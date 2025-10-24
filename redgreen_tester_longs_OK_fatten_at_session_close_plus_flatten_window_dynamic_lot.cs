@@ -20,25 +20,39 @@ input int    NoTradeEndHour     = 1;
 input int    NoTradeEndMinute   = 0;
 
 // dynamic position sizing
-input double BalanceStep    = 5000.0;  // add 1 contract per +5k
-input double BaseLots       = 1.0;     // base contract size
-input double MinBalance     = 0.0;     // balance threshold for first lot
+input double StepSize    = 5000.0;  // add 1 contract per +Xk
 
 
 //-------------------- Helpers --------------------------//
 double DynamicLotSize()
 {
    double balance = AccountInfoDouble(ACCOUNT_BALANCE);
-   int steps = (int)MathFloor((balance - MinBalance) / BalanceStep);
-   double lots = BaseLots + steps;
-
-   // round and limit for safety
-   lots = MathMax(lots, 0.01);
-   lots = NormalizeDouble(lots, 2);
-
-   PrintFormat("💰 Balance=%.2f | Steps=%d | Lots=%.2f", balance, steps, lots);
+   
+   // --- Corrected contract scaling logic ---
+   // 10,000     -> 1 contract
+   // 15,000-20,000 -> 2 contracts  
+   // 20,000-25,000 -> 3 contracts
+   // 25,000-30,000 -> 4 contracts, etc.
+   
+   double BaseBalance = 10000.0;   // starting balance for 1 contract
+   // double StepSize = 5000.0;       // 5k increase per additional contract
+   double lots = 1.0;              // minimum 1 contract
+   
+   if (balance > BaseBalance)
+   {
+      // Calculate how many 5k steps above 10k we have
+      int steps = (int)MathFloor((balance - BaseBalance) / StepSize);
+      lots = 1.0 + steps;
+   }
+   
+   // --- Round and safety ---
+   lots = MathMax(lots, 1.0);            // no less than 1 contract
+   lots = NormalizeDouble(lots, 0);      // must be whole number for futures
+   
+   PrintFormat("💰 Balance=%.2f | Contracts=%d", balance, (int)lots);
    return lots;
 }
+
 
 bool IsFlattenTime(datetime barOpen)
 {
