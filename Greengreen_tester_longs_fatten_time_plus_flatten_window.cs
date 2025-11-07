@@ -1,9 +1,9 @@
 //+------------------------------------------------------------------+
-//| Red-Green Breakout EA: dynamic exit + no-trading window + scaling|
+//| Green Candle Breakout EA: dynamic exit + no-trading window       |
 //+------------------------------------------------------------------+
 #property strict
 
-input double Lots           = 1.0;     // starting lot size
+input double Lots           = 1.0;
 input double RiskReward     = 1.0;
 input int    Slippage       = 5;
 
@@ -19,43 +19,7 @@ input int    NoTradeStartMinute = 30;
 input int    NoTradeEndHour     = 1;
 input int    NoTradeEndMinute   = 0;
 
-// dynamic position sizing
-input int 	 MaxContracts = 3;		  // maximum number of contracts
-input double StepSize     = 5000.0;   // add 1 contract per +Xk
-input double BaseBalance  = 10000.0;  // starting balance for 1 contract
-
-//-------------------- Helpers --------------------------//
-double DynamicLotSize()
-{
-   double balance = AccountInfoDouble(ACCOUNT_BALANCE);
-   
-   // --- Corrected contract scaling logic ---
-   // 10,000     -> 1 contract
-   // 15,000-20,000 -> 2 contracts  
-   // 20,000-25,000 -> 3 contracts
-   // 25,000-30,000 -> 4 contracts, etc.
-   
-   
-   double lots = 1.0;              // minimum 1 contract
-   
-   if (balance > BaseBalance)
-   {
-      // Calculate how many 5k steps above 10k we have
-      int steps = (int)MathFloor((balance - BaseBalance) / StepSize);
-      lots = 1.0 + steps;
-   }
-   
-   // --- Round and safety ---
-   lots = MathMax(lots, 1.0);            // no less than 1 contract
-   lots = NormalizeDouble(lots, 0);      // must be whole number for futures
-   lots = MathMin(lots, MaxContracts);           // no more than MaxContracts
-   
-   
-   PrintFormat("💰 Balance=%.2f | Contracts=%d", balance, (int)lots);
-   return lots;
-}
-
-
+//--------------------- Helpers ------------------------------------//
 bool IsFlattenTime(datetime barOpen)
 {
    MqlDateTime dt;
@@ -75,15 +39,9 @@ bool InNoTradeWindow(datetime barOpen)
    int endMins    = NoTradeEndHour   * 60 + NoTradeEndMinute;
 
    if(startMins <= endMins)
-   {
-      // same-day window
       return (curMinutes >= startMins && curMinutes < endMins);
-   }
    else
-   {
-      // window crosses midnight
       return (curMinutes >= startMins || curMinutes < endMins);
-   }
 }
 
 void CancelAllOrders()
@@ -175,13 +133,12 @@ void ManageOpenPosition()
    double vol   = PositionGetDouble(POSITION_VOLUME);
    long   typ   = PositionGetInteger(POSITION_TYPE);
 
-   // This EA only opens longs; safety check:
+   // Only longs
    if(typ != POSITION_TYPE_BUY) return;
 
    double risk = entry - sl;
    if(risk <= 0.0) return;
 
-   // just-closed bar close
    double barClose = iClose(_Symbol, _Period, 1);
 
    if(barClose >= entry + risk * RiskReward)
@@ -193,7 +150,7 @@ void ManageOpenPosition()
       req.action    = TRADE_ACTION_DEAL;
       req.symbol    = _Symbol;
       req.volume    = vol;
-      req.type      = ORDER_TYPE_SELL;                         // close buy
+      req.type      = ORDER_TYPE_SELL;
       req.price     = SymbolInfoDouble(_Symbol, SYMBOL_BID);
       req.deviation = Slippage;
 
@@ -203,11 +160,8 @@ void ManageOpenPosition()
          Print("✅ Position closed");
    }
    else
-   {
       Print("⏳ Not yet ", RiskReward, "R on close → hold");
-   }
 }
-
 
 //--------------------- EA Core ------------------------------------//
 int OnInit() { return(INIT_SUCCEEDED); }
@@ -216,7 +170,6 @@ void OnTick()
 {
    static datetime lastBar = 0;
    datetime barOpen = iTime(_Symbol, _Period, 0);
-
    if(barOpen == lastBar) return;
    lastBar = barOpen;
 
@@ -229,7 +182,7 @@ void OnTick()
       return;
    }
 
-   // No-trading window (force flat + block trades)
+   // No-trading window
    if(InNoTradeWindow(barOpen))
    {
       Print("🚫 In no-trading window → flat only, no new trades");
@@ -245,15 +198,15 @@ void OnTick()
       return;
    }
 
-   // Red candle setup (only if not in no-trading window)
+   // ✅ Green candle setup
    double o1 = iOpen(_Symbol, _Period, 1);
    double h1 = iHigh(_Symbol, _Period, 1);
    double l1 = iLow(_Symbol, _Period, 1);
    double c1 = iClose(_Symbol, _Period, 1);
 
-   if(c1 < o1)
+   if(c1 > o1)  // green candle
    {
-      Print("🔴 Red candle → refresh BuyStop");
+      Print("🟢 Green candle → refresh BuyStop");
       CancelOldBuyStops();
 
       double entry = h1;
@@ -265,7 +218,7 @@ void OnTick()
       MqlTradeResult  res = {};
       req.action       = TRADE_ACTION_PENDING;
       req.symbol       = _Symbol;
-      req.volume       = DynamicLotSize();
+      req.volume       = Lots;
       req.type         = ORDER_TYPE_BUY_STOP;
       req.price        = entry;
       req.sl           = stop;
