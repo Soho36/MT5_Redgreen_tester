@@ -20,9 +20,14 @@ input int    NoTradeEndHour     = 1;
 input int    NoTradeEndMinute   = 0;
 
 // dynamic position sizing
+input bool UseDynamicLots = true;   // enable/disable dynamic scaling
 input int 	 MaxContracts = 3;		  // maximum number of contracts
 input double StepSize     = 5000.0;   // add 1 contract per +Xk
 input double BaseBalance  = 10000.0;  // starting balance for 1 contract
+
+// candle size filtering
+input bool   UseMaxCandleSize     = true;     // skip oversized red candles
+input double MaxCandleSizePoints  = 100.0;     // max allowed size (in points)
 
 //-------------------- Helpers --------------------------//
 double DynamicLotSize()
@@ -260,21 +265,35 @@ void OnTick()
       double stop  = l1;
       double risk  = entry - stop;
       if(risk <= 0.0) return;
+		
+	// Skip oversized red candles
+	if(UseMaxCandleSize && risk > MaxCandleSizePoints)
+	{
+	   PrintFormat("⛔ Red candle too large (%.1f pts) > Max %.1f → skipping",
+				   risk, MaxCandleSizePoints);
+	   return;
+	}	
+      // choose lot size mode
+	double volumeToUse = Lots;   // fixed lot
+	if(UseDynamicLots)
+		volumeToUse = DynamicLotSize();
 
-      MqlTradeRequest req = {};
-      MqlTradeResult  res = {};
-      req.action       = TRADE_ACTION_PENDING;
-      req.symbol       = _Symbol;
-      req.volume       = DynamicLotSize();
-      req.type         = ORDER_TYPE_BUY_STOP;
-      req.price        = entry;
-      req.sl           = stop;
-      req.deviation    = Slippage;
-      req.type_filling = ORDER_FILLING_RETURN;
+	MqlTradeRequest req = {};
+	MqlTradeResult  res = {};
 
-      if(!OrderSend(req, res))
-         Print("❌ Place BuyStop fail err=", GetLastError());
-      else
-         Print("🚀 BuyStop placed @", entry, " SL=", stop);
+	req.action       = TRADE_ACTION_PENDING;
+	req.symbol       = _Symbol;
+	req.volume       = volumeToUse;
+	req.type         = ORDER_TYPE_BUY_STOP;
+	req.price        = entry;
+	req.sl           = stop;
+	req.deviation    = Slippage;
+	req.type_filling = ORDER_FILLING_RETURN;
+
+	if(!OrderSend(req, res))
+		Print("❌ Place BuyStop fail err=", GetLastError());
+	else
+		PrintFormat("🚀 BuyStop placed @%.2f SL=%.2f Vol=%.0f",
+					entry, stop, volumeToUse);
    }
 }
