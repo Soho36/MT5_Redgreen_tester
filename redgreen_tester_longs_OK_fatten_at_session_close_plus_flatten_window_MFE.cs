@@ -62,7 +62,11 @@ void CancelAllOrders()
       MqlTradeResult  s={};
       r.action = TRADE_ACTION_REMOVE;
       r.order  = t;
-      OrderSend(r,s);
+      if(!OrderSend(r,s))
+        Print("❌ CancelAllOrders failed ticket=", t, " err=", GetLastError());
+      else
+        Print("✅ Cancelled order ticket=", t);
+
    }
 }
 
@@ -92,7 +96,11 @@ void CloseAllPositions()
          r.price = SymbolInfoDouble(_Symbol,SYMBOL_ASK);
       }
 
-      OrderSend(r,s);
+      if(!OrderSend(r,s))
+        Print("❌ CloseAllPositions failed pos#", t, " err=", GetLastError());
+      else
+        Print("✅ Closed position #", t);
+
    }
 }
 
@@ -108,7 +116,12 @@ void CancelOldBuyStops()
       MqlTradeResult  s={};
       r.action = TRADE_ACTION_REMOVE;
       r.order  = t;
-      OrderSend(r,s);
+
+      if(!OrderSend(r,s))
+        Print("❌ Failed to cancel BuyStop ticket=", t, " err=", GetLastError());
+      else
+        Print("✅ Cancelled BuyStop ticket=", t);
+
    }
 }
 
@@ -144,6 +157,7 @@ void ManageOpenPosition()
 
    if(barClose >= entry + risk*RiskReward)
    {
+      Print("✅ ≥ ", RiskReward, "R at bar close → closing at market");
       MqlTradeRequest r={};
       MqlTradeResult  s={};
 
@@ -154,7 +168,14 @@ void ManageOpenPosition()
       r.price     = SymbolInfoDouble(_Symbol,SYMBOL_BID);
       r.deviation = Slippage;
 
-      OrderSend(r,s);
+      if(!OrderSend(r,s))
+         Print("❌ Close fail err=", GetLastError());
+      else
+         Print("✅ Position closed");
+   }
+   else
+   {
+       Print("⏳ Not yet ", RiskReward, "R on close → hold");
    }
 }
 
@@ -176,20 +197,23 @@ void OnTick()
    }
 
    // 🔹 flatten
-   if(UseFlatten && IsFlattenTime(barOpen))
-   {
-      CloseAllPositions();
-      CancelAllOrders();
-      return;
-   }
+    if(UseFlatten && IsFlattenTime(barOpen))
+    {
+       Print("🌙 Flatten cutoff reached → closing everything");
+       CloseAllPositions();
+       CancelAllOrders();
+       return;
+    }
 
-   // 🔹 no-trade window
-   if(InNoTradeWindow(barOpen))
-   {
-      CloseAllPositions();
-      CancelAllOrders();
-      return;
-   }
+    // 🔹 no-trade window
+    if(InNoTradeWindow(barOpen))
+    {
+       Print("🚫 In no-trading window → flat only, no new trades");
+       CloseAllPositions();
+       CancelAllOrders();
+       return;
+    }
+
 
    // 🔹 manage trade (identical priority)
    if(PositionsTotal()>0)
@@ -223,6 +247,7 @@ void OnTick()
 
    if(c<o)
    {
+      Print("🔴 Red candle → refresh BuyStop");
       CancelOldBuyStops();
 
       double risk=h-l;
@@ -240,6 +265,9 @@ void OnTick()
       r.deviation    = Slippage;
       r.type_filling = ORDER_FILLING_RETURN;
 
-      OrderSend(r,s);
+      if(!OrderSend(r,s))
+        Print("❌ Place BuyStop fail err=", GetLastError());
+      else
+        Print("🚀 BuyStop placed @", h, " SL=", l);
    }
 }
