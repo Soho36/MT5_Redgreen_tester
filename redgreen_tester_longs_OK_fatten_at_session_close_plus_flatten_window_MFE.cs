@@ -1,5 +1,5 @@
 //+------------------------------------------------------------------+
-//| Red-Green Breakout EA: dynamic exit + no-trading window + MAE/MFE |
+//| Red-Green Breakout EA: MAE/MFE via floating PnL (robust version)  |
 //+------------------------------------------------------------------+
 #property strict
 
@@ -19,30 +19,26 @@ input int    NoTradeStartMinute = 30;
 input int    NoTradeEndHour     = 1;
 input int    NoTradeEndMinute   = 0;
 
-// ---- MAE / MFE ----
-double g_entryPrice = 0;
-double g_mae = 0;
-double g_mfe = 0;
-bool   g_tracking = false;
-ulong  g_ticket = 0;
+// ---- MAE / MFE (FLOATING PNL BASED) ----
+double g_maeMoney   = 0.0;   // most negative floating PnL
+double g_mfeMoney   = 0.0;   // most positive floating PnL
+bool   g_tracking   = false;
+ulong  g_ticket     = 0;
 
-string g_csvName = "trade_stats.csv";
+datetime g_entryTime = 0;
+string   g_csvName   = "trade_stats.csv";
 
 //---------------- Helpers ----------------//
 bool IsFlattenTime(datetime barOpen)
 {
-   MqlDateTime dt;
-   TimeToStruct(barOpen, dt);
+   MqlDateTime dt; TimeToStruct(barOpen, dt);
    return (dt.hour == FlattenHour && dt.min == FlattenMinute);
 }
 
 bool InNoTradeWindow(datetime barOpen)
 {
    if(!UseNoTradeWindow) return false;
-
-   MqlDateTime dt;
-   TimeToStruct(barOpen, dt);
-
+   MqlDateTime dt; TimeToStruct(barOpen, dt);
    int cur = dt.hour * 60 + dt.min;
    int st  = NoTradeStartHour * 60 + NoTradeStartMinute;
    int en  = NoTradeEndHour   * 60 + NoTradeEndMinute;
@@ -126,20 +122,29 @@ void CancelOldBuyStops()
 }
 
 //---------------- CSV ----------------//
-void SaveTradeStats()
+void SaveTradeStats(double realized, datetime entryTime, datetime exitTime)
 {
-   int f = FileOpen(g_csvName,
-                    FILE_READ|FILE_WRITE|FILE_CSV|FILE_SHARE_WRITE);
-
-   if(f==INVALID_HANDLE) return;
+   int f = FileOpen(g_csvName, FILE_READ|FILE_WRITE|FILE_CSV|FILE_SHARE_WRITE);
+   if(f==INVALID_HANDLE){ Print("File open failed ",GetLastError()); return; }
 
    if(FileSize(f)==0)
-      FileWrite(f,"ticket","entry","mae","mfe");
+      FileWrite(f,"ticket","entry_time","exit_time","mae_money","mfe_money","trade_profit");
 
    FileSeek(f,0,SEEK_END);
-   FileWrite(f,(long)g_ticket,g_entryPrice,g_mae,g_mfe);
+   FileWrite(
+      f,
+      (long)g_ticket,
+      TimeToString(entryTime, TIME_DATE|TIME_SECONDS),
+      TimeToString(exitTime,  TIME_DATE|TIME_SECONDS),
+      g_maeMoney,
+      g_mfeMoney,
+      realized
+   );
+
    FileClose(f);
 }
+
+
 
 //---------------- Trade mgmt ----------------//
 void ManageOpenPosition()
@@ -184,77 +189,109 @@ int OnInit(){ return INIT_SUCCEEDED; }
 
 void OnTick()
 {
+   datetime barOpen = iTime(_Symbol, _Period, 0);
+
+   // ---- TRACK FLOATING MAE / MFE (tick-based, broker-safe) ----
+   if(PositionSelect(_Symbol))
+   {
+      double floating = PositionGetDouble(POSITION_PROFIT);
+
+      if(!g_tracking)
+      {
+         g_tracking   = true;
+         g_ticket     = PositionGetInteger(POSITION_TICKET);
+         g_entryTime  = (datetime)PositionGetInteger(POSITION_TIME);
+         g_maeMoney   = floating;
+         g_mfeMoney   = floating;
+         Print("Tracking started ticket=",g_ticket);
+      }
+
+      g_maeMoney = MathMin(g_maeMoney, floating);
+      g_mfeMoney = MathMax(g_mfeMoney, floating);
+   }
+   else if(g_tracking)
+   {
+   // --- include final realized PnL into MAE/MFE ---
+   double realized = 0.0;
+   
+   // --- include datetime ---
+   datetime exitTime = 0;
+
+   if(HistorySelect(g_entryTime - 86400, TimeCurrent()))
+	{
+	   for(int i = HistoryDealsTotal() - 1; i >= 0; i--)
+	   {
+		  ulong deal = HistoryDealGetTicket(i);
+
+		  if(HistoryDealGetInteger(deal, DEAL_POSITION_ID) != g_ticket)
+			 continue;
+
+		  double profit = HistoryDealGetDouble(deal, DEAL_PROFIT);
+		  realized += profit;
+
+		  if(HistoryDealGetInteger(deal, DEAL_ENTRY) == DEAL_ENTRY_OUT)
+		  {
+			 exitTime = (datetime)HistoryDealGetInteger(deal, DEAL_TIME);
+			 break; // ← exit deal found, stop
+		  }
+	   }
+	}
+
+   // realized PnL IS the last excursion
+   g_maeMoney = MathMin(g_maeMoney, realized);
+   g_mfeMoney = MathMax(g_mfeMoney, realized);
+
+   SaveTradeStats(realized, g_entryTime, exitTime);
+
+   g_tracking = false;
+   }
+
+   // ---- BAR-GATED LOGIC ----
    static datetime lastBar=0;
-   datetime barOpen=iTime(_Symbol,_Period,0);
    if(barOpen==lastBar) return;
    lastBar=barOpen;
 
-   // 🔹 detect trade closed (observer only)
-   if(g_tracking && PositionsTotal()==0)
-   {
-      SaveTradeStats();
-      g_tracking=false;
-   }
-
    // 🔹 flatten
-    if(UseFlatten && IsFlattenTime(barOpen))
-    {
-       Print("🌙 Flatten cutoff reached → closing everything");
-       CloseAllPositions();
-       CancelAllOrders();
-       return;
-    }
-
-    // 🔹 no-trade window
-    if(InNoTradeWindow(barOpen))
-    {
-       Print("🚫 In no-trading window → flat only, no new trades");
-       CloseAllPositions();
-       CancelAllOrders();
-       return;
-    }
-
-
-   // 🔹 manage trade (identical priority)
-   if(PositionsTotal()>0)
+   if(UseFlatten && IsFlattenTime(barOpen))
    {
-      ManageOpenPosition();
-
-      // update MAE/MFE AFTER management
-      if(PositionSelect(_Symbol))
-      {
-         if(!g_tracking)
-         {
-            g_tracking   = true;
-            g_ticket     = PositionGetInteger(POSITION_TICKET);
-            g_entryPrice = PositionGetDouble(POSITION_PRICE_OPEN);
-            g_mae = g_mfe = 0;
-         }
-
-         double hi=iHigh(_Symbol,_Period,1);
-         double lo=iLow (_Symbol,_Period,1);
-         g_mfe=MathMax(g_mfe,hi-g_entryPrice);
-         g_mae=MathMax(g_mae,g_entryPrice-lo);
-      }
+      Print("🌙 Flatten cutoff reached → closing everything");
+      CloseAllPositions();
+      CancelAllOrders();
       return;
    }
 
-   // 🔹 setup
-   double o=iOpen (_Symbol,_Period,1);
-   double h=iHigh (_Symbol,_Period,1);
-   double l=iLow  (_Symbol,_Period,1);
-   double c=iClose(_Symbol,_Period,1);
+   // 🔹 no-trade window
+   if(InNoTradeWindow(barOpen))
+   {
+      Print("🚫 In no-trading window → flat only, no new trades");
+      CloseAllPositions();
+      CancelAllOrders();
+      return;
+   }
 
-   if(c<o)
+   // 🔹 manage trade (bar-based logic)
+   if(PositionsTotal() > 0)
+   {
+      ManageOpenPosition();
+      return;
+   }
+
+   // 🔹 setup (unchanged)
+   double o = iOpen (_Symbol, _Period, 1);
+   double h = iHigh (_Symbol, _Period, 1);
+   double l = iLow  (_Symbol, _Period, 1);
+   double c = iClose(_Symbol, _Period, 1);
+
+   if(c < o)
    {
       Print("🔴 Red candle → refresh BuyStop");
       CancelOldBuyStops();
 
-      double risk=h-l;
-      if(risk<=0) return;
+      double risk = h - l;
+      if(risk <= 0) return;
 
-      MqlTradeRequest r={};
-      MqlTradeResult  s={};
+      MqlTradeRequest r = {};
+      MqlTradeResult  s = {};
 
       r.action       = TRADE_ACTION_PENDING;
       r.symbol       = _Symbol;
@@ -265,9 +302,9 @@ void OnTick()
       r.deviation    = Slippage;
       r.type_filling = ORDER_FILLING_RETURN;
 
-      if(!OrderSend(r,s))
-        Print("❌ Place BuyStop fail err=", GetLastError());
+      if(!OrderSend(r, s))
+         Print("❌ Place BuyStop fail err=", GetLastError());
       else
-        Print("🚀 BuyStop placed @", h, " SL=", l);
+         Print("🚀 BuyStop placed @", h, " SL=", l);
    }
-}
+} 
