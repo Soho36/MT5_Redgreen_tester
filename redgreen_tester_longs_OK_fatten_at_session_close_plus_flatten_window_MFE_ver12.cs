@@ -1,6 +1,7 @@
 //+------------------------------------------------------------------+
 //| Red-Green Breakout EA: MAE/MFE via floating PnL (robust version)  |
 //+------------------------------------------------------------------+
+// THIS EA IS FOR GERATING A FILE FOR "LEFT ON THE TABLE" PYTHON SCRIPT
 #property strict
 
 input double Lots           = 1.0;
