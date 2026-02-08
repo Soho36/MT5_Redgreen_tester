@@ -18,35 +18,35 @@ enum MONTH_FILTER_MODE
 input MONTH_FILTER_MODE MonthFilterMode = MONTH_DISABLED;  // Month filtering mode
 
 // Individual months selection
-input bool TradeJanuary    = true;  // January
+input bool TradeJanuary    = false;  // January
 input bool TradeFebruary   = true;  // February
-input bool TradeMarch      = true;  // March
-input bool TradeApril      = true;  // April
-input bool TradeMay        = true;  // May
-input bool TradeJune       = true;  // June
-input bool TradeJuly       = true;  // July
-input bool TradeAugust     = true;  // August
-input bool TradeSeptember  = true;  // September
-input bool TradeOctober    = true;  // October
-input bool TradeNovember   = true;  // November
-input bool TradeDecember   = true;  // December
+input bool TradeMarch      = false;  // March
+input bool TradeApril      = false;  // April
+input bool TradeMay        = false;  // May
+input bool TradeJune       = false;  // June
+input bool TradeJuly       = false;  // July
+input bool TradeAugust     = false;  // August
+input bool TradeSeptember  = false;  // September
+input bool TradeOctober    = false;  // October
+input bool TradeNovember   = false;  // November
+input bool TradeDecember   = false;  // December
 
 // Month groups for seasonal trading
-input bool TradeWinter     = true;  // Dec, Jan, Feb
-input bool TradeSpring     = true;  // Mar, Apr, May
-input bool TradeSummer     = true;  // Jun, Jul, Aug
-input bool TradeAutumn     = true;  // Sep, Oct, Nov
+input bool TradeWinter     = false;  // Dec, Jan, Feb
+input bool TradeSpring     = false;  // Mar, Apr, May
+input bool TradeSummer     = false;  // Jun, Jul, Aug
+input bool TradeAutumn     = false;  // Sep, Oct, Nov
 
 // ======== SESSION FILTERING ========
 // flattening during session
-input bool   UseFlattenDur     = true;
+input bool   UseFlattenDur     = false;
 input int    FlattenHourDur    = 14;
 input int    FlattenMinuteDur  = 00;
 
 // flattening end session
 input bool   UseFlattenEnd     = true;
-input int    FlattenHourEnd    = 20;
-input int    FlattenMinuteEnd  = 00;
+input int    FlattenHourEnd    = 23;
+input int    FlattenMinuteEnd  = 30;
 
 // ======== TIME WINDOW FILTERING ========
 // no-trading window (block new trades between these times)
