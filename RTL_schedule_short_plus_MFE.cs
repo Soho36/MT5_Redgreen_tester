@@ -81,6 +81,15 @@ bool windows[48] =
    W2100W2130, W2130W2200, W2200W2230, W2230W2300, W2300W2330, W2330W0000
 };
 
+// ---- MAE / MFE (FLOATING PNL BASED) ----
+double g_maeMoney   = 0.0;   // most negative floating PnL
+double g_mfeMoney   = 0.0;   // most positive floating PnL
+bool   g_tracking   = false;
+ulong  g_ticket     = 0;
+
+datetime g_entryTime = 0;
+string   g_csvName   = "trade_stats_short.csv";  // Different filename for short trades
+
 //---------------- Helpers ----------------//
 bool IsFlattenTimeDur(datetime t){MqlDateTime d;TimeToStruct(t,d);return d.hour==FlattenHourDur && d.min==FlattenMinuteDur;}
 bool IsFlattenTimeEnd(datetime t){MqlDateTime d;TimeToStruct(t,d);return d.hour==FlattenHourEnd && d.min==FlattenMinuteEnd;}
@@ -138,6 +147,30 @@ void CancelOldSellStops()
    }
 }
 
+//---------------- CSV ----------------//
+void SaveTradeStats(double realized, datetime entryTime, datetime exitTime)
+{
+   int f = FileOpen(g_csvName, FILE_READ|FILE_WRITE|FILE_CSV|FILE_SHARE_WRITE);
+   if(f==INVALID_HANDLE){ Print("File open failed ",GetLastError()); return; }
+
+   if(FileSize(f)==0)
+      FileWrite(f,"ticket","entry_time","exit_time","mae_money","mfe_money","trade_profit","position_type");
+
+   FileSeek(f,0,SEEK_END);
+   FileWrite(
+      f,
+      (long)g_ticket,
+      TimeToString(entryTime, TIME_DATE|TIME_SECONDS),
+      TimeToString(exitTime,  TIME_DATE|TIME_SECONDS),
+      g_maeMoney,
+      g_mfeMoney,
+      realized,
+      "SHORT"
+   );
+
+   FileClose(f);
+}
+
 void ManageOpenPosition()
 {
    if(!PositionSelect(_Symbol)) return;
@@ -176,18 +209,80 @@ int OnInit(){return INIT_SUCCEEDED;}
 
 void OnTick()
 {
-   static datetime lastBar=0;
-   datetime bar=iTime(_Symbol,_Period,0);
-   if(bar==lastBar) return;
-   lastBar=bar;
+   datetime barOpen = iTime(_Symbol, _Period, 0);
 
-   if(UseFlattenDur && IsFlattenTimeDur(bar))
+   // ---- TRACK FLOATING MAE / MFE (tick-based, broker-safe) ----
+   if(PositionSelect(_Symbol) && PositionGetInteger(POSITION_TYPE) == POSITION_TYPE_SELL)
+   {
+      double floating = PositionGetDouble(POSITION_PROFIT);
+
+      if(!g_tracking)
+      {
+         g_tracking  = true;
+         g_ticket    = PositionGetInteger(POSITION_TICKET);
+         g_entryTime = (datetime)PositionGetInteger(POSITION_TIME);
+         g_maeMoney  = floating;
+         g_mfeMoney  = floating;
+
+         Print("Tracking started for SHORT ticket=", g_ticket);
+      }
+
+      // 🔹 update excursions
+      g_maeMoney = MathMin(g_maeMoney, floating);
+      g_mfeMoney = MathMax(g_mfeMoney, floating);
+   }
+   else if(g_tracking)
+   {
+      // Position closed or no longer exists
+      double realized = 0.0;
+      datetime exitTime = 0;
+
+      if(HistorySelect(g_entryTime - 86400, TimeCurrent()))
+      {
+         for(int i = HistoryDealsTotal() - 1; i >= 0; i--)
+         {
+            ulong deal = HistoryDealGetTicket(i);
+
+            if(HistoryDealGetInteger(deal, DEAL_POSITION_ID) != g_ticket)
+               continue;
+
+            double profit = HistoryDealGetDouble(deal, DEAL_PROFIT);
+            realized += profit;
+
+            if(HistoryDealGetInteger(deal, DEAL_ENTRY) == DEAL_ENTRY_OUT)
+            {
+               exitTime = (datetime)HistoryDealGetInteger(deal, DEAL_TIME);
+               break; // exit deal found, stop
+            }
+         }
+      }
+
+      // realized PnL IS the last excursion
+      g_maeMoney = MathMin(g_maeMoney, realized);
+      g_mfeMoney = MathMax(g_mfeMoney, realized);
+
+      SaveTradeStats(realized, g_entryTime, exitTime);
+
+      // Reset tracking variables
+      g_tracking = false;
+      g_ticket = 0;
+      g_entryTime = 0;
+      g_maeMoney = 0.0;
+      g_mfeMoney = 0.0;
+   }
+
+   // ---- BAR-GATED LOGIC ----
+   static datetime lastBar=0;
+   if(barOpen==lastBar) return;
+   lastBar=barOpen;
+
+   if(UseFlattenDur && IsFlattenTimeDur(barOpen))
    {
       Print("⛔ DUR flatten → clear all");
       CloseAllPositions(); CancelAllOrders(); return;
    }
 
-   if(UseFlattenEnd && IsFlattenTimeEnd(bar))
+   if(UseFlattenEnd && IsFlattenTimeEnd(barOpen))
    {
       Print("🌙 END flatten → clear all");
       CloseAllPositions(); CancelAllOrders(); return;
@@ -195,7 +290,7 @@ void OnTick()
 
    if(PositionsTotal()>0){ManageOpenPosition(); return;}
 
-   if(!IsTradeWindow(bar))
+   if(!IsTradeWindow(barOpen))
    {
       Print("⏱ No-trade window → cancel SellStops");
       CancelOldSellStops(); return;
