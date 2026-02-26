@@ -77,42 +77,75 @@ input int    FlattenHourEnd    = 20;
 input int    FlattenMinuteEnd  = 00;
 
 // ======== TIME WINDOW FILTERING ========
-// no-trading window (block new trades between these times) - 1-HOUR INTERVALS
+// no-trading window (block new trades between these times) - Mixed intervals with session borders
 input bool   UseTradeWindow   = true;
-input bool W0000W0100 = false;  // 00:00–01:00
-input bool W0100W0200 = false;  // 01:00–02:00
-input bool W0200W0300 = false;  // 02:00–03:00
-input bool W0300W0400 = false;  // 03:00–04:00
-input bool W0400W0500 = false;  // 04:00–05:00
-input bool W0500W0600 = false;  // 05:00–06:00
-input bool W0600W0700 = false;  // 06:00–07:00
-input bool W0700W0800 = false;  // 07:00–08:00
-input bool W0800W0900 = false;  // 08:00–09:00
-input bool W0900W1000 = false;  // 09:00–10:00
-input bool W1000W1100 = false;  // 10:00–11:00
-input bool W1100W1200 = false;  // 11:00–12:00
-input bool W1200W1300 = false;  // 12:00–13:00
-input bool W1300W1400 = false;  // 13:00–14:00
-input bool W1400W1500 = false;  // 14:00–15:00
-input bool W1500W1600 = false;  // 15:00–16:00
-input bool W1600W1700 = false;  // 16:00–17:00
-input bool W1700W1800 = false;  // 17:00–18:00
-input bool W1800W1900 = false;  // 18:00–19:00
-input bool W1900W2000 = false;  // 19:00–20:00
-input bool W2000W2100 = false;  // 20:00–21:00
-input bool W2100W2200 = false;  // 21:00–22:00
-input bool W2200W2300 = false;  // 22:00–23:00
-input bool W2300W0000 = false;  // 23:00–00:00
 
-bool windows[24] =
+// ========== SESSION 1: MARKET CLOSED (00:00-01:00) ==========
+input bool W0000W0100 = false;  // 00:00–01:00 (Market Closed)
+
+// ========== SESSION 2: MORNING SESSION (01:00-10:00) ==========
+// 01:00-02:00 split into 30-min intervals
+input bool W0100W0130 = false;  // 01:00–01:30 (Morning Session)
+input bool W0130W0200 = false;  // 01:30–02:00 (Morning Session)
+
+// 1-hour intervals for 02:00-10:00
+input bool W0200W0300 = false;  // 02:00–03:00 (Morning Session)
+input bool W0300W0400 = false;  // 03:00–04:00 (Morning Session)
+input bool W0400W0500 = false;  // 04:00–05:00 (Morning Session)
+input bool W0500W0600 = false;  // 05:00–06:00 (Morning Session)
+input bool W0600W0700 = false;  // 06:00–07:00 (Morning Session)
+input bool W0700W0800 = false;  // 07:00–08:00 (Morning Session)
+input bool W0800W0900 = false;  // 08:00–09:00 (Morning Session)
+input bool W0900W1000 = false;  // 09:00–10:00 (Morning Session)
+
+// ========== SESSION 3: MAIN SESSION (10:00-23:00) ==========
+input bool W1000W1100 = false;  // 10:00–11:00 (Main Session)
+input bool W1100W1200 = false;  // 11:00–12:00 (Main Session)
+input bool W1200W1300 = false;  // 12:00–13:00 (Main Session)
+input bool W1300W1400 = false;  // 13:00–14:00 (Main Session)
+input bool W1400W1500 = false;  // 14:00–15:00 (Main Session)
+input bool W1500W1600 = false;  // 15:00–16:00 (Main Session)
+input bool W1600W1700 = false;  // 16:00–17:00 (Main Session)
+input bool W1700W1800 = false;  // 17:00–18:00 (Main Session)
+input bool W1800W1900 = false;  // 18:00–19:00 (Main Session)
+input bool W1900W2000 = false;  // 19:00–20:00 (Main Session)
+input bool W2000W2100 = false;  // 20:00–21:00 (Main Session)
+input bool W2100W2200 = false;  // 21:00–22:00 (Main Session)
+input bool W2200W2300 = false;  // 22:00–23:00 (Main Session)
+
+// ========== SESSION 4: EVENING SESSION (23:00-00:00) ==========
+input bool W2300W2330 = false;  // 23:00–23:30 (Evening Session)
+input bool W2330W0000 = false;  // 23:30–00:00 (Evening Session)
+
+bool windows[26] =  // Total slots: 1 + 2 + 8 + 13 + 2 = 26
 {
-   W0000W0100, W0100W0200, W0200W0300, W0300W0400,
-   W0400W0500, W0500W0600, W0600W0700, W0700W0800,
-   W0800W0900, W0900W1000, W1000W1100, W1100W1200,
-   W1200W1300, W1300W1400, W1400W1500, W1500W1600,
-   W1600W1700, W1700W1800, W1800W1900, W1900W2000,
-   W2000W2100, W2100W2200, W2200W2300, W2300W0000
+   // ===== SESSION 1: MARKET CLOSED (00:00-01:00) =====
+   W0000W0100,
+   
+   // ===== SESSION 2: MORNING SESSION (01:00-10:00) =====
+   W0100W0130, W0130W0200,
+   W0200W0300, W0300W0400, W0400W0500, W0500W0600,
+   W0600W0700, W0700W0800, W0800W0900, W0900W1000,
+   
+   // ===== SESSION 3: MAIN SESSION (10:00-23:00) =====
+   W1000W1100, W1100W1200, W1200W1300, W1300W1400,
+   W1400W1500, W1500W1600, W1600W1700, W1700W1800,
+   W1800W1900, W1900W2000, W2000W2100, W2100W2200,
+   W2200W2300,
+   
+   // ===== SESSION 4: EVENING SESSION (23:00-00:00) =====
+   W2300W2330, W2330W0000
 };
+
+// Session names for display purposes
+string GetSessionName(int slot)
+{
+   if(slot == 0) return "MARKET CLOSED";
+   if(slot >= 1 && slot <= 10) return "MORNING";
+   if(slot >= 11 && slot <= 23) return "MAIN";
+   if(slot >= 24 && slot <= 25) return "EVENING";
+   return "UNKNOWN";
+}
 
 // ======== MAE / MFE (FLOATING PNL BASED) ========
 double g_maeMoney   = 0.0;   // most negative floating PnL
@@ -143,9 +176,78 @@ bool IsTradeWindow(datetime barOpen)
 
    MqlDateTime dt;
    TimeToStruct(barOpen, dt);
-
-   int slot = dt.hour;  // 1-hour intervals (0-23)
+   
+   int totalMinutes = dt.hour * 60 + dt.min;
+   int slot;
+   
+   // Session 1: 00:00-01:00 - 1-hour interval
+   if(totalMinutes < 60)
+   {
+      slot = 0;
+   }
+   // Session 2: 01:00-10:00 - mixed intervals
+   else if(totalMinutes >= 60 && totalMinutes < 600) // 01:00 to 10:00
+   {
+      if(totalMinutes < 120) // 01:00-02:00 (30-min slots)
+      {
+         slot = 1 + ((totalMinutes - 60) / 30);
+      }
+      else // 02:00-10:00 (hourly slots)
+      {
+         slot = 3 + (dt.hour - 2);  // slots 3-10
+      }
+   }
+   // Session 3: 10:00-23:00 - hourly intervals
+   else if(totalMinutes >= 600 && totalMinutes < 1380) // 10:00 to 23:00
+   {
+      slot = 11 + (dt.hour - 10);  // slots 11-23
+   }
+   // Session 4: 23:00-00:00 - 30-min intervals
+   else // 23:00-00:00
+   {
+      slot = 24 + ((totalMinutes - 1380) / 30);  // slots 24-25
+   }
+   
    return windows[slot];
+}
+
+void DisplayTradeWindowStatus(datetime barOpen)
+{
+   if(!UseTradeWindow) return;
+   
+   MqlDateTime dt;
+   TimeToStruct(barOpen, dt);
+   
+   int totalMinutes = dt.hour * 60 + dt.min;
+   string sessionName = "";
+   string borderLine = "";
+   
+   if(totalMinutes < 60)
+   {
+      sessionName = "MARKET CLOSED";
+      borderLine = "═══════════════════════════════════════════════";
+   }
+   else if(totalMinutes >= 60 && totalMinutes < 600)
+   {
+      sessionName = "MORNING SESSION";
+      if(totalMinutes == 60) // Start of morning session
+         borderLine = "═══════════════ MORNING SESSION START ═══════════════";
+   }
+   else if(totalMinutes >= 600 && totalMinutes < 1380)
+   {
+      sessionName = "MAIN SESSION";
+      if(totalMinutes == 600) // Start of main session
+         borderLine = "════════════════ MAIN SESSION START ════════════════";
+   }
+   else
+   {
+      sessionName = "EVENING SESSION";
+      if(totalMinutes == 1380) // Start of evening session
+         borderLine = "═══════════════ EVENING SESSION START ═══════════════";
+   }
+   
+   if(borderLine != "")
+      Print(borderLine);
 }
 
 bool IsCandleInRange(double high, double low)
@@ -445,61 +547,95 @@ void ManageOpenPosition()
 // ======== DISPLAY CURRENT SETTINGS ========
 void DisplaySettings()
 {
-   Print("=== EA Settings ===");
+   Print("╔════════════════════════════════════════════════════════════╗");
+   Print("║                    EA SETTINGS                             ║");
+   Print("╚════════════════════════════════════════════════════════════╝");
    Print("Lots: ", Lots, ", RiskReward: ", RiskReward);
 
    // Display candle range filter settings
-   Print("Candle Range Filter: ", UseCandleRangeFilter ? "ENABLED" : "DISABLED");
+   Print("┌────────────────────────────────────────────────────────────┐");
+   Print("│ CANDLE RANGE FILTER                                        │");
+   Print("├────────────────────────────────────────────────────────────┤");
+   Print("│ Status: ", UseCandleRangeFilter ? "ENABLED" : "DISABLED");
    if(UseCandleRangeFilter)
    {
-      Print("  Max Candle Range: ", MaxCandleRange, " points");
-      Print("  Min Candle Range: ", MinCandleRange, " points");
+      Print("│ Max Range: ", MaxCandleRange, " points");
+      Print("│ Min Range: ", MinCandleRange, " points");
    }
+   Print("└────────────────────────────────────────────────────────────┘");
 
    // Display weekday settings
+   Print("┌────────────────────────────────────────────────────────────┐");
+   Print("│ WEEKDAY FILTERING                                          │");
+   Print("├────────────────────────────────────────────────────────────┤");
    if(WeekdayFilterMode == WEEKDAY_DISABLED)
-      Print("Weekday Filtering: DISABLED");
+      Print("│ Status: DISABLED");
    else if(WeekdayFilterMode == WEEKDAY_INDIVIDUAL)
    {
-      Print("Weekday Filtering: INDIVIDUAL WEEKDAYS");
-      Print("Mon:", TradeMonday, " Tue:", TradeTuesday, " Wed:", TradeWednesday,
+      Print("│ Status: INDIVIDUAL WEEKDAYS");
+      Print("│ Mon:", TradeMonday, " Tue:", TradeTuesday, " Wed:", TradeWednesday,
             " Thu:", TradeThursday, " Fri:", TradeFriday);
-      Print("Sat:", TradeSaturday, " Sun:", TradeSunday);
+      Print("│ Sat:", TradeSaturday, " Sun:", TradeSunday);
    }
    else if(WeekdayFilterMode == WEEKDAY_GROUPED)
    {
-      Print("Weekday Filtering: WEEKDAY GROUPS");
-      Print("Weekdays (Mon-Fri): ", TradeWeekdays);
-      Print("Weekend (Sat-Sun): ", TradeWeekend);
+      Print("│ Status: WEEKDAY GROUPS");
+      Print("│ Weekdays (Mon-Fri): ", TradeWeekdays);
+      Print("│ Weekend (Sat-Sun): ", TradeWeekend);
    }
+   Print("└────────────────────────────────────────────────────────────┘");
 
    // Display month settings
+   Print("┌────────────────────────────────────────────────────────────┐");
+   Print("│ MONTH FILTERING                                            │");
+   Print("├────────────────────────────────────────────────────────────┤");
    if(MonthFilterMode == MONTH_DISABLED)
-      Print("Month Filtering: DISABLED");
+      Print("│ Status: DISABLED");
    else if(MonthFilterMode == MONTH_INDIVIDUAL)
    {
-      Print("Month Filtering: INDIVIDUAL MONTHS");
-      Print("Jan:", TradeJanuary, " Feb:", TradeFebruary, " Mar:", TradeMarch,
+      Print("│ Status: INDIVIDUAL MONTHS");
+      Print("│ Jan:", TradeJanuary, " Feb:", TradeFebruary, " Mar:", TradeMarch,
             " Apr:", TradeApril, " May:", TradeMay, " Jun:", TradeJune);
-      Print("Jul:", TradeJuly, " Aug:", TradeAugust, " Sep:", TradeSeptember,
+      Print("│ Jul:", TradeJuly, " Aug:", TradeAugust, " Sep:", TradeSeptember,
             " Oct:", TradeOctober, " Nov:", TradeNovember, " Dec:", TradeDecember);
    }
    else if(MonthFilterMode == MONTH_GROUPED)
    {
-      Print("Month Filtering: SEASONAL GROUPS");
-      Print("Winter (Dec-Jan-Feb): ", TradeWinter);
-      Print("Spring (Mar-Apr-May): ", TradeSpring);
-      Print("Summer (Jun-Jul-Aug): ", TradeSummer);
-      Print("Autumn (Sep-Oct-Nov): ", TradeAutumn);
+      Print("│ Status: SEASONAL GROUPS");
+      Print("│ Winter (Dec-Jan-Feb): ", TradeWinter);
+      Print("│ Spring (Mar-Apr-May): ", TradeSpring);
+      Print("│ Summer (Jun-Jul-Aug): ", TradeSummer);
+      Print("│ Autumn (Sep-Oct-Nov): ", TradeAutumn);
    }
+   Print("└────────────────────────────────────────────────────────────┘");
 
    // Display time window settings
-   Print("Time Window Filtering: ", UseTradeWindow ? "ENABLED" : "DISABLED");
-   Print("Time Window Intervals: 1-HOUR INTERVALS (24 slots)");
+   Print("┌────────────────────────────────────────────────────────────┐");
+   Print("│ TIME WINDOW FILTERING - SESSIONS                           │");
+   Print("├────────────────────────────────────────────────────────────┤");
+   Print("│ Status: ", UseTradeWindow ? "ENABLED" : "DISABLED");
+   if(UseTradeWindow)
+   {
+      Print("├────────────────────────────────────────────────────────────┤");
+      Print("│ SESSION 1: MARKET CLOSED (00:00-01:00) - 1 hour           │");
+      Print("├────────────────────────────────────────────────────────────┤");
+      Print("│ SESSION 2: MORNING (01:00-10:00)                          │");
+      Print("│   - 01:00-02:00: 30-min intervals                         │");
+      Print("│   - 02:00-10:00: 1-hour intervals                         │");
+      Print("├────────────────────────────────────────────────────────────┤");
+      Print("│ SESSION 3: MAIN (10:00-23:00) - 1-hour intervals          │");
+      Print("├────────────────────────────────────────────────────────────┤");
+      Print("│ SESSION 4: EVENING (23:00-00:00) - 30-min intervals       │");
+   }
+   Print("└────────────────────────────────────────────────────────────┘");
 
    // Display flattening times
-   Print("Flatten During: ", UseFlattenDur ? "Yes (" + (string)FlattenHourDur + ":" + (string)FlattenMinuteDur + ")" : "No");
-   Print("Flatten End: ", UseFlattenEnd ? "Yes (" + (string)FlattenHourEnd + ":" + (string)FlattenMinuteEnd + ")" : "No");
+   Print("┌────────────────────────────────────────────────────────────┐");
+   Print("│ FLATTEN TIMES                                              │");
+   Print("├────────────────────────────────────────────────────────────┤");
+   Print("│ During Session: ", UseFlattenDur ? "Yes (" + (string)FlattenHourDur + ":" + (string)FlattenMinuteDur + ")" : "No");
+   Print("│ End of Session: ", UseFlattenEnd ? "Yes (" + (string)FlattenHourEnd + ":" + (string)FlattenMinuteEnd + ")" : "No");
+   Print("└────────────────────────────────────────────────────────────┘");
 }
 
 // ======== EA CORE ========
@@ -588,6 +724,9 @@ void OnTick()
    TimeToStruct(barOpen, dt);
    string monthName = GetMonthName(dt.mon);
    string weekdayName = GetWeekdayName(dt.day_of_week);
+
+   // Display session borders
+   DisplayTradeWindowStatus(barOpen);
 
    // 🔹 Weekday filtering check
    if(WeekdayFilterMode != WEEKDAY_DISABLED && !IsWeekdayAllowed(barOpen))
