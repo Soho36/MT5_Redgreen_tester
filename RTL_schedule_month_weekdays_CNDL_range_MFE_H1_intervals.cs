@@ -519,7 +519,7 @@ void ManageOpenPosition()
 
    // just-closed bar close
    double barClose = iClose(_Symbol, _Period, 1);
-
+   // CLOSE POSITION AT LEAST RISK/REWARD OR BETTER 	
    if(barClose >= entry + risk * RiskReward)
    {
       Print("✅ ≥ ", RiskReward, "R at bar close → closing at market");
@@ -529,7 +529,7 @@ void ManageOpenPosition()
       req.action    = TRADE_ACTION_DEAL;
       req.symbol    = _Symbol;
       req.volume    = vol;
-      req.type      = ORDER_TYPE_SELL;                         // close buy
+      req.type      = ORDER_TYPE_SELL;
       req.price     = SymbolInfoDouble(_Symbol, SYMBOL_BID);
       req.deviation = Slippage;
 
@@ -792,7 +792,8 @@ void OnTick()
       CancelOldBuyStops();
       return;
    }
-
+   
+   // BUY-STOP ORDER AT PREVIOUS RED CANDLE HIGH
    if(c1 < o1)
    {
       Print("🔴 Red candle on ", weekdayName, " in ", monthName, " → refresh BuyStop");
