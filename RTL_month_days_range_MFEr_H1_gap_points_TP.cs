@@ -131,6 +131,7 @@ double g_maeMoney   = 0.0;
 double g_mfeMoney   = 0.0;
 bool   g_tracking   = false;
 ulong  g_ticket     = 0;
+double g_candleRange = 0.0;
 
 datetime g_entryTime = 0;
 string   g_csvName   = "trade_stats.csv";
@@ -328,7 +329,7 @@ double CalcTPPrice(double entryPrice)
 }
 
 // ======== CSV FUNCTIONS ========
-void SaveTradeStats(double realized, datetime entryTime, datetime exitTime)
+void SaveTradeStats(double realized, datetime entryTime, datetime exitTime, double candleRange)
 {
    int f = FileOpen(g_csvName, FILE_READ|FILE_WRITE|FILE_CSV|FILE_SHARE_WRITE);
    if(f == INVALID_HANDLE)
@@ -338,7 +339,7 @@ void SaveTradeStats(double realized, datetime entryTime, datetime exitTime)
    }
 
    if(FileSize(f) == 0)
-      FileWrite(f, "ticket", "entry_time", "exit_time", "mae_money", "mfe_money", "trade_profit");
+      FileWrite(f, "ticket", "entry_time", "exit_time", "mae_money", "mfe_money", "trade_profit", "candle_range");
 
    FileSeek(f, 0, SEEK_END);
    FileWrite(
@@ -348,7 +349,8 @@ void SaveTradeStats(double realized, datetime entryTime, datetime exitTime)
       TimeToString(exitTime, TIME_DATE|TIME_SECONDS),
       g_maeMoney,
       g_mfeMoney,
-      realized
+      realized,
+      candleRange
    );
 
    FileClose(f);
@@ -588,7 +590,7 @@ void OnTick()
 
       g_maeMoney = MathMin(g_maeMoney, realized);
       g_mfeMoney = MathMax(g_mfeMoney, realized);
-      SaveTradeStats(realized, g_entryTime, exitTime);
+      SaveTradeStats(realized, g_entryTime, exitTime, g_candleRange);
       g_tracking = false;
    }
 
@@ -667,6 +669,7 @@ void OnTick()
       double entry = h1;
       double stop  = l1;
       double risk  = entry - stop;
+	  g_candleRange = h1 - l1;
       if(risk <= 0.0) return;
 
       // Calculate hard TP price from fixed money target

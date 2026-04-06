@@ -1,5 +1,5 @@
 //+------------------------------------------------------------------+
-//| Red-Green Breakout EA: dynamic exit + time + month + weekday filters |
+//| Green-Red Breakout EA (SHORT ONLY): dynamic exit + time + month + weekday filters |
 //+------------------------------------------------------------------+
 #property strict
 
@@ -9,8 +9,8 @@ input int    Slippage       = 5;
 
 // ======== CANDLE RANGE FILTER ========
 input bool   UseCandleRangeFilter = false;
-input double MaxCandleRange       = 50.0; // MAX range in whole points (e.g. 5 = 5 index points)
-input double MinCandleRange       = 5.0; // MIN range in whole points (e.g. 5 = 5 index points)	
+input double MaxCandleRange       = 50.0;
+input double MinCandleRange       = 5.0;
 
 // ======== WEEKDAY FILTERING OPTIONS ========
 enum WEEKDAY_FILTER_MODE
@@ -204,7 +204,7 @@ bool IsCandleInRange(double high, double low)
    if(!UseCandleRangeFilter)
       return true;
    
-   double rangePoints = (high - low);
+   double rangePoints = (high - low) / _Point;
    
    if(rangePoints > MaxCandleRange)
    {
@@ -324,7 +324,8 @@ string GetMonthName(int month)
 // ======== TP PRICE CALCULATION ========
 double CalcTPPrice(double entryPrice)
 {
-   return entryPrice + FixedTPPoints;
+   // For shorts: TP is BELOW entry
+   return entryPrice - FixedTPPoints;
 }
 
 // ======== CSV FUNCTIONS ========
@@ -412,7 +413,7 @@ void CloseAllPositions()
    }
 }
 
-void CancelOldBuyStops()
+void CancelOldSellStops()
 {
    for(int i = OrdersTotal() - 1; i >= 0; --i)
    {
@@ -421,7 +422,7 @@ void CancelOldBuyStops()
       if(!OrderSelect(ticket)) continue;
 
       int type = (int)OrderGetInteger(ORDER_TYPE);
-      if(type != ORDER_TYPE_BUY_STOP) continue;
+      if(type != ORDER_TYPE_SELL_STOP) continue;
 
       MqlTradeRequest req = {};
       MqlTradeResult  res = {};
@@ -429,19 +430,19 @@ void CancelOldBuyStops()
       req.order  = ticket;
 
       if(!OrderSend(req, res))
-         Print("❌ Failed to cancel BuyStop ticket=", ticket, " err=", GetLastError());
+         Print("❌ Failed to cancel SellStop ticket=", ticket, " err=", GetLastError());
       else
-         Print("✅ Cancelled BuyStop ticket=", ticket);
+         Print("✅ Cancelled SellStop ticket=", ticket);
    }
 }
 
 // ======== DISPLAY CURRENT SETTINGS ========
 void DisplaySettings()
 {	
-   double tickSize  = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_SIZE);   // 0.25
-   double tickValue = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_VALUE);  // 0.50
+   double tickSize  = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_SIZE);
+   double tickValue = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_VALUE);
    Print("╔════════════════════════════════════════════════════════════╗");
-   Print("║                    EA SETTINGS                             ║");
+   Print("║                    EA SETTINGS (SHORT ONLY)                ║");
    Print("╚════════════════════════════════════════════════════════════╝");
    Print("Lots: ", Lots, ", Fixed TP: ", FixedTPPoints, " points (",
       FixedTPPoints / tickSize, " ticks, $",
@@ -628,21 +629,21 @@ void OnTick()
    if(WeekdayFilterMode != WEEKDAY_DISABLED && !IsWeekdayAllowed(barOpen))
    {
       Print("📅 Weekday Filter: ", weekdayName, " not allowed for trading");
-      CancelOldBuyStops();
+      CancelOldSellStops();
       return;
    }
 
    if(MonthFilterMode != MONTH_DISABLED && !IsMonthAllowed(barOpen))
    {
       Print("📅 Month Filter: ", monthName, " not allowed for trading");
-      CancelOldBuyStops();
+      CancelOldSellStops();
       return;
    }
 
    if(!IsTradeWindow(barOpen))
    {
       Print("⏱ Outside trading window → no new entries");
-      CancelOldBuyStops();
+      CancelOldSellStops();
       return;
    }
 
@@ -654,22 +655,22 @@ void OnTick()
    if(!IsCandleInRange(h1, l1))
    {
       Print("⚠️ Candle range outside allowed limits - Skipping signal");
-      CancelOldBuyStops();
+      CancelOldSellStops();
       return;
    }
 
-   // BUY-STOP ORDER AT PREVIOUS RED CANDLE HIGH
-   if(c1 < o1)
+   // SELL-STOP ORDER AT PREVIOUS GREEN CANDLE LOW
+   if(c1 > o1)  // Green candle: close > open
    {
-      Print("🔴 Red candle on ", weekdayName, " in ", monthName, " → refresh BuyStop");
-      CancelOldBuyStops();
+      Print("🟢 Green candle on ", weekdayName, " in ", monthName, " → refresh SellStop");
+      CancelOldSellStops();
 
-      double entry = h1;
-      double stop  = l1;
-      double risk  = entry - stop;
+      double entry = l1;        // Sell Stop at the low of the green candle
+      double stop  = h1;        // SL above the high of the green candle
+      double risk  = stop - entry;
       if(risk <= 0.0) return;
 
-      // Calculate hard TP price from fixed money target
+      // Calculate hard TP price below entry
       double tp = CalcTPPrice(entry);
 
       MqlTradeRequest req = {};
@@ -677,24 +678,24 @@ void OnTick()
       req.action       = TRADE_ACTION_PENDING;
       req.symbol       = _Symbol;
       req.volume       = Lots;
-      req.type         = ORDER_TYPE_BUY_STOP;
+      req.type         = ORDER_TYPE_SELL_STOP;
       req.price        = entry;
       req.sl           = stop;
       req.tp           = tp;
       req.deviation    = Slippage;
       req.type_filling = ORDER_FILLING_RETURN;
 
-      double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
-      if(ask >= entry)
+      double bid = SymbolInfoDouble(_Symbol, SYMBOL_BID);
+      if(bid <= entry)
       {
-         Print("⚠️ Gap above entry at session open → skipping BuyStop placement");
+         Print("⚠️ Gap below entry at session open → skipping SellStop placement");
          return;
       }
 
       if(!OrderSend(req, res))
-        Print("❌ Place BuyStop fail err=", GetLastError());
+         Print("❌ Place SellStop fail err=", GetLastError());
       else
-		Print("🚀 BuyStop placed @", entry, " SL=", stop, " TP=", tp,
-			  " (", FixedTPPoints, " pts, ", weekdayName, ", ", monthName, ")");
+         Print("🔻 SellStop placed @", entry, " SL=", stop, " TP=", tp,
+               " (", FixedTPPoints, " pts, ", weekdayName, ", ", monthName, ")");
    }
 }

@@ -4,119 +4,141 @@
 #property strict
 
 input double Lots           = 1.0;
-input int FixedTPPoints 	= 5;  // Take profit distance in whole points (e.g. 5 = 5 index points)
+input double RiskReward     = 1.0;
 input int    Slippage       = 5;
+input double LimitOffsetPercent = 30.0; // Limit price offset in % (0% - entry price, 100% - SL)
 
 // ======== CANDLE RANGE FILTER ========
-input bool   UseCandleRangeFilter = false;
-input double MaxCandleRange       = 50.0; // MAX range in whole points (e.g. 5 = 5 index points)
-input double MinCandleRange       = 5.0; // MIN range in whole points (e.g. 5 = 5 index points)	
+input bool   UseCandleRangeFilter = false;  // Enable/disable candle range filter
+input double MaxCandleRange       = 50.0;   // Maximum allowed candle range in points
+input double MinCandleRange       = 5.0;    // Minimum allowed candle range in points
 
 // ======== WEEKDAY FILTERING OPTIONS ========
 enum WEEKDAY_FILTER_MODE
 {
-   WEEKDAY_DISABLED,
-   WEEKDAY_INDIVIDUAL,
-   WEEKDAY_GROUPED
+   WEEKDAY_DISABLED,       // No weekday filtering
+   WEEKDAY_INDIVIDUAL,     // Select individual weekdays
+   WEEKDAY_GROUPED         // Select weekday groups
 };
 
-input WEEKDAY_FILTER_MODE WeekdayFilterMode = WEEKDAY_DISABLED;
+input WEEKDAY_FILTER_MODE WeekdayFilterMode = WEEKDAY_DISABLED;  // Weekday filtering mode
 
-input bool TradeMonday     = true;
-input bool TradeTuesday    = true;
-input bool TradeWednesday  = true;
-input bool TradeThursday   = true;
-input bool TradeFriday     = true;
-input bool TradeSaturday   = true;
-input bool TradeSunday     = true;
+// Individual weekdays selection
+input bool TradeMonday     = true;  // Monday
+input bool TradeTuesday    = true;  // Tuesday
+input bool TradeWednesday  = true;  // Wednesday
+input bool TradeThursday   = true;  // Thursday
+input bool TradeFriday     = true;  // Friday
+input bool TradeSaturday   = true;  // Saturday
+input bool TradeSunday     = true;  // Sunday
 
-input bool TradeWeekdays   = true;
-input bool TradeWeekend    = false;
+// Weekday groups for trading patterns
+input bool TradeWeekdays   = true;  // Mon-Fri
+input bool TradeWeekend    = false; // Sat-Sun
 
 // ======== MONTH FILTERING OPTIONS ========
 enum MONTH_FILTER_MODE
 {
-   MONTH_DISABLED,
-   MONTH_INDIVIDUAL,
-   MONTH_GROUPED
+   MONTH_DISABLED,       // No month filtering
+   MONTH_INDIVIDUAL,     // Select individual months
+   MONTH_GROUPED         // Select month groups
 };
 
-input MONTH_FILTER_MODE MonthFilterMode = MONTH_DISABLED;
+input MONTH_FILTER_MODE MonthFilterMode = MONTH_DISABLED;  // Month filtering mode
 
-input bool TradeJanuary    = true;
-input bool TradeFebruary   = true;
-input bool TradeMarch      = true;
-input bool TradeApril      = true;
-input bool TradeMay        = true;
-input bool TradeJune       = true;
-input bool TradeJuly       = true;
-input bool TradeAugust     = true;
-input bool TradeSeptember  = true;
-input bool TradeOctober    = true;
-input bool TradeNovember   = true;
-input bool TradeDecember   = true;
+// Individual months selection
+input bool TradeJanuary    = true;  // January
+input bool TradeFebruary   = true;  // February
+input bool TradeMarch      = true;  // March
+input bool TradeApril      = true;  // April
+input bool TradeMay        = true;  // May
+input bool TradeJune       = true;  // June
+input bool TradeJuly       = true;  // July
+input bool TradeAugust     = true;  // August
+input bool TradeSeptember  = true;  // September
+input bool TradeOctober    = true;  // October
+input bool TradeNovember   = true;  // November
+input bool TradeDecember   = true;  // December
 
-input bool TradeWinter     = true;
-input bool TradeSpring     = true;
-input bool TradeSummer     = true;
-input bool TradeAutumn     = true;
+// Month groups for seasonal trading
+input bool TradeWinter     = true;  // Dec, Jan, Feb
+input bool TradeSpring     = true;  // Mar, Apr, May
+input bool TradeSummer     = true;  // Jun, Jul, Aug
+input bool TradeAutumn     = true;  // Sep, Oct, Nov
 
 // ======== SESSION FILTERING ========
+// flattening during session
 input bool   UseFlattenDur     = true;
 input int    FlattenHourDur    = 14;
 input int    FlattenMinuteDur  = 00;
 
+// flattening end session
 input bool   UseFlattenEnd     = true;
 input int    FlattenHourEnd    = 20;
 input int    FlattenMinuteEnd  = 00;
 
 // ======== TIME WINDOW FILTERING ========
+// no-trading window (block new trades between these times) - Mixed intervals with session borders
 input bool   UseTradeWindow   = true;
 
-input bool W0000W0100 = false;
+// ========== SESSION 1: MARKET CLOSED (00:00-01:00) ==========
+input bool W0000W0100 = false;  // 00:00–01:00 (Market Closed)
 
-input bool W0100W0130 = false;
-input bool W0130W0200 = false;
+// ========== SESSION 2: MORNING SESSION (01:00-10:00) ==========
+// 01:00-02:00 split into 30-min intervals
+input bool W0100W0130 = false;  // 01:00–01:30 (Morning Session)
+input bool W0130W0200 = false;  // 01:30–02:00 (Morning Session)
 
-input bool W0200W0300 = false;
-input bool W0300W0400 = false;
-input bool W0400W0500 = false;
-input bool W0500W0600 = false;
-input bool W0600W0700 = false;
-input bool W0700W0800 = false;
-input bool W0800W0900 = false;
-input bool W0900W1000 = false;
+// 1-hour intervals for 02:00-10:00
+input bool W0200W0300 = false;  // 02:00–03:00 (Morning Session)
+input bool W0300W0400 = false;  // 03:00–04:00 (Morning Session)
+input bool W0400W0500 = false;  // 04:00–05:00 (Morning Session)
+input bool W0500W0600 = false;  // 05:00–06:00 (Morning Session)
+input bool W0600W0700 = false;  // 06:00–07:00 (Morning Session)
+input bool W0700W0800 = false;  // 07:00–08:00 (Morning Session)
+input bool W0800W0900 = false;  // 08:00–09:00 (Morning Session)
+input bool W0900W1000 = false;  // 09:00–10:00 (Morning Session)
 
-input bool W1000W1100 = false;
-input bool W1100W1200 = false;
-input bool W1200W1300 = false;
-input bool W1300W1400 = false;
-input bool W1400W1500 = false;
-input bool W1500W1600 = false;
-input bool W1600W1700 = false;
-input bool W1700W1800 = false;
-input bool W1800W1900 = false;
-input bool W1900W2000 = false;
-input bool W2000W2100 = false;
-input bool W2100W2200 = false;
-input bool W2200W2300 = false;
+// ========== SESSION 3: MAIN SESSION (10:00-23:00) ==========
+input bool W1000W1100 = false;  // 10:00–11:00 (Main Session)
+input bool W1100W1200 = false;  // 11:00–12:00 (Main Session)
+input bool W1200W1300 = false;  // 12:00–13:00 (Main Session)
+input bool W1300W1400 = false;  // 13:00–14:00 (Main Session)
+input bool W1400W1500 = false;  // 14:00–15:00 (Main Session)
+input bool W1500W1600 = false;  // 15:00–16:00 (Main Session)
+input bool W1600W1700 = false;  // 16:00–17:00 (Main Session)
+input bool W1700W1800 = false;  // 17:00–18:00 (Main Session)
+input bool W1800W1900 = false;  // 18:00–19:00 (Main Session)
+input bool W1900W2000 = false;  // 19:00–20:00 (Main Session)
+input bool W2000W2100 = false;  // 20:00–21:00 (Main Session)
+input bool W2100W2200 = false;  // 21:00–22:00 (Main Session)
+input bool W2200W2300 = false;  // 22:00–23:00 (Main Session)
 
-input bool W2300W2330 = false;
-input bool W2330W0000 = false;
+// ========== SESSION 4: EVENING SESSION (23:00-00:00) ==========
+input bool W2300W2330 = false;  // 23:00–23:30 (Evening Session)
+input bool W2330W0000 = false;  // 23:30–00:00 (Evening Session)
 
-bool windows[26] =
+bool windows[26] =  // Total slots: 1 + 2 + 8 + 13 + 2 = 26
 {
+   // ===== SESSION 1: MARKET CLOSED (00:00-01:00) =====
    W0000W0100,
+   
+   // ===== SESSION 2: MORNING SESSION (01:00-10:00) =====
    W0100W0130, W0130W0200,
    W0200W0300, W0300W0400, W0400W0500, W0500W0600,
    W0600W0700, W0700W0800, W0800W0900, W0900W1000,
+   
+   // ===== SESSION 3: MAIN SESSION (10:00-23:00) =====
    W1000W1100, W1100W1200, W1200W1300, W1300W1400,
    W1400W1500, W1500W1600, W1600W1700, W1700W1800,
    W1800W1900, W1900W2000, W2000W2100, W2100W2200,
    W2200W2300,
+   
+   // ===== SESSION 4: EVENING SESSION (23:00-00:00) =====
    W2300W2330, W2330W0000
 };
 
+// Session names for display purposes
 string GetSessionName(int slot)
 {
    if(slot == 0) return "MARKET CLOSED";
@@ -126,11 +148,18 @@ string GetSessionName(int slot)
    return "UNKNOWN";
 }
 
+// Global variables
+bool   g_limitPlacedAfterEntry = false;
+double g_signalHigh = 0.0;
+double g_signalLow  = 0.0;
+bool g_wasInPosition = false;
+
 // ======== MAE / MFE (FLOATING PNL BASED) ========
-double g_maeMoney   = 0.0;
-double g_mfeMoney   = 0.0;
+double g_maeMoney   = 0.0;   // most negative floating PnL
+double g_mfeMoney   = 0.0;   // most positive floating PnL
 bool   g_tracking   = false;
 ulong  g_ticket     = 0;
+double g_candleRange = 0.0;
 
 datetime g_entryTime = 0;
 string   g_csvName   = "trade_stats.csv";
@@ -159,19 +188,33 @@ bool IsTradeWindow(datetime barOpen)
    int totalMinutes = dt.hour * 60 + dt.min;
    int slot;
    
+   // Session 1: 00:00-01:00 - 1-hour interval
    if(totalMinutes < 60)
-      slot = 0;
-   else if(totalMinutes >= 60 && totalMinutes < 600)
    {
-      if(totalMinutes < 120)
-         slot = 1 + ((totalMinutes - 60) / 30);
-      else
-         slot = 3 + (dt.hour - 2);
+      slot = 0;
    }
-   else if(totalMinutes >= 600 && totalMinutes < 1380)
-      slot = 11 + (dt.hour - 10);
-   else
-      slot = 24 + ((totalMinutes - 1380) / 30);
+   // Session 2: 01:00-10:00 - mixed intervals
+   else if(totalMinutes >= 60 && totalMinutes < 600) // 01:00 to 10:00
+   {
+      if(totalMinutes < 120) // 01:00-02:00 (30-min slots)
+      {
+         slot = 1 + ((totalMinutes - 60) / 30);
+      }
+      else // 02:00-10:00 (hourly slots)
+      {
+         slot = 3 + (dt.hour - 2);  // slots 3-10
+      }
+   }
+   // Session 3: 10:00-23:00 - hourly intervals
+   else if(totalMinutes >= 600 && totalMinutes < 1380) // 10:00 to 23:00
+   {
+      slot = 11 + (dt.hour - 10);  // slots 11-23
+   }
+   // Session 4: 23:00-00:00 - 30-min intervals
+   else // 23:00-00:00
+   {
+      slot = 24 + ((totalMinutes - 1380) / 30);  // slots 24-25
+   }
    
    return windows[slot];
 }
@@ -184,16 +227,32 @@ void DisplayTradeWindowStatus(datetime barOpen)
    TimeToStruct(barOpen, dt);
    
    int totalMinutes = dt.hour * 60 + dt.min;
+   string sessionName = "";
    string borderLine = "";
    
    if(totalMinutes < 60)
+   {
+      sessionName = "MARKET CLOSED";
       borderLine = "═══════════════════════════════════════════════";
-   else if(totalMinutes == 60)
-      borderLine = "═══════════════ MORNING SESSION START ═══════════════";
-   else if(totalMinutes == 600)
-      borderLine = "════════════════ MAIN SESSION START ════════════════";
-   else if(totalMinutes == 1380)
-      borderLine = "═══════════════ EVENING SESSION START ═══════════════";
+   }
+   else if(totalMinutes >= 60 && totalMinutes < 600)
+   {
+      sessionName = "MORNING SESSION";
+      if(totalMinutes == 60) // Start of morning session
+         borderLine = "═══════════════ MORNING SESSION START ═══════════════";
+   }
+   else if(totalMinutes >= 600 && totalMinutes < 1380)
+   {
+      sessionName = "MAIN SESSION";
+      if(totalMinutes == 600) // Start of main session
+         borderLine = "════════════════ MAIN SESSION START ════════════════";
+   }
+   else
+   {
+      sessionName = "EVENING SESSION";
+      if(totalMinutes == 1380) // Start of evening session
+         borderLine = "═══════════════ EVENING SESSION START ═══════════════";
+   }
    
    if(borderLine != "")
       Print(borderLine);
@@ -204,18 +263,22 @@ bool IsCandleInRange(double high, double low)
    if(!UseCandleRangeFilter)
       return true;
    
-   double rangePoints = (high - low);
+   // Calculate candle range in points
+   double rangePoints = (high - low) / _Point;
    
+   // Check if range is within allowed limits
    if(rangePoints > MaxCandleRange)
    {
       Print("⚠️ Candle range filter: Range ", DoubleToString(rangePoints, 2), " points > Max ", DoubleToString(MaxCandleRange, 2), " points - Skipping");
       return false;
    }
+   
    if(rangePoints < MinCandleRange)
    {
       Print("⚠️ Candle range filter: Range ", DoubleToString(rangePoints, 2), " points < Min ", DoubleToString(MinCandleRange, 2), " points - Skipping");
       return false;
    }
+   
    return true;
 }
 
@@ -226,27 +289,34 @@ bool IsWeekdayAllowed(datetime barOpen)
 
    MqlDateTime dt;
    TimeToStruct(barOpen, dt);
-   int weekday = dt.day_of_week;
+   int weekday = dt.day_of_week;  // 0-6, where 0=Sunday, 1=Monday, ..., 6=Saturday
 
+   // Individual weekday selection
    if(WeekdayFilterMode == WEEKDAY_INDIVIDUAL)
    {
       switch(weekday)
       {
-         case 1:  return TradeMonday;
-         case 2:  return TradeTuesday;
-         case 3:  return TradeWednesday;
-         case 4:  return TradeThursday;
-         case 5:  return TradeFriday;
-         case 6:  return TradeSaturday;
-         case 0:  return TradeSunday;
+         case 1:  return TradeMonday;     // Monday
+         case 2:  return TradeTuesday;    // Tuesday
+         case 3:  return TradeWednesday;  // Wednesday
+         case 4:  return TradeThursday;   // Thursday
+         case 5:  return TradeFriday;     // Friday
+         case 6:  return TradeSaturday;   // Saturday
+         case 0:  return TradeSunday;     // Sunday
       }
    }
+   // Weekday group selection
    else if(WeekdayFilterMode == WEEKDAY_GROUPED)
    {
-      if(weekday >= 1 && weekday <= 5) return TradeWeekdays;
-      else if(weekday == 6 || weekday == 0) return TradeWeekend;
+      // Weekdays: Monday-Friday (1-5)
+      if(weekday >= 1 && weekday <= 5)
+         return TradeWeekdays;
+      // Weekend: Saturday-Sunday (6, 0)
+      else if(weekday == 6 || weekday == 0)
+         return TradeWeekend;
    }
-   return false;
+
+   return false;  // Should never reach here
 }
 
 string GetWeekdayName(int weekday)
@@ -271,8 +341,9 @@ bool IsMonthAllowed(datetime barOpen)
 
    MqlDateTime dt;
    TimeToStruct(barOpen, dt);
-   int month = dt.mon;
+   int month = dt.mon;  // 1-12
 
+   // Individual month selection
    if(MonthFilterMode == MONTH_INDIVIDUAL)
    {
       switch(month)
@@ -291,14 +362,24 @@ bool IsMonthAllowed(datetime barOpen)
          case 12: return TradeDecember;
       }
    }
+   // Month group selection
    else if(MonthFilterMode == MONTH_GROUPED)
    {
-      if(month == 12 || month == 1 || month == 2) return TradeWinter;
-      else if(month >= 3 && month <= 5)            return TradeSpring;
-      else if(month >= 6 && month <= 8)            return TradeSummer;
-      else if(month >= 9 && month <= 11)           return TradeAutumn;
+      // Winter: Dec, Jan, Feb
+      if(month == 12 || month == 1 || month == 2)
+         return TradeWinter;
+      // Spring: Mar, Apr, May
+      else if(month >= 3 && month <= 5)
+         return TradeSpring;
+      // Summer: Jun, Jul, Aug
+      else if(month >= 6 && month <= 8)
+         return TradeSummer;
+      // Autumn: Sep, Oct, Nov
+      else if(month >= 9 && month <= 11)
+         return TradeAutumn;
    }
-   return false;
+
+   return false;  // Should never reach here
 }
 
 string GetMonthName(int month)
@@ -321,14 +402,8 @@ string GetMonthName(int month)
    return "Unknown";
 }
 
-// ======== TP PRICE CALCULATION ========
-double CalcTPPrice(double entryPrice)
-{
-   return entryPrice + FixedTPPoints;
-}
-
 // ======== CSV FUNCTIONS ========
-void SaveTradeStats(double realized, datetime entryTime, datetime exitTime)
+void SaveTradeStats(double realized, datetime entryTime, datetime exitTime, double candleRange)
 {
    int f = FileOpen(g_csvName, FILE_READ|FILE_WRITE|FILE_CSV|FILE_SHARE_WRITE);
    if(f == INVALID_HANDLE)
@@ -338,7 +413,7 @@ void SaveTradeStats(double realized, datetime entryTime, datetime exitTime)
    }
 
    if(FileSize(f) == 0)
-      FileWrite(f, "ticket", "entry_time", "exit_time", "mae_money", "mfe_money", "trade_profit");
+      FileWrite(f, "ticket", "entry_time", "exit_time", "mae_money", "mfe_money", "trade_profit", "candle_range");
 
    FileSeek(f, 0, SEEK_END);
    FileWrite(
@@ -348,7 +423,8 @@ void SaveTradeStats(double realized, datetime entryTime, datetime exitTime)
       TimeToString(exitTime, TIME_DATE|TIME_SECONDS),
       g_maeMoney,
       g_mfeMoney,
-      realized
+      realized,
+      candleRange
    );
 
    FileClose(f);
@@ -435,18 +511,79 @@ void CancelOldBuyStops()
    }
 }
 
+void CancelAllBuyLimits()
+{
+   for(int i = OrdersTotal() - 1; i >= 0; --i)
+   {
+      ulong ticket = OrderGetTicket(i);
+      if(ticket == 0) continue;
+      if(!OrderSelect(ticket)) continue;
+
+      int type = (int)OrderGetInteger(ORDER_TYPE);
+      if(type != ORDER_TYPE_BUY_LIMIT) continue;
+
+      MqlTradeRequest req = {};
+      MqlTradeResult  res = {};
+      req.action = TRADE_ACTION_REMOVE;
+      req.order  = ticket;
+
+      if(!OrderSend(req, res))
+         Print("❌ Failed to cancel BuyLimit ticket=", ticket, " err=", GetLastError());
+      else
+         Print("🧹 Cancelled BuyLimit ticket=", ticket);
+   }
+}
+
+void ManageOpenPosition()
+{
+   if(!PositionSelect(_Symbol)) return;
+
+   double entry = PositionGetDouble(POSITION_PRICE_OPEN);
+   double sl    = PositionGetDouble(POSITION_SL);
+   double vol   = PositionGetDouble(POSITION_VOLUME);
+   long   typ   = PositionGetInteger(POSITION_TYPE);
+
+   if(typ != POSITION_TYPE_BUY) return;
+
+   double risk = entry - sl;
+   if(risk <= 0.0) return;
+
+   // just-closed bar close
+   double barClose = iClose(_Symbol, _Period, 1);
+   // CLOSE POSITION AT LEAST RISK/REWARD OR BETTER 	
+   if(barClose >= entry + risk * RiskReward)
+   {
+      Print("✅ ≥ ", RiskReward, "R at bar close → closing at market");
+
+      MqlTradeRequest req = {};
+      MqlTradeResult  res = {};
+      req.action    = TRADE_ACTION_DEAL;
+      req.symbol    = _Symbol;
+      req.volume    = vol;
+      req.type      = ORDER_TYPE_SELL;
+      req.price     = SymbolInfoDouble(_Symbol, SYMBOL_BID);
+      req.deviation = Slippage;
+
+      if(!OrderSend(req, res))
+         Print("❌ Close fail err=", GetLastError());
+      else
+         Print("✅ Position closed");
+   }
+   else
+   {
+      Print("⏳ Not yet ", RiskReward, "R on close → hold");
+   }
+}
+
 // ======== DISPLAY CURRENT SETTINGS ========
 void DisplaySettings()
-{	
-   double tickSize  = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_SIZE);   // 0.25
-   double tickValue = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_VALUE);  // 0.50
+{
    Print("╔════════════════════════════════════════════════════════════╗");
    Print("║                    EA SETTINGS                             ║");
    Print("╚════════════════════════════════════════════════════════════╝");
-   Print("Lots: ", Lots, ", Fixed TP: ", FixedTPPoints, " points (",
-      FixedTPPoints / tickSize, " ticks, $",
-      (FixedTPPoints / tickSize) * tickValue * Lots, " per trade)");
+   Print("Lots: ", Lots, ", RiskReward: ", RiskReward);
 
+   // Display candle range filter settings
    Print("┌────────────────────────────────────────────────────────────┐");
    Print("│ CANDLE RANGE FILTER                                        │");
    Print("├────────────────────────────────────────────────────────────┤");
@@ -458,6 +595,7 @@ void DisplaySettings()
    }
    Print("└────────────────────────────────────────────────────────────┘");
 
+   // Display weekday settings
    Print("┌────────────────────────────────────────────────────────────┐");
    Print("│ WEEKDAY FILTERING                                          │");
    Print("├────────────────────────────────────────────────────────────┤");
@@ -478,6 +616,7 @@ void DisplaySettings()
    }
    Print("└────────────────────────────────────────────────────────────┘");
 
+   // Display month settings
    Print("┌────────────────────────────────────────────────────────────┐");
    Print("│ MONTH FILTERING                                            │");
    Print("├────────────────────────────────────────────────────────────┤");
@@ -501,6 +640,7 @@ void DisplaySettings()
    }
    Print("└────────────────────────────────────────────────────────────┘");
 
+   // Display time window settings
    Print("┌────────────────────────────────────────────────────────────┐");
    Print("│ TIME WINDOW FILTERING - SESSIONS                           │");
    Print("├────────────────────────────────────────────────────────────┤");
@@ -520,6 +660,7 @@ void DisplaySettings()
    }
    Print("└────────────────────────────────────────────────────────────┘");
 
+   // Display flattening times
    Print("┌────────────────────────────────────────────────────────────┐");
    Print("│ FLATTEN TIMES                                              │");
    Print("├────────────────────────────────────────────────────────────┤");
@@ -531,6 +672,7 @@ void DisplaySettings()
 // ======== EA CORE ========
 int OnInit()
 {
+   // Delete previous stats file if exists
    if(FileIsExist(g_csvName))
    {
       if(FileDelete(g_csvName))
@@ -543,9 +685,10 @@ int OnInit()
    return(INIT_SUCCEEDED);
 }
 
+
 void OnTick()
 {
-   // ---- TRACK FLOATING MAE / MFE (tick-based) ----
+   // ---- TRACK FLOATING MAE / MFE (tick-based, broker-safe) ----
    if(PositionSelect(_Symbol))
    {
       double floating = PositionGetDouble(POSITION_PROFIT);
@@ -557,15 +700,20 @@ void OnTick()
          g_entryTime = (datetime)PositionGetInteger(POSITION_TIME);
          g_maeMoney  = floating;
          g_mfeMoney  = floating;
+
          Print("Tracking started ticket=", g_ticket);
       }
 
+      // 🔹 update excursions
       g_maeMoney = MathMin(g_maeMoney, floating);
       g_mfeMoney = MathMax(g_mfeMoney, floating);
    }
    else if(g_tracking)
    {
+      // --- include final realized PnL into MAE/MFE ---
       double realized = 0.0;
+      
+      // --- include datetime ---
       datetime exitTime = 0;
 
       if(HistorySelect(g_entryTime - 86400, TimeCurrent()))
@@ -573,7 +721,9 @@ void OnTick()
          for(int i = HistoryDealsTotal() - 1; i >= 0; i--)
          {
             ulong deal = HistoryDealGetTicket(i);
-            if(HistoryDealGetInteger(deal, DEAL_POSITION_ID) != g_ticket) continue;
+
+            if(HistoryDealGetInteger(deal, DEAL_POSITION_ID) != g_ticket)
+               continue;
 
             double profit = HistoryDealGetDouble(deal, DEAL_PROFIT);
             realized += profit;
@@ -581,20 +731,112 @@ void OnTick()
             if(HistoryDealGetInteger(deal, DEAL_ENTRY) == DEAL_ENTRY_OUT)
             {
                exitTime = (datetime)HistoryDealGetInteger(deal, DEAL_TIME);
-               break;
+               break; // ← exit deal found, stop
             }
          }
       }
 
+      // realized PnL IS the last excursion
       g_maeMoney = MathMin(g_maeMoney, realized);
       g_mfeMoney = MathMax(g_mfeMoney, realized);
-      SaveTradeStats(realized, g_entryTime, exitTime);
+
+      SaveTradeStats(realized, g_entryTime, exitTime, g_candleRange);
+
       g_tracking = false;
    }
 
+   static datetime lastBar = 0;
    datetime barOpen = iTime(_Symbol, _Period, 0);
+	
+	bool isInPosition = PositionSelect(_Symbol);
 
-   // 🔹 Flatten checks — always evaluated first, even with open position
+	// 🔴 Position OPENED → place BuyLimit
+	if(isInPosition && !g_wasInPosition && !g_limitPlacedAfterEntry && g_signalHigh > 0)
+	{
+	   Print("⚡ BuyStop triggered → placing BuyLimit immediately");
+
+	   double range = g_signalHigh - g_signalLow;
+		if(range <= 0.0) return;
+		
+		double pct = MathMax(0.0, MathMin(100.0, LimitOffsetPercent));
+		double limitPrice = g_signalHigh - range * (pct / 100.0);
+
+		double tickSize = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_SIZE);
+
+		// align to tick grid
+		limitPrice = MathFloor(limitPrice / tickSize) * tickSize;
+		limitPrice = NormalizeDouble(limitPrice, _Digits);
+
+	   double bid = SymbolInfoDouble(_Symbol, SYMBOL_BID);
+
+	   if(limitPrice < bid)
+	   {
+		  MqlTradeRequest req = {};
+		  MqlTradeResult  res = {};
+		  req.action       = TRADE_ACTION_PENDING;
+		  req.symbol       = _Symbol;
+		  req.volume       = Lots;
+		  req.type         = ORDER_TYPE_BUY_LIMIT;
+		  req.price        = limitPrice;
+		  req.sl           = NormalizeDouble(g_signalLow, _Digits);
+		  req.deviation    = Slippage;
+		  req.type_filling = ORDER_FILLING_RETURN;
+
+		  if(!OrderSend(req, res))
+			 Print("❌ BuyLimit placement failed err=", GetLastError());
+		  else
+		  {
+			 Print("✅ BuyLimit placed @", limitPrice);
+			 g_limitPlacedAfterEntry = true;
+		  }
+	   }
+	}
+
+	// 🔴 Position CLOSED → remove BuyLimit
+	if(!isInPosition && g_wasInPosition)
+	{
+	   Print("📤 Position closed → cancelling BuyLimits");
+
+	   CancelAllBuyLimits();
+
+	   g_signalHigh = 0.0;
+	   g_signalLow  = 0.0;
+	   g_limitPlacedAfterEntry = false;
+	}
+
+	// update state
+	g_wasInPosition = isInPosition;
+	
+   if(barOpen == lastBar) return;
+   lastBar = barOpen;
+
+   MqlDateTime dt;
+   TimeToStruct(barOpen, dt);
+   string monthName = GetMonthName(dt.mon);
+   string weekdayName = GetWeekdayName(dt.day_of_week);
+
+   // Display session borders
+   DisplayTradeWindowStatus(barOpen);
+
+   // 🔹 Weekday filtering check
+   if(WeekdayFilterMode != WEEKDAY_DISABLED && !IsWeekdayAllowed(barOpen))
+   {
+      Print("📅 Weekday Filter: ", weekdayName, " not allowed for trading");
+      if(PositionsTotal() == 0)
+         CancelOldBuyStops();
+      return;
+   }
+
+   // 🔹 Month filtering check
+   if(MonthFilterMode != MONTH_DISABLED && !IsMonthAllowed(barOpen))
+   {
+      Print("📅 Month Filter: ", monthName, " not allowed for trading");
+      if(PositionsTotal() == 0)
+         CancelOldBuyStops();
+      return;
+   }
+
+   // 🔹 flatten during session
    if(UseFlattenDur && IsFlattenTimeDur(barOpen))
    {
       Print("Flatten cutoff reached DURING SESSION → closing everything");
@@ -602,6 +844,8 @@ void OnTick()
       CancelAllOrders();
       return;
    }
+
+   // 🔹 flatten end of session
    if(UseFlattenEnd && IsFlattenTimeEnd(barOpen))
    {
       Print("🌙 Flatten cutoff reached → closing everything");
@@ -610,35 +854,14 @@ void OnTick()
       return;
    }
 
-   // 🔹 If position is open, TP is handled by the broker — nothing to do here
-   if(PositionsTotal() > 0) return;
-
-   // ---- Per-bar logic below ----
-   static datetime lastBar = 0;
-   if(barOpen == lastBar) return;
-   lastBar = barOpen;
-
-   MqlDateTime dt;
-   TimeToStruct(barOpen, dt);
-   string monthName   = GetMonthName(dt.mon);
-   string weekdayName = GetWeekdayName(dt.day_of_week);
-
-   DisplayTradeWindowStatus(barOpen);
-
-   if(WeekdayFilterMode != WEEKDAY_DISABLED && !IsWeekdayAllowed(barOpen))
+   // 🔹 manage existing position
+   if(PositionsTotal() > 0)
    {
-      Print("📅 Weekday Filter: ", weekdayName, " not allowed for trading");
-      CancelOldBuyStops();
+      ManageOpenPosition();
       return;
    }
 
-   if(MonthFilterMode != MONTH_DISABLED && !IsMonthAllowed(barOpen))
-   {
-      Print("📅 Month Filter: ", monthName, " not allowed for trading");
-      CancelOldBuyStops();
-      return;
-   }
-
+   // 🔹 time window check (ENTRY ONLY)
    if(!IsTradeWindow(barOpen))
    {
       Print("⏱ Outside trading window → no new entries");
@@ -646,55 +869,54 @@ void OnTick()
       return;
    }
 
+   // Red candle setup (only if all filters pass)
    double o1 = iOpen(_Symbol, _Period, 1);
    double h1 = iHigh(_Symbol, _Period, 1);
    double l1 = iLow(_Symbol, _Period, 1);
    double c1 = iClose(_Symbol, _Period, 1);
 
+   // 🔹 Candle range filter check
    if(!IsCandleInRange(h1, l1))
    {
       Print("⚠️ Candle range outside allowed limits - Skipping signal");
       CancelOldBuyStops();
       return;
    }
-
+   
+   
    // BUY-STOP ORDER AT PREVIOUS RED CANDLE HIGH
-   if(c1 < o1)
-   {
-      Print("🔴 Red candle on ", weekdayName, " in ", monthName, " → refresh BuyStop");
-      CancelOldBuyStops();
+    if(c1 < o1)
+	{
+	   Print("🔴 Red candle → place BuyStop");
 
-      double entry = h1;
-      double stop  = l1;
-      double risk  = entry - stop;
-      if(risk <= 0.0) return;
+	   CancelOldBuyStops();
 
-      // Calculate hard TP price from fixed money target
-      double tp = CalcTPPrice(entry);
+	   double entry = h1;
+	   double stop  = l1;
+	   double risk  = entry - stop;
+	   g_candleRange = h1 - l1;
 
-      MqlTradeRequest req = {};
-      MqlTradeResult  res = {};
-      req.action       = TRADE_ACTION_PENDING;
-      req.symbol       = _Symbol;
-      req.volume       = Lots;
-      req.type         = ORDER_TYPE_BUY_STOP;
-      req.price        = entry;
-      req.sl           = stop;
-      req.tp           = tp;
-      req.deviation    = Slippage;
-      req.type_filling = ORDER_FILLING_RETURN;
+	   if(risk <= 0.0) return;
 
-      double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
-      if(ask >= entry)
-      {
-         Print("⚠️ Gap above entry at session open → skipping BuyStop placement");
-         return;
-      }
+	   // 🔹 store signal for later limit placement
+	   g_signalHigh = h1;
+	   g_signalLow  = l1;
+	   g_limitPlacedAfterEntry = false;
 
-      if(!OrderSend(req, res))
-        Print("❌ Place BuyStop fail err=", GetLastError());
-      else
-		Print("🚀 BuyStop placed @", entry, " SL=", stop, " TP=", tp,
-			  " (", FixedTPPoints, " pts, ", weekdayName, ", ", monthName, ")");
-   }
+	   MqlTradeRequest req = {};
+	   MqlTradeResult  res = {};
+	   req.action       = TRADE_ACTION_PENDING;
+	   req.symbol       = _Symbol;
+	   req.volume       = Lots;
+	   req.type         = ORDER_TYPE_BUY_STOP;
+	   req.price        = entry;
+	   req.sl           = stop;
+	   req.deviation    = Slippage;
+	   req.type_filling = ORDER_FILLING_RETURN;
+
+	   if(!OrderSend(req, res))
+		  Print("❌ Place BuyStop fail err=", GetLastError());
+	   else
+		  Print("🚀 BuyStop placed @", entry);
+	}
 }
