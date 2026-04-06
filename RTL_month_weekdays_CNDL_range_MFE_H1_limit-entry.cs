@@ -6,10 +6,13 @@
 input double Lots           = 1.0;
 input double RiskReward     = 1.0;
 input int    Slippage       = 5;
+
+// ======== Additional TP-limit order functionality ========
+input bool UseScaleInLimit = true;  // ENABLE/DISABLE ADDITIONAL BUY-LIMIT ORDER
 input double LimitOffsetPercent = 30.0; // Limit price offset in % (0% - entry price, 100% - SL)
 
 // ======== CANDLE RANGE FILTER ========
-input bool   UseCandleRangeFilter = false;  // Enable/disable candle range filter
+input bool   UseCandleRangeFilter = false;  // ENABLE/DISABLE CANDLE RANGE FILTER
 input double MaxCandleRange       = 50.0;   // Maximum allowed candle range in points
 input double MinCandleRange       = 5.0;    // Minimum allowed candle range in points
 
@@ -21,7 +24,7 @@ enum WEEKDAY_FILTER_MODE
    WEEKDAY_GROUPED         // Select weekday groups
 };
 
-input WEEKDAY_FILTER_MODE WeekdayFilterMode = WEEKDAY_DISABLED;  // Weekday filtering mode
+input WEEKDAY_FILTER_MODE WeekdayFilterMode = WEEKDAY_DISABLED;  // WEEKDAY FILTERING MODE
 
 // Individual weekdays selection
 input bool TradeMonday     = true;  // Monday
@@ -44,7 +47,7 @@ enum MONTH_FILTER_MODE
    MONTH_GROUPED         // Select month groups
 };
 
-input MONTH_FILTER_MODE MonthFilterMode = MONTH_DISABLED;  // Month filtering mode
+input MONTH_FILTER_MODE MonthFilterMode = MONTH_DISABLED;  // MONTH FILTERING MODE
 
 // Individual months selection
 input bool TradeJanuary    = true;  // January
@@ -66,20 +69,14 @@ input bool TradeSpring     = true;  // Mar, Apr, May
 input bool TradeSummer     = true;  // Jun, Jul, Aug
 input bool TradeAutumn     = true;  // Sep, Oct, Nov
 
-// ======== SESSION FILTERING ========
-// flattening during session
-input bool   UseFlattenDur     = true;
-input int    FlattenHourDur    = 14;
-input int    FlattenMinuteDur  = 00;
-
 // flattening end session
-input bool   UseFlattenEnd     = true;
+input bool   UseFlattenEnd     = true;	// USE FLATTENING END SESSION
 input int    FlattenHourEnd    = 20;
 input int    FlattenMinuteEnd  = 00;
 
 // ======== TIME WINDOW FILTERING ========
 // no-trading window (block new trades between these times) - Mixed intervals with session borders
-input bool   UseTradeWindow   = true;
+input bool   UseTradeWindow   = true;	// USE TIME TRADE WINDOW
 
 // ========== SESSION 1: MARKET CLOSED (00:00-01:00) ==========
 input bool W0000W0100 = false;  // 00:00–01:00 (Market Closed)
@@ -153,6 +150,9 @@ bool   g_limitPlacedAfterEntry = false;
 double g_signalHigh = 0.0;
 double g_signalLow  = 0.0;
 bool g_wasInPosition = false;
+double g_initialEntry = 0.0;
+double g_initialRisk  = 0.0;
+bool   g_initialSet   = false;
 
 // ======== MAE / MFE (FLOATING PNL BASED) ========
 double g_maeMoney   = 0.0;   // most negative floating PnL
@@ -165,11 +165,6 @@ datetime g_entryTime = 0;
 string   g_csvName   = "trade_stats.csv";
 
 // ======== HELPER FUNCTIONS ========
-bool IsFlattenTimeDur(datetime barOpen)
-{
-   MqlDateTime dt; TimeToStruct(barOpen, dt);
-   return (dt.hour == FlattenHourDur && dt.min == FlattenMinuteDur);
-}
 
 bool IsFlattenTimeEnd(datetime barOpen)
 {
@@ -538,28 +533,30 @@ void ManageOpenPosition()
 {
    if(!PositionSelect(_Symbol)) return;
 
-   double entry = PositionGetDouble(POSITION_PRICE_OPEN);
-   double sl    = PositionGetDouble(POSITION_SL);
-   double vol   = PositionGetDouble(POSITION_VOLUME);
-   long   typ   = PositionGetInteger(POSITION_TYPE);
+   double vol = PositionGetDouble(POSITION_VOLUME);
+   long   typ = PositionGetInteger(POSITION_TYPE);
 
    if(typ != POSITION_TYPE_BUY) return;
 
-   double risk = entry - sl;
-   if(risk <= 0.0) return;
-
-   // just-closed bar close
-   double barClose = iClose(_Symbol, _Period, 1);
-   // CLOSE POSITION AT LEAST RISK/REWARD OR BETTER 	
-   if(barClose >= entry + risk * RiskReward)
+   if(!g_initialSet || g_initialRisk <= 0.0)
    {
-      Print("✅ ≥ ", RiskReward, "R at bar close → closing at market");
+      Print("⚠️ Initial reference not set → skipping TP logic");
+      return;
+   }
+
+   double barClose = iClose(_Symbol, _Period, 1);
+
+   double target = g_initialEntry + g_initialRisk * RiskReward;
+
+   if(barClose >= target)
+   {
+      Print("✅ Fixed R:R reached → closing ALL positions");
 
       MqlTradeRequest req = {};
       MqlTradeResult  res = {};
       req.action    = TRADE_ACTION_DEAL;
       req.symbol    = _Symbol;
-      req.volume    = vol;
+      req.volume    = vol; // closes full net position
       req.type      = ORDER_TYPE_SELL;
       req.price     = SymbolInfoDouble(_Symbol, SYMBOL_BID);
       req.deviation = Slippage;
@@ -567,11 +564,11 @@ void ManageOpenPosition()
       if(!OrderSend(req, res))
          Print("❌ Close fail err=", GetLastError());
       else
-         Print("✅ Position closed");
+         Print("✅ Position closed at fixed R:R");
    }
    else
    {
-      Print("⏳ Not yet ", RiskReward, "R on close → hold");
+      Print("⏳ Waiting fixed R:R → target=", target);
    }
 }
 
@@ -664,7 +661,6 @@ void DisplaySettings()
    Print("┌────────────────────────────────────────────────────────────┐");
    Print("│ FLATTEN TIMES                                              │");
    Print("├────────────────────────────────────────────────────────────┤");
-   Print("│ During Session: ", UseFlattenDur ? "Yes (" + (string)FlattenHourDur + ":" + (string)FlattenMinuteDur + ")" : "No");
    Print("│ End of Session: ", UseFlattenEnd ? "Yes (" + (string)FlattenHourEnd + ":" + (string)FlattenMinuteEnd + ")" : "No");
    Print("└────────────────────────────────────────────────────────────┘");
 }
@@ -687,7 +683,13 @@ int OnInit()
 
 
 void OnTick()
-{
+
+{	// If user turns it OFF during runtime or optimization, ensure no leftovers:
+	if(!UseScaleInLimit)
+	{
+	   CancelAllBuyLimits();
+	   g_limitPlacedAfterEntry = false;
+	}
    // ---- TRACK FLOATING MAE / MFE (tick-based, broker-safe) ----
    if(PositionSelect(_Symbol))
    {
@@ -749,59 +751,90 @@ void OnTick()
    datetime barOpen = iTime(_Symbol, _Period, 0);
 	
 	bool isInPosition = PositionSelect(_Symbol);
+	
+	// 🔹 NEW POSITION DETECTED → initialize R:R reference
+	if(isInPosition && !g_wasInPosition)
+	{
+	   double entry = PositionGetDouble(POSITION_PRICE_OPEN);
+	   double sl    = PositionGetDouble(POSITION_SL);
+
+	   if(sl > 0.0 && entry > sl)
+	   {
+		  g_initialEntry = entry;
+		  g_initialRisk  = entry - sl;
+		  g_initialSet   = true;
+
+		  Print("📌 Initial trade locked (universal): Entry=", g_initialEntry, " Risk=", g_initialRisk);
+	   }
+	   else
+	   {
+		  Print("⚠️ Invalid SL or entry → cannot compute risk");
+	   }
+	}
 
 	// 🔴 Position OPENED → place BuyLimit
-	if(isInPosition && !g_wasInPosition && !g_limitPlacedAfterEntry && g_signalHigh > 0)
+	if(UseScaleInLimit && isInPosition && !g_wasInPosition && !g_limitPlacedAfterEntry && g_signalHigh > 0)
 	{
 	   Print("⚡ BuyStop triggered → placing BuyLimit immediately");
 
 	   double range = g_signalHigh - g_signalLow;
-		if(range <= 0.0) return;
-		
-		double pct = MathMax(0.0, MathMin(100.0, LimitOffsetPercent));
-		double limitPrice = g_signalHigh - range * (pct / 100.0);
+		if(range <= 0.0)
+		{
+		Print("⚠️ Invalid range, skip limit placement");
+		}
+		else
+		{
+				
+			double pct = MathMax(0.0, MathMin(100.0, LimitOffsetPercent));
+			double limitPrice = g_signalHigh - range * (pct / 100.0);
 
-		double tickSize = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_SIZE);
+			double tickSize = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_SIZE);
 
-		// align to tick grid
-		limitPrice = MathFloor(limitPrice / tickSize) * tickSize;
-		limitPrice = NormalizeDouble(limitPrice, _Digits);
+			// align to tick grid
+			limitPrice = MathFloor(limitPrice / tickSize) * tickSize;
+			limitPrice = NormalizeDouble(limitPrice, _Digits);
 
-	   double bid = SymbolInfoDouble(_Symbol, SYMBOL_BID);
+		   double bid = SymbolInfoDouble(_Symbol, SYMBOL_BID);
+		   
+		   if(limitPrice < bid)
+		   {
+			  MqlTradeRequest req = {};
+			  MqlTradeResult  res = {};
+			  req.action       = TRADE_ACTION_PENDING;
+			  req.symbol       = _Symbol;
+			  req.volume       = Lots;
+			  req.type         = ORDER_TYPE_BUY_LIMIT;
+			  req.price        = limitPrice;
+			  req.sl           = NormalizeDouble(g_signalLow, _Digits);
+			  req.deviation    = Slippage;
+			  req.type_filling = ORDER_FILLING_RETURN;
 
-	   if(limitPrice < bid)
-	   {
-		  MqlTradeRequest req = {};
-		  MqlTradeResult  res = {};
-		  req.action       = TRADE_ACTION_PENDING;
-		  req.symbol       = _Symbol;
-		  req.volume       = Lots;
-		  req.type         = ORDER_TYPE_BUY_LIMIT;
-		  req.price        = limitPrice;
-		  req.sl           = NormalizeDouble(g_signalLow, _Digits);
-		  req.deviation    = Slippage;
-		  req.type_filling = ORDER_FILLING_RETURN;
-
-		  if(!OrderSend(req, res))
-			 Print("❌ BuyLimit placement failed err=", GetLastError());
-		  else
-		  {
-			 Print("✅ BuyLimit placed @", limitPrice);
-			 g_limitPlacedAfterEntry = true;
-		  }
-	   }
+			  if(!OrderSend(req, res))
+				 Print("❌ BuyLimit placement failed err=", GetLastError());
+			  else
+			  {
+				 Print("✅ BuyLimit placed @", limitPrice);
+				 g_limitPlacedAfterEntry = true;
+			  }
+		   }
+		}
 	}
 
 	// 🔴 Position CLOSED → remove BuyLimit
-	if(!isInPosition && g_wasInPosition)
+	if(UseScaleInLimit && !isInPosition && g_wasInPosition)
 	{
-	   Print("📤 Position closed → cancelling BuyLimits");
+	   Print("📤 Position closed → cleanup");
 
 	   CancelAllBuyLimits();
 
 	   g_signalHigh = 0.0;
 	   g_signalLow  = 0.0;
 	   g_limitPlacedAfterEntry = false;
+
+	   // 🔹 reset initial reference
+	   g_initialEntry = 0.0;
+	   g_initialRisk  = 0.0;
+	   g_initialSet   = false;
 	}
 
 	// update state
@@ -833,15 +866,6 @@ void OnTick()
       Print("📅 Month Filter: ", monthName, " not allowed for trading");
       if(PositionsTotal() == 0)
          CancelOldBuyStops();
-      return;
-   }
-
-   // 🔹 flatten during session
-   if(UseFlattenDur && IsFlattenTimeDur(barOpen))
-   {
-      Print("Flatten cutoff reached DURING SESSION → closing everything");
-      CloseAllPositions();
-      CancelAllOrders();
       return;
    }
 
