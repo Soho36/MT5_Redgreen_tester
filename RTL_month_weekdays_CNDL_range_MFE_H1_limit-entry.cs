@@ -4,6 +4,7 @@
 #property strict
 
 input double Lots           = 1.0;
+input double Lots2			= 2.0;
 input double RiskReward     = 1.0;
 input int    Slippage       = 5;
 
@@ -579,6 +580,7 @@ void DisplaySettings()
    Print("║                    EA SETTINGS                             ║");
    Print("╚════════════════════════════════════════════════════════════╝");
    Print("Lots: ", Lots, ", RiskReward: ", RiskReward);
+   Print("Lots2: ", Lots2, ", RiskReward: ", RiskReward);
 
    // Display candle range filter settings
    Print("┌────────────────────────────────────────────────────────────┐");
@@ -802,7 +804,7 @@ void OnTick()
 			  MqlTradeResult  res = {};
 			  req.action       = TRADE_ACTION_PENDING;
 			  req.symbol       = _Symbol;
-			  req.volume       = Lots;
+			  req.volume       = Lots2;
 			  req.type         = ORDER_TYPE_BUY_LIMIT;
 			  req.price        = limitPrice;
 			  req.sl           = NormalizeDouble(g_signalLow, _Digits);
