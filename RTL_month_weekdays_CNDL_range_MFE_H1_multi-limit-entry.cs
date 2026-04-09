@@ -8,22 +8,22 @@ input double RiskReward     = 1.0;
 input int    Slippage       = 5;
 
 // ======== Additional TP-limit order functionality ========
-input bool UseScaleInLimit = true;
+input bool UseScaleInLimit = true;		  	// USE SCALE-IN LIMIT
 
-input bool   UseLimit1           = true;
-input double LimitOffsetPercent1 = 25.0;  // Limit 1 offset % (0%=entry, 100%=SL)
+input bool   UseLimit1           = true;	// LIMIT1	
+input double LimitOffsetPercent1 = 25.0;  	// Limit 1 offset % (0%=entry, 100%=SL)
 input double LimitLots1          = 1.0;
 
-input bool   UseLimit2           = true;
-input double LimitOffsetPercent2 = 50.0;  // Limit 2 offset %
+input bool   UseLimit2           = true;	// LIMIT2
+input double LimitOffsetPercent2 = 50.0;  	// Limit 2 offset %
 input double LimitLots2          = 1.5;
 
-input bool   UseLimit3           = true;
-input double LimitOffsetPercent3 = 75.0;  // Limit 3 offset %
+input bool   UseLimit3           = true;	// LIMIT3
+input double LimitOffsetPercent3 = 75.0;  	// Limit 3 offset %
 input double LimitLots3          = 2.0;
 
-input bool   UseLimit4           = true;
-input double LimitOffsetPercent4 = 90.0;  // Limit 4 offset %
+input bool   UseLimit4           = true;	// LIMIT3
+input double LimitOffsetPercent4 = 90.0;  	// Limit 4 offset %
 input double LimitLots4          = 2.5;
 
 
