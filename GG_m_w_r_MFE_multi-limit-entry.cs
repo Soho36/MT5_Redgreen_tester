@@ -1,5 +1,5 @@
 //+------------------------------------------------------------------+
-//| Red-Green Breakout EA: dynamic exit + time + month + weekday filters |
+//| Green Breakout EA: dynamic exit + time + month + weekday filters |
 //+------------------------------------------------------------------+
 #property strict
 
@@ -14,15 +14,15 @@ input bool   UseLimit1           = true;	// LIMIT1
 input double LimitOffsetPercent1 = 25.0;  	// Limit 1 offset % (0%=entry, 100%=SL)
 input double LimitLots1          = 1.0;
 
-input bool   UseLimit2           = true;	// LIMIT2
+input bool   UseLimit2           = false;	// LIMIT2
 input double LimitOffsetPercent2 = 50.0;  	// Limit 2 offset %
 input double LimitLots2          = 1.5;
 
-input bool   UseLimit3           = true;	// LIMIT3
+input bool   UseLimit3           = false;	// LIMIT3
 input double LimitOffsetPercent3 = 75.0;  	// Limit 3 offset %
 input double LimitLots3          = 2.0;
 
-input bool   UseLimit4           = true;	// LIMIT3
+input bool   UseLimit4           = false;	// LIMIT3
 input double LimitOffsetPercent4 = 90.0;  	// Limit 4 offset %
 input double LimitLots4          = 2.5;
 
@@ -87,8 +87,8 @@ input bool TradeAutumn     = true;  // Sep, Oct, Nov
 
 // flattening end session
 input bool   UseFlattenEnd     = true;	// USE FLATTENING END SESSION
-input int    FlattenHourEnd    = 20;
-input int    FlattenMinuteEnd  = 00;
+input int    FlattenHourEnd    = 23;
+input int    FlattenMinuteEnd  = 30;
 
 // ======== TIME WINDOW FILTERING ========
 // no-trading window (block new trades between these times) - Mixed intervals with session borders
@@ -927,7 +927,7 @@ void OnTick()
       return;
    }
 
-   // Red candle setup (only if all filters pass)
+   // Green candle setup (only if all filters pass)
    double o1 = iOpen(_Symbol, _Period, 1);
    double h1 = iHigh(_Symbol, _Period, 1);
    double l1 = iLow(_Symbol, _Period, 1);
@@ -942,10 +942,10 @@ void OnTick()
    }
    
    
-   // BUY-STOP ORDER AT PREVIOUS RED CANDLE HIGH
-    if(c1 < o1)
+   // BUY-STOP ORDER AT PREVIOUS GREEN CANDLE HIGH
+   if(c1 > o1)  // ← GREEN candle condition (was: c1 < o1 for red)
 	{
-	   Print("🔴 Red candle → place BuyStop");
+	   Print("🟢 Green candle → place BuyStop");
 
 	   CancelOldBuyStops();
 
