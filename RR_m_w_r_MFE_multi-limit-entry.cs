@@ -6,6 +6,7 @@
 input double Lots           = 1.0;
 input double RiskReward     = 1.0;
 input int    Slippage       = 5;
+input double StopLossOffsetPoints = 0.0;  // SL offset (neg=lower, pos=higher)
 
 // ======== Additional TP-limit order functionality ========
 input bool UseScaleInLimit = true;		  	// USE SCALE-IN LIMIT
@@ -165,6 +166,7 @@ string GetSessionName(int slot)
 bool   g_limitPlacedAfterEntry = false;
 double g_signalHigh = 0.0;
 double g_signalLow  = 0.0;
+double g_signalStop = 0.0;
 bool g_wasInPosition = false;
 double g_initialEntry = 0.0;
 double g_initialRisk  = 0.0;
@@ -595,6 +597,7 @@ void DisplaySettings()
    Print("║                    EA SETTINGS                             ║");
    Print("╚════════════════════════════════════════════════════════════╝");
    Print("Lots: ", Lots, ", RiskReward: ", RiskReward);
+   Print("StopLossOffsetPoints: ", StopLossOffsetPoints, " points (negative=below red candle low, positive=above)");
    Print("LimitLots1: ", LimitLots1, ", RiskReward: ", RiskReward);
    Print("LimitLots2: ", LimitLots2, ", RiskReward: ", RiskReward);
    Print("LimitLots3: ", LimitLots3, ", RiskReward: ", RiskReward);
@@ -778,13 +781,21 @@ void OnTick()
 	   double entry = PositionGetDouble(POSITION_PRICE_OPEN);
 	   double sl    = PositionGetDouble(POSITION_SL);
 
-	   if(sl > 0.0 && entry > sl)
+	   if(g_signalLow > 0.0 && entry > g_signalLow)
+	   {
+		  g_initialEntry = entry;
+		  g_initialRisk  = entry - g_signalLow;
+		  g_initialSet   = true;
+
+		  Print("📌 Initial trade locked (universal): Entry=", g_initialEntry, " Risk=", g_initialRisk);
+	   }
+	   else if(sl > 0.0 && entry > sl)
 	   {
 		  g_initialEntry = entry;
 		  g_initialRisk  = entry - sl;
 		  g_initialSet   = true;
 
-		  Print("📌 Initial trade locked (universal): Entry=", g_initialEntry, " Risk=", g_initialRisk);
+		  Print("📌 Initial trade locked (fallback from actual SL): Entry=", g_initialEntry, " Risk=", g_initialRisk);
 	   }
 	   else
 	   {
@@ -840,7 +851,7 @@ void OnTick()
 			 req.volume       = lots[i];
 			 req.type         = ORDER_TYPE_BUY_LIMIT;
 			 req.price        = limitPrice;
-			 req.sl           = NormalizeDouble(g_signalLow, _Digits);
+			 req.sl           = NormalizeDouble(g_signalStop, _Digits);
 			 req.deviation    = Slippage;
 			 req.type_filling = ORDER_FILLING_RETURN;
 
@@ -863,6 +874,7 @@ void OnTick()
 
 	   g_signalHigh = 0.0;
 	   g_signalLow  = 0.0;
+	   g_signalStop = 0.0;
 	   g_limitPlacedAfterEntry = false;
 
 	   // 🔹 reset initial reference
@@ -950,15 +962,30 @@ void OnTick()
 	   CancelOldBuyStops();
 
 	   double entry = h1;
-	   double stop  = l1;
-	   double risk  = entry - stop;
+	   double stop  = NormalizeDouble(l1 + StopLossOffsetPoints, _Digits);
+	   double risk  = entry - l1;
 	   g_candleRange = h1 - l1;
 
-	   if(risk <= 0.0) return;
+	   if(entry <= stop)
+	   {
+	      Print("⚠️ Invalid risk after SL offset: entry=", entry,
+	            " redLow=", l1,
+	            " StopLossOffsetPoints=", StopLossOffsetPoints,
+	            " adjustedSL=", stop);
+	      return;
+	   }
 
-	   // 🔹 store signal for later limit placement
+	   if(risk <= 0.0)
+	   {
+	      Print("⚠️ Invalid original candle risk: entry=", entry,
+	            " redLow=", l1);
+	      return;
+	   }
+
+	   // 🔹 store original signal range for RR/limit placement, and adjusted SL for orders
 	   g_signalHigh = h1;
 	   g_signalLow  = l1;
+	   g_signalStop = stop;
 	   g_limitPlacedAfterEntry = false;
 
 	   MqlTradeRequest req = {};
