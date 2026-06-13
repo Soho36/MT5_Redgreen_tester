@@ -6,6 +6,9 @@
 input double Lots           = 1.0;
 input double RiskReward     = 1.0;
 input int    Slippage       = 5;
+input double StopLossOffsetPoints = 0.0;  // SL offset (neg=lower, pos=higher)
+input bool   UseLimitExitAfterRR = false; // Place SellLimit after candle-close RR is reached
+input double ProfitTargetOffsetTicks = 0.0; // SellLimit offset from trigger candle close, in ticks
 
 // ======== Additional TP-limit order functionality ========
 input bool UseScaleInLimit = true;		  	// USE SCALE-IN LIMIT
@@ -163,8 +166,10 @@ string GetSessionName(int slot)
 
 // Global variables
 bool   g_limitPlacedAfterEntry = false;
+bool   g_exitLimitPlaced = false;
 double g_signalHigh = 0.0;
 double g_signalLow  = 0.0;
+double g_signalStop = 0.0;
 bool g_wasInPosition = false;
 double g_initialEntry = 0.0;
 double g_initialRisk  = 0.0;
@@ -545,6 +550,49 @@ void CancelAllBuyLimits()
    }
 }
 
+bool HasSellLimitForSymbol()
+{
+   for(int i = OrdersTotal() - 1; i >= 0; --i)
+   {
+      ulong ticket = OrderGetTicket(i);
+      if(ticket == 0) continue;
+      if(!OrderSelect(ticket)) continue;
+
+      if(OrderGetString(ORDER_SYMBOL) != _Symbol) continue;
+
+      int type = (int)OrderGetInteger(ORDER_TYPE);
+      if(type == ORDER_TYPE_SELL_LIMIT)
+         return true;
+   }
+
+   return false;
+}
+
+void CancelAllSellLimits()
+{
+   for(int i = OrdersTotal() - 1; i >= 0; --i)
+   {
+      ulong ticket = OrderGetTicket(i);
+      if(ticket == 0) continue;
+      if(!OrderSelect(ticket)) continue;
+
+      if(OrderGetString(ORDER_SYMBOL) != _Symbol) continue;
+
+      int type = (int)OrderGetInteger(ORDER_TYPE);
+      if(type != ORDER_TYPE_SELL_LIMIT) continue;
+
+      MqlTradeRequest req = {};
+      MqlTradeResult  res = {};
+      req.action = TRADE_ACTION_REMOVE;
+      req.order  = ticket;
+
+      if(!OrderSend(req, res))
+         Print("❌ Failed to cancel SellLimit ticket=", ticket, " err=", GetLastError());
+      else
+         Print("🧹 Cancelled SellLimit ticket=", ticket);
+   }
+}
+
 void ManageOpenPosition()
 {
    if(!PositionSelect(_Symbol)) return;
@@ -566,6 +614,61 @@ void ManageOpenPosition()
 
    if(barClose >= target)
    {
+      if(UseLimitExitAfterRR)
+      {
+         if(g_exitLimitPlaced || HasSellLimitForSymbol())
+         {
+            g_exitLimitPlaced = true;
+            Print("⏳ Fixed R:R reached → SellLimit exit already placed");
+            return;
+         }
+
+         double tickSize = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_SIZE);
+         if(tickSize <= 0.0)
+            tickSize = _Point;
+
+         double limitPrice = barClose + ProfitTargetOffsetTicks * tickSize;
+         limitPrice = MathCeil(limitPrice / tickSize) * tickSize;
+         limitPrice = NormalizeDouble(limitPrice, _Digits);
+
+         double ask     = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
+         double minDist = SymbolInfoInteger(_Symbol, SYMBOL_TRADE_STOPS_LEVEL) * _Point;
+
+         if(limitPrice <= ask + minDist)
+         {
+            Print("⚠️ SellLimit exit price invalid/too close: barClose=", barClose,
+                  " ProfitTargetOffsetTicks=", ProfitTargetOffsetTicks,
+                  " limitPrice=", limitPrice,
+                  " ask=", ask,
+                  " minDist=", minDist);
+            return;
+         }
+
+         CancelAllBuyLimits();
+
+         Print("✅ Fixed R:R reached → placing SellLimit exit @", limitPrice);
+
+         MqlTradeRequest req = {};
+         MqlTradeResult  res = {};
+         req.action       = TRADE_ACTION_PENDING;
+         req.symbol       = _Symbol;
+         req.volume       = vol;
+         req.type         = ORDER_TYPE_SELL_LIMIT;
+         req.price        = limitPrice;
+         req.deviation    = Slippage;
+         req.type_filling = ORDER_FILLING_RETURN;
+
+         if(!OrderSend(req, res))
+            Print("❌ SellLimit exit failed err=", GetLastError());
+         else
+         {
+            g_exitLimitPlaced = true;
+            Print("✅ SellLimit exit placed @", limitPrice, " lots=", vol);
+         }
+
+         return;
+      }
+
       Print("✅ Fixed R:R reached → closing ALL positions");
 
       MqlTradeRequest req = {};
@@ -595,6 +698,9 @@ void DisplaySettings()
    Print("║                    EA SETTINGS                             ║");
    Print("╚════════════════════════════════════════════════════════════╝");
    Print("Lots: ", Lots, ", RiskReward: ", RiskReward);
+   Print("StopLossOffsetPoints: ", StopLossOffsetPoints, " points (negative=below red candle low, positive=above)");
+   Print("UseLimitExitAfterRR: ", UseLimitExitAfterRR ? "true" : "false",
+         ", ProfitTargetOffsetTicks: ", ProfitTargetOffsetTicks);
    Print("LimitLots1: ", LimitLots1, ", RiskReward: ", RiskReward);
    Print("LimitLots2: ", LimitLots2, ", RiskReward: ", RiskReward);
    Print("LimitLots3: ", LimitLots3, ", RiskReward: ", RiskReward);
@@ -775,16 +881,26 @@ void OnTick()
 	// 🔹 NEW POSITION DETECTED → initialize R:R reference
 	if(isInPosition && !g_wasInPosition)
 	{
+	   g_exitLimitPlaced = false;
+
 	   double entry = PositionGetDouble(POSITION_PRICE_OPEN);
 	   double sl    = PositionGetDouble(POSITION_SL);
 
-	   if(sl > 0.0 && entry > sl)
+	   if(g_signalLow > 0.0 && entry > g_signalLow)
+	   {
+		  g_initialEntry = entry;
+		  g_initialRisk  = entry - g_signalLow;
+		  g_initialSet   = true;
+
+		  Print("📌 Initial trade locked (universal): Entry=", g_initialEntry, " Risk=", g_initialRisk);
+	   }
+	   else if(sl > 0.0 && entry > sl)
 	   {
 		  g_initialEntry = entry;
 		  g_initialRisk  = entry - sl;
 		  g_initialSet   = true;
 
-		  Print("📌 Initial trade locked (universal): Entry=", g_initialEntry, " Risk=", g_initialRisk);
+		  Print("📌 Initial trade locked (fallback from actual SL): Entry=", g_initialEntry, " Risk=", g_initialRisk);
 	   }
 	   else
 	   {
@@ -840,7 +956,7 @@ void OnTick()
 			 req.volume       = lots[i];
 			 req.type         = ORDER_TYPE_BUY_LIMIT;
 			 req.price        = limitPrice;
-			 req.sl           = NormalizeDouble(g_signalLow, _Digits);
+			 req.sl           = NormalizeDouble(g_signalStop, _Digits);
 			 req.deviation    = Slippage;
 			 req.type_filling = ORDER_FILLING_RETURN;
 
@@ -854,16 +970,19 @@ void OnTick()
 	   }
 	}
 
-	// 🔴 Position CLOSED → remove BuyLimit
-	if(UseScaleInLimit && !isInPosition && g_wasInPosition)
+	// 🔴 Position CLOSED → remove pending exits/scale-ins and reset trade state
+	if(!isInPosition && g_wasInPosition)
 	{
 	   Print("📤 Position closed → cleanup");
 
 	   CancelAllBuyLimits();
+	   CancelAllSellLimits();
 
 	   g_signalHigh = 0.0;
 	   g_signalLow  = 0.0;
+	   g_signalStop = 0.0;
 	   g_limitPlacedAfterEntry = false;
+	   g_exitLimitPlaced = false;
 
 	   // 🔹 reset initial reference
 	   g_initialEntry = 0.0;
@@ -950,15 +1069,30 @@ void OnTick()
 	   CancelOldBuyStops();
 
 	   double entry = h1;
-	   double stop  = l1;
-	   double risk  = entry - stop;
+	   double stop  = NormalizeDouble(l1 + StopLossOffsetPoints, _Digits);
+	   double risk  = entry - l1;
 	   g_candleRange = h1 - l1;
 
-	   if(risk <= 0.0) return;
+	   if(entry <= stop)
+	   {
+	      Print("⚠️ Invalid risk after SL offset: entry=", entry,
+	            " redLow=", l1,
+	            " StopLossOffsetPoints=", StopLossOffsetPoints,
+	            " adjustedSL=", stop);
+	      return;
+	   }
 
-	   // 🔹 store signal for later limit placement
+	   if(risk <= 0.0)
+	   {
+	      Print("⚠️ Invalid original candle risk: entry=", entry,
+	            " redLow=", l1);
+	      return;
+	   }
+
+	   // 🔹 store original signal range for RR/limit placement, and adjusted SL for orders
 	   g_signalHigh = h1;
 	   g_signalLow  = l1;
+	   g_signalStop = stop;
 	   g_limitPlacedAfterEntry = false;
 
 	   MqlTradeRequest req = {};
