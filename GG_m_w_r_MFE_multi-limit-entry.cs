@@ -10,7 +10,7 @@ input int    Slippage       = 5;
 // ======== Additional TP-limit order functionality ========
 input bool UseScaleInLimit = true;		  	// USE SCALE-IN LIMIT
 
-input bool   UseLimit1           = true;	// LIMIT1	
+input bool   UseLimit1           = true;	// LIMIT1
 input double LimitOffsetPercent1 = 25.0;  	// Limit 1 offset % (0%=entry, 100%=SL)
 input double LimitLots1          = 1.0;
 
@@ -135,18 +135,18 @@ bool windows[26] =  // Total slots: 1 + 2 + 8 + 13 + 2 = 26
 {
    // ===== SESSION 1: MARKET CLOSED (00:00-01:00) =====
    W0000W0100,
-   
+
    // ===== SESSION 2: MORNING SESSION (01:00-10:00) =====
    W0100W0130, W0130W0200,
    W0200W0300, W0300W0400, W0400W0500, W0500W0600,
    W0600W0700, W0700W0800, W0800W0900, W0900W1000,
-   
+
    // ===== SESSION 3: MAIN SESSION (10:00-23:00) =====
    W1000W1100, W1100W1200, W1200W1300, W1300W1400,
    W1400W1500, W1500W1600, W1600W1700, W1700W1800,
    W1800W1900, W1900W2000, W2000W2100, W2100W2200,
    W2200W2300,
-   
+
    // ===== SESSION 4: EVENING SESSION (23:00-00:00) =====
    W2300W2330, W2330W0000
 };
@@ -195,10 +195,10 @@ bool IsTradeWindow(datetime barOpen)
 
    MqlDateTime dt;
    TimeToStruct(barOpen, dt);
-   
+
    int totalMinutes = dt.hour * 60 + dt.min;
    int slot;
-   
+
    // Session 1: 00:00-01:00 - 1-hour interval
    if(totalMinutes < 60)
    {
@@ -226,21 +226,21 @@ bool IsTradeWindow(datetime barOpen)
    {
       slot = 24 + ((totalMinutes - 1380) / 30);  // slots 24-25
    }
-   
+
    return windows[slot];
 }
 
 void DisplayTradeWindowStatus(datetime barOpen)
 {
    if(!UseTradeWindow) return;
-   
+
    MqlDateTime dt;
    TimeToStruct(barOpen, dt);
-   
+
    int totalMinutes = dt.hour * 60 + dt.min;
    string sessionName = "";
    string borderLine = "";
-   
+
    if(totalMinutes < 60)
    {
       sessionName = "MARKET CLOSED";
@@ -264,7 +264,7 @@ void DisplayTradeWindowStatus(datetime barOpen)
       if(totalMinutes == 1380) // Start of evening session
          borderLine = "═══════════════ EVENING SESSION START ═══════════════";
    }
-   
+
    if(borderLine != "")
       Print(borderLine);
 }
@@ -273,23 +273,23 @@ bool IsCandleInRange(double high, double low)
 {
    if(!UseCandleRangeFilter)
       return true;
-   
+
    // Calculate candle range in points
    double rangePoints = (high - low) / _Point;
-   
+
    // Check if range is within allowed limits
    if(rangePoints > MaxCandleRange)
    {
       Print("⚠️ Candle range filter: Range ", DoubleToString(rangePoints, 2), " points > Max ", DoubleToString(MaxCandleRange, 2), " points - Skipping");
       return false;
    }
-   
+
    if(rangePoints < MinCandleRange)
    {
       Print("⚠️ Candle range filter: Range ", DoubleToString(rangePoints, 2), " points < Min ", DoubleToString(MinCandleRange, 2), " points - Skipping");
       return false;
    }
-   
+
    return true;
 }
 
@@ -688,6 +688,11 @@ void DisplaySettings()
 // ======== EA CORE ========
 int OnInit()
 {
+   // Auto-name the stats file per RiskReward so multiple RR backtests
+   // don't overwrite each other (e.g. trade_stats_rr_1.0.csv, _rr_2.5.csv ...)
+   g_csvName = "trade_stats_rr_" + DoubleToString(RiskReward, 1) + ".csv";
+   Print("Trade stats will be written to: ", g_csvName);
+
    // Delete previous stats file if exists
    if(FileIsExist(g_csvName))
    {
@@ -734,7 +739,7 @@ void OnTick()
    {
       // --- include final realized PnL into MAE/MFE ---
       double realized = 0.0;
-      
+
       // --- include datetime ---
       datetime exitTime = 0;
 
@@ -769,9 +774,9 @@ void OnTick()
 
    static datetime lastBar = 0;
    datetime barOpen = iTime(_Symbol, _Period, 0);
-	
+
 	bool isInPosition = PositionSelect(_Symbol);
-	
+
 	// 🔹 NEW POSITION DETECTED → initialize R:R reference
 	if(isInPosition && !g_wasInPosition)
 	{
@@ -873,7 +878,7 @@ void OnTick()
 
 	// update state
 	g_wasInPosition = isInPosition;
-	
+
    if(barOpen == lastBar) return;
    lastBar = barOpen;
 
@@ -940,8 +945,8 @@ void OnTick()
       CancelOldBuyStops();
       return;
    }
-   
-   
+
+
    // BUY-STOP ORDER AT PREVIOUS GREEN CANDLE HIGH
    if(c1 > o1)  // ← GREEN candle condition (was: c1 < o1 for red)
 	{
