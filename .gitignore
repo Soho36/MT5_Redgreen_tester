@@ -1,2 +1,5 @@
 /Reports/
 .idea/
+/venv/
+/.claude/
+/.agents/
