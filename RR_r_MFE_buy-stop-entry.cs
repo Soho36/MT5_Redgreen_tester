@@ -5,9 +5,7 @@
 
 input double Lots           = 1.0;
 input double RiskReward     = 1.0;
-input int    Slippage       = 5;
-input bool   UseBuyStopLimit       = true; // TRUE=Buy Stop Limit, FALSE=Buy Stop
-input double EntryLimitOffsetTicks = 1.0;  // Limit price below stop trigger, in ticks
+input int    Slippage       = 0;
 
 // ======== CANDLE RANGE FILTER ========
 input bool   UseCandleRangeFilter = false;  // ENABLE/DISABLE CANDLE RANGE FILTER
@@ -22,6 +20,9 @@ input int    FlattenMinuteEnd  = 30;
 // ======== TIME WINDOW FILTERING ========
 // no-trading window (block new trades between these times) - Mixed intervals with session borders
 input bool   UseTradeWindow   = true;	// USE TIME TRADE WINDOW
+
+// ======== Run-tag input ========
+input string RunTag = "00-00";   // window label; becomes the filename prefix for multiple MAEMFE CSV-s
 
 // ========== SESSION 1: MARKET CLOSED (00:00-01:00) ==========
 input bool W0000W0100 = false;  // 00:00–01:00 (Market Closed)
@@ -222,7 +223,7 @@ bool IsCandleInRange(double high, double low)
 // ======== CSV FUNCTIONS ========
 void SaveTradeStats(double realized, datetime entryTime, datetime exitTime, double candleRange)
 {
-   int f = FileOpen(g_csvName, FILE_READ|FILE_WRITE|FILE_CSV|FILE_SHARE_WRITE);
+   int f = FileOpen(g_csvName, FILE_READ|FILE_WRITE|FILE_CSV|FILE_SHARE_WRITE|FILE_COMMON);
    if(f == INVALID_HANDLE)
    {
       Print("File open failed ", GetLastError());
@@ -314,11 +315,7 @@ void CancelOldBuyStops()
       if(!OrderSelect(ticket)) continue;
 
       int type = (int)OrderGetInteger(ORDER_TYPE);
-      // Catches plain BuyStop, untriggered BuyStopLimit, and a BuyStopLimit
-      // that already triggered and converted into a resting BuyLimit.
-      if(type != ORDER_TYPE_BUY_STOP &&
-         type != ORDER_TYPE_BUY_STOP_LIMIT &&
-         type != ORDER_TYPE_BUY_LIMIT) continue;
+      if(type != ORDER_TYPE_BUY_STOP) continue;
 
       MqlTradeRequest req = {};
       MqlTradeResult  res = {};
@@ -428,13 +425,13 @@ int OnInit()
 {
    // Auto-name the stats file per RiskReward so multiple RR backtests
    // don't overwrite each other (e.g. trade_stats_rr_1.0.csv, _rr_2.5.csv ...)
-   g_csvName = "trade_stats_rr_" + DoubleToString(RiskReward, 1) + ".csv";
+   g_csvName = RunTag + "_" + DoubleToString(RiskReward, 2) + ".csv";
    Print("Trade stats will be written to: ", g_csvName);
 
    // Delete previous stats file if exists
-   if(FileIsExist(g_csvName))
+   if(FileIsExist(g_csvName, FILE_COMMON))
    {
-      if(FileDelete(g_csvName))
+      if(FileDelete(g_csvName, FILE_COMMON))
          Print("Old trade_stats.csv deleted");
       else
          Print("Failed to delete old CSV. Error=", GetLastError());
@@ -589,12 +586,10 @@ void OnTick()
    }
 
 
-   // BUY-STOP OR BUY-STOP-LIMIT ORDER AT PREVIOUS RED CANDLE HIGH
+   // BUY-STOP ORDER AT PREVIOUS RED CANDLE HIGH
     if(c1 < o1)
 	{
-	   Print(UseBuyStopLimit
-	         ? "Red candle -> place Buy Stop Limit"
-	         : "Red candle -> place Buy Stop");
+	   Print("Red candle -> place Buy Stop");
 
 	   CancelOldBuyStops();
 
@@ -605,54 +600,22 @@ void OnTick()
 
 	   if(risk <= 0.0) return;
 
-	   double limitPrice = 0.0;
-	   if(UseBuyStopLimit)
-	   {
-	      double tickSize = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_SIZE);
-	      if(tickSize <= 0.0)
-	         tickSize = _Point;
-
-	      double offsetTicks = MathMax(0.0, EntryLimitOffsetTicks);
-	      limitPrice = entry - offsetTicks * tickSize;
-	      limitPrice = MathFloor(limitPrice / tickSize) * tickSize;
-	      limitPrice = NormalizeDouble(limitPrice, _Digits);
-
-	      if(limitPrice <= stop)
-	      {
-	         Print("Buy Stop Limit price must remain above SL: trigger=", entry,
-	               " limit=", limitPrice,
-	               " SL=", stop,
-	               " EntryLimitOffsetTicks=", EntryLimitOffsetTicks);
-	         return;
-	      }
-	   }
-
 	   MqlTradeRequest req = {};
 	   MqlTradeResult  res = {};
 	   req.action       = TRADE_ACTION_PENDING;
 	   req.symbol       = _Symbol;
 	   req.volume       = Lots;
-	   req.type         = UseBuyStopLimit ? ORDER_TYPE_BUY_STOP_LIMIT : ORDER_TYPE_BUY_STOP;
+	   req.type         = ORDER_TYPE_BUY_STOP;
 	   req.price        = entry;
-	   if(UseBuyStopLimit)
-	      req.stoplimit = limitPrice;
 	   req.sl           = stop;
 	   req.deviation    = Slippage;
 	   req.type_filling = ORDER_FILLING_RETURN;
 
 	   if(!OrderSend(req, res))
 	   {
-	      if(UseBuyStopLimit)
-	         Print("Place Buy Stop Limit failed: trigger=", entry,
-	               " limit=", limitPrice,
-	               " err=", GetLastError(),
-	               " retcode=", res.retcode);
-	      else
-	         Print("Place Buy Stop failed err=", GetLastError(),
-	               " retcode=", res.retcode);
+	      Print("Place Buy Stop failed err=", GetLastError(),
+	            " retcode=", res.retcode);
 	   }
-	   else if(UseBuyStopLimit)
-	      Print("Buy Stop Limit placed: trigger=", entry, " limit=", limitPrice);
 	   else
 	      Print("Buy Stop placed @", entry);
 	}
