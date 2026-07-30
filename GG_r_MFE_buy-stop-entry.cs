@@ -22,7 +22,10 @@ input int    FlattenMinuteEnd  = 30;
 input bool   UseTradeWindow   = true;	// USE TIME TRADE WINDOW
 
 // ======== Run-tag input ========
-input string RunTag = "00-00";   // window label; becomes the filename prefix for multiple MAEMFE CSV-s
+// Leave EMPTY to derive the label from whichever trade window is enabled — then
+// the filename can never disagree with the data inside it. Set a value only to
+// force a custom name.
+input string RunTag = "";   // filename prefix for the MAEMFE CSVs ("" = auto)
 
 // ========== SESSION 1: MARKET CLOSED (00:00-01:00) ==========
 input bool W0000W0100 = false;  // 00:00–01:00 (Market Closed)
@@ -106,6 +109,7 @@ double g_candleRange = 0.0;
 
 datetime g_entryTime = 0;
 string   g_csvName   = "trade_stats.csv";
+string   g_runTag    = "";   // resolved in OnInit, reused by OnTester
 
 // ======== HELPER FUNCTIONS ========
 
@@ -420,13 +424,55 @@ void DisplaySettings()
    Print("└────────────────────────────────────────────────────────────┘");
 }
 
+// ======== RUN LABEL ========
+// Append a tag once; skips duplicates so the two 01:00-02:00 half-windows
+// (and the two 23:00-00:00 ones) collapse to a single label.
+void AddWinTag(string &lbl, const string t)
+{
+   if(StringFind("+" + lbl + "+", "+" + t + "+") >= 0) return;
+   lbl = (lbl == "" ? t : lbl + "+" + t);
+}
+
+// Build the label from the ENABLED trade windows, so an export can never be
+// mislabelled (e.g. named "2-3" while actually holding 3-4 trades).
+string ActiveWindowLabel()
+{
+   string l = "";
+   if(W0000W0100)               AddWinTag(l, "0-1");
+   if(W0100W0130 || W0130W0200) AddWinTag(l, "1-2");
+   if(W0200W0300)               AddWinTag(l, "2-3");
+   if(W0300W0400)               AddWinTag(l, "3-4");
+   if(W0400W0500)               AddWinTag(l, "4-5");
+   if(W0500W0600)               AddWinTag(l, "5-6");
+   if(W0600W0700)               AddWinTag(l, "6-7");
+   if(W0700W0800)               AddWinTag(l, "7-8");
+   if(W0800W0900)               AddWinTag(l, "8-9");
+   if(W0900W1000)               AddWinTag(l, "9-10");
+   if(W1000W1100)               AddWinTag(l, "10-11");
+   if(W1100W1200)               AddWinTag(l, "11-12");
+   if(W1200W1300)               AddWinTag(l, "12-13");
+   if(W1300W1400)               AddWinTag(l, "13-14");
+   if(W1400W1500)               AddWinTag(l, "14-15");
+   if(W1500W1600)               AddWinTag(l, "15-16");
+   if(W1600W1700)               AddWinTag(l, "16-17");
+   if(W1700W1800)               AddWinTag(l, "17-18");
+   if(W1800W1900)               AddWinTag(l, "18-19");
+   if(W1900W2000)               AddWinTag(l, "19-20");
+   if(W2000W2100)               AddWinTag(l, "20-21");
+   if(W2100W2200)               AddWinTag(l, "21-22");
+   if(W2200W2300)               AddWinTag(l, "22-23");
+   if(W2300W2330 || W2330W0000) AddWinTag(l, "23-24");
+   return (l == "" ? "nowin" : l);
+}
+
 // ======== EA CORE ========
 int OnInit()
 {
-   // Auto-name the stats file per RiskReward so multiple RR backtests
-   // don't overwrite each other (e.g. trade_stats_rr_1.0.csv, _rr_2.5.csv ...)
-   g_csvName = RunTag + "_" + DoubleToString(RiskReward, 2) + ".csv";
-   Print("Trade stats will be written to: ", g_csvName);
+   // Name the export per window+RiskReward so passes never overwrite each other.
+   // Empty RunTag => label derived from the enabled window(s).
+   g_runTag  = (RunTag == "" ? ActiveWindowLabel() : RunTag);
+   g_csvName = g_runTag + "_" + DoubleToString(RiskReward, 2) + ".csv";
+   Print("Run tag: ", g_runTag, "   ->   ", g_csvName);
 
    // Delete previous stats file if exists
    if(FileIsExist(g_csvName, FILE_COMMON))
@@ -439,6 +485,45 @@ int OnInit()
 
    DisplaySettings();
    return(INIT_SUCCEEDED);
+}
+
+//+------------------------------------------------------------------+
+//| MT5's own figures for this pass, written next to the per-trade    |
+//| export. Runs ONCE per pass, so the cost is one file write.        |
+//| Purpose is cross-checking, not offloading maths: equity_dd is the |
+//| tester's exact drawdown, so Python can verify its reconstruction  |
+//| instead of trusting it. lr_correlation scores equity-curve        |
+//| straightness (1.0 = perfectly linear), which the per-trade data   |
+//| can also give but is handy to have straight from the source.      |
+//| One file per pass => parallel agents never share a handle.        |
+//+------------------------------------------------------------------+
+double OnTester()
+{
+   string fn = g_runTag + "_" + DoubleToString(RiskReward, 2) + "_stats.csv";
+   int f = FileOpen(fn, FILE_READ|FILE_WRITE|FILE_CSV|FILE_SHARE_WRITE|FILE_COMMON);
+   if(f == INVALID_HANDLE)
+   {
+      Print("Stats file open failed ", GetLastError());
+      return(0.0);
+   }
+
+   FileWrite(f, "run_tag", "risk_reward", "trades", "net_profit", "gross_profit",
+                "gross_loss", "equity_dd", "balance_dd", "profit_factor",
+                "expected_payoff", "recovery_factor", "sharpe");
+   FileWrite(f, g_runTag,
+                RiskReward,
+                (int)TesterStatistics(STAT_TRADES),
+                TesterStatistics(STAT_PROFIT),
+                TesterStatistics(STAT_GROSS_PROFIT),
+                TesterStatistics(STAT_GROSS_LOSS),
+                TesterStatistics(STAT_EQUITY_DD),
+                TesterStatistics(STAT_BALANCE_DD),
+                TesterStatistics(STAT_PROFIT_FACTOR),
+                TesterStatistics(STAT_EXPECTED_PAYOFF),
+                TesterStatistics(STAT_RECOVERY_FACTOR),
+                TesterStatistics(STAT_SHARPE_RATIO));
+   FileClose(f);
+   return(0.0);
 }
 
 
