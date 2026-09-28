@@ -27,7 +27,7 @@ input int    MaxRedRun = 0;  // Maximum consecutive reds allowed (0 = no cap)
 // knife), 1 = at the range high (shallow pullback). Skip the signal when
 // location < MinLocation. Same formula as analyze_features.py.
 //   MinLocation = 0 -> disabled (original behaviour)
-// Post-hoc 2020-2026: plateau 0.10..0.20 on top of MaxRedRun=2; ~0.15 suggested.
+// Experimental: see RESEARCH_RESULTS.md for actual MT5 validation results.
 input double MinLocation      = 0.0;  // Minimum location in the range (0 = off)
 input int    LocationLookback = 20;   // Bars in the high-low range (incl. signal)
 
@@ -168,16 +168,25 @@ int ConsecutiveRedRun()
 // Returns -1 if the range cannot be computed.
 double SignalLocation()
 {
-   int lb = MathMax(LocationLookback, 1);
-   int iH = iHighest(_Symbol, _Period, MODE_HIGH, lb, 1);
-   int iL = iLowest(_Symbol, _Period, MODE_LOW, lb, 1);
-   if(iH < 0 || iL < 0) return -1.0;
+   // Require the complete window; never silently use a shorter history.
+   MqlRates bars[];
+   ArraySetAsSeries(bars, true);
+   if(CopyRates(_Symbol, _Period, 1, LocationLookback, bars) != LocationLookback)
+      return -1.0;
 
-   double hh = iHigh(_Symbol, _Period, iH);
-   double ll = iLow(_Symbol, _Period, iL);
-   if(hh - ll <= 0.0) return -1.0;
+   double hh = bars[0].high;
+   double ll = bars[0].low;
+   for(int i = 1; i < LocationLookback; i++)
+   {
+      hh = MathMax(hh, bars[i].high);
+      ll = MathMin(ll, bars[i].low);
+   }
+   if(hh <= ll) return -1.0;
 
-   return (iClose(_Symbol, _Period, 1) - ll) / (hh - ll);
+   double location = (bars[0].close - ll) / (hh - ll);
+   if(!MathIsValidNumber(location) || location < 0.0 || location > 1.0)
+      return -1.0;
+   return location;
 }
 
 bool IsTradeWindow(datetime barOpen)
@@ -295,7 +304,8 @@ void SaveTradeStats(double realized, datetime entryTime, datetime exitTime, doub
       return;
    }
 
-   if(FileSize(f) == 0)
+   // A new Unicode CSV may already contain its two-byte BOM.
+   if(FileSize(f) <= 2)
       FileWrite(f, "ticket", "entry_time", "exit_time", "mae_money", "mfe_money", "trade_profit", "candle_range", "red_run", "location");
 
    FileSeek(f, 0, SEEK_END);
@@ -309,10 +319,36 @@ void SaveTradeStats(double realized, datetime entryTime, datetime exitTime, doub
       realized,
       candleRange,
       g_redRun,
-      DoubleToString(g_location, 4)
+      DoubleToString(g_location, 10)
    );
 
    FileClose(f);
+}
+
+// Flush a tracked close, including a tester-forced close after the last tick.
+void SaveClosedTrackedTrade()
+{
+   if(!g_tracking || PositionSelect(_Symbol)) return;
+   if(!HistorySelect(g_entryTime - 86400, TimeCurrent())) return;
+
+   double realized = 0.0;
+   datetime exitTime = 0;
+   for(int i = HistoryDealsTotal() - 1; i >= 0; i--)
+   {
+      ulong deal = HistoryDealGetTicket(i);
+      if(HistoryDealGetInteger(deal, DEAL_POSITION_ID) != g_ticket) continue;
+      realized += HistoryDealGetDouble(deal, DEAL_PROFIT);
+      if(HistoryDealGetInteger(deal, DEAL_ENTRY) == DEAL_ENTRY_OUT)
+      {
+         exitTime = (datetime)HistoryDealGetInteger(deal, DEAL_TIME);
+         break;
+      }
+   }
+   if(exitTime == 0) return;
+   g_maeMoney = MathMin(g_maeMoney, realized);
+   g_mfeMoney = MathMax(g_mfeMoney, realized);
+   SaveTradeStats(realized, g_entryTime, exitTime, g_candleRange);
+   g_tracking = false;
 }
 
 // ======== TRADE MANAGEMENT FUNCTIONS ========
@@ -550,6 +586,13 @@ string ActiveWindowLabel()
 // ======== EA CORE ========
 int OnInit()
 {
+   if(!MathIsValidNumber(MinLocation) || MinLocation < 0.0 || MinLocation > 1.0
+      || LocationLookback < 1)
+   {
+      Print("Invalid location inputs: MinLocation must be in [0,1], LocationLookback >= 1");
+      return INIT_PARAMETERS_INCORRECT;
+   }
+
    // Name the export per window+RiskReward so passes never overwrite each other.
    // Empty RunTag => label derived from the enabled window(s).
    g_runTag  = (RunTag == "" ? ActiveWindowLabel() : RunTag);
@@ -581,6 +624,7 @@ int OnInit()
 //+------------------------------------------------------------------+
 double OnTester()
 {
+   SaveClosedTrackedTrade();
    string fn = "runband_" + g_runTag + "_" + DoubleToString(RiskReward, 2) + "_stats.csv";
    int f = FileOpen(fn, FILE_READ|FILE_WRITE|FILE_CSV|FILE_SHARE_WRITE|FILE_COMMON);
    if(f == INVALID_HANDLE)
@@ -591,7 +635,8 @@ double OnTester()
 
    FileWrite(f, "run_tag", "risk_reward", "trades", "net_profit", "gross_profit",
                 "gross_loss", "equity_dd", "balance_dd", "profit_factor",
-                "expected_payoff", "recovery_factor", "sharpe");
+                "expected_payoff", "recovery_factor", "sharpe",
+                "min_red_run", "max_red_run", "min_location", "location_lookback");
    FileWrite(f, g_runTag,
                 RiskReward,
                 (int)TesterStatistics(STAT_TRADES),
@@ -603,7 +648,8 @@ double OnTester()
                 TesterStatistics(STAT_PROFIT_FACTOR),
                 TesterStatistics(STAT_EXPECTED_PAYOFF),
                 TesterStatistics(STAT_RECOVERY_FACTOR),
-                TesterStatistics(STAT_SHARPE_RATIO));
+                TesterStatistics(STAT_SHARPE_RATIO),
+                MinRedRun, MaxRedRun, MinLocation, LocationLookback);
    FileClose(f);
    return(0.0);
 }
@@ -634,39 +680,7 @@ void OnTick()
    }
    else if(g_tracking)
    {
-      // --- include final realized PnL into MAE/MFE ---
-      double realized = 0.0;
-
-      // --- include datetime ---
-      datetime exitTime = 0;
-
-      if(HistorySelect(g_entryTime - 86400, TimeCurrent()))
-      {
-         for(int i = HistoryDealsTotal() - 1; i >= 0; i--)
-         {
-            ulong deal = HistoryDealGetTicket(i);
-
-            if(HistoryDealGetInteger(deal, DEAL_POSITION_ID) != g_ticket)
-               continue;
-
-            double profit = HistoryDealGetDouble(deal, DEAL_PROFIT);
-            realized += profit;
-
-            if(HistoryDealGetInteger(deal, DEAL_ENTRY) == DEAL_ENTRY_OUT)
-            {
-               exitTime = (datetime)HistoryDealGetInteger(deal, DEAL_TIME);
-               break; // ← exit deal found, stop
-            }
-         }
-      }
-
-      // realized PnL IS the last excursion
-      g_maeMoney = MathMin(g_maeMoney, realized);
-      g_mfeMoney = MathMax(g_mfeMoney, realized);
-
-      SaveTradeStats(realized, g_entryTime, exitTime, g_candleRange);
-
-      g_tracking = false;
+      SaveClosedTrackedTrade();
    }
 
    static datetime lastBar = 0;
@@ -775,7 +789,13 @@ void OnTick()
 	      CancelOldBuyStops();
 	      return;
 	   }
-	   if(MinLocation > 0.0 && loc >= 0.0 && loc < MinLocation)
+	   if(MinLocation > 0.0 && loc < 0.0)
+	   {
+	      Print("Location unavailable for the complete lookback - skipping signal");
+	      CancelOldBuyStops();
+	      return;
+	   }
+	   if(MinLocation > 0.0 && loc < MinLocation)
 	   {
 	      Print("⛔ Location ", DoubleToString(loc, 2), " < min ", DoubleToString(MinLocation, 2),
 	            " - signal at the bottom of the range, skipping");

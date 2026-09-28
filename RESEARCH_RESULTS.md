@@ -1,7 +1,11 @@
 # RTL (Red-Green Breakout) on MNQ: entry-filter research results
 
-Status as of 2026-09-29. **Everything below is in-sample.** No filter has been
-validated out-of-sample yet (see [Next steps](#next-steps)).
+Status as of 2026-09-29. The feature discovery and post-hoc tables are
+**in-sample**. Actual MT5 reruns and a frozen location check on 2010–2019 are
+now recorded under [MT5 confirmation](#mt5-confirmation-2026-09-29).
+**The reruns do not support adopting 0.15 as the default.** Earlier years were
+unused for location discovery but were used to select the red-run cap, so this
+is a holdout for the added location rule, not for the entire strategy.
 
 ## The strategy being filtered
 
@@ -107,11 +111,12 @@ removed by `red_run ≤ 2`, so the two filters are **not redundant**.
 | `red_run ≤ 2` + `location ≥ 0.15` | 6,026 | 38,604 | 1.18 | 1.17 / 1.19 | 3,466 | 11.1 |
 | `red_run ≤ 2` + `location ≥ 0.20` | 5,639 | 37,525 | 1.19 | 1.18 / 1.20 | 3,326 | 11.3 |
 
-**Current best candidate: `MaxRedRun = 2` + `MinLocation ≈ 0.15`.** It keeps net
+**Original post-hoc candidate: `MaxRedRun = 2` + `MinLocation ≈ 0.15`.** It keeps net
 profit flat (or slightly up) and roughly **halves max drawdown** versus baseline.
 Results for t = 0.10–0.20 are nearly identical, so the result doesn't depend on
 the exact number. 0.15 sits in the middle of that range rather than being the
-single best row.
+single best row. **Superseded by the actual MT5 results below:** the apparent
+plateau in these subsets does not carry over to the full strategy.
 
 ### Other features: no usable signal in 2020–2026
 
@@ -121,32 +126,111 @@ previous) and `fill_delay` (bars until the stop filled) showed no stable
 losing group. `bar2 = inside` looked good (PF 1.24) but was unstable across
 halves (1.04 / 1.43).
 
+## MT5 confirmation (2026-09-29)
+
+Tested the base EA and the runband EA on `MNQcontDATABENTOcurr6`, M30,
+2020-01-02 through 2026-07-14, using the saved feature-run settings:
+1-minute OHLC modelling, RR 1, 1 lot, zero execution delay, $500,000 starting
+deposit, entries from 01:00 through 23:30, flatten at 23:30, range filter off.
+These are actual strategy reruns, not subsets of the baseline trade list.
+
+**Costs and drawdown:** MT5 ran with zero native commission. The figures below
+deduct the same modeled $1 round-turn per completed trade used in the research.
+DD is the maximum **closed-trade balance drawdown after that deduction**, not
+MT5 floating equity DD. Gross MT5 equity DD is retained in `summary.json`.
+This confirms the research's cost model; it does not validate broker charges,
+real-tick fills, or additional slippage.
+
+| Actual MT5 strategy | Trades | Net $ | Net PF | PF 1st / 2nd | Net balance DD | Net / DD |
+|---|---:|---:|---:|---:|---:|---:|
+| Base / runband filters off | 10,022 | 37,504.50 | 1.093 | 1.058 / 1.123 | 6,174.00 | 6.07 |
+| `MaxRedRun=2`, `MinLocation=0` | 8,224 | 42,652.50 | 1.138 | 1.139 / 1.136 | 3,660.50 | 11.65 |
+| `MaxRedRun=2`, `MinLocation=0.10` | 7,668 | 43,108.50 | 1.155 | 1.176 / 1.138 | 3,219.00 | 13.39 |
+| `MaxRedRun=2`, `MinLocation=0.15` | 7,277 | 39,798.50 | 1.154 | 1.166 / 1.143 | 3,626.00 | 10.98 |
+| `MaxRedRun=2`, `MinLocation=0.20` | 6,901 | 40,335.00 | 1.168 | 1.180 / 1.158 | 3,640.00 | 11.08 |
+
+The chronological split is fixed at the median entry time of the original
+baseline for every recent case, rather than changing it for each filter.
+
+**Interpretation:** red-run alone performs materially better than its post-hoc
+subset (8,224 actual trades versus 7,263 retained baseline trades). Rejecting
+signals changes subsequent position availability and pending orders. The old
+claim that this difference should be only about 0.6% is not applicable here.
+Against actual red-run alone, 0.10 adds $456 (+1.1%) and reduces balance DD
+12.1%; most of its PF gain is in the first half. At 0.15, profit falls $2,854
+(-6.7%) and balance DD improves only 0.9%. At 0.20, profit falls 5.4% and DD
+improves only 0.6%. The location idea remains testable, but 0.15 is not confirmed.
+
+### Earlier-history check with the fixed 0.15 threshold
+
+Requested dates: 2010-01-02 through 2020-01-01; actual trades start in June
+2010 because that is where the available custom history begins. Same settings
+and $1/trade model; `MaxRedRun=2` in both runs. No threshold search on this period.
+
+| Rule | Trades | Net $ | Net PF | Net balance DD |
+|---|---:|---:|---:|---:|
+| No location filter | 12,656 | 461.00 | 1.005 | 6,258.50 |
+| `MinLocation=0.15` | 11,212 | -50.00 | 0.999 | 5,698.00 |
+
+The added 0.15 rule does not improve net expectancy here. Both results are
+around breakeven after the assumed commission; neither supports a robust
+historical net edge in this period. A smaller drawdown with fewer trades is
+insufficient evidence by itself. This is an incremental location holdout;
+red-run was previously studied on these years.
+
+### Implementation and verification
+
+The runband source already contained `MinLocation=0` (off),
+`LocationLookback=20`, the signal-inclusive formula, cancellation on a rejected
+red signal, and per-trade location logging. Validation hardened that implementation:
+
+- Require the full closed-bar window and skip signals with unavailable location
+  when the filter is enabled. Validate threshold [0,1] and lookback >= 1.
+- Log location to 10 decimal places and include filter inputs in tester stats.
+- Write the header for a new UTF-16 CSV even when its BOM occupies two bytes.
+- Flush a tracked close in `OnTester` so a close without a subsequent tick is
+  exported. This recovered one $10 trade in the earlier red-run-only run.
+
+Compiled with MetaEditor: **0 errors, 0 warnings**. Checks in
+`verify_location_validation.py` confirm:
+
+- Filters off reproduce all 10,022 base trades, including MAE/MFE, exactly.
+- All 10,022 exported location values match the original 20-bar OHLC snapshots
+  (maximum difference 5e-11, from CSV rounding).
+- Trade counts and gross PnL reconcile to MT5 for all eight cases.
+- Every filtered trade satisfies its red-run and location inputs.
+
+Artifacts are in `Reports/location_validation_20260929/`: the compiled EA,
+compiler logs, tester INIs, original CSVs, reports, and `summary.json`/`summary.csv`.
+The tested expert is installed in the AMP terminal's
+`MQL5/Experts/CodexLocationValidation/RTL_runband_location.ex5`.
+
+```powershell
+.\venv\Scripts\python.exe verify_location_validation.py Reports/location_validation_20260929
+```
+
 ## Caveats
 
-1. **All numbers are in-sample.** The 0.15 cutoff and `MaxRedRun = 2` were
-   both read off the same 2020–2026 data they are scored on.
-2. **Post-hoc vs live:** the table removes trades after the fact. In MT5 a
-   filtered-out signal can let a *different* order trigger instead, so live
-   results will differ slightly. For `MaxRedRun` the two differed by about 0.6%.
+1. **Discovery numbers are in-sample.** The 0.15 cutoff and `MaxRedRun = 2`
+   were both selected with knowledge of the recent data they are scored on.
+   The earlier-period check holds out location only, as explained above.
+2. **Post-hoc vs strategy reruns:** the discovery table removes trades after
+   the fact. A filtered-out signal can let different orders trigger. The actual
+   MT5 runs above demonstrate that the difference can be substantial.
 3. **Max DD is a single path statistic.** It is noisy; compare PF across both
    halves first.
 4. **Commission** is modelled as a flat $1 per trade.
 
 ## Next steps
 
-1. **Confirm in MT5** with `RR_r_MFE_buy-stop-entry_runband.cs`: the backtest
-   EA `RR_r_MFE_buy-stop-entry.cs` plus `MinRedRun` / `MaxRedRun`,
-   `MinLocation` (0 = off) and `LocationLookback` (20). With all filters off it
-   trades exactly like the base EA, so the first check is that a run with
-   filters off reproduces the base result. Then run `MaxRedRun = 2` with
-   `MinLocation` ∈ {0, 0.10, 0.15, 0.20}, with commission set in the tester.
-   Output: `runband_<windows>_<RR>.csv` in Common\Files, with `red_run` and
-   `location` columns.
-2. **Out-of-sample test on 2010–2019.** None of these years were used for the
-   location analysis. If `red_run ≤ 2` + `location ≥ 0.15` also improves
-   PF and DD there, that's the first real confirmation.
-3. Later: walk-forward, then exit/trade-management research using the MAE/MFE
-   columns.
+1. **Completed:** MT5 baseline parity, red-run-only, and thresholds 0.10,
+   0.15, 0.20; the costs are modeled in Python, not configured in the tester.
+2. **Completed:** frozen 0.15 check on 2010–2019. It failed to improve net PF
+   or profit. Keep `MinLocation=0` as the default.
+3. If pursuing 0.10, label it a new candidate selected using the recent MT5
+   results. Validate it on fresh chronological data with realistic execution
+   and costs; do not present these reruns as out-of-sample confirmation.
+4. Later: walk-forward, then exit/trade-management research using MAE/MFE.
 
 ## How to reproduce
 
