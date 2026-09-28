@@ -133,7 +133,9 @@ def f_sweep(d, lb):
 
 def f_rel_size(d, lb):
     rng = d["H"] - d["L"]
-    return rng[:, 0] / np.mean(rng[:, 1:lb + 1], axis=1), None
+    avg = np.mean(rng[:, 1:lb + 1], axis=1)
+    avg[avg == 0] = np.nan          # flat (no-tick) history -> undefined
+    return rng[:, 0] / avg, None
 
 
 def f_close_loc(d, lb):
@@ -169,8 +171,8 @@ def f_fill_delay(d, lb):
 
 
 FEATURES = {
-    "red_run":    (f_red_run,    "SANITY CHECK - consecutive reds ending at the signal; "
-                                 "known result: 6-7 lose. If this doesn't show it, the pipeline is broken."),
+    "red_run":    (f_red_run,    "Consecutive reds ending at the signal (the MaxRedRun lever). "
+                                 "On 2010-2026 data runs 6-7 lost; weaker in 2020+ alone."),
     "room":       (f_room,       "Overhead: highest high of the previous LB bars minus entry, in R. "
                                  "<0 = nothing above entry; 0..RR = a recent high sits before the target."),
     "location":   (f_location,   "Where the signal closes inside the LB-bar high-low channel. "

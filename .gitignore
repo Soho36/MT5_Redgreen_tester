@@ -3,3 +3,4 @@
 /venv/
 /.claude/
 /.agents/
+__pycache__/
