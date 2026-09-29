@@ -205,6 +205,69 @@ compiler logs, tester INIs, original CSVs, reports, and `summary.json`/`summary.
 The tested expert is installed in the AMP terminal's
 `MQL5/Experts/CodexLocationValidation/RTL_runband_location.ex5`.
 
+### Independent re-check and noise level (2026-09-29)
+
+Re-running `verify_location_validation.py` passed all checks and reproduced
+every number in the tables above.
+
+**How big is noise?** The per-trade net std is about $116. Comparing two runs
+through the trades that differ between them (trades removed + new trades):
+
+| Change | Removed | New | Net change | ≈1 s.e. | z |
+|---|---:|---:|---:|---:|---:|
+| off → `MaxRedRun=2` | 2,858 | 1,060 | +$5,148 | $7,268 | +0.7 |
+| `MaxRedRun=2` → + `MinLocation=0.10` | 870 | 314 | +$456 | $3,995 | +0.1 |
+| `MaxRedRun=2` → + `MinLocation=0.15` | 1,398 | 451 | −$2,854 | $4,993 | −0.6 |
+
+- **None of the net-profit differences are distinguishable from noise.** The
+  ranking of 0.10 / 0.15 / 0.20 by profit is noise. Location as a filter is
+  not supported: keep `MinLocation = 0`.
+- **For `MaxRedRun = 2`, the evidence is the risk profile, not profit:** PF
+  1.09 → 1.14 with **both halves improving** (1.06 → 1.14, 1.12 → 1.14), and
+  balance DD 6.2k → 3.7k with 18% fewer trades.
+- **The live filter changes trades a lot:** `MaxRedRun = 2` removed 2,858
+  baseline trades but created 1,060 new ones. Signals that were skipped left the
+  position free for later ones. Post-hoc subset tables can't predict this, so
+  always confirm filters as real MT5 runs.
+- **2010–2019 with `MaxRedRun = 2` is breakeven after commission** (PF 1.005;
+  first half 0.83). There is no filters-off MT5 run for 2010–2019 with these
+  settings. The old `trade_stats_rr_1.0.csv` used different settings (its 2020+
+  part has 8,251 trades, not 10,022), so it can't serve as the baseline. That
+  run (`early_off`) was done next; see the following section.
+
+### 2010–2019 baseline (`early_off`) and the two regimes (2026-09-29)
+
+MT5 run `early_off`: the same INI as `early_red2_loc0` with `MaxRedRun=0`, same
+EA build. 15,077 trades, gross 13,995.5, gross PF 1.122. The CSV reconciles
+with MT5 stats. Files are in `Reports/location_validation_20260929/`.
+
+| Period | Rule | Trades | Gross $ | Gross PF | Gross avgR | Net $ | Net PF | Net DD |
+|---|---|---:|---:|---:|---:|---:|---:|---:|
+| 2010–2014 | off | 7,411 | 893 | 1.024 | +0.000 | −6,518 | 0.843 | 6,826 |
+| 2010–2014 | red ≤ 2 | 6,244 | 524 | 1.017 | −0.005 | −5,720 | 0.831 | 6,016 |
+| 2015–2019 | off | 7,666 | 13,102 | 1.168 | +0.080 | 5,436 | 1.066 | 2,122 |
+| 2015–2019 | red ≤ 2 | 6,412 | 12,594 | 1.203 | +0.096 | 6,182 | 1.094 | 1,636 |
+| 2020–2026 | off | 10,022 | 47,526 | 1.120 | +0.071 | 37,504 | 1.093 | 6,174 |
+| 2020–2026 | red ≤ 2 | 8,224 | 50,876 | 1.167 | +0.095 | 42,652 | 1.138 | 3,660 |
+
+- **2010–2014: the strategy has no edge even before costs** (gross avgR 0.000),
+  with or without the cap. This is a different regime. Optimizing filters
+  there would be fitting noise.
+- **From 2015 on, the gross edge is similar to today** (avgR +0.08 vs +0.07).
+  `MaxRedRun=2` improves gross PF and net DD in both 2015–2019 and 2020–2026.
+- **By year (gross PF):** the cap is better in 10 of 17 years, and in 8 of 12
+  from 2015 on. That's a consistent tilt but not a strong one; single years are
+  noisy.
+- **Commission is distorted in early years.** Average risk per trade was only
+  $7–15 in 2010–2017, so $1 commission cost 0.12–0.22R per trade. In 2020+ it's
+  0.01–0.03R. MNQ only launched in 2019, so early-period net $ is hypothetical.
+  **Compare regimes on gross R / gross PF**, and apply commission only where
+  it's realistic.
+- **Not out-of-sample for red-run:** `MaxRedRun` was originally chosen on
+  2010–2026 data, so both periods had been seen. A clean test needs the value
+  chosen on one period only (train) and then frozen for the next (test). See
+  Next steps.
+
 ```powershell
 .\venv\Scripts\python.exe verify_location_validation.py Reports/location_validation_20260929
 ```
@@ -230,7 +293,60 @@ The tested expert is installed in the AMP terminal's
 3. If pursuing 0.10, label it a new candidate selected using the recent MT5
    results. Validate it on fresh chronological data with realistic execution
    and costs; do not present these reruns as out-of-sample confirmation.
-4. Later: walk-forward, then exit/trade-management research using MAE/MFE.
+4. **Completed:** `early_off` 2010–2019 baseline. 2010–2014 has no gross
+   edge; from 2015 on it matches today. `MaxRedRun=2` helps in 2015–2019 and 2020+.
+5. **Proposed: a train/test test of `MaxRedRun`.** Choose the value on
+   **2015–2019 only**, using gross PF / gross avgR as the criterion, decided
+   *before* looking. Then run that frozen value on 2020–2026 and compare it with
+   filters off. Skip 2010–2014, which has no edge to filter. Run each value as
+   its own MT5 single test with its own `RunTag`: optimization passes share one
+   RunTag and would overwrite each other's CSVs. Caveat: we already know `2`
+   works in 2020+, so this is an honest parameter test, not a discovery test.
+   **Selection rule, fixed before running (2026-09-29):** single MT5 tests on
+   2015-01-01 → 2020-01-01 with `MaxRedRun` ∈ {0 (off), 1, …, 7}, all else as
+   in `early_off.ini`. Winner = highest **gross PF**. A tie within 0.005 goes
+   to the larger `MaxRedRun` (the less restrictive filter). The winner is then
+   frozen and run once on 2020–2026, and compared with filters off.
+
+   **Training result (2015–2019, 8 single MT5 tests, in
+   `Reports/maxredrun_train_20260929/`; reproduce with
+   `evaluate_maxredrun_train.py`):**
+
+   | MaxRedRun | off | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+   |---|---:|---:|---:|---:|---:|---:|---:|---:|
+   | Trades | 7,666 | 4,869 | 6,412 | 7,052 | 7,389 | 7,535 | 7,601 | 7,645 |
+   | Gross $ | 13,102 | 9,918 | 12,594 | 15,060 | 14,432 | 13,928 | 13,288 | 12,720 |
+   | Gross PF | 1.168 | **1.223** | 1.203 | **1.220** | 1.197 | 1.184 | 1.173 | 1.164 |
+   | Net DD | 2,122 | 1,261 | 1,636 | 1,382 | 2,023 | 1,998 | 2,014 | 1,980 |
+
+   The filters-off run matches the 2015–2019 part of `early_off` exactly. By
+   the fixed rule, the best is 1.223 (cap 1), and cap 3 is within 0.005, so the
+   tie goes to the larger cap. **Winner: `MaxRedRun = 3`.** Every cap from 1 to 6
+   beats off, but the curve isn't smooth (2 is below both 1 and 3), so caps 1–3
+   can't really be told apart.
+
+   **Frozen test, 2020-01-02 → 2026-07-14** (a fresh filters-off run reproduced
+   the earlier baseline exactly):
+
+   | Rule | Trades | Gross $ | Gross PF | Gross avgR | Net $ | Net PF | Net DD |
+   |---|---:|---:|---:|---:|---:|---:|---:|
+   | off | 10,022 | 47,526 | 1.120 | +0.071 | 37,504 | 1.093 | 6,174 |
+   | `MaxRedRun=3` (frozen) | 9,147 | 46,438 | 1.132 | +0.084 | 37,291 | 1.105 | 5,134 |
+   | *`MaxRedRun=2` (for reference; chosen with 2020+ seen)* | *8,224* | *50,876* | *1.167* | *+0.095* | *42,652* | *1.138* | *3,660* |
+
+   - **Out of sample, the cap helps a little and in the right direction:** gross
+     PF is higher in **6 of 7 test years**, avgR +0.071 → +0.084, and net DD is
+     17% lower. Net profit is unchanged ($−214, z ≈ 0.0).
+   - **In 2020+, cap 2 looks much better than cap 3,** but 2 was picked with
+     2020+ data in view, and in 2015–2019 caps 1–3 were indistinguishable. Most of
+     cap 2's extra gain in 2020+ should be treated as optimism from having chosen it
+     with that period in view, not as evidence that 2 is better than 3.
+   - **Conclusion:** capping deep red runs is a real but **small** effect that
+     survives a clean out-of-sample test. It mainly improves risk (PF, DD), not
+     profit. Any cap in the 2–3 range is defensible; don't expect the in-sample
+     2020+ numbers for cap 2 to repeat.
+6. Later: walk-forward (e.g. train 3 years → test the next year, rolling), then
+   exit/trade-management research using MAE/MFE.
 
 ## How to reproduce
 
