@@ -4,7 +4,7 @@ Selection rule (fixed before the runs, see RESEARCH_RESULTS.md): winner = highes
 gross PF on the training runs; a tie within 0.005 goes to the larger MaxRedRun.
 MaxRedRun = 0 means the filter is off.
 
-Usage: python evaluate_maxredrun_train.py Reports/maxredrun_train_20260929
+Usage: python python/evaluate_maxredrun_train.py Reports/maxredrun_train_20260929
 """
 
 import sys

@@ -12,14 +12,14 @@ the resulting CSV.
 Dependencies: numpy only (matplotlib optional, for --plot).
 
 Usage:
-    python analyze_drop.py                       # auto-find trade_stats_rr_*.csv
-    python analyze_drop.py trade_stats_rr_1.0.csv
-    python analyze_drop.py path\\to\\file.csv --plot
+    python python/analyze_drop.py                       # auto-find trade_stats_rr_*.csv
+    python python/analyze_drop.py trade_stats_rr_1.0.csv
+    python python/analyze_drop.py path\\to\\file.csv --plot
 """
 
 import sys
 import csv
-import glob
+from project_paths import legacy_csv_candidates
 import argparse
 
 import numpy as np
@@ -254,10 +254,10 @@ def main():
 
     path = args.csv
     if not path:
-        candidates = sorted(glob.glob("trade_stats_rr_*.csv"))
+        candidates = legacy_csv_candidates()
         if not candidates:
-            sys.exit("No CSV given and no trade_stats_rr_*.csv found in this folder.")
-        path = candidates[0]
+            sys.exit("No CSV given and no trade_stats_rr_*.csv found here or in data/legacy.")
+        path = str(candidates[0])
         print(f"(auto-selected {path})\n")
 
     profit, drop, rng = load(path)

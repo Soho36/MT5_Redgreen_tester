@@ -1,6 +1,6 @@
 """Verify saved MT5 location-filter runs and summarize $1/trade net results.
 
-Usage: python verify_location_validation.py Reports/location_validation_20260929
+Usage: python python/verify_location_validation.py Reports/location_validation_20260929
 The directory contains the unique codex_location_20260929* CSV exports plus
 features_reference.csv from the original feature run. No third-party packages.
 """

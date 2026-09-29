@@ -20,10 +20,10 @@ from bigger candles cannot fake an edge.
 Dependencies: numpy only.
 
 Usage:
-    python analyze_features.py                          # auto-find features_*.csv
-    python analyze_features.py features_nowin_1.00.csv --commission 1
-    python analyze_features.py --feature room --feature location
-    python analyze_features.py --list                   # describe the features
+    python python/analyze_features.py                          # auto-find features_*.csv
+    python python/analyze_features.py features_nowin_1.00.csv --commission 1
+    python python/analyze_features.py --feature room --feature location
+    python python/analyze_features.py --list                   # describe the features
 """
 
 import os

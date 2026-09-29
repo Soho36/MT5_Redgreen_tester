@@ -17,13 +17,13 @@ since risk = entry(h1) - stop(l1) = candle_range).
 Dependencies: numpy only.
 
 Usage:
-    python analyze_runlength.py                      # auto-find trade_stats_rr_*.csv
-    python analyze_runlength.py trade_stats_rr_1.0.csv
+    python python/analyze_runlength.py                      # auto-find trade_stats_rr_*.csv
+    python python/analyze_runlength.py trade_stats_rr_1.0.csv
 """
 
 import sys
 import csv
-import glob
+from project_paths import legacy_csv_candidates
 import argparse
 
 import numpy as np
@@ -122,10 +122,10 @@ def main():
 
     path = args.csv
     if not path:
-        candidates = sorted(glob.glob("trade_stats_rr_*.csv"))
+        candidates = legacy_csv_candidates()
         if not candidates:
-            sys.exit("No CSV given and no trade_stats_rr_*.csv found in this folder.")
-        path = candidates[0]
+            sys.exit("No CSV given and no trade_stats_rr_*.csv found here or in data/legacy.")
+        path = str(candidates[0])
         print(f"(auto-selected {path})\n")
 
     profit, rng, run = load(path)

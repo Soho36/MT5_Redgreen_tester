@@ -1,6 +1,12 @@
 # RTL (Red-Green Breakout) on MNQ: entry-filter research results
 
-Status as of 2026-09-29. The feature discovery and post-hoc tables are
+Update 2026-09-30: the [first interrupted-decline and low-recovery study](PRECEDING_CANDLES_RESULTS.md)
+is complete at N=5,10,20,50 on actual cap-3 trades. Neither new filter was
+adopted: recent-period associations failed to establish consistent support
+in the earlier period. Remaining questions are tracked in
+[RESEARCH_QUESTIONS.md](RESEARCH_QUESTIONS.md).
+
+Historical status as of 2026-09-29. The feature discovery and post-hoc tables are
 **in-sample**. Actual MT5 reruns and a frozen location check on 2010–2019 are
 now recorded under [MT5 confirmation](#mt5-confirmation-2026-09-29).
 **The reruns do not support adopting 0.15 as the default.** Earlier years were
@@ -269,7 +275,7 @@ with MT5 stats. Files are in `Reports/location_validation_20260929/`.
   Next steps.
 
 ```powershell
-.\venv\Scripts\python.exe verify_location_validation.py Reports/location_validation_20260929
+.\venv\Scripts\python.exe python\verify_location_validation.py Reports/location_validation_20260929
 ```
 
 ## Caveats
@@ -348,14 +354,23 @@ with MT5 stats. Files are in `Reports/location_validation_20260929/`.
 6. Later: walk-forward (e.g. train 3 years → test the next year, rolling), then
    exit/trade-management research using MAE/MFE.
 
+## Project organization
+
+See [the root README](../README.md) for the current directory layout. MT5 sources
+are in `mt5/experts/`, Python tools in `python/`, older strategies in
+`mt5/archive/`, and historical CSVs in `data/legacy/`. Paths in command examples
+are relative to the project root; `Reports/` remains there.
+
+The next four questions are tracked in [RESEARCH_QUESTIONS.md](RESEARCH_QUESTIONS.md).
+
 ## How to reproduce
 
 ```
 # 1. MT5: run RR_r_MFE_buy-stop-entry_features.cs (writes features_<windows>_<RR>.csv to Common\Files)
 # 2. Feature scan (auto-finds the newest features_*.csv):
-.\venv\Scripts\python.exe analyze_features.py --commission 1
-.\venv\Scripts\python.exe analyze_features.py --feature location --commission 1
-.\venv\Scripts\python.exe analyze_features.py --list
+.\venv\Scripts\python.exe python\analyze_features.py --commission 1
+.\venv\Scripts\python.exe python\analyze_features.py --feature location --commission 1
+.\venv\Scripts\python.exe python\analyze_features.py --list
 # 3. Red-run analysis on a runband CSV:
-.\venv\Scripts\python.exe analyze_runlength.py trade_stats_rr_1.0.csv --commission 1
+.\venv\Scripts\python.exe python\analyze_runlength.py data\legacy\trade_stats_rr_1.0.csv --commission 1
 ```

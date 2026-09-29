@@ -31,6 +31,10 @@ input int    MaxRedRun = 0;  // Maximum consecutive reds allowed (0 = no cap)
 input double MinLocation      = 0.0;  // Minimum location in the range (0 = off)
 input int    LocationLookback = 20;   // Bars in the high-low range (incl. signal)
 
+// Optional research export only; 0 preserves the existing CSV schema.
+// 51 bars = signal plus 50 preceding closed bars. Entry rules are unchanged.
+input int    SnapshotBars = 0;       // Raw OHLC bars to log (0 = disabled)
+
 // ======== CANDLE RANGE FILTER ========
 input bool   UseCandleRangeFilter = false;  // ENABLE/DISABLE CANDLE RANGE FILTER
 input double MaxCandleRange       = 50.0;   // Maximum allowed candle range in points
@@ -132,6 +136,9 @@ ulong  g_ticket     = 0;
 double g_candleRange = 0.0;
 int    g_redRun      = 0;    // consecutive red-run length that armed the entry (logged to CSV)
 double g_location    = 0.0;  // location of the signal close in its range (logged to CSV)
+double g_snapshot[];
+int g_snapshotCount = 0;
+datetime g_signalTime = 0;
 
 datetime g_entryTime = 0;
 string   g_csvName   = "trade_stats.csv";
@@ -295,8 +302,66 @@ bool IsCandleInRange(double high, double low)
 }
 
 // ======== CSV FUNCTIONS ========
+void TakeResearchSnapshot()
+{
+   if(SnapshotBars == 0) return;
+   MqlRates rates[];
+   ArraySetAsSeries(rates, true);
+   int copied = CopyRates(_Symbol, _Period, 1, SnapshotBars, rates);
+   g_snapshotCount = MathMax(copied, 0);
+   g_signalTime = (g_snapshotCount > 0 ? rates[0].time : 0);
+   ArrayResize(g_snapshot, 4 * g_snapshotCount);
+   for(int i = 0; i < g_snapshotCount; i++)
+   {
+      g_snapshot[4*i] = rates[i].open;
+      g_snapshot[4*i+1] = rates[i].high;
+      g_snapshot[4*i+2] = rates[i].low;
+      g_snapshot[4*i+3] = rates[i].close;
+   }
+}
+
+void SaveSnapshotTradeStats(double realized, datetime entryTime, datetime exitTime, double candleRange)
+{
+   // Text output avoids FileWrite's argument limit for wide bar snapshots.
+   int f = FileOpen(g_csvName, FILE_READ|FILE_WRITE|FILE_TXT|FILE_ANSI|FILE_SHARE_WRITE|FILE_COMMON);
+   if(f == INVALID_HANDLE)
+   {
+      Print("Snapshot file open failed ", GetLastError());
+      return;
+   }
+   if(FileSize(f) == 0)
+   {
+      string header = "ticket\tentry_time\texit_time\tmae_money\tmfe_money\ttrade_profit"
+                      "\tcandle_range\tred_run\tlocation\tsignal_time\tperiod_sec";
+      for(int i = 1; i <= SnapshotBars; i++)
+         header += StringFormat("\to%d\th%d\tl%d\tc%d", i, i, i, i);
+      FileWriteString(f, header + "\n");
+   }
+   string line = (string)(long)g_ticket
+                 + "\t" + TimeToString(entryTime, TIME_DATE|TIME_SECONDS)
+                 + "\t" + TimeToString(exitTime, TIME_DATE|TIME_SECONDS)
+                 + "\t" + DoubleToString(g_maeMoney, 8)
+                 + "\t" + DoubleToString(g_mfeMoney, 8)
+                 + "\t" + DoubleToString(realized, 8)
+                 + "\t" + DoubleToString(candleRange, _Digits)
+                 + "\t" + (string)g_redRun
+                 + "\t" + DoubleToString(g_location, 10)
+                 + "\t" + TimeToString(g_signalTime, TIME_DATE|TIME_SECONDS)
+                 + "\t" + (string)PeriodSeconds(_Period);
+   for(int i = 0; i < 4 * SnapshotBars; i++)
+      line += "\t" + (i < 4 * g_snapshotCount ? DoubleToString(g_snapshot[i], _Digits) : "");
+   FileSeek(f, 0, SEEK_END);
+   FileWriteString(f, line + "\n");
+   FileClose(f);
+}
+
 void SaveTradeStats(double realized, datetime entryTime, datetime exitTime, double candleRange)
 {
+   if(SnapshotBars > 0)
+   {
+      SaveSnapshotTradeStats(realized, entryTime, exitTime, candleRange);
+      return;
+   }
    int f = FileOpen(g_csvName, FILE_READ|FILE_WRITE|FILE_CSV|FILE_SHARE_WRITE|FILE_COMMON);
    if(f == INVALID_HANDLE)
    {
@@ -586,6 +651,11 @@ string ActiveWindowLabel()
 // ======== EA CORE ========
 int OnInit()
 {
+   if(SnapshotBars < 0)
+   {
+      Print("SnapshotBars must be >= 0");
+      return INIT_PARAMETERS_INCORRECT;
+   }
    if(!MathIsValidNumber(MinLocation) || MinLocation < 0.0 || MinLocation > 1.0
       || LocationLookback < 1)
    {
@@ -636,7 +706,7 @@ double OnTester()
    FileWrite(f, "run_tag", "risk_reward", "trades", "net_profit", "gross_profit",
                 "gross_loss", "equity_dd", "balance_dd", "profit_factor",
                 "expected_payoff", "recovery_factor", "sharpe",
-                "min_red_run", "max_red_run", "min_location", "location_lookback");
+                "min_red_run", "max_red_run", "min_location", "location_lookback", "snapshot_bars");
    FileWrite(f, g_runTag,
                 RiskReward,
                 (int)TesterStatistics(STAT_TRADES),
@@ -649,7 +719,7 @@ double OnTester()
                 TesterStatistics(STAT_EXPECTED_PAYOFF),
                 TesterStatistics(STAT_RECOVERY_FACTOR),
                 TesterStatistics(STAT_SHARPE_RATIO),
-                MinRedRun, MaxRedRun, MinLocation, LocationLookback);
+                MinRedRun, MaxRedRun, MinLocation, LocationLookback, SnapshotBars);
    FileClose(f);
    return(0.0);
 }
@@ -815,6 +885,8 @@ void OnTick()
 	   g_location    = loc;
 
 	   if(risk <= 0.0) return;
+
+	   TakeResearchSnapshot();
 
 	   MqlTradeRequest req = {};
 	   MqlTradeResult  res = {};
