@@ -33,6 +33,11 @@ data-provenance questions, and proposed next research direction.
 The subsequent [full MT5 exit study](docs/EXIT_THRESHOLD_RESULTS.md) compares
 five bar-close thresholds and fixed TP 1R. It keeps 1R as baseline pending a
 session-clock check of cross-date positions; 2R remains a research candidate.
+The later [corrected 46-pass RR optimization](docs/RR_OPTIMIZATION_REVIEW.md)
+uses the intended cap-3 inputs and identifies 2.5R as a profit/drawdown candidate
+and 3.5R as the sample's net-profit leader. Current scope is technical strategy
+research, with session handling a separate sensitivity and account-policy
+studies deferred.
 
 ## Existing commands
 

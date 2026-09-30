@@ -164,15 +164,14 @@ same explicitly intended session policy. Following the recovered historical
 decision, including 1.5R as the earlier project's fixed control is also a
 justified bounded comparison, not a reason to expand a fine grid.
 
-Before replacing 1R for prop-account use, evaluate the resulting native trade
-paths under one common, fixed account policy: the same trailing floor, sizing,
-start cohorts, fees, withdrawals and account-start schedule. Report safety-net
-attainment, account failures, multi-account shocks and realized cash alongside
-strategy returns. Do not optimize the account policy separately for every RR
-in this first comparison. Profit factor, average R and closed-balance DD alone
-cannot answer the survival objective that originally selected 1R. Exact
-intratrade trailing-floor outcomes still need paths or explicit excursion-order
-sensitivity; the completed-trade exports are not synchronized equity paths.
+Scope update from the user on 2026-09-30: this project evaluates the technical
+trading strategy, with MT5 producing complete paths and Python analyzing them.
+Apex/account-lifecycle testing is outside the current scope. The old survival
+objective explains the historical choice of 1R but is not the current selection
+criterion. Compare trading profit, drawdown, holding behavior, costs and parameter
+stability. Keep session-close handling as a separate sensitivity rather than a
+prerequisite to all further research. The subsequent [optimization review](RR_OPTIMIZATION_REVIEW.md)
+records the user-requested wider grid and correction of its red-run inputs.
 
 This is more informative now than a larger RR grid or a trailing-stop mechanism.
 Do not combine time-of-day filtering with the session correction. Existing
