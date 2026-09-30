@@ -27,6 +27,13 @@ for the first two questions before inspecting their outcomes. Their
 [first study is complete](docs/PRECEDING_CANDLES_RESULTS.md); neither new filter
 was adopted.
 
+The [exit and data review](docs/EXIT_AND_DATA_REVIEW.md) reproduces the +1R
+first-touch estimate and records the synthetic session clock, outstanding
+data-provenance questions, and proposed next research direction.
+The subsequent [full MT5 exit study](docs/EXIT_THRESHOLD_RESULTS.md) compares
+five bar-close thresholds and fixed TP 1R. It keeps 1R as baseline pending a
+session-clock check of cross-date positions; 2R remains a research candidate.
+
 ## Existing commands
 
 ```powershell
@@ -36,6 +43,7 @@ was adopted.
 .\venv\Scripts\python.exe python\verify_location_validation.py Reports\location_validation_20260929
 .\venv\Scripts\python.exe python\evaluate_maxredrun_train.py Reports\maxredrun_train_20260929
 .\venv\Scripts\python.exe python\analyze_preceding_candles.py Reports\preceding_candles_20260930
+.\venv\Scripts\python.exe python\estimate_first_touch.py
 .\venv\Scripts\python.exe -m unittest discover -s python -p "test_*.py" -v
 ```
 
