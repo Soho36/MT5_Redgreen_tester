@@ -1,5 +1,12 @@
 # Exit thresholds: full MT5 comparison
 
+> **Summary** (added 2026-10-01; [project status](STATUS.md))
+> - A fixed take-profit at 1R is **worse** than the bar-close exit in both periods. Rejected.
+> - Bar-close 2R looked better than 1R, but much of its gain came from positions held
+>   for days because of the flatten bug found here.
+> - After the fix ([flatten fallback results](FLATTEN_FALLBACK_RESULTS.md)), 2R wins
+>   in 2015–19 dollars but loses in 2020–26 same-day dollars. **RR = 1 stays; RR is open.**
+
 Completed 2026-09-30 under the [frozen protocol](EXIT_THRESHOLD_PROTOCOL.md).
 **Keep the existing 1R bar-close baseline for now. The 2R bar-close arm is a
 research candidate, but its recent-period advantage is entangled with positions

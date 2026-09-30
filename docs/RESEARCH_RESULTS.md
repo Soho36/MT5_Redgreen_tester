@@ -1,5 +1,14 @@
 # RTL (Red-Green Breakout) on MNQ: entry-filter research results
 
+> **Summary** (added 2026-10-01; [project status](STATUS.md))
+> - Of all the entry filters tried (min red count, drop %, location, 10 bar
+>   features), only the **red-run cap** survived. `MaxRedRun = 3` was chosen on
+>   2015–19 and passed a frozen 2020–26 test, but the effect is small (PF/DD, not profit).
+> - Location looked good after the fact but failed in full MT5 runs. Differences
+>   were within noise.
+> - 2010–2014 has no edge before costs. 2015 onwards resembles today.
+> - This file is the chronological log of those studies. Later work is linked from STATUS.
+
 Update 2026-09-30: the [first interrupted-decline and low-recovery study](PRECEDING_CANDLES_RESULTS.md)
 is complete at N=5,10,20,50 on actual cap-3 trades. Neither new filter was
 adopted: recent-period associations failed to establish consistent support

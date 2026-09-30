@@ -1,5 +1,8 @@
 # RTL strategy research
 
+**Start with [docs/STATUS.md](docs/STATUS.md)**: the current strategy, what's decided,
+what's open, and an index of every study, on one page.
+
 MT5 expert advisors and Python research tools for bar-only entry experiments.
 Run the commands below from this project root. The existing `venv/` stays here.
 
@@ -48,6 +51,7 @@ studies deferred.
 .\venv\Scripts\python.exe python\verify_location_validation.py Reports\location_validation_20260929
 .\venv\Scripts\python.exe python\evaluate_maxredrun_train.py Reports\maxredrun_train_20260929
 .\venv\Scripts\python.exe python\analyze_preceding_candles.py Reports\preceding_candles_20260930
+.\venv\Scripts\python.exe python\analyze_flatten_study.py Reports\flatten_fallback_20261001
 .\venv\Scripts\python.exe python\estimate_first_touch.py
 .\venv\Scripts\python.exe -m unittest discover -s python -p "test_*.py" -v
 ```

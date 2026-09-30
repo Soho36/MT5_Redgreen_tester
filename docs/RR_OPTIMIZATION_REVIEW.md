@@ -1,5 +1,15 @@
 # RR 0.5-5.0 optimization review
 
+> **Summary** (added 2026-10-01; [project status](STATUS.md))
+> - The first optimization used the wrong red-run inputs. Ignore it for the baseline.
+> - The corrected 2020–26 grid is jagged: neighbouring 0.1 steps differ by ±$4–5k.
+>   The "2.5R" and "3.5R" candidates are picks from noise.
+> - Most of the dollar gain above 1R came from multi-day holds caused by the flatten
+>   bug. At 2.5R those holds earned $9.4k, more than the whole gain.
+> - Rerun after the fix: [flatten fallback results](FLATTEN_FALLBACK_RESULTS.md).
+>   The dollar advantage of higher RR mostly disappears in 2020–26; average R still
+>   favours higher RR.
+
 2026-09-30. The supplied XML/PNG used **MinRedRun=3, MaxRedRun=0**: at least
 three reds, without an upper cap. The user confirmed this was accidental and
 requested a corrected repeat with **MinRedRun=1, MaxRedRun=3**. Do not use the

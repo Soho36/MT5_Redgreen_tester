@@ -1,4 +1,6 @@
-param([string]$StudyDir = (Join-Path $PSScriptRoot '..\Reports\exit_thresholds_20260930'))
+param([string]$StudyDir = (Join-Path $PSScriptRoot '..\Reports\exit_thresholds_20260930'),
+      [string]$ExpertName = 'RTL_exit_comparison',     # <name>.mq5/.ex5 inside StudyDir
+      [string]$InstallFolder = 'CodexExitResearch')    # MQL5\Experts subfolder the INIs reference
 $ErrorActionPreference = 'Stop'
 $StudyDir = (Resolve-Path -LiteralPath $StudyDir).Path
 $taskTerminal = 'I:\Programs\1AMP Global (USA) MT5 Exchange-Traded Futures Only\terminal64.exe'
@@ -43,10 +45,10 @@ function Save-NewLogs($before, $tag) {
 }
 
 Assert-TerminalIdle
-$taskInstall = Join-Path $taskData 'MQL5\Experts\CodexExitResearch'
+$taskInstall = Join-Path $taskData "MQL5\Experts\$InstallFolder"
 New-Item -ItemType Directory -Path $taskInstall -Force | Out-Null
 foreach ($ext in @('mq5','ex5')) {
-    Copy-Item -LiteralPath (Join-Path $StudyDir "RTL_exit_comparison.$ext") -Destination $taskInstall -Force
+    Copy-Item -LiteralPath (Join-Path $StudyDir "$ExpertName.$ext") -Destination $taskInstall -Force
 }
 foreach ($job in $taskManifest.jobs) {
     $done = Join-Path $StudyDir ($job.tag + '.completed.json')

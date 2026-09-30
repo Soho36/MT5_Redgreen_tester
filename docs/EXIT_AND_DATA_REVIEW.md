@@ -1,5 +1,15 @@
 # Exit estimate and data construction review
 
+> **Summary** (added 2026-10-01; [project status](STATUS.md))
+> - **Exit:** exiting at the first touch of +1R would lose money compared with
+>   waiting for a bar close. The overshoot beyond +1R (about +0.6R on ~70% of
+>   touching trades) is worth more than the reversals it avoids. A full MT5 run
+>   later confirmed this.
+> - **Data:** pre-2019 history is NQ-based (MNQ didn't exist). The clock is
+>   Chicago time + 8 h. Roll contracts were chosen by that same day's volume (mild
+>   hindsight, likely small). The NQ/MNQ join date and any price adjustment are
+>   unverified, so treat early-vs-late period comparisons with care.
+
 2026-09-30. Research discussion; no EA rules changed and no new MT5 run.
 Candidate remains MaxRedRun=3, MinLocation=0, bar-close threshold RR=1.
 

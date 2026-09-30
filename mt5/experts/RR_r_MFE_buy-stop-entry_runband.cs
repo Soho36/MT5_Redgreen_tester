@@ -44,6 +44,12 @@ input double MinCandleRange       = 5.0;    // Minimum allowed candle range in p
 input bool   UseFlattenEnd     = true;	// USE FLATTENING END SESSION
 input int    FlattenHourEnd    = 23;
 input int    FlattenMinuteEnd  = 30;
+// The cutoff bar is missing on early-close days and in some DST-transition
+// weeks, which left positions open for days. With the fallback on, flatten at
+// the first bar AT OR AFTER the cutoff, and if a date ends without any flatten,
+// flatten on the first bar of the next date (one overnight gap at most).
+// false = original behaviour (flatten only on the exact cutoff bar).
+input bool   FlattenFallback   = true;
 
 // ======== TIME WINDOW FILTERING ========
 // no-trading window (block new trades between these times) - Mixed intervals with session borders
@@ -140,6 +146,9 @@ double g_snapshot[];
 int g_snapshotCount = 0;
 datetime g_signalTime = 0;
 
+datetime g_prevBarDate     = 0;   // date (00:00) of the previous new bar
+datetime g_lastFlattenDate = 0;   // date on which the last session flatten ran
+
 datetime g_entryTime = 0;
 string   g_csvName   = "trade_stats.csv";
 string   g_runTag    = "";   // resolved in OnInit, reused by OnTester
@@ -150,6 +159,12 @@ bool IsFlattenTimeEnd(datetime barOpen)
 {
    MqlDateTime dt; TimeToStruct(barOpen, dt);
    return (dt.hour == FlattenHourEnd && dt.min == FlattenMinuteEnd);
+}
+
+bool IsAtOrAfterFlattenTime(datetime barOpen)
+{
+   MqlDateTime dt; TimeToStruct(barOpen, dt);
+   return (dt.hour * 60 + dt.min >= FlattenHourEnd * 60 + FlattenMinuteEnd);
 }
 
 // Count consecutive red candles ending at the last CLOSED candle (index 1),
@@ -604,6 +619,7 @@ void DisplaySettings()
    Print("│ FLATTEN TIMES                                              │");
    Print("├────────────────────────────────────────────────────────────┤");
    Print("│ End of Session: ", UseFlattenEnd ? "Yes (" + (string)FlattenHourEnd + ":" + (string)FlattenMinuteEnd + ")" : "No");
+   Print("│ Missed-cutoff fallback: ", FlattenFallback ? "ON (at/after cutoff, else next session start)" : "OFF (exact cutoff bar only)");
    Print("└────────────────────────────────────────────────────────────┘");
 }
 
@@ -706,7 +722,8 @@ double OnTester()
    FileWrite(f, "run_tag", "risk_reward", "trades", "net_profit", "gross_profit",
                 "gross_loss", "equity_dd", "balance_dd", "profit_factor",
                 "expected_payoff", "recovery_factor", "sharpe",
-                "min_red_run", "max_red_run", "min_location", "location_lookback", "snapshot_bars");
+                "min_red_run", "max_red_run", "min_location", "location_lookback", "snapshot_bars",
+                "flatten_fallback");
    FileWrite(f, g_runTag,
                 RiskReward,
                 (int)TesterStatistics(STAT_TRADES),
@@ -719,7 +736,8 @@ double OnTester()
                 TesterStatistics(STAT_EXPECTED_PAYOFF),
                 TesterStatistics(STAT_RECOVERY_FACTOR),
                 TesterStatistics(STAT_SHARPE_RATIO),
-                MinRedRun, MaxRedRun, MinLocation, LocationLookback, SnapshotBars);
+                MinRedRun, MaxRedRun, MinLocation, LocationLookback, SnapshotBars,
+                (int)FlattenFallback);
    FileClose(f);
    return(0.0);
 }
@@ -799,12 +817,42 @@ void OnTick()
    DisplayTradeWindowStatus(barOpen);
 
    // 🔹 flatten end of session
-   if(UseFlattenEnd && IsFlattenTimeEnd(barOpen))
+   if(UseFlattenEnd && !FlattenFallback && IsFlattenTimeEnd(barOpen))
    {
       Print("🌙 Flatten cutoff reached → closing everything");
       CloseAllPositions();
       CancelAllOrders();
       return;
+   }
+
+   if(UseFlattenEnd && FlattenFallback)
+   {
+      datetime barDate  = barOpen - (barOpen % 86400);
+      datetime prevDate = g_prevBarDate;
+      g_prevBarDate = barDate;
+
+      // Previous date ended without a flatten (early close / missing cutoff
+      // bar): flatten now, then continue as on any normal session start.
+      if(prevDate != 0 && barDate != prevDate && g_lastFlattenDate != prevDate)
+      {
+         g_lastFlattenDate = prevDate;
+         if(PositionsTotal() > 0 || OrdersTotal() > 0)
+         {
+            Print("🌙 No flatten on ", TimeToString(prevDate, TIME_DATE),
+                  " (cutoff bar missing) → closing everything at session start");
+            CloseAllPositions();
+            CancelAllOrders();
+         }
+      }
+
+      if(IsAtOrAfterFlattenTime(barOpen) && g_lastFlattenDate != barDate)
+      {
+         g_lastFlattenDate = barDate;
+         Print("🌙 Flatten cutoff reached → closing everything");
+         CloseAllPositions();
+         CancelAllOrders();
+         return;
+      }
    }
 
    // 🔹 manage existing position
