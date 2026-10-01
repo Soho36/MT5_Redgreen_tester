@@ -8,9 +8,10 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - **Strategy:** buy stop over the last red M30 candle, stop at its low, bar-close exit at ≥ 1R,
   `MaxRedRun = 3`, flatten at 23:30 with the fallback fix. 2020–26: net $37.4k, PF 1.105.
 - **Entry and exit tweaks are largely exhausted;** most ideas failed. Only the red-run cap survived.
-- **Data rebuilt** from Databento source with a consistent clock. **Next:** (1) import it into
-  MT5 and rerun the key tests; (2) holiday early-close calendar; (3) decide RR on clean data;
-  (4) time-of-day blocks.
+- **Data rebuilt** (`MNQcontDTBNT20102026`) and **early-close calendar** added: the strategy is
+  now strictly intraday. On clean data 2.5R beats 1R in both periods.
+- **Next:** (1) decide RR; (2) confirm `MaxRedRun` on the rebuilt data; (3) time-of-day blocks.
+  Re-import the cleaned CSV before using pre-2016 dates.
 
 ---
 
@@ -63,6 +64,11 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   Data before 2016 also had a different session shape.
 - **Rebuilt the data** from the Databento source ([DATA_BUILD.md](DATA_BUILD.md)): consistent
   clock, rolls without hindsight. Confirmed the old file was shifted 1 h in mismatch weeks.
+  Dropped the pre-2016 post-16:00-Chicago tail bars. Imported as `MNQcontDTBNT20102026`.
+- **Early-close calendar** ([results](EARLY_CLOSE_CALENDAR_RESULTS.md)): on the new data all
+  remaining overnight holds started on early-close days. A data-derived calendar (262 sessions,
+  matching the published schedule) makes every run flat at session end. Profit is unchanged.
+  On clean data **2.5R beats 1R in both periods** (net $, PF, avg R).
 
 ---
 

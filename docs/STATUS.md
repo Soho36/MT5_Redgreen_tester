@@ -11,20 +11,22 @@ For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
 | Entry | Buy stop at its high; stop loss at its low; risk = candle range |
 | Exit | Market exit after the first bar that closes ≥ entry + **1.0R**; flatten at 23:30 |
 | Filter | `MaxRedRun = 3` (skip if more than 3 reds in a row); `MinLocation = 0` (off) |
-| Session safety | `FlattenFallback = true` (flatten even when the 23:30 bar is missing) |
-| Sizing / costs | 1 contract; $1 per round-turn modelled in Python |
-| EA | [`mt5/experts/RR_r_MFE_buy-stop-entry_runband.cs`](../mt5/experts/RR_r_MFE_buy-stop-entry_runband.cs) |
-| Data | Custom MNQ-sized series; NQ-based before MNQ existed (2019). See the data caveats below |
+| Session safety | `FlattenFallback = true` + `UseEarlyCloseCalendar = true`: always flat at session end, including early closes |
+| Sizing / costs | 1 contract; $1 per round-turn modelled in Python (real cost $1.05) |
+| EA | [`mt5/experts/RR_r_MFE_buy-stop-entry_runband.cs`](../mt5/experts/RR_r_MFE_buy-stop-entry_runband.cs) (+ `early_closes.mqh`) |
+| Data | `MNQcontDTBNT20102026`: NQ rebuilt from Databento with a consistent clock ([DATA_BUILD.md](DATA_BUILD.md)), priced as MNQ |
 
-**Where it stands** (net of commission, 1 contract):
+**Where it stands** (rebuilt data, calendar on, net of commission, 1 contract):
 
-| Period | Trades | Net $ | Net PF | Net DD $ | Avg net R |
-|---|---:|---:|---:|---:|---:|
-| 2020-01 → 2026-07 | 9,258 | 37,419 | 1.105 | 5,134 | +0.060 |
-| 2015 → 2019 | 7,194 | 7,172 | 1.098 | 1,434 | −0.012 |
-| 2010 → 2014 | — | ≈ breakeven before costs | | | |
+| Period | RR | Trades | Net $ | Net PF | Net DD $ | Avg net R |
+|---|---:|---:|---:|---:|---:|---:|
+| 2020-01 → 2026-07 | 1.0 | 9,272 | 38,433 | 1.108 | 4,837 | +0.061 |
+| 2020-01 → 2026-07 | 2.5 | 7,328 | 40,524 | 1.119 | 4,530 | +0.092 |
+| 2016 → 2019 | 1.0 | 5,699 | 6,816 | 1.111 | 1,427 | +0.004 |
+| 2016 → 2019 | 2.5 | 4,514 | 8,858 | 1.150 | 1,538 | +0.025 |
 
 The edge is thin, and all of 2015–2026 has been looked at. No untouched data is left for validation.
+Data before 2016 had different market hours (trading until ~16:30 Chicago) and is no longer a reference period.
 
 ## Decisions
 
@@ -32,6 +34,8 @@ The edge is thin, and all of 2015–2026 has been looked at. No untouched data i
 - `MaxRedRun = 3`. Chosen on 2015–19 by a pre-set rule, then tested frozen on 2020–26:
   PF up in 6 of 7 years, DD −17%, profit flat. A **small** but real effect.
 - `FlattenFallback` fix (bug: positions were held up to 6.5 days).
+- Rebuilt data (`MNQcontDTBNT20102026`) and the early-close calendar: no trade crosses
+  a session any more. Results match the old data closely, so earlier entry findings stand.
 
 **Rejected** (evidence kept, don't retest without a new reason)
 - Minimum red count, drop size, `location` filter, 10 other bar features.
@@ -47,24 +51,22 @@ The edge is thin, and all of 2015–2026 has been looked at. No untouched data i
 - Buy-stop-limit entry (an experiment; not used for testing).
 
 **Open**
-- **RR:** 1.0 stays for now. At the real cost, 2–2.5R ≥ 1R under both sizing policies,
-  but the remaining overnight-gap trades favour higher RR. Re-decide on the rebuilt data.
-- **Overnight-gap trades:** about 70–95 remain. About 55–60% came from the DST clock shift
-  (fixed by the data rebuild); the rest are early closes (needs the holiday calendar).
-- **Data:** rebuilt from Databento source ([DATA_BUILD.md](DATA_BUILD.md)). Not yet imported
-  into MT5. Open: whether to drop the thin pre-2016 post-16:00-Chicago bars.
+- **RR: 2.5 is now a strong candidate.** On clean intraday data it beats 1.0 in both periods
+  on net $, PF and average R ([results](EARLY_CLOSE_CALENDAR_RESULTS.md)). But 2.5 was
+  picked from a grid on seen data, and the 2020–26 gain is within noise. **Your decision:**
+  adopt 2.5, or first check the neighbours (2.0 / 3.0) on the clean data for a broad region.
+- **Re-import pending:** the symbol was imported before the pre-2016 tail bars were dropped.
+  Re-import the current CSV before using any pre-2016 period.
 - **Live sizing:** decide at the end. Real cost is $1.05/contract; slippage is unknown.
 
 ## Next steps, in order
 
-1. **Import the rebuilt data** ([DATA_BUILD.md](DATA_BUILD.md)) as a new MT5 custom symbol,
-   then rerun the baseline, the `MaxRedRun` train/test and RR 1.0 vs 2.5 on it.
-   The rebuild fixes the DST clock shift and the hindsight roll.
-2. Flatten before known early closes (holiday calendar, about 10 days a year).
-3. Sizing: at the real cost ($1.05/contract), "fixed $200 risk, max 5 contracts" beats
+1. **Decide RR** (2.5 vs 1.0; optionally check 2.0 / 3.0 on the clean data first).
+2. Re-run the `MaxRedRun` train/test on the rebuilt data (2016–19 → 2020–26) to confirm cap 3.
+3. Time-of-day diagnostic: a few broad session blocks, signal time vs fill time.
+4. Sizing: at the real cost ($1.05/contract), "fixed $200 risk, max 5 contracts" beats
    1 contract on net/DD in 2020–26 but not in 2015–19. Sizing does not change the RR
    answer. Keep 1 contract for research; decide live sizing at the end.
-4. Time-of-day diagnostic: a few broad session blocks, signal time vs fill time.
 5. Lower priority: Q3/Q4 entry-shape questions ([checklist](RESEARCH_QUESTIONS.md)).
 
 ## Study index
@@ -80,6 +82,7 @@ The edge is thin, and all of 2015–2026 has been looked at. No untouched data i
 | 10-01 | [Flatten fallback fix](FLATTEN_FALLBACK_RESULTS.md) | Bug fixed; baseline barely changes; RR still open |
 | 10-01 | [Trailing stop after +1R](TRAILING_STOP_RESULTS.md) | Rejected at all distances; keep the bar-close exit |
 | 10-01 | [Data rebuild](DATA_BUILD.md) | Clean NQ series from Databento source; old data was shifted 1 h in DST-mismatch weeks |
+| 10-01 | [Early-close calendar](EARLY_CLOSE_CALENDAR_RESULTS.md) | No overnight holds left; on clean data 2.5R beats 1R in both periods |
 
 ## How we test
 
