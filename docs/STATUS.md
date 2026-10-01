@@ -33,6 +33,10 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 **Adopted**
 - `MaxRedRun = 3`. Chosen on 2015–19 by a pre-set rule, then tested frozen on 2020–26:
   PF up in 6 of 7 years, DD −17%, profit flat. A **small** but real effect.
+  **Confirmed on clean data** ([check](MAXREDRUN_CLEAN_RESULTS.md)): training picked cap 1,
+  which tested frozen at PF +0.036 and DD −30% but −23% profit. Cap 3 is the balanced choice
+  (DD −16%, profit −2%). The cap value is a risk-vs-profit trade-off. **Decided 2026-10-01:
+  keep cap 3**; cap 1 is the conservative alternative.
 - `FlattenFallback` fix (bug: positions were held up to 6.5 days).
 - Rebuilt data (`MNQcontDTBNT20102026`) and the early-close calendar: no trade crosses
   a session any more. Results match the old data closely, so earlier entry findings stand.
@@ -59,12 +63,11 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 
 ## Next steps, in order
 
-1. Re-run the `MaxRedRun` train/test on the rebuilt data (2016–19 → 2020–26) to confirm cap 3.
-2. Time-of-day diagnostic: a few broad session blocks, signal time vs fill time.
-3. Sizing: at the real cost ($1.05/contract), "fixed $200 risk, max 5 contracts" beats
+1. Time-of-day diagnostic: a few broad session blocks, signal time vs fill time.
+2. Sizing: at the real cost ($1.05/contract), "fixed $200 risk, max 5 contracts" beats
    1 contract on net/DD in 2020–26 but not in 2015–19. Sizing does not change the RR
    answer. Keep 1 contract for research; decide live sizing at the end.
-4. Lower priority: Q3/Q4 entry-shape questions ([checklist](RESEARCH_QUESTIONS.md)).
+3. Lower priority: Q3/Q4 entry-shape questions ([checklist](RESEARCH_QUESTIONS.md)).
 
 ## Study index
 
@@ -81,6 +84,7 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 | 10-01 | [Data rebuild](DATA_BUILD.md) | Clean NQ series from Databento source; old data was shifted 1 h in DST-mismatch weeks |
 | 10-01 | [Early-close calendar](EARLY_CLOSE_CALENDAR_RESULTS.md) | No overnight holds left; on clean data 2.5R beats 1R in both periods |
 | 10-01 | [RR 1.0 vs 2.0 / 2.5 / 3.0, clean data](RR_CLEAN_DATA_RESULTS.md) | Rule not met by $78 → RR stays 1.0; higher RR never meaningfully worse |
+| 10-01 | [MaxRedRun train/test, clean data](MAXREDRUN_CLEAN_RESULTS.md) | Cap confirmed (PF up, DD down); cap 1 = safest, cap 3 = balanced |
 
 ## How we test
 

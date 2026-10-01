@@ -12,7 +12,8 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   now strictly intraday. On clean data 2.5R beats 1R in both periods.
 - **RR = 1.0, decided** after the clean-data check (pre-set rule not met). Use symbol
   `MNQcontDTBNT20102026_2`.
-- **Next:** (1) confirm `MaxRedRun` on the rebuilt data; (2) time-of-day blocks.
+- **`MaxRedRun` confirmed on clean data;** cap 3 kept as the balanced choice (cap 1 = safest).
+- **Next:** time-of-day blocks.
 
 ---
 
@@ -74,6 +75,10 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   higher RR clearly better in 2016–19 and in R terms, flat in 2020–26 dollars. The rule
   required all of 2.0–3.0 to beat 1.0 in both periods; it failed by $78 (2.0R, 2020–26).
   **Decided: RR stays 1.0.**
+- **MaxRedRun train/test on clean data** ([results](MAXREDRUN_CLEAN_RESULTS.md)): 2016–19 training
+  picked cap 1 (cap 3 second). Frozen on 2020–26, cap 1 vs off: PF 1.098 → 1.134, DD −30%,
+  but −23% profit. Cap 3 = balanced (DD −16%, profit −2%). The cap is confirmed; its value is
+  a risk/profit choice.
 
 ---
 
