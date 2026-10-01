@@ -51,6 +51,13 @@ input int    FlattenMinuteEnd  = 30;
 // false = original behaviour (flatten only on the exact cutoff bar).
 input bool   FlattenFallback   = true;
 
+// ======== TRAILING STOP (research, default off) ========
+// Once bid >= entry + TrailStartR x risk, the stop trails at the highest bid
+// since entry minus TrailDistanceR x risk. It only ever moves up. The bar-close
+// target exit and the session flatten stay active. TrailDistanceR = 0 -> off.
+input double TrailStartR    = 1.0;   // Activation, in R above entry
+input double TrailDistanceR = 0.0;   // Trail distance behind the high, in R (0 = off)
+
 // ======== TIME WINDOW FILTERING ========
 // no-trading window (block new trades between these times) - Mixed intervals with session borders
 input bool   UseTradeWindow   = true;	// USE TIME TRADE WINDOW
@@ -146,6 +153,7 @@ double g_snapshot[];
 int g_snapshotCount = 0;
 datetime g_signalTime = 0;
 
+double   g_trailHigh       = 0.0; // highest bid since entry (trailing stop)
 datetime g_prevBarDate     = 0;   // date (00:00) of the previous new bar
 datetime g_lastFlattenDate = 0;   // date on which the last session flatten ran
 
@@ -159,6 +167,36 @@ bool IsFlattenTimeEnd(datetime barOpen)
 {
    MqlDateTime dt; TimeToStruct(barOpen, dt);
    return (dt.hour == FlattenHourEnd && dt.min == FlattenMinuteEnd);
+}
+
+// Tick-level trailing stop for the open long position (see TrailDistanceR).
+void UpdateTrailingStop()
+{
+   if(TrailDistanceR <= 0.0 || !g_initialSet || g_initialRisk <= 0.0) return;
+   if(!PositionSelect(_Symbol)) return;
+
+   double bid = SymbolInfoDouble(_Symbol, SYMBOL_BID);
+   g_trailHigh = MathMax(g_trailHigh, bid);
+   if(g_trailHigh < g_initialEntry + TrailStartR * g_initialRisk) return;
+
+   double tick = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_SIZE);
+   if(tick <= 0.0) tick = _Point;
+   double newSl = MathFloor((g_trailHigh - TrailDistanceR * g_initialRisk) / tick) * tick;
+   newSl = NormalizeDouble(newSl, _Digits);
+
+   double curSl  = PositionGetDouble(POSITION_SL);
+   double minGap = SymbolInfoInteger(_Symbol, SYMBOL_TRADE_STOPS_LEVEL) * _Point;
+   if(newSl < curSl + tick || newSl > bid - minGap - tick) return;
+
+   MqlTradeRequest req = {};
+   MqlTradeResult  res = {};
+   req.action   = TRADE_ACTION_SLTP;
+   req.symbol   = _Symbol;
+   req.position = PositionGetInteger(POSITION_TICKET);
+   req.sl       = newSl;
+   req.tp       = PositionGetDouble(POSITION_TP);
+   if(!OrderSend(req, res))
+      Print("Trailing SL modify failed err=", GetLastError(), " retcode=", res.retcode, " sl=", newSl);
 }
 
 bool IsAtOrAfterFlattenTime(datetime barOpen)
@@ -620,6 +658,9 @@ void DisplaySettings()
    Print("├────────────────────────────────────────────────────────────┤");
    Print("│ End of Session: ", UseFlattenEnd ? "Yes (" + (string)FlattenHourEnd + ":" + (string)FlattenMinuteEnd + ")" : "No");
    Print("│ Missed-cutoff fallback: ", FlattenFallback ? "ON (at/after cutoff, else next session start)" : "OFF (exact cutoff bar only)");
+   Print("│ Trailing stop: ", TrailDistanceR > 0.0
+         ? "ON (start " + DoubleToString(TrailStartR, 2) + "R, distance " + DoubleToString(TrailDistanceR, 2) + "R)"
+         : "OFF");
    Print("└────────────────────────────────────────────────────────────┘");
 }
 
@@ -667,6 +708,12 @@ string ActiveWindowLabel()
 // ======== EA CORE ========
 int OnInit()
 {
+   if(TrailDistanceR < 0.0 || TrailStartR <= 0.0)
+   {
+      Print("Invalid trailing inputs: TrailStartR must be > 0, TrailDistanceR >= 0");
+      return INIT_PARAMETERS_INCORRECT;
+   }
+
    if(SnapshotBars < 0)
    {
       Print("SnapshotBars must be >= 0");
@@ -723,7 +770,7 @@ double OnTester()
                 "gross_loss", "equity_dd", "balance_dd", "profit_factor",
                 "expected_payoff", "recovery_factor", "sharpe",
                 "min_red_run", "max_red_run", "min_location", "location_lookback", "snapshot_bars",
-                "flatten_fallback");
+                "flatten_fallback", "trail_start_r", "trail_distance_r");
    FileWrite(f, g_runTag,
                 RiskReward,
                 (int)TesterStatistics(STAT_TRADES),
@@ -737,7 +784,7 @@ double OnTester()
                 TesterStatistics(STAT_RECOVERY_FACTOR),
                 TesterStatistics(STAT_SHARPE_RATIO),
                 MinRedRun, MaxRedRun, MinLocation, LocationLookback, SnapshotBars,
-                (int)FlattenFallback);
+                (int)FlattenFallback, TrailStartR, TrailDistanceR);
    FileClose(f);
    return(0.0);
 }
@@ -787,6 +834,7 @@ void OnTick()
 		  g_initialEntry = entry;
 		  g_initialRisk  = entry - sl;
 		  g_initialSet   = true;
+		  g_trailHigh    = entry;
 
 		  Print("📌 Initial trade locked (universal): Entry=", g_initialEntry, " Risk=", g_initialRisk);
 	   }
@@ -805,10 +853,15 @@ void OnTick()
 	   g_initialEntry = 0.0;
 	   g_initialRisk  = 0.0;
 	   g_initialSet   = false;
+	   g_trailHigh    = 0.0;
 	}
 
 	// update state
 	g_wasInPosition = isInPosition;
+
+	// 🔹 trailing stop (tick level; no-op when TrailDistanceR = 0)
+	if(isInPosition)
+	   UpdateTrailingStop();
 
    if(barOpen == lastBar) return;
    lastBar = barOpen;

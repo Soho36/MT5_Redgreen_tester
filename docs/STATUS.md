@@ -1,6 +1,7 @@
 # Project status
 
 Updated 2026-10-01. **Start here.** One page. Each study below links to the full evidence.
+For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
 
 ## The strategy (current research baseline)
 
@@ -36,6 +37,13 @@ The edge is thin, and all of 2015–2026 has been looked at. No untouched data i
 - Minimum red count, drop size, `location` filter, 10 other bar features.
 - Q1 interrupted decline, Q2 recovery after a new low.
 - Fixed take-profit at 1R (first touch): worse than the bar-close exit in both periods.
+- Resting limit above the target to "capture the wick" (estimate from MFE, 2026-10-01).
+  Winners give back 0.38R / 0.32R on average from their best point (2015–19 / 2020–26),
+  but a limit at 1.5–4R is worse at every level in both periods (2020–26: $30.7–35.5k
+  vs $37.4k). It caps the big runners, which are worth more than the give-back.
+- Trailing stop after +1R at 0.25 / 0.5 / 1.0R (full MT5 runs, 2026-10-01): clearly
+  worse in 2015–19 at every distance; mixed in 2020–26. Rejected by the pre-set rule.
+  The bar-close exit stays.
 - Buy-stop-limit entry (an experiment; not used for testing).
 
 **Open**
@@ -64,6 +72,7 @@ The edge is thin, and all of 2015–2026 has been looked at. No untouched data i
 | 09-30 | [Exit thresholds](EXIT_THRESHOLD_RESULTS.md) ([protocol](EXIT_THRESHOLD_PROTOCOL.md)) | Fixed TP worse; RR comparison distorted by the flatten bug |
 | 09-30 | [RR 0.5–5.0 grid](RR_OPTIMIZATION_REVIEW.md) | Noisy curve; RR>1 gains were mostly multi-day holds |
 | 10-01 | [Flatten fallback fix](FLATTEN_FALLBACK_RESULTS.md) | Bug fixed; baseline barely changes; RR still open |
+| 10-01 | [Trailing stop after +1R](TRAILING_STOP_RESULTS.md) | Rejected at all distances; keep the bar-close exit |
 
 ## How we test
 
