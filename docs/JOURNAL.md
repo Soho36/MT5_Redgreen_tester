@@ -8,8 +8,9 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - **Strategy:** buy stop over the last red M30 candle, stop at its low, bar-close exit at ≥ 1R,
   `MaxRedRun = 3`, flatten at 23:30 with the fallback fix. 2020–26: net $37.4k, PF 1.105.
 - **Entry and exit tweaks are largely exhausted;** most ideas failed. Only the red-run cap survived.
-- **Next:** (1) decide the sizing policy, fixed contracts or fixed risk (this decides RR);
-  (2) flatten before known early closes; (3) check data provenance; (4) time-of-day blocks.
+- **Data rebuilt** from Databento source with a consistent clock. **Next:** (1) import it into
+  MT5 and rerun the key tests; (2) holiday early-close calendar; (3) decide RR on clean data;
+  (4) time-of-day blocks.
 
 ---
 
@@ -51,6 +52,17 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   limit level is worse because it caps the big runners. **Rejected.**
 - **Trailing stop after +1R at 0.25 / 0.5 / 1.0R (MT5):** worse in 2015–19, mixed in
   2020–26. **Rejected.** The bar-close exit stays.
+
+## 2026-10-01 (later): Sizing, overnight trades, data rebuild
+
+- **Sizing (real cost $1.05/contract):** fixed-$200-risk sizing capped at 5 contracts beats
+  1 contract in 2020–26 but not in 2015–19 (small candles multiply commission). Sizing
+  **doesn't change** the RR answer. Keep 1 contract for research.
+- **Why ~70–95 overnight trades remain:** a bar-time dump showed the data clock shifts one hour
+  in US/EU DST-mismatch weeks (55–60% of them); the rest are holiday early closes.
+  Data before 2016 also had a different session shape.
+- **Rebuilt the data** from the Databento source ([DATA_BUILD.md](DATA_BUILD.md)): consistent
+  clock, rolls without hindsight. Confirmed the old file was shifted 1 h in mismatch weeks.
 
 ---
 

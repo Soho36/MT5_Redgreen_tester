@@ -47,17 +47,23 @@ The edge is thin, and all of 2015–2026 has been looked at. No untouched data i
 - Buy-stop-limit entry (an experiment; not used for testing).
 
 **Open**
-- **RR:** 1.0 stays for now. Dollars favour ~1R in 2020–26 but 2–2.5R in 2015–19.
-  Average R favours higher RR in both. This depends on the sizing decision.
-- **Sizing policy:** fixed contracts or fixed risk per trade. *This is the user's decision.*
-- **Early-close days:** about 70–95 trades still hold one overnight gap.
-- **Data provenance:** NQ/MNQ join date, any price adjustment, roll-contract choice.
+- **RR:** 1.0 stays for now. At the real cost, 2–2.5R ≥ 1R under both sizing policies,
+  but the remaining overnight-gap trades favour higher RR. Re-decide on the rebuilt data.
+- **Overnight-gap trades:** about 70–95 remain. About 55–60% came from the DST clock shift
+  (fixed by the data rebuild); the rest are early closes (needs the holiday calendar).
+- **Data:** rebuilt from Databento source ([DATA_BUILD.md](DATA_BUILD.md)). Not yet imported
+  into MT5. Open: whether to drop the thin pre-2016 post-16:00-Chicago bars.
+- **Live sizing:** decide at the end. Real cost is $1.05/contract; slippage is unknown.
 
 ## Next steps, in order
 
-1. Decide the sizing policy. It picks the primary metric and settles RR.
-2. Flatten before known early closes (session calendar), then rerun 1R vs 2.5R.
-3. Pin down data provenance (join, adjustment, roll dates).
+1. **Import the rebuilt data** ([DATA_BUILD.md](DATA_BUILD.md)) as a new MT5 custom symbol,
+   then rerun the baseline, the `MaxRedRun` train/test and RR 1.0 vs 2.5 on it.
+   The rebuild fixes the DST clock shift and the hindsight roll.
+2. Flatten before known early closes (holiday calendar, about 10 days a year).
+3. Sizing: at the real cost ($1.05/contract), "fixed $200 risk, max 5 contracts" beats
+   1 contract on net/DD in 2020–26 but not in 2015–19. Sizing does not change the RR
+   answer. Keep 1 contract for research; decide live sizing at the end.
 4. Time-of-day diagnostic: a few broad session blocks, signal time vs fill time.
 5. Lower priority: Q3/Q4 entry-shape questions ([checklist](RESEARCH_QUESTIONS.md)).
 
@@ -73,6 +79,7 @@ The edge is thin, and all of 2015–2026 has been looked at. No untouched data i
 | 09-30 | [RR 0.5–5.0 grid](RR_OPTIMIZATION_REVIEW.md) | Noisy curve; RR>1 gains were mostly multi-day holds |
 | 10-01 | [Flatten fallback fix](FLATTEN_FALLBACK_RESULTS.md) | Bug fixed; baseline barely changes; RR still open |
 | 10-01 | [Trailing stop after +1R](TRAILING_STOP_RESULTS.md) | Rejected at all distances; keep the bar-close exit |
+| 10-01 | [Data rebuild](DATA_BUILD.md) | Clean NQ series from Databento source; old data was shifted 1 h in DST-mismatch weeks |
 
 ## How we test
 
