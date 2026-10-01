@@ -25,10 +25,10 @@ PERIODS = {"full": ("2016.01.01", "2026.07.14"), "train": ("2016.01.01", "2020.0
            "recent": ("2020.01.02", "2026.07.14")}
 
 
-def make_ini(template, tag, period, rr, calendar):
+def make_ini(template, tag, period, rr, calendar, symbol=SYMBOL):
     start, end = PERIODS[period]
     text = template
-    for key, value in (("Expert", EXPERT), ("Symbol", SYMBOL), ("FromDate", start), ("ToDate", end),
+    for key, value in (("Expert", EXPERT), ("Symbol", symbol), ("FromDate", start), ("ToDate", end),
                        ("Report", f"{tag}.htm"), ("RiskReward", f"{rr}"), ("RunTag", tag),
                        ("SnapshotBars", "0")):
         text, n = re.subn(rf"(?m)^{key}=.*$", lambda _: f"{key}={value}", text)

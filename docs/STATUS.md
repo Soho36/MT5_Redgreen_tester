@@ -36,6 +36,9 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 - `FlattenFallback` fix (bug: positions were held up to 6.5 days).
 - Rebuilt data (`MNQcontDTBNT20102026`) and the early-close calendar: no trade crosses
   a session any more. Results match the old data closely, so earlier entry findings stand.
+- **RR = 1.0** (2026-10-01). On clean data, 2.0–3.0 didn't beat 1.0 in both periods by the
+  pre-set rule ([check](RR_CLEAN_DATA_RESULTS.md)). Revisit only with a new reason, e.g.
+  measured live slippage.
 
 **Rejected** (evidence kept, don't retest without a new reason)
 - Minimum red count, drop size, `location` filter, 10 other bar features.
@@ -51,23 +54,17 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 - Buy-stop-limit entry (an experiment; not used for testing).
 
 **Open**
-- **RR: 2.5 is now a strong candidate.** On clean intraday data it beats 1.0 in both periods
-  on net $, PF and average R ([results](EARLY_CLOSE_CALENDAR_RESULTS.md)). But 2.5 was
-  picked from a grid on seen data, and the 2020–26 gain is within noise. **Your decision:**
-  adopt 2.5, or first check the neighbours (2.0 / 3.0) on the clean data for a broad region.
-- **Re-import pending:** the symbol was imported before the pre-2016 tail bars were dropped.
-  Re-import the current CSV before using any pre-2016 period.
+- **Symbol:** use `MNQcontDTBNT20102026_2` (rebuilt, tail bars dropped) for all new runs.
 - **Live sizing:** decide at the end. Real cost is $1.05/contract; slippage is unknown.
 
 ## Next steps, in order
 
-1. **Decide RR** (2.5 vs 1.0; optionally check 2.0 / 3.0 on the clean data first).
-2. Re-run the `MaxRedRun` train/test on the rebuilt data (2016–19 → 2020–26) to confirm cap 3.
-3. Time-of-day diagnostic: a few broad session blocks, signal time vs fill time.
-4. Sizing: at the real cost ($1.05/contract), "fixed $200 risk, max 5 contracts" beats
+1. Re-run the `MaxRedRun` train/test on the rebuilt data (2016–19 → 2020–26) to confirm cap 3.
+2. Time-of-day diagnostic: a few broad session blocks, signal time vs fill time.
+3. Sizing: at the real cost ($1.05/contract), "fixed $200 risk, max 5 contracts" beats
    1 contract on net/DD in 2020–26 but not in 2015–19. Sizing does not change the RR
    answer. Keep 1 contract for research; decide live sizing at the end.
-5. Lower priority: Q3/Q4 entry-shape questions ([checklist](RESEARCH_QUESTIONS.md)).
+4. Lower priority: Q3/Q4 entry-shape questions ([checklist](RESEARCH_QUESTIONS.md)).
 
 ## Study index
 
@@ -83,6 +80,7 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 | 10-01 | [Trailing stop after +1R](TRAILING_STOP_RESULTS.md) | Rejected at all distances; keep the bar-close exit |
 | 10-01 | [Data rebuild](DATA_BUILD.md) | Clean NQ series from Databento source; old data was shifted 1 h in DST-mismatch weeks |
 | 10-01 | [Early-close calendar](EARLY_CLOSE_CALENDAR_RESULTS.md) | No overnight holds left; on clean data 2.5R beats 1R in both periods |
+| 10-01 | [RR 1.0 vs 2.0 / 2.5 / 3.0, clean data](RR_CLEAN_DATA_RESULTS.md) | Rule not met by $78 → RR stays 1.0; higher RR never meaningfully worse |
 
 ## How we test
 

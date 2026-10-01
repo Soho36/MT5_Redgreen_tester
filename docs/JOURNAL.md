@@ -10,8 +10,9 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - **Entry and exit tweaks are largely exhausted;** most ideas failed. Only the red-run cap survived.
 - **Data rebuilt** (`MNQcontDTBNT20102026`) and **early-close calendar** added: the strategy is
   now strictly intraday. On clean data 2.5R beats 1R in both periods.
-- **Next:** (1) decide RR; (2) confirm `MaxRedRun` on the rebuilt data; (3) time-of-day blocks.
-  Re-import the cleaned CSV before using pre-2016 dates.
+- **RR = 1.0, decided** after the clean-data check (pre-set rule not met). Use symbol
+  `MNQcontDTBNT20102026_2`.
+- **Next:** (1) confirm `MaxRedRun` on the rebuilt data; (2) time-of-day blocks.
 
 ---
 
@@ -69,6 +70,10 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   remaining overnight holds started on early-close days. A data-derived calendar (262 sessions,
   matching the published schedule) makes every run flat at session end. Profit is unchanged.
   On clean data **2.5R beats 1R in both periods** (net $, PF, avg R).
+- **RR 1.0 / 2.0 / 2.5 / 3.0 on `MNQcontDTBNT20102026_2`** ([results](RR_CLEAN_DATA_RESULTS.md)):
+  higher RR clearly better in 2016–19 and in R terms, flat in 2020–26 dollars. The rule
+  required all of 2.0–3.0 to beat 1.0 in both periods; it failed by $78 (2.0R, 2020–26).
+  **Decided: RR stays 1.0.**
 
 ---
 
