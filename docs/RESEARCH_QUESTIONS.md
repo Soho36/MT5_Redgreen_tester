@@ -32,7 +32,8 @@ Research baseline: `MaxRedRun=3`, `MinLocation=0`, original entry/exit rules.
 
 ## Q3. Were preceding bars overlapping or progressing steadily?
 
-- [ ] Pending; no outcome scan yet.
+- [ ] In progress (2026-10-02). Protocol fixed: [Q3 results](Q3_OVERLAP_RESULTS.md).
+  MT5 runs prepared in `Reports/entry_shape_20261002/`; they wait until the AMP terminal is free.
 - Measure adjacent high-low range overlap alongside net price movement.
 - Motivation: repeatedly crossing the same prices differs from a rising or
   falling staircase, even with similar final location and overall range.
@@ -48,6 +49,15 @@ Research baseline: `MaxRedRun=3`, `MinLocation=0`, original entry/exit rules.
 - Motivation: a recent decline after an advance differs from a decline inside
   a longer decline; a single aggregate trend measure can hide that distinction.
 - Before starting: fix both window lengths and the direction definition.
+
+## Inbox: new questions
+
+Write any new idea here as soon as it comes up: one line, no analysis needed. When we pick
+it up, it gets a number, a fixed protocol before looking at outcomes, and a results doc.
+
+| Added | Question | Status |
+|---|---|---|
+| | *(empty)* | |
 
 ## Shared lookback questions
 

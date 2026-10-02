@@ -90,12 +90,13 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 
 ## Next steps, in order
 
-1. Execution sensitivity remains unresolved; do not equate OHLC screening
+1. **Entry-shape questions, one at a time:** Q3 (overlap vs staircase) in progress, then Q4.
+   New ideas go into the Inbox in [RESEARCH_QUESTIONS.md](RESEARCH_QUESTIONS.md).
+2. Execution sensitivity remains unresolved; do not equate OHLC screening
    profits with verified fills. Further tick-generation runs are not planned.
-2. Sizing: at the real cost ($1.05/contract), "fixed $200 risk, max 5 contracts" beats
+3. Sizing: at the real cost ($1.05/contract), "fixed $200 risk, max 5 contracts" beats
    1 contract on net/DD in 2020–26 but not in 2015–19. Sizing does not change the RR
    answer. Keep 1 contract for research; decide live sizing at the end.
-3. Lower priority: Q3/Q4 entry-shape questions ([checklist](RESEARCH_QUESTIONS.md)).
 
 ## Study index
 
