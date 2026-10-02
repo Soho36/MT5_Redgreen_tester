@@ -44,7 +44,8 @@ Research baseline: `MaxRedRun=3`, `MinLocation=0`, original entry/exit rules.
 
 ## Q4. Is the immediate pullback opposed to the broader move?
 
-- [ ] Pending; no outcome scan yet.
+- [x] Answered 2026-10-02: [Q4 results](Q4_CONTEXT_RESULTS.md). All 4 older/recent direction
+  groups are profitable in both periods at (5, 20), (3, 10) and (10, 40); no filter.
 - Compare the direction of the recent few bars with an older, non-overlapping
   context window.
 - Motivation: a recent decline after an advance differs from a decline inside
@@ -58,7 +59,7 @@ it up, it gets a number, a fixed protocol before looking at outcomes, and a resu
 
 | Added | Question | Status |
 |---|---|---|
-| | *(empty)* | |
+| 2026-10-02 | Does the **signal candle's shape** matter: full body (marubozu), doji, shooting star (long upper wick), hammer (long lower wick)? Related: `close_loc` (09-29) found no effect, but it looked only at where the close sits, not at the full shape. | Queued after Q4 |
 
 ## Shared lookback questions
 
