@@ -13,6 +13,7 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - **RR = 1.0, decided** after the clean-data check (pre-set rule not met). Use symbol
   `MNQcontDTBNT20102026_2`.
 - **`MaxRedRun` confirmed on clean data;** cap 3 kept as the balanced choice (cap 1 = safest).
+- **Limit-order entry rejected** (2026-10-02).
 - **Next:** time-of-day blocks.
 
 ---
@@ -107,6 +108,9 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - Eight MT5 runs reconcile to full reports; both controls match the historical
   OHLC baseline. Limit runs contain no buy-stop orders. Immediate placement is
   implemented as an option but was not backtested.
+- **Follow-up, 80% / RR 2** (user's 2020–26 run: $8.8k net): fills are realistic and stops
+  reasonable, but it's concentrated in ~20 trades and positively correlated with the baseline.
+  On 2016–19 the same settings lose −$3.1k (4 of 4 years). **Limit entry rejected.**
 
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

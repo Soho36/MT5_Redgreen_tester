@@ -65,6 +65,10 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
   worse in 2015–19 at every distance; mixed in 2020–26. Rejected by the pre-set rule.
   The bar-close exit stays.
 - Buy-stop-limit entry (an experiment; not used for testing).
+- Standalone buy-limit entry near the candle low (offsets 80/90/95%, plus 80% with RR 2):
+  loses in every year of 2016–19 at every setting. In 2020–26 it's profitable but weaker than
+  the baseline, concentrated in ~20 trades, and positively correlated with it
+  ([results](LIMIT_ONLY_RESULTS.md)).
 - One equal-sized averaging limit near the original stop, original target kept
   ([full study](AVERAGING_ENTRY_RESULTS.md), 2026-10-02): 5/10/20% distances all
   worse in the OHLC model; 10% also worse in both periods with generated ticks.
@@ -104,6 +108,7 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 | 10-01 | [Early-close calendar](EARLY_CLOSE_CALENDAR_RESULTS.md) | No overnight holds left; on clean data 2.5R beats 1R in both periods |
 | 10-01 | [RR 1.0 vs 2.0 / 2.5 / 3.0, clean data](RR_CLEAN_DATA_RESULTS.md) | Rule not met by $78 → RR stays 1.0; higher RR never meaningfully worse |
 | 10-01 | [MaxRedRun train/test, clean data](MAXREDRUN_CLEAN_RESULTS.md) | Cap confirmed (PF up, DD down); cap 1 = safest, cap 3 = balanced |
+| 10-02 | [Standalone buy-limit entry](LIMIT_ONLY_RESULTS.md) ([protocol](LIMIT_ONLY_PROTOCOL.md)) | Rejected: loses every 2016–19 year at every offset (incl. 80% / RR 2) |
 | 10-02 | [Near-stop averaging entry](AVERAGING_ENTRY_RESULTS.md) ([protocol](AVERAGING_ENTRY_PROTOCOL.md)) | Rejected in both models; also exposes material baseline execution sensitivity |
 | 10-02 | [Standalone buy-limit entry](LIMIT_ONLY_RESULTS.md) ([protocol](LIMIT_ONLY_PROTOCOL.md)) | Positive recently, negative in every earlier year; no adoption; OHLC only |
 

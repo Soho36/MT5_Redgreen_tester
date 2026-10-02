@@ -114,6 +114,29 @@ logs, reports, CSVs and `results.json`.
 has a separate `--immediate` output folder. **Immediate placement has not been
 backtested in this study.** The production baseline and archived EA are unchanged.
 
+## Follow-up 2026-10-02: 80% offset with RR 2 → rejected
+
+The user ran 80% with `RiskReward=2` on 2020–26 (5,115 trades, $14,213.50 gross). A
+control run in `Reports/limit80_rr2_20261002/` reproduces it exactly; the same settings
+were then run on 2016–19.
+
+| Period | Trades | Gross $ | Net $ ($1.05/trade) | Net PF | Net DD $ | Losing years |
+|---|---:|---:|---:|---:|---:|---|
+| 2020–26 | 5,115 | 14,214 | 8,843 | 1.155 | 2,069 | 2 of 7 |
+| 2016–19 | 3,478 | 541 | **−3,111** | **0.765** | 3,225 | **4 of 4** |
+
+Also checked on the 2020–26 run:
+- **Fills are realistic.** Every fill came after the market traded at least one tick *below*
+  the limit, so a real resting order would have filled. Median stop is 18 ticks; commission
+  is 12% of risk. Only 14% of trades open and close in the same minute, none of them winners.
+- **Concentrated:** the top 20 of 5,115 trades make $12.9k gross, more than the whole net.
+  With $1 extra slippage per trade, net is $3.7k.
+- **Not a diversifier:** daily P&L correlates +0.34 with the buy-stop baseline. Running both
+  lowers net/DD from 8.73 (baseline alone) to 7.77.
+
+**Decision: rejected.** It loses in every 2016–19 year, like every other limit variant, and
+in 2020–26 it is weaker than the baseline and doesn't help alongside it.
+
 To reproduce the saved audit:
 
 ```powershell
