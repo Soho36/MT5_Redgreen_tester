@@ -80,6 +80,10 @@ Research baseline: `MaxRedRun=3`, `MinLocation=0`, original entry/exit rules.
   probability result persists at 2/4 ticks and appears in 9/11 yearly slices.
 - Mean forward return does not improve in both periods, and filled-trade PF
   reverses ranking (1.031 vs 1.260 earlier, 1.280 vs 0.955 recently). No filter.
+- [Post-hoc dispersion check](BREACH_RECLAIM_RESULTS.md#post-hoc-check-direction-or-dispersion):
+  reclaims also more often finish <=-0.5R (28.1% vs 24.2% recently, 25.9% vs
+  24.2% earlier). The recent excess is wider outcomes, not upward bias; only
+  2016-19 leans upward. Reclaim signal ranges are ~20-25% smaller, inflating R.
 - Includes 35,632 qualifying order attempts and 14,968 baseline fills. The
   separate resistance-approach/breach/path study remains proposed.
 
@@ -94,7 +98,7 @@ it up, it gets a number, a fixed protocol before looking at outcomes, and a resu
 | 2026-10-02 | Does the **signal candle's shape** matter: full body (marubozu), doji, shooting star (long upper wick), hammer (long lower wick)? | **Answered as Q5** ([results](Q5_CANDLE_SHAPE_RESULTS.md)): no shape loses in both periods; no filter |
 | 2026-10-03 | Does **nearby support below the signal** distinguish better RTL entries from signals far from support? | **First screen answered as Q6** ([results](PRICE_LEVELS_RESULTS.md)): session/week extremes, no filter; swing zones untested |
 | 2026-10-03 | Does **room to resistance above the planned entry**, measured in initial R, affect outcomes? | **First screen answered as Q7** ([results](PRICE_LEVELS_RESULTS.md)): no filter |
-| 2026-10-03 | Does price **approach a known high/low, breach it, then reclaim the range and reverse**, rather than continue through? Does this explain current-session nearby-resistance performance or improve long entries after a low reclaim? | **Support-reclaim screen completed as Q8** ([results](BREACH_RECLAIM_RESULTS.md)): more +0.5R responses, no stable RTL improvement; resistance path study pending |
+| 2026-10-03 | Does price **approach a known high/low, breach it, then reclaim the range and reverse**, rather than continue through? Does this explain current-session nearby-resistance performance or improve long entries after a low reclaim? | **Support-reclaim screen completed as Q8** ([results](BREACH_RECLAIM_RESULTS.md)): more +0.5R responses (mostly two-sided dispersion), no stable RTL improvement; resistance path study pending |
 | 2026-10-03 | Does **interaction with an established level** matter: no contact, touch and hold, pierce and reclaim, or close through? | Session/week low signal interaction screened in Q8; pivot zones and resistance path remain proposed |
 | 2026-10-03 | Does **level history** matter: age, time since last visit, and first versus repeated retest? | Proposed; count separate visits, not clustered pivots |
 | 2026-10-03 | Does a **broken resistance level retested as support** behave differently from support that has never changed role? | Proposed; requires chronological break/retest tracking |
@@ -116,6 +120,9 @@ with forward returns still starting after the M30 signal closes. Fast/slow bins
 and comparisons must be specified before examining their outcomes. Reclaim
 stability observed after a decision is an outcome; requiring stability is a
 later-entry variant, not information available at the first reclaim.
+Report both response tails (e.g. >=+0.5 and <=-0.5), and normalize by a lagged
+volatility measure (e.g. ATR before the signal) alongside R: the Q8 excess was
+largely two-sided dispersion, so a one-tail rate alone cannot show a bounce.
 
 Possible execution experiments, each separately defined rather than jointly
 optimized: enter on a completed-minute reclaim; enter on a later retest of the
@@ -141,7 +148,8 @@ that the same behavior exists at every age/source.
 ### Follow-up hypothesis: approach, breach and reclaim
 
 The support part below is now implemented in [Q8](BREACH_RECLAIM_RESULTS.md).
-Its probability finding is retained; no filter is adopted. The resistance-path
+Its probability finding is retained, but a post-hoc check shows it is mostly
+two-sided dispersion; no filter is adopted. The resistance-path
 part remains proposed.
 
 User hypothesis, 2026-10-03: clustered stops may help explain movement toward

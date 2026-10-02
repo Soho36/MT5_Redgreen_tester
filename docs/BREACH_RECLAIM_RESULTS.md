@@ -11,6 +11,10 @@ low reclaim is followed more often by an additional +0.5R advance at 90 minutes.
 It does not consistently predict a higher average price return or a better RTL
 profit factor across both periods. No filter qualifies.**
 
+A later [dispersion check](#post-hoc-check-direction-or-dispersion) narrows this
+further: in 2020-26 the reclaim group also more often finishes -0.5R or worse,
+so the +0.5R excess there reflects wider outcomes, not an upward bias.
+
 The study includes **35,632 qualifying order attempts**, including those that
 never filled, and the **14,968 original filled baseline trades**. This avoids
 answering the price-response question only with signals that already went far
@@ -130,6 +134,36 @@ Every no-contact, touch, exact-close, already-below and unavailable group is
 preserved in the tables. The `all_fresh_breaches` aggregate overlaps reclaim
 and is descriptive, not an independent control. Depth is saved continuously in
 ticks/R and summarized in the fixed 1, 2-4, 5-8 and >8 tick bins.
+
+## Post-hoc check: direction or dispersion?
+
+Added 2026-10-03 after reading the results; **not part of the frozen protocol**.
+Reclaim cases have larger mean upward *and* downward excursions, so a higher
++0.5R rate could reflect wider outcomes rather than a bounce. The check compares
+both tails on the primary sample (current-session low, 3 bars, >=1 tick,
+complete windows), reusing the saved outputs without recomputation.
+
+| Period | Group | Windows | Endpoint >= +0.5R | Endpoint <= -0.5R | Std of endpoint R | Mean signal range (points) |
+|---|---|---:|---:|---:|---:|---:|
+| 2016-19 | Reclaimed | 1,012 | 35.7% | 25.9% | 1.36 | 16.3 |
+| 2016-19 | Unrecovered | 1,967 | 29.6% | 24.2% | 1.16 | 20.2 |
+| 2020-26 | Reclaimed | 2,000 | 31.5% | 28.1% | 1.22 | 50.3 |
+| 2020-26 | Unrecovered | 3,433 | 28.4% | 24.2% | 1.11 | 67.5 |
+
+- **2020-26:** the reclaim group's -0.5R tail rises by 3.9 pp, more than its
+  +3.1 pp upper-tail gain. The recent result is dispersion, not an upward bias.
+- **2016-19:** the upper tail gains 6.1 pp versus 1.7 pp for the lower tail,
+  consistent with the +0.071R mean difference. Some upward bias may exist there.
+- **Likely confound:** reclaim signal candles are about 20-25% smaller in points,
+  and every response is divided by that range. A smaller denominator spreads the
+  R-normalized outcomes in both directions. Mean close location also differs
+  (0.45 versus 0.21 of the range, by construction of the groups).
+
+No intervals were computed for these differences. A follow-up study, such as the
+proposed speed/path study, should report both tails and normalize responses by a
+volatility measure known before the signal (for example lagged ATR) alongside R,
+before treating the reclaim as an upward signal. Reproduce with
+`.\venv\Scripts\python.exe python\check_breach_reclaim_dispersion.py`.
 
 ## Verification and limits
 

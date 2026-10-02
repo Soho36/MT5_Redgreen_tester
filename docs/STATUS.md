@@ -58,7 +58,8 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
   [protocol](BREACH_RECLAIM_PROTOCOL.md)): current-session reclaims more often
   precede a +0.5R endpoint after 90 minutes (+6.1 / +3.1 percentage points), but
   mean price return and filled-trade PF do not improve across both periods.
-  Retain that narrower probability finding; no strategy filter adopted.
+  A post-hoc check shows the recent excess is two-sided dispersion (-0.5R tail
+  also rises); only 2016-19 hints at upward bias. No strategy filter adopted.
 - Q6/Q7 first price-level screen ([results](PRICE_LEVELS_RESULTS.md),
   [protocol](PRICE_LEVELS_PROTOCOL.md)): previous-session near-support PF rankings
   disagree and the earlier near group is sparse; resistance within 1R remains
@@ -104,8 +105,8 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 1. **Entry-shape questions:** Q1–Q5 all answered, no filter (incl. signal-candle shape).
    New ideas go into the Inbox in [RESEARCH_QUESTIONS.md](RESEARCH_QUESTIONS.md).
    **Price-level context:** Q6/Q7 session/week proximity screen complete, no filter.
-   Q8 support reclaim complete: a modest +0.5R response-frequency association,
-   but no stable RTL filter. Resistance paths, level history and role reversal
+   Q8 support reclaim complete: a +0.5R response-frequency association that is
+   mostly wider dispersion (both tails), no stable RTL filter. Resistance paths, level history and role reversal
    remain proposed in that checklist.
 2. Execution sensitivity remains unresolved; do not equate OHLC screening
    profits with verified fills. Further tick-generation runs are not planned.

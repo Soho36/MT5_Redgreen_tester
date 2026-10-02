@@ -155,6 +155,10 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - Audited 35,632 attempts, 14,968 baseline fills and 803 independent forward
   windows. Deeper breaches preserve the probability association; resistance
   approach/breach paths remain a separate proposed study.
+- [Post-hoc dispersion check](BREACH_RECLAIM_RESULTS.md#post-hoc-check-direction-or-dispersion):
+  reclaims also hit -0.5R more often (+3.9 pp recently), so the 2020-26 excess is
+  wider outcomes, not upward bias; smaller signal ranges inflate R. Next study:
+  report both tails and a lagged-ATR normalization.
 
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*
