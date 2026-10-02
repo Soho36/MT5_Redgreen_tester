@@ -90,7 +90,7 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 
 ## Next steps, in order
 
-1. **Entry-shape questions, one at a time:** Q3 (overlap vs staircase) in progress, then Q4.
+1. **Entry-shape questions, one at a time:** Q3 answered (no filter); Q4 next.
    New ideas go into the Inbox in [RESEARCH_QUESTIONS.md](RESEARCH_QUESTIONS.md).
 2. Execution sensitivity remains unresolved; do not equate OHLC screening
    profits with verified fills. Further tick-generation runs are not planned.
@@ -117,6 +117,7 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 | 10-01 | [MaxRedRun train/test, clean data](MAXREDRUN_CLEAN_RESULTS.md) | Cap confirmed (PF up, DD down); cap 1 = safest, cap 3 = balanced |
 | 10-02 | [Standalone buy-limit entry](LIMIT_ONLY_RESULTS.md) ([protocol](LIMIT_ONLY_PROTOCOL.md)) | Rejected: loses every 2016–19 year at every offset (incl. 80% / RR 2) |
 | 10-02 | [Time of day](TIME_OF_DAY_RESULTS.md) | No block to switch off; every block profitable in both periods |
+| 10-02 | [Q3: overlap vs staircase](Q3_OVERLAP_RESULTS.md) | No group loses in both periods; no filter |
 | 10-02 | [Near-stop averaging entry](AVERAGING_ENTRY_RESULTS.md) ([protocol](AVERAGING_ENTRY_PROTOCOL.md)) | Rejected in both models; also exposes material baseline execution sensitivity |
 | 10-02 | [Standalone buy-limit entry](LIMIT_ONLY_RESULTS.md) ([protocol](LIMIT_ONLY_PROTOCOL.md)) | Positive recently, negative in every earlier year; no adoption; OHLC only |
 

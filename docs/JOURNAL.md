@@ -14,7 +14,8 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   `MNQcontDTBNT20102026_2`.
 - **`MaxRedRun` confirmed on clean data;** cap 3 kept as the balanced choice (cap 1 = safest).
 - **Limit-order entry rejected** and **time of day checked** (no change), 2026-10-02.
-- **Next:** execution realism (live/demo fills and slippage) and the live sizing decision.
+- **Q3 answered (no filter).** **Next:** Q4, then execution realism (live/demo fills and
+  slippage) and the live sizing decision.
 
 ---
 
@@ -114,6 +115,9 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - **Time of day** ([results](TIME_OF_DAY_RESULTS.md)): five session blocks by order-placement
   time. Every block is profitable in both periods and none is consistently weak, so **no
   window change**. The edge is spread across the session.
+- **Q3, overlap vs staircase** ([results](Q3_OVERLAP_RESULTS.md)): did the bars before the
+  signal keep crossing the same prices, or move steadily? No overlap/direction group loses
+  in both periods at N = 5/10/20, so **no filter**. Q4 is next.
 
 ## 2026-10-02: Trend-conditioned targets on baseline RTL
 

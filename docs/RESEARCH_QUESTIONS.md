@@ -32,8 +32,9 @@ Research baseline: `MaxRedRun=3`, `MinLocation=0`, original entry/exit rules.
 
 ## Q3. Were preceding bars overlapping or progressing steadily?
 
-- [ ] In progress (2026-10-02). Protocol fixed: [Q3 results](Q3_OVERLAP_RESULTS.md).
-  MT5 runs prepared in `Reports/entry_shape_20261002/`; they wait until the AMP terminal is free.
+- [x] Answered 2026-10-02: [Q3 results](Q3_OVERLAP_RESULTS.md). No overlap/direction group
+  loses in both periods at N = 5/10/20; no filter. Overlap is barely correlated with
+  `trend_eff` (new information), but it doesn't predict outcomes consistently.
 - Measure adjacent high-low range overlap alongside net price movement.
 - Motivation: repeatedly crossing the same prices differs from a rising or
   falling staircase, even with similar final location and overall range.
