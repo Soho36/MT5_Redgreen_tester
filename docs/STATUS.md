@@ -1,6 +1,6 @@
 # Project status
 
-Updated 2026-10-01. **Start here.** One page. Each study below links to the full evidence.
+Updated 2026-10-02. **Start here.** Each study below links to the full evidence.
 For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
 
 ## The strategy (current research baseline)
@@ -16,7 +16,16 @@ For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
 | EA | [`mt5/experts/RR_r_MFE_buy-stop-entry_runband.cs`](../mt5/experts/RR_r_MFE_buy-stop-entry_runband.cs) (+ `early_closes.mqh`) |
 | Data | `MNQcontDTBNT20102026`: NQ rebuilt from Databento with a consistent clock ([DATA_BUILD.md](DATA_BUILD.md)), priced as MNQ |
 
-**Where it stands** (rebuilt data, calendar on, net of commission, 1 contract):
+**Execution qualification (2026-10-02):** the figures below use one-minute OHLC
+modelling. The [averaging study](AVERAGING_ENTRY_RESULTS.md) found that changing
+to finer generated ticks reduced matched baseline net at $1.05/contract from
+$6,485 to $612 (2016–19) and $37,981 to $19,435 (2020–26). Both modes use the
+same minute data; neither is real-tick validation. The user accepts one-minute
+OHLC for further raw screening to avoid slow generated-tick runs. Keep this
+execution sensitivity in mind when interpreting results or considering live
+sizing. The research baseline rules stay unchanged.
+
+**Earlier OHLC results** (rebuilt data, calendar on, net of $1 commission, 1 contract):
 
 | Period | RR | Trades | Net $ | Net PF | Net DD $ | Avg net R |
 |---|---:|---:|---:|---:|---:|---:|
@@ -56,18 +65,28 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
   worse in 2015–19 at every distance; mixed in 2020–26. Rejected by the pre-set rule.
   The bar-close exit stays.
 - Buy-stop-limit entry (an experiment; not used for testing).
+- One equal-sized averaging limit near the original stop, original target kept
+  ([full study](AVERAGING_ENTRY_RESULTS.md), 2026-10-02): 5/10/20% distances all
+  worse in the OHLC model; 10% also worse in both periods with generated ticks.
+  The added leg loses money in every year from 2016 through partial 2026.
 
 **Open**
+- **Standalone buy limits** ([results](LIMIT_ONLY_RESULTS.md)): offsets
+  80/90/95% below signal high are profitable in 2020–26 but lose in every
+  year of 2016–19. No adoption; retain the separate research EA. Tested the
+  archived high-trigger behavior, using one-minute OHLC only.
 - **Symbol:** use `MNQcontDTBNT20102026_2` (rebuilt, tail bars dropped) for all new runs.
 - **Live sizing:** decide at the end. Real cost is $1.05/contract; slippage is unknown.
 
 ## Next steps, in order
 
 1. Time-of-day diagnostic: a few broad session blocks, signal time vs fill time.
-2. Sizing: at the real cost ($1.05/contract), "fixed $200 risk, max 5 contracts" beats
+2. Execution sensitivity remains unresolved; do not equate OHLC screening
+   profits with verified fills. Further tick-generation runs are not planned.
+3. Sizing: at the real cost ($1.05/contract), "fixed $200 risk, max 5 contracts" beats
    1 contract on net/DD in 2020–26 but not in 2015–19. Sizing does not change the RR
    answer. Keep 1 contract for research; decide live sizing at the end.
-3. Lower priority: Q3/Q4 entry-shape questions ([checklist](RESEARCH_QUESTIONS.md)).
+4. Lower priority: Q3/Q4 entry-shape questions ([checklist](RESEARCH_QUESTIONS.md)).
 
 ## Study index
 
@@ -85,10 +104,14 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 | 10-01 | [Early-close calendar](EARLY_CLOSE_CALENDAR_RESULTS.md) | No overnight holds left; on clean data 2.5R beats 1R in both periods |
 | 10-01 | [RR 1.0 vs 2.0 / 2.5 / 3.0, clean data](RR_CLEAN_DATA_RESULTS.md) | Rule not met by $78 → RR stays 1.0; higher RR never meaningfully worse |
 | 10-01 | [MaxRedRun train/test, clean data](MAXREDRUN_CLEAN_RESULTS.md) | Cap confirmed (PF up, DD down); cap 1 = safest, cap 3 = balanced |
+| 10-02 | [Near-stop averaging entry](AVERAGING_ENTRY_RESULTS.md) ([protocol](AVERAGING_ENTRY_PROTOCOL.md)) | Rejected in both models; also exposes material baseline execution sensitivity |
+| 10-02 | [Standalone buy-limit entry](LIMIT_ONLY_RESULTS.md) ([protocol](LIMIT_ONLY_PROTOCOL.md)) | Positive recently, negative in every earlier year; no adoption; OHLC only |
 
 ## How we test
 
 - Fix definitions and the selection rule **before** running. Keep negative results.
+- Use one-minute OHLC for raw screening per the user's 2026-10-02 preference;
+  document intraminute uncertainty without automatically launching generated ticks.
 - Confirm any filter with a **full MT5 rerun**. Removing rows from a CSV misses the
   changed entries (a skipped trade frees the position for another one).
 - Report **both** net $ and average net R, and say which one decides.

@@ -82,5 +82,31 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 
 ---
 
+## 2026-10-02: One averaging entry near the protective stop
+
+- [Averaging study](AVERAGING_ENTRY_RESULTS.md): one equal-sized add at 5/10/20% R
+  above the original stop, original bar-close target kept. All worse in the OHLC
+  model; 10% also worse with generated ticks in both periods. **Keep it off.**
+- The added leg loses in every year. Twelve valid MT5 runs reconcile; a stop-before-
+  limit execution case required basket accounting across two position identifiers.
+- **Execution review is now first priority:** finer generated ticks reduce the
+  matched baseline net from $6,485 to $612 / $37,981 to $19,435 at $1.05 per contract.
+  No strategy default changed. Neither model uses historical trade ticks.
+- Preserved invalid diagnostics, repaired 40 missing control-export rows strictly
+  from its complete MT5 report, fixed runner log-rotation handling, and restored
+  temporary MT5 storage redirections after the final run.
+
+## 2026-10-02 (later): Standalone buy-limit entries, OHLC only
+
+- User prefers one-minute OHLC for raw screening; no further generated-tick
+  testing planned. Found the archived limit-only EA and reproduced its
+  high-trigger behavior while retaining current session handling.
+- [Standalone screen](LIMIT_ONLY_RESULTS.md): 80/90/95% offsets all profitable
+  in 2020–26, all lose in every year of 2016–19. Primary 90%: −$2,951 / +$7,021
+  net, DD $3,035 / $1,118. No adoption; keep the separate research variant.
+- Eight MT5 runs reconcile to full reports; both controls match the historical
+  OHLC baseline. Limit runs contain no buy-stop orders. Immediate placement is
+  implemented as an option but was not backtested.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*
