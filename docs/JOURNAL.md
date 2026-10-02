@@ -14,8 +14,8 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   `MNQcontDTBNT20102026_2`.
 - **`MaxRedRun` confirmed on clean data;** cap 3 kept as the balanced choice (cap 1 = safest).
 - **Limit-order entry rejected** and **time of day checked** (no change), 2026-10-02.
-- **Q1–Q4 answered (no filter).** **Next:** signal-candle shape (Inbox), then execution realism
-  (live/demo fills and slippage) and the live sizing decision.
+- **Q1–Q5 answered (no filter).** **Next:** execution realism (live/demo fills and slippage)
+  and the live sizing decision; new ideas go into the Inbox.
 
 ---
 
@@ -121,8 +121,9 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - **Q4, pullback vs broader move** ([results](Q4_CONTEXT_RESULTS.md)): older × recent direction
   groups at (5, 20), (3, 10) and (10, 40) are all profitable in both periods. "Pullback in an
   advance" is not better. **No filter.** With Q1–Q4 done, pre-entry bar shape looks exhausted.
-- **New question in the Inbox:** does the signal candle's shape matter (marubozu / doji /
-  shooting star / hammer)?
+- **Q5, signal-candle shape** ([results](Q5_CANDLE_SHAPE_RESULTS.md)), the user's new question:
+  doji / hammer / shooting star / full body / other. No shape loses in both periods. Doji loses
+  in 2016–19 but is strong in 2020–26; full body is the reverse. **No filter.**
 
 ## 2026-10-02: Trend-conditioned targets on baseline RTL
 

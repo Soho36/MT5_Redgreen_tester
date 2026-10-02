@@ -90,8 +90,8 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 
 ## Next steps, in order
 
-1. **Entry-shape questions:** Q1–Q4 all answered, no filter. Next from the Inbox:
-   **signal-candle shape** (body / doji / shooting star / hammer).
+1. **Entry-shape questions:** Q1–Q5 all answered, no filter (incl. signal-candle shape).
+   New ideas go into the Inbox in [RESEARCH_QUESTIONS.md](RESEARCH_QUESTIONS.md).
    New ideas go into the Inbox in [RESEARCH_QUESTIONS.md](RESEARCH_QUESTIONS.md).
 2. Execution sensitivity remains unresolved; do not equate OHLC screening
    profits with verified fills. Further tick-generation runs are not planned.
@@ -120,6 +120,7 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 | 10-02 | [Time of day](TIME_OF_DAY_RESULTS.md) | No block to switch off; every block profitable in both periods |
 | 10-02 | [Q3: overlap vs staircase](Q3_OVERLAP_RESULTS.md) | No group loses in both periods; no filter |
 | 10-02 | [Q4: pullback vs broader move](Q4_CONTEXT_RESULTS.md) | All groups profitable in both periods; no filter |
+| 10-02 | [Q5: signal-candle shape](Q5_CANDLE_SHAPE_RESULTS.md) | Doji and full body each lose in one period only; no filter |
 | 10-02 | [Near-stop averaging entry](AVERAGING_ENTRY_RESULTS.md) ([protocol](AVERAGING_ENTRY_PROTOCOL.md)) | Rejected in both models; also exposes material baseline execution sensitivity |
 | 10-02 | [Standalone buy-limit entry](LIMIT_ONLY_RESULTS.md) ([protocol](LIMIT_ONLY_PROTOCOL.md)) | Positive recently, negative in every earlier year; no adoption; OHLC only |
 
