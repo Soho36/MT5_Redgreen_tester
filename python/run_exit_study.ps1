@@ -90,7 +90,9 @@ foreach ($job in $taskJobs) {
     }
     Save-NewLogs $offsets $job.tag
     if ($process.ExitCode -ne 0) { throw "MT5 exited with code $($process.ExitCode) for $($job.tag)" }
-    foreach ($name in @($job.csv, ($job.csv -replace '\.csv$', '_stats.csv'))) {
+    $taskExports = @($job.csv, ($job.csv -replace '\.csv$', '_stats.csv'))
+    if ($job.extra_csv) { $taskExports += @($job.extra_csv) }
+    foreach ($name in $taskExports) {
         $path = Join-Path $taskCommon $name
         if ((Get-Item -LiteralPath $path).LastWriteTimeUtc -lt $start) { throw "Stale export $path" }
         Copy-Item -LiteralPath $path -Destination $StudyDir

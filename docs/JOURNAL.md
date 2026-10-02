@@ -13,8 +13,8 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - **RR = 1.0, decided** after the clean-data check (pre-set rule not met). Use symbol
   `MNQcontDTBNT20102026_2`.
 - **`MaxRedRun` confirmed on clean data;** cap 3 kept as the balanced choice (cap 1 = safest).
-- **Limit-order entry rejected** (2026-10-02).
-- **Next:** time-of-day blocks.
+- **Limit-order entry rejected** and **time of day checked** (no change), 2026-10-02.
+- **Next:** execution realism (live/demo fills and slippage) and the live sizing decision.
 
 ---
 
@@ -111,6 +111,22 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - **Follow-up, 80% / RR 2** (user's 2020–26 run: $8.8k net): fills are realistic and stops
   reasonable, but it's concentrated in ~20 trades and positively correlated with the baseline.
   On 2016–19 the same settings lose −$3.1k (4 of 4 years). **Limit entry rejected.**
+- **Time of day** ([results](TIME_OF_DAY_RESULTS.md)): five session blocks by order-placement
+  time. Every block is profitable in both periods and none is consistently weak, so **no
+  window change**. The edge is spread across the session.
+
+## 2026-10-02: Trend-conditioned targets on baseline RTL
+
+- User clarified: import only the trend idea, retaining our RTL entry, stop,
+  filters and bar-close-qualified market exit. No GG, sell-limit exit or forward test.
+- [Study](TREND_RR_RESULTS.md): six bull/neutral/bear mappings with previous-day
+  50/200 MAs and 40/200, 60/200 checks. Primary mild/strong mappings reduce
+  net/DD in both usual periods; annual historical selection also fails the
+  required improvement. Keep fixed 1R.
+- All 16 OHLC runs passed the audit, including 1,257,870 target checks. Annual
+  selection net/DD: 8.89 versus fixed 9.00 (−1.3%); only 3/11 years improve.
+  Neighboring MA results change sign. Higher assumed costs favor lower turnover,
+  but slippage remains unmeasured. Baseline source and defaults are unchanged.
 
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

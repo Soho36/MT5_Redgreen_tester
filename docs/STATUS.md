@@ -54,6 +54,10 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
   measured live slippage.
 
 **Rejected** (evidence kept, don't retest without a new reason)
+- Trend-conditioned target RR on the unchanged RTL baseline
+  ([results](TREND_RR_RESULTS.md), [protocol](TREND_RR_PROTOCOL.md)):
+  primary mild/strong mappings reduce net/DD in both usual comparison periods;
+  historical annual selection also fails the required improvement. Fixed 1R stays.
 - Minimum red count, drop size, `location` filter, 10 other bar features.
 - Q1 interrupted decline, Q2 recovery after a new low.
 - Fixed take-profit at 1R (first touch): worse than the bar-close exit in both periods.
@@ -65,6 +69,8 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
   worse in 2015–19 at every distance; mixed in 2020–26. Rejected by the pre-set rule.
   The bar-close exit stays.
 - Buy-stop-limit entry (an experiment; not used for testing).
+- Switching off session blocks (time of day): every block is profitable in both periods, and
+  none is consistently weak ([results](TIME_OF_DAY_RESULTS.md)). Trade windows unchanged.
 - Standalone buy-limit entry near the candle low (offsets 80/90/95%, plus 80% with RR 2):
   loses in every year of 2016–19 at every setting. In 2020–26 it's profitable but weaker than
   the baseline, concentrated in ~20 trades, and positively correlated with it
@@ -84,18 +90,18 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 
 ## Next steps, in order
 
-1. Time-of-day diagnostic: a few broad session blocks, signal time vs fill time.
-2. Execution sensitivity remains unresolved; do not equate OHLC screening
+1. Execution sensitivity remains unresolved; do not equate OHLC screening
    profits with verified fills. Further tick-generation runs are not planned.
-3. Sizing: at the real cost ($1.05/contract), "fixed $200 risk, max 5 contracts" beats
+2. Sizing: at the real cost ($1.05/contract), "fixed $200 risk, max 5 contracts" beats
    1 contract on net/DD in 2020–26 but not in 2015–19. Sizing does not change the RR
    answer. Keep 1 contract for research; decide live sizing at the end.
-4. Lower priority: Q3/Q4 entry-shape questions ([checklist](RESEARCH_QUESTIONS.md)).
+3. Lower priority: Q3/Q4 entry-shape questions ([checklist](RESEARCH_QUESTIONS.md)).
 
 ## Study index
 
 | Date | Study | Verdict |
 |---|---|---|
+| 10-02 | [RTL trend-conditioned RR](TREND_RR_RESULTS.md) | Primary mappings and annual selection fail to improve on fixed 1R; no forward test |
 | 09-28/29 | [Entry filters and bar features](RESEARCH_RESULTS.md) | Only the red-run cap survives; location and other features don't |
 | 09-29 | [MaxRedRun train/test](RESEARCH_RESULTS.md#next-steps) | Cap 3 passes out of sample; the effect is small |
 | 09-30 | [Preceding candles Q1/Q2](PRECEDING_CANDLES_RESULTS.md) ([protocol](PRECEDING_CANDLES_PROTOCOL.md)) | No filter adopted; the periods disagree |
@@ -109,6 +115,7 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 | 10-01 | [RR 1.0 vs 2.0 / 2.5 / 3.0, clean data](RR_CLEAN_DATA_RESULTS.md) | Rule not met by $78 → RR stays 1.0; higher RR never meaningfully worse |
 | 10-01 | [MaxRedRun train/test, clean data](MAXREDRUN_CLEAN_RESULTS.md) | Cap confirmed (PF up, DD down); cap 1 = safest, cap 3 = balanced |
 | 10-02 | [Standalone buy-limit entry](LIMIT_ONLY_RESULTS.md) ([protocol](LIMIT_ONLY_PROTOCOL.md)) | Rejected: loses every 2016–19 year at every offset (incl. 80% / RR 2) |
+| 10-02 | [Time of day](TIME_OF_DAY_RESULTS.md) | No block to switch off; every block profitable in both periods |
 | 10-02 | [Near-stop averaging entry](AVERAGING_ENTRY_RESULTS.md) ([protocol](AVERAGING_ENTRY_PROTOCOL.md)) | Rejected in both models; also exposes material baseline execution sensitivity |
 | 10-02 | [Standalone buy-limit entry](LIMIT_ONLY_RESULTS.md) ([protocol](LIMIT_ONLY_PROTOCOL.md)) | Positive recently, negative in every earlier year; no adoption; OHLC only |
 
