@@ -1,6 +1,6 @@
 # Project status
 
-Updated 2026-10-02. **Start here.** Each study below links to the full evidence.
+Updated 2026-10-03. **Start here.** Each study below links to the full evidence.
 For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
 
 ## The strategy (current research baseline)
@@ -54,6 +54,17 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
   measured live slippage.
 
 **Rejected** (evidence kept, don't retest without a new reason)
+- Q8 support-reclaim filter ([results](BREACH_RECLAIM_RESULTS.md),
+  [protocol](BREACH_RECLAIM_PROTOCOL.md)): current-session reclaims more often
+  precede a +0.5R endpoint after 90 minutes (+6.1 / +3.1 percentage points), but
+  mean price return and filled-trade PF do not improve across both periods.
+  Retain that narrower probability finding; no strategy filter adopted.
+- Q6/Q7 first price-level screen ([results](PRICE_LEVELS_RESULTS.md),
+  [protocol](PRICE_LEVELS_PROTOCOL.md)): previous-session near-support PF rankings
+  disagree and the earlier near group is sparse; resistance within 1R remains
+  profitable in both periods at all predefined cutoffs. No filter. Current-session
+  and previous-week comparisons also provide no reason to avoid nearby highs.
+  Pivot zones, level interaction and role reversal remain separate questions.
 - Trend-conditioned target RR on the unchanged RTL baseline
   ([results](TREND_RR_RESULTS.md), [protocol](TREND_RR_PROTOCOL.md)):
   primary mild/strong mappings reduce net/DD in both usual comparison periods;
@@ -92,7 +103,10 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 
 1. **Entry-shape questions:** Q1–Q5 all answered, no filter (incl. signal-candle shape).
    New ideas go into the Inbox in [RESEARCH_QUESTIONS.md](RESEARCH_QUESTIONS.md).
-   New ideas go into the Inbox in [RESEARCH_QUESTIONS.md](RESEARCH_QUESTIONS.md).
+   **Price-level context:** Q6/Q7 session/week proximity screen complete, no filter.
+   Q8 support reclaim complete: a modest +0.5R response-frequency association,
+   but no stable RTL filter. Resistance paths, level history and role reversal
+   remain proposed in that checklist.
 2. Execution sensitivity remains unresolved; do not equate OHLC screening
    profits with verified fills. Further tick-generation runs are not planned.
 3. Sizing: at the real cost ($1.05/contract), "fixed $200 risk, max 5 contracts" beats
@@ -103,6 +117,8 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 
 | Date | Study | Verdict |
 |---|---|---|
+| 10-03 | [Q8: support breach and reclaim](BREACH_RECLAIM_RESULTS.md) | More +0.5R responses after current-session reclaims; mixed mean return and PF, no filter |
+| 10-03 | [Q6/Q7: support proximity and overhead room](PRICE_LEVELS_RESULTS.md) | No filter from previous-session primary or predefined neighbors; current-session/week sources retained separately |
 | 10-02 | [RTL trend-conditioned RR](TREND_RR_RESULTS.md) | Primary mappings and annual selection fail to improve on fixed 1R; no forward test |
 | 09-28/29 | [Entry filters and bar features](RESEARCH_RESULTS.md) | Only the red-run cap survives; location and other features don't |
 | 09-29 | [MaxRedRun train/test](RESEARCH_RESULTS.md#next-steps) | Cap 3 passes out of sample; the effect is small |

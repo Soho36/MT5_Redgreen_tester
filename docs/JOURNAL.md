@@ -138,5 +138,23 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   Neighboring MA results change sign. Higher assumed costs favor lower turnover,
   but slippage remains unmeasured. Baseline source and defaults are unchanged.
 
+## 2026-10-03: Price-level context (Q6/Q7)
+
+- [First screen](PRICE_LEVELS_RESULTS.md): previous-session support proximity and
+  overhead room, with current-session/week comparisons. No filter qualifies;
+  nearby resistance groups profit in both periods, while near-support samples
+  are sparse and PF rankings disagree. No full filtered-strategy rerun triggered.
+- Reused 14,968 matching baseline trades; verified 3,053,472 candle values,
+  1,191 independent level windows and 5 timing/roll unit tests. No EA changes.
+
+## 2026-10-03: Support breach and reclaim (Q8)
+
+- [Study](BREACH_RECLAIM_RESULTS.md): current-session reclaims increase the
+  90-minute +0.5R response rate by 6.1 / 3.1 pp, including unfilled signals.
+  Mean forward return and trade PF do not improve in both periods; no filter.
+- Audited 35,632 attempts, 14,968 baseline fills and 803 independent forward
+  windows. Deeper breaches preserve the probability association; resistance
+  approach/breach paths remain a separate proposed study.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*
