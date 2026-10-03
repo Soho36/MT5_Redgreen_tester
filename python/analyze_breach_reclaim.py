@@ -11,7 +11,7 @@ from analyze_price_levels import (ROOT, BASE, PERIODS, SOURCES, build_level_maps
 from trend_regimes import SOURCE, ROLLS
 from verify_location_validation import read_rows
 
-STUDY = ROOT / "Reports" / "breach_reclaim_20261003"
+STUDY = ROOT / "Reports" / "levels" / "breach_reclaim_20261003"
 TREND = ROOT / "Reports" / "trend_rr_20261002"
 TAG = "trendrr_20261002_f50_baseline"
 GROUPS = ("no_contact", "touch_only", "breach_reclaim", "breach_unrecovered",
@@ -273,7 +273,7 @@ def fmt(x, digits=3):
 
 
 def write_report(audits, attempts, contrasts, decision):
-    lines = ["# Q8 breach/reclaim diagnostic tables", "", "[Frozen protocol](../../docs/BREACH_RECLAIM_PROTOCOL.md). 2026-10-03.",
+    lines = ["# Q8 breach/reclaim diagnostic tables", "", "[Frozen protocol](../../../docs/BREACH_RECLAIM_PROTOCOL.md). 2026-10-03.",
              "", "Current-session low is primary; previous-session and previous-week lows are separate comparisons.",
              "", f"Candidate for a full strategy experiment: **{decision['candidate']}**. Gates: `{decision['gates']}`.",
              "", "## Baseline", "", f"Audits: `{audits}`", "",

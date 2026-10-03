@@ -3,6 +3,12 @@
 Updated 2026-10-03. **Start here.** Each study below links to the full evidence.
 For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
 
+**Active level-research direction:** [any qualifying red M30 candle whose range
+touches/crosses known support](levels/README.md), versus every other signal,
+using fixed 1R SL/TP for this experiment. No required open/close side or speed.
+Q10's completed numbers used a narrower fresh-interaction definition; the broad
+comparison is pending. [Speed research is archived](levels/SPEED_RESEARCH_ARCHIVE.md).
+
 ## The strategy (current research baseline)
 
 | | |
@@ -54,13 +60,25 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
   measured live slippage.
 
 **Rejected** (evidence kept, don't retest without a new reason)
-- Q8 support-reclaim filter ([results](BREACH_RECLAIM_RESULTS.md),
+- Q10 support-only selection screen under the user's **fixed 1R SL/TP experiment**
+  ([results](levels/SUPPORT_INTERACTION_RESULTS.md)): fresh MT5 reference, 16,395 trades.
+  Current-session interaction/rest PF 1.226/1.000 earlier versus 1.079/1.084
+  recently. Weekly interaction point estimates improve both periods but only
+  79/146 fills; no candidate qualifies. The original bar-close exit stays the
+  production research baseline; this fixed-TP experiment does not replace it.
+- **Archived direction:** Q9 fast-recovery candidate ([results](levels/RECLAIM_SPEED_RESULTS.md),
+  [protocol](RECLAIM_SPEED_PROTOCOL.md)): 130/218 matched current-session pairs
+  show no reliable upward advantage after the M30 close; all candidate gates
+  fail. The Q8 two-sided R effect weakens/reverses in lagged-volatility units,
+  consistent with smaller reclaim signal ranges. Intrabar/early-minute entry
+  follow-ups are parked, not next steps; no EA change.
+- Q8 support-reclaim filter ([results](levels/BREACH_RECLAIM_RESULTS.md),
   [protocol](BREACH_RECLAIM_PROTOCOL.md)): current-session reclaims more often
   precede a +0.5R endpoint after 90 minutes (+6.1 / +3.1 percentage points), but
   mean price return and filled-trade PF do not improve across both periods.
   A post-hoc check shows the recent excess is two-sided dispersion (-0.5R tail
   also rises); only 2016-19 hints at upward bias. No strategy filter adopted.
-- Q6/Q7 first price-level screen ([results](PRICE_LEVELS_RESULTS.md),
+- Q6/Q7 first price-level screen ([results](levels/PRICE_LEVELS_RESULTS.md),
   [protocol](PRICE_LEVELS_PROTOCOL.md)): previous-session near-support PF rankings
   disagree and the earlier near group is sparse; resistance within 1R remains
   profitable in both periods at all predefined cutoffs. No filter. Current-session
@@ -106,8 +124,13 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
    New ideas go into the Inbox in [RESEARCH_QUESTIONS.md](RESEARCH_QUESTIONS.md).
    **Price-level context:** Q6/Q7 session/week proximity screen complete, no filter.
    Q8 support reclaim complete: a +0.5R response-frequency association that is
-   mostly wider dispersion (both tails), no stable RTL filter. Resistance paths, level history and role reversal
-   remain proposed in that checklist.
+   mostly wider dispersion in signal-R units (both tails), no stable RTL filter.
+   Q9 speed is archived. Q10's fresh-interaction screen is complete under fixed
+   1R SL/TP; the next step is the user's broader **any range contact** aggregate
+   versus every other signal. Opening below support must not exclude a candle
+   that reaches it. Specific interaction structures are later refinements.
+   See the [level-study index](levels/README.md); no immediate-entry speed work
+   is queued. Resistance paths, level history and role reversal remain separate.
 2. Execution sensitivity remains unresolved; do not equate OHLC screening
    profits with verified fills. Further tick-generation runs are not planned.
 3. Sizing: at the real cost ($1.05/contract), "fixed $200 risk, max 5 contracts" beats
@@ -118,8 +141,10 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 
 | Date | Study | Verdict |
 |---|---|---|
-| 10-03 | [Q8: support breach and reclaim](BREACH_RECLAIM_RESULTS.md) | More +0.5R responses after current-session reclaims; mixed mean return and PF, no filter |
-| 10-03 | [Q6/Q7: support proximity and overhead room](PRICE_LEVELS_RESULTS.md) | No filter from previous-session primary or predefined neighbors; current-session/week sources retained separately |
+| 10-03 | [Q10: fixed 1R support interaction](levels/SUPPORT_INTERACTION_RESULTS.md) | Historical fresh-interaction screen; broader range-contact follow-up pending |
+| 10-03 | [Q9: recovery speed](levels/RECLAIM_SPEED_RESULTS.md) | Archived direction; evidence retained, no speed/early-entry follow-up queued |
+| 10-03 | [Q8: support breach and reclaim](levels/BREACH_RECLAIM_RESULTS.md) | More +0.5R responses after current-session reclaims; mixed mean return and PF, no filter |
+| 10-03 | [Q6/Q7: support proximity and overhead room](levels/PRICE_LEVELS_RESULTS.md) | No filter from previous-session primary or predefined neighbors; current-session/week sources retained separately |
 | 10-02 | [RTL trend-conditioned RR](TREND_RR_RESULTS.md) | Primary mappings and annual selection fail to improve on fixed 1R; no forward test |
 | 09-28/29 | [Entry filters and bar features](RESEARCH_RESULTS.md) | Only the red-run cap survives; location and other features don't |
 | 09-29 | [MaxRedRun train/test](RESEARCH_RESULTS.md#next-steps) | Cap 3 passes out of sample; the effect is small |

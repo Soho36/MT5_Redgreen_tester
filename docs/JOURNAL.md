@@ -140,7 +140,7 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 
 ## 2026-10-03: Price-level context (Q6/Q7)
 
-- [First screen](PRICE_LEVELS_RESULTS.md): previous-session support proximity and
+- [First screen](levels/PRICE_LEVELS_RESULTS.md): previous-session support proximity and
   overhead room, with current-session/week comparisons. No filter qualifies;
   nearby resistance groups profit in both periods, while near-support samples
   are sparse and PF rankings disagree. No full filtered-strategy rerun triggered.
@@ -149,16 +149,54 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 
 ## 2026-10-03: Support breach and reclaim (Q8)
 
-- [Study](BREACH_RECLAIM_RESULTS.md): current-session reclaims increase the
+- [Study](levels/BREACH_RECLAIM_RESULTS.md): current-session reclaims increase the
   90-minute +0.5R response rate by 6.1 / 3.1 pp, including unfilled signals.
   Mean forward return and trade PF do not improve in both periods; no filter.
 - Audited 35,632 attempts, 14,968 baseline fills and 803 independent forward
   windows. Deeper breaches preserve the probability association; resistance
   approach/breach paths remain a separate proposed study.
-- [Post-hoc dispersion check](BREACH_RECLAIM_RESULTS.md#post-hoc-check-direction-or-dispersion):
+- [Post-hoc dispersion check](levels/BREACH_RECLAIM_RESULTS.md#post-hoc-check-direction-or-dispersion):
   reclaims also hit -0.5R more often (+3.9 pp recently), so the 2020-26 excess is
   wider outcomes, not upward bias; smaller signal ranges inflate R. Next study:
   report both tails and a lagged-ATR normalization.
+
+## 2026-10-03: Recovery speed and symmetric outcomes (Q9)
+
+- [Study](levels/RECLAIM_SPEED_RESULTS.md): fast <=2 versus slow >=6 minutes gives no
+  reliable post-M30 advantage in 130/218 matched current-session pairs. No
+  candidate qualifies; immediate reclaim entries remain a different experiment.
+- Both half-R barriers are reached more often after reclaim (25.7% vs 19.3%),
+  but the excess reverses in lagged-volatility units. Smaller signal ranges are
+  a substantial normalization issue; no general volatility or liquidity claim.
+- Rebuilt minute paths and checked every available Q8 forward window. Python
+  suffices for this diagnostic; no EA changes or additional MT5 runs.
+
+## 2026-10-03: Support candles versus the entire red-signal population (Q10)
+
+- User moved the focus from speed to actual M30 strategy outcomes and specified
+  fixed -1R SL/+1R TP for this experiment. A new isolated MT5 reference run gives
+  16,395 fills from 38,853 attempts; all 52,070 potential signals are accounted for.
+- [Results](levels/SUPPORT_INTERACTION_RESULTS.md): current-session interaction/rest PF
+  1.226/1.000 earlier, 1.079/1.084 recently. Weekly interactions improve both
+  periods but only 79/146 trades. No candidate qualifies; production unchanged.
+- Audited 51,104 report deals and 58,965 order brackets over full history;
+  subset/complement attribution and costs reconcile. Preserve the original-exit
+  interim screen separately; its outcomes are not mixed into this experiment.
+
+## 2026-10-03: Archive speed direction and organize level research
+
+- At the user's request, [archive Q9 and the intrabar/early-entry proposals](levels/SPEED_RESEARCH_ARCHIVE.md)
+  in place. Preserve Q8/Q9 evidence and frozen protocols; this is a change in
+  research direction, not a claim that all speed effects are disproven.
+- [Active definition](levels/README.md): any qualifying red M30 candle with
+  low <= known support <= high, regardless of open/close side. The completed
+  fresh-interaction Q10 screen is narrower; broad follow-up remains pending.
+- Move all six level-output directories under `Reports/levels/` and result
+  documents under `docs/levels/`; preserve old metadata/dependency snapshots
+  and a relocation inventory. Update code paths and links; no numerical
+  results, production rules or source data changed during organization.
+- Validation after relocation: 21 focused tests, Q8/Q9/fixed-1R saved-output
+  verifiers, 77-file inventory reconciliation and 130 local links all pass.
 
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

@@ -13,7 +13,7 @@ def main():
     t = pd.read_csv(STUDY / "trade_features.csv", parse_dates=["signal_time"])
     r = pd.read_csv(STUDY / "forward_responses.csv")
     bars = pd.read_csv(STUDY / "m30_reference.csv", index_col=0, parse_dates=[0])
-    old_bars = pd.read_csv(ROOT / "Reports" / "price_levels_20261003" / "m30_reference.csv", index_col=0, parse_dates=[0])
+    old_bars = pd.read_csv(ROOT / "Reports" / "levels" / "price_levels_20261003" / "m30_reference.csv", index_col=0, parse_dates=[0])
     pd.testing.assert_frame_equal(bars, old_bars, check_names=False)
     for row in f.itertuples():
         if row.status != "eligible":
@@ -37,7 +37,7 @@ def main():
         else:
             assert np.isnan(row.penetration_ticks) and np.isnan(row.penetration_r)
 
-    original = pd.read_csv(ROOT / "Reports" / "price_levels_20261003" / "features.csv", parse_dates=["signal_time"])
+    original = pd.read_csv(ROOT / "Reports" / "levels" / "price_levels_20261003" / "features.csv", parse_dates=["signal_time"])
     joined = t.merge(original, on=["source", "signal_time"], suffixes=("", "_old"), validate="one_to_one")
     assert len(joined) == len(original) == len(t)
     for key in ("low", "high", "signal_open", "signal_high", "signal_low", "signal_close", "net", "net_r"):

@@ -1,7 +1,7 @@
 """Frozen Q6/Q7 level diagnostics; see docs/PRICE_LEVELS_PROTOCOL.md.
 
 Reuses saved baseline trades; does not simulate or place orders.
-Run with the project venv; outputs Reports/price_levels_20261003/.
+Run with the project venv; outputs Reports/levels/price_levels_20261003/.
 """
 
 import argparse
@@ -16,7 +16,7 @@ from trend_regimes import SOURCE, ROLLS, build_m30_reference
 from verify_location_validation import read_rows
 
 ROOT = Path(__file__).absolute().parent.parent
-STUDY = ROOT / "Reports" / "price_levels_20261003"
+STUDY = ROOT / "Reports" / "levels" / "price_levels_20261003"
 BASE = ROOT / "Reports" / "entry_shape_20261002"
 SOURCES = ("previous_session", "current_session", "previous_week")
 PERIODS = {"train": ("2016-01-01", "2020-01-01"),
@@ -316,8 +316,8 @@ def fmt(value, digits=3):
 
 
 def write_report(study, audits, groups, coverage, contrasts, ages, decisions):
-    lines = ["# Q6/Q7: price-level proximity and overhead room", "", "2026-10-03. Frozen definitions: [protocol](../../docs/PRICE_LEVELS_PROTOCOL.md).",
-             "Analysis: `python/analyze_price_levels.py`. Full tables and per-trade features: `Reports/price_levels_20261003/`.", "",
+    lines = ["# Q6/Q7: price-level proximity and overhead room", "", "2026-10-03. Frozen definitions: [protocol](../../../docs/PRICE_LEVELS_PROTOCOL.md).",
+             "Analysis: `python/analyze_price_levels.py`. Full tables and per-trade features: `Reports/levels/price_levels_20261003/`.", "",
              "## Decision", ""]
     for feature, result in decisions.items():
         lines.append(f"- {feature}: **{'candidate for a separately specified full MT5 rerun' if result['candidate'] else 'no filter qualifies'}**. Gates: `{result['gates']}`.")

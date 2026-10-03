@@ -4,6 +4,11 @@ Created 2026-09-30. These are hypotheses, not promised improvements. Investigate
 one at a time, retain negative findings, and link each completed study here.
 Research baseline: `MaxRedRun=3`, `MinLocation=0`, original entry/exit rules.
 
+Current priority: [broad M30 support interaction](levels/README.md). For this
+experiment fixed 1R SL/TP is authorized. Any qualifying red candle whose range
+contains the known support level belongs in the aggregate, regardless of where
+it opens/closes. Candle subtypes are deferred; the speed branch is archived.
+
 ## Q1. Can a small green interruption hide a continuing decline?
 
 - [x] Complete first diagnostic study: [results](PRECEDING_CANDLES_RESULTS.md).
@@ -54,7 +59,7 @@ Research baseline: `MaxRedRun=3`, `MinLocation=0`, original entry/exit rules.
 
 ## Q6. Does proximity to a session/week low identify better entries?
 
-- [x] First screen complete 2026-10-03: [results](PRICE_LEVELS_RESULTS.md),
+- [x] First screen complete 2026-10-03: [results](levels/PRICE_LEVELS_RESULTS.md),
   [protocol](PRICE_LEVELS_PROTOCOL.md). Previous-session support within 0.5R has
   inconsistent PF rankings and only 187 earlier-period trades. Far-support
   groups remain profitable at all predefined cutoffs. No filter.
@@ -63,7 +68,7 @@ Research baseline: `MaxRedRun=3`, `MinLocation=0`, original entry/exit rules.
 
 ## Q7. Does overhead room to a session/week high affect outcomes?
 
-- [x] First screen complete 2026-10-03: [results](PRICE_LEVELS_RESULTS.md),
+- [x] First screen complete 2026-10-03: [results](levels/PRICE_LEVELS_RESULTS.md),
   [protocol](PRICE_LEVELS_PROTOCOL.md). Previous-session resistance within 1R is
   profitable in both periods (PF 1.110 / 1.196), as are the predefined neighbors.
   No avoidance filter; common-population checks reach the same decision.
@@ -74,18 +79,57 @@ Research baseline: `MaxRedRun=3`, `MinLocation=0`, original entry/exit rules.
 ## Q8. Does a breach followed by a reclaim predict a better upward response?
 
 - [x] First support-reclaim study complete 2026-10-03:
-  [results](BREACH_RECLAIM_RESULTS.md), [protocol](BREACH_RECLAIM_PROTOCOL.md).
+  [results](levels/BREACH_RECLAIM_RESULTS.md), [protocol](BREACH_RECLAIM_PROTOCOL.md).
 - Current-session reclaim attempts more often finish >=+0.5R above signal close
   after 90 minutes: 35.7% vs 29.6% earlier, 31.5% vs 28.4% recently. This narrower
   probability result persists at 2/4 ticks and appears in 9/11 yearly slices.
 - Mean forward return does not improve in both periods, and filled-trade PF
   reverses ranking (1.031 vs 1.260 earlier, 1.280 vs 0.955 recently). No filter.
-- [Post-hoc dispersion check](BREACH_RECLAIM_RESULTS.md#post-hoc-check-direction-or-dispersion):
+- [Post-hoc dispersion check](levels/BREACH_RECLAIM_RESULTS.md#post-hoc-check-direction-or-dispersion):
   reclaims also more often finish <=-0.5R (28.1% vs 24.2% recently, 25.9% vs
   24.2% earlier). The recent excess is wider outcomes, not upward bias; only
   2016-19 leans upward. Reclaim signal ranges are ~20-25% smaller, inflating R.
 - Includes 35,632 qualifying order attempts and 14,968 baseline fills. The
   separate resistance-approach/breach/path study remains proposed.
+
+## Q9. Do quick recoveries outperform slow ones at comparable depth and volatility?
+
+**Archived direction, 2026-10-03:** [reason and retained evidence](levels/SPEED_RESEARCH_ARCHIVE.md).
+
+- [x] First minute-speed study complete 2026-10-03:
+  [results](levels/RECLAIM_SPEED_RESULTS.md), [protocol](RECLAIM_SPEED_PROTOCOL.md).
+- Fast <=2 versus slow >=6 minutes, among final M30 reclaims, leaves 130/218
+  current-session matched pairs. Fast +0.5R endpoint rates are 34.6% vs 36.2%
+  earlier and 28.4% vs 32.6% recently. Mean-A difference intervals include zero;
+  all frozen candidate gates fail. No speed filter or early-entry rule adopted.
+- The two-sided R effect is reproduced, but it diminishes/reverses with lagged
+  volatility normalization. Smaller reclaim signal ranges explain part of why
+  both half-R barriers are easier to reach. Matching also removes the original
+  upper-tail advantage; this does not establish a causal explanation.
+- Previous-session/week speed matches are too sparse. Immediate-reclaim,
+  approach-speed and sustained-recovery proposals are parked, not active work.
+
+## Q10. Are support-interaction red signals better than every other red signal?
+
+**Scope clarification after the completed screen:** aggregate every qualifying
+red candle with low <= support <= high, without an open-above or closing-side
+requirement. The completed tables below used open > support; keep their labels
+and numbers historical. The broad comparison is pending. Subtype results are
+descriptive background, not current candidate entry rules.
+
+- [x] Complete 2026-10-03: [results](levels/SUPPORT_INTERACTION_RESULTS.md),
+  [protocol](SUPPORT_INTERACTION_PROTOCOL.md). User explicitly chose fixed
+  -1R SL / +1R TP for this experiment; a separate full MT5 reference run produced
+  16,395 trades. Compare every qualifying signal across all enabled windows,
+  with the full complement; no M1 speed or matched-only control.
+- Current-session interaction versus all other PF: 1.226/1.000 in 2016–19,
+  1.079/1.084 in 2020–26. Earlier concentration of the edge does not replicate.
+  Close-below PF flips 1.356 to 0.958; reclaim is stronger recently, not earlier.
+- Previous-week interaction is better in both periods, but only 79/146 trades;
+  previous-session rankings reverse. No candidate passes the predefined rule.
+- Census includes 52,070 potential signals, 38,853 attempts and 16,395 fills.
+  Subset net/DD is attribution, not a support-only backtest. Original RTL
+  bar-close exit and production defaults remain unchanged.
 
 ## Inbox: new questions
 
@@ -94,19 +138,28 @@ it up, it gets a number, a fixed protocol before looking at outcomes, and a resu
 
 | Added | Question | Status |
 |---|---|---|
-| 2026-10-03 | Does **breach/reclaim speed** distinguish exploitable bounces: rapid approach, short time below the level, quick recovery, and sustained reclaim? Does this extend to older major levels? | User priority after Q8; proposed minute-path study and separate entry/exit experiments, not yet tested |
+| 2026-10-03 | Are red candles **from support levels** better signals than **every other red candle**, under fixed 1R stop/profit exits? | Q10 fresh-interaction screen complete; **broad range-contact comparison is the next step** ([definition](levels/README.md)); no open/close-side restriction |
+| 2026-10-03 | Does **breach/reclaim speed** distinguish exploitable bounces? | **Archived direction** after Q9; retain [evidence and reasons](levels/SPEED_RESEARCH_ARCHIVE.md), no automatic follow-up |
 | 2026-10-02 | Does the **signal candle's shape** matter: full body (marubozu), doji, shooting star (long upper wick), hammer (long lower wick)? | **Answered as Q5** ([results](Q5_CANDLE_SHAPE_RESULTS.md)): no shape loses in both periods; no filter |
-| 2026-10-03 | Does **nearby support below the signal** distinguish better RTL entries from signals far from support? | **First screen answered as Q6** ([results](PRICE_LEVELS_RESULTS.md)): session/week extremes, no filter; swing zones untested |
-| 2026-10-03 | Does **room to resistance above the planned entry**, measured in initial R, affect outcomes? | **First screen answered as Q7** ([results](PRICE_LEVELS_RESULTS.md)): no filter |
-| 2026-10-03 | Does price **approach a known high/low, breach it, then reclaim the range and reverse**, rather than continue through? Does this explain current-session nearby-resistance performance or improve long entries after a low reclaim? | **Support-reclaim screen completed as Q8** ([results](BREACH_RECLAIM_RESULTS.md)): more +0.5R responses (mostly two-sided dispersion), no stable RTL improvement; resistance path study pending |
-| 2026-10-03 | Does **interaction with an established level** matter: no contact, touch and hold, pierce and reclaim, or close through? | Session/week low signal interaction screened in Q8; pivot zones and resistance path remain proposed |
+| 2026-10-03 | Does **nearby support below the signal** distinguish better RTL entries from signals far from support? | **First screen answered as Q6** ([results](levels/PRICE_LEVELS_RESULTS.md)): session/week extremes, no filter; swing zones untested |
+| 2026-10-03 | Does **room to resistance above the planned entry**, measured in initial R, affect outcomes? | **First screen answered as Q7** ([results](levels/PRICE_LEVELS_RESULTS.md)): no filter |
+| 2026-10-03 | Does price **approach a known high/low, breach it, then reclaim the range and reverse**, rather than continue through? Does this explain current-session nearby-resistance performance or improve long entries after a low reclaim? | **Support-reclaim screen completed as Q8** ([results](levels/BREACH_RECLAIM_RESULTS.md)): more +0.5R responses (mostly two-sided dispersion), no stable RTL improvement; resistance path study pending |
+| 2026-10-03 | Does **interaction with an established level** matter: no contact, touch and hold, pierce and reclaim, or close through? | Session/week low behavior screened in Q8 and actual fixed-1R trades versus full complement in [Q10](levels/SUPPORT_INTERACTION_RESULTS.md); pivot zones and resistance path remain proposed |
 | 2026-10-03 | Does **level history** matter: age, time since last visit, and first versus repeated retest? | Proposed; count separate visits, not clustered pivots |
 | 2026-10-03 | Does a **broken resistance level retested as support** behave differently from support that has never changed role? | Proposed; requires chronological break/retest tracking |
 | 2026-10-03 | Does proximity to **previous-session highs/lows or higher-timeframe swing levels**, alone or overlapping local zones, affect outcomes? | Session/week extremes screened in Q6/Q7; higher-timeframe pivots and confluence remain proposed |
 
-### Follow-up after Q8: speed and possible execution models
+### Archived proposals after Q8: speed and possible execution models
 
-User prioritizes speed and notes similar behavior at older major levels. Separate
+**The following is historical planning, superseded on 2026-10-03.** The user's
+priority is now broad M30 contact and actual strategy outcomes. These proposals
+are not a queue of work to resume. [Archive note](levels/SPEED_RESEARCH_ARCHIVE.md).
+
+The first recovery-delay comparison below was completed as
+[Q9](levels/RECLAIM_SPEED_RESULTS.md). Its negative candidate decision does not test
+immediate minute entry or the broader level-interaction population.
+
+At that time the user prioritized speed and noted behavior at older levels. Separate
 the speed of the approach/breach from the speed of recovery; a fast downward
 breach alone may continue. Record penetration in ticks and lagged-volatility
 units, approach movement per minute, delay from first below-level minute to
@@ -147,7 +200,7 @@ that the same behavior exists at every age/source.
 
 ### Follow-up hypothesis: approach, breach and reclaim
 
-The support part below is now implemented in [Q8](BREACH_RECLAIM_RESULTS.md).
+The support part below is now implemented in [Q8](levels/BREACH_RECLAIM_RESULTS.md).
 Its probability finding is retained, but a post-hoc check shows it is mostly
 two-sided dispersion; no filter is adopted. The resistance-path
 part remains proposed.
@@ -217,7 +270,7 @@ question at a time, under the existing protocol and full-rerun requirements belo
 ### Choosing the level horizon (2026-10-03)
 
 The proposal below was implemented in the [frozen Q6/Q7 protocol](PRICE_LEVELS_PROTOCOL.md).
-The [first results](PRICE_LEVELS_RESULTS.md) adopt no filter.
+The [first results](levels/PRICE_LEVELS_RESULTS.md) adopt no filter.
 
 Separate **source window** from **age**: a previous-week extreme can have formed
 on Monday or Friday. Record both the source and when its extreme was last set

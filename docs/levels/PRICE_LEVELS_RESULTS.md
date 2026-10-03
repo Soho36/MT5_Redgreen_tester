@@ -1,8 +1,8 @@
 # Q6/Q7: support proximity and room to resistance
 
-2026-10-03. [Frozen protocol](PRICE_LEVELS_PROTOCOL.md) ·
-[Analysis](../python/analyze_price_levels.py) ·
-[Full generated tables](../Reports/price_levels_20261003/report.md).
+2026-10-03. [Frozen protocol](../PRICE_LEVELS_PROTOCOL.md) ·
+[Analysis](../../python/analyze_price_levels.py) ·
+[Full generated tables](../../Reports/levels/price_levels_20261003/report.md).
 
 ## Finding
 
@@ -143,7 +143,7 @@ does not settle pivot zones, rejection/reclaim behavior, or level role reversal.
 .\venv\Scripts\python.exe -m unittest discover -s python -p test_price_levels.py -v
 ```
 
-Outputs are in `Reports/price_levels_20261003/`: `features.csv`, `groups.csv`,
+Outputs are in `Reports/levels/price_levels_20261003/`: `features.csv`, `groups.csv`,
 `annual_contrasts.csv`, `contrasts.json`, `coverage.csv`, `ages.csv`,
 `decisions.json`, `m30_reference.csv`, `provenance.json`, and `report.md`.
 The provenance file records input, analysis-script and protocol hashes.

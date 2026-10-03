@@ -1,8 +1,12 @@
 # Q8: breach and reclaim of a known low
 
-2026-10-03 · [Frozen protocol](BREACH_RECLAIM_PROTOCOL.md) ·
-[Analysis](../python/analyze_breach_reclaim.py) ·
-[Full comparison tables](../Reports/breach_reclaim_20261003/report.md).
+**Historical context:** the endpoint-bounce follow-up led to the now-archived
+speed branch. The active question is broad M30 support interaction versus every
+other red signal, using trade outcomes. [Direction and archive note](SPEED_RESEARCH_ARCHIVE.md).
+
+2026-10-03 · [Frozen protocol](../BREACH_RECLAIM_PROTOCOL.md) ·
+[Analysis](../../python/analyze_breach_reclaim.py) ·
+[Full comparison tables](../../Reports/levels/breach_reclaim_20261003/report.md).
 
 ## Answer
 
