@@ -213,5 +213,14 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   outcome: the signal low may undercut by at most 0.5 x ATR. Level contacts
   from below go to a separate inbox question.
 
+## 2026-10-04: Q11 run, one-week swing-low support
+
+- [Results](levels/LEVEL_VISIT_RESULTS.md): candidates beat every other signal
+  in both periods (PF 1.201/1.087, 1.140/1.099) but by little; all intervals
+  include zero and N = 3 disagrees, so no full rerun and no filter. Recently,
+  signals with no level nearby do better than candidates.
+- 52,070 signals classified under three settings; 1,323 sampled signals
+  re-derived independently with no mismatch; partitions reconcile.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

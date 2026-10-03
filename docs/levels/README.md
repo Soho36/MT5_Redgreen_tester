@@ -3,10 +3,12 @@
 Updated 2026-10-04. This folder contains all level-study result documents;
 generated tables, ledgers and MT5 reports are grouped under `Reports/levels/`.
 
-## Current direction: intact one-week M30 swing-low support (Q11)
+## Latest study: intact one-week M30 swing-low support (Q11)
 
 Decided with the user on 2026-10-04; frozen in the
 [Q11 protocol](../LEVEL_VISIT_PROTOCOL.md) before any Q11 outcome was computed.
+**Complete:** [results](LEVEL_VISIT_RESULTS.md). Small edge in both periods,
+not confirmed by the N = 3 check; no filter. Example charts are in `img/`.
 
 - **Exit:** the original RTL exit (>=1R qualified at bar close). The fixed-TP
   experiment is secondary context only; compare like with like.
@@ -41,7 +43,7 @@ the visit rule now separates.
 | [Q8: breach and reclaim](BREACH_RECLAIM_RESULTS.md) | Historical context; price-response branch superseded as primary evidence | `Reports/levels/breach_reclaim_20261003/` |
 | [Q9: recovery speed](RECLAIM_SPEED_RESULTS.md) | **Archived research direction** | `Reports/levels/reclaim_speed_20261003/` |
 | [Q10: support interaction](SUPPORT_INTERACTION_RESULTS.md) | Complete; original exit is the primary result, fixed TP secondary. Previous-week lead fails only the sample rule | `Reports/levels/support_interaction_20261003/` (primary), `..._fixed1r_20261003/` |
-| [Q11: one-week swing-low support](../LEVEL_VISIT_PROTOCOL.md) | **Protocol frozen 2026-10-04; not yet run** | `Reports/levels/level_visit_20261004/` (planned) |
+| [Q11: one-week swing-low support](LEVEL_VISIT_RESULTS.md) | Complete 2026-10-04; small edge in both periods, N = 3 disagrees; no filter | `Reports/levels/level_visit_20261004/` |
 
 The Q10 MT5 source, binary, configuration, reports and logs are in
 `Reports/levels/support_fixed1r_20261003/`. The original-exit screen, now

@@ -3,12 +3,11 @@
 Updated 2026-10-04. **Start here.** Each study below links to the full evidence.
 For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
 
-**Active level-research direction:** Q11, red signals that revisit intact M30
-swing-low support from the past week (swing = lowest of 5 bars each side) after
-price moved 1 x ATR away, versus every other signal, with the original RTL exit
-([protocol](LEVEL_VISIT_PROTOCOL.md), [level index](levels/README.md)). Shallow
-undercuts count as support; a close more than 0.5 x ATR below breaks it.
-Protocol frozen 2026-10-04; not yet run.
+**Level research:** Q11 (intact one-week M30 swing-low support, original exit)
+is complete: candidates are slightly better than every other signal in both
+periods, but the effect is small, intervals include zero and the N = 3 check
+disagrees, so no filter ([results](levels/LEVEL_VISIT_RESULTS.md),
+[level index](levels/README.md)). Next level question not yet chosen.
 [Speed research is archived](levels/SPEED_RESEARCH_ARCHIVE.md).
 
 ## The strategy (current research baseline)
@@ -62,6 +61,11 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
   measured live slippage.
 
 **Rejected** (evidence kept, don't retest without a new reason)
+- Q11 one-week M30 swing-low support ([results](levels/LEVEL_VISIT_RESULTS.md),
+  [protocol](LEVEL_VISIT_PROTOCOL.md)): candidate/rest PF 1.201/1.087 and
+  1.140/1.099, avg R +0.036 / +0.005 better, 7/11 years; all intervals include
+  zero and N = 3 disagrees, so no full rerun. Recently, signals with no level
+  nearby (PF 1.191) do better than the candidates. Q10's weekly lead not reproduced.
 - Q10 support-interaction screen ([results](levels/SUPPORT_INTERACTION_RESULTS.md)).
   **Primary, original exit:** current-session interaction/rest PF 1.179/1.079
   earlier versus 1.086/1.114 recently; previous session flips too. Previous-week
@@ -128,8 +132,8 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
    Q8 support reclaim complete: a +0.5R response-frequency association that is
    mostly wider dispersion in signal-R units (both tails), no stable RTL filter.
    Q9 speed is archived. Q10 is complete; its original-exit screen is primary.
-   **Next: run [Q11](LEVEL_VISIT_PROTOCOL.md)**, revisits of one-week M30 swing-low
-   support (two weeks and N = 3 reported alongside), motivated by the previous-week lead.
+   [Q11](levels/LEVEL_VISIT_RESULTS.md) one-week swing-low support: small, unconfirmed
+   edge, no filter. Open inbox ideas: levels approached from below, level history.
    See the [level-study index](levels/README.md); no immediate-entry speed work
    is queued. Resistance paths, level history and role reversal remain separate.
 2. Execution sensitivity remains unresolved; do not equate OHLC screening
@@ -142,6 +146,7 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 
 | Date | Study | Verdict |
 |---|---|---|
+| 10-04 | [Q11: one-week swing-low support](levels/LEVEL_VISIT_RESULTS.md) | Slightly better than the rest in both periods, but small, intervals include zero, N = 3 disagrees; no filter |
 | 10-03 | [Q10: support interaction](levels/SUPPORT_INTERACTION_RESULTS.md) | Original exit primary: session levels flip between periods; previous-week better in both but too few fills; no filter |
 | 10-03 | [Q9: recovery speed](levels/RECLAIM_SPEED_RESULTS.md) | Archived direction; evidence retained, no speed/early-entry follow-up queued |
 | 10-03 | [Q8: support breach and reclaim](levels/BREACH_RECLAIM_RESULTS.md) | More +0.5R responses after current-session reclaims; mixed mean return and PF, no filter |

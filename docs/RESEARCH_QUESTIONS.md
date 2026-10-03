@@ -134,7 +134,11 @@ Q11 replaces it. Fixed-TP results below are secondary.
 
 ## Q11. Do red signals at intact one-week M30 swing-low support beat every other signal?
 
-- [ ] Protocol frozen 2026-10-04, not run: [protocol](LEVEL_VISIT_PROTOCOL.md).
+- [x] Complete 2026-10-04: [results](levels/LEVEL_VISIT_RESULTS.md),
+  [protocol](LEVEL_VISIT_PROTOCOL.md). Candidate/rest PF 1.201/1.087 and
+  1.140/1.099; avg R +0.036 / +0.005 better; 7/11 years. Intervals include zero
+  and N = 3 disagrees, so no full rerun and no filter. Recently, no-level signals
+  do better than candidates. Only 66 candidates overlap Q10's weekly lead.
 - Levels: confirmed M30 swing lows (5 bars each side) from the current session
   plus 5 previous sessions, merged within D = 0.5 x ATR(14). Two weeks and N = 3
   reported alongside, not selected afterwards. Original exit.
@@ -153,7 +157,7 @@ it up, it gets a number, a fixed protocol before looking at outcomes, and a resu
 
 | Added | Question | Status |
 |---|---|---|
-| 2026-10-03 | Are red candles **from support levels** better signals than **every other red candle**? | Q10 complete (original exit primary): previous-week lead, too few fills. **Next: [Q11](LEVEL_VISIT_PROTOCOL.md)**, one-week M30 swing-low support approached from above |
+| 2026-10-03 | Are red candles **from support levels** better signals than **every other red candle**? | Q10 complete (original exit primary): previous-week lead, too few fills. [Q11](levels/LEVEL_VISIT_RESULTS.md) one-week swing-low support: small, unconfirmed edge, no filter |
 | 2026-10-04 | Is a level approached **from below** (broken support retested, acting as resistance) also a valid level for long RTL signals? | Proposed; study separately from Q11 support. Q11 reports these contacts as its broken-level group, descriptively only |
 | 2026-10-03 | Does **breach/reclaim speed** distinguish exploitable bounces? | **Archived direction** after Q9; retain [evidence and reasons](levels/SPEED_RESEARCH_ARCHIVE.md), no automatic follow-up |
 | 2026-10-02 | Does the **signal candle's shape** matter: full body (marubozu), doji, shooting star (long upper wick), hammer (long lower wick)? | **Answered as Q5** ([results](Q5_CANDLE_SHAPE_RESULTS.md)): no shape loses in both periods; no filter |
