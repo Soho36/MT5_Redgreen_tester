@@ -111,11 +111,12 @@ it opens/closes. Candle subtypes are deferred; the speed branch is archived.
 
 ## Q10. Are support-interaction red signals better than every other red signal?
 
-**Scope clarification after the completed screen:** aggregate every qualifying
-red candle with low <= support <= high, without an open-above or closing-side
-requirement. The completed tables below used open > support; keep their labels
-and numbers historical. The broad comparison is pending. Subtype results are
-descriptive background, not current candidate entry rules.
+**Primary result (2026-10-04): original RTL exit.** Interaction/rest PF:
+current session 1.179/1.079 then 1.086/1.114; previous session 1.394/1.087 then
+0.911/1.124; **previous week 1.707/1.096 then 1.451/1.098, but only 72/137 fills**.
+No candidate. The broad "range overlaps any level" idea was dropped before being
+computed: it mixed support tests from above with broken levels tested from below.
+Q11 replaces it. Fixed-TP results below are secondary.
 
 - [x] Complete 2026-10-03: [results](levels/SUPPORT_INTERACTION_RESULTS.md),
   [protocol](SUPPORT_INTERACTION_PROTOCOL.md). User explicitly chose fixed
@@ -131,6 +132,18 @@ descriptive background, not current candidate entry rules.
   Subset net/DD is attribution, not a support-only backtest. Original RTL
   bar-close exit and production defaults remain unchanged.
 
+## Q11. Do red signals at intact one-week M30 swing-low support beat every other signal?
+
+- [ ] Protocol frozen 2026-10-04, not run: [protocol](LEVEL_VISIT_PROTOCOL.md).
+- Levels: confirmed M30 swing lows (5 bars each side) from the current session
+  plus 5 previous sessions, merged within D = 0.5 x ATR(14). Two weeks and N = 3
+  reported alongside, not selected afterwards. Original exit.
+- Support = price closed >= 1 x ATR above the level after the pivot, then returned
+  into L +/- D, with no close more than D below in between. False breakdowns
+  (shallow undercuts) count; candle shape and open/close side do not matter.
+- Candidate vs every other signal; broken-level contacts (tested from below),
+  not-departed contacts and no contact reported separately. Q10 follow-up rule.
+
 ## Inbox: new questions
 
 Write any new idea here as soon as it comes up: one line, no analysis needed. When we pick
@@ -138,7 +151,7 @@ it up, it gets a number, a fixed protocol before looking at outcomes, and a resu
 
 | Added | Question | Status |
 |---|---|---|
-| 2026-10-03 | Are red candles **from support levels** better signals than **every other red candle**, under fixed 1R stop/profit exits? | Q10 fresh-interaction screen complete; **broad range-contact comparison is the next step** ([definition](levels/README.md)); no open/close-side restriction |
+| 2026-10-03 | Are red candles **from support levels** better signals than **every other red candle**? | Q10 complete (original exit primary): previous-week lead, too few fills. **Next: [Q11](LEVEL_VISIT_PROTOCOL.md)**, one-week M30 swing-low support approached from above |
 | 2026-10-03 | Does **breach/reclaim speed** distinguish exploitable bounces? | **Archived direction** after Q9; retain [evidence and reasons](levels/SPEED_RESEARCH_ARCHIVE.md), no automatic follow-up |
 | 2026-10-02 | Does the **signal candle's shape** matter: full body (marubozu), doji, shooting star (long upper wick), hammer (long lower wick)? | **Answered as Q5** ([results](Q5_CANDLE_SHAPE_RESULTS.md)): no shape loses in both periods; no filter |
 | 2026-10-03 | Does **nearby support below the signal** distinguish better RTL entries from signals far from support? | **First screen answered as Q6** ([results](levels/PRICE_LEVELS_RESULTS.md)): session/week extremes, no filter; swing zones untested |

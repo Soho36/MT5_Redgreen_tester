@@ -1,13 +1,15 @@
 # Project status
 
-Updated 2026-10-03. **Start here.** Each study below links to the full evidence.
+Updated 2026-10-04. **Start here.** Each study below links to the full evidence.
 For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
 
-**Active level-research direction:** [any qualifying red M30 candle whose range
-touches/crosses known support](levels/README.md), versus every other signal,
-using fixed 1R SL/TP for this experiment. No required open/close side or speed.
-Q10's completed numbers used a narrower fresh-interaction definition; the broad
-comparison is pending. [Speed research is archived](levels/SPEED_RESEARCH_ARCHIVE.md).
+**Active level-research direction:** Q11, red signals that revisit intact M30
+swing-low support from the past week (swing = lowest of 5 bars each side) after
+price moved 1 x ATR away, versus every other signal, with the original RTL exit
+([protocol](LEVEL_VISIT_PROTOCOL.md), [level index](levels/README.md)). Shallow
+undercuts count as support; a close more than 0.5 x ATR below breaks it.
+Protocol frozen 2026-10-04; not yet run.
+[Speed research is archived](levels/SPEED_RESEARCH_ARCHIVE.md).
 
 ## The strategy (current research baseline)
 
@@ -60,12 +62,12 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
   measured live slippage.
 
 **Rejected** (evidence kept, don't retest without a new reason)
-- Q10 support-only selection screen under the user's **fixed 1R SL/TP experiment**
-  ([results](levels/SUPPORT_INTERACTION_RESULTS.md)): fresh MT5 reference, 16,395 trades.
-  Current-session interaction/rest PF 1.226/1.000 earlier versus 1.079/1.084
-  recently. Weekly interaction point estimates improve both periods but only
-  79/146 fills; no candidate qualifies. The original bar-close exit stays the
-  production research baseline; this fixed-TP experiment does not replace it.
+- Q10 support-interaction screen ([results](levels/SUPPORT_INTERACTION_RESULTS.md)).
+  **Primary, original exit:** current-session interaction/rest PF 1.179/1.079
+  earlier versus 1.086/1.114 recently; previous session flips too. Previous-week
+  interactions beat the rest in both periods (PF 1.707/1.451, 9/11 years) but
+  with only 72/137 fills, so no candidate qualifies. The fixed 1R SL/TP run is
+  secondary context and does not replace the original bar-close exit.
 - **Archived direction:** Q9 fast-recovery candidate ([results](levels/RECLAIM_SPEED_RESULTS.md),
   [protocol](RECLAIM_SPEED_PROTOCOL.md)): 130/218 matched current-session pairs
   show no reliable upward advantage after the M30 close; all candidate gates
@@ -125,10 +127,9 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
    **Price-level context:** Q6/Q7 session/week proximity screen complete, no filter.
    Q8 support reclaim complete: a +0.5R response-frequency association that is
    mostly wider dispersion in signal-R units (both tails), no stable RTL filter.
-   Q9 speed is archived. Q10's fresh-interaction screen is complete under fixed
-   1R SL/TP; the next step is the user's broader **any range contact** aggregate
-   versus every other signal. Opening below support must not exclude a candle
-   that reaches it. Specific interaction structures are later refinements.
+   Q9 speed is archived. Q10 is complete; its original-exit screen is primary.
+   **Next: run [Q11](LEVEL_VISIT_PROTOCOL.md)**, revisits of one-week M30 swing-low
+   support (two weeks and N = 3 reported alongside), motivated by the previous-week lead.
    See the [level-study index](levels/README.md); no immediate-entry speed work
    is queued. Resistance paths, level history and role reversal remain separate.
 2. Execution sensitivity remains unresolved; do not equate OHLC screening
@@ -141,7 +142,7 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 
 | Date | Study | Verdict |
 |---|---|---|
-| 10-03 | [Q10: fixed 1R support interaction](levels/SUPPORT_INTERACTION_RESULTS.md) | Historical fresh-interaction screen; broader range-contact follow-up pending |
+| 10-03 | [Q10: support interaction](levels/SUPPORT_INTERACTION_RESULTS.md) | Original exit primary: session levels flip between periods; previous-week better in both but too few fills; no filter |
 | 10-03 | [Q9: recovery speed](levels/RECLAIM_SPEED_RESULTS.md) | Archived direction; evidence retained, no speed/early-entry follow-up queued |
 | 10-03 | [Q8: support breach and reclaim](levels/BREACH_RECLAIM_RESULTS.md) | More +0.5R responses after current-session reclaims; mixed mean return and PF, no filter |
 | 10-03 | [Q6/Q7: support proximity and overhead room](levels/PRICE_LEVELS_RESULTS.md) | No filter from previous-session primary or predefined neighbors; current-session/week sources retained separately |

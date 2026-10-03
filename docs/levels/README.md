@@ -1,39 +1,36 @@
 # Price-level research
 
-Updated 2026-10-03. This folder contains all level-study result documents;
+Updated 2026-10-04. This folder contains all level-study result documents;
 generated tables, ledgers and MT5 reports are grouped under `Reports/levels/`.
 
-## Current direction: any red candle interacting with support
+## Current direction: intact one-week M30 swing-low support (Q11)
 
-The user clarified that the first question is broad: **are qualifying red M30
-candles that interact with a known support level better signals than every
-other qualifying red candle?** Keep all enabled time windows and the baseline
-red-run cap. For this experiment use entry at the signal high, fixed -1R SL at
-its low, fixed +1R TP, and the existing session-end flattening.
+Decided with the user on 2026-10-04; frozen in the
+[Q11 protocol](../LEVEL_VISIT_PROTOCOL.md) before any Q11 outcome was computed.
 
-For a valid level L known before the candle opened, the broad interaction is:
+- **Exit:** the original RTL exit (>=1R qualified at bar close). The fixed-TP
+  experiment is secondary context only; compare like with like.
+- **Levels:** confirmed M30 **swing lows** (lowest of 5 bars on each side, known
+  only once the 5th bar after closes) whose pivot is in a rolling **one-week**
+  window (current session + 5 previous sessions). Two weeks and N = 3 are
+  reported alongside, not chosen afterwards. Pivots within D of each other merge
+  into one level at the lowest member. Session/week extremes are not used.
+- **Support = approached from above.** D = 0.5 x ATR(14, M30, before the signal).
+  Price must have closed at least 1 x ATR above the level after the pivot, then
+  come back into L +/- D. Shallow undercuts (false breakdowns) still count until
+  a close more than D below the level breaks it. The signal may open and close
+  below the level; candle shape does not matter.
+- **Comparison:** support-revisit signals versus every other qualifying red
+  signal, with broken-level, not-departed, no-contact and unavailable groups
+  reported separately. Same follow-up rule as Q10.
 
-`close < open` and `candle_low <= L <= candle_high`.
+Every report must name its level source explicitly (current session, previous
+session, previous week, or one/two-week M30 swing lows).
 
-Touching with a wick counts. Opening below or exactly at the level does not
-exclude a candle whose range reaches it. Closing above, below or exactly at the
-level does not change qualification. A candle wholly above or below the level
-has no observed contact. No speed, reclaim, close-below, penetration-depth or
-proximity-band requirement is part of this primary rule.
-
-Compare the aggregate with **all other qualifying red signals**, retaining
-unavailable-level cases explicitly, and report all-signals results for context.
-Keep current-session, previous-session and previous-week sources separate.
-Specific candle structures can be investigated later; they are descriptive
-labels, not separate entry requirements or current filter candidates.
-
-**Scope correction:** the completed Q10 study used the narrower *fresh*
-interaction definition (open > L and low <= L). Its aggregate already combined
-touches, reclaims and closes below, but excluded candles opening at/below L.
-Those historical numbers are preserved unchanged. The broader range-overlap
-comparison above is the next research step and has **not yet been calculated**.
-The frozen Q10 protocol/scripts reproduce the earlier definition; do not silently
-rewrite that historical experiment or present it as the broader test.
+**Superseded proposal (2026-10-03):** a broad "range overlaps any session/week
+low" definition with fixed TP. It was never computed. It mixed candles testing
+support from above with candles rejected at a broken level from below, which
+the visit rule now separates.
 
 ## Results and status
 
@@ -42,11 +39,12 @@ rewrite that historical experiment or present it as the broader test.
 | [Q6/Q7: proximity and overhead room](PRICE_LEVELS_RESULTS.md) | Historical context; no filter | `Reports/levels/price_levels_20261003/` |
 | [Q8: breach and reclaim](BREACH_RECLAIM_RESULTS.md) | Historical context; price-response branch superseded as primary evidence | `Reports/levels/breach_reclaim_20261003/` |
 | [Q9: recovery speed](RECLAIM_SPEED_RESULTS.md) | **Archived research direction** | `Reports/levels/reclaim_speed_20261003/` |
-| [Q10: fixed 1R trade comparison](SUPPORT_INTERACTION_RESULTS.md) | Completed under the fresh-interaction definition; broad follow-up pending | `Reports/levels/support_interaction_fixed1r_20261003/` |
+| [Q10: support interaction](SUPPORT_INTERACTION_RESULTS.md) | Complete; original exit is the primary result, fixed TP secondary. Previous-week lead fails only the sample rule | `Reports/levels/support_interaction_20261003/` (primary), `..._fixed1r_20261003/` |
+| [Q11: one-week swing-low support](../LEVEL_VISIT_PROTOCOL.md) | **Protocol frozen 2026-10-04; not yet run** | `Reports/levels/level_visit_20261004/` (planned) |
 
 The Q10 MT5 source, binary, configuration, reports and logs are in
-`Reports/levels/support_fixed1r_20261003/`. The superseded original-exit interim
-screen is in `Reports/levels/support_interaction_20261003/`.
+`Reports/levels/support_fixed1r_20261003/`. The original-exit screen, now
+Q10's primary result, is in `Reports/levels/support_interaction_20261003/`.
 
 Read the [speed archive note](SPEED_RESEARCH_ARCHIVE.md) for why the research
 changed direction. Protocols retain their original `docs/` paths and contents

@@ -1,16 +1,45 @@
 # Q10: do support-interaction red candles make better RTL trades?
 
-**Historical definition:** these completed tables require the candle to open
-above the level. The user's subsequent clarification is broader: any qualifying
-red candle whose range touches/crosses support, regardless of open or close
-position. That broader comparison is pending. Subtypes below are descriptive,
-not requirements for the active rule. [Current direction](README.md).
+**Definition:** all tables require the candle to open above a level known
+before it opened and then reach it (fresh interaction). Subtypes are descriptive,
+not candidate entry rules. The next level study, [Q11](../LEVEL_VISIT_PROTOCOL.md),
+uses swing lows and an approach-from-above rule instead. [Current direction](README.md).
 
 2026-10-03 · [Protocol and fixed-1R amendment](../SUPPORT_INTERACTION_PROTOCOL.md) ·
-[Full tables](../../Reports/levels/support_interaction_fixed1r_20261003/report.md) ·
+[Primary tables, original exit](../../Reports/levels/support_interaction_20261003/report.md) ·
+[Fixed-TP tables](../../Reports/levels/support_interaction_fixed1r_20261003/report.md) ·
 [Analysis](../../python/analyze_support_fixed1r.py).
 
-## Answer
+## Primary result: original RTL exit
+
+Changed 2026-10-04 with the user: compare like with like, so the **original
+bar-close >=1R exit** is primary. These numbers come from the original-exit
+screen run under the protocol's main text before the fixed-TP amendment, on the
+unchanged 14,968-fill baseline. They were computed on 2026-10-03 and are
+promoted here unchanged; nothing was rerun or reselected.
+
+| Source | Period | Interaction fills | PF | Avg net R | Every-other fills | PF | Avg net R | Avg-R difference [95% interval] |
+|---|---|---:|---:|---:|---:|---:|---:|---:|
+| Current session | 2016–19 | 1,214 | 1.179 | +0.073 | 4,483 | 1.079 | -0.025 | +0.099 [+0.020, +0.178] |
+| Current session | 2020–26 | 2,011 | 1.086 | +0.043 | 7,260 | 1.114 | +0.065 | -0.021 [-0.078, +0.038] |
+| Previous session | 2016–19 | 242 | 1.394 | +0.117 | 5,455 | 1.087 | -0.010 | +0.126 [-0.009, +0.268] |
+| Previous session | 2020–26 | 429 | 0.911 | -0.016 | 8,842 | 1.124 | +0.064 | -0.080 [-0.174, +0.020] |
+| Previous week | 2016–19 | **72** | **1.707** | +0.303 | 5,625 | 1.096 | -0.008 | +0.311 [+0.064, +0.560] |
+| Previous week | 2020–26 | **137** | **1.451** | +0.128 | 9,134 | 1.098 | +0.059 | +0.069 [-0.155, +0.328] |
+
+- Current- and previous-session interactions beat the rest in 2016–19 and lose
+  to it in 2020–26. No candidate from those sources.
+- **Previous-week interactions beat every other signal in both periods** and in
+  9 of 11 years, but with only 72 / 137 fills, far below the 200-fill rule. The
+  recent interval includes zero. This lead motivates [Q11](../LEVEL_VISIT_PROTOCOL.md);
+  it is not a filter.
+- Subtypes with the original exit: current-session reclaim PF 1.031 / 1.280 and
+  close-below 1.260 / 0.955, the same flip as under fixed TP (see Q8).
+
+The fixed-TP experiment below is **secondary context**. Its ranking agrees
+(sessions flip between periods; previous week better in both but sparse).
+
+## Fixed-TP experiment (secondary)
 
 **With the user's fixed -1R stop / +1R take-profit experiment, current-session
 support interaction concentrated the edge in 2016–2019, but did not clearly
@@ -22,7 +51,7 @@ Previous-week interactions have better point estimates in both periods, but
 only 79/146 trades. Keep that as a sparse, exploratory observation, not an
 established filter. Previous-session interactions do not replicate across periods.
 
-## This is the requested strategy comparison
+### Fixed-TP setup
 
 All qualifying red M30 signals across all enabled windows form the reference.
 MaxRedRun=3 and the existing session safety remain. Buy stop = signal high,
@@ -30,9 +59,9 @@ SL = signal low, TP = signal high + full signal range. The profit exit is now
 a fixed TP on touch for this separate experiment. No M1 speed or 90-minute
 price-response outcome enters classification or selection.
 
-The user changed the exit while an original-exit attribution screen was being
-prepared. Those interim outputs remain in `Reports/levels/support_interaction_20261003/`;
-they are **not** the results in this document. The new run uses rebuilt symbol
+The user switched to this exit on 2026-10-03 after the original-exit screen
+had been run; on 2026-10-04 the original exit was restored as primary (above).
+The two exits' trades are never mixed in one table. The fixed-TP run uses rebuilt symbol
 **`MNQcontDTBNT20102026_2`**, one-minute OHLC, one
 contract, $2/point and $1.05 round-trip cost. There were no entry-price gaps or
 SL overshoots in the recorded run. TP/SL exits are exactly +/-1 signal R gross;
@@ -45,7 +74,7 @@ including already-below and unavailable-level cases, which are shown separately.
 The primary comparison is not restricted to similar breaches or no-contact
 candles. Levels use the unchanged session/week maps and contract-roll exclusions.
 
-## Whole population and opportunity
+### Whole population and opportunity
 
 | Fixed-TP reference | 2016–19 | 2020–26 |
 |---|---:|---:|
@@ -65,7 +94,7 @@ Fixed TP changes availability: this reference has **16,395 trades**, versus
 14,968 in the original-exit research baseline. Reusing the old trades with
 different labels would have missed that change.
 
-## Current-session interaction versus every other red signal
+### Current-session interaction versus every other red signal
 
 | Period | Group | Trades | Net $ | Net PF | Avg net R | Net win rate |
 |---|---|---:|---:|---:|---:|---:|
@@ -96,7 +125,7 @@ requiring both PF and average R superiority in both periods.
 Interaction attempts convert to fills less often: **37.1% versus 44.4%** earlier,
 **35.1% versus 44.0%** recently. A qualifying candle does not guarantee a trade.
 
-## Which interaction?
+### Which interaction?
 
 Each subtype is compared with its **own full complement**, not just the other
 breach subtype. The table shows candidate PF / complement PF.
@@ -123,7 +152,7 @@ Restricting the control to known levels does not rescue the conclusion:
 eligible-level complements have PF 0.988/1.094. No-contact-only PF is 0.990/1.098.
 The primary all-other complement is retained; coverage cases are never hidden.
 
-## Other support definitions
+### Other support definitions
 
 | Source | Earlier interaction / other PF | Earlier interaction trades | Recent interaction / other PF | Recent interaction trades |
 |---|---:|---:|---:|---:|
@@ -138,7 +167,7 @@ to this weekly subset. It fails the predefined 200-per-period sample threshold.
 This observation merits retention, without presenting a sparse secondary source
 as a confirmed replacement for the primary result. Older swing levels are untested.
 
-## Drawdown attribution and exit accounting
+### Drawdown attribution and exit accounting
 
 Current-session group exits:
 

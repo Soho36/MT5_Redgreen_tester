@@ -198,5 +198,15 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - Validation after relocation: 21 focused tests, Q8/Q9/fixed-1R saved-output
   verifiers, 77-file inventory reconciliation and 130 local links all pass.
 
+## 2026-10-04: Original exit restored; Q11 one-week swing-low support specified
+
+- Q10's [original-exit screen](levels/SUPPORT_INTERACTION_RESULTS.md) is now the
+  primary result; fixed TP is secondary. Previous-week interactions beat the
+  rest in both periods (PF 1.707/1.451) but with only 72/137 fills.
+- Froze the [Q11 protocol](LEVEL_VISIT_PROTOCOL.md): confirmed M30 swing lows
+  (N = 5) from a rolling one-week window, merged within 0.5 x ATR; support = revisit
+  from above after a 1 x ATR departure, undercuts allowed until a close more than
+  0.5 x ATR below. Two weeks and N = 3 reported alongside. Not run.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*
