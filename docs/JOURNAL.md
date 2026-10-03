@@ -207,6 +207,11 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   (N = 5) from a rolling one-week window, merged within 0.5 x ATR; support = revisit
   from above after a 1 x ATR departure, undercuts allowed until a close more than
   0.5 x ATR below. Two weeks and N = 3 reported alongside. Not run.
+- Built the Q11 level code, 12 unit tests and [example charts](levels/README.md)
+  (`python/plot_level_visit_example.py`). The charts showed candles slicing far
+  through levels counted as support, so the protocol was amended before any
+  outcome: the signal low may undercut by at most 0.5 x ATR. Level contacts
+  from below go to a separate inbox question.
 
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

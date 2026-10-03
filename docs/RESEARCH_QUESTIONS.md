@@ -141,6 +141,8 @@ Q11 replaces it. Fixed-TP results below are secondary.
 - Support = price closed >= 1 x ATR above the level after the pivot, then returned
   into L +/- D, with no close more than D below in between. False breakdowns
   (shallow undercuts) count; candle shape and open/close side do not matter.
+- Amended before outcomes (2026-10-04, after example charts): the signal low may
+  be at most D below the level; deeper slices are a separate reported group.
 - Candidate vs every other signal; broken-level contacts (tested from below),
   not-departed contacts and no contact reported separately. Q10 follow-up rule.
 
@@ -152,6 +154,7 @@ it up, it gets a number, a fixed protocol before looking at outcomes, and a resu
 | Added | Question | Status |
 |---|---|---|
 | 2026-10-03 | Are red candles **from support levels** better signals than **every other red candle**? | Q10 complete (original exit primary): previous-week lead, too few fills. **Next: [Q11](LEVEL_VISIT_PROTOCOL.md)**, one-week M30 swing-low support approached from above |
+| 2026-10-04 | Is a level approached **from below** (broken support retested, acting as resistance) also a valid level for long RTL signals? | Proposed; study separately from Q11 support. Q11 reports these contacts as its broken-level group, descriptively only |
 | 2026-10-03 | Does **breach/reclaim speed** distinguish exploitable bounces? | **Archived direction** after Q9; retain [evidence and reasons](levels/SPEED_RESEARCH_ARCHIVE.md), no automatic follow-up |
 | 2026-10-02 | Does the **signal candle's shape** matter: full body (marubozu), doji, shooting star (long upper wick), hammer (long lower wick)? | **Answered as Q5** ([results](Q5_CANDLE_SHAPE_RESULTS.md)): no shape loses in both periods; no filter |
 | 2026-10-03 | Does **nearby support below the signal** distinguish better RTL entries from signals far from support? | **First screen answered as Q6** ([results](levels/PRICE_LEVELS_RESULTS.md)): session/week extremes, no filter; swing zones untested |

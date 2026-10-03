@@ -19,9 +19,10 @@ Decided with the user on 2026-10-04; frozen in the
   Price must have closed at least 1 x ATR above the level after the pivot, then
   come back into L +/- D. Shallow undercuts (false breakdowns) still count until
   a close more than D below the level breaks it. The signal may open and close
-  below the level; candle shape does not matter.
+  below the level and candle shape does not matter, but its low may undercut the
+  level by at most D (amended before outcomes; deeper = separate slice-through group).
 - **Comparison:** support-revisit signals versus every other qualifying red
-  signal, with broken-level, not-departed, no-contact and unavailable groups
+  signal, with slice-through, broken-level, not-departed, no-contact and unavailable groups
   reported separately. Same follow-up rule as Q10.
 
 Every report must name its level source explicitly (current session, previous

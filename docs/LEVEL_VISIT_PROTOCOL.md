@@ -140,3 +140,21 @@ EA can measure a filtered strategy. That EA and its run need their own protocol.
 - Swing lows only: resistance turned support (role reversal), resistance above
   entry and older levels are out of scope. One-minute OHLC execution limits
   remain; no generated-tick runs.
+
+## Amendment 2026-10-04: no deep slice-through, before any outcome
+
+Made with the user after viewing example charts of the classification
+(`python/plot_level_visit_example.py`), **before any Q11 outcome was computed**.
+The charts showed red candles slicing far through a level counted as support
+revisits, which is not the rejection the study is about.
+
+- A support revisit now also requires **signal low >= L - D**: the signal may
+  undercut the level by at most 0.5 x ATR (false breakdowns still count).
+- A signal that contacts an unbroken, departed level but whose low is more than
+  D below it goes to a new group, **slice-through**, placed after group 2 in the
+  order above. It is part of the "every other signal" complement and reported.
+- Contacts with broken levels (price returning from below) stay a separate
+  reported group. Whether a long signal at a level approached from below has an
+  edge is a separate inbox question, not part of the Q11 candidate.
+
+Nothing else changes: N, D, departure, windows, gates and outputs as above.
