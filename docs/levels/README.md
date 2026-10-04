@@ -13,6 +13,11 @@ mean-R advantage flips when the largest trade or several individual years are
 removed. Symmetric trimming and equal-event weighting remain encouraging, but
 cluster intervals include zero. Inconclusive; no filter or new MT5 run.
 
+[Yearly comparison with other RTL](WEEKLY_LOW_YEAR_VIEW.md) shows the recent
+advantage alternating across years: 2023 is as strong as 2025 in average R,
+while 2022/2024 are negative. Dollar concentration and normalized return
+patterns differ; only 4/12 weekly events are positive in 2025.
+
 ## Prior study: broad support-origin contact (Q12)
 
 At the user's request, levels now remain eligible throughout the rolling window

@@ -244,5 +244,14 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   intervals include zero. No new filter, subgroup search or MT5 run; seven tests
   and upstream hashes pass. Code, protocol, ledgers and results saved separately.
 
+## 2026-10-04: PWL yearly view against other RTL
+
+- Committed Q13 as `e7f454c`. [Yearly view](levels/WEEKLY_LOW_YEAR_VIEW.md) adds
+  other-RTL means beside PWL: recent relative returns alternate, with 2023
+  already stronger than 2025/2026 and 69/175 contacts in negative 2022/2024.
+- Dollars and R have different risk weights; 2025's strong trade result is
+  carried by 4/12 positive weekly events. All 11 comparisons and 126 event
+  sums reproduce from saved trades; causal regime explanation remains open.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*
