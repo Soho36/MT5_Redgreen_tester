@@ -276,5 +276,13 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   outcome; fixed to the frozen text, test added. 1,323 signals re-derived
   independently with 0 mismatches; 12 partitions reconcile.
 
+## 2026-10-04: Q15 falling trendline resistance, draft protocol
+
+- Committed Q14 as `839d79b`. [Q15 draft](trendlines/RESISTANCE_PROTOCOL.md): Q14's
+  frozen definitions mirrored to consecutive lower swing highs; candidate = red
+  signal pressing into an intact falling line from below, so a fill breaks it.
+- Code reuses the Q14 classifier via price negation; 7 tests build falling
+  scenarios directly. Counts only: ~9% of signals are candidates in both periods.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

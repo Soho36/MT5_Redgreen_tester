@@ -7,7 +7,8 @@ For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
 trendlines (consecutive higher swing lows, one week). Signals at intact trendline
 support do **worse** than every other signal in both periods (PF 1.029/0.950 vs
 1.114/1.124); broad contact is worse too. No filter ([results](trendlines/TRENDLINE_SUPPORT_RESULTS.md),
-[index](trendlines/README.md)).
+[index](trendlines/README.md)). Q15 falling resistance lines (fill = break from below):
+[protocol](trendlines/RESISTANCE_PROTOCOL.md) frozen, run pending.
 
 **Level research:** Q13 audited Q12's previous-week-low lead. Its 276 fills
 represent 126 weekly events; earlier advantages survive single-year/week
