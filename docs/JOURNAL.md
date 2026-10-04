@@ -351,5 +351,13 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   one trade per departure episode, baseline 1R bar-close exit. Decision control C1: same bars, random-distance limit.
 - Sensitivities: trade-through fill (1 tick below), stops 0.25 / 1.0 x A. Frozen as drafted, nothing run.
 
+## 2026-10-05: Q20 frozen, classify-only run verified
+
+- Froze Q20 as drafted (`4c86411`). Built `trendline_limit.py` / `trendline_limit.mqh`; the classify-only EA run
+  (no orders) matches Python on all 184,888 eligible bars: 0 mismatches (after one pre-outcome fix for the first
+  day of history). [Verification](trendlines/TRENDLINE_LIMIT_PROTOCOL.md#pre-trade-verification-done-2026-10-05-no-outcomes).
+- Counts only: orders on ~56% of bars, ~9% of those can fill; tester spread means a 1-tick bid trade-through
+  is already needed; cost ~0.13R in 2016-19. SVG charts of the per-bar order steps added.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

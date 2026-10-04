@@ -231,3 +231,64 @@ The trade-through sensitivity is this study's execution check.
 Nothing beyond the published Q14 and limit-only results quoted above. Before
 freezing, counts may be shown from the classify-only run, with no P&L or R:
 armed bars, placements, the delta distribution, and the touch frequency.
+
+## Pre-trade verification (done 2026-10-05, no outcomes)
+
+Run folder: `Reports/trendlines/trendline_limit_20261005/`. Code:
+[`trendline_limit.py`](../../python/trendline_limit.py),
+[`trendline_limit.mqh`](../../mt5/experts/trendline_limit.mqh),
+[`prepare_trendline_limit.py`](../../python/prepare_trendline_limit.py),
+[`run_mt5_job.py`](../../python/run_mt5_job.py),
+[`verify_trendline_limit.py`](../../python/verify_trendline_limit.py); 9 unit tests in
+[`test_trendline_limit.py`](../../python/test_trendline_limit.py) (plus Q14's 13).
+
+**Classify-only run** (LimitMode = 1, no order ever sent): compiled 0 errors /
+0 warnings, test passed in 28 s, full history 2010-06-10 to 2026-07-13.
+
+- **Eligible bars:** 184,888 logged, exactly the expected set (flat, 01:00-23:30
+  windows, before the flatten or early close): 0 extra, 0 missing.
+- **Python reproduces every bar: 0 mismatches.** Status 184,888 / 184,888;
+  102,875 / 102,875 orders with identical line choice, anchors, limit and stop;
+  line counts identical; line values and ATR agree to 5e-11 (CSV rounding).
+- **Implementation correction before any outcome.** The first run had 45 status
+  mismatches, all on 2010-06-14 (outside the decision periods, no order either
+  way). The window there starts at the very first bar of history, which the EA
+  could not see (it said missing history, Python said contract roll). The EA
+  was corrected and re-run; the first run is kept in `superseded_classify_v1/`.
+  The protocol did not change.
+
+**Execution fact found (not a protocol change).** The tester quotes ask = bid +
+1 tick on every bar, and M30 bars are bid prices. A buy limit fills when the
+ask reaches it, so the primary already needs the **bid** low to trade 1 tick
+through the limit. A bare bid touch of the line does not fill. The
+trade-through sensitivity (limit 1 tick lower) therefore needs 2 ticks.
+
+**Counts (no P&L, no R).** Fills are ignored here, so a line keeps its order
+after a touch; "fillable" = bid low <= limit - spread on that bar.
+
+| Period | Eligible bars | Order bars | Lines used | Lines with a fillable touch | Fillable bars | Median price above line | Median stop distance |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 2010-15 | 63,342 | 35,121 (55%) | 1,879 | 1,516 | 3,153 (9.0%) | 2.9 x ATR | 2.25 pts |
+| 2016-19 | 46,120 | 26,222 (57%) | 1,381 | 1,129 | 2,446 (9.3%) | 2.7 x ATR | 4.00 pts |
+| 2020-26 | 75,426 | 41,532 (55%) | 2,117 | 1,732 | 3,848 (9.3%) | 2.9 x ATR | 14.25 pts |
+
+- Most orders rest far below price (median 2.7-2.9 x ATR), so about 9% of
+  order bars can fill. Lines with a fillable touch (1,129 / 1,732) suggest the
+  200-trade floor will be met.
+- **Cost is a large share of R in the earlier periods.** At the median stop,
+  1R is $8 in 2016-19 and $4.50 in 2010-15, so the $1.05 round trip is about
+  0.13R and 0.23R per trade (0.04R in 2020-26). This is arithmetic, not an
+  outcome; it applies equally to C1, which has the same stop.
+- When bar t opens at or under the nearest armed line, that line cannot carry a
+  buy limit, and the order drops to the next armed line below, sometimes far
+  away (as the rules state).
+
+**How the orders look** (drawn by `python/plot_trendline_limit.py` from the
+verified bar log; triangles = bars whose bid low reaches limit - spread):
+
+![Q20 one episode, 12-13 May 2026](img/q20_limit_zoom_20260513.svg)
+
+![Q20 week, 11-15 May 2026](img/q20_limits_20260511_20260515.svg)
+
+Next: build the trading modes (primary, C1, C2 and the three sensitivities) and
+the C1 delta table, verify that orders match this log, then run.
