@@ -1,7 +1,7 @@
 # Q17: does the falling-resistance candidate keep its edge when traded alone?
 
-**DRAFT 2026-10-04, not frozen.** Freeze it with the user before the trading
-run. Decided with the user:
+**Frozen 2026-10-04** with the user's approval of the draft as written, before
+the trading run. Decided with the user:
 
 - **Option B:** a stand-alone, candidate-only EA, so these trades are seen
   separately from every other signal.
