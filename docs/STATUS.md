@@ -18,6 +18,10 @@ stand-alone candidate-only EA (whole frozen group primary; entry-below-line as a
 but mean R +0.039/+0.050 vs baseline -0.004/+0.060, 4/11 years. The ~40% of trades freed from
 baseline blocking are break-even. Shared trades are identical to the baseline. No filter or sizing.
 
+**Horizontal breakouts (Q18, draft):** [protocol](levels/BREAKOUT_PROTOCOL.md) awaiting freeze;
+swing-high resistance broken from below; two stages (attribution, then stand-alone EA) and a
+stopping rule for level/line research.
+
 **Level research:** Q13 audited Q12's previous-week-low lead. Its 276 fills
 represent 126 weekly events; earlier advantages survive single-year/week
 deletions, but recent dollar profit is concentrated in 2025-2026 and the small

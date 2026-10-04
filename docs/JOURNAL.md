@@ -318,5 +318,13 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - Shared trades identical to the baseline (405/678), so execution is not the cause: the
   264/323 freed trades (taken while the baseline was busy) are break-even and dilute Q15's edge.
 
+## 2026-10-04: Q18 horizontal breakout, draft protocol
+
+- Committed Q17 as `64a6193`. User asked about horizontal breakouts; chose (a) fill = break as
+  primary. [Draft](levels/BREAKOUT_PROTOCOL.md): Q11 machinery mirrored to swing highs; stage 1 Q11
+  gate, stage 2 stand-alone EA with the Q17 rule; stopping rule for level/line research.
+- Counts only: ~16.5% of signals are breakout tests in both periods; 42% have entry at/above L.
+  Charts led to renaming the broken group (it also holds falls back through old levels).
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*
