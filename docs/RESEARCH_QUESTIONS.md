@@ -158,6 +158,7 @@ it up, it gets a number, a fixed protocol before looking at outcomes, and a resu
 | Added | Question | Status |
 |---|---|---|
 | 2026-10-03 | Are red candles **from support levels** better signals than **every other red candle**? | Q10 complete (original exit primary): previous-week lead, too few fills. [Q11](levels/LEVEL_VISIT_RESULTS.md) one-week swing-low support: small, unconfirmed edge, no filter |
+| 2026-10-04 | Do red signals at **rising trendline support** beat every other signal (Q11/Q12 questions for trendlines)? | Q14 [protocol](trendlines/TRENDLINE_PROTOCOL.md) frozen 2026-10-04, separate study |
 | 2026-10-04 | Is a level approached **from below** (broken support retested, acting as resistance) also a valid level for long RTL signals? | Proposed; study separately from Q11 support. Q11 reports these contacts as its broken-level group, descriptively only |
 | 2026-10-03 | Does **breach/reclaim speed** distinguish exploitable bounces? | **Archived direction** after Q9; retain [evidence and reasons](levels/SPEED_RESEARCH_ARCHIVE.md), no automatic follow-up |
 | 2026-10-02 | Does the **signal candle's shape** matter: full body (marubozu), doji, shooting star (long upper wick), hammer (long lower wick)? | **Answered as Q5** ([results](Q5_CANDLE_SHAPE_RESULTS.md)): no shape loses in both periods; no filter |

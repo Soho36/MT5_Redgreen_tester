@@ -3,6 +3,10 @@
 Updated 2026-10-04. **Start here.** Each study below links to the full evidence.
 For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
 
+**Trendline research (new, 2026-10-04):** Q14 asks the Q11/Q12 questions for rising
+trendlines; [protocol](trendlines/TRENDLINE_PROTOCOL.md) frozen 2026-10-04,
+run pending ([index](trendlines/README.md)).
+
 **Level research:** Q13 audited Q12's previous-week-low lead. Its 276 fills
 represent 126 weekly events; earlier advantages survive single-year/week
 deletions, but recent dollar profit is concentrated in 2025-2026 and the small

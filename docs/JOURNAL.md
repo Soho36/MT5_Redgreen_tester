@@ -253,5 +253,17 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   carried by 4/12 positive weekly events. All 11 comparisons and 126 event
   sums reproduce from saved trades; causal regime explanation remains open.
 
+## 2026-10-04: Q14 rising trendline support, draft protocol
+
+- New separate study, [docs/trendlines/](trendlines/README.md); same questions,
+  population, exit and gate as Q11/Q12. The old `Trendline_rejection.cs` EA is
+  the idea source only (per-bar touch counting, today's ATR for old bars).
+- [Draft protocol](trendlines/TRENDLINE_PROTOCOL.md): lines through consecutive
+  higher N=5 swing lows in one week, >=10 bars apart, rising >=0.02 x A per bar;
+  candidate = revisit of an unbroken, departed line from above (low >= V - D).
+- Example charts led to the consecutive-lows and slope-floor rules (all pairs
+  gave a fan of ~3 lines per contact and near-flat lines). Counts only: about
+  9.5% of signals are candidates in both periods. Code + 12 tests; no outcomes.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*
