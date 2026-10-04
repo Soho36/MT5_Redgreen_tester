@@ -18,9 +18,12 @@ stand-alone candidate-only EA (whole frozen group primary; entry-below-line as a
 but mean R +0.039/+0.050 vs baseline -0.004/+0.060, 4/11 years. The ~40% of trades freed from
 baseline blocking are break-even. Shared trades are identical to the baseline. No filter or sizing.
 
-**Horizontal breakouts (Q18):** [protocol](levels/BREAKOUT_PROTOCOL.md) frozen, stage 1 pending;
-swing-high resistance broken from below; two stages (attribution, then stand-alone EA) and a
-stopping rule for level/line research.
+**Horizontal breakouts (Q18) pass both stages** ([results](levels/BREAKOUT_RESULTS.md)): red signals
+whose buy stop sits at an intact one-week swing-high level, approached from below. Traded alone
+(candidate-only EA, gate verified on all 52,070 signals): 1,083/1,685 trades, PF 1.164/1.204, mean R
++0.062/+0.110 vs baseline -0.004/+0.060, 8/11 years; recent interval excludes zero; freed trades
+hold up. Caveats: 2016-19 weak (+$1.7k), 2010-15 negative (worse than baseline 5/6 years), OHLC
+only. Nothing adopted. Suggested next: generated-tick rerun, concentration audit, forward test.
 
 **Level research:** Q13 audited Q12's previous-week-low lead. Its 276 fills
 represent 126 weekly events; earlier advantages survive single-year/week
@@ -150,6 +153,8 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
   The added leg loses money in every year from 2016 through partial 2026.
 
 **Open**
+- **Q18 horizontal breakout lead** ([results](levels/BREAKOUT_RESULTS.md)): passed attribution and stand-alone
+  stages under one-minute OHLC. Decide next with the user: generated-tick rerun, Q16-style audit, forward test.
 - **Standalone buy limits** ([results](LIMIT_ONLY_RESULTS.md)): offsets
   80/90/95% below signal high are profitable in 2020–26 but lose in every
   year of 2016–19. No adoption; retain the separate research EA. Tested the
@@ -179,6 +184,7 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 
 | Date | Study | Verdict |
 |---|---|---|
+| 10-04 | [Q18: horizontal swing-high breakout](levels/BREAKOUT_RESULTS.md) | **Passes both stages** (attribution, stand-alone EA); first level lead to survive own execution; OHLC only, weak 2016-19 |
 | 10-04 | [Q17: stand-alone falling-resistance EA](trendlines/STANDALONE_RESULTS.md) | Does not survive own execution: PF 1.24 but mean R below baseline recently, 4/11 years |
 | 10-04 | [Q15: falling trendline resistance](trendlines/TRENDLINE_RESISTANCE_RESULTS.md) | **Passes the gate** in both periods with both sensitivities; qualifies for a full MT5 run protocol; 2023-25 flat |
 | 10-04 | [Q14: rising trendline support](trendlines/TRENDLINE_SUPPORT_RESULTS.md) | Worse than every other signal in both periods; loses money recently; no filter |

@@ -326,5 +326,14 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - Counts only: ~16.5% of signals are breakout tests in both periods; 42% have entry at/above L.
   Charts led to renaming the broken group (it also holds falls back through old levels).
 
+## 2026-10-04: Q18 horizontal breakout passes both stages
+
+- Froze Q18 (`4de937a`). Stage 1: candidates PF 1.198/1.192 vs 1.093/1.095, mean R +0.049/+0.121
+  vs -0.012/+0.051, 8/11 years; sensitivities agree; raw-high re-derivation 0 mismatches.
+- Stage 2: MQL5 level gate matched stage 1 on all 52,070 signals, then traded alone:
+  1,083/1,685 trades, PF 1.164/1.204, mean R +0.062/+0.110 vs baseline -0.004/+0.060, 8/11
+  years; freed trades hold up (unlike Q17). [Results](levels/BREAKOUT_RESULTS.md).
+- Caveats: 2016-19 weak, 2010-15 negative, OHLC only. Nothing adopted; next is the user's call.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*
