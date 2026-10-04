@@ -11,7 +11,9 @@ support do **worse** than every other signal in both periods (PF 1.029/0.950 vs
 red signals pressing into an intact falling line from below, PF 1.325/1.332 vs 1.088/1.090,
 avg R +0.093/+0.110 vs -0.012/+0.056, 412/693 fills, 8/11 years; sensitivities and broad agree.
 Caveats: R intervals include zero, 2023-25 flat, partial 2026 large, gap is in entries below
-the line (not true breaks). Next: protocol for a full MT5 filter run.
+the line (not true breaks). [Q16 audit](trendlines/RESISTANCE_CONCENTRATION_RESULTS.md): broadly spread
+(887 lines, max 5 fills per line), survives every year/week deletion and trimming. Next: user chose a
+stand-alone candidate-only EA (whole frozen group primary; entry-below-line as a label).
 
 **Level research:** Q13 audited Q12's previous-week-low lead. Its 276 fills
 represent 126 weekly events; earlier advantages survive single-year/week

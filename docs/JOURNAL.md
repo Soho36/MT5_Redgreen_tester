@@ -294,5 +294,14 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - 1,323 signals re-derived on raw highs (no mirror): 0 mismatches; no look-ahead.
   Next: a separate protocol for a full MT5 filter run, with the user.
 
+## 2026-10-04: Q16 concentration audit of Q15
+
+- Committed Q15 as `d47c00a`. User chose a stand-alone, candidate-only EA next
+  (whole frozen group primary, entry-below-line a label), after a Q13-style audit.
+- [Q16](trendlines/RESISTANCE_CONCENTRATION_RESULTS.md): 1,105 trades on 887 lines (max 5
+  per line), 439 weeks; every year/week deletion keeps both differences positive;
+  trimming leaves +0.10/+0.05R. Week-bootstrap mean R just includes zero. Top 10-20
+  winners removed one-sidedly erase it. Unlike Q13, not concentrated.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*
