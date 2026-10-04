@@ -33,6 +33,12 @@ def main():
         text = re.sub(rf'#include "{re.escape(name)}"[^\n]*',
                       lambda m: f"// ---- begin inlined {name} ----\n{body.rstrip()}\n// ---- end inlined {name} ----", text, count=1)
     assert "#include" not in text
+    # The research parent took the exit target from the trend-RR study (BullRR/BearRR, 1.0 in neutral regimes);
+    # RiskReward only named the CSVs. In this manual-run EA RiskReward sets the target for every trade.
+    # With RiskReward = 1 (the tested value; BullRR = BearRR = 1 were tested) behaviour is unchanged.
+    trend_rr = "   tr_rr=(tr_regime==1 ? BullRR : (tr_regime==-1 ? BearRR : 1.0));"
+    assert text.count(trend_rr) == 1
+    text = text.replace(trend_rr, "   tr_rr=RiskReward;   // manual-run EA: RiskReward drives the exit target (BullRR/BearRR unused)")
     for key, value in tested_inputs().items():
         pattern = rf"(input\s+(\w+)\s+{key}\s*=\s*)([^;]+);"
         match = re.search(pattern, text)
@@ -46,7 +52,8 @@ def main():
               "//| The exact EA of Q18 stage 2 (docs/levels/BREAKOUT_RESULTS.md) with  |\n"
               "//| all includes inlined; input defaults = the tested run's inputs.    |\n"
               "//| GateMode 2 = trade only breakout tests; 0 = plain RTL baseline;    |\n"
-              "//| 1 = classify/log only. Strategy tester only.                       |\n"
+              "//| 1 = classify/log only. RiskReward sets the bar-close exit target   |\n"
+              "//| (BullRR/BearRR unused). Strategy tester only.                      |\n"
               f"//| Source sha256 {sha256(SOURCE)[:16]}...                             |\n"
               "//+------------------------------------------------------------------+\n")
     OUT.write_text(header + text, encoding="utf-8")

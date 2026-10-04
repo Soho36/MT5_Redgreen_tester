@@ -4,7 +4,8 @@
 //| The exact EA of Q18 stage 2 (docs/levels/BREAKOUT_RESULTS.md) with  |
 //| all includes inlined; input defaults = the tested run's inputs.    |
 //| GateMode 2 = trade only breakout tests; 0 = plain RTL baseline;    |
-//| 1 = classify/log only. Strategy tester only.                       |
+//| 1 = classify/log only. RiskReward sets the bar-close exit target   |
+//| (BullRR/BearRR unused). Strategy tester only.                      |
 //| Source sha256 941189daa190cca8...                             |
 //+------------------------------------------------------------------+
 //+------------------------------------------------------------------+
@@ -396,7 +397,7 @@ void FreezeTrendAtEntry()
    tr_entryPreviousDay=tr_previousDay;
    tr_entryClose=tr_previousClose;
    tr_entryFast=tr_fast; tr_entrySlow=tr_slow;
-   tr_rr=(tr_regime==1 ? BullRR : (tr_regime==-1 ? BearRR : 1.0));
+   tr_rr=RiskReward;   // manual-run EA: RiskReward drives the exit target (BullRR/BearRR unused)
    tr_qualified=0;
 }
 

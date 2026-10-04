@@ -181,6 +181,13 @@ Verified 2026-10-05: a run with no tester inputs (defaults only) reproduced stag
 4,298 identical trades, $15,820.50, identical gate counts
 (`Reports/levels/breakout_ea_check_20261005/`).
 
+**RiskReward fix (2026-10-05).** In the research parent, the exit target came from the trend-RR
+study inputs (BullRR/BearRR, 1.0 in neutral regimes), and `RiskReward` only named the CSVs, so changing
+it did nothing (reported by the user). In this `.cs`, `RiskReward` now sets the target. Rechecked: the
+defaults (RR 1) still reproduce stage 2 exactly; RR 2 gives different trades (4,087, $16,787.50 before
+costs), as it should (`Reports/levels/breakout_ea_rrfix_20261005/`). The Q17/Q18 runs themselves were
+at 1R as intended and are unaffected.
+
 ## Suggested next steps (each needs the user's decision, and its own protocol where noted)
 
 1. **Execution model (user decision, 2026-10-05).** Generated ticks are not
