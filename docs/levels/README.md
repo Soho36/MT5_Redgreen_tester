@@ -3,7 +3,17 @@
 Updated 2026-10-04. This folder contains all level-study result documents;
 generated tables, ledgers and MT5 reports are grouped under `Reports/levels/`.
 
-## Latest study: broad support-origin contact (Q12)
+## Latest study: previous-week-low robustness (Q13)
+
+[Protocol](WEEKLY_LOW_ROBUSTNESS_PROTOCOL.md) ·
+[Results](WEEKLY_LOW_ROBUSTNESS_RESULTS.md). The 276 contact trades represent 126
+filled weekly-level events. Earlier advantages survive every single-year/week
+deletion; recent dollar profit is concentrated in 2025-2026 and the small recent
+mean-R advantage flips when the largest trade or several individual years are
+removed. Symmetric trimming and equal-event weighting remain encouraging, but
+cluster intervals include zero. Inconclusive; no filter or new MT5 run.
+
+## Prior study: broad support-origin contact (Q12)
 
 At the user's request, levels now remain eligible throughout the rolling window
 regardless of earlier breaks. Any qualifying red candle contacting the zone
@@ -58,6 +68,7 @@ using the original-exit baseline and keeping level sources separate.
 | [Q10: support interaction](SUPPORT_INTERACTION_RESULTS.md) | Complete; original exit is the primary result, fixed TP secondary. Previous-week lead fails only the sample rule | `Reports/levels/support_interaction_20261003/` (primary), `..._fixed1r_20261003/` |
 | [Q11: one-week swing-low support](LEVEL_VISIT_RESULTS.md) | Complete 2026-10-04; small edge in both periods, N = 3 disagrees; no filter | `Reports/levels/level_visit_20261004/` |
 | [Q12: broad support-origin contact](BROAD_SUPPORT_RESULTS.md) | Complete 2026-10-04; broad swing/session contact reverses across periods; weekly lead uncertain; no filter | `Reports/levels/broad_support_20261004/` |
+| [Q13: previous-week-low robustness](WEEKLY_LOW_ROBUSTNESS_RESULTS.md) | Complete 2026-10-04; 126 filled weekly events, recent profit concentrated and R advantage fragile; inconclusive | `Reports/levels/weekly_low_robustness_20261004/` |
 
 The Q10 MT5 source, binary, configuration, reports and logs are in
 `Reports/levels/support_fixed1r_20261003/`. The original-exit screen, now

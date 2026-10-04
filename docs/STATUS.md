@@ -3,12 +3,13 @@
 Updated 2026-10-04. **Start here.** Each study below links to the full evidence.
 For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
 
-**Level research:** Q12 broad contact is complete. Previously broken levels
-remain eligible; no departure, breach-depth or open/close-side restriction.
-Rolling swing-low contact improves earlier results but underperforms recently
-across all fixed settings; no broad filter. Session lows also reverse. The
-previous-week-low lead remains uncertain with 101 / 175 fills
-([results](levels/BROAD_SUPPORT_RESULTS.md), [level index](levels/README.md)).
+**Level research:** Q13 audited Q12's previous-week-low lead. Its 276 fills
+represent 126 weekly events; earlier advantages survive single-year/week
+deletions, but recent dollar profit is concentrated in 2025-2026 and the small
+recent R advantage is fragile. Trimming/equal-event comparisons stay positive;
+cluster intervals include zero. Inconclusive, no filter
+([results](levels/WEEKLY_LOW_ROBUSTNESS_RESULTS.md), [level index](levels/README.md)).
+Q12's broader swing/session contact comparisons remain inconsistent across periods.
 [Speed research is archived](levels/SPEED_RESEARCH_ARCHIVE.md).
 
 ## The strategy (current research baseline)

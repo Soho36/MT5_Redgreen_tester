@@ -234,5 +234,15 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - New runner fails on missing/changed inputs, checks 312,420 signal/definition
   rows, reconciles 12 partitions and preserves all Q10/Q11 files. Eight tests pass.
 
+## 2026-10-04: Q13 previous-week-low concentration audit
+
+- Committed broad-support Q12 as `7d99d5e`. [Q13](levels/WEEKLY_LOW_ROBUSTNESS_RESULTS.md)
+  counts 126 filled weekly events behind 276 trades. Earlier advantages survive
+  single-year/week deletions; recent profit is concentrated in 2025-2026 and
+  its average-R advantage flips after removing the largest trade.
+- Symmetric trimming/equal-event weighting remain positive, but weekly cluster
+  intervals include zero. No new filter, subgroup search or MT5 run; seven tests
+  and upstream hashes pass. Code, protocol, ledgers and results saved separately.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*
