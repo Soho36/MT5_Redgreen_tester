@@ -23,7 +23,8 @@ whose buy stop sits at an intact one-week swing-high level, approached from belo
 (candidate-only EA, gate verified on all 52,070 signals): 1,083/1,685 trades, PF 1.164/1.204, mean R
 +0.062/+0.110 vs baseline -0.004/+0.060, 8/11 years; recent interval excludes zero; freed trades
 hold up. Caveats: 2016-19 weak (+$1.7k), 2010-15 negative (worse than baseline 5/6 years), OHLC
-only. Nothing adopted. Suggested next: generated-tick rerun, concentration audit, forward test.
+only (generated ticks not a stop criterion, user 2026-10-05). Nothing adopted. Manual-run EA:
+`mt5/experts/RR_r_MFE_buy-stop-entry_breakout.cs`. Next: concentration audit, forward test.
 
 **Level research:** Q13 audited Q12's previous-week-low lead. Its 276 fills
 represent 126 weekly events; earlier advantages survive single-year/week
@@ -154,7 +155,7 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 
 **Open**
 - **Q18 horizontal breakout lead** ([results](levels/BREAKOUT_RESULTS.md)): passed attribution and stand-alone
-  stages under one-minute OHLC. Decide next with the user: generated-tick rerun, Q16-style audit, forward test.
+  stages under one-minute OHLC. Next: Q16-style audit, forward test; user is making manual MT5 runs.
 - **Standalone buy limits** ([results](LIMIT_ONLY_RESULTS.md)): offsets
   80/90/95% below signal high are profitable in 2020–26 but lose in every
   year of 2016–19. No adoption; retain the separate research EA. Tested the
