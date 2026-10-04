@@ -14,8 +14,9 @@ Caveats: R intervals include zero, 2023-25 flat, partial 2026 large, gap is in e
 the line (not true breaks). [Q16 audit](trendlines/RESISTANCE_CONCENTRATION_RESULTS.md): broadly spread
 (887 lines, max 5 fills per line), survives every year/week deletion and trimming. Next: user chose a
 stand-alone candidate-only EA (whole frozen group primary; entry-below-line as a label).
-[Q17 draft protocol](trendlines/STANDALONE_PROTOCOL.md): EA gate matches Q15 on all 52,070 signals;
-protocol frozen, trading run pending.
+**[Q17](trendlines/STANDALONE_RESULTS.md): traded alone, the candidates do not survive** the frozen rule: PF 1.242/1.238
+but mean R +0.039/+0.050 vs baseline -0.004/+0.060, 4/11 years. The ~40% of trades freed from
+baseline blocking are break-even. Shared trades are identical to the baseline. No filter or sizing.
 
 **Level research:** Q13 audited Q12's previous-week-low lead. Its 276 fills
 represent 126 weekly events; earlier advantages survive single-year/week
@@ -77,6 +78,9 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
   measured live slippage.
 
 **Rejected** (evidence kept, don't retest without a new reason)
+- Q15-Q17 falling trendline resistance: passed the attribution gate (Q15) and the concentration audit
+  (Q16), but traded alone (Q17) mean R +0.039/+0.050 does not beat the baseline -0.004/+0.060 and only
+  4/11 years; freed trades break-even. No filter, stand-alone strategy or sizing change.
 - Q14 rising trendline support ([results](trendlines/TRENDLINE_SUPPORT_RESULTS.md),
   [protocol](trendlines/TRENDLINE_PROTOCOL.md)): candidate/rest PF 1.029/1.114 and
   0.950/1.124, avg R -0.029/-0.038; 5/11 years better; two-week and N=3 checks
@@ -142,8 +146,6 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
   The added leg loses money in every year from 2016 through partial 2026.
 
 **Open**
-- **Q15 falling-resistance lead** ([results](trendlines/TRENDLINE_RESISTANCE_RESULTS.md)): first level/line result to pass
-  the gate. Specify a full MT5 filter run (and decide on the post-hoc entry-below-line split) with the user.
 - **Standalone buy limits** ([results](LIMIT_ONLY_RESULTS.md)): offsets
   80/90/95% below signal high are profitable in 2020–26 but lose in every
   year of 2016–19. No adoption; retain the separate research EA. Tested the
@@ -173,6 +175,7 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 
 | Date | Study | Verdict |
 |---|---|---|
+| 10-04 | [Q17: stand-alone falling-resistance EA](trendlines/STANDALONE_RESULTS.md) | Does not survive own execution: PF 1.24 but mean R below baseline recently, 4/11 years |
 | 10-04 | [Q15: falling trendline resistance](trendlines/TRENDLINE_RESISTANCE_RESULTS.md) | **Passes the gate** in both periods with both sensitivities; qualifies for a full MT5 run protocol; 2023-25 flat |
 | 10-04 | [Q14: rising trendline support](trendlines/TRENDLINE_SUPPORT_RESULTS.md) | Worse than every other signal in both periods; loses money recently; no filter |
 | 10-04 | [Q11: one-week swing-low support](levels/LEVEL_VISIT_RESULTS.md) | Slightly better than the rest in both periods, but small, intervals include zero, N = 3 disagrees; no filter |

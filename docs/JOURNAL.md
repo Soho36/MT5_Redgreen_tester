@@ -310,5 +310,13 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - Compiled 0/0. Classify-only MT5 run (no orders) reproduces Q15 on all 52,070 signals:
   0 group mismatches, 4,580/4,580 candidates, identical anchors. Trading run awaits freeze.
 
+## 2026-10-04: Q17 stand-alone run, falling resistance does not survive
+
+- Froze Q17 (`a30fe42`) and ran the candidate-only EA (27 s). [Results](trendlines/STANDALONE_RESULTS.md):
+  669/1,001 trades, PF 1.242/1.238, mean R +0.039/+0.050 vs baseline -0.004/+0.060; 4/11 years.
+  Fails the frozen rule. No filter, sizing or stand-alone strategy.
+- Shared trades identical to the baseline (405/678), so execution is not the cause: the
+  264/323 freed trades (taken while the baseline was busy) are break-even and dilute Q15's edge.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*
