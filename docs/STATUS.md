@@ -1,6 +1,6 @@
 # Project status
 
-Updated 2026-10-04. **Start here.** Each study below links to the full evidence.
+Updated 2026-10-05. **Start here.** Each study below links to the full evidence.
 For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
 
 **Trendline research (2026-10-04):** Q14 asked the Q11/Q12 questions for rising
@@ -27,6 +27,10 @@ only (generated ticks not a stop criterion, user 2026-10-05). Nothing adopted. M
 `mt5/experts/RR_r_MFE_buy-stop-entry_breakout.cs`. [Q19 audit](levels/BREAKOUT_CONCENTRATION_RESULTS.md):
 broadly spread (max 5 trades per level), survives every year/week deletion; paired mean-R difference vs
 RTL +0.066/+0.050, intervals just include zero per period, exclude it pooled. Next: forward/demo evidence.
+
+**[Q20](trendlines/TRENDLINE_LIMIT_PROTOCOL.md) (frozen 2026-10-05):** a buy limit resting on the
+Q14 rising line (any candle colour), stop 0.5 x ATR below, baseline 1R exit, judged against a regime-matched
+random-price dip-buy (C1), not against RTL. Next: classify-only EA run (no orders) vs Python.
 
 **Level research:** Q13 audited Q12's previous-week-low lead. Its 276 fills
 represent 126 weekly events; earlier advantages survive single-year/week

@@ -344,5 +344,12 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   every year/week deletion keeps the advantage; trimming shrinks it (half earlier). Paired difference vs
   RTL +0.066/+0.050R, week intervals just include zero per period, exclude pooled. Not concentrated.
 
+## 2026-10-05: Q20 trendline buy-limit, draft protocol
+
+- User proposed resting a buy limit on the rising (Q14) line, any candle colour; stop chosen 0.5 x ATR below.
+  [Draft](trendlines/TRENDLINE_LIMIT_PROTOCOL.md): lines re-evaluated each M30 open, order re-priced per bar,
+  one trade per departure episode, baseline 1R bar-close exit. Decision control C1: same bars, random-distance limit.
+- Sensitivities: trade-through fill (1 tick below), stops 0.25 / 1.0 x A. Frozen as drafted, nothing run.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*
