@@ -7,8 +7,11 @@ For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
 trendlines (consecutive higher swing lows, one week). Signals at intact trendline
 support do **worse** than every other signal in both periods (PF 1.029/0.950 vs
 1.114/1.124); broad contact is worse too. No filter ([results](trendlines/TRENDLINE_SUPPORT_RESULTS.md),
-[index](trendlines/README.md)). Q15 falling resistance lines (fill = break from below):
-[protocol](trendlines/RESISTANCE_PROTOCOL.md) frozen, run pending.
+[index](trendlines/README.md)). **Q15 falling resistance lines pass the gate** ([results](trendlines/TRENDLINE_RESISTANCE_RESULTS.md)):
+red signals pressing into an intact falling line from below, PF 1.325/1.332 vs 1.088/1.090,
+avg R +0.093/+0.110 vs -0.012/+0.056, 412/693 fills, 8/11 years; sensitivities and broad agree.
+Caveats: R intervals include zero, 2023-25 flat, partial 2026 large, gap is in entries below
+the line (not true breaks). Next: protocol for a full MT5 filter run.
 
 **Level research:** Q13 audited Q12's previous-week-low lead. Its 276 fills
 represent 126 weekly events; earlier advantages survive single-year/week
@@ -135,6 +138,8 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
   The added leg loses money in every year from 2016 through partial 2026.
 
 **Open**
+- **Q15 falling-resistance lead** ([results](trendlines/TRENDLINE_RESISTANCE_RESULTS.md)): first level/line result to pass
+  the gate. Specify a full MT5 filter run (and decide on the post-hoc entry-below-line split) with the user.
 - **Standalone buy limits** ([results](LIMIT_ONLY_RESULTS.md)): offsets
   80/90/95% below signal high are profitable in 2020–26 but lose in every
   year of 2016–19. No adoption; retain the separate research EA. Tested the
@@ -164,6 +169,7 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 
 | Date | Study | Verdict |
 |---|---|---|
+| 10-04 | [Q15: falling trendline resistance](trendlines/TRENDLINE_RESISTANCE_RESULTS.md) | **Passes the gate** in both periods with both sensitivities; qualifies for a full MT5 run protocol; 2023-25 flat |
 | 10-04 | [Q14: rising trendline support](trendlines/TRENDLINE_SUPPORT_RESULTS.md) | Worse than every other signal in both periods; loses money recently; no filter |
 | 10-04 | [Q11: one-week swing-low support](levels/LEVEL_VISIT_RESULTS.md) | Slightly better than the rest in both periods, but small, intervals include zero, N = 3 disagrees; no filter |
 | 10-03 | [Q10: support interaction](levels/SUPPORT_INTERACTION_RESULTS.md) | Original exit primary: session levels flip between periods; previous-week better in both but too few fills; no filter |

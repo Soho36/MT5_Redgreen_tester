@@ -284,5 +284,15 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - Code reuses the Q14 classifier via price negation; 7 tests build falling
   scenarios directly. Counts only: ~9% of signals are candidates in both periods.
 
+## 2026-10-04: Q15 run, falling trendline resistance passes the gate
+
+- Froze the draft as approved (`e916e40`). [Results](trendlines/TRENDLINE_RESISTANCE_RESULTS.md):
+  candidates PF 1.325/1.332 vs 1.088/1.090, avg R +0.093/+0.110 vs -0.012/+0.056,
+  412/693 fills, 8/11 years; two weeks, N=3 and broad contact all pass too.
+- Caveats: avg-R intervals include zero; 2023-25 show no advantage; partial
+  2026 is half of recent net. The gap sits in entries *below* the line, not breaks.
+- 1,323 signals re-derived on raw highs (no mirror): 0 mismatches; no look-ahead.
+  Next: a separate protocol for a full MT5 filter run, with the user.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*
