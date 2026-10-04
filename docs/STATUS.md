@@ -3,11 +3,12 @@
 Updated 2026-10-04. **Start here.** Each study below links to the full evidence.
 For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
 
-**Level research:** Q11 (intact one-week M30 swing-low support, original exit)
-is complete: candidates are slightly better than every other signal in both
-periods, but the effect is small, intervals include zero and the N = 3 check
-disagrees, so no filter ([results](levels/LEVEL_VISIT_RESULTS.md),
-[level index](levels/README.md)). Next level question not yet chosen.
+**Level research:** Q12 broad contact is complete. Previously broken levels
+remain eligible; no departure, breach-depth or open/close-side restriction.
+Rolling swing-low contact improves earlier results but underperforms recently
+across all fixed settings; no broad filter. Session lows also reverse. The
+previous-week-low lead remains uncertain with 101 / 175 fills
+([results](levels/BROAD_SUPPORT_RESULTS.md), [level index](levels/README.md)).
 [Speed research is archived](levels/SPEED_RESEARCH_ARCHIVE.md).
 
 ## The strategy (current research baseline)
@@ -61,6 +62,11 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
   measured live slippage.
 
 **Rejected** (evidence kept, don't retest without a new reason)
+- Q12 broad support-origin contact ([results](levels/BROAD_SUPPORT_RESULTS.md),
+  [protocol](levels/BROAD_SUPPORT_PROTOCOL.md)): primary contact/rest PF
+  1.137/1.061 earlier, 1.084/1.143 recently; mean R difference +0.028/-0.029,
+  5/11 years better. Two weeks and N=3 also reverse. No broad filter supported;
+  broad previous-week contact remains a distinct small-sample lead, not ruled out.
 - Q11 one-week M30 swing-low support ([results](levels/LEVEL_VISIT_RESULTS.md),
   [protocol](LEVEL_VISIT_PROTOCOL.md)): candidate/rest PF 1.201/1.087 and
   1.140/1.099, avg R +0.036 / +0.005 better, 7/11 years; all intervals include

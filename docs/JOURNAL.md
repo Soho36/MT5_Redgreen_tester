@@ -222,5 +222,17 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - 52,070 signals classified under three settings; 1,323 sampled signals
   re-derived independently with no mismatch; partitions reconcile.
 
+## 2026-10-04: Q12 broad support-origin contact, no broken-level retirement
+
+- User requested the broad question and keeping levels eligible despite earlier
+  breaks. [Protocol](levels/BROAD_SUPPORT_PROTOCOL.md): contact only; no departure,
+  depth or open/close-side restriction; original exit and fixed Q11 map settings.
+- [Results](levels/BROAD_SUPPORT_RESULTS.md): rolling swing-low contact/rest PF
+  1.137/1.061 earlier and 1.084/1.143 recently, 5/11 years better. Both sensitivities
+  reverse too. Broad session contact also reverses; weekly contact remains an
+  uncertain lead with 101/175 fills. No filter or new MT5 run.
+- New runner fails on missing/changed inputs, checks 312,420 signal/definition
+  rows, reconciles 12 partitions and preserves all Q10/Q11 files. Eight tests pass.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

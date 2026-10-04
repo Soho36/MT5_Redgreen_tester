@@ -3,7 +3,20 @@
 Updated 2026-10-04. This folder contains all level-study result documents;
 generated tables, ledgers and MT5 reports are grouped under `Reports/levels/`.
 
-## Latest study: intact one-week M30 swing-low support (Q11)
+## Latest study: broad support-origin contact (Q12)
+
+At the user's request, levels now remain eligible throughout the rolling window
+regardless of earlier breaks. Any qualifying red candle contacting the zone
+counts, including deep slices, opens below and cases without a prior departure.
+[Protocol](BROAD_SUPPORT_PROTOCOL.md) · [Results](BROAD_SUPPORT_RESULTS.md).
+
+**Complete:** broad rolling swing-low contact does better earlier and worse
+recently, across all three fixed settings. No broad filter. Broad contact with
+session lows also reverses; previous-week-low contact remains a small-sample,
+uncertain lead (101 / 175 fills). Original RTL exit, unchanged production rules.
+Q11's old broken/intact labels are preserved only as historical/descriptive data.
+
+## Prior study: intact one-week M30 swing-low support (Q11)
 
 Decided with the user on 2026-10-04; frozen in the
 [Q11 protocol](../LEVEL_VISIT_PROTOCOL.md) before any Q11 outcome was computed.
@@ -30,10 +43,10 @@ not confirmed by the N = 3 check; no filter. Example charts are in `img/`.
 Every report must name its level source explicitly (current session, previous
 session, previous week, or one/two-week M30 swing lows).
 
-**Superseded proposal (2026-10-03):** a broad "range overlaps any session/week
-low" definition with fixed TP. It was never computed. It mixed candles testing
-support from above with candles rejected at a broken level from below, which
-the visit rule now separates.
+**History:** the 2026-10-03 broad session/week proposal with fixed TP was not
+computed then. Q11 subsequently narrowed the candidate to intact support
+revisits. Q12 now computes broad contact, including both approach directions,
+using the original-exit baseline and keeping level sources separate.
 
 ## Results and status
 
@@ -44,6 +57,7 @@ the visit rule now separates.
 | [Q9: recovery speed](RECLAIM_SPEED_RESULTS.md) | **Archived research direction** | `Reports/levels/reclaim_speed_20261003/` |
 | [Q10: support interaction](SUPPORT_INTERACTION_RESULTS.md) | Complete; original exit is the primary result, fixed TP secondary. Previous-week lead fails only the sample rule | `Reports/levels/support_interaction_20261003/` (primary), `..._fixed1r_20261003/` |
 | [Q11: one-week swing-low support](LEVEL_VISIT_RESULTS.md) | Complete 2026-10-04; small edge in both periods, N = 3 disagrees; no filter | `Reports/levels/level_visit_20261004/` |
+| [Q12: broad support-origin contact](BROAD_SUPPORT_RESULTS.md) | Complete 2026-10-04; broad swing/session contact reverses across periods; weekly lead uncertain; no filter | `Reports/levels/broad_support_20261004/` |
 
 The Q10 MT5 source, binary, configuration, reports and logs are in
 `Reports/levels/support_fixed1r_20261003/`. The original-exit screen, now
