@@ -3,9 +3,9 @@
 Updated 2026-10-04. This folder contains all level-study result documents;
 generated tables, ledgers and MT5 reports are grouped under `Reports/levels/`.
 
-## Draft: horizontal swing-high breakouts (Q18)
+## Latest: horizontal swing-high breakouts (Q18)
 
-[Draft protocol](BREAKOUT_PROTOCOL.md), not frozen, no outcomes. Q11's swing-level machinery
+[Protocol](BREAKOUT_PROTOCOL.md) frozen 2026-10-04; stage 1 pending. Q11's swing-level machinery
 mirrored to swing highs; candidate = red signal whose buy stop sits at an intact resistance level
 approached from below (fill = break). Stage 1 attribution screen, stage 2 stand-alone EA (Q17 rule).
 Stopping rule: if it fails either stage, level and line research for RTL stops.

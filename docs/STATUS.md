@@ -18,7 +18,7 @@ stand-alone candidate-only EA (whole frozen group primary; entry-below-line as a
 but mean R +0.039/+0.050 vs baseline -0.004/+0.060, 4/11 years. The ~40% of trades freed from
 baseline blocking are break-even. Shared trades are identical to the baseline. No filter or sizing.
 
-**Horizontal breakouts (Q18, draft):** [protocol](levels/BREAKOUT_PROTOCOL.md) awaiting freeze;
+**Horizontal breakouts (Q18):** [protocol](levels/BREAKOUT_PROTOCOL.md) frozen, stage 1 pending;
 swing-high resistance broken from below; two stages (attribution, then stand-alone EA) and a
 stopping rule for level/line research.
 

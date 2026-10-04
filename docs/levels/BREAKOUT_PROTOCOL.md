@@ -1,7 +1,7 @@
 # Q18: do red signals that break horizontal swing-high resistance beat every other signal?
 
-**DRAFT 2026-10-04, not frozen.** Freeze it with the user before any Q18
-outcome is computed. All of 2016-2026 and the Q6-Q17 results have been seen,
+**Frozen 2026-10-04** with the user's approval of the draft as written, before
+any Q18 outcome was computed. All of 2016-2026 and the Q6-Q17 results have been seen,
 so this is exploratory.
 
 **The question (the user's option (a)).** A red RTL signal whose buy stop sits
