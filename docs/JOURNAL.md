@@ -335,5 +335,14 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   years; freed trades hold up (unlike Q17). [Results](levels/BREAKOUT_RESULTS.md).
 - Caveats: 2016-19 weak, 2010-15 negative, OHLC only. Nothing adopted; next is the user's call.
 
+## 2026-10-05: breakout EA for manual runs, RiskReward fix, Q19 audit
+
+- Saved the exact Q18 stage-2 EA as `mt5/experts/RR_r_MFE_buy-stop-entry_breakout.cs` (one file, tested
+  defaults); a defaults-only run reproduces stage 2 trade by trade. User found RiskReward had no effect:
+  the research parent took its target from BullRR/BearRR. Fixed in the .cs (RR 1 unchanged, RR 2 differs).
+- [Q19](levels/BREAKOUT_CONCENTRATION_RESULTS.md): breakout trades spread over ~2,250 levels / 524 weeks;
+  every year/week deletion keeps the advantage; trimming shrinks it (half earlier). Paired difference vs
+  RTL +0.066/+0.050R, week intervals just include zero per period, exclude pooled. Not concentrated.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

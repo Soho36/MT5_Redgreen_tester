@@ -8,7 +8,10 @@ generated tables, ledgers and MT5 reports are grouped under `Reports/levels/`.
 [Results](BREAKOUT_RESULTS.md) · [Protocol](BREAKOUT_PROTOCOL.md). **Passes both stages**, the first
 level/line definition to do so: stage-1 PF 1.198/1.192 vs 1.093/1.095; traded alone, mean R
 +0.062/+0.110 vs baseline -0.004/+0.060, 8/11 years, recent interval excludes zero. Caveats: weak
-2016-19, negative pre-2016, OHLC execution only. Nothing adopted; next is a generated-tick check. Q11's swing-level machinery
+2016-19, negative pre-2016, OHLC execution only. Nothing adopted.
+[Q19 concentration audit](BREAKOUT_CONCENTRATION_RESULTS.md) ([protocol](BREAKOUT_CONCENTRATION_PROTOCOL.md)):
+spread over ~2,250 levels and 524 weeks; survives every year/week deletion; the paired difference
+versus plain RTL just includes zero per period and excludes it pooled. Q11's swing-level machinery
 mirrored to swing highs; candidate = red signal whose buy stop sits at an intact resistance level
 approached from below (fill = break). Stage 1 attribution screen, stage 2 stand-alone EA (Q17 rule).
 Stopping rule: if it fails either stage, level and line research for RTL stops.
