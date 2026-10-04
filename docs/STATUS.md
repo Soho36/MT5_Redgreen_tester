@@ -14,6 +14,8 @@ Caveats: R intervals include zero, 2023-25 flat, partial 2026 large, gap is in e
 the line (not true breaks). [Q16 audit](trendlines/RESISTANCE_CONCENTRATION_RESULTS.md): broadly spread
 (887 lines, max 5 fills per line), survives every year/week deletion and trimming. Next: user chose a
 stand-alone candidate-only EA (whole frozen group primary; entry-below-line as a label).
+[Q17 draft protocol](trendlines/STANDALONE_PROTOCOL.md): EA gate matches Q15 on all 52,070 signals;
+trading run awaits freeze.
 
 **Level research:** Q13 audited Q12's previous-week-low lead. Its 276 fills
 represent 126 weekly events; earlier advantages survive single-year/week

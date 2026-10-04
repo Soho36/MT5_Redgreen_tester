@@ -303,5 +303,12 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   trimming leaves +0.10/+0.05R. Week-bootstrap mean R just includes zero. Top 10-20
   winners removed one-sidedly erase it. Unlike Q13, not concentrated.
 
+## 2026-10-04: Q17 stand-alone EA built, draft protocol
+
+- Committed Q16 as `14c0007`. [Q17 draft](trendlines/STANDALONE_PROTOCOL.md): baseline research EA +
+  `mt5/experts/resistance_gate.mqh`; non-candidates rejected like a MaxRedRun rejection.
+- Compiled 0/0. Classify-only MT5 run (no orders) reproduces Q15 on all 52,070 signals:
+  0 group mismatches, 4,580/4,580 candidates, identical anchors. Trading run awaits freeze.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*
