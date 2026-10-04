@@ -265,5 +265,16 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   gave a fan of ~3 lines per contact and near-flat lines). Counts only: about
   9.5% of signals are candidates in both periods. Code + 12 tests; no outcomes.
 
+## 2026-10-04: Q14 run, rising trendline support
+
+- User approved the draft; froze it (`5cc52ef`) before outcomes. [Results](trendlines/TRENDLINE_SUPPORT_RESULTS.md):
+  candidates do worse than every other signal in both periods (PF 1.029/0.950
+  vs 1.114/1.124, 565/821 fills); broad unbroken-line contact also worse. No filter.
+- Two-week and N=3 agree recently. Only "anchors >46 bars apart" is better in
+  both periods (one of 23 label cells, post hoc). It is not a lead under the frozen rule.
+- Consistency check caught a mixed broken/not-departed grouping bug before any
+  outcome; fixed to the frozen text, test added. 1,323 signals re-derived
+  independently with 0 mismatches; 12 partitions reconcile.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

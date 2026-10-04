@@ -121,10 +121,10 @@ def classify(b, s, n=5, sessions=5, min_sep=10, min_slope=0.02, pivots=None):
         group, chosen = "trendline_support", support
     elif intact:
         group, chosen = "slice_through", intact
-    elif any(x["broken"] for x in lines):
-        group, chosen = "broken_contact", [x for x in lines if x["broken"]]
-    elif lines:
-        group, chosen = "not_departed_contact", lines
+    elif lines and all(x["broken"] for x in lines):
+        group, chosen = "broken_contact", lines
+    elif lines:  # unbroken, never-departed lines (possibly alongside broken ones)
+        group, chosen = "not_departed_contact", [x for x in lines if not x["broken"]]
     else:
         return "no_contact", dict(atr=a, d=d, known_pivots=len(known))
     x = min(chosen, key=lambda z: (abs(low[s] - z["value"]), -z["j"], -z["i"]))

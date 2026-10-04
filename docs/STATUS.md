@@ -3,9 +3,11 @@
 Updated 2026-10-04. **Start here.** Each study below links to the full evidence.
 For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
 
-**Trendline research (new, 2026-10-04):** Q14 asks the Q11/Q12 questions for rising
-trendlines; [protocol](trendlines/TRENDLINE_PROTOCOL.md) frozen 2026-10-04,
-run pending ([index](trendlines/README.md)).
+**Trendline research (2026-10-04):** Q14 asked the Q11/Q12 questions for rising
+trendlines (consecutive higher swing lows, one week). Signals at intact trendline
+support do **worse** than every other signal in both periods (PF 1.029/0.950 vs
+1.114/1.124); broad contact is worse too. No filter ([results](trendlines/TRENDLINE_SUPPORT_RESULTS.md),
+[index](trendlines/README.md)).
 
 **Level research:** Q13 audited Q12's previous-week-low lead. Its 276 fills
 represent 126 weekly events; earlier advantages survive single-year/week
@@ -67,6 +69,10 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
   measured live slippage.
 
 **Rejected** (evidence kept, don't retest without a new reason)
+- Q14 rising trendline support ([results](trendlines/TRENDLINE_SUPPORT_RESULTS.md),
+  [protocol](trendlines/TRENDLINE_PROTOCOL.md)): candidate/rest PF 1.029/1.114 and
+  0.950/1.124, avg R -0.029/-0.038; 5/11 years better; two-week and N=3 checks
+  also worse recently. Broad unbroken-line contact also worse in both periods. No filter.
 - Q12 broad support-origin contact ([results](levels/BROAD_SUPPORT_RESULTS.md),
   [protocol](levels/BROAD_SUPPORT_PROTOCOL.md)): primary contact/rest PF
   1.137/1.061 earlier, 1.084/1.143 recently; mean R difference +0.028/-0.029,
@@ -157,6 +163,7 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 
 | Date | Study | Verdict |
 |---|---|---|
+| 10-04 | [Q14: rising trendline support](trendlines/TRENDLINE_SUPPORT_RESULTS.md) | Worse than every other signal in both periods; loses money recently; no filter |
 | 10-04 | [Q11: one-week swing-low support](levels/LEVEL_VISIT_RESULTS.md) | Slightly better than the rest in both periods, but small, intervals include zero, N = 3 disagrees; no filter |
 | 10-03 | [Q10: support interaction](levels/SUPPORT_INTERACTION_RESULTS.md) | Original exit primary: session levels flip between periods; previous-week better in both but too few fills; no filter |
 | 10-03 | [Q9: recovery speed](levels/RECLAIM_SPEED_RESULTS.md) | Archived direction; evidence retained, no speed/early-entry follow-up queued |

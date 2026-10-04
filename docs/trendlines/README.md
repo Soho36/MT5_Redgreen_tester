@@ -9,7 +9,7 @@ and follow-up gate. Generated outputs go under `Reports/trendlines/`.
 
 | Study | Status | Outputs |
 |---|---|---|
-| [Q14: rising trendline support](TRENDLINE_PROTOCOL.md) | **Protocol frozen 2026-10-04**; run pending | `Reports/trendlines/charts/` (examples only) |
+| [Q14: rising trendline support](TRENDLINE_SUPPORT_RESULTS.md) ([protocol](TRENDLINE_PROTOCOL.md)) | Complete 2026-10-04: candidates **worse** than every other signal in both periods (PF 1.029/0.950 vs 1.114/1.124); broad contact also worse; no filter | `Reports/trendlines/trendline_support_20261004/` |
 
 The old [`Trendline_rejection.cs`](../../mt5/Trendline_rejection.cs) EA was
 the source of the idea and is not used for testing.

@@ -102,6 +102,19 @@ class ClassifyTest(unittest.TestCase):
         self.assertEqual(classify(b, 180, min_sep=61)[0], "no_contact")
         self.assertEqual(classify(b, 180, min_sep=60)[0], "trendline_support")
 
+    def test_broken_group_requires_only_broken_lines(self):
+        b, _ = scenario(offset=0.5, v=0.3)  # one unbroken, never-departed line
+        self.assertEqual(classify(b, 180)[0], "not_departed_contact")
+        import trendline_support as ts
+        real = ts.contacted_lines
+        extra = dict(i=40, j=100, value=b.low.iloc[180], broken=True, departed=True, retests=0, slope_a=0.1)
+        ts.contacted_lines = lambda *args: (lambda r: (*r[:4], r[4] + [extra]))(real(*args))
+        try:
+            self.assertEqual(ts.classify(b, 180)[0], "not_departed_contact")  # mixed: not "broken only"
+            self.assertEqual(ts.classify_contact(b, 180), "contact")
+        finally:
+            ts.contacted_lines = real
+
     def test_min_slope(self):
         b, _ = scenario()  # line rises 0.2 per bar
         slope_a = 0.2 / b.atr.iloc[180]
