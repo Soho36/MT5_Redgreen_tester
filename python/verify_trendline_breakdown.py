@@ -17,12 +17,14 @@ import pandas as pd
 from analyze_level_visit import M30
 from analyze_price_levels import ROOT, sha256
 from level_visit import bar_frame, swing_lows
-from prepare_trendline_breakdown import RUN, STEM
+
 from trend_regimes import ROLLS
 from trendline_breakdown import line_states, resolve, run_spent
 from verify_location_validation import read_rows
 from verify_trendline_limit import period_of
 
+RUN = ROOT / "Reports" / "trendlines" / "trendline_breakdown_20261006"
+STEM = "trendline_breakdown_20261006"
 END = pd.Timestamp("2026-07-14")
 LINE_TOL = 1e-6
 _B, _PIV = None, None

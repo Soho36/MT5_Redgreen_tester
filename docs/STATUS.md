@@ -34,10 +34,11 @@ Stop 0.5 x ATR, baseline 1R exit, any candle colour: PF 0.773/0.969, mean R -0.2
 beats the regime-matched random-distance control in 2/9 years. 9 MT5 runs replayed in Python with 0 mismatches.
 Nothing adopted.
 
-**Q21 (2026-10-06, frozen, classify verified, no trades yet): short the breakdown of the same rising lines** ([protocol](trendlines/BREAKDOWN_SHORT_PROTOCOL.md)).
-Red M30 candle closing below a live line -> sell stop at its low, stop at its high, next bar only, 1R bar-close exit.
-Decision control: any red bar in the same armed-line regime. Classify-only EA = Python on all 184,888 bars (primary and S1);
-~950 / ~1,570 orders in 2016-19 / 2020-26, cost ~0.04R / 0.01R. Next: short-side trading build + C1/C2, then runs.
+**[Q21](trendlines/BREAKDOWN_SHORT_RESULTS.md) (2026-10-06): shorting the break of the Q14 rising line fails.**
+Red M30 candle closing below a live line -> sell stop at its low, stop at its high, next bar only, 1R bar-close exit
+(first short-side study). PF 0.893/0.916, mean R -0.081/-0.025 (558/928 trades); loses before costs too; 51% stops vs
+32% targets. Beats "any red bar in the same regime" (C1) in mean R but 6/11 years, bootstrap includes zero; S1 (deeper
+break) also loses; every red-candle short loses on NQ (C2 PF 0.84/0.97). 4 MT5 runs replayed, 0 mismatches. Nothing adopted.
 
 **Level research:** Q13 audited Q12's previous-week-low lead. Its 276 fills
 represent 126 weekly events; earlier advantages survive single-year/week

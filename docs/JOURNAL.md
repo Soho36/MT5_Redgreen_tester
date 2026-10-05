@@ -384,5 +384,12 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - Counts only: ~950 / ~1,570 orders (2016-19 / 2020-26); R ~1.7 x A, cost ~0.04R / 0.01R. PC hung once on a
   verifier memory bug (per-bar copies of the spent set), fixed.
 
+## 2026-10-06: Q21 trading runs, the breakdown short fails
+
+- Built the short side into the research EA (direction flag, mirrored bar-close exit, direction-aware ledger) plus
+  primary / S1 / C1 / C2 modes; classify regression byte-identical; 4 runs replayed against the verified log, 0 mismatches.
+- [Results](trendlines/BREAKDOWN_SHORT_RESULTS.md): PF 0.893/0.916, mean R -0.081/-0.025; gross negative before costs;
+  better than C1 (any red bar in the regime) in mean R but 6/11 years, interval includes zero. No label works in both periods.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*
