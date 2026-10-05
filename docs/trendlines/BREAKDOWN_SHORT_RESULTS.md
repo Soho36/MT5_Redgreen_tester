@@ -147,3 +147,22 @@ Breaks of two or more lines at once are the worst cell in both periods
 - One-minute OHLC with the tester's one-tick spread; no real ticks.
 - All years had been examined in earlier studies. NQ's upward drift is the
   headwind for every short tested here.
+
+## Exploratory follow-up: 2R target (written before the 2R runs)
+
+**The user's request, 2026-10-06, after the 1R results above.** Rerun the same
+breakdown short with a **2R** bar-close target. Because the target is chosen
+after seeing the 1R result, this is **exploratory**: it cannot rescue Q21, and
+a "pass" would only justify a new protocol on fresh evidence.
+
+Fixed before running:
+
+- The same EA build and inputs; only RiskReward = 2.0 (the target is the
+  first M30 close <= entry - 2R; stop, one-bar order life, flatten and costs
+  unchanged). Runs: primary, S1, C1 and C2 at 2R.
+- Read with the same rule as the frozen protocol, with C1 at 2R as the
+  control: >= 200 trades, PF > 1, mean net R > 0 and mean R > C1 in both
+  periods; >= 7 of 11 years beating C1; S1 PF > 1 and mean R > C1. Also
+  reported: 2010-15, the exit mix, and the same bootstrap.
+- Mean net R stays in units of the initial risk (net / (2 x R)).
+- Nothing else is tried in this follow-up.
