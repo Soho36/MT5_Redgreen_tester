@@ -368,5 +368,12 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - Caveat on the frozen control: one global episode, so C1 placed no order in 2022 (price never closed 1 x A above the
   last fill). Fill-bar colour/depth labels are outcomes, not filters.
 
+## 2026-10-06: Q21 trendline breakdown short, protocol frozen
+
+- User proposed shorting the break of the Q14 rising lines: a red M30 candle closing below a live line, sell stop at
+  its low, stop at its high, next bar only, 1R bar-close exit. First short-side study (mirror of GG, not of RTL).
+- [Protocol](trendlines/BREAKDOWN_SHORT_PROTOCOL.md) frozen before any count: one signal per line (first close below
+  after departure spends it); decision control C1 = any red bar in the same armed-line regime; S1 = close > D below.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

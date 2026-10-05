@@ -1,6 +1,6 @@
 # Project status
 
-Updated 2026-10-05. **Start here.** Each study below links to the full evidence.
+Updated 2026-10-06. **Start here.** Each study below links to the full evidence.
 For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
 
 **Trendline research (2026-10-04):** Q14 asked the Q11/Q12 questions for rising
@@ -33,6 +33,10 @@ Stop 0.5 x ATR, baseline 1R exit, any candle colour: PF 0.773/0.969, mean R -0.2
 45% stopped in the fill bar (price goes through the line); trade-through and stop 0.25/1.0 x A sensitivities lose too;
 beats the regime-matched random-distance control in 2/9 years. 9 MT5 runs replayed in Python with 0 mismatches.
 Nothing adopted.
+
+**Q21 (2026-10-06, frozen, not run): short the breakdown of the same rising lines** ([protocol](trendlines/BREAKDOWN_SHORT_PROTOCOL.md)).
+Red M30 candle closing below a live line -> sell stop at its low, stop at its high, next bar only, 1R bar-close exit.
+Decision control: any red bar in the same armed-line regime. Next: classify-only EA verified against Python.
 
 **Level research:** Q13 audited Q12's previous-week-low lead. Its 276 fills
 represent 126 weekly events; earlier advantages survive single-year/week

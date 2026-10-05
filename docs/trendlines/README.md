@@ -14,6 +14,7 @@ and follow-up gate. Generated outputs go under `Reports/trendlines/`.
 | [Q16: Q15 concentration audit](RESISTANCE_CONCENTRATION_RESULTS.md) ([protocol](RESISTANCE_CONCENTRATION_PROTOCOL.md)) | Complete 2026-10-04: edge spread over 887 lines / 439 weeks; survives every single year/week deletion and symmetric trimming; week-bootstrap mean R just includes zero | `Reports/trendlines/resistance_concentration_20261004/` |
 | [Q17: stand-alone candidate EA](STANDALONE_RESULTS.md) ([protocol](STANDALONE_PROTOCOL.md)) | Complete 2026-10-04: **does not survive** its own execution. PF 1.24/1.24 but mean R +0.039/+0.050 vs baseline -0.004/+0.060; 4/11 years. Freed trades ~break-even; no filter | `Reports/trendlines/resistance_standalone_20261004/` |
 | [Q20: buy limit resting on a rising trendline](TRENDLINE_LIMIT_RESULTS.md) ([protocol](TRENDLINE_LIMIT_PROTOCOL.md)) | Complete 2026-10-05: **fails on its own numbers**. PF 0.773/0.969, mean R -0.238/-0.023; 45% of trades stopped in the fill bar; beats the matched control in 2/9 years. No filter, no strategy | `Reports/trendlines/trendline_limit_runs_20261005/` |
+| Q21: short the breakdown of a rising trendline ([protocol](BREAKDOWN_SHORT_PROTOCOL.md)) | Frozen 2026-10-06: red candle closing below a live Q14 line, sell stop at its low, stop at its high, next bar only; control = any red bar in the same line regime | `Reports/trendlines/trendline_breakdown_20261006/` |
 
 The old [`Trendline_rejection.cs`](../../mt5/Trendline_rejection.cs) EA was
 the source of the idea and is not used for testing.
