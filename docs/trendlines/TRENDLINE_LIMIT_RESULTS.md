@@ -14,6 +14,10 @@ control matters.** PF is 0.773 in 2016-19 and 0.969 in 2020-26; mean net R is
 years. Every sensitivity also loses money in at least one period. No
 filter, no strategy, nothing adopted.
 
+This rejects the frozen **1R bar-close exit** configuration. Other RiskReward
+values were not tested, so it does not establish that every target or every
+trendline buy-limit strategy loses money.
+
 | Period | Run | Trades | Net $ | PF | Mean net R | Win % | Closed DD $ |
 |---|---|---:|---:|---:|---:|---:|---:|
 | 2016-19 | **Primary** (line, stop 0.5 x A) | 1,484 | -2,502 | **0.773** | **-0.238** | 30.9 | 2,713 |
@@ -158,3 +162,41 @@ Full table: `labels.csv` in the run folder. None is better in both periods.
 - One-minute OHLC with the tester's one-tick spread; no real ticks or queue
   position. Real queue priority would make bounce fills rarer still.
 - All years had been examined in earlier studies.
+
+## Independent audit and RiskReward correction (2026-10-05)
+
+[`audit_trendline_limit_results.py`](../../python/audit_trendline_limit_results.py)
+recomputed the trade count, net, PF, mean net R, win rate and closed drawdown
+from the original MT5 ledgers for all nine trading runs and all three periods.
+All match `summary.json`; 62 recorded source/input/output hashes match. The
+annual comparison and the 5,000-resample bootstrap intervals also match.
+Audit output: `Reports/trendlines/trendline_limit_audit_20261005/audit.json`.
+
+The inherited research EA contains an input bug: `FreezeTrendAtEntry()` assigns
+the exit multiplier from **BullRR/BearRR**, with 1.0 in neutral/warmup regimes.
+`ManageOpenPosition()` uses that multiplier; **RiskReward does not control the
+target** in the saved Q20 build. It mainly controls the CSV name and reported
+setting. All saved trading INIs have RiskReward = BullRR = BearRR = 1.0.
+All 30,661 ledger trades have assigned RR = 1.0, and every one of the 38,491
+logged target checks matches entry + (entry - initial stop), the M30 reference
+close and its qualification flag. Target exits occur at the first qualifying
+logged check; all exits meet the session/early-close cutoff. Thus the input bug
+does **not** invalidate the reported 1R results. A manual test changing only
+RiskReward in that original build still tests 1R.
+
+The completed run folder is preserved. The generator now assigns RiskReward
+after freezing the daily labels and rejects nonpositive/nonfinite RR inputs.
+[`build_trendline_limit_ea.py`](../../python/build_trendline_limit_ea.py) builds
+[`RTL_trendline_limit_manual.mq5`](../../mt5/experts/RTL_trendline_limit_manual.mq5),
+a standalone tester EA with the saved primary input defaults, RiskReward as
+the target multiplier in every regime, and BullRR/BearRR removed from the input
+panel. It compiles with 0 errors and 0 warnings. The corrected build has not
+had a fresh MT5 execution run in this audit; the 1R equivalence follows from
+the target assignment and the saved all-1R inputs. Changed-RR results remain
+unstudied.
+
+The negative result is trustworthy for this configuration and execution model.
+The C1 comparison is weaker evidence about whether the line price itself adds
+value: its global re-arm lockout differs from the primary's per-line episodes,
+and its distance distribution is calibrated using the full history. Neither
+comparison nor the exploratory bootstrap is untouched out-of-sample evidence.

@@ -60,7 +60,11 @@ def build_source(source):
         ("   if(!OpenTrendExports()) return INIT_FAILED;",
          "   if(!TLInit()) return INIT_FAILED;\n   if(!OpenTrendExports()) return INIT_FAILED;"),
         ("   FileClose(f);\n   return(0.0);\n}", "   FileClose(f);\n   TLDeinit();\n   return(0.0);\n}"),
-        ("       FreezeTrendAtEntry();\n", "       FreezeTrendAtEntry();\n       TLOnFill();   // Q20 episode / control arming\n"),
+        ("       FreezeTrendAtEntry();\n", "       FreezeTrendAtEntry();\n"
+         "       tr_rr=RiskReward;   // Q20: one bar-close target in every regime\n"
+         "       TLOnFill();   // Q20 episode / control arming\n"),
+        ("int OnInit()\n{", "int OnInit()\n{\n"
+         "   if(!MathIsValidNumber(RiskReward) || RiskReward<=0) return INIT_PARAMETERS_INCORRECT;"),
         ("      Print(\"⏱ Outside trading window → no new entries\");\n      CancelOldBuyStops();",
          "      Print(\"⏱ Outside trading window → no new entries\");\n      CancelAllOrders();   // Q20: the limit too"),
     ]
