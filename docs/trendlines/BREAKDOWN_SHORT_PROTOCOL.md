@@ -231,3 +231,66 @@ execution is not a criterion (the user's 2026-10-05 decision).
 Nothing beyond the published Q14 and Q20 results quoted above. Before the
 trading runs, counts may be shown from the classify-only runs, with no P&L or
 R: signals, gap skips, lines spent, and C1/C2 bar counts.
+
+## Pre-trade verification (done 2026-10-06, no outcomes)
+
+Run folder: `Reports/trendlines/trendline_breakdown_20261006/`. Code:
+[`trendline_breakdown.py`](../../python/trendline_breakdown.py),
+[`trendline_breakdown.mqh`](../../mt5/experts/trendline_breakdown.mqh),
+[`prepare_trendline_breakdown.py`](../../python/prepare_trendline_breakdown.py),
+[`verify_trendline_breakdown.py`](../../python/verify_trendline_breakdown.py); 11 unit tests in
+[`test_trendline_breakdown.py`](../../python/test_trendline_breakdown.py) (plus Q14's and Q20's).
+
+**Implementation correction before any outcome: spending is stateful.** The
+first classify runs (kept in `superseded_classify_v1/`) matched Python on
+every bar, but both judged "live" from scratch at each bar. A is re-measured at
+every bar (it often doubles around the US open), so a larger A(s) could move a
+line's first departure past an earlier close below it, or lift an earlier S1
+break back inside D. The line then looked live again. 52 primary and 202 S1
+breaks came from lines that had already broken, against the rule that a break
+spends the line. Now a break is recorded at the bar it happens, with that
+bar's A, on **every** bar (`TBOnNewBar`, before the flatten / position / window
+checks), whether or not the next bar is eligible, and the line stays spent.
+This implements the rule as written. The protocol did not change. A unit test
+reproduces the mechanism.
+
+**Classify-only runs** (BreakMode = 1, no order ever sent), primary
+(BreakDepthA = 0) and S1 (0.5): compiled 0 errors / 0 warnings, 39 s each, full
+history 2010-06-10 to 2026-07-13.
+
+- **Eligible bars:** 184,888 logged in each run, exactly the expected set
+  (01:00-23:30 windows, before the flatten or early close): 0 extra, 0 missing.
+- **Python reproduces every bar: 0 mismatches** in both runs. That covers
+  status, bar s, colour, contract, line, anchors, entry, stop and line counts
+  (armed / live / broken). Line values and A agree to 5e-11 (CSV rounding).
+  Orders 3,779 / 3,779 (primary) and 3,735 / 3,735 (S1).
+- **One signal per line:** the maximum is 1 in both runs.
+- The tester's ask is bid + 1 tick on every bar, and the bar open equals the
+  bid, as in Q20.
+
+**Counts (no P&L, no R).** "Breaks" are bars s that break a live line, any
+colour; "signals" are red breaks; "orders" are signals not gapped through.
+
+| Period | Run | Breaks | Red signals | Orders | Gap skips | Median R (points) | Median R / A | Median break depth / A |
+|---|---|---:|---:|---:|---:|---:|---:|---:|
+| 2010-15 | Primary | 1,431 | 1,380 | 1,266 | 114 | 7.0 | 1.69 | 0.43 |
+| 2016-19 | Primary | 1,049 | 1,014 | 947 | 67 | 14.0 | 1.71 | 0.48 |
+| 2020-26 | Primary | 1,617 | 1,580 | 1,566 | 14 | 49.6 | 1.60 | 0.46 |
+| 2010-15 | S1 | 1,374 | 1,324 | 1,216 | 108 | 7.6 | 1.81 | 0.99 |
+| 2016-19 | S1 | 1,038 | 1,000 | 947 | 53 | 14.0 | 1.67 | 0.95 |
+| 2020-26 | S1 | 1,624 | 1,585 | 1,572 | 13 | 49.8 | 1.64 | 0.95 |
+
+- 96-98% of breaks are red; 86-89% of primary breakdown bars opened above the
+  line (a real cross within the bar).
+- Control bar sets, per period (2010-15 / 2016-19 / 2020-26): C1 red bars in
+  the armed-line regime 16,343 / 12,491 / 20,233; C2 red bars 29,052 / 21,537
+  / 36,066.
+- **Cost is a small share of R**: the breakdown bar is about 1.7 x A wide, so
+  the $1.05 round trip is about 0.04R in 2016-19 and 0.01R in 2020-26 at the
+  median (Q20: 0.13R / 0.04R). Arithmetic, not an outcome.
+- Orders comfortably exceed the 200-trade floor before fills and position
+  blocking.
+
+Next: the trading build (short side: sell stop, mirrored stop/target/flatten,
+ledger, RiskReward = 1.0 in every regime) plus the C1/C2 modes, checked against
+this log before the trading runs.

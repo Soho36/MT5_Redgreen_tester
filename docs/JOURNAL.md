@@ -375,5 +375,14 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - [Protocol](trendlines/BREAKDOWN_SHORT_PROTOCOL.md) frozen before any count: one signal per line (first close below
   after departure spends it); decision control C1 = any red bar in the same armed-line regime; S1 = close > D below.
 
+## 2026-10-06: Q21 classify-only runs verified
+
+- Built `trendline_breakdown.py` / `.mqh`; classify-only EA (primary and S1) matches Python on all 184,888 eligible
+  bars, 0 mismatches. [Verification](trendlines/BREAKDOWN_SHORT_PROTOCOL.md#pre-trade-verification-done-2026-10-06-no-outcomes).
+- Pre-outcome fix: "live" was judged from scratch each bar, so a growing A revived 52 / 202 already-broken lines.
+  Breaks are now recorded on every bar and stay spent (one signal per line, as the protocol says).
+- Counts only: ~950 / ~1,570 orders (2016-19 / 2020-26); R ~1.7 x A, cost ~0.04R / 0.01R. PC hung once on a
+  verifier memory bug (per-bar copies of the spent set), fixed.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*
