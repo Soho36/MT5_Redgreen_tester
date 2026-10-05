@@ -11,7 +11,7 @@ For one trading job of Reports/trendlines/trendline_breakdown_runs_20261006/:
    order's bar (bar-boundary fills counted); the ledger matches the fills; one position at a time; nothing held past
    the session; MT5 trades and net match the ledger.
 
-Usage: verify_trendline_breakdown_trade.py JOB [JOB ...]   (primary, s1, c1, c2)
+Usage: verify_trendline_breakdown_trade.py JOB [JOB ...]   (primary, s1, c1, c2; *_rr2 for the 2R follow-up)
 """
 import json
 import sys
@@ -21,7 +21,7 @@ import pandas as pd
 
 from analyze_price_levels import sha256
 from trend_regimes import SOURCE
-from prepare_trendline_breakdown import EXPERT, RUN, STEM
+from prepare_trendline_breakdown import EXPERT, RUN, STEM, rr_label
 from verify_location_validation import read_rows
 from verify_trendline_breakdown import RUN as CLASSIFY, STEM as CLASSIFY_STEM, bars
 
@@ -53,8 +53,8 @@ def load_fills(tag):
     return f
 
 
-def load_ledger(tag):
-    led = pd.DataFrame(read_rows(RUN / f"runband_{tag}_1.00.csv"))
+def load_ledger(tag, rr="1.00"):
+    led = pd.DataFrame(read_rows(RUN / f"runband_{tag}_{rr}.csv"))
     for c in ("entry_time", "exit_time", "signal_time"):
         led[c] = pd.to_datetime(led[c], format=TIME)
     led["qualified_time"] = pd.to_datetime(led.qualified_time.replace("", np.nan), format=TIME)
@@ -92,11 +92,12 @@ def verify(job):
     mode = inputs["BreakMode"]
     assert sha256(RUN / f"{EXPERT}.mq5") == manifest["expert_sha256"]
     stats = read_rows(RUN / f"{tag}_breakdown_stats.csv")[0]
-    mt5 = read_rows(RUN / f"runband_{tag}_1.00_stats.csv")[0]
+    rr = rr_label(inputs)
+    mt5 = read_rows(RUN / f"runband_{tag}_{rr}_stats.csv")[0]
     g = load_log(RUN / f"{tag}_breakdown.csv")
     cjob = "classify_s1" if inputs["BreakDepthA"] == 0.5 else "classify"
     cls = load_log(CLASSIFY / f"{CLASSIFY_STEM}_{cjob}_breakdown.csv")
-    fills, led = load_fills(tag), load_ledger(tag)
+    fills, led = load_fills(tag), load_ledger(tag, rr)
     b = bars()
     pos = pd.Series(np.arange(len(b)), index=b.index)
 
@@ -159,7 +160,7 @@ def verify(job):
         fill_at_or_below_entry=int((fills.fill_price <= fills.order_entry + 1e-9).sum()),
         ledger_rows=len(led),
         ledger_direction_short=int((led.direction == -1).sum()),
-        ledger_rr_is_1=int((led.assigned_rr == 1.0).sum()),
+        ledger_rr_matches_input=int((led.assigned_rr == float(rr)).sum()),
         ledger_entry_time_matches=int((led.entry_time == fills.fill_time).sum()),
         ledger_entry_price_matches=int((led.base_entry == fills.fill_price).sum()),
         ledger_stop_matches=int((led.initial_stop == fills.sl).sum()),

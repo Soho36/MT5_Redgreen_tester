@@ -3,8 +3,10 @@
 Frozen protocol: docs/trendlines/BREAKDOWN_SHORT_PROTOCOL.md. Reads the verified MT5 runs in
 Reports/trendlines/trendline_breakdown_runs_20261006/ (verify_trendline_breakdown_trade.py first), applies the frozen
 reading rule and writes summary.json, yearly.csv, labels.csv and trades_<job>.csv there.
+Usage: analyze_trendline_breakdown.py [_rr2]  (the exploratory 2R follow-up writes summary_rr2.json etc.)
 """
 import json
+import sys
 
 import numpy as np
 import pandas as pd
@@ -14,6 +16,7 @@ from analyze_support_interaction import drawdown_interval, trade_metrics
 from analyze_trendline_limit import longest_losing_run
 from trend_regimes import SOURCE
 from verify_trendline_breakdown import RUN as CLASSIFY, STEM as CLASSIFY_STEM, bars
+from prepare_trendline_breakdown import rr_label
 from verify_trendline_breakdown_trade import RUN, STEM, load_fills, load_ledger, load_log
 
 PROTOCOL = ROOT / "docs" / "trendlines" / "BREAKDOWN_SHORT_PROTOCOL.md"
@@ -41,12 +44,12 @@ def load(job):
         assert int(st[key]) == 0, (job, key)
     a, n = v["audit"], v["audit"]["fills"]
     for key in ("fill_is_short", "fill_from_placed_order", "entry_matches_log", "stop_matches_log", "sl_is_order_stop",
-                "fill_at_or_below_entry", "ledger_rows", "ledger_direction_short", "ledger_rr_is_1",
+                "fill_at_or_below_entry", "ledger_rows", "ledger_direction_short", "ledger_rr_matches_input",
                 "ledger_entry_time_matches", "ledger_entry_price_matches", "ledger_stop_matches",
                 "ledger_range_is_planned_r", "ledger_signal_is_s", "same_session_exit", "mt5_trades"):
         assert a[key] == n, (job, key)
     assert a["overlapping_trades"] == 0 and a["mt5_net_matches_ledger"]
-    led = load_ledger(tag)
+    led = load_ledger(tag, rr_label(v["inputs"]))
     fills = load_fills(tag)
     assert (fills.fill_time.to_numpy() == led.entry_time.to_numpy()).all()
     led = pd.concat([led, fills[["order_bar", "s_time", "order_entry", "order_stop", "line", "anchor1_time",
@@ -152,18 +155,18 @@ def label_table(led):
     return pd.DataFrame(out)
 
 
-def main():
+def main(suffix=""):
     manifest = json.loads((RUN / "manifest.json").read_text())
     runs, verif = {}, {}
     for job in JOBS:
-        runs[job], verif[job] = load(job)
+        runs[job], verif[job] = load(job + suffix)
     need = pd.concat([t.entry_time.dt.floor("min") for t in runs.values()]).unique()
     highs = m1_highs(need)
     for t in runs.values():
         fill_high = highs.reindex(t.entry_time.dt.floor("min")).to_numpy()
         assert not np.isnan(fill_high).any()
         t["ohlc_ambiguous"] = fill_high >= t.initial_stop.to_numpy() - TICK  # the ask reached the stop
-    logs = {job: load_log(RUN / f"{STEM}_{job}_breakdown.csv") for job in JOBS}
+    logs = {job: load_log(RUN / f"{STEM}_{job}{suffix}_breakdown.csv") for job in JOBS}
     summary = {job: {p: dict(describe(t[t.period == p]), **volume(logs[job], p)) for p in ALL_PERIODS}
                for job, t in runs.items()}
     yearly = []
@@ -202,12 +205,12 @@ def main():
                                      mismatched_rows=v["mismatched_rows"], boundary_fills=v["boundary_fills"],
                                      logged_not_expected=v["logged_not_expected"],
                                      expected_not_logged=v["expected_not_logged"]) for k, v in verif.items()})
-    (RUN / "summary.json").write_text(json.dumps(out, indent=2, default=float), encoding="utf-8")
-    yearly.to_csv(RUN / "yearly.csv", index=False)
-    lab.to_csv(RUN / "labels.csv", index=False)
-    pr.to_csv(RUN / "trades_primary.csv", index=False)
+    (RUN / f"summary{suffix}.json").write_text(json.dumps(out, indent=2, default=float), encoding="utf-8")
+    yearly.to_csv(RUN / f"yearly{suffix}.csv", index=False)
+    lab.to_csv(RUN / f"labels{suffix}.csv", index=False)
+    pr.to_csv(RUN / f"trades_primary{suffix}.csv", index=False)
     for job in JOBS[1:]:
-        runs[job].to_csv(RUN / f"trades_{job}.csv", index=False)
+        runs[job].to_csv(RUN / f"trades_{job}{suffix}.csv", index=False)
     print(json.dumps(dict(rule=rule, passed=passed, bootstrap=boot), indent=1, default=float))
     for job in runs:
         for p in ALL_PERIODS:
@@ -221,4 +224,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main(*sys.argv[1:])

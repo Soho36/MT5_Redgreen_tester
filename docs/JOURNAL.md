@@ -391,5 +391,12 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - [Results](trendlines/BREAKDOWN_SHORT_RESULTS.md): PF 0.893/0.916, mean R -0.081/-0.025; gross negative before costs;
   better than C1 (any red bar in the regime) in mean R but 6/11 years, interval includes zero. No label works in both periods.
 
+## 2026-10-06: Q21 exploratory 2R target
+
+- User asked for a 2R target; plan fixed and committed before running (exploratory, same rule, C1 at 2R).
+  [Result](trendlines/BREAKDOWN_SHORT_RESULTS.md#2r-result-2026-10-06-also-fails-no-better-than-1r): PF 0.916/0.891,
+  mean R -0.050/-0.041, gross negative; only 18-19% reach 2R. Descriptive regime split: red-candle shorts lose in
+  bear regimes too.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

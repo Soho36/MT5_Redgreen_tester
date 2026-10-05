@@ -34,6 +34,12 @@ COMMON = dict(BreakN=5, BreakSessions=5, BreakMinSep=10, BreakMinSlope=0.02)
 JOBS = {"classify": dict(BreakMode=1, BreakDepthA=0.0), "primary": dict(BreakMode=2, BreakDepthA=0.0),
         "s1": dict(BreakMode=2, BreakDepthA=0.5), "c1": dict(BreakMode=3, BreakDepthA=0.0),
         "c2": dict(BreakMode=4, BreakDepthA=0.0)}
+# Exploratory follow-up (user, after the 1R results; plan in BREAKDOWN_SHORT_RESULTS.md): the same runs at a 2R target.
+JOBS.update({f"{job}_rr2": dict(JOBS[job], RiskReward=2.0) for job in ("primary", "s1", "c1", "c2")})
+
+
+def rr_label(inputs):
+    return f"{inputs.get('RiskReward', 1.0):.2f}"
 ENTRY = "   // Red candle setup (only if all filters pass)\n"
 
 
@@ -119,15 +125,19 @@ def main():
         path = RUN / f"{tag}.ini"
         if not (RUN / f"{tag}.completed.json").exists():
             ini = base_ini
-            for key, value in dict(Expert=fr"{INSTALL}\{EXPERT}.ex5", RunTag=tag, Report=f"{tag}.htm").items():
+            fixed = dict(Expert=fr"{INSTALL}\{EXPERT}.ex5", RunTag=tag, Report=f"{tag}.htm")
+            if "RiskReward" in inputs:  # an existing tester input: replace its line, never add a duplicate key
+                fixed["RiskReward"] = inputs["RiskReward"]
+            for key, value in fixed.items():
                 ini, n = re.subn(rf"(?m)^{key}=.*$", lambda m: f"{key}={value}", ini)
                 assert n == 1, key
-            ini = ini.replace("[TesterInputs]",
-                              "[TesterInputs]\n" + "\n".join(f"{k}={v}" for k, v in inputs.items()), 1)
+            ini = ini.replace("[TesterInputs]", "[TesterInputs]\n" + "\n".join(
+                f"{k}={v}" for k, v in inputs.items() if k != "RiskReward"), 1)
             path.write_text(ini, encoding="utf-16")
-        outputs = [f"{tag}_breakdown.csv", f"{tag}_breakdown_stats.csv", f"runband_{tag}_1.00_stats.csv"]
+        rr = rr_label(inputs)
+        outputs = [f"{tag}_breakdown.csv", f"{tag}_breakdown_stats.csv", f"runband_{tag}_{rr}_stats.csv"]
         if inputs["BreakMode"] >= 2:
-            outputs += [f"{tag}_fills.csv", f"runband_{tag}_1.00.csv", f"{tag}_checks.csv", f"{tag}_signals.csv"]
+            outputs += [f"{tag}_fills.csv", f"runband_{tag}_{rr}.csv", f"{tag}_checks.csv", f"{tag}_signals.csv"]
         jobs.append(dict(tag=tag, ini=str(path), inputs=inputs, report=f"{tag}.htm", outputs=outputs))
     manifest = dict(experiment="Q21 short the breakdown of a rising trendline, full-history one-minute OHLC",
                     parent_source=str(parent), parent_sha256=sha256(parent), parent_ini=str(TREND / f"{TAG}.ini"),

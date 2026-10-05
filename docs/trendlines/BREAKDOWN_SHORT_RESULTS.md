@@ -166,3 +166,43 @@ Fixed before running:
   reported: 2010-15, the exit mix, and the same bootstrap.
 - Mean net R stays in units of the initial risk (net / (2 x R)).
 - Nothing else is tried in this follow-up.
+
+### 2R result (2026-10-06): also fails, no better than 1R
+
+Runs `*_rr2` in the same folder; `summary_rr2.json`, `yearly_rr2.csv`,
+`labels_rr2.csv`. All four runs pass the same verification as the 1R runs
+(0 replay mismatches, 0 unexplained logged-bar differences, audit complete,
+MT5 net = ledger).
+
+| Period | Run | Trades | Net $ | PF | Mean net R | Win % | Closed DD $ |
+|---|---|---:|---:|---:|---:|---:|---:|
+| 2016-19 | **Primary 2R** | 547 | -961 | **0.916** | **-0.050** | 31.4 | 1,410 |
+| 2016-19 | S1 2R | 558 | -1,838 | 0.847 | -0.106 | 29.9 | 2,187 |
+| 2016-19 | C1 2R | 3,311 | -2,636 | 0.939 | -0.113 | 28.2 | 3,695 |
+| 2016-19 | C2 2R | 5,312 | -10,128 | 0.871 | -0.134 | 28.0 | 11,570 |
+| 2020-26 | **Primary 2R** | 914 | -7,231 | **0.891** | **-0.041** | 31.0 | 10,122 |
+| 2020-26 | S1 2R | 951 | -7,706 | 0.887 | -0.046 | 30.8 | 9,277 |
+| 2020-26 | C1 2R | 5,437 | -11,038 | 0.955 | -0.045 | 28.5 | 19,312 |
+| 2020-26 | C2 2R | 8,867 | -24,476 | 0.944 | -0.040 | 29.1 | 29,624 |
+
+- **Rule:** fails PF > 1 and mean R > 0 in both periods. Mean R beats C1 in
+  both, but in 6 of 11 years; S1 fails PF > 1 and is below C1 in 2020-26.
+  Bootstrap of primary minus C1 mean R: [-0.058, +0.186] and [-0.094, +0.107].
+- **Gross before costs is still negative:** -$387 and -$6,271.
+- **The 2R close is reached rarely:** 19% / 18% of trades; 57% / 59% stop out
+  and 23-24% are flattened at the session end. 2020-26 is worse than at 1R.
+
+### Descriptive only: the 1R shorts by daily trend regime
+
+The ledger records the Q10 daily regime at entry (bear = previous close and
+SMA50 both below SMA200). This was looked at after the results, as a hint for
+what to try next, not as a filter:
+
+| Run (1R) | Bear 2016-19 | Bear 2020-26 | Bull 2016-19 | Bull 2020-26 |
+|---|---|---|---|---|
+| Primary | 54 trades, PF 0.810 | 141, PF 0.874 | 430, PF 0.888 | 697, PF 0.982 |
+| C1 | 339, PF 0.914 | 918, PF 1.040 | 3,034, PF 0.903 | 4,717, PF 0.953 |
+| C2 | 628, PF 0.792 | 1,590, PF 0.987 | 4,773, PF 0.851 | 7,821, PF 0.968 |
+
+Shorting the low of a red candle does not work even in bear regimes. The
+mechanic itself, not just the drift, is the problem.

@@ -39,6 +39,8 @@ Red M30 candle closing below a live line -> sell stop at its low, stop at its hi
 (first short-side study). PF 0.893/0.916, mean R -0.081/-0.025 (558/928 trades); loses before costs too; 51% stops vs
 32% targets. Beats "any red bar in the same regime" (C1) in mean R but 6/11 years, bootstrap includes zero; S1 (deeper
 break) also loses; every red-candle short loses on NQ (C2 PF 0.84/0.97). 4 MT5 runs replayed, 0 mismatches. Nothing adopted.
+Exploratory 2R target (user request, plan fixed first): also fails, PF 0.916/0.891, mean R -0.050/-0.041. Red-candle
+shorts lose in bear regimes too (descriptive).
 
 **Level research:** Q13 audited Q12's previous-week-low lead. Its 276 fills
 represent 126 weekly events; earlier advantages survive single-year/week
