@@ -28,11 +28,11 @@ only (generated ticks not a stop criterion, user 2026-10-05). Nothing adopted. M
 broadly spread (max 5 trades per level), survives every year/week deletion; paired mean-R difference vs
 RTL +0.066/+0.050, intervals just include zero per period, exclude it pooled. Next: forward/demo evidence.
 
-**[Q20](trendlines/TRENDLINE_LIMIT_PROTOCOL.md) (frozen 2026-10-05):** a buy limit resting on the
-Q14 rising line (any candle colour), stop 0.5 x ATR below, baseline 1R exit, judged against a regime-matched
-random-price dip-buy (C1), not against RTL. Classify-only EA run matches Python on all 184,888 eligible bars
-(0 mismatches). Tester ask = bid + 1 tick, so fills already need a 1-tick bid trade-through. Cost is ~0.13R per trade
-in 2016-19 at the median 4-point stop. Next: trading modes + C1 delta table.
+**[Q20](trendlines/TRENDLINE_LIMIT_RESULTS.md) (2026-10-05): a buy limit resting on the Q14 rising line fails.**
+Stop 0.5 x ATR, baseline 1R exit, any candle colour: PF 0.773/0.969, mean R -0.238/-0.023 (1,484/2,370 trades);
+45% stopped in the fill bar (price goes through the line); trade-through and stop 0.25/1.0 x A sensitivities lose too;
+beats the regime-matched random-distance control in 2/9 years. 9 MT5 runs replayed in Python with 0 mismatches.
+Nothing adopted.
 
 **Level research:** Q13 audited Q12's previous-week-low lead. Its 276 fills
 represent 126 weekly events; earlier advantages survive single-year/week

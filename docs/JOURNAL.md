@@ -359,5 +359,14 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - Counts only: orders on ~56% of bars, ~9% of those can fill; tester spread means a 1-tick bid trade-through
   is already needed; cost ~0.13R in 2016-19. SVG charts of the per-bar order steps added.
 
+## 2026-10-05: Q20 trading runs, the trendline buy limit fails
+
+- Built the trading modes (primary, C1, C2; trade-through and stop 0.25/1.0 x A) and the C1 delta table; 10 MT5 runs
+  (classify repeat byte-identical). Every run replayed bar by bar in Python: 0 mismatches; fills and ledgers audited.
+- [Results](trendlines/TRENDLINE_LIMIT_RESULTS.md): PF 0.773/0.969, mean R -0.238/-0.023; fails PF > 1 and mean R > 0
+  in both periods before the control matters; 2/9 years beat C1. 45% of trades stop out in the fill bar.
+- Caveat on the frozen control: one global episode, so C1 placed no order in 2022 (price never closed 1 x A above the
+  last fill). Fill-bar colour/depth labels are outcomes, not filters.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

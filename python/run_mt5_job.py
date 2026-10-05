@@ -1,6 +1,6 @@
 """Compile a prepared research EA and run one tester job, then collect its files into the run folder.
 
-Usage: run_mt5_job.py <run_dir> <expert_name> <tag>
+Usage: run_mt5_job.py <run_dir> <expert_name> [tag ...]
 The run folder must hold <expert_name>.mq5, its includes and <tag>.ini (written by a prepare_*.py script).
 Install folder: MQL5/Experts/CodexTrendlineResearch. Writes <tag>.completed.json only if every output exists.
 """
@@ -47,9 +47,11 @@ def trim_log(path, expert, keep=150):
     path.write_text("\n".join(run) + "\n", encoding="utf-8")
 
 
-def run_job(run, tag, outputs, expert):
+def run_job(run, tag, outputs, expert, inputs_files=()):
     for name in outputs:
         (COMMON / name).unlink(missing_ok=True)
+    for name in inputs_files:
+        shutil.copyfile(run / name, COMMON / name)
     started = time.time()
     stamp = datetime.now().strftime("%Y%m%d")
     subprocess.run([str(INSTALL_DIR / "terminal64.exe"), f"/config:{run / (tag + '.ini')}"], check=True)
@@ -72,14 +74,19 @@ def run_job(run, tag, outputs, expert):
     print(json.dumps(done, indent=2))
 
 
-def main(run_dir, expert, tag):
+def main(run_dir, expert, *tags):
+    """Compile once, then run each named job (all jobs not yet completed when none are named)."""
     run = Path(run_dir)
     manifest = json.loads((run / "manifest.json").read_text(encoding="utf-8"))
-    job = next(j for j in manifest["jobs"] if j["tag"] == tag)
-    if (run / f"{tag}.completed.json").exists():
+    if tags:
+        jobs = [j for j in manifest["jobs"] if j["tag"] in tags]
+    else:
+        jobs = [j for j in manifest["jobs"] if not (run / f"{j['tag']}.completed.json").exists()]
+    if any((run / f"{j['tag']}.completed.json").exists() for j in jobs):
         raise RuntimeError("Job already completed; preserve it")
     compile_expert(run, expert)
-    run_job(run, tag, job["outputs"], expert)
+    for job in jobs:
+        run_job(run, job["tag"], job["outputs"], expert, job.get("inputs_files", []))
 
 
 if __name__ == "__main__":
