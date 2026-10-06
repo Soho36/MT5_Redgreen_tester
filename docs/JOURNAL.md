@@ -435,5 +435,11 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   and closes below it, stop at that candle's low. User set a 3-bar order life and a 0.25 x ATR minimum risk (skips reported).
 - [Protocol](levels/SUPPORT_RECLAIM_PROTOCOL.md): decision control C1 = same candles with the RTL entry (buy stop at the high).
 
+## 2026-10-07: Q24 classify-only runs verified
+
+- Built `support_reclaim.py` / `.mqh` on the Q11 level functions; classify-only EA (primary and S1) matches Python on all
+  184,888 eligible bars, 0 mismatches, first time. [Verification](levels/SUPPORT_RECLAIM_PROTOCOL.md#pre-trade-verification-done-2026-10-07-no-outcomes).
+- Counts only: 1,094 / 1,828 orders (2016-19 / 2020-26); min-risk skips 6-8% of breakdowns (none under S1); cost ~0.06R / 0.02R.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

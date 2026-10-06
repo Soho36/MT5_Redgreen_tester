@@ -154,3 +154,47 @@ time-of-day segment; daily regime (Q10).
 
 Only the results quoted above and the Q23 example charts. No Q24 count or
 outcome was computed.
+
+## Pre-trade verification (done 2026-10-07, no outcomes)
+
+Run folder: `Reports/levels/support_reclaim_20261007/`. Code:
+[`support_reclaim.py`](../../python/support_reclaim.py),
+[`support_reclaim.mqh`](../../mt5/experts/support_reclaim.mqh),
+[`prepare_support_reclaim.py`](../../python/prepare_support_reclaim.py),
+[`verify_support_reclaim.py`](../../python/verify_support_reclaim.py); 9 unit tests in
+[`test_support_reclaim.py`](../../python/test_support_reclaim.py) (plus Q11's 12).
+
+**Classify-only runs** (ReclaimMode = 1, no order ever sent), primary
+(BreakDepthA = 0) and S1 (0.5): compiled 0 errors / 0 warnings, about 40 s
+each, full history 2010-06-10 to 2026-07-13.
+
+- **Eligible bars:** 184,888 logged in each run, exactly the expected set: 0
+  extra, 0 missing.
+- **Python reproduces every bar: 0 mismatches** in both runs, first time. That
+  covers status, bar s, colour, contract, level, defining pivot, latest member,
+  members, entry, stop, risk, A and level counts (known pivots, levels, live,
+  broken). Orders 4,373 / 4,373 (primary) and 2,917 / 2,917 (S1).
+
+**Counts (no P&L, no R).** "Breakdowns" are bars t whose bar s freshly broke a
+live, unspent level (orders + min-risk skips + gap skips).
+
+| Period | Run | Breakdowns | Orders | Min-risk skips | Gap skips | Median R (points) | Median R / A | Median close depth / A |
+|---|---|---:|---:|---:|---:|---:|---:|---:|
+| 2010-15 | Primary | 1,677 | 1,451 | 117 (7.0%) | 109 | 4.75 | 0.97 | 0.51 |
+| 2016-19 | Primary | 1,198 | 1,094 | 76 (6.3%) | 28 | 9.00 | 0.99 | 0.49 |
+| 2020-26 | Primary | 2,006 | 1,828 | 150 (7.5%) | 28 | 30.75 | 0.88 | 0.46 |
+| 2010-15 | S1 | 1,015 | 1,013 | 0 | 2 | 6.50 | 1.34 | 0.91 |
+| 2016-19 | S1 | 730 | 729 | 0 | 1 | 13.00 | 1.46 | 0.93 |
+| 2020-26 | S1 | 1,175 | 1,175 | 0 | 0 | 46.25 | 1.32 | 0.90 |
+
+- The minimum risk removes 6-8% of primary breakdowns and none under S1
+  (a close more than 0.5 x A below L already makes R > 0.5 x A).
+- At the median, the $1.05 round trip is about 0.06R in 2016-19 and 0.02R in
+  2020-26 (arithmetic, not an outcome).
+- At t's open the ask sits a median 4.25 / 15.5 points below the level
+  (2016-19 / 2020-26), about half the risk: the buy stop needs a real move back.
+- Orders exceed the 200-trade floor before fills, cancellations and position
+  blocking.
+
+Next: the trading build (3-bar order life, cancel on a touch of low(s), C1 at
+high(s)), checked against this log before the trading runs.
