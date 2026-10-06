@@ -155,3 +155,28 @@ periods.
 - One-minute OHLC with the tester's intrabar spread; no real ticks or queue.
 - All years had been examined in earlier studies. The risk >= 1 x A split is
   post hoc.
+
+## Exploratory follow-up: no cancellation on a touch of the low (written before the runs)
+
+**The user's request, 2026-10-07, after the results above.** The cancel-on-
+touch rule was added to the user's design while drafting; the user's own
+version keeps the order. A second red bar that takes out the signal candle's
+low does not invalidate the setup: if a later bar reclaims the level, the
+order fills and the stop sits at the signal candle's low (it is attached to the
+order but only acts once the position is live). 57-58% of Q24's orders were
+cancelled by that rule.
+
+Fixed before running:
+
+- The same EA and inputs as Q24 except **CancelOnLow = false**: an unfilled
+  buy stop lives its 3 bars (or until the window exit / flatten or a
+  replacing order), whatever price does below the candle low. Runs: primary,
+  C1, S1 primary and S1 C1, all without the cancellation.
+- Read with Q24's frozen rule unchanged (C1 without cancellation as the
+  control): >= 200 trades, PF > 1, mean net R > 0, mean R > C1 in both
+  periods; >= 7 of 11 years; S1 PF > 1 and mean R > its C1. Also: the Q24
+  order and cancellation counts, fills by bar of life, stops in the fill bar,
+  2010-15, the bootstrap (seed 20261007).
+- Exploratory: chosen after seeing Q24, on data already examined. A pass
+  justifies only forward / demo evidence, not adoption. Nothing else is tried
+  in this follow-up (no risk floor change).
