@@ -97,3 +97,15 @@ six mappings, neighboring MA lengths and historical annual selection, using
 .\venv\Scripts\python.exe python\analyze_trend_rr_study.py
 .\venv\Scripts\python.exe python\report_trend_rr_study.py
 ```
+
+The [trade-result streak study](docs/TRADE_STREAKS_RESULTS.md) (Q24) measures
+same-session and consecutive-trade win/loss sequences, shuffled controls and
+daily stopping counterfactuals. No predictive or stopping rule was adopted.
+
+```powershell
+.\venv\Scripts\python.exe python\analyze_trade_streaks.py
+.\venv\Scripts\python.exe python\verify_trade_streaks.py
+.\venv\Scripts\python.exe python\report_trade_streaks.py
+```
+
+The last command uses matplotlib for the saved chart.

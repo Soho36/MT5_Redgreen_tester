@@ -1,7 +1,14 @@
 # Project status
 
-Updated 2026-10-06. **Start here.** Each study below links to the full evidence.
+Updated 2026-10-07. **Start here.** Each study below links to the full evidence.
 For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
+
+**[Q24 trade-result streaks](TRADE_STREAKS_RESULTS.md) (2026-10-07): no predictive or daily-stop gate passes.**
+Current RTL ledger, 14,968 trades, $1.05 costs: after three same-session losses the next-trade win rate
+is 41.9%/41.1% (baseline 43.4%/43.0%); mean-R difference intervals include zero. Five-win daily
+streaks have only 2/13 next trades. Session stops after 3–5 losses reduce drawdown but improve
+dollars in only 5–6/11 years; retain as a risk trade-off, no adoption. Sequence tests and independent
+replay of all states/20 policies pass. [Protocol](TRADE_STREAKS_PROTOCOL.md).
 
 **Trendline research (2026-10-04):** Q14 asked the Q11/Q12 questions for rising
 trendlines (consecutive higher swing lows, one week). Signals at intact trendline
@@ -210,6 +217,7 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 
 | Date | Study | Verdict |
 |---|---|---|
+| 10-07 | [Q24: trade-result streaks](TRADE_STREAKS_RESULTS.md) | No reliable next-trade prediction; five wins too sparse; loss-based session stops reduce DD but fail yearly consistency; no rule adopted |
 | 10-04 | [Q18: horizontal swing-high breakout](levels/BREAKOUT_RESULTS.md) | **Passes both stages** (attribution, stand-alone EA); first level lead to survive own execution; OHLC only, weak 2016-19 |
 | 10-04 | [Q17: stand-alone falling-resistance EA](trendlines/STANDALONE_RESULTS.md) | Does not survive own execution: PF 1.24 but mean R below baseline recently, 4/11 years |
 | 10-04 | [Q15: falling trendline resistance](trendlines/TRENDLINE_RESISTANCE_RESULTS.md) | **Passes the gate** in both periods with both sensitivities; qualifies for a full MT5 run protocol; 2023-25 flat |

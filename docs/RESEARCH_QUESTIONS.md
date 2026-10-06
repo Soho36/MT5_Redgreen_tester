@@ -157,6 +157,7 @@ it up, it gets a number, a fixed protocol before looking at outcomes, and a resu
 
 | Added | Question | Status |
 |---|---|---|
+| 2026-10-07 | Do consecutive profitable/loss-making trades predict exhaustion or recovery, and should trading stop for the session after a streak? | **Q24 complete** ([results](TRADE_STREAKS_RESULTS.md), [protocol](TRADE_STREAKS_PROTOCOL.md)): no predictive/stop gate passes; five daily wins too rare; after three losses no win-rate uplift; loss stops are an inconsistent risk trade-off |
 | 2026-10-03 | Are red candles **from support levels** better signals than **every other red candle**? | Q10 complete (original exit primary): previous-week lead, too few fills. [Q11](levels/LEVEL_VISIT_RESULTS.md) one-week swing-low support: small, unconfirmed edge, no filter |
 | 2026-10-04 | Do red signals that **break horizontal swing-high resistance** from below beat every other signal? | **Q18 passes both stages** ([results](levels/BREAKOUT_RESULTS.md)); open lead: execution realism and forward evidence next |
 | 2026-10-04 | Do red signals at **rising trendline support** beat every other signal (Q11/Q12 questions for trendlines)? | **Q14 complete** ([results](trendlines/TRENDLINE_SUPPORT_RESULTS.md)): candidates worse than the rest in both periods (PF 1.029/0.950 vs 1.114/1.124); broad contact also worse; no filter. Falling resistance lines: Q15 passed the attribution gate, Q16 not concentrated, but **Q17 stand-alone fails** ([results](trendlines/STANDALONE_RESULTS.md)); no filter |

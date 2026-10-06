@@ -424,5 +424,10 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   re-derivations, 0 mismatches): candidate PF 0.992/1.038, better than the rest 7/11 years, N = 3 disagrees.
 - [Results](levels/SUPPORT_BREAKDOWN_RESULTS.md): fails; no stand-alone run; stopping rule ends short-side level research.
 
+## 2026-10-07: Q24 trade-result streaks
+
+- [Q24](TRADE_STREAKS_RESULTS.md): 14,968 current RTL trades; within-session and cross-session streaks, next-trade R/win rates, week intervals and 2,000 month/day shuffles. No predictive gate passes; five daily wins have only 2/13 next trades.
+- Session stops after 3–5 losses reduce DD but help dollars in only 5–6/11 years; no rule adopted. Seven tests and independent replay of every state/20 policies pass, zero mismatches.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*
