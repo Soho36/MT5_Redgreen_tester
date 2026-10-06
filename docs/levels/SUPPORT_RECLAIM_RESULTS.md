@@ -218,9 +218,9 @@ reclaimed the level:
 
 They are not invalid setups, but they are not better either: worse than the
 Q24 fills earlier and slightly better recently, about break-even overall.
-Without the cancellation, 60-70% of orders fill (from about 40%), 72-73% of
-expiries/replacements happen without a fill, and a third of fills still stop
-out in the fill bar (243 / 756, 421 / 1,284). The post-hoc risk split looks the
+Without the cancellation, about 70% of orders fill (756 / 1,088 and
+1,284 / 1,818, from about 40%), and a third of fills still stop out in the
+fill bar (243 / 756, 421 / 1,284). The post-hoc risk split looks the
 same as in Q24 (risk < 1 x A loses in both periods; >= 1 x A is near or above
 break-even).
 
