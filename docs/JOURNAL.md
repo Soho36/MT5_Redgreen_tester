@@ -417,5 +417,12 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   green signal, sell stop at its low at an intact swing-low level approached from above; frozen Q11 classifier as is.
 - No short census exists, so stage 0 is a new MT5 run of the short mirror baseline (green run 1-3, mirrored exit).
 
+## 2026-10-07: Q23 results, the Q18 mirror short fails stage 1
+
+- Stage 0 MT5 run of the short mirror baseline (green candle, sell stop at its low): 24,111 trades, all checks pass;
+  it loses in every period (PF 0.750/0.916/0.974). Stage 1 with the frozen Q11 classifier as is (1,440 independent
+  re-derivations, 0 mismatches): candidate PF 0.992/1.038, better than the rest 7/11 years, N = 3 disagrees.
+- [Results](levels/SUPPORT_BREAKDOWN_RESULTS.md): fails; no stand-alone run; stopping rule ends short-side level research.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*
