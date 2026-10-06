@@ -449,5 +449,13 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - [Results](levels/SUPPORT_RECLAIM_RESULTS.md): PF 1.042/1.063, mean R -0.073/-0.051, fails mean R > 0 and C1 in 2020-26;
   5/11 years. Small-risk trades drive the losses; risk >= 1 x ATR positive in both periods (post hoc, not a lead).
 
+## 2026-10-07: Q24 follow-up without cancellation on the low
+
+- User: taking out the signal candle's low does not invalidate the setup (cancel-on-touch was my addition). Plan fixed and
+  committed first (exploratory); same EA with CancelOnLow = false; all runs verified incl. M1 order-life replay.
+- [Result](levels/SUPPORT_RECLAIM_RESULTS.md#no-cancellation-result-2026-10-07-also-fails-the-added-trades-are-mixed):
+  fails (PF 0.964/1.059, R -0.113/-0.006, below C1). Q24 trades reappear unchanged; the added trades are mixed
+  (PF 0.855 / 1.052). Q24 closed.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

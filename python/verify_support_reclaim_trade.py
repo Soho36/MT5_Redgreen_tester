@@ -16,7 +16,8 @@ For one trading job of Reports/levels/support_reclaim_runs_20261007/:
 4. Execution audit: fills at or above the entry with the logged stop; the ledger matches the fills; one position at
    a time; every trade exits its session; MT5 trades and net match the ledger.
 
-Usage: verify_support_reclaim_trade.py [JOB ...]   (primary, c1, primary_s1, c1_s1)
+Usage: verify_support_reclaim_trade.py [VARIANT [JOB ...]]   (variant '' or nocancel; jobs primary, c1, primary_s1, c1_s1)
+With CancelOnLow = false (the nocancel variant) no touch cancellation is predicted.
 """
 import json
 import sys
@@ -25,7 +26,7 @@ import numpy as np
 import pandas as pd
 
 from analyze_price_levels import sha256
-from prepare_support_reclaim import EXPERT, RUN, STEM
+from prepare_support_reclaim import EXPERT, RUN, STEM, VARIANTS
 from trend_regimes import SOURCE
 from verify_location_validation import read_rows
 from verify_support_reclaim import RUN as CLASSIFY, STEM as CLASSIFY_STEM, bars
@@ -60,8 +61,8 @@ def load_table(path, times, floats):
     return f
 
 
-def load_ledger(tag):
-    led = load_table(RUN / f"runband_{tag}_1.00.csv", ("entry_time", "exit_time", "signal_time"),
+def load_ledger(tag, run=RUN):
+    led = load_table(run / f"runband_{tag}_1.00.csv", ("entry_time", "exit_time", "signal_time"),
                      ("trade_profit", "candle_range", "exit_reason", "base_entry", "initial_stop", "exit_price",
                       "assigned_rr"))
     led["qualified_time"] = pd.to_datetime(led.qualified_time.replace("", np.nan), format=TIME)
@@ -79,7 +80,7 @@ def same(a, b):
     return (a == b) | (pd.isna(a) & pd.isna(b))
 
 
-def expected_life(orders, eligible, b, m1):
+def expected_life(orders, eligible, b, m1, cancel_on_low=True):
     """Predicted outcome of every placed order from one-minute data (see the module docstring, point 3)."""
     mt, mh, ml, mo = m1
     idx = b.index
@@ -96,7 +97,7 @@ def expected_life(orders, eligible, b, m1):
         end, end_reason = min(ends) if ends else (idx[-1] + pd.Timedelta("30min"), "end")
         lo, hi = np.searchsorted(mt, r.bar_time.to_datetime64()), np.searchsorted(mt, end.to_datetime64())
         fill = np.flatnonzero(mh[lo:hi] >= r.order_entry - FILL_OFFSET)
-        touch = np.flatnonzero(ml[lo:hi] <= r.order_stop)
+        touch = np.flatnonzero(ml[lo:hi] <= r.order_stop) if cancel_on_low else np.empty(0, int)
         f = fill[0] if len(fill) else None
         c = touch[0] if len(touch) else None
         first_end = mt[hi] if hi < len(mt) else None  # the first minute of the end bar (its first tick)
@@ -120,21 +121,22 @@ def expected_life(orders, eligible, b, m1):
     return pd.DataFrame(out)
 
 
-def verify(job, m1, b):
-    tag = f"{STEM}_{job}"
-    manifest = json.loads((RUN / "manifest.json").read_text())
+def verify(job, m1, b, variant=""):
+    run, stem, _ = VARIANTS[variant]
+    tag = f"{stem}_{job}"
+    manifest = json.loads((run / "manifest.json").read_text())
     inputs = next(j for j in manifest["jobs"] if j["tag"] == tag)["inputs"]
     mode = inputs["ReclaimMode"]
-    assert sha256(RUN / f"{EXPERT}.mq5") == manifest["expert_sha256"]
-    stats = read_rows(RUN / f"{tag}_reclaim_stats.csv")[0]
-    mt5 = read_rows(RUN / f"runband_{tag}_1.00_stats.csv")[0]
-    g = load_log(RUN / f"{tag}_reclaim.csv")
+    assert sha256(run / f"{EXPERT}.mq5") == manifest["expert_sha256"]
+    stats = read_rows(run / f"{tag}_reclaim_stats.csv")[0]
+    mt5 = read_rows(run / f"runband_{tag}_1.00_stats.csv")[0]
+    g = load_log(run / f"{tag}_reclaim.csv")
     cjob = "classify_s1" if inputs["BreakDepthA"] == 0.5 else "classify"
     cls = load_log(CLASSIFY / f"{CLASSIFY_STEM}_{cjob}_reclaim.csv")
-    fills = load_table(RUN / f"{tag}_fills.csv", ("fill_time", "order_bar", "s_time", "key_time"),
+    fills = load_table(run / f"{tag}_fills.csv", ("fill_time", "order_bar", "s_time", "key_time"),
                        ("fill_price", "sl", "order_entry", "order_stop", "level", "age"))
-    cancels = load_table(RUN / f"{tag}_cancels.csv", ("cancel_time", "order_bar"), ("order_entry", "order_stop", "age", "bid"))
-    led = load_ledger(tag)
+    cancels = load_table(run / f"{tag}_cancels.csv", ("cancel_time", "order_bar"), ("order_entry", "order_stop", "age", "bid"))
+    led = load_ledger(tag, run)
     pos = pd.Series(np.arange(len(b)), index=b.index)
     mt = m1[0]
 
@@ -173,7 +175,7 @@ def verify(job, m1, b):
 
     # 3. Order life on one-minute data.
     orders = m[placed].sort_values("bar_time").reset_index(drop=True)
-    life = expected_life(orders, eligible, b, m1)
+    life = expected_life(orders, eligible, b, m1, str(inputs.get("CancelOnLow", "true")).lower() == "true")
     actual = pd.concat([fills.assign(outcome="fill", when=fills.fill_time)[["order_bar", "outcome", "when"]],
                         cancels.assign(outcome=cancels.reason, when=cancels.cancel_time)[["order_bar", "outcome", "when"]]])
     assert actual.order_bar.is_unique and len(actual) == len(orders), "every order needs exactly one outcome"
@@ -217,17 +219,17 @@ def verify(job, m1, b):
                   expected_not_logged_unexplained=len(absent_unexplained),
                   actions=m.action.value_counts().to_dict(), field_mismatches={k: int((~v).sum()) for k, v in checks.items()},
                   mismatched_rows=int(bad.sum()), order_life=life_summary, audit=audit,
-                  log_sha256=sha256(RUN / f"{tag}_reclaim.csv"))
-    (RUN / f"{tag}_verification.json").write_text(json.dumps(result, indent=2, default=str), encoding="utf-8")
-    m[bad].to_csv(RUN / f"{tag}_mismatches.csv", index=False)
-    life.to_csv(RUN / f"{tag}_order_life.csv", index=False)
+                  log_sha256=sha256(run / f"{tag}_reclaim.csv"))
+    (run / f"{tag}_verification.json").write_text(json.dumps(result, indent=2, default=str), encoding="utf-8")
+    m[bad].to_csv(run / f"{tag}_mismatches.csv", index=False)
+    life.to_csv(run / f"{tag}_order_life.csv", index=False)
     return result
 
 
-def main(*jobs):
+def main(variant="", *jobs):
     m1, b = minutes(), bars()
     for job in jobs or ("primary", "c1", "primary_s1", "c1_s1"):
-        r = verify(job, m1, b)
+        r = verify(job, m1, b, variant)
         print(json.dumps({k: v for k, v in r.items() if k not in ("stats", "inputs")}, indent=1, default=str))
 
 

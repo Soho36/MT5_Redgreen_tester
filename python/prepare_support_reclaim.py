@@ -11,10 +11,14 @@ parent's own exit and ledger apply unchanged.
 The verified classify-only run lives in Reports/levels/support_reclaim_20261007/ (verify_support_reclaim.py). This
 writes Reports/levels/support_reclaim_runs_20261007/ with `classify` (ReclaimMode 1 again: a regression check against
 that verified log), `primary` (2), `c1` (3), `primary_s1` and `c1_s1` (BreakDepthA 0.5).
+
+Variant `nocancel` (exploratory follow-up, plan in docs/levels/SUPPORT_RECLAIM_RESULTS.md): the same jobs with
+CancelOnLow = false, in Reports/levels/support_reclaim_nocancel_20261007/. Usage: prepare_support_reclaim.py [nocancel]
 """
 import json
 import re
 import shutil
+import sys
 
 from analyze_breach_reclaim import TAG, TREND
 from analyze_price_levels import ROOT, sha256
@@ -30,6 +34,9 @@ COMMON = dict(MinRiskA=0.25, LevelN=5, LevelSessions=5, OrderLife=3)
 JOBS = {"classify": dict(COMMON, ReclaimMode=1, BreakDepthA=0.0),
         "primary": dict(COMMON, ReclaimMode=2, BreakDepthA=0.0), "c1": dict(COMMON, ReclaimMode=3, BreakDepthA=0.0),
         "primary_s1": dict(COMMON, ReclaimMode=2, BreakDepthA=0.5), "c1_s1": dict(COMMON, ReclaimMode=3, BreakDepthA=0.5)}
+VARIANTS = {"": (RUN, STEM, JOBS),
+            "nocancel": (ROOT / "Reports" / "levels" / "support_reclaim_nocancel_20261007", "support_reclaim_nocancel_20261007",
+                         {job: dict(inputs, CancelOnLow="false") for job, inputs in JOBS.items()})}
 
 
 def build_source(source):
@@ -55,25 +62,26 @@ def build_source(source):
                   "   SROnBar(barOpen);\n}\n"
 
 
-def main():
-    RUN.mkdir(parents=True, exist_ok=True)
+def main(variant=""):
+    run, stem, jobs_in = VARIANTS[variant]
+    run.mkdir(parents=True, exist_ok=True)
     parent = TREND / "RTL_trend_rr.mq5"
-    expert = RUN / f"{EXPERT}.mq5"
+    expert = run / f"{EXPERT}.mq5"
     files = {expert.name: build_source(parent.read_text(encoding="utf-8-sig")), INCLUDE.name: INCLUDE.read_text(encoding="utf-8"),
              "contract_rolls.mqh": rolls_include()}
-    changed = any(not (RUN / n).exists() or (RUN / n).read_text(encoding="utf-8-sig") != text for n, text in files.items())
-    if changed and list(RUN.glob("*.completed.json")):
+    changed = any(not (run / n).exists() or (run / n).read_text(encoding="utf-8-sig") != text for n, text in files.items())
+    if changed and list(run.glob("*.completed.json")):
         raise RuntimeError("Preserve completed runs; do not overwrite their source")
     for name, text in files.items():
-        (RUN / name).write_text(text, encoding="utf-8-sig" if name == expert.name else "utf-8")
+        (run / name).write_text(text, encoding="utf-8-sig" if name == expert.name else "utf-8")
     for name in ("early_closes.mqh", "trend_rr_ledger.mqh", "trend_rr_research.mqh"):
-        shutil.copyfile(TREND / name, RUN / name)
+        shutil.copyfile(TREND / name, run / name)
     base_ini = (TREND / f"{TAG}.ini").read_text(encoding="utf-16")
     jobs = []
-    for job, inputs in JOBS.items():
-        tag = f"{STEM}_{job}"
-        path = RUN / f"{tag}.ini"
-        if not (RUN / f"{tag}.completed.json").exists():
+    for job, inputs in jobs_in.items():
+        tag = f"{stem}_{job}"
+        path = run / f"{tag}.ini"
+        if not (run / f"{tag}.completed.json").exists():
             ini = base_ini
             for key, value in dict(Expert=fr"{INSTALL}\{EXPERT}.ex5", RunTag=tag, Report=f"{tag}.htm").items():
                 ini, n = re.subn(rf"(?m)^{key}=.*$", lambda m: f"{key}={value}", ini)
@@ -89,9 +97,9 @@ def main():
                     parent_source=str(parent), parent_sha256=sha256(parent), parent_ini=str(TREND / f"{TAG}.ini"),
                     include_source=str(INCLUDE), include_sha256=sha256(INCLUDE), expert_sha256=sha256(expert),
                     protocol_sha256=sha256(PROTOCOL), jobs=jobs)
-    (RUN / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+    (run / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     print(expert, len(jobs), "jobs")
 
 
 if __name__ == "__main__":
-    main()
+    main(*sys.argv[1:])

@@ -11,13 +11,14 @@
 // ReclaimMode 1 = classify + log only (no orders; output identical to the verified classify-only run).
 // ReclaimMode 2 = primary: buy stop at L, stop low(s), on bars whose status is "order".
 // ReclaimMode 3 = control C1: the same bars, buy stop at high(s), stop low(s).
-// Order life: OrderLife bars (cancelled at the open of bar t + OrderLife), or earlier on a touch of low(s)
-// (bid <= low(s) on any tick, SROnTick), by the parent's window exit / flatten ("external"), or when a new order
+// Order life: OrderLife bars (cancelled at the open of bar t + OrderLife), or earlier: on a touch of low(s)
+// (bid <= low(s) on any tick, SROnTick) if CancelOnLow; by the window exit / flatten ("external"); or when a new order
 // replaces it. A breakdown skipped for min risk or a gap does not replace a pending order. After a fill the parent's
 // long exit applies (bar-close target at entry + RiskReward x R).
 
 input int    ReclaimMode   = 1;     // 1 classify only, 2 primary (buy stop at L), 3 control C1 (buy stop at high(s))
 input int    OrderLife     = 3;     // bars an unfilled order lives
+input bool   CancelOnLow   = true;  // cancel an unfilled order when the bid touches low(s) (Q24 follow-up: false)
 input double BreakDepthA   = 0.0;   // break threshold below the level, x A (primary 0, S1 0.5)
 input double MinRiskA      = 0.25;  // minimum risk L - low(s), x A
 input int    LevelN        = 5;     // swing-low strength
@@ -117,11 +118,11 @@ void SRDeinit()
    }
    else
    {
-      FileWrite(f, "reclaim_mode", "break_depth_a", "min_risk_a", "order_life", "log_errors", "send_errors",
+      FileWrite(f, "reclaim_mode", "break_depth_a", "min_risk_a", "order_life", "cancel_on_low", "log_errors", "send_errors",
                 "cancel_errors", "close_errors", "placed", "filled", "cancel_touch_low", "cancel_expired",
                 "cancel_replaced", "cancel_external", "order", "gap_above", "min_risk", "no_break", "no_level",
                 "missing_history", "contract_roll", "invalid_atr");
-      FileWrite(f, ReclaimMode, BreakDepthA, MinRiskA, OrderLife, g_srErrors, g_srSendErrors, g_srCancelErrors,
+      FileWrite(f, ReclaimMode, BreakDepthA, MinRiskA, OrderLife, (int)CancelOnLow, g_srErrors, g_srSendErrors, g_srCancelErrors,
                 tr_closeErrors, g_srPlaced, g_srFilled, g_srCancelTouch, g_srCancelExpired, g_srCancelReplaced,
                 g_srCancelExternal, g_srCounts[0], g_srCounts[1], g_srCounts[2], g_srCounts[3], g_srCounts[4],
                 g_srCounts[5], g_srCounts[6], g_srCounts[7]);
@@ -273,7 +274,7 @@ void SROnTick()
       if(!PositionSelect(_Symbol)) SRLogCancel("external");   // a fill is reported by SROnFill on this tick
       return;
    }
-   if(SymbolInfoDouble(_Symbol, SYMBOL_BID) <= g_srOrdStop) SRCancel("touch_low");
+   if(CancelOnLow && SymbolInfoDouble(_Symbol, SYMBOL_BID) <= g_srOrdStop) SRCancel("touch_low");
 }
 
 // Called by the parent when a new position appears (after FreezeTrendAtEntry).

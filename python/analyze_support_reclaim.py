@@ -3,8 +3,10 @@
 Frozen protocol: docs/levels/SUPPORT_RECLAIM_PROTOCOL.md. Reads the verified MT5 runs in
 Reports/levels/support_reclaim_runs_20261007/ (verify_support_reclaim_trade.py first), applies the frozen reading
 rule and writes summary.json, yearly.csv, labels.csv and trades_<job>.csv there.
+Usage: analyze_support_reclaim.py [nocancel]   (the exploratory follow-up without cancellation on a touch of the low)
 """
 import json
+import sys
 
 import numpy as np
 import pandas as pd
@@ -13,7 +15,8 @@ from analyze_price_levels import PERIODS, ROOT, sha256
 from analyze_support_interaction import trade_metrics
 from analyze_trendline_breakdown import ALL_PERIODS, describe, period_of, week_bootstrap
 from verify_support_reclaim import RUN as CLASSIFY, STEM as CLASSIFY_STEM, bars
-from verify_support_reclaim_trade import RUN, STEM, load_ledger, load_log, load_table, minutes
+from prepare_support_reclaim import VARIANTS
+from verify_support_reclaim_trade import load_ledger, load_log, load_table, minutes
 
 PROTOCOL = ROOT / "docs" / "levels" / "SUPPORT_RECLAIM_PROTOCOL.md"
 DAILY = ROOT / "Reports" / "trend_rr_20261002" / "daily_reference.csv"
@@ -23,9 +26,9 @@ JOBS = ("primary", "c1", "primary_s1", "c1_s1")
 RTL = {"train": dict(pf=1.106, mean_r=-0.004), "recent": dict(pf=1.107, mean_r=0.060)}
 
 
-def load(job):
-    tag = f"{STEM}_{job}"
-    v = json.loads((RUN / f"{tag}_verification.json").read_text())
+def load(job, run, stem):
+    tag = f"{stem}_{job}"
+    v = json.loads((run / f"{tag}_verification.json").read_text())
     assert v["mismatched_rows"] == 0, (job, "replay mismatches")
     assert v["logged_not_expected_unexplained"] == 0 and v["expected_not_logged_unexplained"] == 0, job
     assert v["order_life"]["disagree"] == 0, (job, "order life")
@@ -38,8 +41,8 @@ def load(job):
                 "ledger_range_is_planned_r", "ledger_signal_is_s", "same_session_exit", "mt5_trades"):
         assert a[key] == n, (job, key)
     assert a["overlapping_trades"] == 0 and a["mt5_net_matches_ledger"]
-    led = load_ledger(tag)
-    fills = load_table(RUN / f"{tag}_fills.csv", ("fill_time", "order_bar", "s_time", "key_time"),
+    led = load_ledger(tag, run)
+    fills = load_table(run / f"{tag}_fills.csv", ("fill_time", "order_bar", "s_time", "key_time"),
                        ("fill_price", "sl", "order_entry", "order_stop", "level", "age"))
     assert (fills.fill_time.to_numpy() == led.entry_time.to_numpy()).all()
     led = pd.concat([led, fills[["order_bar", "s_time", "order_entry", "order_stop", "level", "key_time", "age"]]], axis=1)
@@ -51,9 +54,9 @@ def load(job):
     led["year"] = led.order_bar.dt.year
     led["stop_on_fill_bar"] = (led.exit_class == "stop") & \
         (led.exit_time.dt.floor("30min") == led.entry_time.dt.floor("30min"))
-    cancels = load_table(RUN / f"{tag}_cancels.csv", ("cancel_time", "order_bar"), ("order_entry", "order_stop", "age"))
+    cancels = load_table(run / f"{tag}_cancels.csv", ("cancel_time", "order_bar"), ("order_entry", "order_stop", "age"))
     cancels["period"] = period_of(cancels.order_bar)
-    log = load_log(RUN / f"{tag}_reclaim.csv")
+    log = load_log(run / f"{tag}_reclaim.csv")
     log["period"] = period_of(log.bar_time)
     return led, cancels, log, v
 
@@ -85,11 +88,12 @@ def labels(t, b, daily):
     return pd.DataFrame(out)
 
 
-def main():
-    manifest = json.loads((RUN / "manifest.json").read_text())
+def main(variant=""):
+    run, stem, _ = VARIANTS[variant]
+    manifest = json.loads((run / "manifest.json").read_text())
     runs, cancels, logs, verif = {}, {}, {}, {}
     for job in JOBS:
-        runs[job], cancels[job], logs[job], verif[job] = load(job)
+        runs[job], cancels[job], logs[job], verif[job] = load(job, run, stem)
     mt, _, ml, _ = minutes()
     for t in runs.values():
         k = np.searchsorted(mt, t.entry_time.dt.floor("min").to_numpy())
@@ -139,11 +143,11 @@ def main():
                summary=summary, skips=skips, rule=rule, passed=passed, bootstrap=boot, rtl_context=RTL,
                verification={k: dict(fills=v["audit"]["fills"], mismatched_rows=v["mismatched_rows"],
                                      order_life=v["order_life"]) for k, v in verif.items()})
-    (RUN / "summary.json").write_text(json.dumps(out, indent=2, default=float), encoding="utf-8")
-    yearly.to_csv(RUN / "yearly.csv", index=False)
-    lab.to_csv(RUN / "labels.csv", index=False)
+    (run / "summary.json").write_text(json.dumps(out, indent=2, default=float), encoding="utf-8")
+    yearly.to_csv(run / "yearly.csv", index=False)
+    lab.to_csv(run / "labels.csv", index=False)
     for job, t in runs.items():
-        t.to_csv(RUN / f"trades_{job}.csv", index=False)
+        t.to_csv(run / f"trades_{job}.csv", index=False)
     print(json.dumps(dict(rule=rule, passed=passed, bootstrap=boot), indent=1, default=float))
     for job in runs:
         for p in ALL_PERIODS:
@@ -158,4 +162,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main(*sys.argv[1:])

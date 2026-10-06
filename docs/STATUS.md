@@ -63,6 +63,8 @@ Buy stop at the level after a red candle closes below it, stop at its low, 3-bar
 -0.073/-0.051; worse than the candle-high entry (C1) in 2020-26; 5/11 years. 58% of orders cancelled (low taken first),
 a third of fills stopped in the fill bar. Post hoc only: risk >= 1 x ATR positive in both periods. Execution fact: inside a
 minute the tester spread is 0.01, so a buy stop fills only when the bid trades at it (14,541 orders replayed, 0 unexplained).
+Exploratory follow-up without cancellation on a touch of the low (user's original design): also fails, PF 0.964/1.059,
+mean R -0.113/-0.006, below C1 in both periods, 4/11 years; the added low-taken-first trades are mixed (PF 0.855/1.052).
 
 **Level research:** Q13 audited Q12's previous-week-low lead. Its 276 fills
 represent 126 weekly events; earlier advantages survive single-year/week

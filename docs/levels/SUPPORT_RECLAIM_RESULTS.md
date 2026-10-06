@@ -180,3 +180,49 @@ Fixed before running:
 - Exploratory: chosen after seeing Q24, on data already examined. A pass
   justifies only forward / demo evidence, not adoption. Nothing else is tried
   in this follow-up (no risk floor change).
+
+### No-cancellation result (2026-10-07): also fails; the added trades are mixed
+
+Run folder `Reports/levels/support_reclaim_nocancel_20261007/` (same EA with
+`CancelOnLow = false`; classify regression byte-identical; all four runs pass
+the same checks: 0 replay mismatches, every order's life matches the
+one-minute replay with 0 unexplained cases (3 bar-boundary fills), audit
+complete, MT5 net = ledger).
+
+| Period | Run | Trades | Net $ | PF | Mean net R | Win % | Closed DD $ |
+|---|---|---:|---:|---:|---:|---:|---:|
+| 2016-19 | **Primary, no cancel** | 756 | -324 | **0.964** | **-0.113** | 39.6 | 767 |
+| 2016-19 | C1, no cancel | 338 | +43 | 1.007 | -0.083 | 43.5 | 820 |
+| 2016-19 | S1 primary, no cancel | 380 | +709 | 1.127 | +0.030 | 45.8 | 756 |
+| 2016-19 | S1 C1, no cancel | 171 | +422 | 1.130 | -0.018 | 47.4 | 392 |
+| 2020-26 | **Primary, no cancel** | 1,284 | +2,935 | **1.059** | **-0.006** | 38.1 | 2,870 |
+| 2020-26 | C1, no cancel | 536 | +2,853 | 1.088 | +0.029 | 45.1 | 3,639 |
+| 2020-26 | S1 primary, no cancel | 640 | -813 | 0.976 | -0.027 | 40.3 | 3,031 |
+| 2020-26 | S1 C1, no cancel | 270 | +3,545 | 1.201 | +0.060 | 46.7 | 2,374 |
+| 2010-15 | Primary, no cancel | 1,033 | -686 | 0.899 | -0.054 | 39.5 | 1,021 |
+
+**Rule:** fails PF > 1 in 2016-19, mean R > 0 in both periods, mean R > C1 in
+both, S1 in 2020-26, and the year count (4 of 11). Bootstrap of primary minus
+C1 mean R: [-0.147, +0.082] and [-0.137, +0.067].
+
+**The setups where the low was taken first (the user's question).** Every
+Q24 trade reappears unchanged in the no-cancel run (433 / 756 trades, identical
+results), so the difference is exactly the orders Q24 cancelled and that later
+reclaimed the level:
+
+| Period | Added trades (low taken first, then reclaimed) | PF | Mean R |
+|---|---:|---:|---:|
+| 2010-15 | 462 | 0.866 | -0.113 |
+| 2016-19 | 323 | 0.855 | -0.168 |
+| 2020-26 | 528 | 1.052 | +0.058 |
+
+They are not invalid setups, but they are not better either: worse than the
+Q24 fills earlier and slightly better recently, about break-even overall.
+Without the cancellation, 60-70% of orders fill (from about 40%), 72-73% of
+expiries/replacements happen without a fill, and a third of fills still stop
+out in the fill bar (243 / 756, 421 / 1,284). The post-hoc risk split looks the
+same as in Q24 (risk < 1 x A loses in both periods; >= 1 x A is near or above
+break-even).
+
+Neither version of the reclaim entry beats buying the same candle's high
+(C1), and neither passes. Q24 is closed; nothing adopted.

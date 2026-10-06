@@ -9,7 +9,8 @@ generated tables, ledgers and MT5 reports are grouped under `Reports/levels/`.
 candle closes below it, stop at the candle low, 3-bar life. PF 1.042/1.063 in dollars but mean R -0.073/-0.051; worse
 than buying the candle high on the same bars in 2020-26 (C1 +0.047); 5/11 years. 57-58% of orders are cancelled because
 price takes out the candle low first; a third of fills stop out in the fill bar. Post hoc: risk >= 1 x ATR is positive
-in both periods, below it loses (not a lead; needs untouched data).
+in both periods, below it loses (not a lead; needs untouched data). Exploratory no-cancel follow-up
+(the user's original design): also fails (PF 0.964/1.059, R -0.113/-0.006); the added low-taken-first trades are mixed.
 
 ## Previous: swing-low breakdown short (Q23) - fails stage 1; short-side level research stops
 
