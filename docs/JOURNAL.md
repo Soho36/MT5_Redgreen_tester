@@ -398,5 +398,12 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   mean R -0.050/-0.041, gross negative; only 18-19% reach 2R. Descriptive regime split: red-candle shorts lose in
   bear regimes too.
 
+## 2026-10-06: Q22 protocol frozen (RTL longs after a rising-line break)
+
+- After Q21, user chose to use the break on the long side. Prior evidence (Q14 broken-line contact, Q21 no follow-through)
+  points to "better" rather than "worse", so the user chose a two-sided gate: skip filter if worse, failed-breakdown long if better.
+- [Protocol](trendlines/BREAKDOWN_RTL_PROTOCOL.md): group A = red signal candle breaks a live line, B = break in the 10 bars
+  before; Q10 census attribution, no new MT5 run; sensitivity S1. Future separate study noted: Q18-mirror swing-low breakdown short.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

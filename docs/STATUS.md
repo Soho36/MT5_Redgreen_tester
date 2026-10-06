@@ -42,6 +42,11 @@ break) also loses; every red-candle short loses on NQ (C2 PF 0.84/0.97). 4 MT5 r
 Exploratory 2R target (user request, plan fixed first): also fails, PF 0.916/0.891, mean R -0.050/-0.041. Red-candle
 shorts lose in bear regimes too (descriptive).
 
+**Q22 (2026-10-06, frozen, not run): RTL longs at or after a rising-line break** ([protocol](trendlines/BREAKDOWN_RTL_PROTOCOL.md)).
+Two-sided gate on existing baseline fills (worse -> skip filter, better -> failed-breakdown long).
+**Queued as a separate study (user, 2026-10-06):** Q18 mirror short - sell stop at an intact one-week swing-low level
+approached from above. The RTL mirror (green candle, sell stop at its low) was tried manually by the user: choppy, unstable.
+
 **Level research:** Q13 audited Q12's previous-week-low lead. Its 276 fills
 represent 126 weekly events; earlier advantages survive single-year/week
 deletions, but recent dollar profit is concentrated in 2025-2026 and the small
