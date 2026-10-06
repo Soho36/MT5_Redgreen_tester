@@ -405,5 +405,11 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - [Protocol](trendlines/BREAKDOWN_RTL_PROTOCOL.md): group A = red signal candle breaks a live line, B = break in the 10 bars
   before; Q10 census attribution, no new MT5 run; sensitivity S1. Future separate study noted: Q18-mirror swing-low breakdown short.
 
+## 2026-10-06: Q22 results, no gate passes
+
+- [Results](trendlines/BREAKDOWN_RTL_RESULTS.md): against the prior evidence, RTL buys on the red breakdown candle are worse
+  than every other signal in both periods (PF 1.010/0.831), 7/11 years, 2020-26 interval excludes zero; the skip-filter gate
+  fails only on S1. 10-bar post-break group: no difference. Break events = verified Q21 log on 170,256 bars, 0 mismatches.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*
