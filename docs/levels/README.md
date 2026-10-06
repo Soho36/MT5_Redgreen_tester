@@ -3,7 +3,15 @@
 Updated 2026-10-04. This folder contains all level-study result documents;
 generated tables, ledgers and MT5 reports are grouped under `Reports/levels/`.
 
-## Latest: horizontal swing-high breakouts (Q18)
+## Latest: swing-low breakdown short (Q23, frozen 2026-10-06, not run)
+
+[Protocol](SUPPORT_BREAKDOWN_PROTOCOL.md). The exact short mirror of Q18: a green M30 signal's sell stop at its
+low (stop at its high) sitting at an intact one-week swing-low level approached from above (fill = break).
+Stage 0 is a new MT5 run of the short mirror baseline (the population); stage 1 the Q18 gate with the frozen
+Q11 classifier unchanged; stage 2 stand-alone only if stage 1 passes. Stopping rule: a failure ends
+short-side level research.
+
+## Previous: horizontal swing-high breakouts (Q18)
 
 [Results](BREAKOUT_RESULTS.md) · [Protocol](BREAKOUT_PROTOCOL.md). **Passes both stages**, the first
 level/line definition to do so: stage-1 PF 1.198/1.192 vs 1.093/1.095; traded alone, mean R

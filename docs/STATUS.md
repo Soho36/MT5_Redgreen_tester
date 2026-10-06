@@ -46,8 +46,8 @@ shorts lose in bear regimes too (descriptive).
 RTL buys on the red breakdown candle are worse than every other signal (PF 1.010/0.831 vs 1.111/1.123, avg R -0.070/-0.069
 vs -0.002/+0.065, 7/11 years; 2020-26 interval excludes zero), but the S1 (deeper break) sensitivity disagrees, so no skip
 filter. Signals in the 10 bars after a break: no difference. With Q21: the break bar pays in neither direction.
-**Queued as a separate study (user, 2026-10-06):** Q18 mirror short - sell stop at an intact one-week swing-low level
-approached from above. The RTL mirror (green candle, sell stop at its low) was tried manually by the user: choppy, unstable.
+**[Q23](levels/SUPPORT_BREAKDOWN_PROTOCOL.md) (2026-10-06, frozen, not run):** the Q18 mirror short - green signal's sell stop at
+an intact one-week swing-low level approached from above; stage 0 = MT5 run of the short mirror baseline (population). The RTL mirror (green candle, sell stop at its low) was tried manually by the user: choppy, unstable.
 
 **Level research:** Q13 audited Q12's previous-week-low lead. Its 276 fills
 represent 126 weekly events; earlier advantages survive single-year/week

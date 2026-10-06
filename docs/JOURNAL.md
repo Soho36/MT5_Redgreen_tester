@@ -411,5 +411,11 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   than every other signal in both periods (PF 1.010/0.831), 7/11 years, 2020-26 interval excludes zero; the skip-filter gate
   fails only on S1. 10-bar post-break group: no difference. Break events = verified Q21 log on 170,256 bars, 0 mismatches.
 
+## 2026-10-06: Q23 protocol frozen (Q18 mirror short)
+
+- User asked for the short mirror of Q18 with the same level rules. [Protocol](levels/SUPPORT_BREAKDOWN_PROTOCOL.md):
+  green signal, sell stop at its low at an intact swing-low level approached from above; frozen Q11 classifier as is.
+- No short census exists, so stage 0 is a new MT5 run of the short mirror baseline (green run 1-3, mirrored exit).
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*
