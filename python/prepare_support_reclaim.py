@@ -1,10 +1,16 @@
-"""Prepare the Q24 support-reclaim EA and its classify-only tester jobs (protocol: docs/levels/SUPPORT_RECLAIM_PROTOCOL.md).
+"""Prepare the Q24 support-reclaim EA and its tester jobs (protocol: docs/levels/SUPPORT_RECLAIM_PROTOCOL.md).
 
 Copies the Q10 baseline research EA (Reports/trend_rr_20261002/RTL_trend_rr.mq5, tag f50_baseline) and replaces its
 red-candle buy-stop entry with mt5/experts/support_reclaim.mqh, called at the open of every eligible bar (flat,
 inside a trade window, before the flatten). SROnNewBar runs first on every new bar, before the flatten, position and
-window checks, so a breakdown spends its level whether or not the bar is eligible. Jobs: `classify`
-(BreakDepthA = 0, primary) and `classify_s1` (0.5), ReclaimMode = 1, no orders; verified by verify_support_reclaim.py.
+window checks, so a breakdown spends its level whether or not the bar is eligible. Trading hooks: SROnTick is the
+first line of OnTick (cancel on a touch of low(s), notice orders the parent cancelled), SROnFill logs fills, and
+RiskReward sets the bar-close target in every regime (the Q20 audit's BullRR/BearRR bug). The trade is a long, so the
+parent's own exit and ledger apply unchanged.
+
+The verified classify-only run lives in Reports/levels/support_reclaim_20261007/ (verify_support_reclaim.py). This
+writes Reports/levels/support_reclaim_runs_20261007/ with `classify` (ReclaimMode 1 again: a regression check against
+that verified log), `primary` (2), `c1` (3), `primary_s1` and `c1_s1` (BreakDepthA 0.5).
 """
 import json
 import re
@@ -15,13 +21,15 @@ from analyze_price_levels import ROOT, sha256
 from prepare_resistance_standalone import INSTALL, rolls_include
 from prepare_trendline_breakdown import ENTRY, patch
 
-RUN = ROOT / "Reports" / "levels" / "support_reclaim_20261007"
-STEM = "support_reclaim_20261007"
+RUN = ROOT / "Reports" / "levels" / "support_reclaim_runs_20261007"
+STEM = "support_reclaim_runs_20261007"
 EXPERT = "RTL_support_reclaim"
 INCLUDE = ROOT / "mt5" / "experts" / "support_reclaim.mqh"
 PROTOCOL = ROOT / "docs" / "levels" / "SUPPORT_RECLAIM_PROTOCOL.md"
-COMMON = dict(ReclaimMode=1, MinRiskA=0.25, LevelN=5, LevelSessions=5)
-JOBS = {"classify": dict(COMMON, BreakDepthA=0.0), "classify_s1": dict(COMMON, BreakDepthA=0.5)}
+COMMON = dict(MinRiskA=0.25, LevelN=5, LevelSessions=5, OrderLife=3)
+JOBS = {"classify": dict(COMMON, ReclaimMode=1, BreakDepthA=0.0),
+        "primary": dict(COMMON, ReclaimMode=2, BreakDepthA=0.0), "c1": dict(COMMON, ReclaimMode=3, BreakDepthA=0.0),
+        "primary_s1": dict(COMMON, ReclaimMode=2, BreakDepthA=0.5), "c1_s1": dict(COMMON, ReclaimMode=3, BreakDepthA=0.5)}
 
 
 def build_source(source):
@@ -29,11 +37,17 @@ def build_source(source):
         ('#include "trend_rr_ledger.mqh"',
          '#include "trend_rr_ledger.mqh"\n#include "contract_rolls.mqh"\n'
          '#include "support_reclaim.mqh"   // Q24 research entry', 1),
+        ("int OnInit()\n{", "int OnInit()\n{\n"
+         "   if(!MathIsValidNumber(RiskReward) || RiskReward<=0) return INIT_PARAMETERS_INCORRECT;", 1),
         ("   if(!OpenTrendExports()) return INIT_FAILED;",
          "   if(!SRInit()) return INIT_FAILED;\n   if(!OpenTrendExports()) return INIT_FAILED;", 1),
         ("   FileClose(f);\n   return(0.0);\n}", "   FileClose(f);\n   SRDeinit();\n   return(0.0);\n}", 1),
+        ("void OnTick()\n\n{\n", "void OnTick()\n\n{\n   SROnTick();   // Q24: cancel on a touch of low(s); orders the parent cancelled\n", 1),
         ("   lastBar = barOpen;\n",
          "   lastBar = barOpen;\n   SROnNewBar(barOpen);   // Q24: every bar, so a breakdown spends its level either way\n", 1),
+        ("       FreezeTrendAtEntry();\n", "       FreezeTrendAtEntry();\n"
+         "       tr_rr=RiskReward;   // Q24: one bar-close target in every regime\n"
+         "       SROnFill();         // Q24 fill log\n", 1),
     ])
     assert source.count(ENTRY) == 1 and source.rstrip().endswith("}")
     head = source[:source.index(ENTRY)]
@@ -66,9 +80,12 @@ def main():
                 assert n == 1, key
             ini = ini.replace("[TesterInputs]", "[TesterInputs]\n" + "\n".join(f"{k}={v}" for k, v in inputs.items()), 1)
             path.write_text(ini, encoding="utf-16")
-        jobs.append(dict(tag=tag, ini=str(path), inputs=inputs, report=f"{tag}.htm",
-                         outputs=[f"{tag}_reclaim.csv", f"{tag}_reclaim_stats.csv", f"runband_{tag}_1.00_stats.csv"]))
-    manifest = dict(experiment="Q24 buy the reclaim of a broken swing-low level, classify-only, one-minute OHLC",
+        outputs = [f"{tag}_reclaim.csv", f"{tag}_reclaim_stats.csv", f"runband_{tag}_1.00_stats.csv"]
+        if inputs["ReclaimMode"] >= 2:
+            outputs += [f"{tag}_fills.csv", f"{tag}_cancels.csv", f"runband_{tag}_1.00.csv", f"{tag}_checks.csv",
+                        f"{tag}_signals.csv"]
+        jobs.append(dict(tag=tag, ini=str(path), inputs=inputs, report=f"{tag}.htm", outputs=outputs))
+    manifest = dict(experiment="Q24 buy the reclaim of a broken swing-low level, full-history one-minute OHLC",
                     parent_source=str(parent), parent_sha256=sha256(parent), parent_ini=str(TREND / f"{TAG}.ini"),
                     include_source=str(INCLUDE), include_sha256=sha256(INCLUDE), expert_sha256=sha256(expert),
                     protocol_sha256=sha256(PROTOCOL), jobs=jobs)

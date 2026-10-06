@@ -3,11 +3,13 @@
 Updated 2026-10-04. This folder contains all level-study result documents;
 generated tables, ledgers and MT5 reports are grouped under `Reports/levels/`.
 
-## Latest: buy the reclaim of a broken swing-low level (Q24, frozen 2026-10-07, not run)
+## Latest: buy the reclaim of a broken swing-low level (Q24) - fails
 
-[Protocol](SUPPORT_RECLAIM_PROTOCOL.md). Red candle opens at/above an intact Q11 swing-low level and closes below
-it -> buy stop at the level, stop at the candle low, 3-bar order life (cancelled if price trades at/below that low),
-min risk 0.25 x ATR, 1R exit. Decision control C1: the same candles with the RTL entry (buy stop at the high).
+[Results](SUPPORT_RECLAIM_RESULTS.md) · [Protocol](SUPPORT_RECLAIM_PROTOCOL.md). Buy stop at the level after a red
+candle closes below it, stop at the candle low, 3-bar life. PF 1.042/1.063 in dollars but mean R -0.073/-0.051; worse
+than buying the candle high on the same bars in 2020-26 (C1 +0.047); 5/11 years. 57-58% of orders are cancelled because
+price takes out the candle low first; a third of fills stop out in the fill bar. Post hoc: risk >= 1 x ATR is positive
+in both periods, below it loses (not a lead; needs untouched data).
 
 ## Previous: swing-low breakdown short (Q23) - fails stage 1; short-side level research stops
 

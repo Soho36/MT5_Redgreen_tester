@@ -95,7 +95,7 @@ def volume(log, period):
     return dict(placed=int((p.action == "placed").sum()), gap_skips=int((p.action == "gap_below").sum()))
 
 
-def week_bootstrap(p, c, period):
+def week_bootstrap(p, c, period, seed=SEED):
     """Paired calendar-week resampling of primary minus control: mean net R and PF."""
     start, end = PERIODS[period]
     weeks = pd.period_range(pd.Timestamp(start), pd.Timestamp(end) - pd.Timedelta(days=1), freq="W")
@@ -107,7 +107,7 @@ def week_bootstrap(p, c, period):
                 g.net.apply(lambda x: -x[x < 0].sum()).reindex(weeks, fill_value=0).to_numpy())
     ps, pn, pg, pl = by_week(p)
     cs, cn, cg, cl = by_week(c)
-    idx = np.random.default_rng(SEED).integers(0, len(weeks), size=(BOOT, len(weeks)))
+    idx = np.random.default_rng(seed).integers(0, len(weeks), size=(BOOT, len(weeks)))
     mean_diff = ps[idx].sum(1) / pn[idx].sum(1) - cs[idx].sum(1) / cn[idx].sum(1)
     pf_diff = pg[idx].sum(1) / pl[idx].sum(1) - cg[idx].sum(1) / cl[idx].sum(1)
     q = lambda x: [float(np.quantile(x, 0.025)), float(np.quantile(x, 0.975))]

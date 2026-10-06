@@ -58,9 +58,11 @@ Green signal's sell stop at an intact swing-low level approached from above: bet
 but PF 0.992/1.038, N = 3 disagrees. The short mirror baseline (stage 0 MT5 run) loses in every period, PF 0.750/0.916/0.974,
 confirming the user's manual test. Every short tried in Q21-Q23 loses on NQ.
 
-**Q24 (2026-10-07, frozen, classify verified, no trades yet): buy the reclaim of a broken swing-low level** ([protocol](levels/SUPPORT_RECLAIM_PROTOCOL.md)).
-Buy stop at the level after a red candle closes below it; stop at the candle low; 3-bar life; min risk 0.25 x ATR.
-Classify-only EA = Python on all 184,888 bars; 1,094 / 1,828 orders; min-risk skips 6-8%. Next: trading build.
+**[Q24](levels/SUPPORT_RECLAIM_RESULTS.md) (2026-10-07): buying the reclaim of a broken swing-low level fails.**
+Buy stop at the level after a red candle closes below it, stop at its low, 3-bar life: PF 1.042/1.063 but mean R
+-0.073/-0.051; worse than the candle-high entry (C1) in 2020-26; 5/11 years. 58% of orders cancelled (low taken first),
+a third of fills stopped in the fill bar. Post hoc only: risk >= 1 x ATR positive in both periods. Execution fact: inside a
+minute the tester spread is 0.01, so a buy stop fills only when the bid trades at it (14,541 orders replayed, 0 unexplained).
 
 **Level research:** Q13 audited Q12's previous-week-low lead. Its 276 fills
 represent 126 weekly events; earlier advantages survive single-year/week

@@ -16,13 +16,15 @@ import pandas as pd
 from analyze_level_visit import M30
 from analyze_price_levels import sha256
 from level_visit import bar_frame, swing_lows
-from prepare_support_reclaim import RUN, STEM
+from analyze_price_levels import ROOT
 from support_reclaim import level_states, resolve, run_spent
 from trend_regimes import ROLLS
 from verify_location_validation import read_rows
 from verify_trendline_breakdown import eligible_times
 from verify_trendline_limit import period_of
 
+RUN = ROOT / "Reports" / "levels" / "support_reclaim_20261007"
+STEM = "support_reclaim_20261007"
 LINE_TOL = 1e-6
 _B, _PIV = None, None
 

@@ -441,5 +441,13 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   184,888 eligible bars, 0 mismatches, first time. [Verification](levels/SUPPORT_RECLAIM_PROTOCOL.md#pre-trade-verification-done-2026-10-07-no-outcomes).
 - Counts only: 1,094 / 1,828 orders (2016-19 / 2020-26); min-risk skips 6-8% of breakdowns (none under S1); cost ~0.06R / 0.02R.
 
+## 2026-10-07: Q24 trading runs, the reclaim buy stop fails
+
+- Trading build (3-bar life, tick-level cancel on a touch of the candle low, C1 at the candle high); classify regression
+  byte-identical; 4 runs replayed (0 mismatches) and every order's life replayed on M1 data (0 unexplained).
+- Execution fact: intrabar spread is 0.01 (source file), so buy stops fill only when the bid reaches them.
+- [Results](levels/SUPPORT_RECLAIM_RESULTS.md): PF 1.042/1.063, mean R -0.073/-0.051, fails mean R > 0 and C1 in 2020-26;
+  5/11 years. Small-risk trades drive the losses; risk >= 1 x ATR positive in both periods (post hoc, not a lead).
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

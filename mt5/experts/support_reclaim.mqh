@@ -8,9 +8,16 @@
 // L - low(s) >= MinRiskA x A and the ask is below L. A break spends its level (recorded on every bar by SROnNewBar).
 // Requires contract_rolls.mqh (CR_DATE/CR_ID). Floating-point expressions follow the Python order.
 //
-// ReclaimMode 1 = classify + log only (no orders). The trading modes are added after this log is verified.
+// ReclaimMode 1 = classify + log only (no orders; output identical to the verified classify-only run).
+// ReclaimMode 2 = primary: buy stop at L, stop low(s), on bars whose status is "order".
+// ReclaimMode 3 = control C1: the same bars, buy stop at high(s), stop low(s).
+// Order life: OrderLife bars (cancelled at the open of bar t + OrderLife), or earlier on a touch of low(s)
+// (bid <= low(s) on any tick, SROnTick), by the parent's window exit / flatten ("external"), or when a new order
+// replaces it. A breakdown skipped for min risk or a gap does not replace a pending order. After a fill the parent's
+// long exit applies (bar-close target at entry + RiskReward x R).
 
-input int    ReclaimMode   = 1;     // 1 classify only
+input int    ReclaimMode   = 1;     // 1 classify only, 2 primary (buy stop at L), 3 control C1 (buy stop at high(s))
+input int    OrderLife     = 3;     // bars an unfilled order lives
 input double BreakDepthA   = 0.0;   // break threshold below the level, x A (primary 0, S1 0.5)
 input double MinRiskA      = 0.25;  // minimum risk L - low(s), x A
 input int    LevelN        = 5;     // swing-low strength
@@ -20,8 +27,14 @@ input int    LevelSessions = 5;     // previous sessions in the window
 
 enum SRStatus { SR_ORDER=0, SR_GAP=1, SR_MINRISK=2, SR_NO_BREAK=3, SR_NO_LEVEL=4, SR_MISSING=5, SR_ROLL=6, SR_ATR=7 };
 string SR_NAMES[8] = {"order","gap_above","min_risk","no_break","no_level","missing_history","contract_roll","invalid_atr"};
-int    g_srFile = INVALID_HANDLE;
-int    g_srErrors = 0;
+int    g_srFile = INVALID_HANDLE, g_srFills = INVALID_HANDLE, g_srCancels = INVALID_HANDLE;
+int    g_srErrors = 0, g_srSendErrors = 0, g_srCancelErrors = 0, g_srPlaced = 0, g_srFilled = 0;
+int    g_srCancelTouch = 0, g_srCancelExpired = 0, g_srCancelReplaced = 0, g_srCancelExternal = 0;
+// The order resting now.
+ulong    g_srTicket = 0;
+datetime g_srOrdBar = 0, g_srOrdS = 0, g_srOrdKey = 0;
+double   g_srOrdEntry = 0, g_srOrdStop = 0, g_srOrdLevel = 0;
+int      g_srOrdAge = 0;
 int    g_srCounts[8];
 // Spent levels (defining pivot times), pruned once far outside any window.
 datetime g_srSpent[];
@@ -63,27 +76,56 @@ void SRPruneSpent(datetime now)
 
 bool SRInit()
 {
-   if(ReclaimMode != 1 || !MathIsValidNumber(BreakDepthA) || BreakDepthA < 0 || !MathIsValidNumber(MinRiskA)
+   if(ReclaimMode < 1 || ReclaimMode > 3 || OrderLife < 1 || !MathIsValidNumber(BreakDepthA) || BreakDepthA < 0 || !MathIsValidNumber(MinRiskA)
       || MinRiskA < 0 || LevelN < 1 || LevelSessions < 0) return false;
    g_srFile = FileOpen(g_runTag + "_reclaim.csv", FILE_WRITE|FILE_CSV|FILE_COMMON);
    if(g_srFile == INVALID_HANDLE) return false;
-   FileWrite(g_srFile, "bar_time", "s_time", "open", "ask", "bid", "status", "level", "key_time", "t0_time", "members",
-             "atr", "entry", "stop", "risk", "known_pivots", "levels", "levels_live", "levels_broken", "s_red",
-             "same_contract");
+   if(ReclaimMode == 1)
+      FileWrite(g_srFile, "bar_time", "s_time", "open", "ask", "bid", "status", "level", "key_time", "t0_time", "members",
+                "atr", "entry", "stop", "risk", "known_pivots", "levels", "levels_live", "levels_broken", "s_red",
+                "same_contract");
+   else
+   {
+      FileWrite(g_srFile, "bar_time", "s_time", "open", "ask", "bid", "status", "level", "key_time", "t0_time", "members",
+                "atr", "entry", "stop", "risk", "known_pivots", "levels", "levels_live", "levels_broken", "s_red",
+                "same_contract", "pending_at_open", "order_entry", "order_stop", "action");
+      g_srFills = FileOpen(g_runTag + "_fills.csv", FILE_WRITE|FILE_CSV|FILE_COMMON);
+      g_srCancels = FileOpen(g_runTag + "_cancels.csv", FILE_WRITE|FILE_CSV|FILE_COMMON);
+      if(g_srFills == INVALID_HANDLE || g_srCancels == INVALID_HANDLE) return false;
+      FileWrite(g_srFills, "fill_time", "fill_price", "sl", "order_bar", "s_time", "order_entry", "order_stop", "level",
+                "key_time", "age");
+      FileWrite(g_srCancels, "cancel_time", "order_bar", "order_entry", "order_stop", "age", "reason", "bid");
+   }
    return true;
 }
 
 void SRDeinit()
 {
    if(g_srFile != INVALID_HANDLE) FileClose(g_srFile);
-   g_srFile = INVALID_HANDLE;
+   if(g_srFills != INVALID_HANDLE) FileClose(g_srFills);
+   if(g_srCancels != INVALID_HANDLE) FileClose(g_srCancels);
+   g_srFile = INVALID_HANDLE; g_srFills = INVALID_HANDLE; g_srCancels = INVALID_HANDLE;
    int f = FileOpen(g_runTag + "_reclaim_stats.csv", FILE_WRITE|FILE_CSV|FILE_COMMON);
    if(f == INVALID_HANDLE) return;
-   FileWrite(f, "reclaim_mode", "break_depth_a", "min_risk_a", "log_errors", "tick", "order", "gap_above", "min_risk",
-             "no_break", "no_level", "missing_history", "contract_roll", "invalid_atr");
-   FileWrite(f, ReclaimMode, BreakDepthA, MinRiskA, g_srErrors,
-             DoubleToString(SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_SIZE), 10), g_srCounts[0], g_srCounts[1],
-             g_srCounts[2], g_srCounts[3], g_srCounts[4], g_srCounts[5], g_srCounts[6], g_srCounts[7]);
+   if(ReclaimMode == 1)
+   {
+      FileWrite(f, "reclaim_mode", "break_depth_a", "min_risk_a", "log_errors", "tick", "order", "gap_above", "min_risk",
+                "no_break", "no_level", "missing_history", "contract_roll", "invalid_atr");
+      FileWrite(f, ReclaimMode, BreakDepthA, MinRiskA, g_srErrors,
+                DoubleToString(SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_SIZE), 10), g_srCounts[0], g_srCounts[1],
+                g_srCounts[2], g_srCounts[3], g_srCounts[4], g_srCounts[5], g_srCounts[6], g_srCounts[7]);
+   }
+   else
+   {
+      FileWrite(f, "reclaim_mode", "break_depth_a", "min_risk_a", "order_life", "log_errors", "send_errors",
+                "cancel_errors", "close_errors", "placed", "filled", "cancel_touch_low", "cancel_expired",
+                "cancel_replaced", "cancel_external", "order", "gap_above", "min_risk", "no_break", "no_level",
+                "missing_history", "contract_roll", "invalid_atr");
+      FileWrite(f, ReclaimMode, BreakDepthA, MinRiskA, OrderLife, g_srErrors, g_srSendErrors, g_srCancelErrors,
+                tr_closeErrors, g_srPlaced, g_srFilled, g_srCancelTouch, g_srCancelExpired, g_srCancelReplaced,
+                g_srCancelExternal, g_srCounts[0], g_srCounts[1], g_srCounts[2], g_srCounts[3], g_srCounts[4],
+                g_srCounts[5], g_srCounts[6], g_srCounts[7]);
+   }
    FileClose(f);
 }
 
@@ -192,10 +234,89 @@ int SRClassify(datetime barOpen, double ask, datetime &sTime, double &level, dat
    return SR_ORDER;
 }
 
+// ---- Trading modes (2 primary: buy stop at L; 3 control C1: buy stop at high(s)) ----
+
+bool SRSelectPending()
+{
+   return (g_srTicket > 0 && OrderSelect(g_srTicket));
+}
+
+void SRLogCancel(string reason)
+{
+   if(reason == "touch_low") g_srCancelTouch++;
+   else if(reason == "expired") g_srCancelExpired++;
+   else if(reason == "replaced") g_srCancelReplaced++;
+   else g_srCancelExternal++;
+   if(FileWrite(g_srCancels, TimeToString(TimeCurrent(), TIME_DATE|TIME_SECONDS), TimeToString(g_srOrdBar, TIME_DATE|TIME_SECONDS),
+      DoubleToString(g_srOrdEntry, 2), DoubleToString(g_srOrdStop, 2), g_srOrdAge, reason,
+      DoubleToString(SymbolInfoDouble(_Symbol, SYMBOL_BID), 2)) == 0)
+      g_srErrors++;
+   g_srTicket = 0;
+}
+
+void SRCancel(string reason)
+{
+   MqlTradeRequest req = {};
+   MqlTradeResult  res = {};
+   req.action = TRADE_ACTION_REMOVE;
+   req.order  = g_srTicket;
+   if(!OrderSend(req, res) || res.retcode != TRADE_RETCODE_DONE) { g_srCancelErrors++; return; }
+   SRLogCancel(reason);
+}
+
+// First thing in OnTick: notice an order cancelled by the parent (window exit, flatten) and cancel on a touch of low(s).
+void SROnTick()
+{
+   if(ReclaimMode < 2 || g_srTicket == 0) return;
+   if(!SRSelectPending())
+   {
+      if(!PositionSelect(_Symbol)) SRLogCancel("external");   // a fill is reported by SROnFill on this tick
+      return;
+   }
+   if(SymbolInfoDouble(_Symbol, SYMBOL_BID) <= g_srOrdStop) SRCancel("touch_low");
+}
+
+// Called by the parent when a new position appears (after FreezeTrendAtEntry).
+void SROnFill()
+{
+   if(ReclaimMode < 2 || !PositionSelect(_Symbol)) return;
+   g_srFilled++;
+   if(FileWrite(g_srFills, TimeToString((datetime)PositionGetInteger(POSITION_TIME), TIME_DATE|TIME_SECONDS),
+      DoubleToString(PositionGetDouble(POSITION_PRICE_OPEN), 2), DoubleToString(PositionGetDouble(POSITION_SL), 2),
+      TimeToString(g_srOrdBar, TIME_DATE|TIME_SECONDS), TimeToString(g_srOrdS, TIME_DATE|TIME_SECONDS),
+      DoubleToString(g_srOrdEntry, 2), DoubleToString(g_srOrdStop, 2), DoubleToString(g_srOrdLevel, 2),
+      TimeToString(g_srOrdKey, TIME_DATE|TIME_SECONDS), g_srOrdAge) == 0)
+      g_srErrors++;
+   g_srTicket = 0;
+}
+
+bool SRSend(double entry, double stop)
+{
+   MqlTradeRequest req = {};
+   MqlTradeResult  res = {};
+   req.action       = TRADE_ACTION_PENDING;
+   req.symbol       = _Symbol;
+   req.volume       = Lots;
+   req.type         = ORDER_TYPE_BUY_STOP;
+   req.price        = NormalizeDouble(entry, _Digits);
+   req.sl           = NormalizeDouble(stop, _Digits);
+   req.deviation    = Slippage;
+   req.type_filling = ORDER_FILLING_RETURN;
+   req.type_time    = ORDER_TIME_GTC;
+   if(!OrderSend(req, res) || res.retcode != TRADE_RETCODE_DONE) { g_srSendErrors++; return false; }
+   g_srTicket = res.order;
+   return true;
+}
+
 // Called once per new bar, before the flatten / position / window checks: classifies bar s and records breaks.
 void SROnNewBar(datetime barOpen)
 {
    SRPruneSpent(barOpen);
+   if(ReclaimMode >= 2 && SRSelectPending())
+   {
+      g_srOrdAge++;
+      if(g_srOrdAge >= OrderLife) SRCancel("expired");
+   }
    double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
    g_srBar = barOpen;
    g_srSt = SRClassify(barOpen, ask, g_srS, g_srLevel, g_srKey, g_srT0, g_srMembers, g_srEntry, g_srStop, g_srRisk,
@@ -209,6 +330,7 @@ void SROnBar(datetime barOpen)
    double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK), bid = SymbolInfoDouble(_Symbol, SYMBOL_BID);
    double open = iOpen(_Symbol, _Period, 0);
    g_srCounts[g_srSt]++;
+   if(ReclaimMode >= 2) { SRTradeBar(barOpen, open, ask, bid); return; }
    if(FileWrite(g_srFile, TimeToString(barOpen, TIME_DATE|TIME_SECONDS),
       (g_srS > 0 ? TimeToString(g_srS, TIME_DATE|TIME_SECONDS) : ""), DoubleToString(open, 2), DoubleToString(ask, 2),
       DoubleToString(bid, 2), SR_NAMES[g_srSt], DoubleToString(g_srLevel, 2),
@@ -216,5 +338,39 @@ void SROnBar(datetime barOpen)
       (g_srT0 > 0 ? TimeToString(g_srT0, TIME_DATE|TIME_SECONDS) : ""), g_srMembers, DoubleToString(g_srAtr, 10),
       DoubleToString(g_srEntry, 2), DoubleToString(g_srStop, 2), DoubleToString(g_srRisk, 2), g_srKnown, g_srLevels,
       g_srLive, g_srBroken, (int)g_srRed, (int)g_srSame) == 0)
+      g_srErrors++;
+}
+
+// Trading modes at an eligible bar: place (or replace) the buy stop when the classification says "order".
+void SRTradeBar(datetime barOpen, double open, double ask, double bid)
+{
+   bool pending = SRSelectPending();
+   string action = "no_order";
+   double oEntry = 0, oStop = 0;
+   if(g_srSt == SR_ORDER)
+   {
+      oEntry = (ReclaimMode == 2 ? g_srEntry : iHigh(_Symbol, _Period, 1));
+      oStop = g_srStop;
+      bool replaced = false;
+      if(pending) { SRCancel("replaced"); replaced = true; }
+      g_candleRange = oEntry - oStop;   // planned R in points, written to the trade ledger as candle_range
+      LogTrendSignal();                 // signal bar s OHLC into the ledger; sets g_signalTime
+      if(SRSend(oEntry, oStop))
+      {
+         g_srPlaced++;
+         g_srOrdBar = barOpen; g_srOrdS = g_srS; g_srOrdKey = g_srKey; g_srOrdEntry = oEntry; g_srOrdStop = oStop;
+         g_srOrdLevel = g_srLevel; g_srOrdAge = 0;
+         action = (replaced ? "replaced" : "placed");
+      }
+      else action = "send_failed";
+   }
+   if(FileWrite(g_srFile, TimeToString(barOpen, TIME_DATE|TIME_SECONDS),
+      (g_srS > 0 ? TimeToString(g_srS, TIME_DATE|TIME_SECONDS) : ""), DoubleToString(open, 2), DoubleToString(ask, 2),
+      DoubleToString(bid, 2), SR_NAMES[g_srSt], DoubleToString(g_srLevel, 2),
+      (g_srKey > 0 ? TimeToString(g_srKey, TIME_DATE|TIME_SECONDS) : ""),
+      (g_srT0 > 0 ? TimeToString(g_srT0, TIME_DATE|TIME_SECONDS) : ""), g_srMembers, DoubleToString(g_srAtr, 10),
+      DoubleToString(g_srEntry, 2), DoubleToString(g_srStop, 2), DoubleToString(g_srRisk, 2), g_srKnown, g_srLevels,
+      g_srLive, g_srBroken, (int)g_srRed, (int)g_srSame, (int)pending, DoubleToString(oEntry, 2),
+      DoubleToString(oStop, 2), action) == 0)
       g_srErrors++;
 }
