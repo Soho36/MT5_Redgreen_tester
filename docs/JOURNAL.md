@@ -429,5 +429,11 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - [Q24](TRADE_STREAKS_RESULTS.md): 14,968 current RTL trades; within-session and cross-session streaks, next-trade R/win rates, week intervals and 2,000 month/day shuffles. No predictive gate passes; five daily wins have only 2/13 next trades.
 - Session stops after 3–5 losses reduce DD but help dollars in only 5–6/11 years; no rule adopted. Seven tests and independent replay of every state/20 policies pass, zero mismatches.
 
+## 2026-10-07: Q24 protocol frozen (buy the reclaim of a broken swing-low level)
+
+- After the Q23 charts, user proposed going long off the same levels: buy stop at the level after a red candle breaks
+  and closes below it, stop at that candle's low. User set a 3-bar order life and a 0.25 x ATR minimum risk (skips reported).
+- [Protocol](levels/SUPPORT_RECLAIM_PROTOCOL.md): decision control C1 = same candles with the RTL entry (buy stop at the high).
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

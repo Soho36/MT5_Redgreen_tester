@@ -3,7 +3,13 @@
 Updated 2026-10-04. This folder contains all level-study result documents;
 generated tables, ledgers and MT5 reports are grouped under `Reports/levels/`.
 
-## Latest: swing-low breakdown short (Q23) - fails stage 1; short-side level research stops
+## Latest: buy the reclaim of a broken swing-low level (Q24, frozen 2026-10-07, not run)
+
+[Protocol](SUPPORT_RECLAIM_PROTOCOL.md). Red candle opens at/above an intact Q11 swing-low level and closes below
+it -> buy stop at the level, stop at the candle low, 3-bar order life (cancelled if price trades at/below that low),
+min risk 0.25 x ATR, 1R exit. Decision control C1: the same candles with the RTL entry (buy stop at the high).
+
+## Previous: swing-low breakdown short (Q23) - fails stage 1; short-side level research stops
 
 [Results](SUPPORT_BREAKDOWN_RESULTS.md) · [Protocol](SUPPORT_BREAKDOWN_PROTOCOL.md). The exact short mirror of Q18
 (green signal, sell stop at its low at an intact swing-low level approached from above). Candidates beat every other
