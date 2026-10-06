@@ -59,12 +59,20 @@ def segments(b, pivots, lo, hi):
     return out
 
 
-def draw(b, signals, lo, hi, path, title, resistance=False):
-    mark = MARK_RESISTANCE if resistance else MARK
+def draw(b, signals, lo, hi, path, title, resistance=False, mark=None, subtitle=None, overlay=None, legend_extra=(),
+         width_per=None):
+    """overlay(x, y, width_per) returns extra SVG elements drawn over the markers; legend_extra adds
+    (kind, color, text) legend rows; mark and subtitle replace the defaults (used by plot_support_breakdown)."""
+    mark = mark or (MARK_RESISTANCE if resistance else MARK)
     m = lr.mirror(b) if resistance else b  # level geometry is computed in mirrored space
     price = (lambda i: b.high.iloc[i]) if resistance else (lambda i: b.low.iloc[i])
-    width_per = 2.4 if hi - lo > 400 else 7.0
-    left, right, top, bottom = 70, 250, 56, 46
+    width_per = width_per or (2.4 if hi - lo > 400 else 7.0)
+    subtitle = (subtitle or
+                ("Swing high = highest" if resistance else "Swing low = lowest") + " of 5 bars each side. Dotted until confirmed; "
+                "solid while usable; band = level +/- 0.5 x ATR(14). Broken (x) when a close is more than 0.5 x ATR "
+                + ("above" if resistance else "below") + "; dashed grey afterwards; dropped after one week. Markers sit "
+                + ("above" if resistance else "under") + " the signal candle.").split("\n")
+    left, right, top, bottom = 70, 300 if legend_extra else 250, 56 + 16 * (len(subtitle) - 1), 46
     w = int(left + right + (hi - lo + 1) * width_per)
     h = 640
     view = b.iloc[lo:hi + 1]
@@ -76,12 +84,8 @@ def draw(b, signals, lo, hi, path, title, resistance=False):
     svg = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" '
            'font-family="Segoe UI, Arial, sans-serif" font-size="12">',
            f'<rect width="{w}" height="{h}" fill="#ffffff"/>',
-           f'<text x="{left}" y="24" font-size="16" font-weight="600" fill="{INK}">{escape(title)}</text>',
-           f'<text x="{left}" y="42" fill="{MUTED}">' + escape(
-               ("Swing high = highest" if resistance else "Swing low = lowest") + " of 5 bars each side. Dotted until confirmed; "
-               "solid while usable; band = level +/- 0.5 x ATR(14). Broken (x) when a close is more than 0.5 x ATR "
-               + ("above" if resistance else "below") + "; dashed grey afterwards; dropped after one week. Markers sit "
-               + ("above" if resistance else "under") + " the signal candle.") + '</text>']
+           f'<text x="{left}" y="24" font-size="16" font-weight="600" fill="{INK}">{escape(title)}</text>'] + \
+          [f'<text x="{left}" y="{42 + 16 * n}" fill="{MUTED}">{escape(line)}</text>' for n, line in enumerate(subtitle)]
     # price grid
     step = 10 ** np.floor(np.log10((pmax - pmin) / 6))
     step *= [1, 2, 5, 10][int(np.searchsorted([1.5, 3.5, 7.5], (pmax - pmin) / 6 / step))]
@@ -141,11 +145,13 @@ def draw(b, signals, lo, hi, path, title, resistance=False):
             tip += f'; level {info["level"]:,.2f}, beyond level {info.get("poke_a", info.get("depth_a")):+.2f} ATR'
         svg.append(f'<path d="M{x(k):.1f},{yy:.1f} l5,9 h-10 z" fill="{color}" stroke="#ffffff" stroke-width="1">'
                    f'<title>{escape(tip)}</title></path>')
+    if overlay:
+        svg += overlay(x, y, width_per)
     # legend
     lx, ly = w - right + 18, top + 8
     kind = "high" if resistance else "low"
     items = [("line", LEVEL, f"Swing-{kind} level (usable)"), ("dot", LEVEL, "Not yet confirmed"),
-             ("x", DOWN, "Level broken"), ("dash", BROKEN, "Broken level (now support)" if resistance else "Broken level (now resistance)")] + [("tri", c, t) for c, t in mark.values()]
+             ("x", DOWN, "Level broken"), ("dash", BROKEN, "Broken level (now support)" if resistance else "Broken level (now resistance)")] + [("tri", c, t) for c, t in mark.values()] + list(legend_extra)
     for n_item, (kind, color, text) in enumerate(items):
         yy = ly + 22 * n_item
         if kind == "line":
@@ -154,6 +160,13 @@ def draw(b, signals, lo, hi, path, title, resistance=False):
             svg.append(f'<line x1="{lx}" x2="{lx + 22}" y1="{yy}" y2="{yy}" stroke="{color}" stroke-dasharray="1 3"/>')
         elif kind == "dash":
             svg.append(f'<line x1="{lx}" x2="{lx + 22}" y1="{yy}" y2="{yy}" stroke="{color}" stroke-dasharray="4 3"/>')
+        elif kind in ("solid", "dashed"):
+            svg.append(f'<line x1="{lx}" x2="{lx + 22}" y1="{yy}" y2="{yy}" stroke="{color}" stroke-width="2"'
+                       + (' stroke-dasharray="5 3"' if kind == "dashed" else "") + '/>')
+        elif kind == "down":
+            svg.append(f'<path d="M{lx + 11},{yy + 6} l6,-11 h-12 z" fill="{color}"/>')
+        elif kind == "circle":
+            svg.append(f'<circle cx="{lx + 11}" cy="{yy}" r="4" fill="#ffffff" stroke="{color}" stroke-width="2"/>')
         elif kind == "x":
             svg.append(f'<text x="{lx + 11}" y="{yy + 4}" text-anchor="middle" fill="{color}" font-weight="700">x</text>')
         else:

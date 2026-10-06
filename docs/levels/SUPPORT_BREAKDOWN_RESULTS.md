@@ -73,6 +73,26 @@ For comparison, the long side: RTL PF 1.106 / 1.107, Q18's breakout test
   -$3,522 and 2024-2025 are +$4,676. The mean R is +0.012.
 - **2010-2015 loses heavily** (PF 0.712), as Q18 did.
 
+## What the levels and trades look like
+
+Drawn by [`python/plot_support_breakdown.py`](../../python/plot_support_breakdown.py) from the study code and
+the verified stage-0 ledger. Blue lines are the swing-low levels (band +/- 0.5 x ATR); orange triangles under
+green candles are breakdown tests; ▼ is the short fill, ○ the exit, red/green dashes the stop (signal high)
+and the 1R target while the trade is open; grey lines are other mirror-baseline shorts.
+
+**A candidate that works (21 May 2025).** The green 08:00 candle's low sits just above an intact level; the
+sell stop fills in the next bar, price breaks through and the first close below the 1R line exits it.
+
+![Q23 winning breakdown test, 21 May 2025](../figures/q23_breakdown_win_20250521.svg)
+
+**A candidate that fails (20 May 2025).** The sell stop sits just under the level (a strict break). It
+fills, price reclaims the level and the stop at the signal high is hit: the failed breakdown that keeps
+these shorts near break-even.
+
+![Q23 losing breakdown test, 20 May 2025](../figures/q23_breakdown_loss_20250520.svg)
+
+Both sessions in one view: [20-21 May 2025](../figures/q23_support_breakdown_20250520_21.svg).
+
 ## Year by year (primary candidate vs every other green signal, avg net R)
 
 | Year | Candidate fills | Candidate avg R | Other avg R | Candidate net $ | Better |

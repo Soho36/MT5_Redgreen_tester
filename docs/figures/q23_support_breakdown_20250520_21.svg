@@ -1,0 +1,343 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1474" height="640" viewBox="0 0 1474 640" font-family="Segoe UI, Arial, sans-serif" font-size="12">
+<rect width="1474" height="640" fill="#ffffff"/>
+<text x="70" y="24" font-size="16" font-weight="600" fill="#202124">MNQ M30, 20 May 2025 01:00 to 21 May 2025 23:30: Q23 short at swing-low support</text>
+<text x="70" y="42" fill="#5f6368">Q23, short mirror of Q18. Swing low = lowest of 5 bars each side, one-week window;</text>
+<text x="70" y="58" fill="#5f6368">band = level +/- 0.5 x ATR(14). Markers sit under green signal candles: sell stop at the</text>
+<text x="70" y="74" fill="#5f6368">candle low, stop at its high, exit after a close below entry - 1R or at the session flatten.</text>
+<text x="70" y="90" fill="#5f6368">Trades are the verified stage-0 run of the short mirror baseline.</text>
+<line x1="70" x2="1174" y1="550.6" y2="550.6" stroke="#eeeeee"/>
+<text x="64" y="554.6" text-anchor="end" fill="#5f6368">21,100</text>
+<line x1="70" x2="1174" y1="457.9" y2="457.9" stroke="#eeeeee"/>
+<text x="64" y="461.9" text-anchor="end" fill="#5f6368">21,200</text>
+<line x1="70" x2="1174" y1="365.2" y2="365.2" stroke="#eeeeee"/>
+<text x="64" y="369.2" text-anchor="end" fill="#5f6368">21,300</text>
+<line x1="70" x2="1174" y1="272.5" y2="272.5" stroke="#eeeeee"/>
+<text x="64" y="276.5" text-anchor="end" fill="#5f6368">21,400</text>
+<line x1="70" x2="1174" y1="179.8" y2="179.8" stroke="#eeeeee"/>
+<text x="64" y="183.8" text-anchor="end" fill="#5f6368">21,500</text>
+<line x1="70.0" x2="70.0" y1="104" y2="594" stroke="#f3f3f3"/>
+<text x="76.0" y="610" fill="#5f6368">20 May</text>
+<line x1="622.0" x2="622.0" y1="104" y2="594" stroke="#f3f3f3"/>
+<text x="628.0" y="610" fill="#5f6368">21 May</text>
+<rect x="76.0" y="799.7" width="540.1" height="24.4" fill="#2962ff" opacity="0.07"/>
+<line x1="76.0" x2="616.0" y1="812.0" y2="812.0" stroke="#2962ff" stroke-width="1.6" opacity="0.85"><title>Swing low 20,818.00 set 13 May 07:30</title></line>
+<rect x="76.0" y="792.4" width="540.1" height="27.2" fill="#2962ff" opacity="0.07"/>
+<line x1="76.0" x2="616.0" y1="805.9" y2="805.9" stroke="#2962ff" stroke-width="1.6" opacity="0.85"><title>Swing low 20,824.50 set 13 May 11:00</title></line>
+<line x1="76.0" x2="616.0" y1="413.9" y2="413.9" stroke="#9e9e9e" stroke-width="1" stroke-dasharray="4 3" opacity="0.8"/>
+<line x1="76.0" x2="1168.0" y1="414.6" y2="414.6" stroke="#9e9e9e" stroke-width="1" stroke-dasharray="4 3" opacity="0.8"/>
+<line x1="76.0" x2="1168.0" y1="422.5" y2="422.5" stroke="#9e9e9e" stroke-width="1" stroke-dasharray="4 3" opacity="0.8"/>
+<line x1="76.0" x2="1168.0" y1="389.6" y2="389.6" stroke="#9e9e9e" stroke-width="1" stroke-dasharray="4 3" opacity="0.8"/>
+<line x1="76.0" x2="1168.0" y1="382.4" y2="382.4" stroke="#9e9e9e" stroke-width="1" stroke-dasharray="4 3" opacity="0.8"/>
+<line x1="76.0" x2="1168.0" y1="465.3" y2="465.3" stroke="#9e9e9e" stroke-width="1" stroke-dasharray="4 3" opacity="0.8"/>
+<line x1="76.0" x2="1168.0" y1="361.7" y2="361.7" stroke="#9e9e9e" stroke-width="1" stroke-dasharray="4 3" opacity="0.8"/>
+<line x1="76.0" x2="1168.0" y1="320.0" y2="320.0" stroke="#9e9e9e" stroke-width="1" stroke-dasharray="4 3" opacity="0.8"/>
+<line x1="76.0" x2="1168.0" y1="307.8" y2="307.8" stroke="#9e9e9e" stroke-width="1" stroke-dasharray="4 3" opacity="0.8"/>
+<line x1="76.0" x2="1168.0" y1="346.5" y2="346.5" stroke="#9e9e9e" stroke-width="1" stroke-dasharray="4 3" opacity="0.8"/>
+<line x1="76.0" x2="1168.0" y1="461.6" y2="461.6" stroke="#9e9e9e" stroke-width="1" stroke-dasharray="4 3" opacity="0.8"/>
+<rect x="76.0" y="519.8" width="1092.1" height="38.4" fill="#2962ff" opacity="0.07"/>
+<line x1="76.0" x2="1168.0" y1="539.0" y2="539.0" stroke="#2962ff" stroke-width="1.6" opacity="0.85"><title>Swing low 21,112.50 set 19 May 11:30</title></line>
+<rect x="88.0" y="207.9" width="168.1" height="48.6" fill="#2962ff" opacity="0.07"/>
+<line x1="76.0" x2="88.0" y1="232.2" y2="232.2" stroke="#2962ff" stroke-width="1" stroke-dasharray="1 3" opacity="0.7"/>
+<line x1="88.0" x2="256.0" y1="232.2" y2="232.2" stroke="#2962ff" stroke-width="1.6" opacity="0.85"><title>Swing low 21,443.50 set 19 May 22:00</title></line>
+<line x1="256.0" x2="1168.0" y1="232.2" y2="232.2" stroke="#9e9e9e" stroke-width="1" stroke-dasharray="4 3" opacity="0.8"/>
+<text x="256.0" y="236.2" text-anchor="middle" fill="#ef5350" font-weight="700">x</text>
+<rect x="328.0" y="261.3" width="228.1" height="34.0" fill="#2962ff" opacity="0.07"/>
+<line x1="268.0" x2="328.0" y1="278.3" y2="278.3" stroke="#2962ff" stroke-width="1" stroke-dasharray="1 3" opacity="0.7"/>
+<line x1="328.0" x2="556.0" y1="278.3" y2="278.3" stroke="#2962ff" stroke-width="1.6" opacity="0.85"><title>Swing low 21,393.75 set 20 May 09:00</title></line>
+<line x1="556.0" x2="1168.0" y1="278.3" y2="278.3" stroke="#9e9e9e" stroke-width="1" stroke-dasharray="4 3" opacity="0.8"/>
+<text x="556.0" y="282.3" text-anchor="middle" fill="#ef5350" font-weight="700">x</text>
+<rect x="508.0" y="294.4" width="300.1" height="40.2" fill="#2962ff" opacity="0.07"/>
+<line x1="448.0" x2="508.0" y1="314.5" y2="314.5" stroke="#2962ff" stroke-width="1" stroke-dasharray="1 3" opacity="0.7"/>
+<line x1="508.0" x2="808.0" y1="314.5" y2="314.5" stroke="#2962ff" stroke-width="1.6" opacity="0.85"><title>Swing low 21,354.75 set 20 May 16:30</title></line>
+<line x1="808.0" x2="1168.0" y1="314.5" y2="314.5" stroke="#9e9e9e" stroke-width="1" stroke-dasharray="4 3" opacity="0.8"/>
+<text x="808.0" y="318.5" text-anchor="middle" fill="#ef5350" font-weight="700">x</text>
+<rect x="640.0" y="340.7" width="264.1" height="52.7" fill="#2962ff" opacity="0.07"/>
+<line x1="580.0" x2="640.0" y1="367.1" y2="367.1" stroke="#2962ff" stroke-width="1" stroke-dasharray="1 3" opacity="0.7"/>
+<line x1="640.0" x2="904.0" y1="367.1" y2="367.1" stroke="#2962ff" stroke-width="1.6" opacity="0.85"><title>Swing low 21,298.00 set 20 May 22:00</title></line>
+<line x1="904.0" x2="1168.0" y1="367.1" y2="367.1" stroke="#9e9e9e" stroke-width="1" stroke-dasharray="4 3" opacity="0.8"/>
+<text x="904.0" y="371.1" text-anchor="middle" fill="#ef5350" font-weight="700">x</text>
+<rect x="892.0" y="362.6" width="12.1" height="30.3" fill="#2962ff" opacity="0.07"/>
+<line x1="832.0" x2="892.0" y1="377.7" y2="377.7" stroke="#2962ff" stroke-width="1" stroke-dasharray="1 3" opacity="0.7"/>
+<line x1="892.0" x2="904.0" y1="377.7" y2="377.7" stroke="#2962ff" stroke-width="1.6" opacity="0.85"><title>Swing low 21,286.50 set 21 May 09:30</title></line>
+<line x1="904.0" x2="1168.0" y1="377.7" y2="377.7" stroke="#9e9e9e" stroke-width="1" stroke-dasharray="4 3" opacity="0.8"/>
+<text x="904.0" y="381.7" text-anchor="middle" fill="#ef5350" font-weight="700">x</text>
+<rect x="976.0" y="410.7" width="144.1" height="39.3" fill="#2962ff" opacity="0.07"/>
+<line x1="916.0" x2="976.0" y1="430.3" y2="430.3" stroke="#2962ff" stroke-width="1" stroke-dasharray="1 3" opacity="0.7"/>
+<line x1="976.0" x2="1120.0" y1="430.3" y2="430.3" stroke="#2962ff" stroke-width="1.6" opacity="0.85"><title>Swing low 21,229.75 set 21 May 13:00</title></line>
+<line x1="1120.0" x2="1168.0" y1="430.3" y2="430.3" stroke="#9e9e9e" stroke-width="1" stroke-dasharray="4 3" opacity="0.8"/>
+<text x="1120.0" y="434.3" text-anchor="middle" fill="#ef5350" font-weight="700">x</text>
+<line x1="76.0" x2="76.0" y1="165.9" y2="181.2" stroke="#ef5350" stroke-width="1"/>
+<rect x="71.8" y="167.8" width="8.4" height="9.0" fill="#ef5350"/>
+<line x1="88.0" x2="88.0" y1="174.3" y2="186.3" stroke="#ef5350" stroke-width="1"/>
+<rect x="83.8" y="177.3" width="8.4" height="2.5" fill="#ef5350"/>
+<line x1="100.0" x2="100.0" y1="150.2" y2="181.9" stroke="#26a69a" stroke-width="1"/>
+<rect x="95.8" y="152.5" width="8.4" height="27.6" fill="#26a69a"/>
+<line x1="112.0" x2="112.0" y1="122.4" y2="158.5" stroke="#26a69a" stroke-width="1"/>
+<rect x="107.8" y="143.5" width="8.4" height="8.6" fill="#26a69a"/>
+<line x1="124.0" x2="124.0" y1="122.1" y2="146.2" stroke="#26a69a" stroke-width="1"/>
+<rect x="119.8" y="139.8" width="8.4" height="3.9" fill="#26a69a"/>
+<line x1="136.0" x2="136.0" y1="129.1" y2="167.6" stroke="#ef5350" stroke-width="1"/>
+<rect x="131.8" y="140.0" width="8.4" height="26.9" fill="#ef5350"/>
+<line x1="148.0" x2="148.0" y1="166.9" y2="218.8" stroke="#ef5350" stroke-width="1"/>
+<rect x="143.8" y="167.6" width="8.4" height="43.3" fill="#ef5350"/>
+<line x1="160.0" x2="160.0" y1="210.4" y2="238.9" stroke="#ef5350" stroke-width="1"/>
+<rect x="155.8" y="213.2" width="8.4" height="5.6" fill="#ef5350"/>
+<line x1="172.0" x2="172.0" y1="210.4" y2="232.9" stroke="#ef5350" stroke-width="1"/>
+<rect x="167.8" y="218.8" width="8.4" height="10.4" fill="#ef5350"/>
+<line x1="184.0" x2="184.0" y1="216.2" y2="240.6" stroke="#26a69a" stroke-width="1"/>
+<rect x="179.8" y="222.0" width="8.4" height="7.2" fill="#26a69a"/>
+<line x1="196.0" x2="196.0" y1="222.3" y2="236.8" stroke="#ef5350" stroke-width="1"/>
+<rect x="191.8" y="222.7" width="8.4" height="6.0" fill="#ef5350"/>
+<line x1="208.0" x2="208.0" y1="221.8" y2="247.0" stroke="#ef5350" stroke-width="1"/>
+<rect x="203.8" y="229.0" width="8.4" height="12.0" fill="#ef5350"/>
+<line x1="220.0" x2="220.0" y1="235.5" y2="254.0" stroke="#ef5350" stroke-width="1"/>
+<rect x="215.8" y="240.3" width="8.4" height="2.5" fill="#ef5350"/>
+<line x1="232.0" x2="232.0" y1="224.3" y2="248.4" stroke="#26a69a" stroke-width="1"/>
+<rect x="227.8" y="228.5" width="8.4" height="14.1" fill="#26a69a"/>
+<line x1="244.0" x2="244.0" y1="196.5" y2="229.9" stroke="#26a69a" stroke-width="1"/>
+<rect x="239.8" y="202.6" width="8.4" height="27.1" fill="#26a69a"/>
+<line x1="256.0" x2="256.0" y1="191.9" y2="257.9" stroke="#ef5350" stroke-width="1"/>
+<rect x="251.8" y="201.9" width="8.4" height="53.1" fill="#ef5350"/>
+<line x1="268.0" x2="268.0" y1="250.5" y2="278.3" stroke="#ef5350" stroke-width="1"/>
+<rect x="263.8" y="254.9" width="8.4" height="14.8" fill="#ef5350"/>
+<line x1="280.0" x2="280.0" y1="243.1" y2="271.6" stroke="#26a69a" stroke-width="1"/>
+<rect x="275.8" y="251.4" width="8.4" height="17.6" fill="#26a69a"/>
+<line x1="292.0" x2="292.0" y1="210.7" y2="265.1" stroke="#26a69a" stroke-width="1"/>
+<rect x="287.8" y="213.0" width="8.4" height="38.9" fill="#26a69a"/>
+<line x1="304.0" x2="304.0" y1="197.5" y2="257.5" stroke="#ef5350" stroke-width="1"/>
+<rect x="299.8" y="213.0" width="8.4" height="16.5" fill="#ef5350"/>
+<line x1="316.0" x2="316.0" y1="215.8" y2="263.3" stroke="#ef5350" stroke-width="1"/>
+<rect x="311.8" y="231.1" width="8.4" height="5.3" fill="#ef5350"/>
+<line x1="328.0" x2="328.0" y1="215.8" y2="245.0" stroke="#ef5350" stroke-width="1"/>
+<rect x="323.8" y="236.6" width="8.4" height="3.9" fill="#ef5350"/>
+<line x1="340.0" x2="340.0" y1="223.9" y2="258.4" stroke="#ef5350" stroke-width="1"/>
+<rect x="335.8" y="240.8" width="8.4" height="16.2" fill="#ef5350"/>
+<line x1="352.0" x2="352.0" y1="237.3" y2="257.2" stroke="#26a69a" stroke-width="1"/>
+<rect x="347.8" y="248.4" width="8.4" height="7.9" fill="#26a69a"/>
+<line x1="364.0" x2="364.0" y1="222.3" y2="254.2" stroke="#26a69a" stroke-width="1"/>
+<rect x="359.8" y="234.3" width="8.4" height="12.5" fill="#26a69a"/>
+<line x1="376.0" x2="376.0" y1="212.5" y2="243.8" stroke="#26a69a" stroke-width="1"/>
+<rect x="371.8" y="214.4" width="8.4" height="19.5" fill="#26a69a"/>
+<line x1="388.0" x2="388.0" y1="194.9" y2="220.2" stroke="#26a69a" stroke-width="1"/>
+<rect x="383.8" y="200.2" width="8.4" height="13.9" fill="#26a69a"/>
+<line x1="400.0" x2="400.0" y1="195.4" y2="214.1" stroke="#ef5350" stroke-width="1"/>
+<rect x="395.8" y="200.0" width="8.4" height="13.4" fill="#ef5350"/>
+<line x1="412.0" x2="412.0" y1="203.7" y2="229.2" stroke="#ef5350" stroke-width="1"/>
+<rect x="407.8" y="214.1" width="8.4" height="13.4" fill="#ef5350"/>
+<line x1="424.0" x2="424.0" y1="225.3" y2="255.4" stroke="#ef5350" stroke-width="1"/>
+<rect x="419.8" y="227.1" width="8.4" height="12.7" fill="#ef5350"/>
+<line x1="436.0" x2="436.0" y1="218.5" y2="267.9" stroke="#ef5350" stroke-width="1"/>
+<rect x="431.8" y="239.6" width="8.4" height="21.1" fill="#ef5350"/>
+<line x1="448.0" x2="448.0" y1="235.7" y2="314.5" stroke="#ef5350" stroke-width="1"/>
+<rect x="443.8" y="260.5" width="8.4" height="16.9" fill="#ef5350"/>
+<line x1="460.0" x2="460.0" y1="247.5" y2="306.8" stroke="#26a69a" stroke-width="1"/>
+<rect x="455.8" y="277.2" width="8.4" height="0.8" fill="#26a69a"/>
+<line x1="472.0" x2="472.0" y1="225.3" y2="289.4" stroke="#26a69a" stroke-width="1"/>
+<rect x="467.8" y="265.3" width="8.4" height="13.4" fill="#26a69a"/>
+<line x1="484.0" x2="484.0" y1="241.5" y2="284.1" stroke="#26a69a" stroke-width="1"/>
+<rect x="479.8" y="251.9" width="8.4" height="13.9" fill="#26a69a"/>
+<line x1="496.0" x2="496.0" y1="230.1" y2="281.8" stroke="#26a69a" stroke-width="1"/>
+<rect x="491.8" y="239.6" width="8.4" height="12.5" fill="#26a69a"/>
+<line x1="508.0" x2="508.0" y1="233.6" y2="270.0" stroke="#ef5350" stroke-width="1"/>
+<rect x="503.8" y="239.6" width="8.4" height="4.2" fill="#ef5350"/>
+<line x1="520.0" x2="520.0" y1="205.8" y2="246.1" stroke="#26a69a" stroke-width="1"/>
+<rect x="515.8" y="218.1" width="8.4" height="25.7" fill="#26a69a"/>
+<line x1="532.0" x2="532.0" y1="203.7" y2="232.0" stroke="#ef5350" stroke-width="1"/>
+<rect x="527.8" y="217.6" width="8.4" height="5.1" fill="#ef5350"/>
+<line x1="544.0" x2="544.0" y1="220.4" y2="265.1" stroke="#ef5350" stroke-width="1"/>
+<rect x="539.8" y="222.7" width="8.4" height="20.6" fill="#ef5350"/>
+<line x1="556.0" x2="556.0" y1="234.1" y2="327.5" stroke="#ef5350" stroke-width="1"/>
+<rect x="551.8" y="244.3" width="8.4" height="74.6" fill="#ef5350"/>
+<line x1="568.0" x2="568.0" y1="285.5" y2="325.6" stroke="#ef5350" stroke-width="1"/>
+<rect x="563.8" y="318.6" width="8.4" height="1.4" fill="#ef5350"/>
+<line x1="580.0" x2="580.0" y1="283.7" y2="367.1" stroke="#26a69a" stroke-width="1"/>
+<rect x="575.8" y="293.2" width="8.4" height="26.9" fill="#26a69a"/>
+<line x1="592.0" x2="592.0" y1="224.3" y2="292.9" stroke="#26a69a" stroke-width="1"/>
+<rect x="587.8" y="228.5" width="8.4" height="64.4" fill="#26a69a"/>
+<line x1="604.0" x2="604.0" y1="224.3" y2="273.9" stroke="#ef5350" stroke-width="1"/>
+<rect x="599.8" y="228.5" width="8.4" height="12.7" fill="#ef5350"/>
+<line x1="616.0" x2="616.0" y1="240.8" y2="263.3" stroke="#ef5350" stroke-width="1"/>
+<rect x="611.8" y="240.8" width="8.4" height="13.2" fill="#ef5350"/>
+<line x1="628.0" x2="628.0" y1="256.5" y2="326.3" stroke="#ef5350" stroke-width="1"/>
+<rect x="623.8" y="258.9" width="8.4" height="35.2" fill="#ef5350"/>
+<line x1="640.0" x2="640.0" y1="268.4" y2="295.0" stroke="#26a69a" stroke-width="1"/>
+<rect x="635.8" y="272.3" width="8.4" height="20.9" fill="#26a69a"/>
+<line x1="652.0" x2="652.0" y1="249.4" y2="275.1" stroke="#26a69a" stroke-width="1"/>
+<rect x="647.8" y="257.9" width="8.4" height="14.4" fill="#26a69a"/>
+<line x1="664.0" x2="664.0" y1="243.3" y2="267.4" stroke="#26a69a" stroke-width="1"/>
+<rect x="659.8" y="243.3" width="8.4" height="14.4" fill="#26a69a"/>
+<line x1="676.0" x2="676.0" y1="232.7" y2="269.8" stroke="#26a69a" stroke-width="1"/>
+<rect x="671.8" y="234.3" width="8.4" height="8.8" fill="#26a69a"/>
+<line x1="688.0" x2="688.0" y1="231.8" y2="254.5" stroke="#ef5350" stroke-width="1"/>
+<rect x="683.8" y="234.5" width="8.4" height="16.5" fill="#ef5350"/>
+<line x1="700.0" x2="700.0" y1="240.1" y2="273.9" stroke="#ef5350" stroke-width="1"/>
+<rect x="695.8" y="251.0" width="8.4" height="21.5" fill="#ef5350"/>
+<line x1="712.0" x2="712.0" y1="260.5" y2="283.0" stroke="#26a69a" stroke-width="1"/>
+<rect x="707.8" y="271.4" width="8.4" height="1.2" fill="#26a69a"/>
+<line x1="724.0" x2="724.0" y1="267.2" y2="296.2" stroke="#ef5350" stroke-width="1"/>
+<rect x="719.8" y="270.7" width="8.4" height="23.6" fill="#ef5350"/>
+<line x1="736.0" x2="736.0" y1="273.5" y2="297.3" stroke="#26a69a" stroke-width="1"/>
+<rect x="731.8" y="292.2" width="8.4" height="1.9" fill="#26a69a"/>
+<line x1="748.0" x2="748.0" y1="274.6" y2="298.3" stroke="#ef5350" stroke-width="1"/>
+<rect x="743.8" y="292.5" width="8.4" height="3.5" fill="#ef5350"/>
+<line x1="760.0" x2="760.0" y1="281.6" y2="301.0" stroke="#26a69a" stroke-width="1"/>
+<rect x="755.8" y="293.6" width="8.4" height="2.8" fill="#26a69a"/>
+<line x1="772.0" x2="772.0" y1="292.9" y2="314.2" stroke="#ef5350" stroke-width="1"/>
+<rect x="767.8" y="292.9" width="8.4" height="18.8" fill="#ef5350"/>
+<line x1="784.0" x2="784.0" y1="302.9" y2="319.3" stroke="#26a69a" stroke-width="1"/>
+<rect x="779.8" y="311.7" width="8.4" height="0.8" fill="#26a69a"/>
+<line x1="796.0" x2="796.0" y1="286.9" y2="311.2" stroke="#26a69a" stroke-width="1"/>
+<rect x="791.8" y="293.6" width="8.4" height="17.6" fill="#26a69a"/>
+<line x1="808.0" x2="808.0" y1="292.9" y2="340.2" stroke="#ef5350" stroke-width="1"/>
+<rect x="803.8" y="292.9" width="8.4" height="43.3" fill="#ef5350"/>
+<line x1="820.0" x2="820.0" y1="327.7" y2="362.0" stroke="#ef5350" stroke-width="1"/>
+<rect x="815.8" y="336.0" width="8.4" height="9.7" fill="#ef5350"/>
+<line x1="832.0" x2="832.0" y1="335.6" y2="377.7" stroke="#ef5350" stroke-width="1"/>
+<rect x="827.8" y="346.5" width="8.4" height="23.9" fill="#ef5350"/>
+<line x1="844.0" x2="844.0" y1="338.8" y2="371.5" stroke="#26a69a" stroke-width="1"/>
+<rect x="839.8" y="345.5" width="8.4" height="25.3" fill="#26a69a"/>
+<line x1="856.0" x2="856.0" y1="320.0" y2="362.2" stroke="#26a69a" stroke-width="1"/>
+<rect x="851.8" y="325.1" width="8.4" height="21.1" fill="#26a69a"/>
+<line x1="868.0" x2="868.0" y1="320.5" y2="350.4" stroke="#ef5350" stroke-width="1"/>
+<rect x="863.8" y="324.9" width="8.4" height="16.0" fill="#ef5350"/>
+<line x1="880.0" x2="880.0" y1="338.3" y2="375.2" stroke="#ef5350" stroke-width="1"/>
+<rect x="875.8" y="341.6" width="8.4" height="2.8" fill="#ef5350"/>
+<line x1="892.0" x2="892.0" y1="331.9" y2="363.4" stroke="#ef5350" stroke-width="1"/>
+<rect x="887.8" y="344.1" width="8.4" height="17.6" fill="#ef5350"/>
+<line x1="904.0" x2="904.0" y1="356.6" y2="401.1" stroke="#ef5350" stroke-width="1"/>
+<rect x="899.8" y="362.2" width="8.4" height="31.5" fill="#ef5350"/>
+<line x1="916.0" x2="916.0" y1="387.9" y2="430.3" stroke="#ef5350" stroke-width="1"/>
+<rect x="911.8" y="393.5" width="8.4" height="18.3" fill="#ef5350"/>
+<line x1="928.0" x2="928.0" y1="362.9" y2="412.7" stroke="#26a69a" stroke-width="1"/>
+<rect x="923.8" y="365.0" width="8.4" height="45.2" fill="#26a69a"/>
+<line x1="940.0" x2="940.0" y1="323.0" y2="368.9" stroke="#26a69a" stroke-width="1"/>
+<rect x="935.8" y="330.9" width="8.4" height="34.3" fill="#26a69a"/>
+<line x1="952.0" x2="952.0" y1="313.5" y2="342.7" stroke="#26a69a" stroke-width="1"/>
+<rect x="947.8" y="328.1" width="8.4" height="2.3" fill="#26a69a"/>
+<line x1="964.0" x2="964.0" y1="325.8" y2="367.5" stroke="#ef5350" stroke-width="1"/>
+<rect x="959.8" y="328.4" width="8.4" height="13.4" fill="#ef5350"/>
+<line x1="976.0" x2="976.0" y1="341.8" y2="380.1" stroke="#ef5350" stroke-width="1"/>
+<rect x="971.8" y="341.8" width="8.4" height="12.5" fill="#ef5350"/>
+<line x1="988.0" x2="988.0" y1="348.5" y2="400.0" stroke="#ef5350" stroke-width="1"/>
+<rect x="983.8" y="353.4" width="8.4" height="31.1" fill="#ef5350"/>
+<line x1="1000.0" x2="1000.0" y1="268.1" y2="386.5" stroke="#26a69a" stroke-width="1"/>
+<rect x="995.8" y="296.4" width="8.4" height="88.5" fill="#26a69a"/>
+<line x1="1012.0" x2="1012.0" y1="234.3" y2="307.3" stroke="#26a69a" stroke-width="1"/>
+<rect x="1007.8" y="288.3" width="8.4" height="8.1" fill="#26a69a"/>
+<line x1="1024.0" x2="1024.0" y1="217.8" y2="298.5" stroke="#26a69a" stroke-width="1"/>
+<rect x="1019.8" y="219.9" width="8.4" height="67.7" fill="#26a69a"/>
+<line x1="1036.0" x2="1036.0" y1="147.4" y2="229.0" stroke="#26a69a" stroke-width="1"/>
+<rect x="1031.8" y="162.0" width="8.4" height="58.2" fill="#26a69a"/>
+<line x1="1048.0" x2="1048.0" y1="148.8" y2="186.3" stroke="#ef5350" stroke-width="1"/>
+<rect x="1043.8" y="162.5" width="8.4" height="2.8" fill="#ef5350"/>
+<line x1="1060.0" x2="1060.0" y1="133.5" y2="172.0" stroke="#26a69a" stroke-width="1"/>
+<rect x="1055.8" y="151.3" width="8.4" height="14.6" fill="#26a69a"/>
+<line x1="1072.0" x2="1072.0" y1="125.6" y2="168.3" stroke="#ef5350" stroke-width="1"/>
+<rect x="1067.8" y="151.1" width="8.4" height="14.6" fill="#ef5350"/>
+<line x1="1084.0" x2="1084.0" y1="158.3" y2="462.8" stroke="#ef5350" stroke-width="1"/>
+<rect x="1079.8" y="165.7" width="8.4" height="289.0" fill="#ef5350"/>
+<line x1="1096.0" x2="1096.0" y1="339.3" y2="495.4" stroke="#26a69a" stroke-width="1"/>
+<rect x="1091.8" y="391.9" width="8.4" height="62.6" fill="#26a69a"/>
+<line x1="1108.0" x2="1108.0" y1="381.9" y2="470.7" stroke="#ef5350" stroke-width="1"/>
+<rect x="1103.8" y="391.6" width="8.4" height="29.7" fill="#ef5350"/>
+<line x1="1120.0" x2="1120.0" y1="381.2" y2="488.5" stroke="#ef5350" stroke-width="1"/>
+<rect x="1115.8" y="420.4" width="8.4" height="59.3" fill="#ef5350"/>
+<line x1="1132.0" x2="1132.0" y1="453.7" y2="575.9" stroke="#ef5350" stroke-width="1"/>
+<rect x="1127.8" y="478.3" width="8.4" height="74.8" fill="#ef5350"/>
+<line x1="1144.0" x2="1144.0" y1="438.4" y2="553.4" stroke="#26a69a" stroke-width="1"/>
+<rect x="1139.8" y="505.2" width="8.4" height="48.2" fill="#26a69a"/>
+<line x1="1156.0" x2="1156.0" y1="499.2" y2="540.2" stroke="#ef5350" stroke-width="1"/>
+<rect x="1151.8" y="505.2" width="8.4" height="14.1" fill="#ef5350"/>
+<line x1="1168.0" x2="1168.0" y1="504.3" y2="519.8" stroke="#26a69a" stroke-width="1"/>
+<rect x="1163.8" y="508.4" width="8.4" height="10.4" fill="#26a69a"/>
+<path d="M184.0,247.6 l5,9 h-10 z" fill="#f57c00" stroke="#ffffff" stroke-width="1"><title>20 May 05:30 Breakdown test from above (Q23 candidate); level 21,443.50, beyond level +0.23 ATR</title></path>
+<path d="M232.0,255.4 l5,9 h-10 z" fill="#000000" stroke="#ffffff" stroke-width="1"><title>20 May 07:30 Low &gt; 0.5 x ATR below intact level; level 21,443.50, beyond level +0.61 ATR</title></path>
+<path d="M244.0,236.9 l5,9 h-10 z" fill="#f57c00" stroke="#ffffff" stroke-width="1"><title>20 May 08:00 Breakdown test from above (Q23 candidate); level 21,443.50, beyond level -0.09 ATR</title></path>
+<path d="M280.0,278.6 l5,9 h-10 z" fill="#7b1fa2" stroke="#ffffff" stroke-width="1"><title>20 May 09:30 Contact with a broken level; level 21,443.50, beyond level +1.27 ATR</title></path>
+<path d="M292.0,272.1 l5,9 h-10 z" fill="#7b1fa2" stroke="#ffffff" stroke-width="1"><title>20 May 10:00 Contact with a broken level; level 21,443.50, beyond level +1.08 ATR</title></path>
+<path d="M352.0,264.2 l5,9 h-10 z" fill="#7b1fa2" stroke="#ffffff" stroke-width="1"><title>20 May 12:30 Contact with a broken level; level 21,443.50, beyond level +0.72 ATR</title></path>
+<path d="M364.0,261.2 l5,9 h-10 z" fill="#7b1fa2" stroke="#ffffff" stroke-width="1"><title>20 May 13:00 Contact with a broken level; level 21,443.50, beyond level +0.64 ATR</title></path>
+<path d="M376.0,250.8 l5,9 h-10 z" fill="#7b1fa2" stroke="#ffffff" stroke-width="1"><title>20 May 13:30 Contact with a broken level; level 21,443.50, beyond level +0.32 ATR</title></path>
+<path d="M472.0,296.4 l5,9 h-10 z" fill="#f57c00" stroke="#ffffff" stroke-width="1"><title>20 May 17:30 Breakdown test from above (Q23 candidate); level 21,393.75, beyond level +0.29 ATR</title></path>
+<path d="M484.0,291.1 l5,9 h-10 z" fill="#f57c00" stroke="#ffffff" stroke-width="1"><title>20 May 18:00 Breakdown test from above (Q23 candidate); level 21,393.75, beyond level +0.15 ATR</title></path>
+<path d="M496.0,288.8 l5,9 h-10 z" fill="#f57c00" stroke="#ffffff" stroke-width="1"><title>20 May 18:30 Breakdown test from above (Q23 candidate); level 21,393.75, beyond level +0.09 ATR</title></path>
+<path d="M520.0,253.1 l5,9 h-10 z" fill="#7b1fa2" stroke="#ffffff" stroke-width="1"><title>20 May 19:30 Contact with a broken level; level 21,443.50, beyond level +0.34 ATR</title></path>
+<path d="M580.0,374.1 l5,9 h-10 z" fill="#000000" stroke="#ffffff" stroke-width="1"><title>20 May 22:00 Low &gt; 0.5 x ATR below intact level; level 21,348.75, beyond level +0.96 ATR</title></path>
+<path d="M592.0,299.9 l5,9 h-10 z" fill="#7b1fa2" stroke="#ffffff" stroke-width="1"><title>20 May 22:30 Contact with a broken level; level 21,393.75, beyond level +0.28 ATR</title></path>
+<path d="M640.0,302.0 l5,9 h-10 z" fill="#f57c00" stroke="#ffffff" stroke-width="1"><title>21 May 01:30 Breakdown test from above (Q23 candidate); level 21,348.75, beyond level -0.47 ATR</title></path>
+<path d="M652.0,282.1 l5,9 h-10 z" fill="#7b1fa2" stroke="#ffffff" stroke-width="1"><title>21 May 02:00 Contact with a broken level; level 21,393.75, beyond level -0.06 ATR</title></path>
+<path d="M664.0,274.4 l5,9 h-10 z" fill="#7b1fa2" stroke="#ffffff" stroke-width="1"><title>21 May 02:30 Contact with a broken level; level 21,393.75, beyond level -0.22 ATR</title></path>
+<path d="M712.0,290.0 l5,9 h-10 z" fill="#7b1fa2" stroke="#ffffff" stroke-width="1"><title>21 May 04:30 Contact with a broken level; level 21,393.75, beyond level +0.10 ATR</title></path>
+<path d="M736.0,304.3 l5,9 h-10 z" fill="#7b1fa2" stroke="#ffffff" stroke-width="1"><title>21 May 05:30 Contact with a broken level; level 21,393.75, beyond level +0.48 ATR</title></path>
+<path d="M760.0,308.0 l5,9 h-10 z" fill="#7b1fa2" stroke="#ffffff" stroke-width="1"><title>21 May 06:30 Contact with a broken level; level 21,393.75, beyond level +0.66 ATR</title></path>
+<path d="M784.0,326.3 l5,9 h-10 z" fill="#f57c00" stroke="#ffffff" stroke-width="1"><title>21 May 07:30 Breakdown test from above (Q23 candidate); level 21,348.75, beyond level -0.02 ATR</title></path>
+<path d="M796.0,318.2 l5,9 h-10 z" fill="#f57c00" stroke="#ffffff" stroke-width="1"><title>21 May 08:00 Breakdown test from above (Q23 candidate); level 21,348.75, beyond level -0.31 ATR</title></path>
+<path d="M844.0,378.5 l5,9 h-10 z" fill="#f57c00" stroke="#ffffff" stroke-width="1"><title>21 May 10:00 Breakdown test from above (Q23 candidate); level 21,298.00, beyond level +0.15 ATR</title></path>
+<path d="M856.0,369.2 l5,9 h-10 z" fill="#f57c00" stroke="#ffffff" stroke-width="1"><title>21 May 10:30 Breakdown test from above (Q23 candidate); level 21,298.00, beyond level -0.17 ATR</title></path>
+<path d="M928.0,419.7 l5,9 h-10 z" fill="#7b1fa2" stroke="#ffffff" stroke-width="1"><title>21 May 13:30 Contact with a broken level; level 21,238.25, beyond level -0.29 ATR</title></path>
+<path d="M940.0,375.9 l5,9 h-10 z" fill="#7b1fa2" stroke="#ffffff" stroke-width="1"><title>21 May 14:00 Contact with a broken level; level 21,298.00, beyond level +0.05 ATR</title></path>
+<path d="M952.0,349.7 l5,9 h-10 z" fill="#7b1fa2" stroke="#ffffff" stroke-width="1"><title>21 May 14:30 Contact with a broken level; level 21,320.25, beyond level -0.10 ATR</title></path>
+<path d="M1000.0,393.5 l5,9 h-10 z" fill="#7b1fa2" stroke="#ffffff" stroke-width="1"><title>21 May 16:30 Contact with a broken level; level 21,273.75, beyond level -0.08 ATR</title></path>
+<path d="M1012.0,314.3 l5,9 h-10 z" fill="#7b1fa2" stroke="#ffffff" stroke-width="1"><title>21 May 17:00 Contact with a broken level; level 21,348.75, beyond level -0.28 ATR</title></path>
+<path d="M1024.0,305.5 l5,9 h-10 z" fill="#7b1fa2" stroke="#ffffff" stroke-width="1"><title>21 May 17:30 Contact with a broken level; level 21,393.75, beyond level +0.42 ATR</title></path>
+<path d="M1096.0,502.4 l5,9 h-10 z" fill="#f57c00" stroke="#ffffff" stroke-width="1"><title>21 May 20:30 Breakdown test from above (Q23 candidate); level 21,192.00, beyond level +0.41 ATR</title></path>
+<path d="M1144.0,560.4 l5,9 h-10 z" fill="#f57c00" stroke="#ffffff" stroke-width="1"><title>21 May 22:30 Breakdown test from above (Q23 candidate); level 21,112.50, beyond level +0.15 ATR</title></path>
+<path d="M1168.0,526.8 l5,9 h-10 z" fill="#f57c00" stroke="#ffffff" stroke-width="1"><title>21 May 23:30 Breakdown test from above (Q23 candidate); level 21,112.50, beyond level -0.19 ATR</title></path>
+<line x1="136.0" y1="146.2" x2="160.0" y2="213.0" stroke="#bdbdbd" stroke-width="1.2"><title>no_contact: short 21,536.25 at 20 May 03:31, stop 21,562.25, exit 21,464.25 at 04:30 (1R target), net +142.95 $</title></line>
+<line x1="202.0" x2="250.0" y1="216.2" y2="216.2" stroke="#ef5350" stroke-width="1.6" stroke-dasharray="5 3"/>
+<line x1="202.0" x2="250.0" y1="264.9" y2="264.9" stroke="#26a69a" stroke-width="1.6" stroke-dasharray="5 3"/>
+<line x1="208.0" y1="240.6" x2="244.0" y2="216.2" stroke="#ef5350" stroke-width="2"/>
+<path d="M208.0,246.6 l6,-11 h-12 z" fill="#202124"><title>breakdown_test: short 21,434.50 at 20 May 06:35, stop 21,460.75, exit 21,460.75 at 08:08 (stop), net -53.55 $</title></path>
+<circle cx="244.0" cy="216.2" r="4" fill="#ffffff" stroke="#ef5350" stroke-width="2"><title>breakdown_test: short 21,434.50 at 20 May 06:35, stop 21,460.75, exit 21,460.75 at 08:08 (stop), net -53.55 $</title></circle>
+<line x1="250.0" x2="286.0" y1="196.5" y2="196.5" stroke="#ef5350" stroke-width="1.6" stroke-dasharray="5 3"/>
+<line x1="250.0" x2="286.0" y1="263.3" y2="263.3" stroke="#26a69a" stroke-width="1.6" stroke-dasharray="5 3"/>
+<line x1="256.0" y1="229.9" x2="280.0" y2="268.8" stroke="#26a69a" stroke-width="2"/>
+<path d="M256.0,235.9 l6,-11 h-12 z" fill="#202124"><title>breakdown_test: short 21,446.00 at 20 May 08:48, stop 21,482.00, exit 21,404.00 at 09:30 (1R target), net +82.95 $</title></path>
+<circle cx="280.0" cy="268.8" r="4" fill="#ffffff" stroke="#26a69a" stroke-width="2"><title>breakdown_test: short 21,446.00 at 20 May 08:48, stop 21,482.00, exit 21,404.00 at 09:30 (1R target), net +82.95 $</title></circle>
+<line x1="544.0" y1="246.1" x2="568.0" y2="318.4" stroke="#bdbdbd" stroke-width="1.2"><title>broken_downward_contact: short 21,428.50 at 20 May 20:33, stop 21,472.00, exit 21,350.50 at 21:30 (1R target), net +154.95 $</title></line>
+<line x1="676.0" y1="267.4" x2="676.0" y2="243.3" stroke="#bdbdbd" stroke-width="1.2"><title>broken_downward_contact: short 21,405.50 at 21 May 03:07, stop 21,431.50, exit 21,431.50 at 03:24 (stop), net -53.05 $</title></line>
+<line x1="724.0" y1="283.0" x2="784.0" y2="311.9" stroke="#bdbdbd" stroke-width="1.2"><title>broken_downward_contact: short 21,388.75 at 21 May 05:17, stop 21,413.00, exit 21,357.50 at 07:30 (1R target), net +61.45 $</title></line>
+<line x1="802.0" x2="826.0" y1="286.9" y2="286.9" stroke="#ef5350" stroke-width="1.6" stroke-dasharray="5 3"/>
+<line x1="802.0" x2="826.0" y1="335.6" y2="335.6" stroke="#26a69a" stroke-width="1.6" stroke-dasharray="5 3"/>
+<line x1="808.0" y1="311.2" x2="820.0" y2="335.8" stroke="#26a69a" stroke-width="2"/>
+<path d="M808.0,317.2 l6,-11 h-12 z" fill="#202124"><title>breakdown_test: short 21,358.25 at 21 May 08:40, stop 21,384.50, exit 21,331.75 at 09:00 (1R target), net +51.95 $</title></path>
+<circle cx="820.0" cy="335.8" r="4" fill="#ffffff" stroke="#26a69a" stroke-width="2"><title>breakdown_test: short 21,358.25 at 21 May 08:40, stop 21,384.50, exit 21,331.75 at 09:00 (1R target), net +51.95 $</title></circle>
+<line x1="874.0" x2="934.0" y1="320.0" y2="320.0" stroke="#ef5350" stroke-width="1.6" stroke-dasharray="5 3"/>
+<line x1="874.0" x2="934.0" y1="404.4" y2="404.4" stroke="#26a69a" stroke-width="1.6" stroke-dasharray="5 3"/>
+<line x1="880.0" y1="362.2" x2="928.0" y2="409.9" stroke="#26a69a" stroke-width="2"/>
+<path d="M880.0,368.2 l6,-11 h-12 z" fill="#202124"><title>breakdown_test: short 21,303.25 at 21 May 11:36, stop 21,348.75, exit 21,251.75 at 13:30 (1R target), net +101.95 $</title></path>
+<circle cx="928.0" cy="409.9" r="4" fill="#ffffff" stroke="#26a69a" stroke-width="2"><title>breakdown_test: short 21,303.25 at 21 May 11:36, stop 21,348.75, exit 21,251.75 at 13:30 (1R target), net +101.95 $</title></circle>
+<line x1="964.0" y1="342.7" x2="1000.0" y2="384.7" stroke="#bdbdbd" stroke-width="1.2"><title>broken_downward_contact: short 21,324.25 at 21 May 15:03, stop 21,355.75, exit 21,279.00 at 16:30 (1R target), net +89.45 $</title></line>
+<line x1="1084.0" y1="172.0" x2="1096.0" y2="454.2" stroke="#bdbdbd" stroke-width="1.2"><title>no_contact: short 21,508.50 at 21 May 20:02, stop 21,550.00, exit 21,204.00 at 20:30 (1R target), net +607.95 $</title></line>
+<line x1="1126.0" x2="1174.0" y1="339.3" y2="339.3" stroke="#ef5350" stroke-width="1.6" stroke-dasharray="5 3"/>
+<line x1="1126.0" x2="1174.0" y1="651.6" y2="651.6" stroke="#26a69a" stroke-width="1.6" stroke-dasharray="5 3"/>
+<line x1="1132.0" y1="495.4" x2="1168.0" y2="518.6" stroke="#26a69a" stroke-width="2"/>
+<path d="M1132.0,501.4 l6,-11 h-12 z" fill="#202124"><title>breakdown_test: short 21,159.50 at 21 May 22:06, stop 21,328.00, exit 21,134.50 at 23:30 (session flatten), net +48.95 $</title></path>
+<circle cx="1168.0" cy="518.6" r="4" fill="#ffffff" stroke="#26a69a" stroke-width="2"><title>breakdown_test: short 21,159.50 at 21 May 22:06, stop 21,328.00, exit 21,134.50 at 23:30 (session flatten), net +48.95 $</title></circle>
+<line x1="1192" x2="1214" y1="112" y2="112" stroke="#2962ff" stroke-width="2"/>
+<text x="1222" y="116" fill="#202124">Swing-low level (usable)</text>
+<line x1="1192" x2="1214" y1="134" y2="134" stroke="#2962ff" stroke-dasharray="1 3"/>
+<text x="1222" y="138" fill="#202124">Not yet confirmed</text>
+<text x="1203" y="160" text-anchor="middle" fill="#ef5350" font-weight="700">x</text>
+<text x="1222" y="160" fill="#202124">Level broken</text>
+<line x1="1192" x2="1214" y1="178" y2="178" stroke="#9e9e9e" stroke-dasharray="4 3"/>
+<text x="1222" y="182" fill="#202124">Broken level (now resistance)</text>
+<path d="M1203,194 l6,11 h-12 z" fill="#f57c00"/>
+<text x="1222" y="204" fill="#202124">Breakdown test from above (Q23 candidate)</text>
+<path d="M1203,216 l6,11 h-12 z" fill="#000000"/>
+<text x="1222" y="226" fill="#202124">Low &gt; 0.5 x ATR below intact level</text>
+<path d="M1203,238 l6,11 h-12 z" fill="#7b1fa2"/>
+<text x="1222" y="248" fill="#202124">Contact with a broken level</text>
+<path d="M1203,260 l6,11 h-12 z" fill="#9e9e9e"/>
+<text x="1222" y="270" fill="#202124">Contact, price never left by 1 x ATR</text>
+<path d="M1203,294 l6,-11 h-12 z" fill="#202124"/>
+<text x="1222" y="292" fill="#202124">Short entry (sell stop at the signal low)</text>
+<circle cx="1203" cy="310" r="4" fill="#ffffff" stroke="#5f6368" stroke-width="2"/>
+<text x="1222" y="314" fill="#202124">Exit (green profit / red loss)</text>
+<line x1="1192" x2="1214" y1="332" y2="332" stroke="#ef5350" stroke-width="2" stroke-dasharray="5 3"/>
+<text x="1222" y="336" fill="#202124">Stop = signal high</text>
+<line x1="1192" x2="1214" y1="354" y2="354" stroke="#26a69a" stroke-width="2" stroke-dasharray="5 3"/>
+<text x="1222" y="358" fill="#202124">1R target (close below -&gt; exit)</text>
+<line x1="1192" x2="1214" y1="376" y2="376" stroke="#bdbdbd" stroke-width="2"/>
+<text x="1222" y="380" fill="#202124">Other mirror-baseline short</text>
+</svg>
