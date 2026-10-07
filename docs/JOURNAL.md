@@ -493,5 +493,13 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   apart; win rate 2–4 points lower; net loss in 15/17 years. The MNQ edge does not transfer to ES.
 - Found two ES source-data holes (2020-02-28, 2020-06-30 stop mid-session); noted in DATA_BUILD. Negligible here.
 
+## 2026-10-08: signal colour (GG) and a no-pattern control
+
+- Question: is the edge the red candle, or just being long NQ? User suggested GG (buy over green). One EA, `SignalMode`
+  red / green / any / market-buy control. [Results](baseline/signal-colour/RESULTS.md).
+- Not drift: the control earns +0.011 / +0.009 R before costs (intervals include 0). Green ≈ red (+0.073 / +0.066 vs
+  +0.093 / +0.085 R, overlapping). The edge is the buy stop over a previous M30 high. RTL + GG = ~2x net and ~2x DD
+  (corr +0.62). New EA `mt5/experts/GG_r_MFE_buy-stop-entry_runband.cs` (RTL with the colour flipped, verified).
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

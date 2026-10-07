@@ -39,7 +39,7 @@ Grouped as in the user's sketch ([photo](reference/setup_map_sketch.jpg)).
 Entry filters, exits, RR, sessions and order mechanics of the base strategy
 (red candle, buy stop at its high): Q1-Q5, time of day, MaxRedRun, RR, exit
 threshold, trailing stop, flatten fallback, early-close calendar, averaging,
-limit-only entry, trend-conditioned RR, Q24 trade streaks, the baseline on MES (unseen instrument).
+limit-only entry, trend-conditioned RR, Q24 trade streaks, the baseline on MES (unseen instrument), signal colour (GG) and a no-pattern control.
 
 ## Reference
 
