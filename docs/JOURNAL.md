@@ -476,5 +476,13 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   (old -> new in [moved_files.json](reference/moved_files.json)). Support reclaim renumbered Q24 -> Q25 (trade streaks
   already had Q24). Protocol hash checks now accept the recorded version from git history (`protocol_matches`).
 
+## 2026-10-08: ES 1-minute data for unseen-instrument tests
+
+- User downloaded ES (Databento, 2010-06 → 2026-10-06, two CSVs). Both files pass every check and join without
+  gap or overlap. Built `MT5_ES_continuous_2010-2026_ohlcv-1m.csv` with the NQ rules (script generalised to
+  `python/build_continuous.py`; NQ output reproduced byte for byte). Details: [DATA_BUILD.md](reference/DATA_BUILD.md#es-build-2026-10-08).
+- The old ES conversion (`MT5_v_converted.csv`) has calendar-spread prices on 3 days (2017-03-13, 2017-12-11,
+  2019-06-17). Next: user imports the new file as an MT5 custom symbol.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

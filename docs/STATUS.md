@@ -1,7 +1,12 @@
 # Project status
 
-Updated 2026-10-07. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
+Updated 2026-10-08. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
 For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
+
+**ES data for unseen-instrument tests (2026-10-08):** continuous ES 1-minute file built with the NQ rules
+(`F:\DATABENTO\ES_16_YEARS\MT5_ES_continuous_2010-2026_ohlcv-1m.csv`, 2010-06-07 → 2026-10-07), input checks clean
+([DATA_BUILD](reference/DATA_BUILD.md#es-build-2026-10-08)). Do not use the old ES conversion: 3 days hold spread prices.
+Next: import as an MT5 custom symbol.
 
 **[Q24 trade-result streaks](baseline/q24-trade-streaks/RESULTS.md) (2026-10-07): no predictive or daily-stop gate passes.**
 Current RTL ledger, 14,968 trades, $1.05 costs: after three same-session losses the next-trade win rate
