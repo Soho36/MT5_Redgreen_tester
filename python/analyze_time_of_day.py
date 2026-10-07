@@ -1,4 +1,4 @@
-"""Time-of-day diagnostic (protocol: docs/TIME_OF_DAY_RESULTS.md).
+"""Time-of-day diagnostic (protocol: docs/baseline/time-of-day/RESULTS.md).
 
 Checks the SnapshotBars=1 runs reproduce the baseline (Reports/rr_clean_20261001, RR 1.0)
 field by field, then reports net results by session block of order placement

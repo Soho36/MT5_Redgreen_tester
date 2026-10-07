@@ -1,4 +1,4 @@
-"""Q20 buy limit resting on a rising trendline; see docs/trendlines/TRENDLINE_LIMIT_PROTOCOL.md.
+"""Q20 buy limit resting on a rising trendline; see docs/setups/trendlines/uptrend-bounce-long/q20-trendline-limit/PROTOCOL.md.
 
 Per-bar order price at the open of bar t, using closed bars only (bars < t). The lines are the frozen
 Q14 ones (python/trendline_support.py), evaluated at bar t instead of at a red signal bar. Nothing

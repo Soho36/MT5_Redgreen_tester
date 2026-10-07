@@ -1,6 +1,6 @@
 """Q14: rising trendline support versus every other RTL signal.
 
-Frozen protocol: docs/trendlines/TRENDLINE_PROTOCOL.md. Reuses Q10's original-exit census,
+Frozen protocol: docs/setups/trendlines/uptrend-bounce-long/q14-trendline-support/PROTOCOL.md. Reuses Q10's original-exit census,
 attempts and fills (hash-verified); no new MT5 run. Outputs Reports/trendlines/trendline_support_20261004/.
 """
 
@@ -21,7 +21,7 @@ from trendline_support import GROUPS, UNAVAILABLE, classify, classify_contact
 ROOT = Path(__file__).absolute().parent.parent
 Q11 = ROOT / "Reports" / "levels" / "level_visit_20261004"
 STUDY = ROOT / "Reports" / "trendlines" / "trendline_support_20261004"
-PROTOCOL = ROOT / "docs" / "trendlines" / "TRENDLINE_PROTOCOL.md"
+PROTOCOL = ROOT / "docs" / "setups" / "trendlines" / "uptrend-bounce-long" / "q14-trendline-support" / "PROTOCOL.md"
 CONFIGS = {"week_n5": (5, 5), "two_weeks_n5": (5, 10), "week_n3": (3, 5)}
 PRIMARY = "week_n5"
 MIN_SEP, MIN_SLOPE = 10, 0.02

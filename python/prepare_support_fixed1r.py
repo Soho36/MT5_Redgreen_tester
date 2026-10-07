@@ -36,7 +36,7 @@ def main():
     path.write_text(ini, encoding='utf-16')
     manifest = dict(experiment='All RTL signals, fixed 1R SL and TP, full-history OHLC',
                     parent_source=str(source_path), parent_sha256=sha256(source_path), expert_sha256=sha256(expert),
-                    protocol_sha256=sha256(ROOT/'docs/SUPPORT_INTERACTION_PROTOCOL.md'),
+                    protocol_sha256=sha256(ROOT/'docs/setups/horizontal/support-bounce-long/q10-support-interaction/PROTOCOL.md'),
                     jobs=[dict(tag=RUN_TAG, ini=str(path), csv=f'runband_{RUN_TAG}_1.00.csv',
                                report=f'{RUN_TAG}.htm', extra_csv=[f'{RUN_TAG}_signals.csv', f'{RUN_TAG}_checks.csv'])])
     (RUN/'manifest.json').write_text(json.dumps(manifest, indent=2), encoding='utf-8')

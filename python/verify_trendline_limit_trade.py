@@ -1,4 +1,4 @@
-"""Q20 trading-run checks (protocol: docs/trendlines/TRENDLINE_LIMIT_PROTOCOL.md, "Verification").
+"""Q20 trading-run checks (protocol: docs/setups/trendlines/uptrend-bounce-long/q20-trendline-limit/PROTOCOL.md, "Verification").
 
 For one trading job of Reports/trendlines/trendline_limit_runs_20261005/:
 1. Logged bars = eligible bars of the verified classify-only run, minus bars that open with a position.

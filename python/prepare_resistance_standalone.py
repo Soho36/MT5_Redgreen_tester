@@ -1,4 +1,4 @@
-"""Prepare the Q17 stand-alone falling-resistance EA and tester jobs (protocol: docs/trendlines/STANDALONE_PROTOCOL.md).
+"""Prepare the Q17 stand-alone falling-resistance EA and tester jobs (protocol: docs/setups/trendlines/downtrend-breakout-long/q17-standalone/PROTOCOL.md).
 
 Copies the Q10 baseline research EA (Reports/trend_rr_20261002/RTL_trend_rr.mq5, tag f50_baseline) and adds
 mt5/experts/resistance_gate.mqh at the point where the baseline would place its buy stop. A signal that is not a
@@ -19,7 +19,7 @@ RUN = ROOT / "Reports" / "trendlines" / "resistance_standalone_20261004"
 EXPERT = "RTL_resistance_gate"
 INSTALL = "CodexTrendlineResearch"
 GATE = ROOT / "mt5" / "experts" / "resistance_gate.mqh"
-PROTOCOL = ROOT / "docs" / "trendlines" / "STANDALONE_PROTOCOL.md"
+PROTOCOL = ROOT / "docs" / "setups" / "trendlines" / "downtrend-breakout-long" / "q17-standalone" / "PROTOCOL.md"
 JOBS = {"classify": 1, "trade": 2}
 
 

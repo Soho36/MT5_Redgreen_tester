@@ -1,4 +1,4 @@
-﻿"""Prepare the clean-data RR check (protocol: docs/RR_CLEAN_DATA_RESULTS.md).
+﻿"""Prepare the clean-data RR check (protocol: docs/baseline/rr-clean-data/RESULTS.md).
 
 Reuses the compiled calendar-study EA (same source). Writes Reports/rr_clean_20261001/.
 Run with

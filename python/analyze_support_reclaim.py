@@ -1,6 +1,6 @@
 """Q24: buy the reclaim of a broken swing-low level versus the RTL entry on the same candles.
 
-Frozen protocol: docs/levels/SUPPORT_RECLAIM_PROTOCOL.md. Reads the verified MT5 runs in
+Frozen protocol: docs/setups/horizontal/support-reclaim-long/q25-support-reclaim/PROTOCOL.md. Reads the verified MT5 runs in
 Reports/levels/support_reclaim_runs_20261007/ (verify_support_reclaim_trade.py first), applies the frozen reading
 rule and writes summary.json, yearly.csv, labels.csv and trades_<job>.csv there.
 Usage: analyze_support_reclaim.py [nocancel]   (the exploratory follow-up without cancellation on a touch of the low)
@@ -18,7 +18,7 @@ from verify_support_reclaim import RUN as CLASSIFY, STEM as CLASSIFY_STEM, bars
 from prepare_support_reclaim import VARIANTS
 from verify_support_reclaim_trade import load_ledger, load_log, load_table, minutes
 
-PROTOCOL = ROOT / "docs" / "levels" / "SUPPORT_RECLAIM_PROTOCOL.md"
+PROTOCOL = ROOT / "docs" / "setups" / "horizontal" / "support-reclaim-long" / "q25-support-reclaim" / "PROTOCOL.md"
 DAILY = ROOT / "Reports" / "trend_rr_20261002" / "daily_reference.csv"
 COST, SEED = 1.05, 20261007
 DECISION = tuple(PERIODS)

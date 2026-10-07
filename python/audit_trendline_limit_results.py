@@ -14,6 +14,7 @@ import numpy as np
 import pandas as pd
 
 from verify_location_validation import read_rows
+from analyze_price_levels import protocol_matches
 
 ROOT = Path(__file__).resolve().parent.parent
 RUN = ROOT / "Reports" / "trendlines" / "trendline_limit_runs_20261005"
@@ -38,7 +39,7 @@ def audit():
     hashes = {
         "expert": digest(RUN / "RTL_trendline_limit.mq5") == manifest["expert_sha256"],
         "include": digest(RUN / "trendline_limit.mqh") == manifest["include_sha256"],
-        "protocol": digest(ROOT / "docs" / "trendlines" / "TRENDLINE_LIMIT_PROTOCOL.md") == manifest["protocol_sha256"],
+        "protocol": protocol_matches(ROOT / "docs" / "setups" / "trendlines" / "uptrend-bounce-long" / "q20-trendline-limit" / "PROTOCOL.md", manifest["protocol_sha256"]),
         "deltas": digest(RUN / manifest["deltas"]) == manifest["deltas_sha256"],
         "classify_bars": digest(RUN.parent / "trendline_limit_20261005" / "trendline_limit_20261005_classify_bars.csv") == manifest["classify_bars_sha256"],
     }

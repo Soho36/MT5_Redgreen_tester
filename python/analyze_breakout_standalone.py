@@ -1,4 +1,4 @@
-"""Q18 stage 2: stand-alone horizontal breakout candidate run; frozen protocol docs/levels/BREAKOUT_PROTOCOL.md.
+"""Q18 stage 2: stand-alone horizontal breakout candidate run; frozen protocol docs/setups/horizontal/resistance-breakout-long/q18-breakout/PROTOCOL.md.
 
 Reads the GateMode=2 MT5 run, audits it, compares it with the stage-1 attribution and the baseline full strategy,
 and applies the frozen (Q17) reading rule. Outputs into the run folder.
@@ -10,7 +10,7 @@ import numpy as np
 import pandas as pd
 
 from analyze_level_visit import load as load_q10
-from analyze_price_levels import PERIODS, ROOT, sha256
+from analyze_price_levels import PERIODS, ROOT, sha256, protocol_matches
 from analyze_support_interaction import drawdown_interval, trade_metrics
 from verify_location_validation import read_rows
 from verify_breakout_gate import load_gate
@@ -18,7 +18,7 @@ from verify_breakout_gate import load_gate
 RUN = ROOT / "Reports" / "levels" / "breakout_standalone_20261004"
 Q15 = ROOT / "Reports" / "levels" / "breakout_20261004"  # stage-1 attribution
 TAG = "breakout_standalone_20261004_trade"
-PROTOCOL = ROOT / "docs" / "levels" / "BREAKOUT_PROTOCOL.md"
+PROTOCOL = ROOT / "docs" / "setups" / "horizontal" / "resistance-breakout-long" / "q18-breakout" / "PROTOCOL.md"
 COST, SEED = 1.05, 20261004
 Q15_REF = {"train": dict(fills=751, pf=1.198, mean_r=0.049), "recent": dict(fills=1181, pf=1.192, mean_r=0.121)}
 
@@ -33,7 +33,7 @@ def period_of(times):
 def load_run():
     manifest = json.loads((RUN / "manifest.json").read_text())
     assert sha256(RUN / "RTL_level_gate.mq5") == manifest["expert_sha256"]
-    assert sha256(PROTOCOL) == manifest["protocol_sha256"], "protocol changed after freeze"
+    assert protocol_matches(PROTOCOL, manifest["protocol_sha256"]), "protocol changed after freeze"
     assert (RUN / f"{TAG}.completed.json").exists()
     ini = (RUN / f"{TAG}.ini").read_text(encoding="utf-16").splitlines()
     for value in ("GateMode=2", "Model=1", "Period=M30", "Symbol=MNQcontDTBNT20102026_2", "MaxRedRun=3",

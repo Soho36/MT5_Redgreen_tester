@@ -1,4 +1,4 @@
-"""Prepare the Q21 trendline breakdown EA and its tester jobs (protocol: docs/trendlines/BREAKDOWN_SHORT_PROTOCOL.md).
+"""Prepare the Q21 trendline breakdown EA and its tester jobs (protocol: docs/setups/trendlines/uptrend-breakdown/q21-breakdown-short/PROTOCOL.md).
 
 Copies the Q10 baseline research EA (Reports/trend_rr_20261002/RTL_trend_rr.mq5, tag f50_baseline) and replaces
 its red-candle buy-stop entry with mt5/experts/trendline_breakdown.mqh, called at the open of every eligible bar
@@ -29,7 +29,7 @@ RUN = ROOT / "Reports" / "trendlines" / "trendline_breakdown_runs_20261006"
 STEM = "trendline_breakdown_runs_20261006"
 EXPERT = "RTL_trendline_breakdown"
 INCLUDE = ROOT / "mt5" / "experts" / "trendline_breakdown.mqh"
-PROTOCOL = ROOT / "docs" / "trendlines" / "BREAKDOWN_SHORT_PROTOCOL.md"
+PROTOCOL = ROOT / "docs" / "setups" / "trendlines" / "uptrend-breakdown" / "q21-breakdown-short" / "PROTOCOL.md"
 COMMON = dict(BreakN=5, BreakSessions=5, BreakMinSep=10, BreakMinSlope=0.02)
 JOBS = {"classify": dict(BreakMode=1, BreakDepthA=0.0), "primary": dict(BreakMode=2, BreakDepthA=0.0),
         "s1": dict(BreakMode=2, BreakDepthA=0.5), "c1": dict(BreakMode=3, BreakDepthA=0.0),

@@ -3,7 +3,7 @@
 Compile Reports/averaging_entry_20261001/RTL_average.mq5 with MetaEditor, then:
   ./python/run_exit_study.ps1 -StudyDir Reports/averaging_entry_20261001 \
       -ExpertName RTL_average -InstallFolder CodexAveragingResearch
-Source strategy defaults remain unchanged. Protocol: docs/AVERAGING_ENTRY_PROTOCOL.md.
+Source strategy defaults remain unchanged. Protocol: docs/baseline/averaging-entry/PROTOCOL.md.
 """
 import argparse
 import hashlib

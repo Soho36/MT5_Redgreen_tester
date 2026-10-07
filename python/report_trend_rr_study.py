@@ -124,7 +124,7 @@ def main():
               "- `mt5/experts/trend_rr_research.mqh`: tester-only daily regime assignment and audit logging.","",
               "```powershell",r".\venv\Scripts\python.exe python\analyze_trend_rr_study.py",
               r".\venv\Scripts\python.exe python\report_trend_rr_study.py","```",""]
-    path=PROJECT_ROOT/"docs/TREND_RR_RESULTS.md"
+    path=PROJECT_ROOT/"docs/baseline/trend-rr/RESULTS.md"
     path.write_text("\n".join(lines),encoding="utf-8")
     print(path)
 

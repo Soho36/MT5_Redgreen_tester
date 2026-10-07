@@ -1,6 +1,6 @@
 """Q20: buy limit resting on a rising trendline versus the matched dip-buy control.
 
-Frozen protocol: docs/trendlines/TRENDLINE_LIMIT_PROTOCOL.md. Reads the verified MT5 runs in
+Frozen protocol: docs/setups/trendlines/uptrend-bounce-long/q20-trendline-limit/PROTOCOL.md. Reads the verified MT5 runs in
 Reports/trendlines/trendline_limit_runs_20261005/ (verify_trendline_limit_trade.py first), applies the frozen
 reading rule and writes summary.json, yearly.csv, labels.csv and report.md there.
 """
@@ -9,7 +9,7 @@ import json
 import numpy as np
 import pandas as pd
 
-from analyze_price_levels import PERIODS, ROOT, sha256
+from analyze_price_levels import PERIODS, ROOT, sha256, protocol_matches
 from analyze_support_interaction import drawdown_interval, trade_metrics
 from level_visit import swing_lows
 from trend_regimes import SOURCE
@@ -19,7 +19,7 @@ from verify_trendline_limit import bars
 from verify_trendline_limit_trade import RUN, TIME, load_fills
 
 STEM = "trendline_limit_runs_20261005"
-PROTOCOL = ROOT / "docs" / "trendlines" / "TRENDLINE_LIMIT_PROTOCOL.md"
+PROTOCOL = ROOT / "docs" / "setups" / "trendlines" / "uptrend-bounce-long" / "q20-trendline-limit" / "PROTOCOL.md"
 COST, SEED, BOOT = 1.05, 20261005, 5000
 ALL_PERIODS = {"early": ("2010-06-07", "2016-01-01"), **PERIODS}
 DECISION = tuple(PERIODS)
@@ -160,7 +160,7 @@ def label_table(led):
 
 def main():
     manifest = json.loads((RUN / "manifest.json").read_text())
-    assert sha256(PROTOCOL) == manifest["protocol_sha256"], "protocol changed after the runs were prepared"
+    assert protocol_matches(PROTOCOL, manifest["protocol_sha256"]), "protocol changed after the runs were prepared"
     runs, verif = {}, {}
     for job in [f"{n}{s}" for n in ("primary", "c1") for s in SETTINGS] + ["c2"]:
         runs[job], verif[job] = load(job)

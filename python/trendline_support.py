@@ -1,4 +1,4 @@
-"""Q14 rising trendline map and signal classification; see docs/trendlines/TRENDLINE_PROTOCOL.md.
+"""Q14 rising trendline map and signal classification; see docs/setups/trendlines/uptrend-bounce-long/q14-trendline-support/PROTOCOL.md.
 
 Pure functions on arrays of consecutive M30 bars (the bar frame from level_visit.bar_frame).
 Nothing here reads outcomes. A line is projected in bar-index space: one step per M30 bar,
@@ -77,7 +77,7 @@ def contacted_lines(b, s, n=5, sessions=5, min_sep=10, min_slope=0.02, pivots=No
     """All valid rising lines whose zone the signal range overlaps.
 
     A line must rise at least min_slope x A per bar (A = the signal's lagged ATR); flatter
-    lines are horizontal levels, studied in docs/levels/.
+    lines are horizontal levels, studied in docs/setups/horizontal/.
 
     Returns (reason_or_None, a, d, known, lines) where lines are dicts with state.
     """

@@ -1,4 +1,4 @@
-"""Prepare the Q18 stage-2 stand-alone horizontal-breakout EA and tester jobs (protocol: docs/levels/BREAKOUT_PROTOCOL.md).
+"""Prepare the Q18 stage-2 stand-alone horizontal-breakout EA and tester jobs (protocol: docs/setups/horizontal/resistance-breakout-long/q18-breakout/PROTOCOL.md).
 
 Same construction as Q17 (prepare_resistance_standalone.py): the Q10 baseline research EA plus
 mt5/experts/level_gate.mqh where the baseline would place its buy stop; a non-candidate is rejected like a MaxRedRun
@@ -18,7 +18,7 @@ RUN = ROOT / "Reports" / "levels" / "breakout_standalone_20261004"
 EXPERT = "RTL_level_gate"
 INSTALL = "CodexLevelResearch"
 GATE = ROOT / "mt5" / "experts" / "level_gate.mqh"
-PROTOCOL = ROOT / "docs" / "levels" / "BREAKOUT_PROTOCOL.md"
+PROTOCOL = ROOT / "docs" / "setups" / "horizontal" / "resistance-breakout-long" / "q18-breakout" / "PROTOCOL.md"
 JOBS = {"classify": 1, "trade": 2}
 
 

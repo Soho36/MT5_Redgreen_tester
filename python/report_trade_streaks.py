@@ -10,7 +10,7 @@ import pandas as pd
 from analyze_price_levels import sha256
 from analyze_trade_streaks import ROOT, STUDY, states
 
-DOC = ROOT / 'docs/TRADE_STREAKS_RESULTS.md'
+DOC = ROOT / 'docs/baseline/q24-trade-streaks/RESULTS.md'
 PERIOD_NAMES = {'train': '2016–19', 'recent': '2020–Jul 2026'}
 
 

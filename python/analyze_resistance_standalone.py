@@ -1,4 +1,4 @@
-"""Q17: stand-alone falling-resistance candidate run; frozen protocol docs/trendlines/STANDALONE_PROTOCOL.md.
+"""Q17: stand-alone falling-resistance candidate run; frozen protocol docs/setups/trendlines/downtrend-breakout-long/q17-standalone/PROTOCOL.md.
 
 Reads the GateMode=2 MT5 run, audits it, compares it with Q15's attribution and the baseline full strategy,
 and applies the frozen reading rule. Outputs into the run folder.
@@ -10,7 +10,7 @@ import numpy as np
 import pandas as pd
 
 from analyze_level_visit import load as load_q10
-from analyze_price_levels import PERIODS, ROOT, sha256
+from analyze_price_levels import PERIODS, ROOT, sha256, protocol_matches
 from analyze_support_interaction import drawdown_interval, trade_metrics
 from verify_location_validation import read_rows
 from verify_resistance_gate import load_gate
@@ -18,7 +18,7 @@ from verify_resistance_gate import load_gate
 RUN = ROOT / "Reports" / "trendlines" / "resistance_standalone_20261004"
 Q15 = ROOT / "Reports" / "trendlines" / "trendline_resistance_20261004"
 TAG = "resistance_standalone_20261004_trade"
-PROTOCOL = ROOT / "docs" / "trendlines" / "STANDALONE_PROTOCOL.md"
+PROTOCOL = ROOT / "docs" / "setups" / "trendlines" / "downtrend-breakout-long" / "q17-standalone" / "PROTOCOL.md"
 COST, SEED = 1.05, 20261004
 Q15_REF = {"train": dict(fills=412, pf=1.325, mean_r=0.093), "recent": dict(fills=693, pf=1.332, mean_r=0.110)}
 
@@ -33,7 +33,7 @@ def period_of(times):
 def load_run():
     manifest = json.loads((RUN / "manifest.json").read_text())
     assert sha256(RUN / "RTL_resistance_gate.mq5") == manifest["expert_sha256"]
-    assert sha256(PROTOCOL) == manifest["protocol_sha256"], "protocol changed after freeze"
+    assert protocol_matches(PROTOCOL, manifest["protocol_sha256"]), "protocol changed after freeze"
     assert (RUN / f"{TAG}.completed.json").exists()
     ini = (RUN / f"{TAG}.ini").read_text(encoding="utf-16").splitlines()
     for value in ("GateMode=2", "Model=1", "Period=M30", "Symbol=MNQcontDTBNT20102026_2", "MaxRedRun=3",

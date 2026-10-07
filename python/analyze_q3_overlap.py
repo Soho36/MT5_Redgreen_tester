@@ -1,4 +1,4 @@
-"""Q3: overlapping vs steadily progressing bars before the signal (protocol: docs/Q3_OVERLAP_RESULTS.md).
+"""Q3: overlapping vs steadily progressing bars before the signal (protocol: docs/baseline/q03-overlap/RESULTS.md).
 
 Reads two 51-bar snapshot runs (bar 1 = signal, columns o1 h1 l1 c1 ...). For the N bars before
 the signal (bars 2..N+1, signal excluded), N in {5, 10, 20}:

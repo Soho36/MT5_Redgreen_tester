@@ -1,6 +1,6 @@
 """Q18 stage 1: horizontal swing-high breakout versus every other RTL signal.
 
-Frozen protocol: docs/levels/BREAKOUT_PROTOCOL.md. Reuses Q10's original-exit census,
+Frozen protocol: docs/setups/horizontal/resistance-breakout-long/q18-breakout/PROTOCOL.md. Reuses Q10's original-exit census,
 attempts and fills (hash-verified); no new MT5 run. Outputs Reports/levels/breakout_20261004/.
 Broad contact is context only (not a candidate).
 """
@@ -20,7 +20,7 @@ from trend_regimes import ROLLS
 
 ROOT = Path(__file__).absolute().parent.parent
 STUDY = ROOT / "Reports" / "levels" / "breakout_20261004"
-PROTOCOL = ROOT / "docs" / "levels" / "BREAKOUT_PROTOCOL.md"
+PROTOCOL = ROOT / "docs" / "setups" / "horizontal" / "resistance-breakout-long" / "q18-breakout" / "PROTOCOL.md"
 CONFIGS = {"week_n5": (5, 5), "two_weeks_n5": (5, 10), "week_n3": (3, 5)}
 PRIMARY = "week_n5"
 GROUPS, UNAVAILABLE = lr.GROUPS, lr.UNAVAILABLE

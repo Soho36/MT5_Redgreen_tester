@@ -154,7 +154,7 @@ def load():
     paths = [UPSTREAM/'attempt_features.csv', UPSTREAM/'trade_features.csv', UPSTREAM/'m30_reference.csv',
              ledger_path, calendar, TREND/f'{TAG}.ini', ROLLS, Path(__file__),
              ROOT/'python/analyze_breach_reclaim.py', ROOT/'python/analyze_price_levels.py',
-             ROOT/'docs/SUPPORT_INTERACTION_PROTOCOL.md']
+             ROOT/'docs/setups/horizontal/support-bounce-long/q10-support-interaction/PROTOCOL.md']
     return c, a, t, paths, len(upstream['files'])
 
 

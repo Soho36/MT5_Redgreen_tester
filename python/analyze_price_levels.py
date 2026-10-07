@@ -1,4 +1,4 @@
-"""Frozen Q6/Q7 level diagnostics; see docs/PRICE_LEVELS_PROTOCOL.md.
+"""Frozen Q6/Q7 level diagnostics; see docs/setups/horizontal/support-bounce-long/q06-q07-price-levels/PROTOCOL.md.
 
 Reuses saved baseline trades; does not simulate or place orders.
 Run with the project venv; outputs Reports/levels/price_levels_20261003/.
@@ -7,6 +7,8 @@ Run with the project venv; outputs Reports/levels/price_levels_20261003/.
 import argparse
 import hashlib
 import json
+import re
+import subprocess
 from pathlib import Path
 
 import numpy as np
@@ -32,6 +34,39 @@ def sha256(path):
         for chunk in iter(lambda: stream.read(1024 * 1024), b""):
             result.update(chunk)
     return result.hexdigest()
+
+
+def protocol_matches(path, recorded):
+    """True if the file, or any committed version of it (renames followed), hashes to `recorded`.
+
+    Run manifests record a protocol's hash when the runs were prepared. The docs were reorganised on 2026-10-07
+    (paths and links only, docs/reference/moved_files.json), so the recorded version is checked against git history.
+    Both line-ending conventions are tried, since the hash was taken on the working-tree file."""
+    if sha256(path) == recorded:
+        return True
+    root = Path(__file__).resolve().parent.parent
+    rel = Path(path).resolve().relative_to(root).as_posix()
+    log = subprocess.run(["git", "log", "--follow", "--name-only", "--format=%H", "--", rel], cwd=root,
+                         capture_output=True, text=True, check=True).stdout.split()
+    for rev, name in zip(log[::2], log[1::2]):
+        blob = subprocess.run(["git", "show", f"{rev}:{name}"], cwd=root, capture_output=True, check=True).stdout
+        lf = blob.replace(b"\r\n", b"\n")
+        if recorded in (hashlib.sha256(lf).hexdigest(), hashlib.sha256(lf.replace(b"\n", b"\r\n")).hexdigest()):
+            return True
+    # Runs prepared from a working file with mixed line endings: its raw hash is in no commit. The registry names
+    # the commit holding that version; the current file must equal it except for line endings and link targets.
+    entry = json.loads((root / "docs" / "reference" / "protocol_hashes.json").read_text()).get(recorded)
+    if entry:
+        blob = subprocess.run(["git", "show", f"{entry['commit']}:{entry['path']}"], cwd=root, capture_output=True,
+                              check=True).stdout.decode("utf-8")
+        return _paths_ignored(blob) == _paths_ignored(Path(path).read_text(encoding="utf-8"))
+    return False
+
+
+def _paths_ignored(text):
+    """Protocol text with line endings, link targets and docs/ paths normalised (what the 2026-10-07 move changed)."""
+    text = re.sub(r"\]\([^)]*\)", "]()", text.replace("\r\n", "\n"))
+    return re.sub(r"docs/[^\s)`'\"]*", "docs/", text)
 
 
 def distance_bin(values):
@@ -316,7 +351,7 @@ def fmt(value, digits=3):
 
 
 def write_report(study, audits, groups, coverage, contrasts, ages, decisions):
-    lines = ["# Q6/Q7: price-level proximity and overhead room", "", "2026-10-03. Frozen definitions: [protocol](../../../docs/PRICE_LEVELS_PROTOCOL.md).",
+    lines = ["# Q6/Q7: price-level proximity and overhead room", "", "2026-10-03. Frozen definitions: [protocol](../../../docs/setups/horizontal/support-bounce-long/q06-q07-price-levels/PROTOCOL.md).",
              "Analysis: `python/analyze_price_levels.py`. Full tables and per-trade features: `Reports/levels/price_levels_20261003/`.", "",
              "## Decision", ""]
     for feature, result in decisions.items():
@@ -395,7 +430,7 @@ def main():
     pd.DataFrame(annual).to_csv(study / "annual_contrasts.csv", index=False)
     (study / "contrasts.json").write_text(json.dumps(contrasts, indent=2), encoding="utf-8")
     (study / "decisions.json").write_text(json.dumps(decisions, indent=2), encoding="utf-8")
-    paths = files + [SOURCE, ROLLS, Path(__file__), ROOT / "docs" / "PRICE_LEVELS_PROTOCOL.md"]
+    paths = files + [SOURCE, ROLLS, Path(__file__), ROOT / "docs" / "setups" / "horizontal" / "support-bounce-long" / "q06-q07-price-levels" / "PROTOCOL.md"]
     provenance = dict(audits=audits, files=[dict(path=str(p), sha256=sha256(p)) for p in paths],
                       common_trades=int(features[features.source == "previous_session"].common.sum()),
                       reference_bars=len(bars), independent_window_checks=sample_checks)

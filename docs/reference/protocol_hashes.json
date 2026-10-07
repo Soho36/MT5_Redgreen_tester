@@ -1,0 +1,14 @@
+{
+ "16068978d05952562e97cc1d10b924565836d11f79852654ae59ebdb32a183d9": {
+  "commit": "e480a18",
+  "path": "docs/trendlines/TRENDLINE_LIMIT_PROTOCOL.md",
+  "manifest": "Reports/trendlines/trendline_limit_runs_20261005/manifest.json",
+  "why": "Q20 runs were prepared from this version with mixed line endings, so the raw hash is not in any commit"
+ },
+ "32fe189b984506851d09d7228e11211b030b3be838d1c9f57737a60450f95552": {
+  "commit": "b052ed4",
+  "path": "docs/trendlines/BREAKDOWN_SHORT_PROTOCOL.md",
+  "manifest": "Reports/trendlines/trendline_breakdown_runs_20261006/manifest.json",
+  "why": "Q21 runs were prepared from this version with mixed line endings, so the raw hash is not in any commit"
+ }
+}

@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 
 import analyze_support_interaction as base
-from analyze_price_levels import ROOT, SOURCES, PERIODS, build_level_maps, sha256
+from analyze_price_levels import ROOT, SOURCES, PERIODS, build_level_maps, sha256, protocol_matches
 from analyze_breach_reclaim import attach, read_table
 from analyze_averaging_study import validate
 from analyze_exit_study import deals, number
@@ -25,7 +25,7 @@ def audit_run(bars):
     assert (RUN/f'{RUN_TAG}.completed.json').exists()
     assert sha256(RUN/'RTL_support_fixed1r.mq5') == manifest['expert_sha256']
     assert sha256(manifest['parent_source']) == manifest['parent_sha256']
-    assert sha256(ROOT/'docs/SUPPORT_INTERACTION_PROTOCOL.md') == manifest['protocol_sha256']
+    assert protocol_matches(ROOT/'docs/setups/horizontal/support-bounce-long/q10-support-interaction/PROTOCOL.md', manifest['protocol_sha256'])
     rows = read_rows(RUN/job['csv'])
     stats = read_rows(RUN/job['csv'].replace('.csv', '_stats.csv'))[0]
     validate(rows, stats, dict(job, distance=0))
@@ -158,7 +158,7 @@ def main():
     report.write_text(report.read_text().replace('Actual baseline outcomes,', 'Actual fixed -1R SL / +1R TP all-signals reference outcomes,'), encoding='utf-8')
     paths = [Path(__file__), ROOT/'python/analyze_support_interaction.py', ROOT/'python/prepare_support_fixed1r.py',
              ROOT/'python/analyze_breach_reclaim.py', ROOT/'python/analyze_price_levels.py',
-             base.UPSTREAM/'m30_reference.csv', ROLLS, ROOT/'docs/SUPPORT_INTERACTION_PROTOCOL.md',
+             base.UPSTREAM/'m30_reference.csv', ROLLS, ROOT/'docs/setups/horizontal/support-bounce-long/q10-support-interaction/PROTOCOL.md',
              RUN/'manifest.json', RUN/'RTL_support_fixed1r.mq5', RUN/'RTL_support_fixed1r.ex5', RUN/'early_closes.mqh',
              RUN/'trend_rr_ledger.mqh', RUN/'trend_rr_research.mqh', RUN/f'{RUN_TAG}.ini', RUN/f'{RUN_TAG}.htm',
              RUN/f'runband_{RUN_TAG}_1.00.csv', RUN/f'runband_{RUN_TAG}_1.00_stats.csv', RUN/f'{RUN_TAG}_signals.csv']

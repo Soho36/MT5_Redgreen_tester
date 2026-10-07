@@ -1,47 +1,47 @@
 # Project status
 
-Updated 2026-10-07. **Start here.** Each study below links to the full evidence.
+Updated 2026-10-07. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
 For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
 
-**[Q24 trade-result streaks](TRADE_STREAKS_RESULTS.md) (2026-10-07): no predictive or daily-stop gate passes.**
+**[Q24 trade-result streaks](baseline/q24-trade-streaks/RESULTS.md) (2026-10-07): no predictive or daily-stop gate passes.**
 Current RTL ledger, 14,968 trades, $1.05 costs: after three same-session losses the next-trade win rate
 is 41.9%/41.1% (baseline 43.4%/43.0%); mean-R difference intervals include zero. Five-win daily
 streaks have only 2/13 next trades. Session stops after 3–5 losses reduce drawdown but improve
 dollars in only 5–6/11 years; retain as a risk trade-off, no adoption. Sequence tests and independent
-replay of all states/20 policies pass. [Protocol](TRADE_STREAKS_PROTOCOL.md).
+replay of all states/20 policies pass. [Protocol](baseline/q24-trade-streaks/PROTOCOL.md).
 
 **Trendline research (2026-10-04):** Q14 asked the Q11/Q12 questions for rising
 trendlines (consecutive higher swing lows, one week). Signals at intact trendline
 support do **worse** than every other signal in both periods (PF 1.029/0.950 vs
-1.114/1.124); broad contact is worse too. No filter ([results](trendlines/TRENDLINE_SUPPORT_RESULTS.md),
-[index](trendlines/README.md)). **Q15 falling resistance lines pass the gate** ([results](trendlines/TRENDLINE_RESISTANCE_RESULTS.md)):
+1.114/1.124); broad contact is worse too. No filter ([results](setups/trendlines/uptrend-bounce-long/q14-trendline-support/RESULTS.md),
+[index](setups/trendlines/README.md)). **Q15 falling resistance lines pass the gate** ([results](setups/trendlines/downtrend-breakout-long/q15-falling-resistance/RESULTS.md)):
 red signals pressing into an intact falling line from below, PF 1.325/1.332 vs 1.088/1.090,
 avg R +0.093/+0.110 vs -0.012/+0.056, 412/693 fills, 8/11 years; sensitivities and broad agree.
 Caveats: R intervals include zero, 2023-25 flat, partial 2026 large, gap is in entries below
-the line (not true breaks). [Q16 audit](trendlines/RESISTANCE_CONCENTRATION_RESULTS.md): broadly spread
+the line (not true breaks). [Q16 audit](setups/trendlines/downtrend-breakout-long/q16-resistance-concentration/RESULTS.md): broadly spread
 (887 lines, max 5 fills per line), survives every year/week deletion and trimming. Next: user chose a
 stand-alone candidate-only EA (whole frozen group primary; entry-below-line as a label).
-**[Q17](trendlines/STANDALONE_RESULTS.md): traded alone, the candidates do not survive** the frozen rule: PF 1.242/1.238
+**[Q17](setups/trendlines/downtrend-breakout-long/q17-standalone/RESULTS.md): traded alone, the candidates do not survive** the frozen rule: PF 1.242/1.238
 but mean R +0.039/+0.050 vs baseline -0.004/+0.060, 4/11 years. The ~40% of trades freed from
 baseline blocking are break-even. Shared trades are identical to the baseline. No filter or sizing.
 
-**Horizontal breakouts (Q18) pass both stages** ([results](levels/BREAKOUT_RESULTS.md)): red signals
+**Horizontal breakouts (Q18) pass both stages** ([results](setups/horizontal/resistance-breakout-long/q18-breakout/RESULTS.md)): red signals
 whose buy stop sits at an intact one-week swing-high level, approached from below. Traded alone
 (candidate-only EA, gate verified on all 52,070 signals): 1,083/1,685 trades, PF 1.164/1.204, mean R
 +0.062/+0.110 vs baseline -0.004/+0.060, 8/11 years; recent interval excludes zero; freed trades
 hold up. Caveats: 2016-19 weak (+$1.7k), 2010-15 negative (worse than baseline 5/6 years), OHLC
 only (generated ticks not a stop criterion, user 2026-10-05). Nothing adopted. Manual-run EA:
-`mt5/experts/RR_r_MFE_buy-stop-entry_breakout.cs`. [Q19 audit](levels/BREAKOUT_CONCENTRATION_RESULTS.md):
+`mt5/experts/RR_r_MFE_buy-stop-entry_breakout.cs`. [Q19 audit](setups/horizontal/resistance-breakout-long/q19-breakout-concentration/RESULTS.md):
 broadly spread (max 5 trades per level), survives every year/week deletion; paired mean-R difference vs
 RTL +0.066/+0.050, intervals just include zero per period, exclude it pooled. Next: forward/demo evidence.
 
-**[Q20](trendlines/TRENDLINE_LIMIT_RESULTS.md) (2026-10-05): a buy limit resting on the Q14 rising line fails.**
+**[Q20](setups/trendlines/uptrend-bounce-long/q20-trendline-limit/RESULTS.md) (2026-10-05): a buy limit resting on the Q14 rising line fails.**
 Stop 0.5 x ATR, baseline 1R exit, any candle colour: PF 0.773/0.969, mean R -0.238/-0.023 (1,484/2,370 trades);
 45% stopped in the fill bar (price goes through the line); trade-through and stop 0.25/1.0 x A sensitivities lose too;
 beats the regime-matched random-distance control in 2/9 years. 9 MT5 runs replayed in Python with 0 mismatches.
 Nothing adopted.
 
-**[Q21](trendlines/BREAKDOWN_SHORT_RESULTS.md) (2026-10-06): shorting the break of the Q14 rising line fails.**
+**[Q21](setups/trendlines/uptrend-breakdown/q21-breakdown-short/RESULTS.md) (2026-10-06): shorting the break of the Q14 rising line fails.**
 Red M30 candle closing below a live line -> sell stop at its low, stop at its high, next bar only, 1R bar-close exit
 (first short-side study). PF 0.893/0.916, mean R -0.081/-0.025 (558/928 trades); loses before costs too; 51% stops vs
 32% targets. Beats "any red bar in the same regime" (C1) in mean R but 6/11 years, bootstrap includes zero; S1 (deeper
@@ -49,16 +49,16 @@ break) also loses; every red-candle short loses on NQ (C2 PF 0.84/0.97). 4 MT5 r
 Exploratory 2R target (user request, plan fixed first): also fails, PF 0.916/0.891, mean R -0.050/-0.041. Red-candle
 shorts lose in bear regimes too (descriptive).
 
-**[Q22](trendlines/BREAKDOWN_RTL_RESULTS.md) (2026-10-06): RTL longs at or after a rising-line break - no gate passes.**
+**[Q22](setups/trendlines/uptrend-breakdown/q22-breakdown-rtl/RESULTS.md) (2026-10-06): RTL longs at or after a rising-line break - no gate passes.**
 RTL buys on the red breakdown candle are worse than every other signal (PF 1.010/0.831 vs 1.111/1.123, avg R -0.070/-0.069
 vs -0.002/+0.065, 7/11 years; 2020-26 interval excludes zero), but the S1 (deeper break) sensitivity disagrees, so no skip
 filter. Signals in the 10 bars after a break: no difference. With Q21: the break bar pays in neither direction.
-**[Q23](levels/SUPPORT_BREAKDOWN_RESULTS.md) (2026-10-07): the Q18 mirror short fails stage 1; short-side level research stops.**
+**[Q23](setups/horizontal/support-breakdown-short/q23-support-breakdown/RESULTS.md) (2026-10-07): the Q18 mirror short fails stage 1; short-side level research stops.**
 Green signal's sell stop at an intact swing-low level approached from above: better than other green signals (7/11 years)
 but PF 0.992/1.038, N = 3 disagrees. The short mirror baseline (stage 0 MT5 run) loses in every period, PF 0.750/0.916/0.974,
 confirming the user's manual test. Every short tried in Q21-Q23 loses on NQ.
 
-**[Q24](levels/SUPPORT_RECLAIM_RESULTS.md) (2026-10-07): buying the reclaim of a broken swing-low level fails.**
+**[Q25](setups/horizontal/support-reclaim-long/q25-support-reclaim/RESULTS.md) (2026-10-07): buying the reclaim of a broken swing-low level fails.**
 Buy stop at the level after a red candle closes below it, stop at its low, 3-bar life: PF 1.042/1.063 but mean R
 -0.073/-0.051; worse than the candle-high entry (C1) in 2020-26; 5/11 years. 58% of orders cancelled (low taken first),
 a third of fills stopped in the fill bar. Post hoc only: risk >= 1 x ATR positive in both periods. Execution fact: inside a
@@ -71,9 +71,9 @@ represent 126 weekly events; earlier advantages survive single-year/week
 deletions, but recent dollar profit is concentrated in 2025-2026 and the small
 recent R advantage is fragile. Trimming/equal-event comparisons stay positive;
 cluster intervals include zero. Inconclusive, no filter
-([results](levels/WEEKLY_LOW_ROBUSTNESS_RESULTS.md), [level index](levels/README.md)).
+([results](setups/horizontal/support-bounce-long/q13-weekly-low/RESULTS.md), [level index](setups/horizontal/README.md)).
 Q12's broader swing/session contact comparisons remain inconsistent across periods.
-[Speed research is archived](levels/SPEED_RESEARCH_ARCHIVE.md).
+[Speed research is archived](setups/horizontal/support-reclaim-long/q09-reclaim-speed/ARCHIVE.md).
 
 ## The strategy (current research baseline)
 
@@ -86,10 +86,10 @@ Q12's broader swing/session contact comparisons remain inconsistent across perio
 | Session safety | `FlattenFallback = true` + `UseEarlyCloseCalendar = true`: always flat at session end, including early closes |
 | Sizing / costs | 1 contract; $1 per round-turn modelled in Python (real cost $1.05) |
 | EA | [`mt5/experts/RR_r_MFE_buy-stop-entry_runband.cs`](../mt5/experts/RR_r_MFE_buy-stop-entry_runband.cs) (+ `early_closes.mqh`) |
-| Data | `MNQcontDTBNT20102026`: NQ rebuilt from Databento with a consistent clock ([DATA_BUILD.md](DATA_BUILD.md)), priced as MNQ |
+| Data | `MNQcontDTBNT20102026`: NQ rebuilt from Databento with a consistent clock ([DATA_BUILD.md](reference/DATA_BUILD.md)), priced as MNQ |
 
 **Execution qualification (2026-10-02):** the figures below use one-minute OHLC
-modelling. The [averaging study](AVERAGING_ENTRY_RESULTS.md) found that changing
+modelling. The [averaging study](baseline/averaging-entry/RESULTS.md) found that changing
 to finer generated ticks reduced matched baseline net at $1.05/contract from
 $6,485 to $612 (2016–19) and $37,981 to $19,435 (2020–26). Both modes use the
 same minute data; neither is real-tick validation. The user accepts one-minute
@@ -114,7 +114,7 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 **Adopted**
 - `MaxRedRun = 3`. Chosen on 2015–19 by a pre-set rule, then tested frozen on 2020–26:
   PF up in 6 of 7 years, DD −17%, profit flat. A **small** but real effect.
-  **Confirmed on clean data** ([check](MAXREDRUN_CLEAN_RESULTS.md)): training picked cap 1,
+  **Confirmed on clean data** ([check](baseline/maxredrun/RESULTS.md)): training picked cap 1,
   which tested frozen at PF +0.036 and DD −30% but −23% profit. Cap 3 is the balanced choice
   (DD −16%, profit −2%). The cap value is a risk-vs-profit trade-off. **Decided 2026-10-01:
   keep cap 3**; cap 1 is the conservative alternative.
@@ -122,53 +122,53 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 - Rebuilt data (`MNQcontDTBNT20102026`) and the early-close calendar: no trade crosses
   a session any more. Results match the old data closely, so earlier entry findings stand.
 - **RR = 1.0** (2026-10-01). On clean data, 2.0–3.0 didn't beat 1.0 in both periods by the
-  pre-set rule ([check](RR_CLEAN_DATA_RESULTS.md)). Revisit only with a new reason, e.g.
+  pre-set rule ([check](baseline/rr-clean-data/RESULTS.md)). Revisit only with a new reason, e.g.
   measured live slippage.
 
 **Rejected** (evidence kept, don't retest without a new reason)
 - Q15-Q17 falling trendline resistance: passed the attribution gate (Q15) and the concentration audit
   (Q16), but traded alone (Q17) mean R +0.039/+0.050 does not beat the baseline -0.004/+0.060 and only
   4/11 years; freed trades break-even. No filter, stand-alone strategy or sizing change.
-- Q14 rising trendline support ([results](trendlines/TRENDLINE_SUPPORT_RESULTS.md),
-  [protocol](trendlines/TRENDLINE_PROTOCOL.md)): candidate/rest PF 1.029/1.114 and
+- Q14 rising trendline support ([results](setups/trendlines/uptrend-bounce-long/q14-trendline-support/RESULTS.md),
+  [protocol](setups/trendlines/uptrend-bounce-long/q14-trendline-support/PROTOCOL.md)): candidate/rest PF 1.029/1.114 and
   0.950/1.124, avg R -0.029/-0.038; 5/11 years better; two-week and N=3 checks
   also worse recently. Broad unbroken-line contact also worse in both periods. No filter.
-- Q12 broad support-origin contact ([results](levels/BROAD_SUPPORT_RESULTS.md),
-  [protocol](levels/BROAD_SUPPORT_PROTOCOL.md)): primary contact/rest PF
+- Q12 broad support-origin contact ([results](setups/horizontal/support-bounce-long/q12-broad-support/RESULTS.md),
+  [protocol](setups/horizontal/support-bounce-long/q12-broad-support/PROTOCOL.md)): primary contact/rest PF
   1.137/1.061 earlier, 1.084/1.143 recently; mean R difference +0.028/-0.029,
   5/11 years better. Two weeks and N=3 also reverse. No broad filter supported;
   broad previous-week contact remains a distinct small-sample lead, not ruled out.
-- Q11 one-week M30 swing-low support ([results](levels/LEVEL_VISIT_RESULTS.md),
-  [protocol](LEVEL_VISIT_PROTOCOL.md)): candidate/rest PF 1.201/1.087 and
+- Q11 one-week M30 swing-low support ([results](setups/horizontal/support-bounce-long/q11-level-visit/RESULTS.md),
+  [protocol](setups/horizontal/support-bounce-long/q11-level-visit/PROTOCOL.md)): candidate/rest PF 1.201/1.087 and
   1.140/1.099, avg R +0.036 / +0.005 better, 7/11 years; all intervals include
   zero and N = 3 disagrees, so no full rerun. Recently, signals with no level
   nearby (PF 1.191) do better than the candidates. Q10's weekly lead not reproduced.
-- Q10 support-interaction screen ([results](levels/SUPPORT_INTERACTION_RESULTS.md)).
+- Q10 support-interaction screen ([results](setups/horizontal/support-bounce-long/q10-support-interaction/RESULTS.md)).
   **Primary, original exit:** current-session interaction/rest PF 1.179/1.079
   earlier versus 1.086/1.114 recently; previous session flips too. Previous-week
   interactions beat the rest in both periods (PF 1.707/1.451, 9/11 years) but
   with only 72/137 fills, so no candidate qualifies. The fixed 1R SL/TP run is
   secondary context and does not replace the original bar-close exit.
-- **Archived direction:** Q9 fast-recovery candidate ([results](levels/RECLAIM_SPEED_RESULTS.md),
-  [protocol](RECLAIM_SPEED_PROTOCOL.md)): 130/218 matched current-session pairs
+- **Archived direction:** Q9 fast-recovery candidate ([results](setups/horizontal/support-reclaim-long/q09-reclaim-speed/RESULTS.md),
+  [protocol](setups/horizontal/support-reclaim-long/q09-reclaim-speed/PROTOCOL.md)): 130/218 matched current-session pairs
   show no reliable upward advantage after the M30 close; all candidate gates
   fail. The Q8 two-sided R effect weakens/reverses in lagged-volatility units,
   consistent with smaller reclaim signal ranges. Intrabar/early-minute entry
   follow-ups are parked, not next steps; no EA change.
-- Q8 support-reclaim filter ([results](levels/BREACH_RECLAIM_RESULTS.md),
-  [protocol](BREACH_RECLAIM_PROTOCOL.md)): current-session reclaims more often
+- Q8 support-reclaim filter ([results](setups/horizontal/support-reclaim-long/q08-breach-reclaim/RESULTS.md),
+  [protocol](setups/horizontal/support-reclaim-long/q08-breach-reclaim/PROTOCOL.md)): current-session reclaims more often
   precede a +0.5R endpoint after 90 minutes (+6.1 / +3.1 percentage points), but
   mean price return and filled-trade PF do not improve across both periods.
   A post-hoc check shows the recent excess is two-sided dispersion (-0.5R tail
   also rises); only 2016-19 hints at upward bias. No strategy filter adopted.
-- Q6/Q7 first price-level screen ([results](levels/PRICE_LEVELS_RESULTS.md),
-  [protocol](PRICE_LEVELS_PROTOCOL.md)): previous-session near-support PF rankings
+- Q6/Q7 first price-level screen ([results](setups/horizontal/support-bounce-long/q06-q07-price-levels/RESULTS.md),
+  [protocol](setups/horizontal/support-bounce-long/q06-q07-price-levels/PROTOCOL.md)): previous-session near-support PF rankings
   disagree and the earlier near group is sparse; resistance within 1R remains
   profitable in both periods at all predefined cutoffs. No filter. Current-session
   and previous-week comparisons also provide no reason to avoid nearby highs.
   Pivot zones, level interaction and role reversal remain separate questions.
 - Trend-conditioned target RR on the unchanged RTL baseline
-  ([results](TREND_RR_RESULTS.md), [protocol](TREND_RR_PROTOCOL.md)):
+  ([results](baseline/trend-rr/RESULTS.md), [protocol](baseline/trend-rr/PROTOCOL.md)):
   primary mild/strong mappings reduce net/DD in both usual comparison periods;
   historical annual selection also fails the required improvement. Fixed 1R stays.
 - Minimum red count, drop size, `location` filter, 10 other bar features.
@@ -183,20 +183,20 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
   The bar-close exit stays.
 - Buy-stop-limit entry (an experiment; not used for testing).
 - Switching off session blocks (time of day): every block is profitable in both periods, and
-  none is consistently weak ([results](TIME_OF_DAY_RESULTS.md)). Trade windows unchanged.
+  none is consistently weak ([results](baseline/time-of-day/RESULTS.md)). Trade windows unchanged.
 - Standalone buy-limit entry near the candle low (offsets 80/90/95%, plus 80% with RR 2):
   loses in every year of 2016–19 at every setting. In 2020–26 it's profitable but weaker than
   the baseline, concentrated in ~20 trades, and positively correlated with it
-  ([results](LIMIT_ONLY_RESULTS.md)).
+  ([results](baseline/limit-only/RESULTS.md)).
 - One equal-sized averaging limit near the original stop, original target kept
-  ([full study](AVERAGING_ENTRY_RESULTS.md), 2026-10-02): 5/10/20% distances all
+  ([full study](baseline/averaging-entry/RESULTS.md), 2026-10-02): 5/10/20% distances all
   worse in the OHLC model; 10% also worse in both periods with generated ticks.
   The added leg loses money in every year from 2016 through partial 2026.
 
 **Open**
-- **Q18 horizontal breakout lead** ([results](levels/BREAKOUT_RESULTS.md)): passed attribution and stand-alone
+- **Q18 horizontal breakout lead** ([results](setups/horizontal/resistance-breakout-long/q18-breakout/RESULTS.md)): passed attribution and stand-alone
   stages under one-minute OHLC. Q19 audit done (broad, not concentrated). Next: forward/demo evidence; user is making manual MT5 runs.
-- **Standalone buy limits** ([results](LIMIT_ONLY_RESULTS.md)): offsets
+- **Standalone buy limits** ([results](baseline/limit-only/RESULTS.md)): offsets
   80/90/95% below signal high are profitable in 2020–26 but lose in every
   year of 2016–19. No adoption; retain the separate research EA. Tested the
   archived high-trigger behavior, using one-minute OHLC only.
@@ -206,14 +206,14 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 ## Next steps, in order
 
 1. **Entry-shape questions:** Q1–Q5 all answered, no filter (incl. signal-candle shape).
-   New ideas go into the Inbox in [RESEARCH_QUESTIONS.md](RESEARCH_QUESTIONS.md).
+   New ideas go into the Inbox in [RESEARCH_QUESTIONS.md](reference/RESEARCH_QUESTIONS.md).
    **Price-level context:** Q6/Q7 session/week proximity screen complete, no filter.
    Q8 support reclaim complete: a +0.5R response-frequency association that is
    mostly wider dispersion in signal-R units (both tails), no stable RTL filter.
    Q9 speed is archived. Q10 is complete; its original-exit screen is primary.
-   [Q11](levels/LEVEL_VISIT_RESULTS.md) one-week swing-low support: small, unconfirmed
+   [Q11](setups/horizontal/support-bounce-long/q11-level-visit/RESULTS.md) one-week swing-low support: small, unconfirmed
    edge, no filter. Open inbox ideas: levels approached from below, level history.
-   See the [level-study index](levels/README.md); no immediate-entry speed work
+   See the [level-study index](setups/horizontal/README.md); no immediate-entry speed work
    is queued. Resistance paths, level history and role reversal remain separate.
 2. Execution sensitivity remains unresolved; do not equate OHLC screening
    profits with verified fills. Further tick-generation runs are not planned.
@@ -225,36 +225,36 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 
 | Date | Study | Verdict |
 |---|---|---|
-| 10-07 | [Q24: trade-result streaks](TRADE_STREAKS_RESULTS.md) | No reliable next-trade prediction; five wins too sparse; loss-based session stops reduce DD but fail yearly consistency; no rule adopted |
-| 10-04 | [Q18: horizontal swing-high breakout](levels/BREAKOUT_RESULTS.md) | **Passes both stages** (attribution, stand-alone EA); first level lead to survive own execution; OHLC only, weak 2016-19 |
-| 10-04 | [Q17: stand-alone falling-resistance EA](trendlines/STANDALONE_RESULTS.md) | Does not survive own execution: PF 1.24 but mean R below baseline recently, 4/11 years |
-| 10-04 | [Q15: falling trendline resistance](trendlines/TRENDLINE_RESISTANCE_RESULTS.md) | **Passes the gate** in both periods with both sensitivities; qualifies for a full MT5 run protocol; 2023-25 flat |
-| 10-04 | [Q14: rising trendline support](trendlines/TRENDLINE_SUPPORT_RESULTS.md) | Worse than every other signal in both periods; loses money recently; no filter |
-| 10-04 | [Q11: one-week swing-low support](levels/LEVEL_VISIT_RESULTS.md) | Slightly better than the rest in both periods, but small, intervals include zero, N = 3 disagrees; no filter |
-| 10-03 | [Q10: support interaction](levels/SUPPORT_INTERACTION_RESULTS.md) | Original exit primary: session levels flip between periods; previous-week better in both but too few fills; no filter |
-| 10-03 | [Q9: recovery speed](levels/RECLAIM_SPEED_RESULTS.md) | Archived direction; evidence retained, no speed/early-entry follow-up queued |
-| 10-03 | [Q8: support breach and reclaim](levels/BREACH_RECLAIM_RESULTS.md) | More +0.5R responses after current-session reclaims; mixed mean return and PF, no filter |
-| 10-03 | [Q6/Q7: support proximity and overhead room](levels/PRICE_LEVELS_RESULTS.md) | No filter from previous-session primary or predefined neighbors; current-session/week sources retained separately |
-| 10-02 | [RTL trend-conditioned RR](TREND_RR_RESULTS.md) | Primary mappings and annual selection fail to improve on fixed 1R; no forward test |
-| 09-28/29 | [Entry filters and bar features](RESEARCH_RESULTS.md) | Only the red-run cap survives; location and other features don't |
-| 09-29 | [MaxRedRun train/test](RESEARCH_RESULTS.md#next-steps) | Cap 3 passes out of sample; the effect is small |
-| 09-30 | [Preceding candles Q1/Q2](PRECEDING_CANDLES_RESULTS.md) ([protocol](PRECEDING_CANDLES_PROTOCOL.md)) | No filter adopted; the periods disagree |
-| 09-30 | [Exit estimate and data review](EXIT_AND_DATA_REVIEW.md) | First-touch exit worse; several data caveats |
-| 09-30 | [Exit thresholds](EXIT_THRESHOLD_RESULTS.md) ([protocol](EXIT_THRESHOLD_PROTOCOL.md)) | Fixed TP worse; RR comparison distorted by the flatten bug |
-| 09-30 | [RR 0.5–5.0 grid](RR_OPTIMIZATION_REVIEW.md) | Noisy curve; RR>1 gains were mostly multi-day holds |
-| 10-01 | [Flatten fallback fix](FLATTEN_FALLBACK_RESULTS.md) | Bug fixed; baseline barely changes; RR still open |
-| 10-01 | [Trailing stop after +1R](TRAILING_STOP_RESULTS.md) | Rejected at all distances; keep the bar-close exit |
-| 10-01 | [Data rebuild](DATA_BUILD.md) | Clean NQ series from Databento source; old data was shifted 1 h in DST-mismatch weeks |
-| 10-01 | [Early-close calendar](EARLY_CLOSE_CALENDAR_RESULTS.md) | No overnight holds left; on clean data 2.5R beats 1R in both periods |
-| 10-01 | [RR 1.0 vs 2.0 / 2.5 / 3.0, clean data](RR_CLEAN_DATA_RESULTS.md) | Rule not met by $78 → RR stays 1.0; higher RR never meaningfully worse |
-| 10-01 | [MaxRedRun train/test, clean data](MAXREDRUN_CLEAN_RESULTS.md) | Cap confirmed (PF up, DD down); cap 1 = safest, cap 3 = balanced |
-| 10-02 | [Standalone buy-limit entry](LIMIT_ONLY_RESULTS.md) ([protocol](LIMIT_ONLY_PROTOCOL.md)) | Rejected: loses every 2016–19 year at every offset (incl. 80% / RR 2) |
-| 10-02 | [Time of day](TIME_OF_DAY_RESULTS.md) | No block to switch off; every block profitable in both periods |
-| 10-02 | [Q3: overlap vs staircase](Q3_OVERLAP_RESULTS.md) | No group loses in both periods; no filter |
-| 10-02 | [Q4: pullback vs broader move](Q4_CONTEXT_RESULTS.md) | All groups profitable in both periods; no filter |
-| 10-02 | [Q5: signal-candle shape](Q5_CANDLE_SHAPE_RESULTS.md) | Doji and full body each lose in one period only; no filter |
-| 10-02 | [Near-stop averaging entry](AVERAGING_ENTRY_RESULTS.md) ([protocol](AVERAGING_ENTRY_PROTOCOL.md)) | Rejected in both models; also exposes material baseline execution sensitivity |
-| 10-02 | [Standalone buy-limit entry](LIMIT_ONLY_RESULTS.md) ([protocol](LIMIT_ONLY_PROTOCOL.md)) | Positive recently, negative in every earlier year; no adoption; OHLC only |
+| 10-07 | [Q24: trade-result streaks](baseline/q24-trade-streaks/RESULTS.md) | No reliable next-trade prediction; five wins too sparse; loss-based session stops reduce DD but fail yearly consistency; no rule adopted |
+| 10-04 | [Q18: horizontal swing-high breakout](setups/horizontal/resistance-breakout-long/q18-breakout/RESULTS.md) | **Passes both stages** (attribution, stand-alone EA); first level lead to survive own execution; OHLC only, weak 2016-19 |
+| 10-04 | [Q17: stand-alone falling-resistance EA](setups/trendlines/downtrend-breakout-long/q17-standalone/RESULTS.md) | Does not survive own execution: PF 1.24 but mean R below baseline recently, 4/11 years |
+| 10-04 | [Q15: falling trendline resistance](setups/trendlines/downtrend-breakout-long/q15-falling-resistance/RESULTS.md) | **Passes the gate** in both periods with both sensitivities; qualifies for a full MT5 run protocol; 2023-25 flat |
+| 10-04 | [Q14: rising trendline support](setups/trendlines/uptrend-bounce-long/q14-trendline-support/RESULTS.md) | Worse than every other signal in both periods; loses money recently; no filter |
+| 10-04 | [Q11: one-week swing-low support](setups/horizontal/support-bounce-long/q11-level-visit/RESULTS.md) | Slightly better than the rest in both periods, but small, intervals include zero, N = 3 disagrees; no filter |
+| 10-03 | [Q10: support interaction](setups/horizontal/support-bounce-long/q10-support-interaction/RESULTS.md) | Original exit primary: session levels flip between periods; previous-week better in both but too few fills; no filter |
+| 10-03 | [Q9: recovery speed](setups/horizontal/support-reclaim-long/q09-reclaim-speed/RESULTS.md) | Archived direction; evidence retained, no speed/early-entry follow-up queued |
+| 10-03 | [Q8: support breach and reclaim](setups/horizontal/support-reclaim-long/q08-breach-reclaim/RESULTS.md) | More +0.5R responses after current-session reclaims; mixed mean return and PF, no filter |
+| 10-03 | [Q6/Q7: support proximity and overhead room](setups/horizontal/support-bounce-long/q06-q07-price-levels/RESULTS.md) | No filter from previous-session primary or predefined neighbors; current-session/week sources retained separately |
+| 10-02 | [RTL trend-conditioned RR](baseline/trend-rr/RESULTS.md) | Primary mappings and annual selection fail to improve on fixed 1R; no forward test |
+| 09-28/29 | [Entry filters and bar features](reference/RESEARCH_RESULTS.md) | Only the red-run cap survives; location and other features don't |
+| 09-29 | [MaxRedRun train/test](reference/RESEARCH_RESULTS.md#next-steps) | Cap 3 passes out of sample; the effect is small |
+| 09-30 | [Preceding candles Q1/Q2](baseline/q01-q02-preceding-candles/RESULTS.md) ([protocol](baseline/q01-q02-preceding-candles/PROTOCOL.md)) | No filter adopted; the periods disagree |
+| 09-30 | [Exit estimate and data review](reference/EXIT_AND_DATA_REVIEW.md) | First-touch exit worse; several data caveats |
+| 09-30 | [Exit thresholds](baseline/exit-threshold/RESULTS.md) ([protocol](baseline/exit-threshold/PROTOCOL.md)) | Fixed TP worse; RR comparison distorted by the flatten bug |
+| 09-30 | [RR 0.5–5.0 grid](baseline/rr-optimization/RESULTS.md) | Noisy curve; RR>1 gains were mostly multi-day holds |
+| 10-01 | [Flatten fallback fix](baseline/flatten-fallback/RESULTS.md) | Bug fixed; baseline barely changes; RR still open |
+| 10-01 | [Trailing stop after +1R](baseline/trailing-stop/RESULTS.md) | Rejected at all distances; keep the bar-close exit |
+| 10-01 | [Data rebuild](reference/DATA_BUILD.md) | Clean NQ series from Databento source; old data was shifted 1 h in DST-mismatch weeks |
+| 10-01 | [Early-close calendar](baseline/early-close-calendar/RESULTS.md) | No overnight holds left; on clean data 2.5R beats 1R in both periods |
+| 10-01 | [RR 1.0 vs 2.0 / 2.5 / 3.0, clean data](baseline/rr-clean-data/RESULTS.md) | Rule not met by $78 → RR stays 1.0; higher RR never meaningfully worse |
+| 10-01 | [MaxRedRun train/test, clean data](baseline/maxredrun/RESULTS.md) | Cap confirmed (PF up, DD down); cap 1 = safest, cap 3 = balanced |
+| 10-02 | [Standalone buy-limit entry](baseline/limit-only/RESULTS.md) ([protocol](baseline/limit-only/PROTOCOL.md)) | Rejected: loses every 2016–19 year at every offset (incl. 80% / RR 2) |
+| 10-02 | [Time of day](baseline/time-of-day/RESULTS.md) | No block to switch off; every block profitable in both periods |
+| 10-02 | [Q3: overlap vs staircase](baseline/q03-overlap/RESULTS.md) | No group loses in both periods; no filter |
+| 10-02 | [Q4: pullback vs broader move](baseline/q04-context/RESULTS.md) | All groups profitable in both periods; no filter |
+| 10-02 | [Q5: signal-candle shape](baseline/q05-candle-shape/RESULTS.md) | Doji and full body each lose in one period only; no filter |
+| 10-02 | [Near-stop averaging entry](baseline/averaging-entry/RESULTS.md) ([protocol](baseline/averaging-entry/PROTOCOL.md)) | Rejected in both models; also exposes material baseline execution sensitivity |
+| 10-02 | [Standalone buy-limit entry](baseline/limit-only/RESULTS.md) ([protocol](baseline/limit-only/PROTOCOL.md)) | Positive recently, negative in every earlier year; no adoption; OHLC only |
 
 ## How we test
 

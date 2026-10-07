@@ -1,6 +1,6 @@
 """Q21: short the breakdown of a rising trendline versus shorting any red bar in the same regime.
 
-Frozen protocol: docs/trendlines/BREAKDOWN_SHORT_PROTOCOL.md. Reads the verified MT5 runs in
+Frozen protocol: docs/setups/trendlines/uptrend-breakdown/q21-breakdown-short/PROTOCOL.md. Reads the verified MT5 runs in
 Reports/trendlines/trendline_breakdown_runs_20261006/ (verify_trendline_breakdown_trade.py first), applies the frozen
 reading rule and writes summary.json, yearly.csv, labels.csv and trades_<job>.csv there.
 Usage: analyze_trendline_breakdown.py [_rr2]  (the exploratory 2R follow-up writes summary_rr2.json etc.)
@@ -19,7 +19,7 @@ from verify_trendline_breakdown import RUN as CLASSIFY, STEM as CLASSIFY_STEM, b
 from prepare_trendline_breakdown import rr_label
 from verify_trendline_breakdown_trade import RUN, STEM, load_fills, load_ledger, load_log
 
-PROTOCOL = ROOT / "docs" / "trendlines" / "BREAKDOWN_SHORT_PROTOCOL.md"
+PROTOCOL = ROOT / "docs" / "setups" / "trendlines" / "uptrend-breakdown" / "q21-breakdown-short" / "PROTOCOL.md"
 COST, SEED, BOOT, TICK = 1.05, 20261006, 5000, 0.25
 ALL_PERIODS = {"early": ("2010-06-07", "2016-01-01"), **PERIODS}
 DECISION = tuple(PERIODS)

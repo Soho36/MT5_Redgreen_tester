@@ -13,6 +13,7 @@ import numpy as np
 
 from project_paths import PROJECT_ROOT
 from verify_location_validation import balance_dd, pf, read_rows
+from analyze_price_levels import protocol_matches
 
 
 def dt(value):
@@ -145,7 +146,7 @@ def main():
     args = parser.parse_args()
     directory = PROJECT_ROOT / "Reports/exit_thresholds_20260930"
     manifest = json.loads((directory / "manifest.json").read_text())
-    assert hashlib.sha256((PROJECT_ROOT / "docs/EXIT_THRESHOLD_PROTOCOL.md").read_bytes()).hexdigest() == manifest["protocol_sha256"]
+    assert protocol_matches(PROJECT_ROOT / "docs/baseline/exit-threshold/PROTOCOL.md", manifest["protocol_sha256"])
     populations, results, audits, yearly = {}, [], {}, []
     for job in manifest["jobs"]:
         assert (directory / (job["tag"] + ".completed.json")).exists(), job["tag"]

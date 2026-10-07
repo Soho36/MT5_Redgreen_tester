@@ -1,4 +1,4 @@
-"""Analyze the trailing-stop study (protocol: docs/TRAILING_STOP_RESULTS.md).
+"""Analyze the trailing-stop study (protocol: docs/baseline/trailing-stop/RESULTS.md).
 
 Checks: CSVs reconcile with MT5 stats; each run's trail_distance_r matches its
 job; trailing-off controls reproduce the flatten-fixed RR1 runs field by field;

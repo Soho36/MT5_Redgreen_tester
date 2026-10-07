@@ -1,6 +1,6 @@
 """Build a continuous NQ 1-minute series for MT5 import from a Databento NQ.FUT DBN file.
 
-Conventions (see docs/DATA_BUILD.md):
+Conventions (see docs/reference/DATA_BUILD.md):
 - Outright NQ contracts only (calendar spreads dropped). Contracts are keyed by
   instrument_id: Databento's one-digit-year names (NQM0) repeat every decade.
 - Clock: America/Chicago (US DST) + 8 h, so a normal Globex session is 01:00-24:00

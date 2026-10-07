@@ -3,7 +3,7 @@
 Each listed date gets a flatten time = open of its last M30 bar (e.g. last minute 19:59 ->
 flatten at 19:30), the same rule as a normal day (last bar 23:30). Every date was checked
 against the published schedule (holiday rules, the 2010-2012 Friday 15:15 CT close, announced
-state-funeral closures; Hurricane Sandy 2012 is the only unscheduled one). See docs/DATA_BUILD.md.
+state-funeral closures; Hurricane Sandy 2012 is the only unscheduled one). See docs/reference/DATA_BUILD.md.
 
 Usage: python build_early_close_calendar.py <MT5 bar CSV> [--exclude-after YYYY.MM.DD]
 """

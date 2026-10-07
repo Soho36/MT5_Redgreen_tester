@@ -1,4 +1,4 @@
-"""Q21 trading-run checks (protocol: docs/trendlines/BREAKDOWN_SHORT_PROTOCOL.md, "Verification").
+"""Q21 trading-run checks (protocol: docs/setups/trendlines/uptrend-breakdown/q21-breakdown-short/PROTOCOL.md, "Verification").
 
 For one trading job of Reports/trendlines/trendline_breakdown_runs_20261006/:
 1. Logged bars = eligible bars of the verified classify-only run (same threshold), minus bars that open with a

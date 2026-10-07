@@ -1,6 +1,6 @@
 """Q16: concentration audit of Q15's falling-resistance candidates (Q13 diagnostics).
 
-Protocol: docs/trendlines/RESISTANCE_CONCENTRATION_PROTOCOL.md. Descriptive only; no MT5 run.
+Protocol: docs/setups/trendlines/downtrend-breakout-long/q16-resistance-concentration/PROTOCOL.md. Descriptive only; no MT5 run.
 Outputs Reports/trendlines/resistance_concentration_20261004/.
 """
 
@@ -16,7 +16,7 @@ from analyze_weekly_low_robustness import bootstrap_weeks, comparison, metrics, 
 UPSTREAM = ROOT / "Reports/trendlines/trendline_resistance_20261004"
 M30 = ROOT / "Reports/levels/breach_reclaim_20261003/m30_reference.csv"
 STUDY = ROOT / "Reports/trendlines/resistance_concentration_20261004"
-PROTOCOL = ROOT / "docs/trendlines/RESISTANCE_CONCENTRATION_PROTOCOL.md"
+PROTOCOL = ROOT / "docs/setups/trendlines/downtrend-breakout-long/q16-resistance-concentration/PROTOCOL.md"
 CANDIDATE, PRIMARY = "resistance_test", "week_n5"
 FILLS = {"train": 412, "recent": 693}
 

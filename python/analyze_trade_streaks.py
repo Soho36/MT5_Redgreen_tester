@@ -13,7 +13,7 @@ from verify_location_validation import read_rows
 BASE = ROOT / 'Reports/trend_rr_20261002'
 TAG = 'trendrr_20261002_f50_baseline'
 STUDY = ROOT / 'Reports/trade_streaks_20261007'
-PROTOCOL = ROOT / 'docs/TRADE_STREAKS_PROTOCOL.md'
+PROTOCOL = ROOT / 'docs/baseline/q24-trade-streaks/PROTOCOL.md'
 N = 2000
 SEED = 20261007
 

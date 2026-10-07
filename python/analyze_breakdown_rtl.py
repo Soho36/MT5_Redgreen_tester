@@ -1,6 +1,6 @@
 """Q22: are RTL long signals at or after a rising-line break different from every other signal?
 
-Frozen protocol: docs/trendlines/BREAKDOWN_RTL_PROTOCOL.md. Reuses Q10's original-exit census (no new MT5 run) and
+Frozen protocol: docs/setups/trendlines/uptrend-breakdown/q22-breakdown-rtl/PROTOCOL.md. Reuses Q10's original-exit census (no new MT5 run) and
 the verified Q21 break events (python/trendline_breakdown.py; EA = Python on every bar). Group A: the red signal
 candle itself breaks a live line. Group B: not A, and a bar 1-10 bars before the signal bar (same contract) breaks
 one. Each is compared with every other signal under a two-sided gate (better -> failed-breakdown long candidate,
@@ -22,7 +22,7 @@ from trendline_breakdown import choose_broken, spent_by
 from verify_trendline_breakdown import RUN as CLASSIFY, STEM as CLASSIFY_STEM, _init, _states
 
 OUT = ROOT / "Reports" / "trendlines" / "breakdown_rtl_20261006"
-PROTOCOL = ROOT / "docs" / "trendlines" / "BREAKDOWN_RTL_PROTOCOL.md"
+PROTOCOL = ROOT / "docs" / "setups" / "trendlines" / "uptrend-breakdown" / "q22-breakdown-rtl" / "PROTOCOL.md"
 DAILY = ROOT / "Reports" / "trend_rr_20261002" / "daily_reference.csv"
 CONFIGS = {"primary": 0.0, "s1": 0.5}
 WINDOW = 10

@@ -1,6 +1,6 @@
 """Q23 stages 0-1: green signals whose sell stop sits at intact swing-low support (short mirror of Q18).
 
-Frozen protocol: docs/levels/SUPPORT_BREAKDOWN_PROTOCOL.md. Reads the stage-0 MT5 run of the short mirror baseline
+Frozen protocol: docs/setups/horizontal/support-breakdown-short/q23-support-breakdown/PROTOCOL.md. Reads the stage-0 MT5 run of the short mirror baseline
 (Reports/levels/support_breakdown_20261006/), builds the green-signal census (the mirror of Q10's), checks attempts
 and trades against it, classifies every signal with the frozen Q11 classifier as is (level_visit.classify), checks a
 sample by independent re-derivation (verify_level_visit.direct), and applies Q18's stage-1 gate. Writes summary.json,

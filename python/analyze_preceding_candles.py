@@ -1,4 +1,4 @@
-"""Q1/Q2 diagnostics under the frozen protocol in docs/PRECEDING_CANDLES_PROTOCOL.md.
+"""Q1/Q2 diagnostics under the frozen protocol in docs/baseline/q01-q02-preceding-candles/PROTOCOL.md.
 
 Run from the project root:
   python python/analyze_preceding_candles.py Reports/preceding_candles_20260930

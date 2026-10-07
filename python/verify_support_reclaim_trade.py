@@ -1,4 +1,4 @@
-"""Q24 trading-run checks (protocol: docs/levels/SUPPORT_RECLAIM_PROTOCOL.md, "Verification").
+"""Q24 trading-run checks (protocol: docs/setups/horizontal/support-reclaim-long/q25-support-reclaim/PROTOCOL.md, "Verification").
 
 For one trading job of Reports/levels/support_reclaim_runs_20261007/:
 1. Logged bars = eligible bars of the verified classify-only run (same threshold), minus bars that open with a

@@ -1,4 +1,4 @@
-"""Q5: signal-candle shape (protocol: docs/Q5_CANDLE_SHAPE_RESULTS.md).
+"""Q5: signal-candle shape (protocol: docs/baseline/q05-candle-shape/RESULTS.md).
 
 Signal bar = bar 1 (always red). Shares of its range: body = (o-c)/r, upper = (h-o)/r,
 lower = (c-l)/r. Shapes in order: doji (body <= 0.10), hammer (lower >= 0.60, upper <= 0.15),

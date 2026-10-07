@@ -1,4 +1,4 @@
-"""Q12 broad support-origin contact screen; see docs/levels/BROAD_SUPPORT_PROTOCOL.md."""
+"""Q12 broad support-origin contact screen; see docs/setups/horizontal/support-bounce-long/q12-broad-support/PROTOCOL.md."""
 
 import json
 from pathlib import Path
@@ -15,7 +15,7 @@ from trend_regimes import ROLLS
 
 Q11 = ROOT / "Reports/levels/level_visit_20261004"
 STUDY = ROOT / "Reports/levels/broad_support_20261004"
-PROTOCOL = ROOT / "docs/levels/BROAD_SUPPORT_PROTOCOL.md"
+PROTOCOL = ROOT / "docs/setups/horizontal/support-bounce-long/q12-broad-support/PROTOCOL.md"
 CONTACT_GROUPS = ("support_revisit", "slice_through", "broken_contact", "not_departed_contact")
 
 

@@ -1,4 +1,4 @@
-"""Q4: recent pullback vs broader move (protocol: docs/Q4_CONTEXT_RESULTS.md).
+"""Q4: recent pullback vs broader move (protocol: docs/baseline/q04-context/RESULTS.md).
 
 Recent window = bars 2..R+1, older window = bars R+2..R+L+1 (bar 1 = signal, excluded).
 Direction = sign of close(newest) - open(oldest); 0 counts as up. Groups = older x recent.

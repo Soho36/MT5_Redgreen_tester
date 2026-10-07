@@ -1,6 +1,6 @@
 """Prepare the trailing-stop study: EA source copy, tester INIs and manifest.
 
-Protocol: docs/TRAILING_STOP_RESULTS.md. Writes Reports/trailing_stop_20261001/
+Protocol: docs/baseline/trailing-stop/RESULTS.md. Writes Reports/trailing_stop_20261001/
 (gitignored). Compile the copied RTL_runband_trail.mq5 with MetaEditor, then run
     .\\python\\run_exit_study.ps1 -StudyDir Reports\\trailing_stop_20261001 `
         -ExpertName RTL_runband_trail -InstallFolder ClaudeTrailingStop

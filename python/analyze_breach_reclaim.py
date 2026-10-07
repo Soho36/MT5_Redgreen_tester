@@ -1,4 +1,4 @@
-"""Q8 support breach/reclaim diagnostic. See docs/BREACH_RECLAIM_PROTOCOL.md."""
+"""Q8 support breach/reclaim diagnostic. See docs/setups/horizontal/support-reclaim-long/q08-breach-reclaim/PROTOCOL.md."""
 
 import json
 from pathlib import Path
@@ -273,7 +273,7 @@ def fmt(x, digits=3):
 
 
 def write_report(audits, attempts, contrasts, decision):
-    lines = ["# Q8 breach/reclaim diagnostic tables", "", "[Frozen protocol](../../../docs/BREACH_RECLAIM_PROTOCOL.md). 2026-10-03.",
+    lines = ["# Q8 breach/reclaim diagnostic tables", "", "[Frozen protocol](../../../docs/setups/horizontal/support-reclaim-long/q08-breach-reclaim/PROTOCOL.md). 2026-10-03.",
              "", "Current-session low is primary; previous-session and previous-week lows are separate comparisons.",
              "", f"Candidate for a full strategy experiment: **{decision['candidate']}**. Gates: `{decision['gates']}`.",
              "", "## Baseline", "", f"Audits: `{audits}`", "",
@@ -332,7 +332,7 @@ def main():
     (STUDY / "decision.json").write_text(json.dumps(decision, indent=2), encoding="utf-8")
     paths = files + signal_files + [SOURCE, ROLLS, Path(__file__), ROOT / "python" / "analyze_price_levels.py",
                                    ROOT / "python" / "verify_location_validation.py", ROOT / "python" / "trend_regimes.py",
-                                   ROOT / "docs" / "BREACH_RECLAIM_PROTOCOL.md"]
+                                   ROOT / "docs" / "setups" / "horizontal" / "support-reclaim-long" / "q08-breach-reclaim" / "PROTOCOL.md"]
     provenance = dict(baseline_audits=audits, attempt_counts=attempts.groupby("period").size().to_dict(),
                       files=[dict(path=str(p), sha256=sha256(p)) for p in paths])
     (STUDY / "provenance.json").write_text(json.dumps(provenance, indent=2), encoding="utf-8")

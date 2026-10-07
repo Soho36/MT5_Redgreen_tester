@@ -1,4 +1,4 @@
-"""Prepare the Q24 support-reclaim EA and its tester jobs (protocol: docs/levels/SUPPORT_RECLAIM_PROTOCOL.md).
+"""Prepare the Q24 support-reclaim EA and its tester jobs (protocol: docs/setups/horizontal/support-reclaim-long/q25-support-reclaim/PROTOCOL.md).
 
 Copies the Q10 baseline research EA (Reports/trend_rr_20261002/RTL_trend_rr.mq5, tag f50_baseline) and replaces its
 red-candle buy-stop entry with mt5/experts/support_reclaim.mqh, called at the open of every eligible bar (flat,
@@ -12,7 +12,7 @@ The verified classify-only run lives in Reports/levels/support_reclaim_20261007/
 writes Reports/levels/support_reclaim_runs_20261007/ with `classify` (ReclaimMode 1 again: a regression check against
 that verified log), `primary` (2), `c1` (3), `primary_s1` and `c1_s1` (BreakDepthA 0.5).
 
-Variant `nocancel` (exploratory follow-up, plan in docs/levels/SUPPORT_RECLAIM_RESULTS.md): the same jobs with
+Variant `nocancel` (exploratory follow-up, plan in docs/setups/horizontal/support-reclaim-long/q25-support-reclaim/RESULTS.md): the same jobs with
 CancelOnLow = false, in Reports/levels/support_reclaim_nocancel_20261007/. Usage: prepare_support_reclaim.py [nocancel]
 """
 import json
@@ -29,7 +29,7 @@ RUN = ROOT / "Reports" / "levels" / "support_reclaim_runs_20261007"
 STEM = "support_reclaim_runs_20261007"
 EXPERT = "RTL_support_reclaim"
 INCLUDE = ROOT / "mt5" / "experts" / "support_reclaim.mqh"
-PROTOCOL = ROOT / "docs" / "levels" / "SUPPORT_RECLAIM_PROTOCOL.md"
+PROTOCOL = ROOT / "docs" / "setups" / "horizontal" / "support-reclaim-long" / "q25-support-reclaim" / "PROTOCOL.md"
 COMMON = dict(MinRiskA=0.25, LevelN=5, LevelSessions=5, OrderLife=3)
 JOBS = {"classify": dict(COMMON, ReclaimMode=1, BreakDepthA=0.0),
         "primary": dict(COMMON, ReclaimMode=2, BreakDepthA=0.0), "c1": dict(COMMON, ReclaimMode=3, BreakDepthA=0.0),

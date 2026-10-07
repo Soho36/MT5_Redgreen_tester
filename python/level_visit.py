@@ -1,4 +1,4 @@
-"""Q11 level map and signal classification; see docs/LEVEL_VISIT_PROTOCOL.md.
+"""Q11 level map and signal classification; see docs/setups/horizontal/support-bounce-long/q11-level-visit/PROTOCOL.md.
 
 Pure functions on arrays of consecutive M30 bars. Nothing here reads outcomes.
 """

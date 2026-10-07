@@ -1,6 +1,6 @@
 """Q11: intact one-week M30 swing-low support versus every other RTL signal.
 
-Frozen protocol (with pre-outcome amendment): docs/LEVEL_VISIT_PROTOCOL.md.
+Frozen protocol (with pre-outcome amendment): docs/setups/horizontal/support-bounce-long/q11-level-visit/PROTOCOL.md.
 Reuses Q10's original-exit census, attempts and fills; no new MT5 run.
 Outputs Reports/levels/level_visit_20261004/.
 """
@@ -20,7 +20,7 @@ ROOT = Path(__file__).absolute().parent.parent
 Q10 = ROOT / "Reports" / "levels" / "support_interaction_20261003"
 M30 = ROOT / "Reports" / "levels" / "breach_reclaim_20261003" / "m30_reference.csv"
 STUDY = ROOT / "Reports" / "levels" / "level_visit_20261004"
-PROTOCOL = ROOT / "docs" / "LEVEL_VISIT_PROTOCOL.md"
+PROTOCOL = ROOT / "docs" / "setups" / "horizontal" / "support-bounce-long" / "q11-level-visit" / "PROTOCOL.md"
 CONFIGS = {"week_n5": (5, 5), "two_weeks_n5": (5, 10), "week_n3": (3, 5)}
 PRIMARY = "week_n5"
 SEED = 20261004

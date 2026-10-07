@@ -1,4 +1,4 @@
-"""Prepare the clean-data MaxRedRun train/test (protocol: docs/MAXREDRUN_CLEAN_RESULTS.md).
+"""Prepare the clean-data MaxRedRun train/test (protocol: docs/baseline/maxredrun/RESULTS.md).
 
 Step 1 (no argument): 8 training jobs, MaxRedRun 0..7 on 2016-2019.
 Step 2 (--test-cap N): adds the frozen winner N and off (0) on 2020-2026.

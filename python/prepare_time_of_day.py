@@ -1,4 +1,4 @@
-"""Prepare the time-of-day diagnostic (protocol: docs/TIME_OF_DAY_RESULTS.md).
+"""Prepare the time-of-day diagnostic (protocol: docs/baseline/time-of-day/RESULTS.md).
 
 Baseline (RR 1.0, MaxRedRun 3, calendar on) on the clean symbol with SnapshotBars=1 so
 every trade carries its signal time. Writes Reports/time_of_day_20261002/. Run with

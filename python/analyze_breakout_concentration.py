@@ -1,6 +1,6 @@
 """Q19: concentration audit of the Q18 breakout result (Q16 diagnostics).
 
-Protocol: docs/levels/BREAKOUT_CONCENTRATION_PROTOCOL.md. Primary: stage-2 stand-alone trades versus the baseline
+Protocol: docs/setups/horizontal/resistance-breakout-long/q19-breakout-concentration/PROTOCOL.md. Primary: stage-2 stand-alone trades versus the baseline
 full strategy. Secondary: stage-1 attribution versus every other signal. Descriptive only; no MT5 run.
 """
 
@@ -21,7 +21,7 @@ STAGE1 = ROOT / "Reports/levels/breakout_20261004"
 STAGE2 = ROOT / "Reports/levels/breakout_standalone_20261004"
 M30 = ROOT / "Reports/levels/breach_reclaim_20261003/m30_reference.csv"
 STUDY = ROOT / "Reports/levels/breakout_concentration_20261005"
-PROTOCOL = ROOT / "docs/levels/BREAKOUT_CONCENTRATION_PROTOCOL.md"
+PROTOCOL = ROOT / "docs/setups/horizontal/resistance-breakout-long/q19-breakout-concentration/PROTOCOL.md"
 REF = {"standalone": {"train": (1083, 1742.35), "recent": (1685, 12029.75)},
        "attribution": {"train": (751, 1471.45), "recent": (1181, 8265.45)}}
 

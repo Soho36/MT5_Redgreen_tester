@@ -1,4 +1,4 @@
-"""Q24 buy the reclaim of a broken swing-low level; see docs/levels/SUPPORT_RECLAIM_PROTOCOL.md.
+"""Q24 buy the reclaim of a broken swing-low level; see docs/setups/horizontal/support-reclaim-long/q25-support-reclaim/PROTOCOL.md.
 
 Order for the open of bar t: bar s = t - 1 is the breakdown candidate. Levels are the frozen Q11 ones
 (level_visit.merge_levels / level_state), evaluated at the open of s from bars before s: known swing lows (N = 5)

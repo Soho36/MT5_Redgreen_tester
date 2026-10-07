@@ -1,4 +1,4 @@
-"""Analyze the clean-data RR check (protocol: docs/RR_CLEAN_DATA_RESULTS.md).
+"""Analyze the clean-data RR check (protocol: docs/baseline/rr-clean-data/RESULTS.md).
 
 Checks every CSV against its MT5 stats and that no trade crosses a date, prints the
 results per period and RR, and applies the pre-set rule: adopt 2.5R only if 2.0, 2.5

@@ -238,7 +238,7 @@ def fmt(x, digits=3):
 
 
 def report(groups, contrasts, verdict):
-    lines = ["# Q9: speed and symmetric response tables", "", "[Frozen protocol](../../../docs/RECLAIM_SPEED_PROTOCOL.md).",
+    lines = ["# Q9: speed and symmetric response tables", "", "[Frozen protocol](../../../docs/setups/horizontal/support-reclaim-long/q09-reclaim-speed/PROTOCOL.md).",
              "", f"Candidate for a separate early-entry experiment: **{verdict['candidate']}**. Gates: `{verdict['gates']}`.",
              "", "## Current-session raw groups at 90 minutes", "", "Endpoint and path probabilities are distinct; all values are from signal close, not a simulated fill.",
              "", "| Period | Group | n endpoint | n path | Up endpoint % | Down endpoint % | Balance pp | Mean R | Mean abs R | Up hit % | Down hit % | Both hit % | Up first % | Down first % | Ambiguous % |",
@@ -297,7 +297,7 @@ def main():
                  forward_windows_checked=checks, total_attempt_source_rows=len(features))
     paths = [SOURCE, ROLLS, fpath, UPSTREAM / "forward_responses.csv", UPSTREAM / "m30_reference.csv", Path(__file__),
              ROOT / "python" / "reclaim_speed.py", ROOT / "python" / "analyze_breach_reclaim.py",
-             ROOT / "python" / "analyze_price_levels.py", ROOT / "docs" / "RECLAIM_SPEED_PROTOCOL.md"]
+             ROOT / "python" / "analyze_price_levels.py", ROOT / "docs" / "setups" / "horizontal" / "support-reclaim-long" / "q09-reclaim-speed" / "PROTOCOL.md"]
     provenance = dict(audits=audit, files=[dict(path=str(p), sha256=sha256(p)) for p in paths])
     (STUDY / "provenance.json").write_text(json.dumps(provenance, indent=2), encoding="utf-8")
     report(groups, contrasts, verdict)

@@ -1,6 +1,6 @@
 """Q15: falling trendline resistance versus every other RTL signal.
 
-Frozen protocol: docs/trendlines/RESISTANCE_PROTOCOL.md. Reuses Q10's original-exit census,
+Frozen protocol: docs/setups/trendlines/downtrend-breakout-long/q15-falling-resistance/PROTOCOL.md. Reuses Q10's original-exit census,
 attempts and fills (hash-verified); no new MT5 run. Outputs Reports/trendlines/trendline_resistance_20261004/.
 """
 
@@ -20,7 +20,7 @@ from trend_regimes import ROLLS
 ROOT = Path(__file__).absolute().parent.parent
 Q14 = ROOT / "Reports" / "trendlines" / "trendline_support_20261004"
 STUDY = ROOT / "Reports" / "trendlines" / "trendline_resistance_20261004"
-PROTOCOL = ROOT / "docs" / "trendlines" / "RESISTANCE_PROTOCOL.md"
+PROTOCOL = ROOT / "docs" / "setups" / "trendlines" / "downtrend-breakout-long" / "q15-falling-resistance" / "PROTOCOL.md"
 CONFIGS = {"week_n5": (5, 5), "two_weeks_n5": (5, 10), "week_n3": (3, 5)}
 PRIMARY = "week_n5"
 MIN_SEP, MIN_SLOPE = 10, 0.02

@@ -1,4 +1,4 @@
-"""Q18 horizontal swing-high resistance (breakout from below); see docs/levels/BREAKOUT_PROTOCOL.md.
+"""Q18 horizontal swing-high resistance (breakout from below); see docs/setups/horizontal/resistance-breakout-long/q18-breakout/PROTOCOL.md.
 
 Exact mirror of the frozen Q11 classifier (level_visit.classify, including its pre-outcome amendment):
 negating prices turns confirmed swing highs into swing lows, a close above a level into a close below it,

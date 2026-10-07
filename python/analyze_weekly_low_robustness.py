@@ -12,7 +12,7 @@ from analyze_price_levels import ROOT, PERIODS, sha256
 UPSTREAM = ROOT / "Reports/levels/broad_support_20261004"
 Q10 = ROOT / "Reports/levels/support_interaction_20261003"
 STUDY = ROOT / "Reports/levels/weekly_low_robustness_20261004"
-PROTOCOL = ROOT / "docs/levels/WEEKLY_LOW_ROBUSTNESS_PROTOCOL.md"
+PROTOCOL = ROOT / "docs/setups/horizontal/support-bounce-long/q13-weekly-low/PROTOCOL.md"
 SEED = 20261004
 
 

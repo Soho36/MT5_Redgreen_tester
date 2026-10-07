@@ -1,4 +1,4 @@
-"""Analyze the clean-data MaxRedRun train/test (protocol: docs/MAXREDRUN_CLEAN_RESULTS.md).
+"""Analyze the clean-data MaxRedRun train/test (protocol: docs/baseline/maxredrun/RESULTS.md).
 
 Checks each CSV against its MT5 stats (incl. the max_red_run flag) and that no trade crosses
 a date. Applies the pre-set selection rule to the 2016-2019 runs (highest gross PF; a tie

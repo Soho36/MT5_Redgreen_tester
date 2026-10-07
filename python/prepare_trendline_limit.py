@@ -1,4 +1,4 @@
-"""Prepare the Q20 trendline buy-limit EA and tester jobs (protocol: docs/trendlines/TRENDLINE_LIMIT_PROTOCOL.md).
+"""Prepare the Q20 trendline buy-limit EA and tester jobs (protocol: docs/setups/trendlines/uptrend-bounce-long/q20-trendline-limit/PROTOCOL.md).
 
 Copies the Q10 baseline research EA (Reports/trend_rr_20261002/RTL_trend_rr.mq5, tag f50_baseline) and replaces
 its red-candle buy-stop entry with mt5/experts/trendline_limit.mqh, called at the open of every eligible bar
@@ -30,7 +30,7 @@ RUN = ROOT / "Reports" / "trendlines" / "trendline_limit_runs_20261005"
 STEM = "trendline_limit_runs_20261005"
 EXPERT = "RTL_trendline_limit"
 INCLUDE = ROOT / "mt5" / "experts" / "trendline_limit.mqh"
-PROTOCOL = ROOT / "docs" / "trendlines" / "TRENDLINE_LIMIT_PROTOCOL.md"
+PROTOCOL = ROOT / "docs" / "setups" / "trendlines" / "uptrend-bounce-long" / "q20-trendline-limit" / "PROTOCOL.md"
 DELTAS = f"{STEM}_deltas.csv"
 SEED = 20261005
 SETTINGS = {"": (0.5, 0), "_tt": (0.5, 1), "_s025": (0.25, 0), "_s100": (1.0, 0)}

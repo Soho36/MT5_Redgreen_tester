@@ -51,7 +51,7 @@ def main():
                              csv=f"runband_{tag}_{rr:.2f}.csv", report=f"{tag}.htm"))
     manifest = dict(source=str(source_path), source_sha256=hashlib.sha256(source_path.read_bytes()).hexdigest(),
                     experimental_source_sha256=hashlib.sha256(expert.read_bytes()).hexdigest(),
-                    protocol_sha256=hashlib.sha256((root / "docs/EXIT_THRESHOLD_PROTOCOL.md").read_bytes()).hexdigest(),
+                    protocol_sha256=hashlib.sha256((root / "docs/baseline/exit-threshold/PROTOCOL.md").read_bytes()).hexdigest(),
                     jobs=jobs)
     (out / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     print(f"Prepared {len(jobs)} runs and {expert}")

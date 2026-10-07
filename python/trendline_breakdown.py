@@ -1,4 +1,4 @@
-"""Q21 short the breakdown of a rising trendline; see docs/trendlines/BREAKDOWN_SHORT_PROTOCOL.md.
+"""Q21 short the breakdown of a rising trendline; see docs/setups/trendlines/uptrend-breakdown/q21-breakdown-short/PROTOCOL.md.
 
 Signal for the open of bar t: bar s = t - 1 is the breakdown candidate. The lines are the frozen Q14/Q20 ones
 (python/trendline_limit.armed_lines), evaluated at the open of s from bars before s. A line is live if no close

@@ -1,4 +1,4 @@
-"""Q15 falling trendline resistance; see docs/trendlines/RESISTANCE_PROTOCOL.md.
+"""Q15 falling trendline resistance; see docs/setups/trendlines/downtrend-breakout-long/q15-falling-resistance/PROTOCOL.md.
 
 Exact mirror of trendline_support: negating prices (high <-> -low, open/close -> -open/-close)
 turns lines through consecutive lower swing highs into lines through consecutive higher swing

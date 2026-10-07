@@ -1,4 +1,4 @@
-"""Prepare the Q23 short mirror baseline EA and its tester jobs (protocol: docs/levels/SUPPORT_BREAKDOWN_PROTOCOL.md).
+"""Prepare the Q23 short mirror baseline EA and its tester jobs (protocol: docs/setups/horizontal/support-breakdown-short/q23-support-breakdown/PROTOCOL.md).
 
 Stage 0: copies the Q10 baseline research EA (Reports/trend_rr_20261002/RTL_trend_rr.mq5, tag f50_baseline), applies
 the Q21 short-side patches (python/prepare_trendline_breakdown.py: direction flag, mirrored bar-close exit,
@@ -19,7 +19,7 @@ RUN = ROOT / "Reports" / "levels" / "support_breakdown_20261006"
 STEM = "support_breakdown_20261006"
 EXPERT = "RTL_short_mirror"
 INCLUDE = ROOT / "mt5" / "experts" / "short_mirror.mqh"
-PROTOCOL = ROOT / "docs" / "levels" / "SUPPORT_BREAKDOWN_PROTOCOL.md"
+PROTOCOL = ROOT / "docs" / "setups" / "horizontal" / "support-breakdown-short" / "q23-support-breakdown" / "PROTOCOL.md"
 JOBS = {"baseline": {}}
 
 
