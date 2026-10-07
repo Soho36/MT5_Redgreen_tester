@@ -39,11 +39,11 @@ Grouped as in the user's sketch ([photo](reference/setup_map_sketch.jpg)).
 Entry filters, exits, RR, sessions and order mechanics of the base strategy
 (red candle, buy stop at its high): Q1-Q5, time of day, MaxRedRun, RR, exit
 threshold, trailing stop, flatten fallback, early-close calendar, averaging,
-limit-only entry, trend-conditioned RR, Q24 trade streaks.
+limit-only entry, trend-conditioned RR, Q24 trade streaks, the baseline on MES (unseen instrument).
 
 ## Reference
 
-- [Data build](reference/DATA_BUILD.md): the continuous NQ one-minute series.
+- [Data build](reference/DATA_BUILD.md): the continuous NQ and ES one-minute series.
 - [Exit and data review](reference/EXIT_AND_DATA_REVIEW.md).
 - [Research questions](reference/RESEARCH_QUESTIONS.md) (checklist and inbox)
   and [early research results](reference/RESEARCH_RESULTS.md).

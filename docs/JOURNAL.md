@@ -484,5 +484,14 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - The old ES conversion (`MT5_v_converted.csv`) has calendar-spread prices on 3 days (2017-03-13, 2017-12-11,
   2019-06-17). Next: user imports the new file as an MT5 custom symbol.
 
+## 2026-10-08: RTL baseline on MES (unseen instrument)
+
+- User created `MEScontDTBNT20102026` and asked for the baseline on it, compared with MNQ. Same EA (runband, RR 1,
+  cap 3) and tester settings; the MNQ rerun reproduces the existing baseline ledger exactly.
+  [Results](baseline/mes-unseen-instrument/RESULTS.md).
+- **No edge on MES even before costs:** mean R −0.039 / +0.002 (2016–19 / 2020–26) vs MNQ +0.093 / +0.085, intervals
+  apart; win rate 2–4 points lower; net loss in 15/17 years. The MNQ edge does not transfer to ES.
+- Found two ES source-data holes (2020-02-28, 2020-06-30 stop mid-session); noted in DATA_BUILD. Negligible here.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

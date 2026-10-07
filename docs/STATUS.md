@@ -6,7 +6,12 @@ For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
 **ES data for unseen-instrument tests (2026-10-08):** continuous ES 1-minute file built with the NQ rules
 (`F:\DATABENTO\ES_16_YEARS\MT5_ES_continuous_2010-2026_ohlcv-1m.csv`, 2010-06-07 → 2026-10-07), input checks clean
 ([DATA_BUILD](reference/DATA_BUILD.md#es-build-2026-10-08)). Do not use the old ES conversion: 3 days hold spread prices.
-Next: import as an MT5 custom symbol.
+Two ES-only data holes (2020-02-28, 2020-06-30). Imported as `MEScontDTBNT20102026`.
+
+**[Baseline on MES](baseline/mes-unseen-instrument/RESULTS.md) (2026-10-08): the RTL edge does not transfer.** Unchanged
+baseline EA and settings: MES mean R before costs −0.039 / +0.002 (2016–19 / 2020–26) vs MNQ +0.093 / +0.085, 95%
+intervals apart. PF net 0.930 / 0.979; 15/17 years lose. Costs in R are the same on both, so the gap is the
+signal itself (win rate 2–4 points lower). Treat MNQ results as unconfirmed on independent data.
 
 **[Q24 trade-result streaks](baseline/q24-trade-streaks/RESULTS.md) (2026-10-07): no predictive or daily-stop gate passes.**
 Current RTL ledger, 14,968 trades, $1.05 costs: after three same-session losses the next-trade win rate

@@ -73,7 +73,7 @@ The NQ part comes first; the ES build (same rules, unseen-instrument data) is [b
   prices, no OHLC inconsistencies, all prices on the 0.25 tick, no zero-volume bars, each
   `instrument_id` has one name. The files join seamlessly (last bar 2026-04-16 23:59 UTC, first
   2026-04-17 00:00 UTC, no overlap; ESM6/ESU6/ESZ6/ESH7 keep the same `instrument_id` in both).
-  No calendar gap longer than a weekend/holiday.
+  No calendar gap longer than a weekend/holiday (but see the two intraday holes below).
 - **Output:** `MT5_ES_continuous_2010-2026_ohlcv-1m.csv`: 5,685,512 bars, 4,207 dates,
   2010-06-07 01:00 → 2026-10-07 02:59 (the last session is partial, as in the NQ file).
   29,079 post-close tail rows dropped. `MT5_ES_continuous_2010-2026_rolls.csv`: 67 contract
@@ -81,6 +81,15 @@ The NQ part comes first; the ES build (same rules, unseen-instrument data) is [b
 - **Output checks:** Monday–Friday dates only; since 2016, 2,779/2,781 sessions start at 01:00
   and 2,682 end at 23:59 (the rest are early closes 19:59/20:14 and holidays). Session dates
   equal the NQ file's (ES has 4 more at the end because its download is newer).
+- **Intraday holes (found 2026-10-08, after the first check):** the Databento ES source stops mid-session on
+  **2020-02-28** (no bars after 15:59 UTC, 17:58 in this clock) and **2020-06-30** (after 14:10 UTC, 17:10),
+  for all contracts. NQ has both days complete. These are the only ES-only holes: every session was compared
+  with NQ (end time and bar count), and the other long internal gaps appear in both (2012-07-03, 2019-02-27,
+  2025-11-28 CME outage). Re-download those two days if Databento has them; the RTL baseline has 8 trades
+  there (net −$480).
+- **Early-close calendar:** `mt5/experts/early_closes.mqh` (built from NQ) fits ES too. ES has the same CME
+  schedule. Apart from the two holes, the only differences are 3 sessions whose last bar is one minute off
+  (19:59 vs 20:00).
 - **Compared with the old ES conversion** (`MT5_v_converted.csv`, to 2026-04-17): 98.5% of
   common minutes identical (the old file already used this clock). The 67 differing days:
   - 64 are the session before a roll (the old file rolled on same-day volume).
