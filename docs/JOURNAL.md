@@ -500,6 +500,9 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - Not drift: the control earns +0.011 / +0.009 R before costs (intervals include 0). Green ≈ red (+0.073 / +0.066 vs
   +0.093 / +0.085 R, overlapping). The edge is the buy stop over a previous M30 high. RTL + GG = ~2x net and ~2x DD
   (corr +0.62). New EA `mt5/experts/GG_r_MFE_buy-stop-entry_runband.cs` (RTL with the colour flipped, verified).
+- Same control on MES (user request): the buy-stop gain over the plain long is there too (+0.03 / +0.04 / +0.04 R,
+  intervals above 0, ~half of NQ), but the MES plain long loses before costs (−0.14 / −0.08 / −0.04 R; NQ ≈ 0).
+  So RTL works where the plain long breaks even. [Results](baseline/signal-colour/RESULTS.md#mes-same-control-2026-10-08).
 
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

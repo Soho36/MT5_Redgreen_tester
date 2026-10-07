@@ -22,6 +22,6 @@ flatten. The current rules are in [STATUS.md](../STATUS.md).
 | [Near-stop averaging entry](averaging-entry/RESULTS.md) ([protocol](averaging-entry/PROTOCOL.md)) | Keep averaging off |
 | [Limit-only entry](limit-only/RESULTS.md) ([protocol](limit-only/PROTOCOL.md)) | Rejected |
 | [Trend-conditioned RR](trend-rr/RESULTS.md) ([protocol](trend-rr/PROTOCOL.md)) | Keep fixed 1R |
-| [Signal colour + no-pattern control](signal-colour/RESULTS.md) | Edge is the buy stop over a previous high, not the colour (green ≈ red) and not drift (market-entry control ≈ 0) |
+| [Signal colour + no-pattern control](signal-colour/RESULTS.md) | Edge is the buy stop over a previous high, not the colour (green ≈ red). Buy-stop gain over a plain long: NQ +0.08 R, ES +0.04 R; ES fails because its plain long loses |
 | [MES: unseen instrument](mes-unseen-instrument/RESULTS.md) | No edge on MES even before costs (mean R −0.04 / +0.00 vs MNQ +0.09 / +0.09) |
 | [Q24: trade-result streaks](q24-trade-streaks/RESULTS.md) ([protocol](q24-trade-streaks/PROTOCOL.md)) | No predictive or daily-stop rule passes |

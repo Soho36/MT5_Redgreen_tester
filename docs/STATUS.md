@@ -16,7 +16,9 @@ signal itself (win rate 2–4 points lower). Treat MNQ results as unconfirmed on
 **[Signal colour + control](baseline/signal-colour/RESULTS.md) (2026-10-08, exploratory): the edge is the buy stop, not the
 colour or drift.** On MNQ a market-buy control with the same stop and exit earns ~0 R before costs (+0.011 / +0.009). Green
 signals nearly match red (+0.073 / +0.066 vs +0.093 / +0.085 R). RTL + GG together = ~2x net and ~2x DD. GG EA:
-`mt5/experts/GG_r_MFE_buy-stop-entry_runband.cs`.
+`mt5/experts/GG_r_MFE_buy-stop-entry_runband.cs`. **Same control on MES:** the buy stop beats the plain long there too,
+by +0.025 / +0.042 / +0.039 R (2010–15 / 2016–19 / 2020–26, all intervals above 0), about half the NQ gain. But the MES
+plain long itself loses −0.14 / −0.08 / −0.04 R (NQ ≈ 0), so RTL fails there. The market's background decides.
 
 **[Q24 trade-result streaks](baseline/q24-trade-streaks/RESULTS.md) (2026-10-07): no predictive or daily-stop gate passes.**
 Current RTL ledger, 14,968 trades, $1.05 costs: after three same-session losses the next-trade win rate

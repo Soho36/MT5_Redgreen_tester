@@ -7,19 +7,20 @@ The baseline runband EA gets one input, SignalMode (text edits below, nothing el
 The "run" filter counts consecutive signal-coloured bars (green run in mode 1). Mode 0 with MaxRedRun 3
 must reproduce the baseline ledger exactly.
 
-Writes Reports/signal_colour_20261008/. Run with
-    .\\venv\\Scripts\\python.exe python\\run_mt5_job.py Reports\\signal_colour_20261008 RTL_signal
+Usage: python prepare_signal_colour.py [mnq|mes]   (default mnq; mes = red_cap3 + market_control only)
+Writes Reports/signal_colour_20261008/ (MNQ) or Reports/signal_colour_20261008_mes/. Run with
+    .\\venv\\Scripts\\python.exe python\\run_mt5_job.py Reports\\signal_colour_20261008[_mes] RTL_signal
 """
 
 import json
 import shutil
+import sys
 
 from prepare_instrument_baseline import make_ini
 from project_paths import PROJECT_ROOT as ROOT
 
-STUDY = ROOT / "Reports" / "signal_colour_20261008"
 EXPERT = "RTL_signal"
-SYMBOL = "MNQcontDTBNT20102026_2"
+SYMBOLS = {"mnq": "MNQcontDTBNT20102026_2", "mes": "MEScontDTBNT20102026"}
 JOBS = (("red_cap3", 0, 3), ("red_nocap", 0, 0), ("green_cap3", 1, 3), ("green_nocap", 1, 0),
         ("any", 2, 0), ("market_control", 3, 0))
 
@@ -57,24 +58,27 @@ def build_source():
     return src
 
 
-def main():
-    STUDY.mkdir(parents=True, exist_ok=True)
-    (STUDY / f"{EXPERT}.mq5").write_text(build_source(), encoding="utf-8")
-    shutil.copyfile(ROOT / "mt5" / "experts" / "early_closes.mqh", STUDY / "early_closes.mqh")
+def main(key="mnq"):
+    study = ROOT / "Reports" / ("signal_colour_20261008" + ("" if key == "mnq" else f"_{key}"))
+    jobs_def = JOBS if key == "mnq" else [j for j in JOBS if j[0] in ("red_cap3", "market_control")]
+    symbol = SYMBOLS[key]
+    study.mkdir(parents=True, exist_ok=True)
+    (study / f"{EXPERT}.mq5").write_text(build_source(), encoding="utf-8")
+    shutil.copyfile(ROOT / "mt5" / "experts" / "early_closes.mqh", study / "early_closes.mqh")
     jobs = []
-    for name, mode, cap in JOBS:
-        tag = f"signal_20261008_{name}"
-        ini = make_ini(tag, SYMBOL).replace("Expert=CodexTrendlineResearch\\RTL_runband.ex5",
+    for name, mode, cap in jobs_def:
+        tag = f"signal_20261008_{name}" + ("" if key == "mnq" else f"_{key}")
+        ini = make_ini(tag, symbol).replace("Expert=CodexTrendlineResearch\\RTL_runband.ex5",
                                             f"Expert=CodexTrendlineResearch\\{EXPERT}.ex5")
         assert "MaxRedRun=3\n" in ini
         ini = ini.replace("MaxRedRun=3\n", f"MaxRedRun={cap}\nSignalMode={mode}\n")
-        (STUDY / f"{tag}.ini").write_text(ini, encoding="utf-16")
+        (study / f"{tag}.ini").write_text(ini, encoding="utf-16")
         jobs.append({"tag": tag, "mode": mode, "max_run": cap,
                      "outputs": [f"runband_{tag}_1.00.csv", f"runband_{tag}_1.00_stats.csv"]})
-    (STUDY / "manifest.json").write_text(json.dumps({"expert": EXPERT, "symbol": SYMBOL, "jobs": jobs}, indent=1),
+    (study / "manifest.json").write_text(json.dumps({"expert": EXPERT, "symbol": symbol, "jobs": jobs}, indent=1),
                                          encoding="utf-8")
-    print(f"Wrote {len(jobs)} jobs to {STUDY}")
+    print(f"Wrote {len(jobs)} jobs to {study}")
 
 
 if __name__ == "__main__":
-    main()
+    main(*sys.argv[1:])

@@ -1,4 +1,4 @@
-# Signal colour and a no-pattern control (MNQ)
+# Signal colour and a no-pattern control (MNQ, control also on MES)
 
 2026-10-08 · Exploratory, no pre-set gate · [Baseline studies](../README.md)
 
@@ -66,10 +66,43 @@ RTL + GG (cap 3) as two accounts, summed by exit day:
   survives opposite-colour bars, so some entries are at an older high. In "any" mode the order always
   moves to the latest bar. Why this matters is not tested.
 
+## MES: same control (2026-10-08)
+
+The user asked for the same market-buy control on MES. Red cap 3 was rerun with the same EA and
+reproduces the [MES baseline](../mes-unseen-instrument/RESULTS.md) byte for byte.
+
+Mean R before costs. The middle column is the gain over the control: red minus control, with a 95%
+interval from resampling days jointly.
+
+| | Control (plain long) | Gain over control | = Red baseline |
+|---|---|---|---|
+| MNQ 2010–15 | −0.034 | +0.039 [+0.014, +0.062] | +0.005 |
+| MNQ 2016–19 | +0.011 | +0.083 [+0.054, +0.112] | +0.093 |
+| MNQ 2020–26 | +0.009 | +0.075 [+0.053, +0.099] | +0.085 |
+| MES 2010–15 | −0.142 | +0.025 [+0.003, +0.047] | −0.118 |
+| MES 2016–19 | −0.081 | +0.042 [+0.014, +0.068] | −0.039 |
+| MES 2020–26 | −0.037 | +0.039 [+0.019, +0.060] | +0.002 |
+
+- **The buy-stop gain exists on ES too.** In every period it is positive with an interval above zero, about
+  half the NQ size (+0.04 vs +0.08 R). This comparison was decided on MNQ before the MES control was run.
+  MES itself had already been seen in the baseline test, so this is supporting evidence, not a clean
+  confirmation.
+- **The instruments differ in the plain-long control.** On NQ a long entered at the bar open with this stop
+  and exit breaks even before costs (2016–26). On ES it loses −0.04 to −0.08 R. That fits ES being more
+  mean-reverting intraday than NQ, but this is not tested here. So the buy-stop gain only shows up as
+  profit where the plain long is not negative.
+- **Correction to the MNQ summary above:** "not drift" holds in that the plain long earns ~0 on NQ. But
+  the plain long is exactly where NQ and ES differ, so the market's character (drift, trend vs reversion)
+  does decide whether the strategy pays.
+
 ## Reproduce
 
 ```powershell
 .\venv\Scripts\python.exe python\prepare_signal_colour.py
 .\venv\Scripts\python.exe python\run_mt5_job.py Reports\signal_colour_20261008 RTL_signal
 .\venv\Scripts\python.exe python\analyze_signal_colour.py
+# MES control
+.\venv\Scripts\python.exe python\prepare_signal_colour.py mes
+.\venv\Scripts\python.exe python\run_mt5_job.py Reports\signal_colour_20261008_mes RTL_signal
+.\venv\Scripts\python.exe python\analyze_signal_colour.py mes
 ```
