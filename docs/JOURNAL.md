@@ -457,5 +457,15 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   fails (PF 0.964/1.059, R -0.113/-0.006, below C1). Q24 trades reappear unchanged; the added trades are mixed
   (PF 0.855 / 1.052). Q24 closed.
 
+## 2026-10-07: long + short baselines merged (descriptive)
+
+- User asked whether the Q23 short mirror baseline (green candle, sell stop at its low) smooths the RTL long
+  baseline. Both runs have identical tester settings (2010-06 to 2026-07, 1R, run cap 3); ledgers summed by exit day,
+  $1.05 costs. [Script](../python/merge_long_short.py), [chart](figures/long_short_equity.png).
+- No: daily correlation -0.39, but shorts lose in 13/17 years, including the long's losing years 2010-14 and 2016.
+  Short P&L is positive in only 7/32 losing long quarters. Net $37,439 -> $8,009, max DD $8,186 -> $24,617.
+  The one hedge year is 2022 (+$9,620), given back in 2023 (-$12,206). Merging also assumes a hedging account:
+  14,916/23,427 long trades overlap a short in time.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*
