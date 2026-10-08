@@ -2,6 +2,8 @@
 
 2026-10-08 · Exploratory, no gate · [Baseline studies](../README.md)
 
+**2026-10-09 follow-up:** [Fixed grids and every origin](../granularity/RESULTS.md) confirms strong NQ resolution sensitivity. The original causal attribution below remains exploratory. The follow-up also found omitted fast-stop control trades in the EA CSV logger: native NQ controls are now audit-corrected there; the older ES/yearly-coarse control figures below still require the same audit. Full ES attribution remains open.
+
 ## Summary
 
 - **Question (user):** RTL fails on MES. Is that because ES candles span fewer ticks, or because ES moves

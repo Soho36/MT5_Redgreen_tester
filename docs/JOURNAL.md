@@ -517,5 +517,10 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   −0.039 / +0.002). The buy-stop gain goes; the plain long stays ~0 (ES's plain long loses, which coarsening doesn't
   reproduce). The edge needs candles spanning many ticks.
 
+## 2026-10-09: NQ fixed-grid resolution experiment
+
+- All 30 runs: RTL minus control declines across every grid/origin; 2020–26 +0.078 → +0.004 R. [Results](baseline/granularity/RESULTS.md).
+- Recovered 2,321 omitted control trades from tester reports; all totals reconcile. Resolution sensitivity supported; no filter adopted, ES path attribution remains open.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*
