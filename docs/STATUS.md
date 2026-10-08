@@ -22,8 +22,9 @@ plain long itself loses −0.14 / −0.08 / −0.04 R (NQ ≈ 0), so RTL fails t
 
 **[Why ES differs](baseline/nq-vs-es/RESULTS.md) (2026-10-08, exploratory): mostly tick granularity.** After a touch of
 the previous M30 high, NQ follows through and ES falls back. NQ rounded to an ES-like grid loses half (2016–26) to all
-(2010–15) of that difference; the rest sits in tiny ES candles. Next: MT5 runs on the coarse NQ symbol
-(`MNQcoarseDTBNT20102026`, user to import).
+(2010–15) of that difference; the rest sits in tiny ES candles. **MT5 on the coarse symbol** (`MNQcoarseDTBNT20102026`):
+RTL mean R before costs −0.123 / +0.020 / +0.041 (2010–15 / 2016–19 / 2020–26) vs NQ +0.005 / +0.093 / +0.085. The edge needs
+candles spanning many ticks; ES also has a negative plain long that granularity doesn't explain.
 
 **[Q24 trade-result streaks](baseline/q24-trade-streaks/RESULTS.md) (2026-10-07): no predictive or daily-stop gate passes.**
 Current RTL ledger, 14,968 trades, $1.05 costs: after three same-session losses the next-trade win rate

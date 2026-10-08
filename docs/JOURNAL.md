@@ -513,6 +513,9 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   NQ rounded to an ES-like grid (`build_coarse_nq.py`) loses half (2016–26) to all (2010–15) of that difference, so
   tick granularity is the main cause; the rest sits in tiny ES candles. ES is not generally more mean-reverting at M30.
   [Results](baseline/nq-vs-es/RESULTS.md). Next: user imports the coarse file as `MNQcoarseDTBNT20102026` for MT5 runs.
+- MT5 on the imported coarse symbol: RTL gross R falls to −0.123 / +0.020 / +0.041 (NQ +0.005 / +0.093 / +0.085; ES −0.118 /
+  −0.039 / +0.002). The buy-stop gain goes; the plain long stays ~0 (ES's plain long loses, which coarsening doesn't
+  reproduce). The edge needs candles spanning many ticks.
 
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

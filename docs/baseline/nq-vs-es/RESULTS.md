@@ -14,8 +14,10 @@
   previous high hold more often.
 - **ES is not generally more mean-reverting at the 30-minute scale.** Autocorrelation and variance ratios
   of M30 returns are close to 1 on both. NQ is only slightly more trending (2016–19 VR8 1.06 vs 0.99).
-- **Next:** run RTL and the control on the coarsened NQ in MT5 (user imports the file as a custom symbol).
-  That shows the effect on the strategy itself, not just on price paths.
+- **MT5 on the coarsened NQ confirms it for the strategy itself** ([below](#mt5-rtl-and-the-control-on-coarsened-nq-2026-10-08)).
+  RTL mean R before costs falls from +0.093 / +0.085 to +0.020 / +0.041 (2016–19 / 2020–26), and from +0.005 to
+  −0.123 in 2010–15, which is ES's level. Separately, ES's plain long loses with the RTL exit and coarsening does
+  not reproduce that.
 
 ## Method
 
@@ -69,9 +71,50 @@ By signal-candle size in ticks (grid steps for coarsened NQ), 2016–26, breakou
   0.96; 2016–19 NQ +0.009 / 1.06, ES −0.008 / 0.99; 2020–26 NQ −0.003 / 0.99, ES −0.003 / 0.97. Coarsening
   does not change these.
 
+## MT5: RTL and the control on coarsened NQ (2026-10-08)
+
+The user imported the coarse file as `MNQcoarseDTBNT20102026`, with settings copied from
+`MNQcontDTBNT20102026_2`. It was run with the same EA and settings as the [signal-colour](../signal-colour/RESULTS.md)
+runs (red cap 3 = RTL baseline; market-buy control). Check: 100% of the ledger's candle ranges lie on the yearly grid.
+
+Mean R before costs (gain = RTL minus control, 95% interval from resampling days):
+
+| | 2010–15 | 2016–19 | 2020–26 |
+|---|---|---|---|
+| **RTL** NQ | +0.005 | +0.093 | +0.085 |
+| **RTL** coarsened NQ | **−0.123** | **+0.020** | **+0.041** |
+| **RTL** ES | −0.118 | −0.039 | +0.002 |
+| Control NQ | −0.034 | +0.011 | +0.009 |
+| Control coarsened NQ | −0.018 | +0.016 | +0.009 |
+| Control ES | −0.142 | −0.081 | −0.037 |
+| Gain NQ | +0.039 | +0.083 | +0.075 |
+| Gain coarsened NQ | −0.105 [−0.129, −0.081] | +0.004 [−0.025, +0.032] | +0.032 [+0.011, +0.055] |
+| Gain ES | +0.025 | +0.042 | +0.039 |
+
+After costs, coarsened NQ RTL: PF 0.758 / 1.042 / 1.058, net −$13.3k / +$2.7k / +$21.1k. Real NQ: +$38.0k in 2020–26.
+
+- **Granularity alone removes about half of the RTL edge in 2016–26 and all of it in 2010–15.** There the
+  coarsened NQ lands on ES exactly (−0.123 vs −0.118). Its win rate drops to ES levels too (35.9% vs 36.4%
+  in 2010–15).
+- **It works by removing the buy-stop gain, not the plain long.** On coarsened NQ the plain long stays
+  around zero, like real NQ. On ES the plain long itself loses. Granularity does not reproduce that, so
+  ES has a second, separate weakness. It shows only with the bar-close exit: in the touch-exit path
+  measure, the ES plain long was as good as NQ's.
+- **In 2016–26 coarsened NQ still beats ES** by about 0.04–0.06 R. That is about the size of ES's negative
+  plain long.
+
+**Meaning for the strategy:** the RTL edge needs candles that span many ticks. That fits NQ having no edge in
+2010–15 (small candles) and a clear edge from about 2018 (large candles). If NQ's M30 range in ticks shrinks
+again, the edge should shrink with it. For another instrument this gives a prediction to state before
+testing: RTL needs typical M30 candles of well over ~30 ticks.
+
 ## Reproduce
 
 ```powershell
 .\venv\Scripts\python.exe python\build_coarse_nq.py "F:\DATABENTO\MNQ_16_YEARS\MT5_NQ_continuous_2010-2026_ohlcv-1m.csv" "F:\DATABENTO\MNQ_16_YEARS\MT5_NQ_coarse_2010-2026_ohlcv-1m.csv"
 .\venv\Scripts\python.exe python\analyze_market_character.py
+# MT5 on the imported coarse symbol
+.\venv\Scripts\python.exe python\prepare_signal_colour.py nqcoarse
+.\venv\Scripts\python.exe python\run_mt5_job.py Reports\signal_colour_20261008_nqcoarse RTL_signal
+.\venv\Scripts\python.exe python\analyze_signal_colour.py nqcoarse
 ```
