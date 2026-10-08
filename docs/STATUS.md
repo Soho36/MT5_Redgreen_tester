@@ -1,6 +1,6 @@
 # Project status
 
-Updated 2026-10-08. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
+Updated 2026-10-09. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
 For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
 
 **ES data for unseen-instrument tests (2026-10-08):** continuous ES 1-minute file built with the NQ rules
@@ -14,17 +14,23 @@ intervals apart. PF net 0.930 / 0.979; 15/17 years lose. Costs in R are the same
 signal itself (win rate 2–4 points lower). Treat MNQ results as unconfirmed on independent data.
 
 **[Signal colour + control](baseline/signal-colour/RESULTS.md) (2026-10-08, exploratory): the edge is the buy stop, not the
-colour or drift.** On MNQ a market-buy control with the same stop and exit earns ~0 R before costs (+0.011 / +0.009). Green
+colour or drift.** On MNQ a market-buy control with the same stop and exit earns ~0 R before costs (+0.009 / +0.007, audited). Green
 signals nearly match red (+0.073 / +0.066 vs +0.093 / +0.085 R). RTL + GG together = ~2x net and ~2x DD. GG EA:
 `mt5/experts/GG_r_MFE_buy-stop-entry_runband.cs`. **Same control on MES:** the buy stop beats the plain long there too,
-by +0.025 / +0.042 / +0.039 R (2010–15 / 2016–19 / 2020–26, all intervals above 0), about half the NQ gain. But the MES
-plain long itself loses −0.14 / −0.08 / −0.04 R (NQ ≈ 0), so RTL fails there. The market's background decides.
+by +0.029 / +0.044 / +0.042 R (2010–15 / 2016–19 / 2020–26, audited, all intervals above 0), about half the NQ gain. But the
+MES plain long itself loses −0.15 / −0.08 / −0.04 R (NQ ≈ 0), so RTL fails there. The market's background decides.
 
 **[Why ES differs](baseline/nq-vs-es/RESULTS.md) (2026-10-08, exploratory): mostly tick granularity.** After a touch of
 the previous M30 high, NQ follows through and ES falls back. NQ rounded to an ES-like grid loses half (2016–26) to all
 (2010–15) of that difference; the rest sits in tiny ES candles. **MT5 on the coarse symbol** (`MNQcoarseDTBNT20102026`):
 RTL mean R before costs −0.123 / +0.020 / +0.041 (2010–15 / 2016–19 / 2020–26) vs NQ +0.005 / +0.093 / +0.085. The edge needs
 candles spanning many ticks; ES also has a negative plain long that granularity doesn't explain.
+
+**[NQ fixed-grid resolution](baseline/granularity/RESULTS.md) (2026-10-09, exploratory):** all 30 runs, every grid origin:
+wider price grids progressively reduce RTL minus control (2020–26 +0.078 → +0.004 R). Ordered by steps per candle, the
+NQ periods line up on roughly one curve (near 0 at ~15 steps, +0.06 to +0.09 R from ~30), so 2010–15's weak edge looks
+mostly like low resolution. No cutoff or filter adopted. Logger fix: market-entry controls omit fast stops; all
+2026-10-08 ledgers re-audited (≤ 0.005 R change).
 
 **[Q24 trade-result streaks](baseline/q24-trade-streaks/RESULTS.md) (2026-10-07): no predictive or daily-stop gate passes.**
 Current RTL ledger, 14,968 trades, $1.05 costs: after three same-session losses the next-trade win rate

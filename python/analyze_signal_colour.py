@@ -45,16 +45,24 @@ def edge_over_control(a, b, pv, rng):
     return sa.sum() / na.sum() - sb.sum() / nb.sum(), *np.percentile(diff, [2.5, 97.5])
 
 
+def audited(raw_path):
+    """The audited ledger (audit_signal_colour_ledgers.py) when it exists, else the raw EA CSV."""
+    a = raw_path.with_name(raw_path.stem + "_audited.csv")
+    return a if a.exists() else raw_path
+
+
 def main(key="mnq"):
     folder, pv, names = CONFIG[key]
     suffix = "" if key == "mnq" else f"_{key}"
-    runs = {n: load(ROOT / "Reports" / folder / f"runband_signal_20261008_{n}{suffix}_1.00.csv") for n in names}
+    raw = {n: ROOT / "Reports" / folder / f"runband_signal_20261008_{n}{suffix}_1.00.csv" for n in names}
+    runs = {n: load(audited(p)) for n, p in raw.items()}
+    print(f"[{key}] ledgers:", {n: audited(p).name.endswith("_audited.csv") and "audited" or "raw" for n, p in raw.items()})
     base_file = ROOT / "Reports" / "instrument_baseline_20261008" / f"runband_instbase_20261008_{key}_1.00.csv"
-    if base_file.exists():   # no separate baseline run for nqcoarse
-        base = load(base_file)
+    if base_file.exists():   # no separate baseline run for nqcoarse; compare the raw EA files
+        base, red = load(base_file), load(raw["red_cap3"])
         print(f"[{key}] red_cap3 reproduces the baseline ledger:",
-              len(base) == len(runs["red_cap3"]) and (base.entry_time.values == runs["red_cap3"].entry_time.values).all()
-              and np.allclose(base.trade_profit, runs["red_cap3"].trade_profit))
+              len(base) == len(red) and (base.entry_time.values == red.entry_time.values).all()
+              and np.allclose(base.trade_profit, red.trade_profit))
     mc = runs["market_control"]
     print("market control entries at a bar open (mm:ss 00:00 or 30:00):",
           f"{mc.entry.dt.strftime('%M:%S').isin(['00:00', '30:00']).mean():.1%}")

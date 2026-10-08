@@ -2,7 +2,7 @@
 
 2026-10-08 · Exploratory, no gate · [Baseline studies](../README.md)
 
-**2026-10-09 follow-up:** [Fixed grids and every origin](../granularity/RESULTS.md) confirms strong NQ resolution sensitivity. The original causal attribution below remains exploratory. The follow-up also found omitted fast-stop control trades in the EA CSV logger: native NQ controls are now audit-corrected there; the older ES/yearly-coarse control figures below still require the same audit. Full ES attribution remains open.
+**2026-10-09 follow-up:** [Fixed grids and every origin](../granularity/RESULTS.md) confirms strong NQ resolution sensitivity. The original causal attribution below remains exploratory. The follow-up also found omitted fast-stop control trades in the EA CSV logger: native NQ controls are audit-corrected there, and on 2026-10-09 the MT5 figures below (NQ, ES and yearly-coarse NQ) were audit-corrected too ([audit_signal_colour_ledgers.py](../../../python/audit_signal_colour_ledgers.py)); control figures moved by at most 0.005 R and no conclusion changed. Full ES attribution remains open.
 
 ## Summary
 
@@ -79,19 +79,19 @@ The user imported the coarse file as `MNQcoarseDTBNT20102026`, with settings cop
 `MNQcontDTBNT20102026_2`. It was run with the same EA and settings as the [signal-colour](../signal-colour/RESULTS.md)
 runs (red cap 3 = RTL baseline; market-buy control). Check: 100% of the ledger's candle ranges lie on the yearly grid.
 
-Mean R before costs (gain = RTL minus control, 95% interval from resampling days):
+Mean R before costs, audited ledgers (gain = RTL minus control, 95% interval from resampling days):
 
 | | 2010–15 | 2016–19 | 2020–26 |
 |---|---|---|---|
 | **RTL** NQ | +0.005 | +0.093 | +0.085 |
 | **RTL** coarsened NQ | **−0.123** | **+0.020** | **+0.041** |
 | **RTL** ES | −0.118 | −0.039 | +0.002 |
-| Control NQ | −0.034 | +0.011 | +0.009 |
-| Control coarsened NQ | −0.018 | +0.016 | +0.009 |
-| Control ES | −0.142 | −0.081 | −0.037 |
-| Gain NQ | +0.039 | +0.083 | +0.075 |
-| Gain coarsened NQ | −0.105 [−0.129, −0.081] | +0.004 [−0.025, +0.032] | +0.032 [+0.011, +0.055] |
-| Gain ES | +0.025 | +0.042 | +0.039 |
+| Control NQ | −0.036 | +0.009 | +0.007 |
+| Control coarsened NQ | −0.019 | +0.015 | +0.006 |
+| Control ES | −0.147 | −0.083 | −0.040 |
+| Gain NQ | +0.041 | +0.085 | +0.078 |
+| Gain coarsened NQ | −0.103 [−0.127, −0.079] | +0.005 [−0.023, +0.034] | +0.035 [+0.014, +0.058] |
+| Gain ES | +0.029 | +0.044 | +0.042 |
 
 After costs, coarsened NQ RTL: PF 0.758 / 1.042 / 1.058, net −$13.3k / +$2.7k / +$21.1k. Real NQ: +$38.0k in 2020–26.
 
@@ -105,10 +105,13 @@ After costs, coarsened NQ RTL: PF 0.758 / 1.042 / 1.058, net −$13.3k / +$2.7k 
 - **In 2016–26 coarsened NQ still beats ES** by about 0.04–0.06 R. That is about the size of ES's negative
   plain long.
 
-**Meaning for the strategy:** the RTL edge needs candles that span many ticks. That fits NQ having no edge in
+**Meaning for the strategy:** the RTL edge needs candles that span many price steps. That fits NQ having no edge in
 2010–15 (small candles) and a clear edge from about 2018 (large candles). If NQ's M30 range in ticks shrinks
-again, the edge should shrink with it. For another instrument this gives a prediction to state before
-testing: RTL needs typical M30 candles of well over ~30 ticks.
+again, the edge should shrink with it. *Corrected 2026-10-09:* an earlier version stated a ~30-tick requirement.
+The [granularity study](../granularity/RESULTS.md#steps-per-candle-across-periods) shows a gradual decline, not a
+cutoff: the gain over the control is near zero at about 14–15 steps per candle and about +0.04 to +0.09 R at 27–29
+steps. Read a prediction for another instrument from that curve, stated before its data is used; no threshold is
+established.
 
 ## Reproduce
 

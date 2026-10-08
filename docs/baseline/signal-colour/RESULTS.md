@@ -2,12 +2,19 @@
 
 2026-10-08 · Exploratory, no pre-set gate · [Baseline studies](../README.md)
 
+**2026-10-09 audit:** the EA's CSV logger can omit a market-entry trade that is stopped on the very next tick
+(found in the [granularity study](../granularity/RESULTS.md)). Every ledger here was audited against MT5's own
+order/deal report ([audit_signal_colour_ledgers.py](../../../python/audit_signal_colour_ledgers.py)). Buy-stop
+runs missed nothing. Controls missed 72 trades (MNQ) and 127 (MES, plus 2 rows logged with the next trade's risk
+on ES flatten-gap days). Every figure below uses the audited ledgers; all audited totals match MT5 exactly. The
+corrections move control figures by 0.002–0.005 R and change no conclusion.
+
 ## Summary
 
 - **Question:** is the RTL edge the red candle, any buy stop over the previous bar, or just being long NQ
   while it rises?
 - **Not drift.** The control has no pattern: it buys at market at every bar open, with the same stop
-  distance and exit. It earns about nothing before costs: +0.011 / +0.009 R (2016–19 / 2020–26), with
+  distance and exit. It earns about nothing before costs: +0.009 / +0.007 R (2016–19 / 2020–26), with
   intervals that include zero. It loses after costs.
 - **Colour matters little.** Green (the user's GG) gives +0.073 / +0.066 R against red's +0.093 / +0.085.
   The intervals overlap. Red is slightly better and MaxRedRun 3 helps it a little. The edge is the
@@ -40,7 +47,7 @@ Mean R before costs, with 95% intervals from resampling days:
 | Red, no cap | +0.006 | +0.081 | +0.071 |
 | Green, no cap | +0.022 | +0.071 | +0.070 |
 | Any candle | +0.013 | +0.057 | +0.061 |
-| Control: market buy, no pattern | −0.034 [−0.056, −0.013] | +0.011 [−0.015, +0.037] | +0.009 [−0.011, +0.029] |
+| Control: market buy, no pattern | −0.036 [−0.057, −0.014] | +0.009 [−0.016, +0.035] | +0.007 [−0.013, +0.027] |
 
 After costs:
 
@@ -49,7 +56,7 @@ After costs:
 | Red, cap 3 | 1.106 | 1.107 | 37,981 | 4,847 | 23,427 |
 | Green, cap 3 | 1.051 | 1.084 | 35,626 | 5,675 | 24,852 |
 | Any candle | 1.027 | 1.078 | 40,928 | 5,803 | 32,960 |
-| Control | 0.954 | 1.008 | 6,112 | 11,261 | 35,800 |
+| Control | 0.952 | 1.006 | 4,847 | 11,587 | 35,872 |
 
 RTL + GG (cap 3) as two accounts, summed by exit day:
 
@@ -60,7 +67,7 @@ RTL + GG (cap 3) as two accounts, summed by exit day:
 
 - **By year:** every buy-stop variant follows the same path. All lose 2010–17 after costs and all are positive
   2018–26. The control is negative or near zero in almost every year.
-- **2010–15:** buy-stop entries already beat the control by about 0.04–0.05 R before costs. But candles
+- **2010–15:** buy-stop entries already beat the control by about 0.04–0.06 R before costs. But candles
   were small, so costs were 0.19 R per trade (0.03 R in 2020–26) and outweighed it.
 - "Any candle" is below both red and green. One mechanical difference: in red or green mode a resting order
   survives opposite-colour bars, so some entries are at an older high. In "any" mode the order always
@@ -76,12 +83,12 @@ interval from resampling days jointly.
 
 | | Control (plain long) | Gain over control | = Red baseline |
 |---|---|---|---|
-| MNQ 2010–15 | −0.034 | +0.039 [+0.014, +0.062] | +0.005 |
-| MNQ 2016–19 | +0.011 | +0.083 [+0.054, +0.112] | +0.093 |
-| MNQ 2020–26 | +0.009 | +0.075 [+0.053, +0.099] | +0.085 |
-| MES 2010–15 | −0.142 | +0.025 [+0.003, +0.047] | −0.118 |
-| MES 2016–19 | −0.081 | +0.042 [+0.014, +0.068] | −0.039 |
-| MES 2020–26 | −0.037 | +0.039 [+0.019, +0.060] | +0.002 |
+| MNQ 2010–15 | −0.036 | +0.041 [+0.016, +0.064] | +0.005 |
+| MNQ 2016–19 | +0.009 | +0.085 [+0.056, +0.113] | +0.093 |
+| MNQ 2020–26 | +0.007 | +0.078 [+0.056, +0.101] | +0.085 |
+| MES 2010–15 | −0.147 | +0.029 [+0.007, +0.051] | −0.118 |
+| MES 2016–19 | −0.083 | +0.044 [+0.016, +0.070] | −0.039 |
+| MES 2020–26 | −0.040 | +0.042 [+0.021, +0.062] | +0.002 |
 
 - **The buy-stop gain exists on ES too.** In every period it is positive with an interval above zero, about
   half the NQ size (+0.04 vs +0.08 R). This comparison was decided on MNQ before the MES control was run.
@@ -102,14 +109,14 @@ ticks per candle. Gross mean R in 2016–26, by signal-candle size ([script](../
 
 | Ticks | NQ control | NQ red | ES control | ES red | NQ trades (ctrl) | ES trades (ctrl) |
 |---|---|---|---|---|---|---|
-| <8 | −0.171 | −0.004 | −0.257 | −0.141 | 123 | 2,593 |
-| 8–16 | −0.070 | +0.088 | −0.070 | −0.030 | 1,026 | 5,788 |
-| 16–24 | +0.007 | +0.111 | −0.053 | +0.035 | 1,359 | 4,291 |
-| 24–32 | +0.061 | +0.076 | +0.014 | +0.050 | 1,364 | 2,956 |
-| 32–48 | +0.035 | +0.150 | +0.012 | +0.035 | 2,530 | 3,358 |
-| 48–64 | −0.007 | +0.089 | −0.038 | +0.003 | 2,239 | 1,950 |
-| 64–128 | +0.012 | +0.088 | −0.021 | −0.001 | 5,926 | 2,657 |
-| >128 | +0.010 | +0.061 | +0.053 | +0.074 | 8,872 | 767 |
+| <8 | −0.184 | −0.004 | −0.266 | −0.141 | 125 | 2,623 |
+| 8–16 | −0.076 | +0.088 | −0.072 | −0.030 | 1,033 | 5,804 |
+| 16–24 | +0.005 | +0.111 | −0.056 | +0.035 | 1,361 | 4,301 |
+| 24–32 | +0.056 | +0.076 | +0.013 | +0.050 | 1,371 | 2,960 |
+| 32–48 | +0.031 | +0.150 | +0.010 | +0.035 | 2,541 | 3,362 |
+| 48–64 | −0.010 | +0.089 | −0.038 | +0.003 | 2,245 | 1,950 |
+| 64–128 | +0.009 | +0.088 | −0.021 | −0.001 | 5,939 | 2,657 |
+| >128 | +0.010 | +0.061 | +0.053 | +0.074 | 8,875 | 768 |
 
 - **Small candles hurt both instruments.** Under 16 ticks the plain long loses on both, and ES has far more
   of these trades: 34% of ES control trades vs 5% on NQ. Tick granularity explains part of ES's negative
@@ -128,5 +135,7 @@ ticks per candle. Gross mean R in 2016–26, by signal-candle size ([script](../
 # MES control
 .\venv\Scripts\python.exe python\prepare_signal_colour.py mes
 .\venv\Scripts\python.exe python\run_mt5_job.py Reports\signal_colour_20261008_mes RTL_signal
+# Audit every ledger first; the analysis scripts then use the audited files
+.\venv\Scripts\python.exe python\audit_signal_colour_ledgers.py
 .\venv\Scripts\python.exe python\analyze_signal_colour.py mes
 ```

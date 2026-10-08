@@ -1,9 +1,13 @@
 """Exploratory (2026-10-08): RTL (red cap 3) vs market-buy control by signal-candle size in ticks, MNQ vs MES, 2016-26.
 Gross mean R; "gain" = red minus control. Asks whether ES lags NQ because its candles span fewer ticks.
+Uses the audited ledgers (audit_signal_colour_ledgers.py) when present.
 Usage: python analyze_tick_buckets.py
 """
+from pathlib import Path
+
 import pandas as pd
 from analyze_instrument_baseline import load
+from analyze_signal_colour import audited
 from project_paths import PROJECT_ROOT as ROOT
 
 R = str(ROOT / "Reports")
@@ -17,7 +21,7 @@ bins = [0, 8, 16, 24, 32, 48, 64, 128, 10000]
 labels = ["<8", "8-16", "16-24", "24-32", "32-48", "48-64", "64-128", ">128"]
 rows = []
 for (sym, run), (f, pv) in files.items():
-    d = load(f)
+    d = load(audited(Path(f)))
     d = d[d.entry.dt.year >= 2016]
     d["ticks"] = d.candle_range / 0.25
     d["r"] = d.trade_profit / (d.candle_range * pv)

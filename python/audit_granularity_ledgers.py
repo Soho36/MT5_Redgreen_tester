@@ -131,8 +131,12 @@ def reconcile_totals(frame, stats_path, tag):
     return totals
 
 
-def ensure_audited(run, job, variant, pv):
-    """Return an audited ledger path, validating raw/report provenance and totals."""
+def ensure_audited(run, job, variant, pv, fix_risk=False):
+    """Return an audited ledger path, validating raw/report provenance and totals.
+
+    fix_risk (opt-in, default off): a logged row whose risk disagrees with its original order (times and profit
+    still matching) takes the order's price-minus-SL risk, is labelled "original_risk_from_order" and listed in the
+    metadata. Seen when a fallback flatten and a new market entry share one OnTick. Default runs stay strict."""
     run = Path(run)
     raw_path, stats_path = (run / name for name in job["outputs"][:2])
     report_path = run / f"{job['tag']}.htm"
@@ -148,6 +152,8 @@ def ensure_audited(run, job, variant, pv):
             raise ValueError(f"Completed raw/stat output changed: {filename}")
     identity = {"tag": job["tag"], "mode": job["mode"], "symbol": variant["symbol"],
                 "grid_points": variant["grid_points"], "point_value": pv, "version": 1}
+    if fix_risk:
+        identity["fix_risk"] = True
     if audit_path.exists():
         previous = json.loads(audit_path.read_text(encoding="utf-8"))
         if previous.get("input_sha256") == inputs and previous.get("identity") == identity:
@@ -167,10 +173,14 @@ def ensure_audited(run, job, variant, pv):
     for field in ("entry_time", "exit_time"):
         if not np.array_equal(existing[field].to_numpy(), paired[field].to_numpy()):
             raise ValueError(f"Raw {field} differs from complete deal history: {raw_path}")
+    corrected = pd.Index([], dtype="int64")
     for field in ("trade_profit", "candle_range"):
         if not np.allclose(existing[field], paired[field], rtol=0, atol=TOL):
-            n = int((~np.isclose(existing[field], paired[field], rtol=0, atol=TOL)).sum())
-            raise ValueError(f"{n} raw {field} values differ from original orders/deals: {raw_path}")
+            off = ~np.isclose(existing[field], paired[field], rtol=0, atol=TOL)
+            if field == "candle_range" and fix_risk:
+                corrected = existing.index[off]
+                continue
+            raise ValueError(f"{int(off.sum())} raw {field} values differ from original orders/deals: {raw_path}")
     levels = report.candle_range / variant["grid_points"]
     if not np.isclose(levels, np.rint(levels), rtol=0, atol=1e-7).all():
         raise ValueError(f"Report-derived original risks do not lie on grid: {job['tag']}")
@@ -180,13 +190,19 @@ def ensure_audited(run, job, variant, pv):
         recovered[field] = missing[field]
     raw_out = raw.copy()
     raw_out["ledger_source"] = "original"
+    fix = raw_out.ticket.isin(corrected)
+    raw_out.loc[fix, "candle_range"] = ref.loc[raw_out.loc[fix, "ticket"], "candle_range"].to_numpy()
+    raw_out.loc[fix, "ledger_source"] = "original_risk_from_order"
     recovered["ledger_source"] = "tester_orders_deals"
     augmented = pd.concat([raw_out, recovered], ignore_index=True)
     augmented["ticket"] = augmented.ticket.astype("int64")
     augmented = augmented.sort_values(["entry_time", "ticket"], kind="stable").reset_index(drop=True)
     reconcile_totals(augmented, stats_path, job["tag"])
-    preserved = augmented.loc[augmented.ledger_source == "original", raw.columns].set_index("ticket").reindex(existing.index)
-    pd.testing.assert_frame_equal(existing, preserved, check_dtype=False, check_exact=True)
+    logged = augmented.ledger_source.isin(["original", "original_risk_from_order"])
+    preserved = augmented.loc[logged, raw.columns].set_index("ticket").reindex(existing.index)
+    expected = existing.copy()
+    expected.loc[corrected, "candle_range"] = ref.loc[corrected, "candle_range"]
+    pd.testing.assert_frame_equal(expected, preserved, check_dtype=False, check_exact=True)
     augmented.to_csv(out_path, sep="\t", encoding="utf-16", index=False)
     loaded = load(out_path)
     exact_open = loaded.entry.dt.minute.isin([0, 30]) & (loaded.entry.dt.second == 0)
@@ -207,9 +223,13 @@ def ensure_audited(run, job, variant, pv):
                 "control_exact_m30_timestamp_fraction": float(exact_open.mean()) if job["mode"] == "control" else None,
                 "recovered_unknown_fields": [c for c in raw.columns if c not in missing.columns],
                 "recovery_periods": recovery_periods,
+                "risk_corrected_trades": [{"ticket": int(k), "entry_time": existing.loc[k, "entry_time"],
+                                           "logged_risk": float(existing.loc[k, "candle_range"]),
+                                           "order_risk": float(ref.loc[k, "candle_range"])} for k in corrected],
                 "notes": "Raw trade fields remain unchanged. Missing risk comes from original order requested price minus SL; profit/times come from deals. Missing excursions/signal labels remain NaN. Delayed first ticks need not equal the exact M30 boundary."}
     audit_path.write_text(json.dumps(metadata, indent=2) + "\n", encoding="utf-8")
-    print(f"AUDIT {job['tag']}: {len(raw):,} original + {len(missing)} recovered = {len(augmented):,}; tester totals match.", flush=True)
+    print(f"AUDIT {job['tag']}: {len(raw):,} original + {len(missing)} recovered = {len(augmented):,}"
+          f"{f', {len(corrected)} risks from orders' if len(corrected) else ''}; tester totals match.", flush=True)
     return out_path
 
 

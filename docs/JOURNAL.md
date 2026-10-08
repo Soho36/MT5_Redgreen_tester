@@ -522,5 +522,16 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - All 30 runs: RTL minus control declines across every grid/origin; 2020–26 +0.078 → +0.004 R. [Results](baseline/granularity/RESULTS.md).
 - Recovered 2,321 omitted control trades from tester reports; all totals reconcile. Resolution sensitivity supported; no filter adopted, ES path attribution remains open.
 
+## 2026-10-09: review follow-ups (audit, wording, steps table)
+
+- Same ledger audit on the 2026-10-08 runs ([audit_signal_colour_ledgers.py](../python/audit_signal_colour_ledgers.py)):
+  buy-stop runs missed nothing; controls missed 72 (MNQ), 127 (MES) and 76 (coarse NQ) fast stops, plus 2 MES rows logged
+  with the next trade's risk (fallback flatten + new market entry in one OnTick, on ES flatten-gap days; new opt-in
+  `fix_risk` in the audit takes the order's risk). Control means move ≤ 0.005 R; signal-colour and nq-vs-es docs updated.
+- nq-vs-es: dropped the "~30 ticks" requirement; the granularity curve shows a gradual decline, not a cutoff.
+- Granularity: added a [steps-per-candle table](baseline/granularity/RESULTS.md#steps-per-candle-across-periods). NQ periods line
+  up on one curve by steps per candle; 2010–15's weak edge looks mostly like resolution. ES's buy-stop gain (+0.04 at 24
+  steps) fits the curve, so its plain long, not the breakout, is what fails.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

@@ -73,6 +73,47 @@ For two instruments with a 0.25-point native tick, the relevant ratio is `(high 
 
 Earlier NQ candles are much narrower: native executed RTL median widths are 3.75 points/15 steps in 2010-15, 7.25 points/29 steps in 2016-19, and 27 points/108 steps in 2020-26. A fixed 2-point grid consumes a much larger fraction of the earlier candles. The stronger historical deterioration is consistent with that explanation, although period differences also involve different market behaviour and trade populations. This does **not** establish a universal 30-tick cutoff or any new trading rule.
 
+## Steps per candle across periods
+
+*Descriptive add-on, 2026-10-09, after the results above. No new runs; [script](../../../python/report_granularity_steps.py).*
+
+The rows below are the 12 period × grid results above, ordered by the median grid steps per executed RTL
+candle (equal-origin mean). For comparison they also include MES on its native grid, from the audited
+[signal-colour](../signal-colour/RESULTS.md) ledgers:
+
+| Steps per candle | Run | RTL minus control | 95% interval |
+|---:|---|---:|---|
+| 2 | NQ 2010–15, 2.00 grid | −0.297 | [−0.315, −0.279] |
+| 4 | NQ 2010–15, 1.00 grid | −0.156 | [−0.175, −0.136] |
+| 4 | NQ 2016–19, 2.00 grid | −0.143 | [−0.168, −0.119] |
+| 7 | NQ 2010–15, 0.50 grid | −0.060 | [−0.083, −0.039] |
+| 7 | NQ 2016–19, 1.00 grid | −0.035 | [−0.062, −0.009] |
+| 8 | *ES 2010–15, native* | *+0.029* | *[+0.007, +0.051]* |
+| 10 | *ES 2016–19, native* | *+0.044* | *[+0.019, +0.071]* |
+| 14 | NQ 2020–26, 2.00 grid | +0.004 | [−0.016, +0.023] |
+| 14.5 | NQ 2016–19, 0.50 grid | +0.021 | [−0.007, +0.048] |
+| 15 | NQ 2010–15, native | +0.041 | [+0.017, +0.064] |
+| 24 | *ES 2020–26, native* | *+0.042* | *[+0.021, +0.062]* |
+| 27 | NQ 2020–26, 1.00 grid | +0.043 | [+0.022, +0.063] |
+| 29 | NQ 2016–19, native | +0.085 | [+0.056, +0.114] |
+| 54 | NQ 2020–26, 0.50 grid | +0.060 | [+0.039, +0.082] |
+| 108 | NQ 2020–26, native | +0.078 | [+0.056, +0.100] |
+
+- **On NQ, the step count lines up the three periods on roughly one curve.** Different periods at the same
+  step count give similar contrasts: −0.16 and −0.14 at 4 steps, −0.06 and −0.04 at 7, and +0.00 to +0.04 at
+  14–15. The curve rises to about +0.06 to +0.09 R from roughly 30 steps on. Period still matters somewhat:
+  at 27–29 steps the values are +0.043 and +0.085.
+- **The weak 2010–15 contrast looks mostly like a resolution effect.** Native NQ then had 15 steps per
+  candle and its contrast (+0.041) sits with recent NQ squeezed to 14–15 steps. That points to resolution
+  more than to a different market regime.
+- **ES's buy-stop gain does not explain why RTL fails on ES.** At 24 steps (2020–26) ES gives +0.042, in line
+  with NQ at 27 steps. At 8–10 steps (2010–19) ES does better than coarsened NQ at 7 steps. Either the
+  synthetic rounding is harsher than a real market at that resolution, or ES differs; this is not resolved.
+  Either way, ES's weakness is its plain-long control (−0.15 / −0.08 / −0.04 R), not the breakout contrast.
+- Caveats: a median step count is a crude summary of each trade population; periods, origins and
+  instruments are not independent; the data has been seen many times. The curve describes this tester, and
+  no cutoff or filter follows from it.
+
 ## Signal populations also change
 
 Rounding can turn red or green candles into dojis, tie highs/lows and break red runs. The source diagnostics quantify these changes before accounting for occupied positions or pending orders. For 2020-26, averaging counts across origins:
@@ -113,7 +154,7 @@ The source checks cover 5,433,425 M1 rows, 189,168 M30 bars and 4,145 source-ses
 
 RTL's relative performance is strongly sensitive to price-data resolution in this tester. The direction is consistent across the fixed grids, every origin and each era. The result makes the granularity hypothesis more credible and supports proceeding to the separate post-entry path decomposition.
 
-A precise NQ-versus-ES attribution still needs that path study and the same ledger audit applied to the older ES and yearly-coarse reports. This experiment did not rerun ES. The former study used NumPy ties-to-even rounding; this study uses nearest halfway-up rounding. Results at overlapping grid sizes need not reproduce the former coarsening, and invariance to rounding rules has not been tested.
+A precise NQ-versus-ES attribution still needs that path study. The same ledger audit has since been applied to the older ES and yearly-coarse reports (2026-10-09, [audit_signal_colour_ledgers.py](../../../python/audit_signal_colour_ledgers.py)). It recovered 127 MES and 76 coarse-NQ control trades and corrected 2 MES rows logged with the next trade's risk; control means moved by at most 0.005 R. This experiment did not rerun ES. The former study used NumPy ties-to-even rounding; this study uses nearest halfway-up rounding. Results at overlapping grid sizes need not reproduce the former coarsening, and invariance to rounding rules has not been tested.
 
 Intervals use 2,000 common resamples of whole entry days within each period, including zero-trade source days, with seed 20261009 plus period index. Each sample recomputes total R / total trades, and averages origin-level contrasts equally while preserving covariance across origins and native. Origins reuse the same history and are not independent replications. The intervals do not cover dependence spanning multiple days, multiple-comparison selection or broader research selection. This is an exploratory sensitivity study, without an independent out-of-sample claim.
 
