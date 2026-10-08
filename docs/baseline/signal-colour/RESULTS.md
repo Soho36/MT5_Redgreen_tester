@@ -95,6 +95,30 @@ interval from resampling days jointly.
   the plain long is exactly where NQ and ES differ, so the market's character (drift, trend vs reversion)
   does decide whether the strategy pays.
 
+## Candle size in ticks (exploratory, 2026-10-08)
+
+Does ES lag because its candles span fewer ticks? Both instruments have a 0.25 tick, so the question is
+ticks per candle. Gross mean R in 2016–26, by signal-candle size ([script](../../../python/analyze_tick_buckets.py)):
+
+| Ticks | NQ control | NQ red | ES control | ES red | NQ trades (ctrl) | ES trades (ctrl) |
+|---|---|---|---|---|---|---|
+| <8 | −0.171 | −0.004 | −0.257 | −0.141 | 123 | 2,593 |
+| 8–16 | −0.070 | +0.088 | −0.070 | −0.030 | 1,026 | 5,788 |
+| 16–24 | +0.007 | +0.111 | −0.053 | +0.035 | 1,359 | 4,291 |
+| 24–32 | +0.061 | +0.076 | +0.014 | +0.050 | 1,364 | 2,956 |
+| 32–48 | +0.035 | +0.150 | +0.012 | +0.035 | 2,530 | 3,358 |
+| 48–64 | −0.007 | +0.089 | −0.038 | +0.003 | 2,239 | 1,950 |
+| 64–128 | +0.012 | +0.088 | −0.021 | −0.001 | 5,926 | 2,657 |
+| >128 | +0.010 | +0.061 | +0.053 | +0.074 | 8,872 | 767 |
+
+- **Small candles hurt both instruments.** Under 16 ticks the plain long loses on both, and ES has far more
+  of these trades: 34% of ES control trades vs 5% on NQ. Tick granularity explains part of ES's negative
+  plain long.
+- **It is not the whole answer.** At the same candle size (16–128 ticks), NQ red still earns +0.08 to +0.15 R
+  against ES's 0.00 to +0.05.
+- Each cell holds 1,000–9,000 trades, so a single cell is noisy (about ±0.03 R). Candle size is also tied
+  to time of day and to calm vs volatile years, which differ between the instruments.
+
 ## Reproduce
 
 ```powershell

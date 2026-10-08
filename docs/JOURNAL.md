@@ -503,6 +503,9 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - Same control on MES (user request): the buy-stop gain over the plain long is there too (+0.03 / +0.04 / +0.04 R,
   intervals above 0, ~half of NQ), but the MES plain long loses before costs (−0.14 / −0.08 / −0.04 R; NQ ≈ 0).
   So RTL works where the plain long breaks even. [Results](baseline/signal-colour/RESULTS.md#mes-same-control-2026-10-08).
+- Why ES differs (user question), first check by candle size in ticks: candles under 16 ticks lose on both, and ES has
+  34% such trades vs NQ 5%, so granularity explains part. But at equal tick sizes NQ still earns more, so it is not
+  the whole answer. [Table](baseline/signal-colour/RESULTS.md#candle-size-in-ticks-exploratory-2026-10-08).
 
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*
