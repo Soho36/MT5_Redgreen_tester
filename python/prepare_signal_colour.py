@@ -7,7 +7,7 @@ The baseline runband EA gets one input, SignalMode (text edits below, nothing el
 The "run" filter counts consecutive signal-coloured bars (green run in mode 1). Mode 0 with MaxRedRun 3
 must reproduce the baseline ledger exactly.
 
-Usage: python prepare_signal_colour.py [mnq|mes]   (default mnq; mes = red_cap3 + market_control only)
+Usage: python prepare_signal_colour.py [mnq|mes|nqcoarse]   (default mnq; others = red_cap3 + market_control)
 Writes Reports/signal_colour_20261008/ (MNQ) or Reports/signal_colour_20261008_mes/. Run with
     .\\venv\\Scripts\\python.exe python\\run_mt5_job.py Reports\\signal_colour_20261008[_mes] RTL_signal
 """
@@ -20,7 +20,8 @@ from prepare_instrument_baseline import make_ini
 from project_paths import PROJECT_ROOT as ROOT
 
 EXPERT = "RTL_signal"
-SYMBOLS = {"mnq": "MNQcontDTBNT20102026_2", "mes": "MEScontDTBNT20102026"}
+SYMBOLS = {"mnq": "MNQcontDTBNT20102026_2", "mes": "MEScontDTBNT20102026",
+           "nqcoarse": "MNQcoarseDTBNT20102026"}   # NQ rounded to an ES-like grid (build_coarse_nq.py)
 JOBS = (("red_cap3", 0, 3), ("red_nocap", 0, 0), ("green_cap3", 1, 3), ("green_nocap", 1, 0),
         ("any", 2, 0), ("market_control", 3, 0))
 

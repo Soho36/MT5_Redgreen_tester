@@ -3,7 +3,7 @@
 Same R and cost conventions as analyze_instrument_baseline.py. "RTL+GG" = the red and green ledgers run as two
 separate accounts and summed by exit day (the user's "both at the same time").
 "Edge over control" = red cap 3 mean R minus market-control mean R, before costs, 95% interval resampling days jointly.
-Usage: python analyze_signal_colour.py [mnq|mes]   (mes: red_cap3 + market_control only)
+Usage: python analyze_signal_colour.py [mnq|mes|nqcoarse]   (mes, nqcoarse: red_cap3 + market_control only)
 """
 
 import sys
@@ -19,6 +19,7 @@ CONFIG = {
     "mnq": ("signal_colour_20261008", 2.0,
             ("red_cap3", "green_cap3", "red_nocap", "green_nocap", "any", "market_control")),
     "mes": ("signal_colour_20261008_mes", 5.0, ("red_cap3", "market_control")),
+    "nqcoarse": ("signal_colour_20261008_nqcoarse", 2.0, ("red_cap3", "market_control")),
 }
 
 
@@ -48,10 +49,12 @@ def main(key="mnq"):
     folder, pv, names = CONFIG[key]
     suffix = "" if key == "mnq" else f"_{key}"
     runs = {n: load(ROOT / "Reports" / folder / f"runband_signal_20261008_{n}{suffix}_1.00.csv") for n in names}
-    base = load(ROOT / "Reports" / "instrument_baseline_20261008" / f"runband_instbase_20261008_{key}_1.00.csv")
-    print(f"[{key}] red_cap3 reproduces the baseline ledger:",
-          len(base) == len(runs["red_cap3"]) and (base.entry_time.values == runs["red_cap3"].entry_time.values).all()
-          and np.allclose(base.trade_profit, runs["red_cap3"].trade_profit))
+    base_file = ROOT / "Reports" / "instrument_baseline_20261008" / f"runband_instbase_20261008_{key}_1.00.csv"
+    if base_file.exists():   # no separate baseline run for nqcoarse
+        base = load(base_file)
+        print(f"[{key}] red_cap3 reproduces the baseline ledger:",
+              len(base) == len(runs["red_cap3"]) and (base.entry_time.values == runs["red_cap3"].entry_time.values).all()
+              and np.allclose(base.trade_profit, runs["red_cap3"].trade_profit))
     mc = runs["market_control"]
     print("market control entries at a bar open (mm:ss 00:00 or 30:00):",
           f"{mc.entry.dt.strftime('%M:%S').isin(['00:00', '30:00']).mean():.1%}")

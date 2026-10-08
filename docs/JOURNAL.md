@@ -507,5 +507,12 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   34% such trades vs NQ 5%, so granularity explains part. But at equal tick sizes NQ still earns more, so it is not
   the whole answer. [Table](baseline/signal-colour/RESULTS.md#candle-size-in-ticks-exploratory-2026-10-08).
 
+## 2026-10-08: why ES differs from NQ (path measures + coarsened NQ)
+
+- From the 1-minute data, no EA: after price touches the previous M30 high, NQ follows through and ES falls back.
+  NQ rounded to an ES-like grid (`build_coarse_nq.py`) loses half (2016–26) to all (2010–15) of that difference, so
+  tick granularity is the main cause; the rest sits in tiny ES candles. ES is not generally more mean-reverting at M30.
+  [Results](baseline/nq-vs-es/RESULTS.md). Next: user imports the coarse file as `MNQcoarseDTBNT20102026` for MT5 runs.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

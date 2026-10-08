@@ -20,6 +20,11 @@ signals nearly match red (+0.073 / +0.066 vs +0.093 / +0.085 R). RTL + GG togeth
 by +0.025 / +0.042 / +0.039 R (2010–15 / 2016–19 / 2020–26, all intervals above 0), about half the NQ gain. But the MES
 plain long itself loses −0.14 / −0.08 / −0.04 R (NQ ≈ 0), so RTL fails there. The market's background decides.
 
+**[Why ES differs](baseline/nq-vs-es/RESULTS.md) (2026-10-08, exploratory): mostly tick granularity.** After a touch of
+the previous M30 high, NQ follows through and ES falls back. NQ rounded to an ES-like grid loses half (2016–26) to all
+(2010–15) of that difference; the rest sits in tiny ES candles. Next: MT5 runs on the coarse NQ symbol
+(`MNQcoarseDTBNT20102026`, user to import).
+
 **[Q24 trade-result streaks](baseline/q24-trade-streaks/RESULTS.md) (2026-10-07): no predictive or daily-stop gate passes.**
 Current RTL ledger, 14,968 trades, $1.05 costs: after three same-session losses the next-trade win rate
 is 41.9%/41.1% (baseline 43.4%/43.0%); mean-R difference intervals include zero. Five-win daily

@@ -23,5 +23,6 @@ flatten. The current rules are in [STATUS.md](../STATUS.md).
 | [Limit-only entry](limit-only/RESULTS.md) ([protocol](limit-only/PROTOCOL.md)) | Rejected |
 | [Trend-conditioned RR](trend-rr/RESULTS.md) ([protocol](trend-rr/PROTOCOL.md)) | Keep fixed 1R |
 | [Signal colour + no-pattern control](signal-colour/RESULTS.md) | Edge is the buy stop over a previous high, not the colour (green ≈ red). Buy-stop gain over a plain long: NQ +0.08 R, ES +0.04 R; ES fails because its plain long loses |
+| [Why ES differs from NQ](nq-vs-es/RESULTS.md) | Mostly tick granularity: NQ rounded to an ES-like grid loses half (2016–26) to all (2010–15) of its breakout follow-through; ES not generally more mean-reverting |
 | [MES: unseen instrument](mes-unseen-instrument/RESULTS.md) | No edge on MES even before costs (mean R −0.04 / +0.00 vs MNQ +0.09 / +0.09) |
 | [Q24: trade-result streaks](q24-trade-streaks/RESULTS.md) ([protocol](q24-trade-streaks/PROTOCOL.md)) | No predictive or daily-stop rule passes |
