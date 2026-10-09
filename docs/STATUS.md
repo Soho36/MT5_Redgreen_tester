@@ -32,6 +32,11 @@ NQ periods line up on roughly one curve (near 0 at ~15 steps, +0.06 to +0.09 R f
 mostly like low resolution. No cutoff or filter adopted. Logger fix: market-entry controls omit fast stops; all
 2026-10-08 ledgers re-audited (≤ 0.005 R change).
 
+**[Complete paths: NQ / coarse NQ / ES](baseline/path-interaction/RESULTS.md) (2026-10-09, exploratory): ES line closed.** ES
+doesn't lose at the bar-close exit (touch-to-close retention equal in 2020–26). It reaches +1R slightly less and extends less,
+in both RTL and the plain long. Its plain-long gap vs coarse NQ sits mostly in candles under ~24 steps (hypothesis: real
+tick noise near tight stops). No rule change. Next: MNQ forward test, logging slippage and candle size in ticks.
+
 **[Q24 trade-result streaks](baseline/q24-trade-streaks/RESULTS.md) (2026-10-07): no predictive or daily-stop gate passes.**
 Current RTL ledger, 14,968 trades, $1.05 costs: after three same-session losses the next-trade win rate
 is 41.9%/41.1% (baseline 43.4%/43.0%); mean-R difference intervals include zero. Five-win daily

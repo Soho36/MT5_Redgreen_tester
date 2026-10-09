@@ -537,6 +537,11 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 
 - Six unchanged-strategy runs reproduce 180,130 complete paths. Recent broad effective-step matching finds weaker ES reach/stop-first paths but similar close retention after +1R; [results](baseline/path-interaction/RESULTS.md).
 - Three-instrument overlap retains only 20-33% of recent trades; native-tick sensitivity changes the population and several conclusions. No rule adopted.
+- Review note added to the [results](baseline/path-interaction/RESULTS.md#interpretation-note-added-2026-10-09-after-review): ES doesn't lose
+  at the bar-close exit (touch retention equal in 2020–26); it reaches +1R a bit less and extends less. By size bin, ES's plain-long gap vs
+  coarse NQ sits mostly under ~24 steps (2020–26: +0.32 / +0.07 / +0.10 R under 8 / 8–16 / 16–24 steps, ≤ +0.04 above). Hypothesis:
+  real tick noise near tight stops, which rounding can't reproduce. ES line closed; next is the MNQ forward test with slippage and
+  candle size logged in ticks.
 
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

@@ -4,7 +4,7 @@
 
 **The recent, broad candle-size-matched comparison points to ES reaching +1R less often and stopping first more often than coarsened NQ. It does not show poorer conversion of a +1R touch into a qualifying M30 close on ES.** That pattern appears in both RTL and the every-bar market-buy control.
 
-This finding is conditional on the comparison population. Matching all three instruments leaves a narrow recent population and removes the clear coarse-NQ/ES control-expectancy gap there. Matching by ordinary quarter-point ticks also weakens several differences. The results narrow the path explanation; they do not establish a complete causal attribution to granularity or market behaviour.
+This finding is conditional on the comparison population. Matching all three instruments leaves a narrow recent population and removes the clear coarse-NQ/ES control-expectancy gap there. Matching by ordinary quarter-point ticks also weakens several differences. The results narrow the path explanation; they do not establish a complete causal attribution to granularity or market behaviour. See the [interpretation note](#interpretation-note-added-2026-10-09-after-review): ES's plain-long weakness sits mostly in candles under about 24 steps.
 
 All six instrumented MT5 runs reproduce their original raw trade ledgers and complete audited trades. There are **180,130 complete position paths**, including all 275 control trades previously omitted by the CSV logger. Every path starts at the actual entry quote with zero delay and ends at the actual exit.
 
@@ -138,6 +138,59 @@ These are descriptive point estimates, with no new filters or subgroup uncertain
 The observer measures actual generated tester quotes only while a position is held, including terminal exit fills. M1 OHLC mode generates an intraminute sequence, rather than replaying exchange ticks ([official MT5 description](https://www.mql5.com/en/articles/239)). These results concern that model and these strategy-conditioned holding periods. Stops and profit exits censor future excursions; different holding lengths affect MFE and MAE. A greater MFE is not a promise of recoverable profit under another exit rule.
 
 Year/session/size matching does not align exact entry times, individual candles, trend/volatility regimes or all other path determinants. There is still variation within bins, and reach-conditioned retention compares selected survivors. Day intervals omit longer serial dependence, uncertainty in selected weights and multiple exploratory comparisons. The study does not identify an order-book mechanism, prove broad ES mean reversion or validate a new trading filter. Strategy rules remain unchanged.
+
+## Interpretation note (added 2026-10-09, after review)
+
+*Written after the results above, at the user's request. Descriptive reading of saved tables; no new runs or intervals.
+Size table: [report_path_size_bins.py](../../../python/report_path_size_bins.py), from the study's
+[group table](../../../Reports/path_experiment_20261009/group_metrics.csv).*
+
+**1. ES does not lose at the bar-close exit.** An earlier guess ([NQ versus ES](../nq-vs-es/RESULTS.md)) was that ES
+touches +1R but falls back before the bar closes. In the broad recent panel, about 48% of touches give a qualifying close
+in the touch bar, and about 77% do eventually. That holds on both coarse NQ and ES, with differences under 0.5 pp and
+intervals spanning zero. That hypothesis is retired for 2020–26. In 2010–15, ES's first-close conversion is lower
+(+3.9 pp for coarse NQ), so this does not generalise to every era.
+
+**2. Where ES loses at equal steps per candle:** slightly lower +1R reach (−1.3 to −1.6 pp), slightly more stop-first,
+and smaller favourable excursions. The pattern is the same in RTL and in the plain long, so it concerns ES's movement
+after any entry, not the buy stop. Rough arithmetic for the 0.045–0.058 R gap: about 1.5% of trades moving from a −1R
+stop to a win accounts for roughly 0.03 R; smaller winners account for the rest.
+
+**3. ES's plain-long weakness sits mostly in small candles.** Gross R by signal-size bin, broad four-arm panel, effective
+steps, 2020–26 (fixed panel weights renormalised within each bin):
+
+| Steps per candle | <8 | 8–16 | 16–24 | 24–32 | 32–48 | 48–64 | 64–128 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Panel weight | 4% | 25% | 21% | 14% | 19% | 8% | 8% |
+| ES plain long | −0.336 | −0.066 | −0.112 | +0.008 | +0.000 | −0.035 | −0.027 |
+| Coarse-NQ plain long | −0.019 | +0.004 | −0.013 | +0.013 | +0.004 | −0.020 | +0.013 |
+| Gap (coarse NQ − ES) | +0.317 | +0.070 | +0.098 | +0.005 | +0.004 | +0.015 | +0.040 |
+
+Below about 24 steps the ES plain long falls well behind coarse NQ; above it the two are close. Earlier periods show the
+same collapse below 16 steps (gaps +0.22 to +0.25 R under 8 steps, +0.09 to +0.10 at 8–16). Their few larger-candle bins
+hold 6% or less of the weight each and are noisy: 2016–19 still shows gaps of +0.08 to +0.11 there. This fits the
+narrow six-arm panel, which is mostly large candles: it shows no plain-long gap (−0.012 R [−0.048, +0.024]). Per-bin
+values have no intervals.
+
+**4. A possible mechanism (hypothesis, not tested):** rounding cannot create real tick noise. In a real 4-tick ES candle
+the stop is 4 real ticks away, and the normal 1–2 tick bid/ask bounce is a large fraction of that distance. In rounded
+NQ, small wiggles disappear unless they cross a grid line, so a "4-step" coarse candle is quieter than a real 4-tick one.
+Rounding reproduces the damage to the buy stop (false touches of the previous high: coarse-NQ and ES RTL are similar
+under 8 steps), but not the damage real noise does to a tight stop. If so, coarsened-NQ experiments understate how badly
+small real-tick candles hurt. Testing this needs tick data, not the M1 OHLC tester.
+
+**5. Comparisons to weight lightly.** At equal steps, native NQ candles are quiet bars for NQ (30 steps = 7.5 points),
+while ES candles at the same step count are busy bars for ES. This likely explains native NQ's much larger excursions and
+its more frequent "touch +1R, then stop" (about 5–9% of reachers vs 1–3%). Coarse NQ versus ES is the clean pair, because
+its yearly grid was set from the ratio of median candle sizes. Equal steps there means roughly equal relative size.
+Ordinary-tick matching compares quiet NQ bars with busy ES bars, so it answers a different question.
+
+**Consequences.** No rule changes. On MNQ, under 5% of recent trades have candles below 16 ticks, so the mechanism matters
+only if NQ's candle size in ticks shrinks; log it in the forward test. ES is not rescued by large candles: ES RTL in the
+mostly-large six-arm panel is about +0.01 R gross, and a filter chosen here would be tuned on seen data. To screen another
+instrument, check first the share of M30 candles under about 16–24 real ticks and the plain-long control result. The ES
+line stops here. Resolution weakens the buy stop, and small real-tick candles hurt any tight-stop long; what remains is a
+microstructure question the M1 OHLC tester cannot answer.
 
 ## Reproducible artifacts
 
