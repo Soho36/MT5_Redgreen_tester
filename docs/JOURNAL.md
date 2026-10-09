@@ -533,5 +533,10 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   up on one curve by steps per candle; 2010–15's weak edge looks mostly like resolution. ES's buy-stop gain (+0.04 at 24
   steps) fits the curve, so its plain long, not the breakout, is what fails.
 
+## 2026-10-09: complete NQ / coarse NQ / ES path experiment
+
+- Six unchanged-strategy runs reproduce 180,130 complete paths. Recent broad effective-step matching finds weaker ES reach/stop-first paths but similar close retention after +1R; [results](baseline/path-interaction/RESULTS.md).
+- Three-instrument overlap retains only 20-33% of recent trades; native-tick sensitivity changes the population and several conclusions. No rule adopted.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

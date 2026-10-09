@@ -6,6 +6,8 @@
 
 This is stronger evidence of resolution sensitivity than the earlier single yearly-grid experiment. It supports price resolution relative to candle width as an important candidate explanation for the NQ/ES difference. This experiment alone cannot determine how much of ES's weakness it explains or which entry/exit mechanism is responsible.
 
+**Path follow-up:** [Complete NQ / coarse NQ / ES paths](../path-interaction/RESULTS.md) examine what happens before and after +1R in comparable candle groups. The recent broad effective-step comparison finds weaker ES reach/stop paths and similar post-touch retention; overlap and size-basis sensitivities limit causal attribution.
+
 ## What was run
 
 All **30 MT5 jobs** completed: 15 price histories, each tested with RTL red cap3 and the market-buy control. The control buys on each eligible M30 bar while flat, regardless of candle colour. The contrast compares these two complete strategies.

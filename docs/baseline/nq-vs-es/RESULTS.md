@@ -4,6 +4,8 @@
 
 **2026-10-09 follow-up:** [Fixed grids and every origin](../granularity/RESULTS.md) confirms strong NQ resolution sensitivity. The original causal attribution below remains exploratory. The follow-up also found omitted fast-stop control trades in the EA CSV logger: native NQ controls are audit-corrected there, and on 2026-10-09 the MT5 figures below (NQ, ES and yearly-coarse NQ) were audit-corrected too ([audit_signal_colour_ledgers.py](../../../python/audit_signal_colour_ledgers.py)); control figures moved by at most 0.005 R and no conclusion changed. Full ES attribution remains open.
 
+**2026-10-09 path follow-up:** [Complete held-position paths](../path-interaction/RESULTS.md) compare all three instruments within year/session/candle-size cells. Recent broad effective-step matching locates the residual ES weakness mainly in lower +1R reach and more stop-first trades, with similar post-touch close retention. Three-way overlap and ordinary-tick matching materially change the population and some conclusions, so the earlier "mostly tick granularity" attribution below is not a measured causal decomposition.
+
 ## Summary
 
 - **Question (user):** RTL fails on MES. Is that because ES candles span fewer ticks, or because ES moves
