@@ -1,7 +1,13 @@
 # Project status
 
-Updated 2026-10-10. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
+Updated 2026-10-11. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
 For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
+
+**[ES minimum 50-tick candle width](baseline/es-minimum-width/RESULTS.md) (2026-10-11, exploratory): does not pass.**
+Four full EA reruns use the built-in filter (MinCandleRange = 1250 quote points = 12.5 price points). Recent RTL gross
+R falls +0.0018 -> -0.0207, net R improves slightly -0.0418 -> -0.0322 as costs fall; the improvement interval spans zero.
+2016-19 is positive but has only 91 trades. Recent trades fall 9,623 -> 1,479; changed order lifetimes alter the entries.
+Both baselines reproduce earlier ledgers; 69,422 complete paths audited. No filter adopted and no causal ES attribution.
 
 **[Break-even stop after +1R](baseline/breakeven-stop/RESULTS.md) (2026-10-10, exploratory): rejected.** Baseline unchanged,
 stop moved to the entry price once price touches +1R: net $6,485 → $5,404 / $37,981 → $33,727 (2016–19 / 2020–26), average
@@ -21,8 +27,8 @@ Two ES-only data holes (2020-02-28, 2020-06-30). Imported as `MEScontDTBNT201020
 
 **[Baseline on MES](baseline/mes-unseen-instrument/RESULTS.md) (2026-10-08): the RTL edge does not transfer.** Unchanged
 baseline EA and settings: MES mean R before costs −0.039 / +0.002 (2016–19 / 2020–26) vs MNQ +0.093 / +0.085, 95%
-intervals apart. PF net 0.930 / 0.979; 15/17 years lose. Costs in R are the same on both, so the gap is the
-signal itself (win rate 2–4 points lower). Treat MNQ results as unconfirmed on independent data.
+intervals apart. PF net 0.930 / 0.979; 15/17 years lose. The gap already exists before costs; its mechanism remains
+unresolved (win rate 2–4 points lower). Treat MNQ results as unconfirmed on independent data.
 
 **[Signal colour + control](baseline/signal-colour/RESULTS.md) (2026-10-08, exploratory): the edge is the buy stop, not the
 colour or drift.** On MNQ a market-buy control with the same stop and exit earns ~0 R before costs (+0.009 / +0.007, audited). Green
@@ -31,22 +37,23 @@ signals nearly match red (+0.073 / +0.066 vs +0.093 / +0.085 R). RTL + GG togeth
 by +0.029 / +0.044 / +0.042 R (2010–15 / 2016–19 / 2020–26, audited, all intervals above 0), about half the NQ gain. But the
 MES plain long itself loses −0.15 / −0.08 / −0.04 R (NQ ≈ 0), so RTL fails there. The market's background decides.
 
-**[Why ES differs](baseline/nq-vs-es/RESULTS.md) (2026-10-08, exploratory): mostly tick granularity.** After a touch of
-the previous M30 high, NQ follows through and ES falls back. NQ rounded to an ES-like grid loses half (2016–26) to all
-(2010–15) of that difference; the rest sits in tiny ES candles. **MT5 on the coarse symbol** (`MNQcoarseDTBNT20102026`):
-RTL mean R before costs −0.123 / +0.020 / +0.041 (2010–15 / 2016–19 / 2020–26) vs NQ +0.005 / +0.093 / +0.085. The edge needs
-candles spanning many ticks; ES also has a negative plain long that granularity doesn't explain.
+**[Why ES differs](baseline/nq-vs-es/RESULTS.md) (2026-10-08, exploratory): resolution sensitivity, attribution open.**
+Artificially coarsened NQ loses RTL performance: MT5 gross R -0.123 / +0.020 / +0.041 (2010-15 / 2016-19 / 2020-26)
+versus native NQ +0.005 / +0.093 / +0.085. Coarsening changes signals, entries, stops and targets together. This establishes
+sensitivity to the data grid; it does not establish that fewer candle ticks primarily cause ES's weakness. ES's negative
+plain-long control remains a separate difference.
 
 **[NQ fixed-grid resolution](baseline/granularity/RESULTS.md) (2026-10-09, exploratory):** all 30 runs, every grid origin:
-wider price grids progressively reduce RTL minus control (2020–26 +0.078 → +0.004 R). Ordered by steps per candle, the
-NQ periods line up on roughly one curve (near 0 at ~15 steps, +0.06 to +0.09 R from ~30), so 2010–15's weak edge looks
-mostly like low resolution. No cutoff or filter adopted. Logger fix: market-entry controls omit fast stops; all
-2026-10-08 ledgers re-audited (≤ 0.005 R change).
+wider price grids progressively reduce RTL minus control (2020-26 +0.078 -> +0.004 R). Ordered by steps per candle, the
+NQ periods line up on roughly one curve (near 0 at ~15 steps, +0.06 to +0.09 R from ~30). This descriptive alignment
+strengthens the resolution hypothesis without isolating its mechanism. No cutoff or filter adopted. Logger fix:
+market-entry controls omit fast stops; all 2026-10-08 ledgers re-audited (<= 0.005 R change).
 
-**[Complete paths: NQ / coarse NQ / ES](baseline/path-interaction/RESULTS.md) (2026-10-09, exploratory): ES line closed.** ES
-doesn't lose at the bar-close exit (touch-to-close retention equal in 2020–26). It reaches +1R slightly less and extends less,
-in both RTL and the plain long. Its plain-long gap vs coarse NQ sits mostly in candles under ~24 steps (hypothesis: real
-tick noise near tight stops). No rule change. Next: MNQ forward test, logging slippage and candle size in ticks.
+**[Complete paths: NQ / coarse NQ / ES](baseline/path-interaction/RESULTS.md) (2026-10-09, exploratory):** recent broad
+effective-step comparisons find lower ES +1R reach and more stop-first paths, with similar close retention after +1R.
+The plain-long gap versus coarse NQ is concentrated in smaller candles in that comparison. Three-instrument overlap is
+limited and native-tick matching changes the population and several conclusions; these are associations, not a resolved
+ES mechanism. The subsequent full minimum-width test above does not produce positive recent ES RTL expectancy.
 
 **[Q24 trade-result streaks](baseline/q24-trade-streaks/RESULTS.md) (2026-10-07): no predictive or daily-stop gate passes.**
 Current RTL ledger, 14,968 trades, $1.05 costs: after three same-session losses the next-trade win rate
@@ -171,6 +178,8 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
   measured live slippage.
 
 **Rejected** (evidence kept, don't retest without a new reason)
+- ES minimum 50-tick candle width ([results](baseline/es-minimum-width/RESULTS.md), 2026-10-11): full rerun remains
+  negative before and after costs in 2020-26; earlier positive sample has only 91 trades. No ES filter adopted.
 - Q15-Q17 falling trendline resistance: passed the attribution gate (Q15) and the concentration audit
   (Q16), but traded alone (Q17) mean R +0.039/+0.050 does not beat the baseline -0.004/+0.060 and only
   4/11 years; freed trades break-even. No filter, stand-alone strategy or sizing change.
@@ -273,6 +282,7 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 
 | Date | Study | Verdict |
 |---|---|---|
+| 10-11 | [ES minimum candle width](baseline/es-minimum-width/RESULTS.md) ([protocol](baseline/es-minimum-width/PROTOCOL.md)) | 50-tick rule fails: recent RTL gross/net negative, paired net improvement uncertain; earlier 91 trades; no adoption |
 | 10-10 | [Baseline trade paths](baseline/trade-paths/RESULTS.md) | Descriptive: path tree, where losers and winners had been, level map. Holding is slightly positive at every level; no early cut or take-profit point |
 | 10-10 | [Break-even stop after +1R](baseline/breakeven-stop/RESULTS.md) ([protocol](baseline/breakeven-stop/PROTOCOL.md)) | Rejected: worse on net $ and average R in both periods; cut trades are worth about zero in the baseline |
 | 10-07 | [Q24: trade-result streaks](baseline/q24-trade-streaks/RESULTS.md) | No reliable next-trade prediction; five wins too sparse; loss-based session stops reduce DD but fail yearly consistency; no rule adopted |

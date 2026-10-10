@@ -562,5 +562,13 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   had been above +0.5R; 60% of winners below −0.25R. Holding is slightly positive at every level and the path so far
   barely matters: no place to cut or bank early.
 
+## 2026-10-11: ES minimum 50-tick candle width, complete EA test
+
+- Built-in range filter tested at one frozen threshold: 12.5 price points = 50 ticks = MinCandleRange 1250 quote points.
+  Four complete RTL/control reruns; 69,422 paths audited and both baselines reproduce earlier runs. [Results](baseline/es-minimum-width/RESULTS.md).
+- Recent RTL remains negative: gross +0.0018 -> -0.0207 R, net -0.0418 -> -0.0322 R; fewer trades save costs. Earlier
+  positive result has only 91 trades. No adoption. Earlier coarsening claims are qualified: grid sensitivity does not
+  establish that fewer candle ticks cause ES's weakness; the current [status](STATUS.md) reflects this distinction.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*
