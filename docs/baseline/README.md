@@ -17,6 +17,8 @@ flatten. The current rules are in [STATUS.md](../STATUS.md).
 | [RR on clean data](rr-clean-data/RESULTS.md) | 2.0 / 2.5 / 3.0 do not all beat 1.0; RR stays 1.0 |
 | [Exit threshold](exit-threshold/RESULTS.md) ([protocol](exit-threshold/PROTOCOL.md)) | Keep the 1R bar-close exit |
 | [Trailing stop after +1R](trailing-stop/RESULTS.md) | Rejected |
+| [Break-even stop after +1R](breakeven-stop/RESULTS.md) ([protocol](breakeven-stop/PROTOCOL.md)) | Rejected: worse on net $ and average R in both periods; the trades it cuts are worth about zero in the baseline |
+| [Trade paths: what price does between entry and exit](trade-paths/RESULTS.md) | Descriptive. Per 100 trades: 50 never touch +1R (44 stop), 33 touch it and never come back (all win), 16 come back to entry (10 stop, 6 win). Holding is slightly positive at every level; no place to cut or bank early |
 | [Flatten fallback](flatten-fallback/RESULTS.md) | Fix adopted: always flat at session end |
 | [Early-close calendar](early-close-calendar/RESULTS.md) | Adopted: no cross-date trades |
 | [Near-stop averaging entry](averaging-entry/RESULTS.md) ([protocol](averaging-entry/PROTOCOL.md)) | Keep averaging off |

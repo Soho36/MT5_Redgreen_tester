@@ -1,7 +1,18 @@
 # Project status
 
-Updated 2026-10-09. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
+Updated 2026-10-10. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
 For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
+
+**[Break-even stop after +1R](baseline/breakeven-stop/RESULTS.md) (2026-10-10, exploratory): rejected.** Baseline unchanged,
+stop moved to the entry price once price touches +1R: net $6,485 → $5,404 / $37,981 → $33,727 (2016–19 / 2020–26), average
+net R −0.004 → −0.009 / +0.060 → +0.053; 3/11 years better. Differences are within noise, DD is 5–11% lower. The trades it
+cuts (touched +1R, came back to entry) are worth about zero in the baseline: 60% stop out, 39% recover to about +1.6R.
+
+**[Baseline trade paths](baseline/trade-paths/RESULTS.md) (2026-10-10, descriptive):** every baseline trade followed quote by
+quote. Per 100 trades (2016–26, both periods alike): 50 never touch +1R (44 stop, 6 closed at session end); 33 touch +1R and
+never come back to entry (all win); 16 come back to entry (10 stop, 6 win). 45% of losers had been above +0.5R; 60% of winners
+had been below −0.25R. At every level from −0.75R to +3R, holding on was worth slightly more than getting out there (mostly
++0.03 to +0.09R), and a trade back at entry is worth about the same whatever it did before. No rule tested; nothing to adopt.
 
 **ES data for unseen-instrument tests (2026-10-08):** continuous ES 1-minute file built with the NQ rules
 (`F:\DATABENTO\ES_16_YEARS\MT5_ES_continuous_2010-2026_ohlcv-1m.csv`, 2010-06-07 → 2026-10-07), input checks clean
@@ -215,6 +226,9 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 - Trailing stop after +1R at 0.25 / 0.5 / 1.0R (full MT5 runs, 2026-10-01): clearly
   worse in 2015–19 at every distance; mixed in 2020–26. Rejected by the pre-set rule.
   The bar-close exit stays.
+- Break-even stop: stop moved to the entry price once price touches +1R, bar-close exit kept
+  ([results](baseline/breakeven-stop/RESULTS.md), 2026-10-10). Worse on net $ and average net R in both
+  periods (within noise); DD 5–11% lower for 11–17% less profit. Don't retry other trigger levels.
 - Buy-stop-limit entry (an experiment; not used for testing).
 - Switching off session blocks (time of day): every block is profitable in both periods, and
   none is consistently weak ([results](baseline/time-of-day/RESULTS.md)). Trade windows unchanged.
@@ -259,6 +273,8 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 
 | Date | Study | Verdict |
 |---|---|---|
+| 10-10 | [Baseline trade paths](baseline/trade-paths/RESULTS.md) | Descriptive: path tree, where losers and winners had been, level map. Holding is slightly positive at every level; no early cut or take-profit point |
+| 10-10 | [Break-even stop after +1R](baseline/breakeven-stop/RESULTS.md) ([protocol](baseline/breakeven-stop/PROTOCOL.md)) | Rejected: worse on net $ and average R in both periods; cut trades are worth about zero in the baseline |
 | 10-07 | [Q24: trade-result streaks](baseline/q24-trade-streaks/RESULTS.md) | No reliable next-trade prediction; five wins too sparse; loss-based session stops reduce DD but fail yearly consistency; no rule adopted |
 | 10-04 | [Q18: horizontal swing-high breakout](setups/horizontal/resistance-breakout-long/q18-breakout/RESULTS.md) | **Passes both stages** (attribution, stand-alone EA); first level lead to survive own execution; OHLC only, weak 2016-19 |
 | 10-04 | [Q17: stand-alone falling-resistance EA](setups/trendlines/downtrend-breakout-long/q17-standalone/RESULTS.md) | Does not survive own execution: PF 1.24 but mean R below baseline recently, 4/11 years |

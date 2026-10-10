@@ -543,5 +543,24 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   real tick noise near tight stops, which rounding can't reproduce. ES line closed; next is the MNQ forward test with slippage and
   candle size logged in ticks.
 
+## 2026-10-10: break-even stop after +1R
+
+- User asked: baseline unchanged, but move the stop to the entry price once price reaches +1R (bar-close exit kept).
+  Protocol and rule fixed first (exploratory, one trigger level). EA = baseline + `BreakevenAtR` via text edits; the
+  control is byte-identical to the baseline ledger. [Results](baseline/breakeven-stop/RESULTS.md).
+- **Rejected:** net $6,485 → $5,404 / $37,981 → $33,727 (2016–19 / 2020–26), average net R lower in both, 3/11 years
+  better; differences within noise; DD 5–11% lower. Half of all trades touch +1R and a third of those come back to
+  entry; in the baseline those are worth about zero (60% stop out, 39% recover to about +1.6R), so cutting them gains nothing.
+
+## 2026-10-10: baseline trade paths (what price does between entry and exit)
+
+- User liked the break-even breakdown and asked for the same view of the pure baseline. Baseline EA + passive tick log
+  (ledger byte-identical, 8.4M quotes); paths reproduce MFE/MAE on every trade and the break-even run's cut trades.
+  [Report](baseline/trade-paths/RESULTS.md), descriptive only.
+- Per 100 trades (2016–26): 50 never touch +1R (44 stop, 6 closed at session end, which is where that group's small
+  profits come from); 33 touch and never come back to entry (all win); 16 come back (10 stop, 6 win). 45% of losers
+  had been above +0.5R; 60% of winners below −0.25R. Holding is slightly positive at every level and the path so far
+  barely matters: no place to cut or bank early.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*
