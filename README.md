@@ -24,6 +24,9 @@ history. Compile a copied `.mq5` file with MetaEditor, or use the optional
 `SnapshotBars` input in the runband EA for research exports. Installed terminal
 copies are separate from these project sources.
 
+Installed EA folders and the shared runner are described in the
+[MT5 research EA catalog](docs/reference/MT5_RESEARCH_EAS.md).
+
 All study docs are mapped by setup type in [docs/README.md](docs/README.md); the
 current state is in [docs/STATUS.md](docs/STATUS.md). Start with [research results](docs/reference/RESEARCH_RESULTS.md) and the
 [question checklist](docs/reference/RESEARCH_QUESTIONS.md). The

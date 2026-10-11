@@ -570,5 +570,12 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   positive result has only 91 trades. No adoption. Earlier coarsening claims are qualified: grid sensitivity does not
   establish that fewer candle ticks cause ES's weakness; the current [status](STATUS.md) reflects this distinction.
 
+## 2026-10-11: MT5 research EA folders
+
+- Moved nine baseline EAs (including RTL_width) to CodexBaselineResearch and support-reclaim to CodexLevelResearch;
+  four actual trendline EAs remain. All source/binary hashes match; other research folder names checked. [Catalog](reference/MT5_RESEARCH_EAS.md).
+- Shared runner routes installation and launch paths by EA purpose, preserving recorded INIs and trading inputs.
+  Six retained terminal/tester paths updated; exact prior runner and reversible file backups saved.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

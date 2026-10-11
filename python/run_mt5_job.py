@@ -2,7 +2,8 @@
 
 Usage: run_mt5_job.py <run_dir> <expert_name> [tag ...]
 The run folder must hold <expert_name>.mq5, its includes and <tag>.ini (written by a prepare_*.py script).
-Install folder: MQL5/Experts/CodexTrendlineResearch. Writes <tag>.completed.json only if every output exists.
+Install folders follow python/mt5_expert_layout.py. Saved INIs stay unchanged;
+launch copies remap only the Expert path. Writes <tag>.completed.json only if every output exists.
 """
 import json
 import os
@@ -14,7 +15,7 @@ from datetime import datetime
 from pathlib import Path
 
 from analyze_price_levels import sha256
-from prepare_resistance_standalone import INSTALL
+from mt5_expert_layout import expert_folder, runtime_tester_config
 
 INSTALL_DIR = Path(r"I:\Programs\1AMP Global (USA) MT5 Exchange-Traded Futures Only")
 DATA = Path(os.environ["APPDATA"]) / "MetaQuotes" / "Terminal" / "F5855995045EF8A4C3CA7AE968872CF2"
@@ -23,7 +24,7 @@ AGENT_LOGS = Path(os.environ["APPDATA"]) / "MetaQuotes" / "Tester" / DATA.name /
 
 
 def compile_expert(run, expert):
-    target = DATA / "MQL5" / "Experts" / INSTALL
+    target = DATA / "MQL5" / "Experts" / expert_folder(expert)
     target.mkdir(parents=True, exist_ok=True)
     for f in list(run.glob("*.mqh")) + [run / f"{expert}.mq5"]:
         shutil.copyfile(f, target / f.name)
@@ -48,13 +49,14 @@ def trim_log(path, expert, keep=150):
 
 
 def run_job(run, tag, outputs, expert, inputs_files=()):
+    config = runtime_tester_config(run, tag, expert)
     for name in outputs:
         (COMMON / name).unlink(missing_ok=True)
     for name in inputs_files:
         shutil.copyfile(run / name, COMMON / name)
     started = time.time()
     stamp = datetime.now().strftime("%Y%m%d")
-    subprocess.run([str(INSTALL_DIR / "terminal64.exe"), f"/config:{run / (tag + '.ini')}"], check=True)
+    subprocess.run([str(INSTALL_DIR / "terminal64.exe"), f"/config:{config}"], check=True)
     seconds = time.time() - started
     missing = [n for n in outputs if not (COMMON / n).exists()]
     for name in outputs:

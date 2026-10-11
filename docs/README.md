@@ -44,6 +44,7 @@ limit-only entry, trend-conditioned RR, Q24 trade streaks, the baseline on MES (
 
 ## Reference
 
+- [MT5 research EA folders](reference/MT5_RESEARCH_EAS.md): installed EAs, input modes and saved-run path handling.
 - [Data build](reference/DATA_BUILD.md): the continuous NQ and ES one-minute series.
 - [Exit and data review](reference/EXIT_AND_DATA_REVIEW.md).
 - [Research questions](reference/RESEARCH_QUESTIONS.md) (checklist and inbox)
