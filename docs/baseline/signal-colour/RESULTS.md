@@ -9,6 +9,12 @@ runs missed nothing. Controls missed 72 trades (MNQ) and 127 (MES, plus 2 rows l
 on ES flatten-gap days). Every figure below uses the audited ledgers; all audited totals match MT5 exactly. The
 corrections move control figures by 0.002–0.005 R and change no conclusion.
 
+**2026-10-13 correction (user's catch):** `MaxRedRun = 3` was chosen and tested for RTL only. The "Green, cap 3"
+rows and the first RTL + GG table below apply it to GG without a test. The
+[GG run-cap test](#gg-run-cap-and-the-combined-equity-curve-2026-10-13) finds no cap that helps GG, so **GG's own
+setting is no cap**. Read green from the "no cap" rows; the corrected combined figures and the equity chart are
+in that section.
+
 ## Summary
 
 - **Question:** is the RTL edge the red candle, any buy stop over the previous bar, or just being long NQ
@@ -16,11 +22,12 @@ corrections move control figures by 0.002–0.005 R and change no conclusion.
 - **Not drift.** The control has no pattern: it buys at market at every bar open, with the same stop
   distance and exit. It earns about nothing before costs: +0.009 / +0.007 R (2016–19 / 2020–26), with
   intervals that include zero. It loses after costs.
-- **Colour matters little.** Green (the user's GG) gives +0.073 / +0.066 R against red's +0.093 / +0.085.
-  The intervals overlap. Red is slightly better and MaxRedRun 3 helps it a little. The edge is the
-  **buy stop over a previous M30 high**, not the red candle.
+- **Colour matters little.** Without the run cap, green (the user's GG) and red are close: +0.071 / +0.070 R
+  against +0.081 / +0.071. The cap lifts red to +0.093 / +0.085 and does nothing for green (2026-10-13). The
+  edge is the **buy stop over a previous M30 high**, not the red candle.
 - **Running RTL and GG together** doubles net profit and roughly doubles drawdown. Daily correlation is
   +0.62, so this is about twice the size, not diversification. This matches the user's experience.
+  [Equity chart](#gg-run-cap-and-the-combined-equity-curve-2026-10-13).
 - **Meaning for forward testing:** the thing to watch is whether buy-stop entries keep beating plain long
   entries on NQ. Here they beat them by about 0.06–0.08 R in 2016–26.
 
@@ -58,7 +65,8 @@ After costs:
 | Any candle | 1.027 | 1.078 | 40,928 | 5,803 | 32,960 |
 | Control | 0.952 | 1.006 | 4,847 | 11,587 | 35,872 |
 
-RTL + GG (cap 3) as two accounts, summed by exit day:
+RTL + GG (cap 3 on both; superseded by the [2026-10-13 tables](#gg-run-cap-and-the-combined-equity-curve-2026-10-13))
+as two accounts, summed by exit day:
 
 | Period | RTL net / DD | GG net / DD | Both net / DD |
 |---|---|---|---|
@@ -126,9 +134,72 @@ ticks per candle. Gross mean R in 2016–26, by signal-candle size ([script](../
 - Each cell holds 1,000–9,000 trades, so a single cell is noisy (about ±0.03 R). Candle size is also tied
   to time of day and to calm vs volatile years, which differ between the instruments.
 
+## GG run cap and the combined equity curve (2026-10-13)
+
+**Why:** the run cap was chosen for RTL. Using it on GG was an untested assumption. Two fixes were possible:
+compare both without the cap, or test a cap for GG. Both are done here.
+
+**Protocol, fixed before the runs** (the [RTL rule](../maxredrun/RESULTS.md), applied to green):
+
+- Same EA, `SignalMode = 1`. `MaxRedRun` counts consecutive green bars. Caps off, 1, 2, … 7. Eight full-period
+  runs, split by entry year.
+- Train 2016–19: winner = highest gross PF. A tie within 0.005 goes to the larger cap (off is the largest).
+- Test 2020–26: the winner against off. It passes if net PF is higher and net drawdown is lower.
+- The cap 3 and off runs reproduce the 2026-10-08 green ledgers exactly. All eight match MT5's own totals.
+
+**Result: no cap passes. GG keeps no cap.**
+
+| Cap | 1 | 2 | 3 | 4 | 5 | 6 | 7 | off |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Train gross PF | 1.152 | 1.128 | 1.146 | 1.150 | 1.150 | 1.144 | 1.142 | 1.142 |
+| Train net $ | 3,609 | 2,439 | 3,701 | 4,072 | 4,104 | 3,753 | 3,586 | 3,636 |
+| Test net PF | 1.078 | 1.080 | 1.084 | 1.089 | 1.082 | 1.085 | 1.087 | 1.088 |
+| Test net $ | 30,026 | 32,928 | 35,626 | 38,711 | 36,229 | 37,940 | 38,759 | 39,230 |
+| Test net DD $ | 5,071 | 5,791 | 5,675 | 5,641 | 5,632 | 5,632 | 5,270 | 5,316 |
+
+- **Train:** caps 1, 4 and 5 tie within 0.005, so the rule picks 5. The whole row is flat (1.128 to 1.152); there
+  is no peak to pick.
+- **Test:** cap 5 is worse than off on all three measures (net PF 1.082 vs 1.088, DD 5,632 vs 5,316, net $36.2k
+  vs $39.2k). No cap beats off on net $. Cap 3, used on 2026-10-08, costs GG about $3.6k and its drawdown is
+  higher, not lower (5,675 vs 5,316).
+- **Mean R, cap minus off:** between −0.007 and +0.002 R for every cap in both periods. 13 of the 14 intervals
+  include zero.
+- **The cap has little to remove on GG:** 76% of GG trades come after a single green candle and 8% after more
+  than three. For RTL it is 47% and 12%. Likely reason, not tested: GG enters right after the first green candle
+  and is already in a trade while the run goes on.
+- Drawdown in this table is trade by trade. The table below uses daily closes, so its figures are a little lower.
+
+**RTL + GG as two accounts, summed by exit day** (net $ after costs / drawdown on daily closes):
+
+| Period | RTL | GG | Both | Daily correlation |
+|---|---|---|---|---|
+| **No cap on either** | | | | |
+| 2010–15 | −7,496 / 8,254 | −5,108 / 5,833 | −12,604 / 13,764 | +0.62 |
+| 2016–19 | 4,417 / 2,143 | 3,636 / 1,561 | 8,052 / 3,695 | +0.65 |
+| 2020–26 | 38,890 / 5,781 | 39,230 / 4,882 | 78,120 / 9,141 | +0.65 |
+| **Each at its own setting: RTL cap 3, GG no cap** | | | | |
+| 2010–15 | −7,027 / 8,186 | −5,108 / 5,833 | −12,135 / 13,754 | +0.60 |
+| 2016–19 | 6,485 / 1,412 | 3,636 / 1,561 | 10,121 / 2,964 | +0.62 |
+| 2020–26 | 37,981 / 4,352 | 39,230 / 4,882 | 77,211 / 8,158 | +0.62 |
+
+![RTL and GG equity, alone and together](../../figures/rtl_gg_equity.png)
+
+- **Like for like, red and green earn about the same:** $38.9k vs $39.2k in 2020–26, $4.4k vs $3.6k in 2016–19.
+- **The earlier conclusion holds:** both together give about twice the profit and about twice the drawdown of
+  one. Correlation is +0.6, so it is more size, not diversification.
+- **The correction is small:** the 2020–26 combined figure moves from 73,607 / 8,517 to 77,211 / 8,158.
+- **Limits:** 2020–26 had been seen for GG at cap 3 and off, so this is a consistency check, not a fresh test.
+  Both curves lose in 2010–15 and earn most of their profit after 2020. Two accounts are summed; margin and
+  the two positions overlapping in one account are not modelled.
+
 ## Reproduce
 
 ```powershell
+# GG run cap and the equity chart (2026-10-13)
+.\venv\Scripts\python.exe python\prepare_gg_run_cap.py
+.\venv\Scripts\python.exe python\run_mt5_job.py Reports\gg_run_cap_20261013 RTL_signal
+.\venv\Scripts\python.exe python\analyze_gg_run_cap.py
+# Original study
 .\venv\Scripts\python.exe python\prepare_signal_colour.py
 .\venv\Scripts\python.exe python\run_mt5_job.py Reports\signal_colour_20261008 RTL_signal
 .\venv\Scripts\python.exe python\analyze_signal_colour.py

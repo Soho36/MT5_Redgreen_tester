@@ -577,5 +577,17 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - Shared runner routes installation and launch paths by EA purpose, preserving recorded INIs and trading inputs.
   Six retained terminal/tester paths updated; exact prior runner and reversible file backups saved.
 
+## 2026-10-13: GG run cap and the combined RTL + GG equity curve
+
+- User's catch: `MaxRedRun = 3` was chosen for RTL only, but the 2026-10-08 GG figures used it too. Fixed both ways:
+  compared the two without the cap, and ran the RTL train/test rule on green (caps off, 1–7; 8 MT5 runs; cap 3 and off
+  reproduce the earlier ledgers). [Results](baseline/signal-colour/RESULTS.md#gg-run-cap-and-the-combined-equity-curve-2026-10-13).
+- **No cap passes for GG; GG runs with no cap.** Train (2016–19) gross PF is flat, 1.128–1.152; the rule picks cap 5,
+  which is worse than off on 2020–26 (net PF 1.082 vs 1.088, DD 5,632 vs 5,316, net $36.2k vs $39.2k). 76% of GG
+  trades follow a single green candle, so the cap has little to remove.
+- Without the cap red and green earn about the same (2020–26: $38.9k vs $39.2k). RTL cap 3 + GG no cap, 2020–26:
+  $77.2k net, $8.2k DD, daily correlation +0.62: still twice the size, not diversification.
+  First chart of the combined curve: [rtl_gg_equity.png](figures/rtl_gg_equity.png).
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

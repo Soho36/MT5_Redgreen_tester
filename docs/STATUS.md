@@ -1,6 +1,6 @@
 # Project status
 
-Updated 2026-10-11. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
+Updated 2026-10-13. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
 For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
 
 **[ES minimum 50-tick candle width](baseline/es-minimum-width/RESULTS.md) (2026-10-11, exploratory): does not pass.**
@@ -32,7 +32,10 @@ unresolved (win rate 2–4 points lower). Treat MNQ results as unconfirmed on in
 
 **[Signal colour + control](baseline/signal-colour/RESULTS.md) (2026-10-08, exploratory): the edge is the buy stop, not the
 colour or drift.** On MNQ a market-buy control with the same stop and exit earns ~0 R before costs (+0.009 / +0.007, audited). Green
-signals nearly match red (+0.073 / +0.066 vs +0.093 / +0.085 R). RTL + GG together = ~2x net and ~2x DD. GG EA:
+signals nearly match red (no cap on either: +0.071 / +0.070 vs +0.081 / +0.071 R). RTL + GG together = ~2x net and ~2x DD
+([equity chart](figures/rtl_gg_equity.png)). **GG run cap (2026-10-13): none passes, GG runs with no cap.** The RTL
+train/test rule applied to green picks cap 5, which is worse than off on 2020–26 (net PF 1.082 vs 1.088, net $36.2k vs
+$39.2k); the earlier GG figures used RTL's cap 3 untested. RTL cap 3 + GG no cap, 2020–26: $77.2k net, $8.2k DD. GG EA:
 `mt5/experts/GG_r_MFE_buy-stop-entry_runband.cs`. **Same control on MES:** the buy stop beats the plain long there too,
 by +0.029 / +0.044 / +0.042 R (2010–15 / 2016–19 / 2020–26, audited, all intervals above 0), about half the NQ gain. But the
 MES plain long itself loses −0.15 / −0.08 / −0.04 R (NQ ≈ 0), so RTL fails there. The market's background decides.
