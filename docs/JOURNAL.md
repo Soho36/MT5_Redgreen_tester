@@ -3,16 +3,19 @@
 What we did, day by day, and what each step answered. Newest day last.
 For the current state of the strategy, see [STATUS.md](STATUS.md).
 
-## Where we are now (updated 2026-10-01)
+## Where we are now (strategy line updated 2026-10-13, the rest 2026-10-01)
 
 - **Strategy:** buy stop over the last red M30 candle, stop at its low, bar-close exit at ≥ 1R,
-  `MaxRedRun = 3`, flatten at 23:30 with the fallback fix. 2020–26: net $37.4k, PF 1.105.
-- **Entry and exit tweaks are largely exhausted;** most ideas failed. Only the red-run cap survived.
+  no red-run cap (`MaxRedRun = 0` since 2026-10-13; it was 3), flatten at 23:30 with the fallback fix.
+  2020-01 → 2026-10-01: net $38.5k, PF 1.091.
+- **Entry and exit tweaks are largely exhausted;** most ideas failed. The red-run cap, the only one that
+  survived, was dropped on 2026-10-13.
 - **Data rebuilt** (`MNQcontDTBNT20102026`) and **early-close calendar** added: the strategy is
   now strictly intraday. On clean data 2.5R beats 1R in both periods.
 - **RR = 1.0, decided** after the clean-data check (pre-set rule not met). Use symbol
   `MNQcontDTBNT20102026_2`.
 - **`MaxRedRun` confirmed on clean data;** cap 3 kept as the balanced choice (cap 1 = safest).
+  Dropped 2026-10-13 after the test was extended to 2026-10-01.
 - **Limit-order entry rejected** and **time of day checked** (no change), 2026-10-02.
 - **Q1–Q5 answered (no filter).** **Next:** execution realism (live/demo fills and slippage)
   and the live sizing decision; new ideas go into the Inbox.
@@ -588,6 +591,18 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - Without the cap red and green earn about the same (2020–26: $38.9k vs $39.2k). RTL cap 3 + GG no cap, 2020–26:
   $77.2k net, $8.2k DD, daily correlation +0.62: still twice the size, not diversification.
   First chart of the combined curve: [rtl_gg_equity.png](figures/rtl_gg_equity.png).
+
+## 2026-10-13: MaxRedRun on the test extended to 2026-10-01
+
+- User reran cap 3 and off by hand to the end of the data and saw cap 3 behind. The original test used the same
+  symbol but stopped at 2026-07-14; the data runs to 2026-10-01, so 58 trading days were unused. Reran off / cap 1 /
+  cap 3 to the end (earlier trades reproduce the original ledgers; totals match the user's runs).
+  [Results](baseline/maxredrun/RESULTS.md#extended-test-to-2026-10-01-2026-10-13).
+- **Cap 3 no longer passes:** drawdown 5,980 vs 5,781 for off, net $36.3k vs $38.5k, net PF 1.097 vs 1.091. Cap 1
+  still passes (PF 1.125, DD 4,036) at −23% profit. The new slice alone decides nothing (−$1,303, interval −3,339 to +687).
+- Cap 3 helped in 2020–23 and cost money in 2024–26. Per trade it still adds +0.012 R; the dollar loss comes from
+  long-red-run trades that won on large candles in 2025–26.
+- **User decided: drop the cap. Baseline is now `MaxRedRun = 0`.** Earlier studies used cap 3 and are not rerun.
 
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

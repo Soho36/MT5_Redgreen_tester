@@ -2,7 +2,8 @@
 
 Created 2026-09-30. These are hypotheses, not promised improvements. Investigate
 one at a time, retain negative findings, and link each completed study here.
-Research baseline: `MaxRedRun=3`, `MinLocation=0`, original entry/exit rules.
+Research baseline: `MaxRedRun=3`, `MinLocation=0`, original entry/exit rules. (Since 2026-10-13 the baseline is
+`MaxRedRun=0`; the questions below were studied with cap 3.)
 
 Current priority: [broad M30 support interaction](../setups/horizontal/README.md). For this
 experiment fixed 1R SL/TP is authorized. Any qualifying red candle whose range

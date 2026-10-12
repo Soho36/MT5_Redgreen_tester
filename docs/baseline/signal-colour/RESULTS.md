@@ -182,6 +182,9 @@ compare both without the cap, or test a cap for GG. Both are done here.
 | 2016–19 | 6,485 / 1,412 | 3,636 / 1,561 | 10,121 / 2,964 | +0.62 |
 | 2020–26 | 37,981 / 4,352 | 39,230 / 4,882 | 77,211 / 8,158 | +0.62 |
 
+Later on 2026-10-13 the user [dropped the RTL cap](../maxredrun/RESULTS.md#extended-test-to-2026-10-01-2026-10-13),
+so the "no cap on either" rows and the left panel below are now the baseline pairing.
+
 ![RTL and GG equity, alone and together](../../figures/rtl_gg_equity.png)
 
 - **Like for like, red and green earn about the same:** $38.9k vs $39.2k in 2020–26, $4.4k vs $3.6k in 2016–19.

@@ -35,10 +35,13 @@ evaluated on it. This is a robustness check on clean data, not a fresh out-of-sa
 - **Conclusion:** the red-run cap is confirmed on clean data. The exact value is a trade-off,
   not a single right answer: **1 = maximum risk reduction, 3 = balanced**. This matches the
   original finding (low caps best risk-adjusted, higher caps more profit).
+- **2026-10-13 update:** with the data to 2026-10-01, cap 3 no longer lowers drawdown and earns 5.7% less than
+  off. Cap 1 still passes. **The user dropped the cap; the baseline is now no cap.** See the
+  [extended test](#extended-test-to-2026-10-01-2026-10-13).
 
 ## Results (net of $1/trade; DD = net closed-balance drawdown; no trade crosses a date)
 
-**Train, 2016–19** (selection by gross PF):
+**Train, 2016-01-01 → 2020-01-01** (selection by gross PF):
 
 | MaxRedRun | 1 | 2 | 3 | 4 | 5 | 6 | 7 | off |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -48,13 +51,68 @@ evaluated on it. This is a robustness check on clean data, not a fresh out-of-sa
 | Net $ | 4,962 | 4,911 | 6,770 | 6,075 | 5,438 | 5,012 | 4,401 | 4,725 |
 | Net DD | 1,257 | 1,676 | 1,427 | 2,068 | 2,042 | 2,058 | 2,025 | 2,166 |
 
-**Test, 2020–26:**
+**Test, 2020-01-02 → 2026-07-14** (the symbol holds data to 2026-10-01; the end date was kept from earlier studies):
 
 | Rule | Trades | Gross PF | Net $ | Net PF | Net DD $ | Net / DD | Avg net R |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Off | 10,165 | 1.125 | **39,398** | 1.098 | 5,768 | 6.83 | +0.048 |
 | **Cap 1 (frozen winner)** | 6,258 | **1.164** | 30,298 | **1.134** | **4,030** | 7.52 | **+0.064** |
 | *Cap 3 (reference; seen before)* | *9,271* | *—* | *38,444* | *1.108* | *4,837* | *7.95* | *+0.061* |
+
+## Extended test to 2026-10-01 (2026-10-13)
+
+**Why:** the user reran cap 3 and off to the end of the data and saw cap 3 behind. 2026-07-14 → 2026-10-01
+(58 trading days) was never used by any study. Protocol fixed before the runs: same EA, symbol and settings,
+off / cap 1 / cap 3, 2020-01-01 → 2026-10-13; same reading as above (net PF higher and net DD lower than off).
+
+**Summary**
+
+- **The user's figures are right.** Gross profit to 2026-10-01: off $49,561, cap 3 $46,365, the same as the
+  manual runs. Trades before 2026-07-14 reproduce the original three ledgers exactly.
+- **Cap 3 no longer passes.** Its drawdown is now higher than off (5,980 vs 5,781), net is 5.7% lower and net
+  PF is only 0.006 higher. The drawdown benefit was the reason it was kept.
+- **Cap 1, the frozen winner, still passes** on PF and drawdown, at the same price: 23% less profit.
+- **The new slice alone decides nothing.** Cap 3 is $1,303 behind off there, with an interval of −3,339 to +687.
+  Off itself lost $356 in those 58 days.
+- **In dollars, cap 3 and off cannot be told apart:** −$2,212 over the extended test, interval −11,006 to +6,678.
+  Per trade the cap still helps a little: mean R +0.012 higher, interval +0.003 to +0.021.
+
+Net of $1.05 a trade (the tables above use $1, so the original-window figures differ slightly):
+
+| Rule | Trades | Net $ | Net PF | Net DD $ | Net / DD | Avg net R |
+|---|---:|---:|---:|---:|---:|---:|
+| **Extended test, 2020-01-02 → 2026-10-01** | | | | | | |
+| Off | 10,502 | 38,534 | 1.091 | 5,781 | 6.67 | +0.048 |
+| Cap 1 | 6,449 | 29,830 | 1.125 | 4,036 | 7.39 | +0.063 |
+| Cap 3 | 9,565 | 36,322 | 1.097 | 5,980 | 6.07 | +0.059 |
+| **Original window, to 2026-07-13** | | | | | | |
+| Off | 10,165 | 38,890 | 1.097 | 5,781 | 6.73 | +0.047 |
+| Cap 1 | 6,258 | 29,985 | 1.132 | 4,036 | 7.43 | +0.063 |
+| Cap 3 | 9,271 | 37,981 | 1.107 | 4,847 | 7.84 | +0.060 |
+| **New slice, 2026-07-14 → 2026-10-01** | | | | | | |
+| Off | 337 | −356 | 0.984 | 3,010 | | |
+| Cap 1 | 191 | −155 | 0.987 | 2,201 | | |
+| Cap 3 | 294 | −1,659 | 0.917 | 4,086 | | |
+
+Cap 3 minus off, net $ by entry year:
+
+| 2020 | 2021 | 2022 | 2023 | 2024 | 2025 | 2026 (to 10-01) |
+|---:|---:|---:|---:|---:|---:|---:|
+| +1,156 | +707 | +747 | +452 | −382 | −2,739 | −2,153 |
+
+- **The cap helped in 2020–23 and cost money in 2024–26.** 2025 and the first half of 2026 were already inside
+  the original test; earlier years hid them.
+- **One month moved the drawdown.** Cap 3's deepest drawdown now runs 2026-06-16 → 2026-07-30. In July 2026 cap 3
+  lost $4,031 and off lost $1,711.
+- **Why R and dollars disagree:** trades after more than three reds average about −0.03 R against +0.09 R for the
+  rest (off ledger, original window), so removing them raises the average trade. But in 2025–26 they made
+  money in dollars (+$1,425 and +$2,382), because their winners came on large candles.
+- **Limits:** 58 days is short and the dollar differences are inside the noise in both directions. This shows
+  that cap 3 has no demonstrated dollar or drawdown benefit at one contract. It does not show that the cap hurts.
+- **Decision (user, 2026-10-13): the cap is dropped. The baseline is `MaxRedRun = 0`.** Studies dated earlier
+  used cap 3 and are not rerun. With a fixed contract count the dollar result is what counts, and the cap shows
+  nothing there. If sizing ever moves to a fixed dollar risk per trade, the per-trade R result becomes the
+  dollar result and the cap is worth testing again.
 
 ## Verification
 
@@ -68,4 +126,8 @@ evaluated on it. This is a robustness check on clean data, not a fresh out-of-sa
 .\venv\Scripts\python.exe python\analyze_maxredrun_clean_study.py              # applies the selection rule
 .\venv\Scripts\python.exe python\prepare_maxredrun_clean_study.py --test-cap 1 # adds the frozen test jobs
 # run the runner again (completed jobs are skipped), then analyze again
+# Extended test (2026-10-13)
+.\venv\Scripts\python.exe python\prepare_maxredrun_extended.py
+.\venv\Scripts\python.exe python\run_mt5_job.py Reports\maxredrun_extended_20261013 RTL_runband
+.\venv\Scripts\python.exe python\analyze_maxredrun_extended.py
 ```

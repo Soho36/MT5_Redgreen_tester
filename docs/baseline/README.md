@@ -12,7 +12,7 @@ flatten. The current rules are in [STATUS.md](../STATUS.md).
 | [Q4: pullback vs broader move](q04-context/RESULTS.md) | No filter |
 | [Q5: signal-candle shape](q05-candle-shape/RESULTS.md) | No filter (doji / full body flip between periods) |
 | [Time of day](time-of-day/RESULTS.md) | Every session block profitable in both periods; windows unchanged |
-| [MaxRedRun on clean data](maxredrun/RESULTS.md) | Cap 1 wins the train/test on PF and DD but costs 23% net; the user kept cap 3 |
+| [MaxRedRun on clean data](maxredrun/RESULTS.md) | Cap 1 wins the train/test on PF and DD but costs 23% net; the user kept cap 3. Extended to 2026-10-01 (2026-10-13): cap 3 no longer lowers drawdown and earns 5.7% less than off; **cap dropped, baseline is no cap** |
 | [RR 0.5-5.0 optimization review](rr-optimization/RESULTS.md) | 2.5R the best profit/drawdown candidate in that sample |
 | [RR on clean data](rr-clean-data/RESULTS.md) | 2.0 / 2.5 / 3.0 do not all beat 1.0; RR stays 1.0 |
 | [Exit threshold](exit-threshold/RESULTS.md) ([protocol](exit-threshold/PROTOCOL.md)) | Keep the 1R bar-close exit |

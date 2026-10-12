@@ -3,6 +3,15 @@
 Updated 2026-10-13. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
 For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
 
+**[MaxRedRun on the test extended to 2026-10-01](baseline/maxredrun/RESULTS.md#extended-test-to-2026-10-01-2026-10-13)
+(2026-10-13): the red-run cap is dropped. The baseline is now `MaxRedRun = 0` (no cap), user decision.** The original
+test stopped at 2026-07-14 although the symbol holds data to 2026-10-01. Extended (net of $1.05): off $38,534, PF 1.091,
+DD 5,781; cap 3 $36,322, PF 1.097, DD 5,980; cap 1 (the frozen winner) $29,830, PF 1.125, DD 4,036, still passing. Cap 3
+minus off is −$2,212 with an interval of −11,006 to +6,678, so in dollars the two cannot be told apart; per trade the
+cap still adds +0.012 R. It helped in 2020–23 and cost money in 2024–26. The 58 new days alone decide nothing.
+**Every study dated before 2026-10-13 used cap 3 as its baseline.** They are not rerun: the cap moves results by a few
+percent. New studies use no cap.
+
 **[ES minimum 50-tick candle width](baseline/es-minimum-width/RESULTS.md) (2026-10-11, exploratory): does not pass.**
 Four full EA reruns use the built-in filter (MinCandleRange = 1250 quote points = 12.5 price points). Recent RTL gross
 R falls +0.0018 -> -0.0207, net R improves slightly -0.0418 -> -0.0322 as costs fall; the improvement interval spans zero.
@@ -35,7 +44,8 @@ colour or drift.** On MNQ a market-buy control with the same stop and exit earns
 signals nearly match red (no cap on either: +0.071 / +0.070 vs +0.081 / +0.071 R). RTL + GG together = ~2x net and ~2x DD
 ([equity chart](figures/rtl_gg_equity.png)). **GG run cap (2026-10-13): none passes, GG runs with no cap.** The RTL
 train/test rule applied to green picks cap 5, which is worse than off on 2020–26 (net PF 1.082 vs 1.088, net $36.2k vs
-$39.2k); the earlier GG figures used RTL's cap 3 untested. RTL cap 3 + GG no cap, 2020–26: $77.2k net, $8.2k DD. GG EA:
+$39.2k); the earlier GG figures used RTL's cap 3 untested. Both with no cap (the baseline since 2026-10-13), 2020–26:
+$78.1k net, $9.1k DD on daily closes. GG EA:
 `mt5/experts/GG_r_MFE_buy-stop-entry_runband.cs`. **Same control on MES:** the buy stop beats the plain long there too,
 by +0.029 / +0.044 / +0.042 R (2010–15 / 2016–19 / 2020–26, audited, all intervals above 0), about half the NQ gain. But the
 MES plain long itself loses −0.15 / −0.08 / −0.04 R (NQ ≈ 0), so RTL fails there. The market's background decides.
@@ -137,7 +147,7 @@ Q12's broader swing/session contact comparisons remain inconsistent across perio
 | Signal | The last closed M30 candle is red |
 | Entry | Buy stop at its high; stop loss at its low; risk = candle range |
 | Exit | Market exit after the first bar that closes ≥ entry + **1.0R**; flatten at 23:30 |
-| Filter | `MaxRedRun = 3` (skip if more than 3 reds in a row); `MinLocation = 0` (off) |
+| Filter | None since 2026-10-13: `MaxRedRun = 0` (no cap; it was 3 until then), `MinLocation = 0` (off) |
 | Session safety | `FlattenFallback = true` + `UseEarlyCloseCalendar = true`: always flat at session end, including early closes |
 | Sizing / costs | 1 contract; $1 per round-turn modelled in Python (real cost $1.05) |
 | EA | [`mt5/experts/RR_r_MFE_buy-stop-entry_runband.cs`](../mt5/experts/RR_r_MFE_buy-stop-entry_runband.cs) (+ `early_closes.mqh`) |
@@ -152,7 +162,15 @@ OHLC for further raw screening to avoid slow generated-tick runs. Keep this
 execution sensitivity in mind when interpreting results or considering live
 sizing. The research baseline rules stay unchanged.
 
-**Earlier OHLC results** (rebuilt data, calendar on, net of $1 commission, 1 contract):
+**Current baseline, no cap** (one-minute OHLC, calendar on, net of $1.05, 1 contract, RR 1.0):
+
+| Period | Trades | Net $ | Net PF | Net DD $ | Avg net R |
+|---|---:|---:|---:|---:|---:|
+| 2020-01-02 → 2026-10-01 | 10,502 | 38,534 | 1.091 | 5,781 | +0.048 |
+| 2020-01-02 → 2026-07-13 | 10,165 | 38,890 | 1.097 | 5,781 | +0.047 |
+| 2016-01-01 → 2019-12-31 | 6,167 | 4,417 | 1.064 | 2,176 | −0.014 |
+
+**Earlier OHLC results with `MaxRedRun = 3`** (rebuilt data, calendar on, net of $1 commission, 1 contract):
 
 | Period | RR | Trades | Net $ | Net PF | Net DD $ | Avg net R |
 |---|---:|---:|---:|---:|---:|---:|
@@ -167,12 +185,13 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 ## Decisions
 
 **Adopted**
-- `MaxRedRun = 3`. Chosen on 2015–19 by a pre-set rule, then tested frozen on 2020–26:
-  PF up in 6 of 7 years, DD −17%, profit flat. A **small** but real effect.
-  **Confirmed on clean data** ([check](baseline/maxredrun/RESULTS.md)): training picked cap 1,
-  which tested frozen at PF +0.036 and DD −30% but −23% profit. Cap 3 is the balanced choice
-  (DD −16%, profit −2%). The cap value is a risk-vs-profit trade-off. **Decided 2026-10-01:
-  keep cap 3**; cap 1 is the conservative alternative.
+- **No red-run cap (`MaxRedRun = 0`), decided 2026-10-13.** History: cap 3 was chosen on 2015–19 by a pre-set
+  rule and tested frozen on 2020–26 (PF up in 6 of 7 years, DD −17%, profit flat). On clean data
+  ([check](baseline/maxredrun/RESULTS.md)) training picked cap 1 (PF +0.036, DD −30%, profit −23%) and the user
+  kept cap 3 as the balanced choice (DD −16%, profit −2%) on 2026-10-01. On the test extended to 2026-10-01, cap 3
+  no longer lowers drawdown (5,980 vs 5,781 for off) and earns 5.7% less, so the user dropped it. Cap 1 still
+  passes and stays the conservative alternative. Per trade the cap still adds about +0.012 R, so look at it
+  again if sizing ever moves from a fixed contract count to a fixed dollar risk.
 - `FlattenFallback` fix (bug: positions were held up to 6.5 days).
 - Rebuilt data (`MNQcontDTBNT20102026`) and the early-close calendar: no trade crosses
   a session any more. Results match the old data closely, so earlier entry findings stand.
@@ -285,6 +304,8 @@ Data before 2016 had different market hours (trading until ~16:30 Chicago) and i
 
 | Date | Study | Verdict |
 |---|---|---|
+| 10-13 | [MaxRedRun, test extended to 2026-10-01](baseline/maxredrun/RESULTS.md#extended-test-to-2026-10-01-2026-10-13) | Cap 3 no longer lowers drawdown and earns 5.7% less; cap dropped, baseline is no cap |
+| 10-13 | [GG run cap and RTL + GG equity](baseline/signal-colour/RESULTS.md#gg-run-cap-and-the-combined-equity-curve-2026-10-13) | No cap passes for GG; red and green earn about the same; together = twice the size |
 | 10-11 | [ES minimum candle width](baseline/es-minimum-width/RESULTS.md) ([protocol](baseline/es-minimum-width/PROTOCOL.md)) | 50-tick rule fails: recent RTL gross/net negative, paired net improvement uncertain; earlier 91 trades; no adoption |
 | 10-10 | [Baseline trade paths](baseline/trade-paths/RESULTS.md) | Descriptive: path tree, where losers and winners had been, level map. Holding is slightly positive at every level; no early cut or take-profit point |
 | 10-10 | [Break-even stop after +1R](baseline/breakeven-stop/RESULTS.md) ([protocol](baseline/breakeven-stop/PROTOCOL.md)) | Rejected: worse on net $ and average R in both periods; cut trades are worth about zero in the baseline |

@@ -68,7 +68,7 @@ Pass explicit CSV paths for reproducible research; automatic discovery is a
 convenience for older commands. Python research needs NumPy; `analyze_drop.py
 --plot` additionally uses matplotlib. Verification uses the standard library.
 
-The current research candidate is `MaxRedRun=3`, `MinLocation=0`. Strategy
+The current research baseline is `MaxRedRun=0` (no cap, since 2026-10-13; it was 3), `MinLocation=0`. Strategy
 defaults are not changed by the research setup. No test shown here establishes
 live profitability or untouched out-of-sample confirmation.
 
