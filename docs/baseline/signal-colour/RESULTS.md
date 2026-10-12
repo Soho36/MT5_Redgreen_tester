@@ -195,9 +195,51 @@ so the "no cap on either" rows and the left panel below are now the baseline pai
   Both curves lose in 2010–15 and earn most of their profit after 2020. Two accounts are summed; margin and
   the two positions overlapping in one account are not modelled.
 
+## Is the combined curve smoother? (2026-10-13)
+
+**Question (user):** the two are correlated at +0.6, not 1. Is the sum a smoother curve, or only a bigger one?
+
+**How to tell:** adding two accounts doubles the size, so profit and drawdown double whatever happens. Compare at
+equal size instead: half of RTL plus half of GG against one of them alone. Both with no cap, net of $1.05.
+
+**Answer: slightly smoother in 2020–26, not at all in 2016–19, and the gain is inside the noise.**
+
+| 2020-01 → 2026-07, equal size | RTL | GG | Half of each |
+|---|---:|---:|---:|
+| Net $ | 38,890 | 39,230 | 39,060 |
+| Typical daily swing $ (st. dev.) | 294 | 304 | 272 |
+| Deepest drawdown $ (daily closes) | 5,781 | 4,882 | 4,570 |
+| Worst month $ | −3,575 | −2,853 | −2,194 |
+| Losing months, of 79 | 26 | 24 | 23 |
+| Winning weeks | 59.7% | 59.9% | 61.1% |
+| Winning days | 54.9% | 53.3% | 53.6% |
+| Longest time below an equity high, days | 284 | 315 | 302 |
+| Yearly mean ÷ st. dev. | 1.24 | 1.21 | 1.35 |
+
+![Drawdowns of RTL, GG and half of each](../../figures/rtl_gg_underwater.png)
+
+- **Daily swings are 9% smaller.** That is what a +0.65 correlation gives: the swings of an equal mix are
+  √((1 + 0.65) / 2) = 0.91 of one alone. Correlation is no lower by week (+0.59) or month (+0.53).
+- **Bad months are milder, drawdowns come at the same times.** The worst month is 23–39% smaller and the deepest
+  drawdown 6–21% smaller. But the chart shows all three falling together (2022, April 2025, early 2026), and the
+  time spent below a high is no shorter. The share of winning days does not change.
+- **Not beyond chance.** Mean ÷ st. dev. of both minus RTL is +0.11 with an interval of −0.23 to +0.44; minus GG it
+  is +0.14, −0.17 to +0.46.
+- **2016–19 shows nothing:** mean ÷ st. dev. 0.82 / 0.67 / 0.82, winning months 69% / 65% / 60%, drawdown at
+  equal size 2,143 / 1,561 / 1,847.
+- **In one account the mix needs two positions.** While RTL is in a trade, GG is in one too 71% of the time. Half of
+  each cannot be traded with a one-contract minimum, so running both in one account means holding two contracts most
+  of the time. One contract taking either signal is roughly the "any candle" run above, which earned about the same
+  as one of them alone ($40.9k in 2020–26).
+- **Across several one-contract accounts the mix is free.** RTL on half of them and GG on the other half gives the
+  "half of each" column for the total, at the same total size as running one strategy on all. Each single account
+  still carries the full drawdown of its own strategy; only the total is smoother.
+
 ## Reproduce
 
 ```powershell
+# Smoothness of the combined curve (2026-10-13)
+.\venv\Scripts\python.exe python\analyze_rtl_gg_smoothness.py
 # GG run cap and the equity chart (2026-10-13)
 .\venv\Scripts\python.exe python\prepare_gg_run_cap.py
 .\venv\Scripts\python.exe python\run_mt5_job.py Reports\gg_run_cap_20261013 RTL_signal

@@ -45,7 +45,9 @@ signals nearly match red (no cap on either: +0.071 / +0.070 vs +0.081 / +0.071 R
 ([equity chart](figures/rtl_gg_equity.png)). **GG run cap (2026-10-13): none passes, GG runs with no cap.** The RTL
 train/test rule applied to green picks cap 5, which is worse than off on 2020–26 (net PF 1.082 vs 1.088, net $36.2k vs
 $39.2k); the earlier GG figures used RTL's cap 3 untested. Both with no cap (the baseline since 2026-10-13), 2020–26:
-$78.1k net, $9.1k DD on daily closes. GG EA:
+$78.1k net, $9.1k DD on daily closes. At equal size the mix is only slightly smoother (daily swings 9% smaller,
+worst month $2.2k vs $3.6k / $2.9k; inside the noise, nothing in 2016–19). In one account it needs two contracts 71% of
+the time; split across several one-contract accounts it costs nothing. GG EA:
 `mt5/experts/GG_r_MFE_buy-stop-entry_runband.cs`. **Same control on MES:** the buy stop beats the plain long there too,
 by +0.029 / +0.044 / +0.042 R (2010–15 / 2016–19 / 2020–26, audited, all intervals above 0), about half the NQ gain. But the
 MES plain long itself loses −0.15 / −0.08 / −0.04 R (NQ ≈ 0), so RTL fails there. The market's background decides.

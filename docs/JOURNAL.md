@@ -604,5 +604,16 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   long-red-run trades that won on large candles in 2025–26.
 - **User decided: drop the cap. Baseline is now `MaxRedRun = 0`.** Earlier studies used cap 3 and are not rerun.
 
+## 2026-10-13: is RTL + GG smoother than one alone?
+
+- User's question. Compared at equal size (half of each vs one alone), no cap, 2020–26:
+  [results](baseline/signal-colour/RESULTS.md#is-the-combined-curve-smoother-2026-10-13).
+- **Slightly:** daily swings 9% smaller (what a +0.65 correlation gives), worst month $2.2k vs $3.6k / $2.9k,
+  deepest drawdown $4.6k vs $5.8k / $4.9k. Drawdowns come at the same times, time below a high and winning days
+  are no better, 2016–19 shows nothing, and the gain is inside the noise.
+- GG is in a trade 71% of the time RTL is, so running both in one account means two contracts most of the time.
+  Across several one-contract accounts the mix is free: RTL on half, GG on half gives the equal-size result for
+  the total, though each account keeps its own strategy's full drawdown.
+
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*
