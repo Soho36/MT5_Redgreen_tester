@@ -17,6 +17,7 @@ from matplotlib.ticker import FuncFormatter
 
 from analyze_gg_run_cap import GRID, INK, MUTED, OLD, SURFACE, load_gg
 from analyze_instrument_baseline import COST, load, max_dd
+from analyze_signal_colour import edge_over_control
 from project_paths import PROJECT_ROOT as ROOT
 
 FIGURE = ROOT / "docs" / "figures" / "rtl_gg_underwater.png"
@@ -81,6 +82,19 @@ def both_in_position(rtl, gg, lo, hi):
     return overlap / (a[:, 1] - a[:, 0]).sum(), hit / len(a)
 
 
+def blocked_split(x, other, rng):
+    """Trades of x entered while `other` holds a position (one account would have to skip them) against the rest."""
+    oe, ox = other.entry.to_numpy(), other.exit.to_numpy()
+    i = np.searchsorted(oe, x.entry.to_numpy(), side="right") - 1
+    during = (i >= 0) & (ox[np.clip(i, 0, None)] > x.entry.to_numpy())
+    out = []
+    for p in (x[during], x[~during]):
+        out.append(f"{len(p):,} trades ({100 * len(p) / len(x):.0f}%), net ${(p.trade_profit - COST).sum():,.0f},"
+                   f" gross R {(p.trade_profit / (p.candle_range * 2.0)).mean():+.3f}")
+    e, lo, hi = edge_over_control(x[during], x[~during], 2.0, rng)
+    return out[0], out[1], f"{e:+.3f} [{lo:+.3f}, {hi:+.3f}]"
+
+
 def plot(x):
     plt.rcParams.update({"font.family": "sans-serif", "font.sans-serif": ["Segoe UI", "DejaVu Sans"], "font.size": 10})
     p = x[x.index >= "2020-01-01"]
@@ -129,6 +143,11 @@ def main():
         share, hit = both_in_position(rtl, gg, pd.Timestamp(lo), pd.Timestamp(hi))
         print(f"  while RTL is in a trade, GG is in one too {100 * share:.0f}% of the time;"
               f" {100 * hit:.0f}% of RTL trades overlap a GG trade")
+        cut = lambda d: d[(d.entry >= lo) & (d.entry < hi)].reset_index(drop=True)
+        for label, a, b in (("GG", cut(gg), cut(rtl)), ("RTL", cut(rtl), cut(gg))):
+            during, flat, diff = blocked_split(a, b, rng)
+            print(f"  {label} entered while the other is in a trade: {during}\n  {label} entered while the other is flat:"
+                  f"       {flat}\n     difference in mean gross R: {diff}")
         both_lose = ((p.RTL < 0) & (p.GG < 0)).sum() / ((p.RTL < 0) | (p.GG < 0)).sum()
         print(f"  on days when at least one loses, both lose on {100 * both_lose:.0f}%;"
               f" RTL's losing days: GG also loses on {100 * ((p.RTL < 0) & (p.GG < 0)).sum() / (p.RTL < 0).sum():.0f}%")

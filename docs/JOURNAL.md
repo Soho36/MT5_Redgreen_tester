@@ -614,6 +614,10 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - GG is in a trade 71% of the time RTL is, so running both in one account means two contracts most of the time.
   Across several one-contract accounts the mix is free: RTL on half, GG on half gives the equal-size result for
   the total, though each account keeps its own strategy's full drawdown.
+- User's point on blocked entries (exploratory): about half of each strategy's trades are entered while the other
+  is already in a trade, the ones a single position would skip. They are at least as good as the rest: GG +0.099 R
+  vs +0.044 R (2020–26, difference above zero, 7/7 years), RTL +0.085 vs +0.057 (inside the noise). Open idea, not
+  tested: a second account that takes the red signals the first RTL account has to skip.
 
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*

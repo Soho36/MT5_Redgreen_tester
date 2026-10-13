@@ -235,6 +235,25 @@ equal size instead: half of RTL plus half of GG against one of them alone. Both 
   "half of each" column for the total, at the same total size as running one strategy on all. Each single account
   still carries the full drawdown of its own strategy; only the total is smoother.
 
+**Blocked entries (user's point, exploratory).** One account holds one position, so a signal that arrives during a
+trade is skipped. Two accounts, one per colour, take those signals. About half of each strategy's trades are entered
+while the other is already in a trade, and they are at least as good as the rest:
+
+| 2020–26 | Trades | Net $ | Mean R before costs |
+|---|---:|---:|---:|
+| GG, entered while RTL is in a trade | 4,981 (46%) | 29,090 | +0.099 |
+| GG, entered while RTL is flat | 5,833 (54%) | 10,140 | +0.044 |
+| RTL, entered while GG is in a trade | 5,309 (52%) | 23,110 | +0.085 |
+| RTL, entered while GG is flat | 4,856 (48%) | 15,780 | +0.057 |
+
+- **For GG the difference is +0.055 R in both periods** (interval +0.007 to +0.103 in 2020–26, 7 of 7 years;
+  −0.006 to +0.117 in 2016–19). For RTL it is +0.02 to +0.03 R with intervals that include zero.
+- **This is why two accounts earn twice one account.** One account taking either colour made $40.9k on 13,297
+  trades in 2020–26; the two accounts made $78.1k on 20,979. The extra trades are the ones a single position blocks.
+- **Limits:** the split was looked at after the result was known. These entries add to a move that is already
+  running, so they also explain why the two curves fall together. Red signals that arrive during an RTL trade stay
+  blocked in the RTL account; that case is not tested here.
+
 ## Reproduce
 
 ```powershell
