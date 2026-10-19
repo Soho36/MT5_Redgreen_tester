@@ -7,6 +7,7 @@ flatten. The current rules are in [STATUS.md](../STATUS.md).
 
 | Study | Answer |
 |---|---|
+| [H1 versus M30, RTL and GG](timeframe-h1/RESULTS.md) | No run cap, RR 0.5/1: H1 cuts recent trades 44–47%; RR 0.5 earns more, RR 1 less. GG H1/RR 1 has 50% higher DD; no baseline change |
 | [Q1/Q2: preceding candles](q01-q02-preceding-candles/RESULTS.md) ([protocol](q01-q02-preceding-candles/PROTOCOL.md)) | No filter; keep MaxRedRun = 3, MinLocation = 0 |
 | [Q3: overlapping vs steady bars](q03-overlap/RESULTS.md) | No filter |
 | [Q4: pullback vs broader move](q04-context/RESULTS.md) | No filter |

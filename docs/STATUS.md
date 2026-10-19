@@ -1,7 +1,9 @@
 # Project status
 
-Updated 2026-10-13. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
+Updated 2026-10-15. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
 For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
+
+**[H1 versus M30, RTL and GG](baseline/timeframe-h1/RESULTS.md) (2026-10-15, exploratory):** eight matched uncapped MT5 runs at RR 0.5/1. H1 cuts recent trades 44–47%. At RR 0.5, H1 earns more in both eras, but recent DD rises 10% (RTL) / 42% (GG). At RR 1, recent net falls 27% / 50%; GG DD rises 50%. M30/RR 1 still earns more recent dollars than either H1 variant. H1 research copies enforce the existing half-hour session cutoff on ticks; all ledger/session audits pass. No baseline change.
 
 **[MaxRedRun on the test extended to 2026-10-01](baseline/maxredrun/RESULTS.md#extended-test-to-2026-10-01-2026-10-13)
 (2026-10-13): the red-run cap is dropped. The baseline is now `MaxRedRun = 0` (no cap), user decision.** The original

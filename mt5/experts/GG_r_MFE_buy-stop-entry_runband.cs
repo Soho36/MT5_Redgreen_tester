@@ -1,12 +1,12 @@
 //+------------------------------------------------------------------+
 //| Green-Green Breakout EA: GREEN-candle mirror of RR_r_MFE_buy-stop-entry_runband.cs |
-//| Only difference: the signal candle is green (close > open); the run  |
-//| filter (MinRedRun / MaxRedRun, names kept) counts consecutive GREEN.  |
+//| Signal candle is green (close > open); the run filter counts      |
+//| consecutive green candles (MinGreenRun / MaxGreenRun).         |
 //| RUNBAND variant of RR_r_MFE_buy-stop-entry: same buy-stop entry, plus |
-//|  + consecutive red-run BAND filter (MinRedRun / MaxRedRun)            |
+//|  + consecutive green-run BAND filter (MinGreenRun / MaxGreenRun)      |
 //|  + LOCATION filter (skip signals closing near the range low)          |
 //| With all filters off it trades exactly like the base EA.              |
-//| Logs red_run and location per trade for analysis.                     |
+//| Logs run length and location per trade for analysis.           |
 //+------------------------------------------------------------------+
 #property strict
 
@@ -16,14 +16,14 @@ input double Lots           = 1.0;
 input double RiskReward     = 1.0;
 input int    Slippage       = 5;
 
-// ======== RED-RUN BAND FILTER ========
-// Only arm the entry when the number of consecutive red candles ending at the
-// signal candle (index 1) is within [MinRedRun .. MaxRedRun].
-//   MinRedRun = 1  -> original behaviour (any single red candle qualifies)
-//   MaxRedRun = 0  -> no upper cap (disabled)
-// Example: MinRedRun=1, MaxRedRun=2  ==> "skip the signal once the run > 2".
-input int    MinRedRun = 1;  // Minimum consecutive reds required (>=1)
-input int    MaxRedRun = 0;  // Maximum consecutive reds allowed (0 = no cap)
+// ======== GREEN-RUN BAND FILTER ========
+// Only arm the entry when the number of consecutive green candles ending at the
+// signal candle (index 1) is within [MinGreenRun .. MaxGreenRun].
+//   MinGreenRun = 1  -> original behaviour (any single green candle qualifies)
+//   MaxGreenRun = 0  -> no upper cap (disabled)
+// Example: MinGreenRun=1, MaxGreenRun=2  ==> "skip the signal once the run > 2".
+input int    MinGreenRun = 1;  // Minimum consecutive greens required (>=1)
+input int    MaxGreenRun = 0;  // Maximum consecutive greens allowed (0 = no cap)
 
 // ======== LOCATION FILTER ========
 // location = (c1 - LL) / (HH - LL) over the last LocationLookback bars
@@ -156,7 +156,7 @@ double g_mfeMoney   = 0.0;   // most positive floating PnL
 bool   g_tracking   = false;
 ulong  g_ticket     = 0;
 double g_candleRange = 0.0;
-int    g_redRun      = 0;    // consecutive red-run length that armed the entry (logged to CSV)
+int    g_greenRun    = 0;    // consecutive green-run length that armed the entry (logged in the legacy red_run column)
 double g_location    = 0.0;  // location of the signal close in its range (logged to CSV)
 double g_snapshot[];
 int g_snapshotCount = 0;
@@ -232,9 +232,9 @@ bool IsAtOrAfterFlattenTime(datetime barOpen)
    return (dt.hour * 60 + dt.min >= FlattenCutoffMinutes(barOpen));
 }
 
-// Count consecutive red candles ending at the last CLOSED candle (index 1),
-// walking back until a non-red candle is hit. Returns 0 if index 1 is not red.
-int ConsecutiveRedRun()
+// Count consecutive green candles ending at the last CLOSED candle (index 1),
+// walking back until a non-green candle is hit. Returns 0 if index 1 is not green.
+int ConsecutiveGreenRun()
 {
    int count = 0;
    int bars  = Bars(_Symbol, _Period);
@@ -424,7 +424,7 @@ void SaveSnapshotTradeStats(double realized, datetime entryTime, datetime exitTi
                  + "\t" + DoubleToString(g_mfeMoney, 8)
                  + "\t" + DoubleToString(realized, 8)
                  + "\t" + DoubleToString(candleRange, _Digits)
-                 + "\t" + (string)g_redRun
+                 + "\t" + (string)g_greenRun
                  + "\t" + DoubleToString(g_location, 10)
                  + "\t" + TimeToString(g_signalTime, TIME_DATE|TIME_SECONDS)
                  + "\t" + (string)PeriodSeconds(_Period);
@@ -463,7 +463,7 @@ void SaveTradeStats(double realized, datetime entryTime, datetime exitTime, doub
       g_mfeMoney,
       realized,
       candleRange,
-      g_redRun,
+      g_greenRun,
       DoubleToString(g_location, 10)
    );
 
@@ -628,12 +628,12 @@ void DisplaySettings()
    Print("╚════════════════════════════════════════════════════════════╝");
    Print("Lots: ", Lots, ", RiskReward: ", RiskReward);
 
-   // Display red-run band filter
+   // Display green-run band filter
    Print("┌────────────────────────────────────────────────────────────┐");
-   Print("│ RED-RUN BAND FILTER                                        │");
+   Print("│ GREEN-RUN BAND FILTER                                      │");
    Print("├────────────────────────────────────────────────────────────┤");
-   Print("│ Min consecutive reds: ", (MinRedRun < 1 ? 1 : MinRedRun));
-   Print("│ Max consecutive reds: ", (MaxRedRun > 0 ? (string)MaxRedRun : "no cap"));
+   Print("│ Min consecutive greens: ", (MinGreenRun < 1 ? 1 : MinGreenRun));
+   Print("│ Max consecutive greens: ", (MaxGreenRun > 0 ? (string)MaxGreenRun : "no cap"));
    Print("└────────────────────────────────────────────────────────────┘");
 
    // Display location filter
@@ -812,7 +812,7 @@ double OnTester()
                 TesterStatistics(STAT_EXPECTED_PAYOFF),
                 TesterStatistics(STAT_RECOVERY_FACTOR),
                 TesterStatistics(STAT_SHARPE_RATIO),
-                MinRedRun, MaxRedRun, MinLocation, LocationLookback, SnapshotBars,
+                MinGreenRun, MaxGreenRun, MinLocation, LocationLookback, SnapshotBars,
                 (int)FlattenFallback, TrailStartR, TrailDistanceR,
                 (int)UseEarlyCloseCalendar);
    FileClose(f);
@@ -956,7 +956,7 @@ void OnTick()
       return;
    }
 
-   // Red candle setup (only if all filters pass)
+   // Green candle setup (only if all filters pass)
    double o1 = iOpen(_Symbol, _Period, 1);
    double h1 = iHigh(_Symbol, _Period, 1);
    double l1 = iLow(_Symbol, _Period, 1);
@@ -971,25 +971,25 @@ void OnTick()
    }
 
 
-   // BUY-STOP ORDER AT PREVIOUS RED CANDLE HIGH
+   // BUY-STOP ORDER AT PREVIOUS GREEN CANDLE HIGH
     if(c1 > o1)   // GREEN signal candle
 	{
-	   // 🔹 Filters. A rejected red signal cancels the pending order, just as
-	   //     an accepted one would replace it; a green bar (no signal) leaves
+	   // 🔹 Filters. A rejected green signal cancels the pending order, just as
+	   //     an accepted one would replace it; a red bar (no signal) leaves
 	   //     the pending order alone, as in the base EA.
-	   int    run    = ConsecutiveRedRun();
-	   int    minRun = (MinRedRun < 1) ? 1 : MinRedRun;
+	   int    run    = ConsecutiveGreenRun();
+	   int    minRun = (MinGreenRun < 1) ? 1 : MinGreenRun;
 	   double loc    = SignalLocation();
 
 	   if(run < minRun)
 	   {
-	      Print("⛔ Red-run ", run, " < min ", minRun, " - skipping signal");
+	      Print("⛔ Green-run ", run, " < min ", minRun, " - skipping signal");
 	      CancelOldBuyStops();
 	      return;
 	   }
-	   if(MaxRedRun > 0 && run > MaxRedRun)
+	   if(MaxGreenRun > 0 && run > MaxGreenRun)
 	   {
-	      Print("⛔ Red-run ", run, " > max ", MaxRedRun, " - skipping signal");
+	      Print("⛔ Green-run ", run, " > max ", MaxGreenRun, " - skipping signal");
 	      CancelOldBuyStops();
 	      return;
 	   }
@@ -1007,7 +1007,7 @@ void OnTick()
 	      return;
 	   }
 
-	   Print("Red candle (run=", run, ", location=", DoubleToString(loc, 2), ") -> place Buy Stop");
+	   Print("Green candle (run=", run, ", location=", DoubleToString(loc, 2), ") -> place Buy Stop");
 
 	   CancelOldBuyStops();
 
@@ -1015,7 +1015,7 @@ void OnTick()
 	   double stop  = l1;
 	   double risk  = entry - stop;
 	   g_candleRange = h1 - l1;
-	   g_redRun      = run;   // stored for the CSV when this trade closes
+	   g_greenRun    = run;   // stored for the CSV when this trade closes
 	   g_location    = loc;
 
 	   if(risk <= 0.0) return;

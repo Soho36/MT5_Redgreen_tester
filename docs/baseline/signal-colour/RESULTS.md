@@ -40,8 +40,10 @@ in that section.
 - MNQ `MNQcontDTBNT20102026_2`, M30, 1-minute OHLC, 2010-06-07 → 2026-07-14, $1.05 costs, R = profit ÷
   (candle range × $2).
 - Checks: mode 0 with cap 3 reproduces the baseline ledger byte for byte. The standalone
-  `mt5/experts/GG_r_MFE_buy-stop-entry_runband.cs` (the RTL EA with only the colour flipped; `MinRedRun` /
-  `MaxRedRun` keep their names and count green bars) reproduces the green cap-3 run byte for byte.
+  `mt5/experts/GG_r_MFE_buy-stop-entry_runband.cs` (the RTL EA with only the colour flipped) reproduces the green
+  cap-3 run byte for byte. Its run inputs were then named `MinRedRun` / `MaxRedRun` and counted green bars; since
+  2026-10-20 they are `MinGreenRun` / `MaxGreenRun`. Old presets that set `MaxRedRun` now run with no cap, because
+  MT5 ignores input names the EA no longer has.
 
 ## Results
 
@@ -133,6 +135,8 @@ ticks per candle. Gross mean R in 2016–26, by signal-candle size ([script](../
   against ES's 0.00 to +0.05.
 - Each cell holds 1,000–9,000 trades, so a single cell is noisy (about ±0.03 R). Candle size is also tied
   to time of day and to calm vs volatile years, which differ between the instruments.
+
+[2026-10-20 green-run cap follow-up](GREEN_RUN_FOLLOWUP.md): refreshed standalone GG tests through October 2026; no cap adopted.
 
 ## GG run cap and the combined equity curve (2026-10-13)
 

@@ -621,3 +621,10 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 
 *Add a dated section after each working session: the question, the answer, and a link to the
 study doc. Keep each step to one or two lines.*
+
+## 2026-10-15: H1 versus M30 baselines, RTL and GG
+
+- Eight matched MT5 runs at RR 0.5 and 1, no MaxRedRun cap, same MNQ data through 2026-10-01 and $1.05 costs.
+- H1 research copies check session flattening on ticks because H1 skips the 23:30 chart-bar cutoff. Signals and targets stay hourly. M30 execution is unchanged; both existing RR 1 ledgers reproduce exactly.
+- Recent H1 has 44–47% fewer trades. RR 0.5 adds $7.0k RTL / $6.4k GG against M30, with DD +10% / +42%. RR 1 loses $10.5k / $19.7k; DD -30% / +50%. Earlier H1 has higher net and lower DD in all four comparisons. No baseline change.
+- All eight ledgers reconcile to MT5; no overnight or late-session exits. [Report](baseline/timeframe-h1/RESULTS.md); generated evidence in `Reports/timeframe_baseline_20261015/`.
