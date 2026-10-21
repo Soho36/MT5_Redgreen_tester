@@ -58,6 +58,22 @@ input bool   FlattenFallback   = true;
 // Requires FlattenFallback = true. false = flatten at 23:30 every day.
 input bool   UseEarlyCloseCalendar = true;
 
+// ======== SERVER CLOCK ========
+// Every time-of-day input (trade windows, flatten, early-close calendar) is on
+// the session clock: Chicago + 8 h, where a regular session runs 01:00-23:59.
+// The research symbols (custom symbols) already use it. AMP's live symbols
+// (e.g. MNQZ26) run on UTC: there bars are shifted +2 h (US winter) or +3 h
+// (US daylight time) before any of those checks. Order and bar times stay as they are.
+// Auto picks by symbol type, so old INIs that never set this input stay correct
+// even though the tester otherwise reuses the last value it was given.
+enum SERVER_CLOCK
+{
+   CLOCK_AUTO    = 0,  // Auto: custom symbol = session clock, broker symbol = UTC
+   CLOCK_SESSION = 1,  // Session clock (Chicago + 8 h, research symbols)
+   CLOCK_UTC     = 2   // UTC (AMP live symbols, e.g. MNQZ26)
+};
+input SERVER_CLOCK ServerClock = CLOCK_AUTO;
+
 // ======== TRAILING STOP (research, default off) ========
 // Once bid >= entry + TrailStartR x risk, the stop trails at the highest bid
 // since entry minus TrailDistanceR x risk. It only ever moves up. The bar-close
@@ -167,8 +183,31 @@ datetime g_lastFlattenDate = 0;   // date on which the last session flatten ran
 datetime g_entryTime = 0;
 string   g_csvName   = "trade_stats.csv";
 string   g_runTag    = "";   // resolved in OnInit, reused by OnTester
+bool     g_utcServer = false; // server runs on UTC (ServerClock resolved in OnInit)
 
 // ======== HELPER FUNCTIONS ========
+
+// Date of the n-th Sunday of a month, 00:00.
+datetime NthSunday(int year, int month, int n)
+{
+   MqlDateTime d = {};
+   d.year = year; d.mon = month; d.day = 1;
+   datetime first = StructToTime(d);
+   TimeToStruct(first, d);
+   return first + ((7 - d.day_of_week) % 7 + 7 * (n - 1)) * 86400;
+}
+
+// Server time -> session clock (see ServerClock). Chicago + 8 h is UTC + 3 h from
+// the second Sunday of March 08:00 UTC to the first Sunday of November 07:00 UTC
+// (US daylight time; both switches fall in the weekend close), else UTC + 2 h.
+datetime SessionClock(datetime server)
+{
+   if(!g_utcServer) return server;
+   MqlDateTime dt; TimeToStruct(server, dt);
+   datetime dstStart = NthSunday(dt.year, 3, 2) + 8 * 3600;
+   datetime dstEnd   = NthSunday(dt.year, 11, 1) + 7 * 3600;
+   return server + ((server >= dstStart && server < dstEnd) ? 3 : 2) * 3600;
+}
 
 bool IsFlattenTimeEnd(datetime barOpen)
 {
@@ -684,6 +723,8 @@ void DisplaySettings()
    Print("│ End of Session: ", UseFlattenEnd ? "Yes (" + (string)FlattenHourEnd + ":" + (string)FlattenMinuteEnd + ")" : "No");
    Print("│ Missed-cutoff fallback: ", FlattenFallback ? "ON (at/after cutoff, else next session start)" : "OFF (exact cutoff bar only)");
    Print("│ Early-close calendar: ", UseEarlyCloseCalendar ? "ON (" + (string)EC_COUNT + " sessions)" : "OFF");
+   Print("│ Server clock: ", g_utcServer ? "UTC -> session clock (+2 h / +3 h US DST)" : "session clock (Chicago + 8 h)",
+         ServerClock == CLOCK_AUTO ? " (auto)" : "");
    Print("│ Trailing stop: ", TrailDistanceR > 0.0
          ? "ON (start " + DoubleToString(TrailStartR, 2) + "R, distance " + DoubleToString(TrailDistanceR, 2) + "R)"
          : "OFF");
@@ -751,6 +792,9 @@ int OnInit()
       Print("Invalid location inputs: MinLocation must be in [0,1], LocationLookback >= 1");
       return INIT_PARAMETERS_INCORRECT;
    }
+
+   g_utcServer = (ServerClock == CLOCK_UTC
+                  || (ServerClock == CLOCK_AUTO && !SymbolInfoInteger(_Symbol, SYMBOL_CUSTOM)));
 
    // Name the export per window+RiskReward so passes never overwrite each other.
    // Empty RunTag => label derived from the enabled window(s).
@@ -894,11 +938,14 @@ void OnTick()
    if(barOpen == lastBar) return;
    lastBar = barOpen;
 
+   // Session-clock time of this bar: all time-of-day checks below use it.
+   datetime sessionBar = SessionClock(barOpen);
+
    // Display session borders
-   DisplayTradeWindowStatus(barOpen);
+   DisplayTradeWindowStatus(sessionBar);
 
    // 🔹 flatten end of session
-   if(UseFlattenEnd && !FlattenFallback && IsFlattenTimeEnd(barOpen))
+   if(UseFlattenEnd && !FlattenFallback && IsFlattenTimeEnd(sessionBar))
    {
       Print("🌙 Flatten cutoff reached → closing everything");
       CloseAllPositions();
@@ -908,7 +955,7 @@ void OnTick()
 
    if(UseFlattenEnd && FlattenFallback)
    {
-      datetime barDate  = barOpen - (barOpen % 86400);
+      datetime barDate  = sessionBar - (sessionBar % 86400);
       datetime prevDate = g_prevBarDate;
       g_prevBarDate = barDate;
 
@@ -926,7 +973,7 @@ void OnTick()
          }
       }
 
-      if(IsAtOrAfterFlattenTime(barOpen))
+      if(IsAtOrAfterFlattenTime(sessionBar))
       {
          if(g_lastFlattenDate != barDate)
          {
@@ -947,7 +994,7 @@ void OnTick()
    }
 
    // 🔹 time window check (ENTRY ONLY)
-   if(!IsTradeWindow(barOpen))
+   if(!IsTradeWindow(sessionBar))
    {
       Print("⏱ Outside trading window → no new entries");
       CancelOldBuyStops();

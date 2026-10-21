@@ -1,7 +1,17 @@
 # Project status
 
-Updated 2026-10-15. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
+Updated 2026-10-21. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
 For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
+
+**[MT5 versus prop fills tool and server clock](JOURNAL.md#2026-10-21-mt5-backtest-versus-prop-fills-tool) (2026-10-21, tooling):** `python/compare_mt5_nt8.py` pairs MT5 tester trades with prop fills from NT8's database (both clocks UTC). AMP's live `MNQZ26` runs on UTC, the research symbols on Chicago + 8 h, so both runband EAs got `ServerClock` (Auto: custom symbol = session clock, broker symbol = UTC with US-DST shift). Research ledgers reproduce exactly; on `MNQZ26` the EAs now flatten at 20:30 UTC.
+
+**[Red breakdown versus new-high outside short](baseline/gg-outside/RED_BREAKDOWN_RESULTS.md) (2026-10-21, exploratory):** the marked red candle needs a new n-bar low and enlarged full range; a new high is optional. All 12 no-new-high settings lose net dollars in 2016–19 and 2020–26. At n=3/r=1.25, recent net/PF is −$6,192/0.965 without the new high versus −$10,635/0.774 with it. Both isolated MT5 EAs are available for manual tests; no short rule adopted.
+
+**[Red outside-bar short correction](baseline/gg-outside/RED_SHORT_RESULTS.md) (2026-10-21, exploratory):** the signal is a *red* outside M30 candle; sell stop at its low, stop at its high. All 12 filtered settings lose net money in 2016–19 and 2020–26. Strict n=3: −$1,099 / −$10,252, PF 0.839 / 0.787; the earlier positive short screen used a *green* outside candle. No red-short rule adopted. `GG_red_outside_short` is available for manual MT5 tests with the filter enabled by default.
+
+**[GG outside-bar short mirror](baseline/gg-outside/SHORT_RESULTS.md) (2026-10-20, exploratory):** 12 short-side MT5 filters plus a green-candle short control. Strict n=3 sells below the outside low: 2020–26 +$2,530, PF 1.169 on 190 fills, but 2016–19 −$236, PF 0.882; 2022 accounts for 90% of recent profit and nearby size settings weaken. No short rule adopted. The manually testable `GG_outside_short` EA has `UseOutsideFilter=true` by default.
+
+**[GG full-range outside-bar screen](baseline/gg-outside/RESULTS.md) (2026-10-20, exploratory):** 12 GG-only filtered MT5 runs over n=1/3/5/10 and three size settings. The filter-off control reproduces all 17,570 GG trades. Strict n=1 stays profitable but lowers 2020–26 PF to 1.058 from 1.083; all n=3 settings lose in 2020–26. No GG filter adopted.
 
 **[H1 versus M30, RTL and GG](baseline/timeframe-h1/RESULTS.md) (2026-10-15, exploratory):** eight matched uncapped MT5 runs at RR 0.5/1. H1 cuts recent trades 44–47%. At RR 0.5, H1 earns more in both eras, but recent DD rises 10% (RTL) / 42% (GG). At RR 1, recent net falls 27% / 50%; GG DD rises 50%. M30/RR 1 still earns more recent dollars than either H1 variant. H1 research copies enforce the existing half-hour session cutoff on ticks; all ledger/session audits pass. No baseline change.
 

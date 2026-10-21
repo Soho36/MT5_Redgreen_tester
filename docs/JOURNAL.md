@@ -628,3 +628,10 @@ study doc. Keep each step to one or two lines.*
 - H1 research copies check session flattening on ticks because H1 skips the 23:30 chart-bar cutoff. Signals and targets stay hourly. M30 execution is unchanged; both existing RR 1 ledgers reproduce exactly.
 - Recent H1 has 44–47% fewer trades. RR 0.5 adds $7.0k RTL / $6.4k GG against M30, with DD +10% / +42%. RR 1 loses $10.5k / $19.7k; DD -30% / +50%. Earlier H1 has higher net and lower DD in all four comparisons. No baseline change.
 - All eight ledgers reconcile to MT5; no overnight or late-session exits. [Report](baseline/timeframe-h1/RESULTS.md); generated evidence in `Reports/timeframe_baseline_20261015/`.
+
+## 2026-10-21: MT5 backtest versus prop fills tool
+
+- `python/compare_mt5_nt8.py` pairs MT5 tester trades (HTML report) with the prop round trips read from NT8's own database, and reports entry/exit slippage and the per-trade difference in points, $ and R. Output goes next to the report (`Reports/` is not tracked).
+- Clocks: AMP's live `MNQZ26` server time is UTC (tester fills land on the same second as the prop fills); NT8 stores fills in UTC. The research symbols use the CT+8 clock instead, so session-time inputs mean different hours on `MNQZ26`.
+- `ServerClock` input added to both runband EAs (RTL and GG). Auto (default): custom symbols keep the session clock, broker symbols such as `MNQZ26` are read as UTC and shifted +2 h / +3 h (US DST) before trade-window, flatten and early-close checks. Research ledgers reproduce exactly (RTL 25,833 / GG 26,505 trades, M30 RR 1); on `MNQZ26` both now flatten at 20:30 UTC instead of holding through the daily halt. Evidence in `Reports/server_clock_20261021/`.
+- MT5 tester trap: an input missing from an INI takes the value the tester last used, not the EA default. Auto keeps old INIs safe for this input.

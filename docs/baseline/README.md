@@ -25,6 +25,7 @@ flatten. The current rules are in [STATUS.md](../STATUS.md).
 | [Near-stop averaging entry](averaging-entry/RESULTS.md) ([protocol](averaging-entry/PROTOCOL.md)) | Keep averaging off |
 | [Limit-only entry](limit-only/RESULTS.md) ([protocol](limit-only/PROTOCOL.md)) | Rejected |
 | [Trend-conditioned RR](trend-rr/RESULTS.md) ([protocol](trend-rr/PROTOCOL.md)) | Keep fixed 1R |
+| [Green outside long](gg-outside/RESULTS.md), [green outside short](gg-outside/SHORT_RESULTS.md), [red breakdown versus new-high short](gg-outside/RED_BREAKDOWN_RESULTS.md), [strict red outside short](gg-outside/RED_SHORT_RESULTS.md) | Both red-candle short definitions lose in all 12 settings in both periods; the marked chart does not need a new high. The green-candle short is separate. No rule adopted |
 | [Signal colour + no-pattern control](signal-colour/RESULTS.md) | Edge is the buy stop over a previous high, not the colour (green ≈ red). Buy-stop gain over a plain long: NQ +0.08 R, ES +0.04 R; ES fails because its plain long loses. GG run cap (2026-10-13): none passes, GG runs with no cap; RTL + GG equity chart |
 | [Why ES differs from NQ](nq-vs-es/RESULTS.md) | Earlier coarsening suggests resolution sensitivity; fixed-grid follow-up below strengthens it. Full ES attribution remains open |
 | [NQ resolution: fixed grids and every origin](granularity/RESULTS.md) ([protocol](granularity/PROTOCOL.md)) | All 30 runs complete: wider grids progressively reduce RTL minus control in every era/origin; 2020–26 +0.078 → +0.004 R. Control ledgers audited; no new filter |
