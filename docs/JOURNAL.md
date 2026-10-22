@@ -635,3 +635,7 @@ study doc. Keep each step to one or two lines.*
 - Clocks: AMP's live `MNQZ26` server time is UTC (tester fills land on the same second as the prop fills); NT8 stores fills in UTC. The research symbols use the CT+8 clock instead, so session-time inputs mean different hours on `MNQZ26`.
 - `ServerClock` input added to both runband EAs (RTL and GG). Auto (default): custom symbols keep the session clock, broker symbols such as `MNQZ26` are read as UTC and shifted +2 h / +3 h (US DST) before trade-window, flatten and early-close checks. Research ledgers reproduce exactly (RTL 25,833 / GG 26,505 trades, M30 RR 1); on `MNQZ26` both now flatten at 20:30 UTC instead of holding through the daily halt. Evidence in `Reports/server_clock_20261021/`.
 - MT5 tester trap: an input missing from an INI takes the value the tester last used, not the EA default. Auto keeps old INIs safe for this input.
+
+## 2026-10-22: Weekly MT5 versus prop fills check
+
+- `python/weekly_mt5_nt8.py` (live trading now runs on a separate PC): copies the trading PC's NT8 database from a shared folder, backtests the past week's RTL and GG on the front MNQ contract (real ticks, every EA input written into the INI), runs `compare_mt5_nt8.py` and appends one line per strategy and week to `Reports/weekly_fills/summary.csv`. Defaults are the research baseline; `--rtl-set` / `--gg-set` take the live inputs from MT5 .set files.

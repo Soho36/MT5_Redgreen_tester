@@ -199,28 +199,19 @@ def fmt(v, digits=2):
     return "" if v is None or v == "" else (f"{v:.{digits}f}" if isinstance(v, float) else str(v))
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    parser.add_argument("reports", nargs="+", help="MT5 tester HTML report(s), e.g. one for RTL and one for GG")
-    parser.add_argument("--accounts", help="regex on NT8 account names (default: every non-Sim account)")
-    parser.add_argument("--instrument", default="MNQ")
-    parser.add_argument("--tolerance", type=float, default=60, help="seconds between entries (and exits) to pair")
-    parser.add_argument("--server-offset", type=int, default=0, help="MT5 server clock minus UTC, in hours")
-    parser.add_argument("--db", default=NT8_DB)
-    parser.add_argument("--out")
-    args = parser.parse_args()
-
-    loaded = [read_report(r) for r in args.reports]
-    shift = timedelta(hours=args.server_offset)
+def run(reports, db=NT8_DB, accounts=None, instrument="MNQ", tolerance=60, server_offset=0, out=None):
+    """Compare the reports with the NT8 fills, write the CSV, print the table and summary; return the rows."""
+    loaded = [read_report(r) for r in reports]
+    shift = timedelta(hours=server_offset)
     start, end = min(x[0] for x in loaded) - shift, max(x[1] for x in loaded) - shift
     server = sorted((t for x in loaded for t in x[2]), key=lambda t: t["entry_time"])
-    mt5 = to_utc(server, args.server_offset)
-    prop = read_nt8(args.db, start - timedelta(hours=12), end + timedelta(hours=12), args.accounts, args.instrument)
+    mt5 = to_utc(server, server_offset)
+    prop = read_nt8(db, start - timedelta(hours=12), end + timedelta(hours=12), accounts, instrument)
     prop = [p for p in prop if start <= p["entry_time"] < end]
-    check_offset({h: to_utc(server, h) for h in range(-12, 13)}, prop, args.tolerance, args.server_offset)
-    rows = compare(mt5, prop, args.tolerance)
+    check_offset({h: to_utc(server, h) for h in range(-12, 13)}, prop, tolerance, server_offset)
+    rows = compare(mt5, prop, tolerance)
 
-    out = Path(args.out) if args.out else Path(args.reports[0]).with_name(Path(args.reports[0]).stem + "_vs_nt8.csv")
+    out = Path(out) if out else Path(reports[0]).with_name(Path(reports[0]).stem + "_vs_nt8.csv")
     fields = ["time_local", "status", "source", "account", "side", "mt5_planned", "mt5_entry", "nt8_planned",
               "nt8_entry", "entry_slip", "mt5_sl", "mt5_exit_time", "mt5_exit_reason", "mt5_exit", "nt8_exit_time",
               "nt8_exit", "exit_slip", "mt5_points", "nt8_points", "worse_points", "worse_usd", "worse_r"]
@@ -250,6 +241,20 @@ def main():
                   f"{mean(r['worse_usd'] for r in group):+.2f} $ = {mean(r['worse_r'] for r in group):+.3f} R per trade, "
                   f"total {sum(r['worse_usd'] for r in group):+.2f} $")
     print(f"Wrote {out}")
+    return rows
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    parser.add_argument("reports", nargs="+", help="MT5 tester HTML report(s), e.g. one for RTL and one for GG")
+    parser.add_argument("--accounts", help="regex on NT8 account names (default: every non-Sim account)")
+    parser.add_argument("--instrument", default="MNQ")
+    parser.add_argument("--tolerance", type=float, default=60, help="seconds between entries (and exits) to pair")
+    parser.add_argument("--server-offset", type=int, default=0, help="MT5 server clock minus UTC, in hours")
+    parser.add_argument("--db", default=NT8_DB)
+    parser.add_argument("--out")
+    args = parser.parse_args()
+    run(args.reports, args.db, args.accounts, args.instrument, args.tolerance, args.server_offset, args.out)
 
 
 if __name__ == "__main__":
