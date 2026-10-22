@@ -7,6 +7,7 @@ flatten. The current rules are in [STATUS.md](../STATUS.md).
 
 | Study | Answer |
 |---|---|
+| [RTL unfavorable periods](rtl-market-regimes/PLAN.md) ([protocol](rtl-market-regimes/PROTOCOL.md)) | In progress: RTL-only daily trend x volatility six-group diagnosis; no gate adopted |
 | [H1 versus M30, RTL and GG](timeframe-h1/RESULTS.md) | No run cap, RR 0.5/1: H1 cuts recent trades 44–47%; RR 0.5 earns more, RR 1 less. GG H1/RR 1 has 50% higher DD; no baseline change |
 | [Q1/Q2: preceding candles](q01-q02-preceding-candles/RESULTS.md) ([protocol](q01-q02-preceding-candles/PROTOCOL.md)) | No filter; keep MaxRedRun = 3, MinLocation = 0 |
 | [Q3: overlapping vs steady bars](q03-overlap/RESULTS.md) | No filter |
@@ -31,5 +32,6 @@ flatten. The current rules are in [STATUS.md](../STATUS.md).
 | [NQ resolution: fixed grids and every origin](granularity/RESULTS.md) ([protocol](granularity/PROTOCOL.md)) | All 30 runs complete: wider grids progressively reduce RTL minus control in every era/origin; 2020–26 +0.078 → +0.004 R. Control ledgers audited; no new filter |
 | [NQ / coarse NQ / ES: complete paths](path-interaction/RESULTS.md) ([protocol](path-interaction/PROTOCOL.md)) | 180,130 paths: recent broad effective-step comparison finds lower +1R reach / more stop-first on ES, similar post-touch close retention; three-way overlap and tick-size matching limit attribution |
 | [ES minimum 50-tick candle width](es-minimum-width/RESULTS.md) ([protocol](es-minimum-width/PROTOCOL.md)) | Full EA reruns: recent RTL gross/net expectancy remains negative; fewer trades lower costs, earlier positive result has only 91 trades. No filter adopted |
+| [YM (Dow): four baselines vs NQ and ES](ym-unseen-instrument/RESULTS.md) | Longs keep a small gross edge (RTL +0.036 / +0.056 / +0.014 R, 2010–15 / 2016–19 / 2020–26), lost to costs on MYM; both shorts lose. Buy-stop gain over a plain long transfers (+0.080 / +0.057 / +0.032 R), YM's plain long slightly negative. Does not confirm NQ in money |
 | [MES: unseen instrument](mes-unseen-instrument/RESULTS.md) | No edge on MES even before costs (mean R −0.04 / +0.00 vs MNQ +0.09 / +0.09) |
 | [Q24: trade-result streaks](q24-trade-streaks/RESULTS.md) ([protocol](q24-trade-streaks/PROTOCOL.md)) | No predictive or daily-stop rule passes |

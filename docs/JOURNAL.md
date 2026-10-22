@@ -639,3 +639,22 @@ study doc. Keep each step to one or two lines.*
 ## 2026-10-22: Weekly MT5 versus prop fills check
 
 - `python/weekly_mt5_nt8.py` (live trading now runs on a separate PC): copies the trading PC's NT8 database from a shared folder, backtests the past week's RTL and GG on the front MNQ contract (real ticks, every EA input written into the INI), runs `compare_mt5_nt8.py` and appends one line per strategy and week to `Reports/weekly_fills/summary.csv`. Defaults are the research baseline; `--rtl-set` / `--gg-set` take the live inputs from MT5 .set files.
+
+## 2026-10-23: Four baselines on YM (Dow)
+
+- User downloaded Databento `YM.FUT` 1-minute data (2010-06 → 2026-10-21) and asked how RTL, GG, RTL-short and
+  GG-short do on it. Built with the NQ/ES rules ([data build](reference/DATA_BUILD.md#ym-build-2026-10-23)); input
+  checks clean; YM-only holes on 2020-02-27/28 and 2020-03-16.
+- New `python/import_custom_symbol.py` creates the MT5 custom symbol itself and verifies every year against the CSV:
+  `MYMcontDTBNT20102026` ($0.50/pt). The old ES symbol had lost its bars in MT5, so ES was re-imported as
+  `MEScontDTBNT20102026_2`.
+- 12 MT5 runs (4 EAs × NQ/ES/YM, same settings; shorts = the unfiltered short controls). NQ ledgers reproduce exactly.
+- Answer: longs keep a small gross edge on YM (RTL +0.036 / +0.056 / +0.014 R; NQ +0.006 / +0.081 / +0.072), but
+  it fades after 2020 and costs (0.06 R on MYM) turn it into a loss: 2020–26 RTL −$2.5k, GG −$5.7k. Both shorts lose
+  on all three instruments. YM does not confirm NQ. [Results](baseline/ym-unseen-instrument/RESULTS.md).
+- Follow-up: plain-long market-buy control on NQ, ES and YM, ledgers audited against the MT5 reports (72–128 fast
+  stops recovered per control; NQ control reproduces 2026-10-08). The buy-stop gain transfers: YM +0.080 / +0.057 /
+  +0.032 R over a plain long (NQ +0.041 / +0.072 / +0.064, ES +0.029 / +0.042 / +0.035), all intervals above zero.
+  YM's plain long is slightly negative. Recent YM weakness is mostly a smaller gain, about zero in 2025–26.
+  [Control section](baseline/ym-unseen-instrument/RESULTS.md#plain-long-control-buy-stop-gain-versus-background).
+

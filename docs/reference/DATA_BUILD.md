@@ -100,3 +100,33 @@ The NQ part comes first; the ES build (same rules, unseen-instrument data) is [b
 ```powershell
 .\venv\Scripts\python.exe python\build_continuous.py ES "F:\DATABENTO\ES_16_YEARS" "F:\DATABENTO\ES_16_YEARS\ES_full.ohlcv-1m.csv" "F:\DATABENTO\ES_16_YEARS\glbx-mdp3-20260417-20261006.ohlcv-1m.csv"
 ```
+
+## YM build (2026-10-23)
+
+- **Why:** a second unseen instrument (Dow futures) for the four baselines ([results](../baseline/ym-unseen-instrument/RESULTS.md)).
+  Built with exactly the NQ/ES rules above.
+- **Source:** Databento `GLBX.MDP3`, `YM.FUT` (parent), OHLCV-1m, one DBN file
+  `glbx-mdp3-20100606-20261021.ohlcv-1m.dbn` (job GLBX-20261022-65U97KVMGQ), unpacked to
+  `F:\DATABENTO\YM_16_YEARS\source\`.
+- **Input checks:** 257,534 spread rows dropped; outrights have no duplicate (minute, contract) rows, sorted
+  timestamps, no zero prices, no OHLC inconsistencies, every price on the 1.0 tick, no zero-volume bars, one name per
+  `instrument_id`. Last bar 2026-10-21 23:59 UTC.
+- **Output:** `MT5_YM_continuous_2010-2026_ohlcv-1m.csv`: 5,502,688 bars, 4,223 dates,
+  2010-06-07 01:00 → 2026-10-22 02:59 (last session partial). 17,087 post-close tail rows dropped. 67 contract
+  periods, all in Mar/Jun/Sep/Dec.
+- **Output checks:** Monday–Friday only; since 2016, 2,789/2,792 sessions start at 01:00 and 2,694 end at 23:59
+  (the rest are the usual early closes). Session dates match NQ apart from five 2014 dates the NQ file lacks
+  (2014-06-12/13, 2014-09-23/24/25, 2014-12-31 present in YM only; 2014-10-03 in NQ only) and the newer end.
+- **Intraday holes (compared with NQ):** 2020-02-27 (two gaps of 98 and 190 min), 2020-02-28 (nothing before 10:00),
+  2020-03-16 (227 min) and 2020-06-30 (no bars after 17:10, the same hole as ES). Other long gaps also occur in NQ.
+  YM has fewer bars per session than NQ on some days (minutes with no trade), mainly around rolls.
+- **MT5:** imported 2026-10-23 as `MYMcontDTBNT20102026` by `python/import_custom_symbol.py`: settings copied from
+  `MNQcontDTBNT20102026_2`, then tick size 1.0 and tick value $0.50 (MYM). The script reads every year back from MT5
+  and checks bar counts, first/last bar and price sums against the CSV (`Reports/ym_symbol_20261023/`).
+- **ES re-import (same day):** the old `MEScontDTBNT20102026` no longer has bars in MT5, so the ES file was imported
+  again as `MEScontDTBNT20102026_2` (tick 0.25, $1.25, i.e. $5/pt as before) with the same checks
+  (`Reports/es_symbol_20261023/`). The old symbol was left untouched.
+
+```powershell
+.\venv\Scripts\python.exe python\build_continuous.py YM "F:\DATABENTO\YM_16_YEARS" "F:\DATABENTO\YM_16_YEARS\source\glbx-mdp3-20100606-20261021.ohlcv-1m.dbn"
+```
