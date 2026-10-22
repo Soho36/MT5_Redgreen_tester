@@ -20,6 +20,12 @@
   interval above zero, in 15 of 17 years (NQ +0.041 / +0.072 / +0.064, ES +0.029 / +0.042 / +0.035). YM's plain
   long sits slightly below zero (−0.044 / −0.001 / −0.018), between NQ (about 0 since 2016) and ES (clearly negative).
   Since 2020 YM's gain is half of NQ's and has been about zero in 2025–26.
+- **Ticks per candle and H1 ([follow-up below](#ticks-per-candle-and-h1)):** MYM and MNQ both pay $0.50 per tick, so
+  commission in R depends only on how many ticks a candle spans. YM's M30 candles span about half as many ticks as
+  NQ's, which doubles the commission per trade in R. The edge before costs does not grow with ticks above about 20 on
+  any instrument, and at equal ticks YM still earns less than NQ. RTL on H1 (correct session cutoff) helps YM on both
+  counts: 2020–26 gross R +0.028 vs +0.014, cost 0.042 vs 0.060 R, net +$6.1k (PF 1.048) vs −$2.5k. Over all years
+  it is +$5.4k, positive in 6 of 17 years.
 - **Meaning:** YM is the second unseen index future after ES. It does not confirm the NQ result in money: the long
   gross edge is there in 2016–19 but has faded since 2020, which is when NQ earned most of its money. It does
   confirm, for the third time, that buying the break of a previous high beats a plain long.
@@ -140,6 +146,65 @@ YM ledger exactly (26,299 trades).
 - **Earlier YM looks better than NQ:** in 2010–15 the YM gain (+0.080) is twice NQ's, which is why RTL had a small
   gross edge on YM in the years it had none on NQ.
 
+## Ticks per candle and H1
+
+Follow-up the same day. The user ran RTL on MYM by hand at M15 / M30 / H1 / H2 (`RTL_signal`, no commission;
+gross +$17.5k / +$20.0k / +$23.5k / +$14.3k) and asked whether YM would do better with NQ's candle resolution.
+Script: [analyze_ym_h1.py](../../../python/analyze_ym_h1.py).
+
+**Commission is a ticks question.** MNQ and MYM both pay $0.50 per tick, so $1.05 costs the same R at the same
+number of ticks per candle (the cost columns below are identical for NQ and YM). Median RTL candle 2016–26:
+NQ 74 ticks, YM 35, ES 19. So on M30 YM pays about twice NQ's commission per R.
+
+**The edge before costs is not a ticks question above ~20 ticks.** RTL gross R by signal candle size, 2016–26:
+
+| Ticks per candle | NQ RTL R | YM RTL R | ES RTL R | NQ gain | YM gain | Cost R (NQ = YM) |
+|---|---:|---:|---:|---:|---:|---:|
+| <10 | −0.087 | +0.017 | −0.104 | +0.096 | +0.177 | 0.33 |
+| 10–20 | +0.126 | +0.007 | −0.017 | +0.155 | +0.066 | 0.15 |
+| 20–30 | +0.089 | +0.003 | +0.041 | +0.046 | +0.034 | 0.087 |
+| 30–45 | +0.090 | +0.027 | +0.009 | +0.073 | +0.024 | 0.058 |
+| 45–70 | +0.088 | +0.040 | +0.015 | +0.067 | +0.023 | 0.038 |
+| 70–110 | +0.092 | +0.094 | −0.030 | +0.093 | +0.074 | 0.025 |
+| 110+ | +0.052 | +0.027 | +0.071 | +0.043 | +0.036 | 0.012 |
+
+Gain = RTL minus plain-long control. On NQ, RTL earns about +0.09 R from 10 ticks up, flat. On YM it is lower than
+NQ in every bucket from 10 to 70 ticks, where most YM trades are; only 70–110 matches. Bucket intervals are wide
+(gain intervals about ±0.05–0.08), and bucketing mixes candle size with volatility and era, so this is descriptive.
+It does not support "YM would match NQ with NQ's resolution": more ticks per candle would cut YM's commission to
+NQ's level but would not lift its gross edge to NQ's. This agrees with the [granularity study](../granularity/RESULTS.md),
+where NQ's edge stopped improving at about 30 steps per candle.
+
+**RTL on H1, correct session cutoff.** On H1 there is no 23:30 bar, so `RTL_signal` / `RTL_runband` on H1 can hold
+positions overnight. These runs use the [H1 study's](../timeframe-h1/RESULTS.md) `RTL_timeframe` (tick-level 23:30
+cutoff), same inputs as M30 (`Reports/ym_h1_20261023/`; NQ H1 from the H1 study). At most one overnight exit per run
+(a data-hole day). The YM H1 run grosses +$20.4k to 2026-10-22 against the user's +$23.5k; the ~$3.1k difference is
+the overnight holds.
+
+| Inst | TF | Period | Trades | Median ticks | Gross R | Cost R | Net R | Net $ | PF net | Max DD $ |
+|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| NQ | M30 | 2016–19 | 6,167 | 30 | +0.081 | 0.095 | −0.014 | 4,417 | 1.064 | 2,176 |
+| NQ | H1 | 2016–19 | 3,377 | 44 | +0.081 | 0.065 | +0.016 | 4,462 | 1.091 | 1,347 |
+| NQ | M30 | 2020–26 | 10,501 | 115 | +0.072 | 0.024 | +0.048 | 38,400 | 1.090 | 5,781 |
+| NQ | H1 | 2020–26 | 5,849 | 163 | +0.057 | 0.017 | +0.040 | 28,020 | 1.092 | 4,039 |
+| ES | M30 | 2020–26 | 10,803 | 25 | −0.006 | 0.042 | −0.048 | −9,086 | 0.964 | 10,288 |
+| ES | H1 | 2020–26 | 5,911 | 36 | +0.004 | 0.029 | −0.025 | 2,312 | 1.013 | 5,564 |
+| YM | M30 | 2010–15 | 9,097 | 15 | +0.036 | 0.177 | −0.142 | −6,548 | 0.879 | 6,934 |
+| YM | H1 | 2010–15 | 4,960 | 21 | +0.050 | 0.122 | −0.072 | −2,223 | 0.940 | 2,728 |
+| YM | M30 | 2016–19 | 6,209 | 22 | +0.056 | 0.126 | −0.070 | 691 | 1.013 | 2,261 |
+| YM | H1 | 2016–19 | 3,440 | 31 | +0.054 | 0.087 | −0.033 | 1,482 | 1.041 | 1,728 |
+| YM | M30 | 2020–26 | 10,889 | 45 | +0.014 | 0.060 | −0.046 | −2,467 | 0.987 | 5,403 |
+| YM | H1 | 2020–26 | 5,923 | 64 | +0.028 | 0.042 | −0.014 | 6,097 | 1.048 | 2,635 |
+
+Mean net R is below zero while net dollars are positive because the larger candles carry more dollars per R and the
+smaller ones carry most of the cost. Full table, all periods: `Reports/ym_h1_20261023/m30_vs_h1.csv`.
+
+- **YM H1 beats YM M30 in every period** after costs, with lower drawdown: half the trades means half the commission,
+  and recent gross R doubled. On NQ, H1 keeps the gross R in 2016–19 but loses some in 2020–26 (as the H1 study found).
+- **Still small:** YM H1 makes +$5.4k over 16 years, positive in 6 of 17 years; 2010–15 loses. 2020–26 +$6.1k is about
+  a fifth of NQ M30's +$38.4k at one micro contract each, and 2020 alone gives +$3.5k of it.
+- H1 was chosen after seeing the user's hand runs at four timeframes, so H1 being best on YM is a selected result.
+
 ## Reproduce
 
 ```powershell
@@ -153,4 +218,7 @@ YM ledger exactly (26,299 trades).
 .\venv\Scripts\python.exe python\run_mt5_job.py Reports\ym_control_20261023 RTL_signal
 .\venv\Scripts\python.exe python\audit_ym_control.py
 .\venv\Scripts\python.exe python\analyze_ym_control.py
+.\venv\Scripts\python.exe python\prepare_ym_h1.py
+.\venv\Scripts\python.exe python\run_mt5_job.py Reports\ym_h1_20261023 RTL_timeframe
+.\venv\Scripts\python.exe python\analyze_ym_h1.py
 ```

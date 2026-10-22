@@ -657,4 +657,10 @@ study doc. Keep each step to one or two lines.*
   +0.032 R over a plain long (NQ +0.041 / +0.072 / +0.064, ES +0.029 / +0.042 / +0.035), all intervals above zero.
   YM's plain long is slightly negative. Recent YM weakness is mostly a smaller gain, about zero in 2025–26.
   [Control section](baseline/ym-unseen-instrument/RESULTS.md#plain-long-control-buy-stop-gain-versus-background).
+- User ran RTL on MYM by hand at M15/M30/H1/H2 (H1 best, +$23.5k gross) and asked whether YM would do better with NQ's
+  candle resolution. MYM and MNQ both pay $0.50 per tick, so commission in R depends only on ticks per candle; YM's M30
+  candles span half NQ's ticks. But the gross edge does not grow with ticks above ~20, and at equal ticks YM still
+  trails NQ: more resolution would fix costs, not the edge. RTL H1 with the correct 23:30 cutoff (`RTL_timeframe`; the
+  hand run held some trades overnight, ~$3.1k of its gross) beats M30 on YM in every period: 2020–26 net +$6.1k PF 1.048,
+  all years +$5.4k, 6/17 years positive. [Section](baseline/ym-unseen-instrument/RESULTS.md#ticks-per-candle-and-h1).
 
