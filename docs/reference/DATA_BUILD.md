@@ -130,3 +130,26 @@ The NQ part comes first; the ES build (same rules, unseen-instrument data) is [b
 ```powershell
 .\venv\Scripts\python.exe python\build_continuous.py YM "F:\DATABENTO\YM_16_YEARS" "F:\DATABENTO\YM_16_YEARS\source\glbx-mdp3-20100606-20261021.ohlcv-1m.dbn"
 ```
+
+## RTY build (2026-10-23)
+
+- **Why:** a third unseen instrument (Russell 2000) for the same experiments as YM
+  ([results](../baseline/rty-unseen-instrument/RESULTS.md)). Same rules as NQ/ES/YM.
+- **Source:** Databento `GLBX.MDP3`, `RTY.FUT` (parent), OHLCV-1m, `glbx-mdp3-20100606-20261021.ohlcv-1m.dbn`
+  (job GLBX-20261022-G4K3WHA8KV), unpacked to `F:\DATABENTO\RTY_16_YEARS\source\`. **CME RTY starts 2017-07-09**
+  (Russell futures traded on ICE before), so there is no 2010–16.
+- **Input checks:** 215,575 spread rows dropped; outrights clean (no duplicates, sorted, no zero prices, no OHLC
+  inconsistencies, every price on the 0.1 tick, no zero volume, one name per `instrument_id`).
+- **Output:** `MT5_RTY_continuous_2017-2026_ohlcv-1m.csv`: 3,077,561 bars, 2,401 dates, 2017-07-10 01:01 →
+  2026-10-22 02:59; 49 tail rows dropped; 38 contract periods.
+- **Output checks:** Monday–Friday only; 2,377/2,401 sessions start at 01:00, 2,294 end at 23:59 (the rest are early
+  closes or a last minute without a trade); no session ends early against NQ. The launch months 2017-07 → 2017-09 are
+  thin (about 50 intraday gaps of 1–6 hours); after that the long gaps are 2019-02-27, 2020-03-09/16/17/18, 2020-04-17
+  and the 2025-11-28 CME outage. RTY has fewer bars per session than NQ on many days (minutes without a trade).
+- **MT5:** `M2KcontDTBNT20172026` (settings from `MNQcontDTBNT20102026_2`, tick 0.1, tick value $0.50 = M2K $5/pt),
+  imported and verified per year by `python/import_custom_symbol.py` (`Reports/rty_symbol_20261023/`).
+
+```powershell
+.\venv\Scripts\python.exe python\build_continuous.py RTY "F:\DATABENTO\RTY_16_YEARS" "F:\DATABENTO\RTY_16_YEARS\source\glbx-mdp3-20100606-20261021.ohlcv-1m.dbn"
+```
+

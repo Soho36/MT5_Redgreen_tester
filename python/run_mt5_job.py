@@ -11,6 +11,7 @@ import shutil
 import subprocess
 import sys
 import time
+from collections import deque
 from datetime import datetime
 from pathlib import Path
 
@@ -38,14 +39,25 @@ def compile_expert(run, expert):
     shutil.copyfile(target / f"{expert}.ex5", run / f"{expert}.ex5")
 
 
-def trim_log(path, expert, keep=150):
-    """The day's MT5 log holds every run and a print per bar: keep this run's first and last lines."""
-    lines = path.read_bytes().decode("utf-16", errors="replace").splitlines()
-    starts = [i for i, x in enumerate(lines) if "testing of Experts" in x and expert in x]
-    run = lines[max(starts[-1] - 25, 0):] if starts else lines
-    if len(run) > 2 * keep:
-        run = run[:keep] + [f"... {len(run) - 2 * keep} lines trimmed ..."] + run[-keep:]
-    path.write_text("\n".join(run) + "\n", encoding="utf-8")
+def trim_log(src, dst, expert, keep=150):
+    """The day's MT5 log holds every run and a print per bar: keep this run's first and last lines.
+
+    Streams the UTF-16 log (it can reach several GB) and writes only the kept lines to dst."""
+    pre, head, tail, total = deque(maxlen=25), [], deque(maxlen=keep), 0
+    with open(src, encoding="utf-16", errors="replace", newline="") as f:
+        for line in f:
+            line = line.rstrip("\r\n")
+            if "testing of Experts" in line and expert in line:
+                head, tail, total = list(pre) + [line], deque(maxlen=keep), len(pre) + 1
+                continue
+            pre.append(line)
+            total += 1
+            if len(head) < keep:
+                head.append(line)
+            else:
+                tail.append(line)
+    run = head + ([f"... {total - len(head) - len(tail)} lines trimmed ..."] if total > len(head) + len(tail) else []) + list(tail)
+    Path(dst).write_text("\n".join(run) + "\n", encoding="utf-8")
 
 
 def run_job(run, tag, outputs, expert, inputs_files=()):
@@ -66,9 +78,10 @@ def run_job(run, tag, outputs, expert, inputs_files=()):
                      (DATA / "Tester" / "logs" / f"{stamp}.log", run / f"{tag}.tester.log"),
                      (AGENT_LOGS / f"{stamp}.log", run / f"{tag}.agent.log")):
         if src.exists():
-            shutil.copyfile(src, dst)
             if dst.suffix == ".log":
-                trim_log(dst, expert)
+                trim_log(src, dst, expert)
+            else:
+                shutil.copyfile(src, dst)
     if missing:
         raise RuntimeError(f"Missing outputs: {missing}")
     done = dict(tag=tag, seconds=round(seconds, 1), outputs={n: sha256(run / n) for n in outputs})

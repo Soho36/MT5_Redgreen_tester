@@ -663,4 +663,12 @@ study doc. Keep each step to one or two lines.*
   trails NQ: more resolution would fix costs, not the edge. RTL H1 with the correct 23:30 cutoff (`RTL_timeframe`; the
   hand run held some trades overnight, ~$3.1k of its gross) beats M30 on YM in every period: 2020–26 net +$6.1k PF 1.048,
   all years +$5.4k, 6/17 years positive. [Section](baseline/ym-unseen-instrument/RESULTS.md#ticks-per-candle-and-h1).
+- Same experiments on RTY (Russell 2000, user's Databento download). CME RTY starts 2017-07, so windows are 2018–19
+  and 2020–26 on all four instruments. RTY looks like YM: RTL gross +0.019 / +0.025 R, net 2020–26 −$3.5k; GG −$11.2k;
+  shorts lose; buy-stop gain +0.050 / +0.040 R over a plain long that loses a little; H1 2020–26 +$3.1k (PF 1.029).
+  Across the four, the buy-stop gain is about +0.04 R except NQ (+0.07), and only NQ's plain long is not negative.
+  [Results](baseline/rty-unseen-instrument/RESULTS.md).
+- Tooling: today's MT5 tester log reached 4.3 GB and `run_mt5_job.trim_log` ran out of memory; it now streams the log
+  and writes only the kept lines. The log was moved to `I:\MT5_old_logs\Tester_logs_moved_20261023\` (drive C: was
+  down to 0.4 GB free).
 
