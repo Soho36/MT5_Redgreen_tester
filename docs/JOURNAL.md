@@ -671,4 +671,22 @@ study doc. Keep each step to one or two lines.*
 - Tooling: today's MT5 tester log reached 4.3 GB and `run_mt5_job.trim_log` ran out of memory; it now streams the log
   and writes only the kept lines. The log was moved to `I:\MT5_old_logs\Tester_logs_moved_20261023\` (drive C: was
   down to 0.4 GB free).
+- User idea: if the buy stop is the edge, would a tighter stop help? Exploratory estimate from the ledgers' worst
+  excursion (`python/estimate_tight_stop.py`; stop at k x candle, exit unchanged at +1 original R). At one contract a
+  tighter stop always earns fewer dollars on NQ 2020–26 ($38.4k at k=1, $28.5k at 0.75, $18.7k at 0.5) because it
+  stops out winners (35% of them at k=0.5). Per dollar risked it helps NQ 2020–26 but hurts NQ 2016–19 and YM in both
+  periods; no consistent gain. Exiting faster was already covered by the trade-path, first-touch, fixed-TP, trailing
+  and break-even studies (holding on was worth more at every level). Not tested: a tighter stop with the target scaled
+  to the new risk (needs an MT5 run).
+- MT5 test of the tighter stop with the target scaled to it (`RTL_stopfrac`, k = 0.75 / 0.5, NQ and YM; k = 1
+  reproduces the baseline): rejected. Net R per dollar risked is worse in 16–17 of 17 years on both instruments; NQ
+  2020–26 at one contract $38.4k → $19.3k / $13.7k. Gross R the same or lower, more stop-outs, higher cost per R.
+  [Results](baseline/stop-fraction/RESULTS.md).
 
+
+
+## 2026-10-23: RTL unfavorable-period plan and first six-group study
+
+- Saved the user's [plan](baseline/rtl-market-regimes/PLAN.md), RTL only; froze daily trend x trailing volatility definitions before results. Steps 1-5 complete.
+- All six primary groups earn positive net dollars in both eras. No repeatably losing group qualifies; four groups lack enough independent weeks. Mean planned one-contract risk $21.72 -> $78.95 and commission/R 0.095 -> 0.024 clarify the cost/risk distinction. [Results](baseline/rtl-market-regimes/RESULTS.md).
+- Reconciled 25,833 source trades and 16,668 primary trades; excluded one forced Oct1 end-of-test liquidation. Independent minute/HTML/feature/summary/bootstrap/gate checks pass; 16 tests pass. No strategy change; filter and full-replay stages not triggered.
