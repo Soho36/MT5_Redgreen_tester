@@ -7,6 +7,8 @@ flatten. The current rules are in [STATUS.md](../STATUS.md).
 
 | Study | Answer |
 |---|---|
+| [RTL profit location within chop/wick episodes](rtl-price-structure/EPISODE_RESULTS.md) ([protocol](rtl-price-structure/EPISODE_PROTOCOL.md)) | M30 contained paths lose; upper excursions fund net gains at 10/20/40 in both eras. Entries commonly precede flag clearance; hindsight late-phase strength does not supply a live restart rule. Independently verified; MA agreement remains a separate proposal |
+| [RTL daily/M30 price structure](rtl-price-structure/RESULTS.md) ([protocol](rtl-price-structure/PROTOCOL.md)) | No filter: M30 overlap/chop and wick/overlap subsets profitable in both eras. Daily omission has a modest historical risk tradeoff but unstable sensitivity; all four plan points completed and independently verified |
 | [RTL unfavorable periods](rtl-market-regimes/RESULTS.md) ([plan](rtl-market-regimes/PLAN.md), [protocol](rtl-market-regimes/PROTOCOL.md)) | Six daily trend x volatility groups all positive in dollars in both eras; no skip candidate. Cost/R and dollar risk vary; smaller groups remain inconclusive |
 | [H1 versus M30, RTL and GG](timeframe-h1/RESULTS.md) | No run cap, RR 0.5/1: H1 cuts recent trades 44–47%; RR 0.5 earns more, RR 1 less. GG H1/RR 1 has 50% higher DD; no baseline change |
 | [Q1/Q2: preceding candles](q01-q02-preceding-candles/RESULTS.md) ([protocol](q01-q02-preceding-candles/PROTOCOL.md)) | No filter; keep MaxRedRun = 3, MinLocation = 0 |

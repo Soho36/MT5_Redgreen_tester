@@ -85,3 +85,57 @@ also have insufficient independent-week coverage. No skip rule is adopted.
   by this historical study.
 - RTL-only scope retained. The cost/risk diagnostic and intraday-choppiness ideas
   remain separate possible follow-ups; no new thresholds were selected here.
+
+## Price-structure follow-up: 2026-10-24
+
+User authorized the four points proposed in conversation, with an additional M30
+wick/overlap example. This is a new hypothesis; the first study's null result and
+frozen protocol remain unchanged. [Price-structure protocol](../rtl-price-structure/PROTOCOL.md).
+
+- [x] **1. Measure completed daily structure:** 20 sessions, efficiency and overlap;
+  10/40 as fixed robustness checks. Separately measure the user's M30 example
+  with 20 completed candles and the same fixed neighboring windows.
+- [x] **2. Compare four efficiency/overlap groups:** cutoffs calibrated solely on
+  pre-2016 price windows, then held fixed for 2016-19 and 2020-September 2026.
+- [x] **3. Diagnose persistent wick fraction:** preserve small-body/long-wick
+  overlap as an explicit M30 subset, without selecting another optimized gate.
+- [x] **4. Assess actual RTL outcomes:** dollars, R, losses avoided, gains missed,
+  realized drawdowns, static reduced exposure and limited random-placement controls.
+
+Status: all four points complete and independently verified; 12 focused tests pass.
+[Results](../rtl-price-structure/RESULTS.md): M30 low-efficiency/high-overlap and
+high-wick/high-overlap subsets make positive dollars in both eras. Daily structure
+offers a modest historical profit/drawdown tradeoff but no robust negative-edge
+candidate; sensitivity and placement controls do not establish an adoption case.
+No filter adopted. No full gated-strategy replay or fresh forward validation is
+claimed. An extreme wick-persistence definition would be a separate hypothesis;
+the completed study's cutoffs were not retuned around its results.
+
+## Profit location within flagged episodes: 2026-10-24
+
+User authorized finding where the retained profits arise and asked about the
+twenty-candle setting and agreement among MA lengths 5-200.
+[Frozen attribution protocol](../rtl-price-structure/EPISODE_PROTOCOL.md).
+
+- [x] Form episodes from consecutive flagged price observations, including bars
+  without trades; distinguish retrospective episode phase from causal episode age.
+- [x] Locate each trade's logged excursion relative to its frozen pre-submission
+  range; separate contained paths, upper/lower escapes and exit locations.
+- [x] Check whether pending orders fill in the original episode, after its flag
+  clears, or in a later episode; compare n=10/20/40 and both historical eras.
+- [x] Independently verify and report contribution of winners and losers, counts,
+  average returns and episode coverage. No new threshold or trading gate implied.
+
+Completed and independently verified: [episode results](../rtl-price-structure/EPISODE_RESULTS.md).
+All 23,569 overlapping attribution rows, 678 summaries and 24 era reconciliations
+match; 16 focused tests pass. All 18 M30 flag/window/era combinations have
+negative contained-path dollars and positive upper-excursion dollars. Most
+winning dollars enter before the original flag clears; some upper excursions
+also close profitably before clearance. Retrospective late-episode strength does
+not establish a causal waiting rule. Twenty is not the sole source of the failed
+blanket omission result. No filter or EA change adopted.
+
+Separate next hypothesis: multi-horizon MA slope agreement. The protocol records
+the exact SMA slope identity and the weighting problem in a dense step-5 grid.
+Up/down/mixed labels, flat-slope handling and transition costs would need their
+own frozen test; no MA outcomes or settings are selected during this attribution.
