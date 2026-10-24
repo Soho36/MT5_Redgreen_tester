@@ -182,3 +182,15 @@ Completed: [results](../rtl-pullback-stats/RESULTS.md). Bounce warnings pass
 everywhere; pullback warnings pass only for 5% drops (5-session rise). Next, if
 pursued: a frozen RTL test of signal-based skipping for 5% drops, and possibly a
 separately frozen live-zigzag stop with a bounce-warning resume.
+
+## Warning-based skip rules on RTL: 2026-10-25
+
+User-requested RTL test of the warning statistics. [Frozen protocol](../rtl-warning-rules/PROTOCOL.md).
+
+- [x] Rule A: pullback-warning stop, bounce-warning or timeout resume (5% drops).
+- [x] Rule B: live-zigzag stop, bounce-warning resume, at 2/3/5%.
+- [x] Independently verify and apply the fixed decision rule.
+
+Completed: [results](../rtl-warning-rules/RESULTS.md). No rule is promising;
+nothing beats trading every session. Daily downtrend filtering for RTL on NQ is
+considered exhausted; no MT5 replay stage triggered.

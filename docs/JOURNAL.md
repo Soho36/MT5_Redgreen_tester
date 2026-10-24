@@ -729,3 +729,10 @@ study doc. Keep each step to one or two lines.*
 - Bounce warning ("down a lot") works as a statistic: low of a 2-5% drop within 2 sessions 21-53% of the time, 1.8-4.9x the volatility-matched base, every predictor, size, era, series, k and cutoff. Post-hoc: still 1.25-2.1x versus just knowing a fall is confirmed.
 - Pullback warning ("up a lot") is weak: 6-38% hits, 17-84% false alarms; only the 5-session rise for 5% drops passes. Rallies do not get tired: the chance the peak is within 2 sessions falls with rally age. Fixed rule: RTL test worth designing for 5% drops only. Idea for later (outside this rule): stop on the live zigzag, resume on the bounce warning.
 - Verifier 10/10 (all 864 statistic rows), 7 tests pass.
+
+## 2026-10-25: RTL test of warning-based skip rules
+
+- User asked for the fixed-rule test (5% drops) plus a live-zigzag stop with a bounce-warning resume. [Protocol](baseline/rtl-warning-rules/PROTOCOL.md) frozen before outcomes; [results](baseline/rtl-warning-rules/RESULTS.md).
+- Rule A (stop after a top-10% 5-session rise; resume on a bounce warning or after 20 sessions): +7% / -51%, sits out 37-47% of sessions; every variant loses 40-51% in 2020-26. Its stops land in continuing rallies, RTL's best sessions.
+- Rule B (zigzag stop, bounce resume): 2% -22% / -15%, 3% -7% / -17%, 5% +6% / +0% (barely skips: the warning is usually already on). Much better than the plain zigzag, still no pass: the costly sessions are the first after the peak, before any fall can be confirmed. Rule B at 2% improves profit-to-drawdown (risk hint only).
+- Conclusion of this series: daily downtrend filtering looks exhausted for RTL on NQ. Verifier 7/7, 9 tests pass.
