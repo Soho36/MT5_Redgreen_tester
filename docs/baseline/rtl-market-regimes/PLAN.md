@@ -139,3 +139,19 @@ Separate next hypothesis: multi-horizon MA slope agreement. The protocol records
 the exact SMA slope identity and the weighting problem in a dense step-5 grid.
 Up/down/mixed labels, flat-slope handling and transition costs would need their
 own frozen test; no MA outcomes or settings are selected during this attribution.
+
+## Downtrend crystal ball: 2026-10-24
+
+User proposed a perfect-foresight downtrend test as a ceiling for all downtrend
+filters, with deliberate delays. [Frozen protocol](../rtl-downtrend-oracle/PROTOCOL.md).
+
+- [x] Hindsight zigzag downtrends at 2/3/5/10% on roll-adjusted daily closes;
+  raw closes as sensitivity.
+- [x] Skip from peak to trough, then 1/2/3/5/10/20 sessions late; live zigzag as
+  the no-hindsight counterpart; static and all-shift placement controls.
+- [x] Independently verify and apply the fixed decision rule.
+
+Completed: [results](../rtl-downtrend-oracle/RESULTS.md). On-time gains of 36-202%
+vanish within 2-3 sessions for small drops and by 3 sessions in 2016-19 at every
+size; the live zigzag loses profit everywhere. Downtrend filters are not worth
+pursuing further for RTL on NQ. No filter or EA change adopted.

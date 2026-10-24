@@ -710,3 +710,9 @@ study doc. Keep each step to one or two lines.*
 
 - Review of the episode study: the "contained loses, upper excursion wins" split is mostly what any long 1R trade looks like. Added a post-hoc control ([section 5](baseline/rtl-price-structure/EPISODE_RESULTS.md#5-control-added-after-results-unflagged-trades), `python/control_rtl_flagged_paths.py`): unflagged trades lose when contained (-0.15 to -0.44 R) and win above the range (+0.65 to +0.85 R) in all 18 M30 combinations. Flagged rows reconcile exactly to the verified attribution.
 - Softened the timing reading in the results summary and STATUS: a winning move tends to clear the flag itself, so after-clearance exits and late-in-hindsight phases are expected to look good even if the flag has no effect. Causal episode age does not repeat; no timing rule is supported. Episodes mostly last 1-2 bars, so any future regime flag needs hysteresis or a minimum duration.
+
+## 2026-10-24: RTL downtrend crystal ball
+
+- User's idea: a perfect-foresight downtrend detector, then the same signals made late, to put a ceiling on any downtrend filter. Sizes 2/3/5/10% (user asked for smaller than 20%), delays 0/1/2/3/5/10/20 sessions, plus the live zigzag as the no-hindsight counterpart. [Protocol](baseline/rtl-downtrend-oracle/PROTOCOL.md) frozen before outcomes; [results](baseline/rtl-downtrend-oracle/RESULTS.md).
+- On time: +36% to +202% net profit in both eras. One session late roughly halves it; 2-3 sessions late it is gone for small drops; 2016-19 fails by 3 sessions at every size. Live zigzag loses 10-82% of profit everywhere and skips better-than-average trades in 7 of 8 cases. Decision rule: further downtrend-filter research not worthwhile; unadjusted closes agree.
+- Independent verifier (vectorized zigzag, explicit masks, every circular shift) 12/12 PASS; 10 focused tests pass. Scope is daily 2-10% downtrends; ledger omission, not an MT5 replay.
