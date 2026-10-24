@@ -11,6 +11,11 @@ hindsight) reacts 2-21 sessions late and cuts profit by 10-82% at every size, in
 both eras. By the rule fixed before the run, **further research on downtrend
 filters for RTL is not worthwhile.** No strategy defaults or live settings changed.
 
+**Update 2026-10-25:** this conclusion covers filters that confirm a drop and
+therefore act late. The [early-signal addendum](EARLY_RESULTS.md) found being
+early far more forgiving, so an anticipating (pullback-warning) signal still
+passes its ceiling test.
+
 ## The idea
 
 Skip RTL while the market is falling and resume when the fall ends, using

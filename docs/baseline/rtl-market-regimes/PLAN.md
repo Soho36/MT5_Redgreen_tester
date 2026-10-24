@@ -155,3 +155,16 @@ Completed: [results](../rtl-downtrend-oracle/RESULTS.md). On-time gains of 36-20
 vanish within 2-3 sessions for small drops and by 3 sessions in 2016-19 at every
 size; the live zigzag loses profit everywhere. Downtrend filters are not worth
 pursuing further for RTL on NQ. No filter or EA change adopted.
+
+## Crystal ball with early signals: 2026-10-25
+
+User asked whether a pullback-anticipation statistic is worth building.
+[Frozen addendum](../rtl-downtrend-oracle/EARLY_PROTOCOL.md).
+
+- [x] Stop and resume 1/2/3/5 sessions early; early stop with on-time resume.
+- [x] Same controls; independently verify and apply the fixed decision rule.
+
+Completed: [early results](../rtl-downtrend-oracle/EARLY_RESULTS.md). Being early
+costs far less than being late, so the pullback statistic passes the fixed rule.
+Next, if pursued: a separately frozen protocol for a stop signal and an early
+resume signal, with hit rates against the base rate and false-alarm cost.
