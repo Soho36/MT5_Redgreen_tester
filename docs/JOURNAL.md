@@ -722,3 +722,10 @@ study doc. Keep each step to one or two lines.*
 - User asked whether "up N% over n sessions, so a pullback soon" is worth building. Froze an [addendum](baseline/rtl-downtrend-oracle/EARLY_PROTOCOL.md): stop and resume 1/2/3/5 sessions early, and early stop with on-time resume. [Results](baseline/rtl-downtrend-oracle/EARLY_RESULTS.md).
 - Early is far more forgiving than late: two early still adds +20% to +59% at every size and era; with the resume exactly at the low, a stop up to five sessions early adds +8% to +130%. Fixed rule passes, so the pullback statistic is worth building; raw closes agree. My prior guess (early decays as fast as late) was wrong.
 - Caveats: both edges of a rally are good for RTL and both edges of a fall are bad; late resumes give up the rebound, the costliest window in dollars (largest stops near lows). In 2020-26 the early advantage is mostly in dollars, not R per trade. False alarms are outside the ceiling; step 2 needs a resume signal too and a hit rate against the base rate. Verifier 7/7; 15 tests pass.
+
+## 2026-10-25: Pullback and bounce warning statistics
+
+- User's step 2: "up N% over n sessions, pullback soon", plus drop/rally durations. Froze a [protocol](baseline/rtl-pullback-stats/PROTOCOL.md) with a mirror bounce warning (the early-signal study showed the resume matters more). Price data only. [Results](baseline/rtl-pullback-stats/RESULTS.md).
+- Bounce warning ("down a lot") works as a statistic: low of a 2-5% drop within 2 sessions 21-53% of the time, 1.8-4.9x the volatility-matched base, every predictor, size, era, series, k and cutoff. Post-hoc: still 1.25-2.1x versus just knowing a fall is confirmed.
+- Pullback warning ("up a lot") is weak: 6-38% hits, 17-84% false alarms; only the 5-session rise for 5% drops passes. Rallies do not get tired: the chance the peak is within 2 sessions falls with rally age. Fixed rule: RTL test worth designing for 5% drops only. Idea for later (outside this rule): stop on the live zigzag, resume on the bounce warning.
+- Verifier 10/10 (all 864 statistic rows), 7 tests pass.

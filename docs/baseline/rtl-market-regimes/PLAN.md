@@ -168,3 +168,17 @@ Completed: [early results](../rtl-downtrend-oracle/EARLY_RESULTS.md). Being earl
 costs far less than being late, so the pullback statistic passes the fixed rule.
 Next, if pursued: a separately frozen protocol for a stop signal and an early
 resume signal, with hit rates against the base rate and false-alarm cost.
+
+## Pullback and bounce warning statistics: 2026-10-25
+
+User's step 2. [Frozen protocol](../rtl-pullback-stats/PROTOCOL.md); price data only.
+
+- [x] Durations of falls and rallies; hindsight "tiredness" by leg age.
+- [x] Pullback ("up a lot") and bounce ("down a lot") warnings against zigzag
+  turns, with volatility-matched base rates and all-shift controls.
+- [x] Independently verify and apply the fixed decision rule.
+
+Completed: [results](../rtl-pullback-stats/RESULTS.md). Bounce warnings pass
+everywhere; pullback warnings pass only for 5% drops (5-session rise). Next, if
+pursued: a frozen RTL test of signal-based skipping for 5% drops, and possibly a
+separately frozen live-zigzag stop with a bounce-warning resume.
