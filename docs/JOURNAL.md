@@ -736,3 +736,17 @@ study doc. Keep each step to one or two lines.*
 - Rule A (stop after a top-10% 5-session rise; resume on a bounce warning or after 20 sessions): +7% / -51%, sits out 37-47% of sessions; every variant loses 40-51% in 2020-26. Its stops land in continuing rallies, RTL's best sessions.
 - Rule B (zigzag stop, bounce resume): 2% -22% / -15%, 3% -7% / -17%, 5% +6% / +0% (barely skips: the warning is usually already on). Much better than the plain zigzag, still no pass: the costly sessions are the first after the peak, before any fall can be confirmed. Rule B at 2% improves profit-to-drawdown (risk hint only).
 - Conclusion of this series: daily downtrend filtering looks exhausted for RTL on NQ. Verifier 7/7, 9 tests pass.
+
+## 2026-10-25: RTL weekly signal gate
+
+- User ran RTL on weekly MNQ in MT5 (results not in repo) and proposed gating M30 RTL with weekly signals: off when a week breaks below a green prior week's low, on when a week breaks above a red prior week's high. [Protocol](baseline/rtl-weekly-gate/PROTOCOL.md) frozen before outcomes; [results](baseline/rtl-weekly-gate/RESULTS.md).
+- Off 33-45% of the time; profit -85% / -57% (primary, intraweek touch) and -52% to -85% in every sensitivity (week-close timing, close-confirmed, unadjusted). Skipped trades beat kept ones in 7 of 8 cases; no drawdown benefit. Weekly sell periods contain many of RTL's best dip-buying stretches (late 2018, Feb-Aug 2026); sells need a green week first, so they come after falls start, and buys come after rebounds.
+- Verifier 9/9 (shifts by prefix sums, independent of the FFT), 9 tests pass. Weekly RTL itself was not rerun.
+
+## 2026-10-25: RTL MA-agreement test completed
+
+- User authorized the separate MA test on October 24; resumed after usage interruptions. [Protocol](baseline/rtl-ma-agreement/PROTOCOL.md) frozen before conditional outcomes; [results](baseline/rtl-ma-agreement/RESULTS.md). Completed M30 SMA slopes at 5/10/20/40/80/160/200, five votes for clear direction, pre-2016 flat bands, four fixed sensitivities. Short/long conflicts remain orthogonal descriptors.
+- Primary up/down/mixed net dollars early: -$900.65/+$2,743.75/+$2,573.55; recent: +$13,051.00/+$9,611.15/+$15,737.80. All 30 policy/variant/era omission cells remove profitable dollars. None passes the frozen screen; no full replay triggered and no MA filter adopted.
+- Skip-down reduces recent profit 25% and daily-close DD 32.5%, modestly better than same-holding static exposure; the comparison reverses early and does not match dollar-risk exposure. Only-up improves recent mean R but loses early. Sensitivities, annual concentration, roll-clean subsets and adjusted uncertainty do not establish a stable exclusion rule.
+- Among recent non-up submissions, 1,759 trades open when up-consensus returns net +$104,058.55; 6,010 exiting before it returns net -$80,301.00. These are full-trade, future-conditioned totals: rising prices drive both long PnL and up agreement. They do not measure money earned before confirmation or prove a delayed-entry rule.
+- Independent reconstruction passes all 191,781 price rows, 83,340 labelled trade rows, 136,410 state episodes, 9,019 non-up spells, 159 summaries, 220 annual rows, 40 roll rows, 90 policy rows, 124,920 daily-curve rows, 60,000 bootstrap group draws and 12,000 placement draws. Eighteen focused tests pass; protocol/source hashes unchanged. Tables, chart and audit/provenance saved under `Reports/rtl_ma_agreement_20261024`.

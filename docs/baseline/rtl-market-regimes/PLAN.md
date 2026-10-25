@@ -140,6 +140,34 @@ the exact SMA slope identity and the weighting problem in a dense step-5 grid.
 Up/down/mixed labels, flat-slope handling and transition costs would need their
 own frozen test; no MA outcomes or settings are selected during this attribution.
 
+## MA agreement follow-up: authorized 2026-10-24, resumed 2026-10-25
+
+The user authorized the separate MA test. [Frozen protocol](../rtl-ma-agreement/PROTOCOL.md)
+uses completed M30 slopes at 5/10/20/40/80/160/200, a pre-2016 flat-slope band,
+five-of-seven primary agreement, and four fixed sensitivity variants. Short/long
+conflicts remain separate descriptors, including when the overall state is clear.
+
+- [x] Freeze definitions, calibration, sensitivity variants, omission policies,
+  transition attribution and uncertainty before conditional MA results.
+- [x] Build and verify completed-price votes, causal states and actual-submission
+  labels; preserve all 16,668 eligible RTL trades and baseline economics.
+- [x] Compare states and fixed skip policies, dollars/R, costs, drawdowns, annual
+  and roll sensitivity, same-holding controls and circular-placement controls.
+- [x] Locate profits missed before up-consensus returns and describe causal age
+  after reentry, separating future attribution from live information.
+- [x] Independently verify all outputs, render results, and decide whether any
+  primary policy warrants a separately specified full replay. No automatic adoption.
+
+Completed 2026-10-25: [results](../rtl-ma-agreement/RESULTS.md). All three policies
+remove profitable dollars in both eras under all five definitions; no primary
+policy passes the frozen replay screen. Clear-up returns improve recently but
+do not repeat early. Skip-down has a modest recent risk tradeoff, with contrary
+early evidence and unequal dollar-risk exposure. Future consensus often arrives
+during profitable trades, but that is outcome-conditioned attribution, not a
+predictive restart rule. All 83,340 labelled rows, 159 summaries, 90 policy rows,
+60,000 bootstrap group draws and 12,000 placement draws independently verified;
+18 tests pass. No MA filter or EA change adopted; full replay not triggered.
+
 ## Downtrend crystal ball: 2026-10-24
 
 User proposed a perfect-foresight downtrend test as a ceiling for all downtrend
@@ -194,3 +222,14 @@ User-requested RTL test of the warning statistics. [Frozen protocol](../rtl-warn
 Completed: [results](../rtl-warning-rules/RESULTS.md). No rule is promising;
 nothing beats trading every session. Daily downtrend filtering for RTL on NQ is
 considered exhausted; no MT5 replay stage triggered.
+
+## Weekly signal gate: 2026-10-25
+
+User proposal after a weekly MT5 run. [Frozen protocol](../rtl-weekly-gate/PROTOCOL.md).
+
+- [x] Weekly bars from M30, roll-adjusted; sell/buy breaks of the prior week.
+- [x] Gate new M30 trades at the breaking bar's close; three fixed sensitivities.
+- [x] Independently verify and apply the fixed decision rule.
+
+Completed: [results](../rtl-weekly-gate/RESULTS.md). Not promising: every version
+cuts profit by 52-85%.
