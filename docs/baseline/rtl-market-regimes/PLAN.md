@@ -5,6 +5,10 @@ start with **RTL only**, save the proposal as a plan, and work through it point 
 
 ## Objective and scope
 
+Latest cross-study interpretation: [drawdown synthesis](SYNTHESIS.md), saved
+2026-10-25 at the user's request. This qualifies the earlier broad claims that
+all filtering is exhausted and retains the modest risk-reduction evidence.
+
 Find observable conditions in which reducing or skipping RTL long exposure improves
 the result after costs while preserving profitable opportunities. Distinguish a
 negative entry expectancy from positive expectancy accompanied by larger dollar risk.

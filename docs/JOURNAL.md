@@ -1,5 +1,14 @@
 # Research journal
 
+## 2026-10-25: Drawdown research synthesis
+
+- User asked to review the latest crystal-ball and related experiments and commit
+  the conclusions. Saved [synthesis](baseline/rtl-market-regimes/SYNTHESIS.md):
+  identification, false alarms and restart timing remain obstacles; tested filters
+  do not establish an adoption case. Preserve Rule B's qualified risk benefit and
+  distinguish manageable drawdowns from unlimited losses or guaranteed recovery.
+  No strategy change.
+
 What we did, day by day, and what each step answered. Newest day last.
 For the current state of the strategy, see [STATUS.md](STATUS.md).
 
