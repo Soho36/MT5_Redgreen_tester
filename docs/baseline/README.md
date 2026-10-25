@@ -7,6 +7,7 @@ flatten. The current rules are in [STATUS.md](../STATUS.md).
 
 | Study | Answer |
 |---|---|
+| [RTL session VWAP](rtl-vwap/RESULTS.md) ([protocol](rtl-vwap/PROTOCOL.md)) | Far-below signals offer a risk-reduction lead: roughly half the daily-close DD in both eras, earlier profit slightly lower/recent higher; same-holding controls and close-price sensitivity support a full replay proposal. Duration and cash-anchor limitations remain; no filter adopted. Independently verified; 13 tests pass |
 | [RTL M30 MA agreement](rtl-ma-agreement/RESULTS.md) ([protocol](rtl-ma-agreement/PROTOCOL.md)) | No filter: skip mixed/down or only-up all cut profit in both eras across five fixed variants. Recent skip-down risk tradeoff fails to repeat early; future consensus timing is descriptive. Independently verified; 18 tests pass |
 | [RTL weekly signal gate](rtl-weekly-gate/RESULTS.md) ([protocol](rtl-weekly-gate/PROTOCOL.md)) | Turning M30 RTL off after a weekly sell (break of a green week's low) and on after a weekly buy cuts profit 52-85% in every version; skipped trades are the better ones. Not promising. Independently verified |
 | [RTL warning-based skip rules](rtl-warning-rules/RESULTS.md) ([protocol](rtl-warning-rules/PROTOCOL.md)) | Pullback-warning stop loses half of recent profit; live-zigzag stop with bounce-warning resume repairs most of the zigzag's damage but still loses at 2-3% and barely acts at 5%. Nothing beats trading every session; daily downtrend filtering looks exhausted. Independently verified |

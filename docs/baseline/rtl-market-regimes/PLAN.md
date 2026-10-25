@@ -237,3 +237,20 @@ User proposal after a weekly MT5 run. [Frozen protocol](../rtl-weekly-gate/PROTO
 
 Completed: [results](../rtl-weekly-gate/RESULTS.md). Not promising: every version
 cuts profit by 52-85%.
+
+## VWAP and price action: 2026-10-25
+
+User authorized after saving the [drawdown synthesis](SYNTHESIS.md).
+[Frozen protocol](../rtl-vwap/PROTOCOL.md), RTL only, existing baseline.
+
+- [x] Freeze four questions: location, distance, reclaim/loss and repeated crossings.
+- [x] Build minute-volume VWAP and causal labels; preserve unknown session opens.
+- [x] Compare trade outcomes, omission policies, equal exposure and confounds.
+- [x] Independently verify, report results and determine whether replay is warranted.
+
+Completed 2026-10-26: [results](../rtl-vwap/RESULTS.md), 13 tests and full
+independent reconstruction pass. Far-below full-session VWAP signals provide a
+risk-reduction lead across both eras, despite failing the negative-dollar screen
+early. A [concrete replay proposal](../rtl-vwap/REPLAY_PROPOSAL.md) is saved;
+not executed or adopted. Recent drawdown duration worsens and cash-anchor results
+are weaker. Other tested VWAP relationships do not justify a filter.

@@ -1,7 +1,9 @@
 # Project status
 
-Updated 2026-10-25. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
+Updated 2026-10-26. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
 For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
+
+**[RTL session VWAP](baseline/rtl-vwap/RESULTS.md) (2026-10-26, exploratory): far-below signals warrant a risk-management replay; no filter adopted.** Four fixed questions, 16,668 trades, full-session HLC3 VWAP plus close-price/cash-anchor sensitivities. Skipping close < VWAP - A20 changes net/DD from $4,417/$2,143 to $3,939/$932 early, and $38,400/$5,781 to $43,435/$3,084 recently. Both beat same-holding static exposure; close-price and roll-clean patterns agree. Strict negative-edge screen fails because skipped early dollars are positive. Recent DD duration worsens 283 -> 392 days, cash-anchor evidence is weaker, and retained planned risk is only 61% versus 72% holding. Repeated crossings remain profitable; reclaims are too rare. All raw features/trades/economics/controls independently verified; 13 tests pass. [Full replay proposal](baseline/rtl-vwap/REPLAY_PROPOSAL.md) saved, not executed.
 
 **[Drawdown research synthesis](baseline/rtl-market-regimes/SYNTHESIS.md) (2026-10-25):** accepting manageable drawdowns currently has stronger support than the tested timing filters. This is not proof all filters are exhausted or recovery is guaranteed. Preserve the warning-rule risk hint, distinguish exposure reduction from prediction, and assess account-level survivability and forward execution before deployment. Baseline unchanged.
 
