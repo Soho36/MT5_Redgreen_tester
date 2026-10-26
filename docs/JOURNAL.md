@@ -28,7 +28,8 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - **Limit-order entry rejected** and **time of day checked** (no change), 2026-10-02.
 - **Weekly RTL (2026-10-27):** flattening every session barely changes it; per trade it beats M30 in R but
   trades ~6 times a year with a ~$1.5k stop per MNQ and earned less recently. Controls: no edge beyond being
-  long NQ (plain weekly long as good; timing not better than random). Not adopted.
+  long NQ (plain weekly long as good; timing not better than random). Weekly GG is weaker still
+  (2020-26 DD $18.8k, 2022 -$12.9k). Not adopted.
 - **Q1–Q5 answered (no filter).** **Next:** execution realism (live/demo fills and slippage)
   and the live sizing decision; new ideas go into the Inbox.
 
@@ -785,3 +786,11 @@ study doc. Keep each step to one or two lines.*
 - Plain long (every week's first open while flat, stop one weekly range below, same exit/flatten): gross R +0.51 / +0.30 vs RTL +0.29 / +0.39; RTL minus plain -0.22 / +0.10 R, intervals across zero; RTL better in 8 of 17 years. Red week with a market entry: RTL minus -0.37 / +0.05 R. On M30 the buy stop gains +0.07 R; on weekly bars nothing visible.
 - Random timing: RTL's long sessions (from the open) beat 52% / 81% of shifted placements, short of 95%. The protocol's version also counted breakout fill days (look-ahead, $2.5k / $17.1k of the score); corrected after seeing it, disclosed. Remaining hint: smaller 2020-26 DD ($7.6k vs $14.1k plain long, mostly 2022).
 - Market-entry path matches 165 of 166 trades of a fresh MT5 W1 control run (the other is MT5's tester-start trade, same loss); MT5 fills market buys one tick above the open. 12 tests pass.
+
+## 2026-10-27: Weekly studies committed; GG on weekly candles
+
+- Weekly RTL studies committed and pushed (`1721b61`); the push also carried three earlier unpushed commits.
+- User asked to run GG next: same weekly setup and controls with a green signal week. [Protocol](baseline/gg-weekly-flatten/PROTOCOL.md) fixed before results; [results](baseline/gg-weekly-flatten/RESULTS.md).
+- GG weekly flattened: $3,544 / $15,996, +0.33 / +0.18 R per trade, 2020-26 DD $18,760. 2022 lost $12,903 (10 stops in 11 trades buying breakouts above green weeks in the bear market); weekly RTL made +$807 that year. Flattening barely matters again (held $3,798 / $16,208).
+- Controls: GG minus plain long -0.13 / -0.10 R; its long sessions beat only 11% / 27% of random placements and its 2020-26 DD is larger than 98% of them. Buy stop vs market entry on green weeks +0.10 / +0.13 R (intervals across zero). RTL + GG weekly together: $43.3k, DD $23.3k, worse than the plain long ($37.6k, DD $14.1k).
+- Simulator reproduces all 26,505 MT5 GG M30 trades and all 119 trades of a fresh MT5 GG W1 run; RTL ledger unchanged; 13 tests pass.

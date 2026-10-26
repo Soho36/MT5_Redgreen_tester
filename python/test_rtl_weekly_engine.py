@@ -113,6 +113,18 @@ class FlattenReopen(unittest.TestCase):
         self.assertAlmostEqual(trades.iloc[0].gross, -20 * e.POINT_VALUE)
 
 
+class GreenSignal(unittest.TestCase):
+    def test_gg_arms_on_a_green_week_and_a_red_week_keeps_its_order(self):
+        s = {0: [(60, 100, 120, 95, 110), (1410, 110, 110, 110, 110)],     # green: high 120, low 95
+             4: [(60, 110, 118, 110, 118), (1410, 118, 118, 118, 118)]}
+        red_week(s, 7)                                                     # red week below 120
+        s[14] = flat_session(110, high=121)
+        self.assertEqual(len(run(s)[0]), 1)                                 # RTL: red week 7, high 120
+        t = run(s, signal='green')[0].iloc[0]
+        self.assertEqual((t.requested, t.sl, t.fill), (120, 95, 120))      # GG: week 0's order survived week 7
+        self.assertEqual(t.signal_week, np.datetime64('2024-01-01'))
+
+
 class MarketControls(unittest.TestCase):
     def green_week(self, s):
         s[0] = [(60, 100, 120, 95, 110), (1410, 110, 110, 110, 110)]
@@ -132,14 +144,14 @@ class MarketControls(unittest.TestCase):
         s = {}
         self.green_week(s)
         s[7] = flat_session(118)
-        self.assertEqual(len(run(s, control='red_market')[0]), 0)
+        self.assertEqual(len(run(s, control='signal_market')[0]), 0)
         s = {}
         red_week(s)
         s[7] = flat_session(106)
-        t = run(s, control='red_market')[0].iloc[0]
+        t = run(s, control='signal_market')[0].iloc[0]
         self.assertEqual((t.fill, t.sl, t.requested), (106, 100, 106))
         s[7] = flat_session(99)
-        trades, _, counts = run(s, control='red_market')
+        trades, _, counts = run(s, control='signal_market')
         self.assertEqual((len(trades), counts['rejected']), (0, 1))
 
     def test_plain_long_stopped_next_minute_in_hold_mode(self):

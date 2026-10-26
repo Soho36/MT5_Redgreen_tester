@@ -23,7 +23,7 @@ SPREAD = 0.25       # MT5 fills a market buy one tick above the open on this sym
 MIN_SHIFT = 60
 SEED = 20261028
 DRAWS = 10000
-CONTROLS = {'Plain long': 'plain', 'Red week, market entry': 'red_market'}
+CONTROLS = {'Plain long': 'plain', 'Red week, market entry': 'signal_market'}
 
 
 def minute_floor(s):

@@ -85,6 +85,11 @@ def path(o, h, l, c):
     return (o, l, h, c) if c > o else (o, h, l, c)
 
 
+def is_signal(o, c, signal):
+    """RTL arms on a red bar, GG (signal 'green') on a green bar."""
+    return c > o if signal == 'green' else c < o
+
+
 def stamp(day, minute, k):
     return np.datetime64(int(day), 'D') + np.timedelta64(int(minute) * 60 + TICK_SECONDS[k], 's')
 
@@ -95,7 +100,7 @@ def stamp_array(day, minute, k=0):
 
 # ---------------------------------------------------------------- M30 EA emulation
 
-def simulate_m30_ea(bars, rr=1.0, cutoffs=None, last_date=None):
+def simulate_m30_ea(bars, rr=1.0, cutoffs=None, last_date=None, signal='red'):
     """RR_r_MFE_buy-stop-entry_runband on M30, uncapped, all 01:00-23:30 windows, flatten fallback
     and early-close calendar, MT5 tester fills (pending and stop orders fill at their level)."""
     cutoffs = cutoffs or {}
@@ -154,7 +159,7 @@ def simulate_m30_ea(bars, rr=1.0, cutoffs=None, last_date=None):
             if bar_min < 60:
                 pend = None
                 continue
-            if bar1 is not None and bar1[3] < bar1[0]:
+            if bar1 is not None and is_signal(bar1[0], bar1[3], signal):
                 pend = None
                 if bar1[1] - bar1[2] <= 0:
                     continue
@@ -178,14 +183,14 @@ def weekly_bars(bars, o, h, l, c):
 
 
 def simulate_weekly(bars, o, h, l, c, fac, mode='flat', fills='gap', rr=1.0, cutoffs=None,
-                    last_date=None, contracts=None, control=None, spread=0.0):
+                    last_date=None, contracts=None, control=None, spread=0.0, signal='red'):
     """RTL on weekly bars. mode 'flat': live only 01:00-cutoff, reopen at each session open.
     mode 'hold': the EA on W1 with flattening and windows off. fills 'gap': at the level or a
     worse open; 'mt5': always at the level (MT5 tester). Returns (trades, pieces, counters).
     Pieces are round turns in flat mode; in hold mode, a held trade's P&L per session ('mark').
     control 'plain': market buy at every week's first open while flat, stop one previous-week
-    range below (the EA's SignalMode 3); 'red_market': market buy after a red week, stop at its
-    low. Market buys pay `spread` (MT5: ask = bid + 0.01)."""
+    range below (the EA's SignalMode 3); 'signal_market': market buy after a signal week, stop at
+    its low. signal 'red' = RTL, 'green' = GG. Market buys pay `spread` (MT5: ask = bid + 0.01)."""
     cutoffs = cutoffs or {}
     date, day, minute = bars['date'], bars['day'], bars['minute']
     n = len(o) if last_date is None else int(np.searchsorted(date, last_date, side='right'))
@@ -236,9 +241,9 @@ def simulate_weekly(bars, o, h, l, c, fac, mode='flat', fills='gap', rr=1.0, cut
                         'requested': p + spread, 'sl': p + spread - (wh - wl)}
                 start_trade(i, 0, p + spread)
             return
-        if wc < wo:
+        if is_signal(wo, wc, signal):
             pend = None
-            if control == 'red_market':
+            if control == 'signal_market':
                 if p + spread <= wl:
                     counts['rejected'] += 1
                     return
