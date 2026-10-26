@@ -12,7 +12,7 @@
 What we did, day by day, and what each step answered. Newest day last.
 For the current state of the strategy, see [STATUS.md](STATUS.md).
 
-## Where we are now (strategy line updated 2026-10-13, the rest 2026-10-01)
+## Where we are now (strategy line updated 2026-10-13, weekly line 2026-10-27, the rest 2026-10-01)
 
 - **Strategy:** buy stop over the last red M30 candle, stop at its low, bar-close exit at ≥ 1R,
   no red-run cap (`MaxRedRun = 0` since 2026-10-13; it was 3), flatten at 23:30 with the fallback fix.
@@ -26,6 +26,9 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - **`MaxRedRun` confirmed on clean data;** cap 3 kept as the balanced choice (cap 1 = safest).
   Dropped 2026-10-13 after the test was extended to 2026-10-01.
 - **Limit-order entry rejected** and **time of day checked** (no change), 2026-10-02.
+- **Weekly RTL (2026-10-27):** flattening every session barely changes it; per trade it beats M30 in R but
+  trades ~6 times a year with a ~$1.5k stop per MNQ and earned less recently. Controls: no edge beyond being
+  long NQ (plain weekly long as good; timing not better than random). Not adopted.
 - **Q1–Q5 answered (no filter).** **Next:** execution realism (live/demo fills and slippage)
   and the live sizing decision; new ideas go into the Inbox.
 
@@ -767,3 +770,18 @@ study doc. Keep each step to one or two lines.*
 - Skip signals more than one A20 below full-session VWAP: net/DD $4,417/$2,143 -> $3,939/$932 early, $38,400/$5,781 -> $43,435/$3,084 recent. Both beat same-holding static exposure; close-price/roll-clean findings agree. This is a risk-only lead: skipped early net dollars remain positive, so the strict negative-edge screen fails.
 - Recent DD duration increases 283 -> 392 days; the policy retains 72% holding but 61% planned risk. Cash anchoring weakens evidence, even on common available trades. Adjusted recent R contrast is negative; absolute skipped mean-R intervals include zero in both eras. Repeated crossings remain profitable, reclaims have only 5/11 trades, and extra $1 cost makes early retained net negative.
 - Independent reconstruction verifies 5,511,965 raw minutes, all features and 50,004 variant trade labels, summaries/policies, 40,000 bootstrap group draws and 8,000 placement draws. Thirteen focused tests pass. Chart visually checked. [Full replay proposal](baseline/rtl-vwap/REPLAY_PROPOSAL.md) saved; no replay or baseline/live change made.
+
+## 2026-10-27: RTL on weekly candles, flattened every session
+
+- User asked what RTL does on weekly candles when it must be flat at every session close: an MT5 W1 run holds overnight and over weekends. [Protocol](baseline/rtl-weekly-flatten/PROTOCOL.md) fixed before results; [results](baseline/rtl-weekly-flatten/RESULTS.md).
+- Rule: red week -> buy stop at its high, stop at its low, exit after a weekly close >= 1R. Live 01:00-23:30 only; flatten at the cutoff, buy back at the next open with the same stop and target; a breakout while flat fills at the next open. Signal levels roll-adjusted, profit in raw prices.
+- Answer: flattening barely matters. Flattened vs held: $4,563 vs $5,043 (2016-19), $27,199 vs $23,826 (2020-26); the recent edge for flattening is one held trade stopped at 23:32. Cost per trade is mostly commission on ~22 daily round turns. The MT5 W1 result is a fair guide.
+- Weekly vs M30 (one contract): +0.23 / +0.38 R per trade vs -0.01 / +0.05, cost-robust, but only 25 / 44 trades, median risk $357 / $1,528 per MNQ, recent net $27.2k vs $38.4k, DD $7.6k vs $5.8k. About in line with being long 55-59% of sessions; a plain-long control would be the next test.
+- New 1-minute simulator (`python/rtl_weekly_engine.py`) reproduces all 25,833 MT5 M30 trades and all 92 trades of a fresh MT5 W1 run exactly. Independent re-simulation matches all 103 trades / 2,291 pieces; 9 tests pass.
+
+## 2026-10-27: Weekly RTL controls: plain long and random timing
+
+- User asked for the plain-long control (market entry instead of the buy stop) and random timing. [Control protocol](baseline/rtl-weekly-flatten/CONTROL_PROTOCOL.md) fixed before results; [results](baseline/rtl-weekly-flatten/CONTROL_RESULTS.md).
+- Plain long (every week's first open while flat, stop one weekly range below, same exit/flatten): gross R +0.51 / +0.30 vs RTL +0.29 / +0.39; RTL minus plain -0.22 / +0.10 R, intervals across zero; RTL better in 8 of 17 years. Red week with a market entry: RTL minus -0.37 / +0.05 R. On M30 the buy stop gains +0.07 R; on weekly bars nothing visible.
+- Random timing: RTL's long sessions (from the open) beat 52% / 81% of shifted placements, short of 95%. The protocol's version also counted breakout fill days (look-ahead, $2.5k / $17.1k of the score); corrected after seeing it, disclosed. Remaining hint: smaller 2020-26 DD ($7.6k vs $14.1k plain long, mostly 2022).
+- Market-entry path matches 165 of 166 trades of a fresh MT5 W1 control run (the other is MT5's tester-start trade, same loss); MT5 fills market buys one tick above the open. 12 tests pass.
