@@ -12,7 +12,7 @@
 What we did, day by day, and what each step answered. Newest day last.
 For the current state of the strategy, see [STATUS.md](STATUS.md).
 
-## Where we are now (strategy line updated 2026-10-13, weekly line 2026-10-27, the rest 2026-10-01)
+## Where we are now (strategy line updated 2026-10-13, weekly and VWAP lines 2026-10-27, the rest 2026-10-01)
 
 - **Strategy:** buy stop over the last red M30 candle, stop at its low, bar-close exit at ≥ 1R,
   no red-run cap (`MaxRedRun = 0` since 2026-10-13; it was 3), flatten at 23:30 with the fallback fix.
@@ -30,6 +30,9 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   trades ~6 times a year with a ~$1.5k stop per MNQ and earned less recently. Controls: no edge beyond being
   long NQ (plain weekly long as good; timing not better than random). Weekly GG is weaker still
   (2020-26 DD $18.8k, 2022 -$12.9k). Not adopted.
+- **VWAP gate (2026-10-27):** on NQ 2016-26, skipping new signals more than one A20 below session VWAP
+  about halved drawdown (full MT5 replay). The frozen test on other instruments failed: 0 of 3 (ES, YM,
+  RTY) confirm, and NQ 2010-15 fails too. Treat it as specific to that history. Not adopted.
 - **Q1–Q5 answered (no filter).** **Next:** execution realism (live/demo fills and slippage)
   and the live sizing decision; new ideas go into the Inbox.
 
@@ -802,3 +805,26 @@ study doc. Keep each step to one or two lines.*
 - GG weekly flattened: $3,544 / $15,996, +0.33 / +0.18 R per trade, 2020-26 DD $18,760. 2022 lost $12,903 (10 stops in 11 trades buying breakouts above green weeks in the bear market); weekly RTL made +$807 that year. Flattening barely matters again (held $3,798 / $16,208).
 - Controls: GG minus plain long -0.13 / -0.10 R; its long sessions beat only 11% / 27% of random placements and its 2020-26 DD is larger than 98% of them. Buy stop vs market entry on green weeks +0.10 / +0.13 R (intervals across zero). RTL + GG weekly together: $43.3k, DD $23.3k, worse than the plain long ($37.6k, DD $14.1k).
 - Simulator reproduces all 26,505 MT5 GG M30 trades and all 119 trades of a fresh MT5 GG W1 run; RTL ledger unchanged; 13 tests pass.
+
+## 2026-10-27: Evaluation of the VWAP study
+
+- User asked what I think of the [VWAP study](baseline/rtl-vwap/RESULTS.md) and its [full replay](baseline/rtl-vwap/REPLAY_RESULTS.md). Three extra checks on the saved ledger (omission, not replay; not part of the frozen study): `python/check_rtl_vwap_placebos.py`. Numbers are 2016-19 / 2020-26.
+- Not just skipping big trades: far-below trades carry ~1.7x the planned risk, but their mean R is below other trades' in 9 of 10 risk deciles in each era. Skipping the same number of largest-risk trades instead: net -$442 / $18.2k, DD $1,763 / $3,520 (VWAP rule: $3,939 / $43.4k, DD $932 / $3,084).
+- Placebos without VWAP barely move DD. Same number of skips per risk decile: median DD $2,017 / $5,927 (baseline $2,143 / $5,781); the VWAP rule beats all 2,000 draws. The actual skip pattern rolled within each month (keeps runs of skips on the same days): the rule's DD beats 99.4% / 99.6% of draws, its net only 68% early, 99% recent.
+- Neighbouring thresholds: skipping more (z < -0.75 or -0.5) cuts DD as much or more; skipping less (-1.25) leaves recent DD at $4,764. Recent profit is best at -1 ($34.7k at -0.75, $40.9k at -1.25). DD lower in all 11 years; the recent profit gain leans on 2022 (+$4.2k) and 2024 gives back $4.6k.
+- Verdict: the best drawdown lead so far. Read it as "drawdown about halves, profit about the same", not as a profit gain. It came after many failed filters on the same history, so expect a smaller effect live. Next: the unchanged rule on ES, YM and RTY (minute volume is on disk), then forward. Forward alone needs years: ~36 far-below signals a month.
+
+## 2026-10-27: VWAP rule on ES, YM and RTY: protocol frozen
+
+- User asked to draft and freeze the test. [Protocol](baseline/rtl-vwap/CROSS_PROTOCOL.md) frozen before any ES/YM/RTY VWAP label or outcome; SHA-256 `39a0884b…2886` (full hash in the [plan](baseline/rtl-market-regimes/PLAN.md)).
+- Same rule and code as NQ (full-session HLC3 VWAP, A20, z < -1), on the existing RTL runs. ES and YM 2016-26, RTY 2018-26. NQ is the reference: the new code must reproduce the VWAP study's labels and numbers first. 2010-15 (NQ, ES, YM) is reported as secondary.
+- An instrument confirms if far-below trades earn less R than others of similar risk (whole interval below zero), and skipping them cuts DD more than 95% of risk-matched and rolled-within-month placebos, with the same direction in each era. The verdict is "transfers" if 2 of 3 confirm. No rescue if it fails.
+- Not run yet.
+
+## 2026-10-27: VWAP rule on ES, YM and RTY: does not transfer
+
+- User asked to run the frozen test. [Results](baseline/rtl-vwap/CROSS_RESULTS.md); [protocol](baseline/rtl-vwap/CROSS_PROTOCOL.md).
+- Answer: 0 of 3 confirm. Matched on risk, far-below trades earn -0.013 / -0.026 / -0.028 R less on ES / YM / RTY (NQ -0.091); every interval includes zero. NQ 2010-15, never analysed for this rule, fails too (+0.033 R).
+- Drawdown halves on ES and RTY as on NQ, but mostly through timing: the rule's own skips shifted within each month do almost as well (rule beats 87% / 15% / 89% of those draws; 95% needed). 65-82% of their far-below trades came while NQ was also far below; on the rest the effect is about zero.
+- Meaning: the NQ VWAP lead is most likely specific to its 2016-26 history. No rescue, no live change; forward testing only, low priority.
+- Checks: all four MT5 reports reconcile, published totals reproduced, 93,020 signal bars match, the new code reproduces the NQ study's features and labels exactly. Disclosed: 3 ES positions and 1 YM order cross a date in documented data holes; a 1e-9 rounding tolerance against the older NQ panel; dollar ties count against the rule. Independently verified; 11 new tests (33 VWAP tests) pass.

@@ -273,3 +273,22 @@ $887/$729; recent daily DD duration grows 283 -> 328 days, and extra $1/trade
 makes early filtered net -$303. All raw outputs/economics independently verified;
 22 VWAP tests pass. Keep the unchanged rule for prospective validation rather
 than more tuning on the same history. No production RTL change.
+
+## VWAP rule on ES, YM and RTY: frozen 2026-10-27
+
+User asked for this after the evaluation's placebo checks (see the journal).
+[Frozen protocol](../rtl-vwap/CROSS_PROTOCOL.md), SHA-256
+`39a0884b7d746de14902e8a87833c4903da0965e331b47e7ead3b277cf912886`. No ES/YM/RTY
+VWAP label or outcome computed before freezing.
+
+- [x] Freeze the unchanged rule, samples, placebos, seeds and the verdict.
+- [x] Parse and reconcile the existing ES/YM/RTY/NQ RTL runs; NQ reproduces the VWAP panel.
+- [x] Build features with the unchanged NQ code; label trades; signal-bar check.
+- [x] Risk-matched contrast, placebos, descriptive outputs; apply the fixed verdict.
+- [x] Independently verify; results, chart, plan, journal and status.
+
+Completed 2026-10-27: [results](../rtl-vwap/CROSS_RESULTS.md). **Does not transfer: 0 of 3
+confirm.** Risk-matched contrasts -0.013 / -0.026 / -0.028 R on ES / YM / RTY (NQ -0.091), every
+interval across zero; the rule's DD beats only 87% / 15% / 89% of same-month placebos (95%
+needed). NQ 2010-15 fails too. Per protocol: no rescue on these data; the rule stays a forward
+candidate only. No production RTL change.

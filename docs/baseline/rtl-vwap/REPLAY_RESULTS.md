@@ -1,5 +1,9 @@
 # RTL VWAP: full strategy replay
 
+**Update 2026-10-27, later: the rule does not transfer.** Under a frozen protocol it confirms on
+none of ES, YM and RTY (0 of 3) and fails on NQ 2010-15. The replay below stands as NQ 2016-26
+history only. See [cross-instrument results](CROSS_RESULTS.md).
+
 Completed 2026-10-27. [Protocol](REPLAY_PROTOCOL.md) frozen before outcomes;
 follow-up to the [ledger study](RESULTS.md). **The risk-reduction result survives
 the full engine replay, and net dollars improve in both eras.** This warrants
