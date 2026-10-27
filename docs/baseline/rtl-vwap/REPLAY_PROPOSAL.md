@@ -1,7 +1,11 @@
 # Proposed full replay: RTL signals far below session VWAP
 
+**Update 2026-10-27:** authorized replay completed under the separately frozen
+[replay protocol](REPLAY_PROTOCOL.md); see [results](REPLAY_RESULTS.md).
+The historical proposal below is preserved; no live filter is adopted.
+
 2026-10-26. A concrete follow-up to the completed [attribution study](RESULTS.md).
-**Proposal only; not implemented, executed or adopted.** Rationale is historical
+**Status when proposed: not implemented, executed or adopted.** Rationale is historical
 risk reduction in both eras, not passing the stricter negative-dollar screen.
 
 ## Rule to preserve

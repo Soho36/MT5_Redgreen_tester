@@ -1,5 +1,10 @@
 # RTL session VWAP and price action
 
+**Update 2026-10-27:** the [full engine replay](REPLAY_RESULTS.md) is complete.
+The historical risk benefit survives, with higher net dollars in both eras.
+The original ledger-only findings below remain the motivation for that replay;
+neither study is independent forward validation, and no live filter is adopted.
+
 Completed 2026-10-26; [protocol](PROTOCOL.md) frozen 2026-10-25 before outcomes.
 RTL only. **One worthwhile risk-management lead: avoid new signals far below
 the full-session VWAP. No filter adopted; full replay is still required.**

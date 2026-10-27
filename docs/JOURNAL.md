@@ -772,6 +772,14 @@ study doc. Keep each step to one or two lines.*
 - Recent DD duration increases 283 -> 392 days; the policy retains 72% holding but 61% planned risk. Cash anchoring weakens evidence, even on common available trades. Adjusted recent R contrast is negative; absolute skipped mean-R intervals include zero in both eras. Repeated crossings remain profitable, reclaims have only 5/11 trades, and extra $1 cost makes early retained net negative.
 - Independent reconstruction verifies 5,511,965 raw minutes, all features and 50,004 variant trade labels, summaries/policies, 40,000 bootstrap group draws and 8,000 placement draws. Thirteen focused tests pass. Chart visually checked. [Full replay proposal](baseline/rtl-vwap/REPLAY_PROPOSAL.md) saved; no replay or baseline/live change made.
 
+## 2026-10-27: RTL VWAP full strategy replay completed
+
+- User authorized full replay and commit after the VWAP study (`44f2cff`), then authorized the usual MT5 installation after portable startup lacked account context. [Frozen protocol](baseline/rtl-vwap/REPLAY_PROTOCOL.md); [results](baseline/rtl-vwap/REPLAY_RESULTS.md).
+- OFF exactly reproduces all 25,833 baseline trades, execution fields, ticket IDs and raw bytes. ON blocks only new red candidates with completed close < full-session VWAP - A20 after original cancellation; no threshold or exit tuning. Native history independently reconciles both arms; ON HTML also matches. OFF HTML was not generated because its absolute report path was unsupported; disclosed environment/report deviation.
+- Eligible baseline/gated net $4,416.65/$4,721.30 early and $38,399.95/$45,724.65 recent. Daily-close DD $2,143.15/$985.55 and $5,781.15/$3,158.35; sampled open-equity DD $2,348.40/$1,041.85 and $5,941.70/$3,454.05. Both outperform uniform baseline scaling to matching holding time and planned risk.
+- Newly enabled completed trades add $886.85/$728.65. Removed baseline trades contribute +$582.20/-$6,596.05 originally; membership changes reconcile exactly. Recent daily DD duration grows 283 -> 328 days; early mean R stays negative and +$1/trade makes filtered net -$302.70. Annual net declines in 2017, 2019, 2024; equal-R DD improvement is smaller than dollar DD improvement.
+- All 126,860 candidates, 46,554 complete trades, 12,146,097 equity samples and nine economic tables independently verified; 22 VWAP tests pass. Corrected closed/sample drawdown duration includes recovery; inherited daily convention retained and disclosed. Chart rendered and visually inspected. No production RTL change or live filter activation; keep the unchanged rule for prospective validation.
+
 ## 2026-10-27: RTL on weekly candles, flattened every session
 
 - User asked what RTL does on weekly candles when it must be flat at every session close: an MT5 W1 run holds overnight and over weekends. [Protocol](baseline/rtl-weekly-flatten/PROTOCOL.md) fixed before results; [results](baseline/rtl-weekly-flatten/RESULTS.md).

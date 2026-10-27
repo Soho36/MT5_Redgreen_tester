@@ -254,3 +254,22 @@ risk-reduction lead across both eras, despite failing the negative-dollar screen
 early. A [concrete replay proposal](../rtl-vwap/REPLAY_PROPOSAL.md) is saved;
 not executed or adopted. Recent drawdown duration worsens and cash-anchor results
 are weaker. Other tested VWAP relationships do not justify a filter.
+
+## Full VWAP strategy replay: completed 2026-10-27
+
+User authorized the full replay and commit. [Frozen protocol](../rtl-vwap/REPLAY_PROTOCOL.md).
+
+- [x] Freeze the single far-below rule and original pending-order maintenance.
+- [x] Reproduce all 25,833 baseline trades exactly before enabling the gate.
+- [x] Replay skipped orders and subsequent opportunities through the full engine.
+- [x] Reconcile candidate/order histories, attribution, equal-exposure controls,
+  annual/cost results and sampled open-equity risk independently.
+- [x] Save results, chart, executable workflow and verification; no live adoption.
+
+[Results](../rtl-vwap/REPLAY_RESULTS.md): net $4,417 -> $4,721 early and
+$38,400 -> $45,725 recently; daily-close DD $2,143 -> $986 and $5,781 -> $3,158.
+Both beat same-holding and same-planned-risk baseline scaling. New trades add
+$887/$729; recent daily DD duration grows 283 -> 328 days, and extra $1/trade
+makes early filtered net -$303. All raw outputs/economics independently verified;
+22 VWAP tests pass. Keep the unchanged rule for prospective validation rather
+than more tuning on the same history. No production RTL change.
