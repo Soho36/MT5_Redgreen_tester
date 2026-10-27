@@ -45,7 +45,7 @@ def validate(bars, cutoffs, factor):
            'exit_minute_diff': int((minute_floor(j.exit_time_s) != j.exit.dt.floor('min')).sum()),
            'rejected_orders': rejected}
     assert m30['extra_after_mt5_start'] == 0 and m30['profit_diff'] == 0 and m30['range_diff'] == 0
-    assert m30['exit_minute_diff'] <= 5
+    assert m30['exit_minute_diff'] == 0
     ones = np.ones(len(bars['o']))
     tr, _, _ = e.simulate_weekly(bars, bars['o'], bars['h'], bars['l'], bars['c'], ones, mode='hold',
                                  fills='mt5', signal='green')

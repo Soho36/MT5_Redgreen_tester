@@ -20,8 +20,11 @@ LAST_DATE = 20260930
 SECONDS = (0, 20, 40, 59)
 
 
-def ticks(o, h, l, c):
-    return (o, l, h, c) if c > o else (o, h, l, c)
+def ticks(o, h, l, c, previous_move):
+    """MT5 1-minute OHLC order; a flat minute follows the last minute that moved (rose: high first)."""
+    if c > o or (c == o and previous_move < 0):
+        return (o, l, h, c)
+    return (o, h, l, c)
 
 
 def main():
@@ -42,6 +45,12 @@ def main():
     factor_by_date = pd.Series(np.cumprod(step[::-1])[::-1], index=dates)
     f = factor_by_date[m.date].to_numpy()
     o, h, l, c = (m[x].to_numpy() * f for x in 'ohlc')
+    previous_move = np.zeros(len(o))     # direction of the last earlier minute whose close differs from its open
+    move = 0.0
+    for j, (oj, cj) in enumerate(zip(m.o.to_numpy(), m.c.to_numpy())):
+        previous_move[j] = move
+        if cj != oj:
+            move = 1.0 if cj > oj else -1.0
     # weekly bars on the adjusted prices
     week = when.dt.to_period('W-SUN')
     wk = pd.DataFrame({'week': week, 'o': o, 'h': h, 'l': l, 'c': c}).groupby('week').agg(
@@ -86,7 +95,7 @@ def main():
         open_piece(j, k, price)
 
     def first_tick(j, k0, test):
-        for k, p in enumerate(ticks(o[j], h[j], l[j], c[j])):
+        for k, p in enumerate(ticks(o[j], h[j], l[j], c[j], previous_move[j])):
             if k >= k0 and test(p):
                 return k, p
         return None

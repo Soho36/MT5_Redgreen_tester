@@ -113,6 +113,14 @@ class FlattenReopen(unittest.TestCase):
         self.assertAlmostEqual(trades.iloc[0].gross, -20 * e.POINT_VALUE)
 
 
+class TickOrder(unittest.TestCase):
+    def test_flat_minute_follows_the_last_minute_that_moved(self):
+        o = np.array([10., 11., 11., 11., 9., 9.])
+        c = np.array([11., 11., 11., 9., 9., 10.])
+        # rise, flat after rise (high first), flat, fall, flat after fall (low first), rise
+        self.assertEqual(list(e.low_first(o, c)), [True, False, False, False, True, True])
+
+
 class GreenSignal(unittest.TestCase):
     def test_gg_arms_on_a_green_week_and_a_red_week_keeps_its_order(self):
         s = {0: [(60, 100, 120, 95, 110), (1410, 110, 110, 110, 110)],     # green: high 120, low 95
@@ -169,6 +177,14 @@ class Basis(unittest.TestCase):
         adj = b['o'] * f
         self.assertAlmostEqual(adj[4], b['c'][3] * f[3])
         self.assertTrue(np.allclose(f[4:], 1) and np.allclose(f[:4], 1.1))
+
+    def test_point_value_scales_risk_and_profit(self):
+        s = {}
+        red_week(s)
+        s[7] = [(60, 110, 125, 110, 124), (1410, 126, 126, 126, 126)]
+        trades, pieces, _ = run(s, point_value=5.0)
+        self.assertAlmostEqual(trades.iloc[0].risk_dollars, 20 * 5.0)
+        self.assertAlmostEqual(pieces.gross.sum(), (126 - 120) * 5.0)
 
     def test_flat_pieces_are_raw_dollars_on_adjusted_levels(self):
         s = {}

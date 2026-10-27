@@ -53,7 +53,7 @@ def validate(bars, cutoffs):
            'exit_minute_diff': int((minute_floor(j.exit_time_m) != minute_floor(j.exit_time_s)).sum()),
            'rejected_orders': rejected}
     assert m30['requested_diff'] == m30['sl_diff'] == m30['fill_diff'] == m30['exit_price_diff'] == 0
-    assert m30['exit_minute_diff'] <= 2
+    assert m30['exit_minute_diff'] == 0
     ones = np.ones(len(bars['o']))
     tr, _, _ = e.simulate_weekly(bars, bars['o'], bars['h'], bars['l'], bars['c'], ones, mode='hold', fills='mt5')
     w1 = load(W1_LEDGER)
@@ -142,7 +142,7 @@ def era_of(times):
                                list(reversed(list(ERAS))), 'none'), index=times.index)
 
 
-def session_long(bars, cutoffs):
+def session_long(bars, cutoffs, point_value=e.POINT_VALUE):
     """Benchmark: one contract long from every session's first bar to its flatten, net of $1.05."""
     date, minute, o, c = bars['date'], bars['minute'], bars['o'], bars['c']
     keep = date <= LAST_DATE
@@ -151,7 +151,7 @@ def session_long(bars, cutoffs):
     first = d.groupby('date').o.first()
     flat = d[d.cut].groupby('date').o.first().reindex(first.index)
     exit_ = flat.fillna(d.groupby('date').c.last())
-    pnl = (exit_ - first) * e.POINT_VALUE - COST
+    pnl = (exit_ - first) * point_value - COST
     pnl.index = pd.to_datetime(pnl.index.astype(str))
     return pnl
 

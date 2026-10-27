@@ -106,7 +106,8 @@ weekly stop of $1,500-3,000 matters for any account loss limit.
 
 - **M30 check:** the simulator in M30 mode, with the EA's own flatten logic, reproduces
   all 25,833 trades of the MT5 M30 RTL ledger: identical order levels, stops, fill and
-  exit prices; exit minute identical in 25,831 (two same-minute timing differences).
+  exit prices and exit minutes (since the flat-minute tick rule found in the
+  [MES study](../mes-weekly-flatten/RESULTS.md); before it, two exits differed by a minute).
   18 extra simulated trades fall in the first three days, before MT5 starts trading.
 - **W1 check:** a fresh MT5 tester run on W1 (frozen 2026-10-15 RTL source, flatten and
   trade windows off) reproduced trade by trade by `W1 hold MT5-style`: all 92 trades,

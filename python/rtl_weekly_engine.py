@@ -1,7 +1,8 @@
 """Minute-bar RTL simulator: MT5 M30 EA emulation, and RTL on weekly bars, held or session-flattened.
 
-Ticks follow MT5's 1-minute OHLC model: open, then low and high (bullish minute) or
-high and low (otherwise), then close, at :00/:20/:40/:59. With 'gap' fills an order fills
+Ticks follow MT5's 1-minute OHLC model: open, then low and high (rising minute) or high and
+low (falling minute), then close, at :00/:20/:40/:59. A flat minute (close = open) takes the
+opposite order of the last minute that moved: high first after a rise, low first after a fall. With 'gap' fills an order fills
 at its level, or at a minute's open when that open is already beyond it.
 Prices o/h/l/c are in the level basis (raw or roll-adjusted). `fac` = basis / raw for
 each minute, constant within a session, so raw points = basis difference / fac.
@@ -19,18 +20,20 @@ from project_paths import PROJECT_ROOT as ROOT
 
 MINUTES = Path(r'F:\DATABENTO\MNQ_16_YEARS\MT5_NQ_continuous_2010-2026_ohlcv-1m.csv')
 ROLLS = MINUTES.with_name('MT5_NQ_continuous_2010-2026_rolls.csv')
+ES_MINUTES = Path(r'F:\DATABENTO\ES_16_YEARS\MT5_ES_continuous_2010-2026_ohlcv-1m.csv')
+ES_ROLLS = ES_MINUTES.with_name('MT5_ES_continuous_2010-2026_rolls.csv')
 CALENDAR = ROOT / 'mt5/experts/early_closes.mqh'
-POINT_VALUE = 2.0
+POINT_VALUE = 2.0           # MNQ; MES is 5.0
 CUTOFF = 23 * 60 + 30
 TICK_SECONDS = (0, 20, 40, 59)
 
 
-def load_minutes(cache=None):
+def load_minutes(cache=None, source=MINUTES):
     """Arrays date (yyyymmdd), day (days since 1970), minute (of day), o/h/l/c (raw)."""
     if cache is not None and Path(cache).exists():
         with np.load(cache) as z:
             return {k: z[k] for k in z.files}
-    d = pd.read_csv(MINUTES, sep='\t', usecols=[0, 1, 2, 3, 4, 5], header=0,
+    d = pd.read_csv(source, sep='\t', usecols=[0, 1, 2, 3, 4, 5], header=0,
                     names=['date', 'time', 'o', 'h', 'l', 'c'], dtype={'date': str, 'time': str})
     keys = pd.Series(pd.unique(d.date))
     days = pd.to_datetime(keys, format='%Y.%m.%d').to_numpy().astype('datetime64[D]').astype(np.int64)
@@ -53,9 +56,9 @@ def load_cutoffs():
     return dict(zip(dates, times))
 
 
-def roll_switches(last_date):
+def roll_switches(last_date, rolls_file=ROLLS):
     """Session dates (yyyymmdd) on which the traded contract changes."""
-    rolls = pd.read_csv(ROLLS)
+    rolls = pd.read_csv(rolls_file)
     change = rolls.symbol.ne(rolls.symbol.shift()) & rolls.symbol.shift().notna()
     dates = rolls.loc[change, 'date'].str.replace('-', '').astype(int)
     return [d for d in dates if d <= last_date]
@@ -81,8 +84,15 @@ def week_keys(day):
     return day - (day + 3) % 7
 
 
-def path(o, h, l, c):
-    return (o, l, h, c) if c > o else (o, h, l, c)
+def low_first(o, c):
+    """Per minute: True when MT5 goes open, low, high, close."""
+    move = np.sign(c - o)
+    last = pd.Series(np.where(move != 0, move, np.nan)).ffill().shift(1).fillna(0).to_numpy()
+    return (move > 0) | ((move == 0) & (last < 0))
+
+
+def path(o, h, l, c, lowfirst):
+    return (o, l, h, c) if lowfirst else (o, h, l, c)
 
 
 def is_signal(o, c, signal):
@@ -108,6 +118,7 @@ def simulate_m30_ea(bars, rr=1.0, cutoffs=None, last_date=None, signal='red'):
     o, h, l, c = bars['o'], bars['h'], bars['l'], bars['c']
     n = len(o) if last_date is None else int(np.searchsorted(date, last_date, side='right'))
     slot = day * 48 + minute // 30
+    lf = low_first(o, c)
     trades, rejected = [], 0
     pend = pos = None
     last_flat = prev_date = 0
@@ -129,7 +140,7 @@ def simulate_m30_ea(bars, rr=1.0, cutoffs=None, last_date=None, signal='red'):
             cur[1] = max(cur[1], h[i]); cur[2] = min(cur[2], l[i]); cur[3] = c[i]
         if not new and (pend is None or h[i] < pend['requested']) and (pos is None or l[i] > pos['sl']):
             continue
-        for k, p in enumerate(path(o[i], h[i], l[i], c[i])):
+        for k, p in enumerate(path(o[i], h[i], l[i], c[i], lf[i])):
             if pos is not None and p <= pos['sl']:
                 close(i, k, pos['sl'], 'sl')
             if pend is not None and p >= pend['requested']:
@@ -183,7 +194,8 @@ def weekly_bars(bars, o, h, l, c):
 
 
 def simulate_weekly(bars, o, h, l, c, fac, mode='flat', fills='gap', rr=1.0, cutoffs=None,
-                    last_date=None, contracts=None, control=None, spread=0.0, signal='red'):
+                    last_date=None, contracts=None, control=None, spread=0.0, signal='red',
+                    point_value=POINT_VALUE):
     """RTL on weekly bars. mode 'flat': live only 01:00-cutoff, reopen at each session open.
     mode 'hold': the EA on W1 with flattening and windows off. fills 'gap': at the level or a
     worse open; 'mt5': always at the level (MT5 tester). Returns (trades, pieces, counters).
@@ -195,6 +207,7 @@ def simulate_weekly(bars, o, h, l, c, fac, mode='flat', fills='gap', rr=1.0, cut
     date, day, minute = bars['date'], bars['day'], bars['minute']
     n = len(o) if last_date is None else int(np.searchsorted(date, last_date, side='right'))
     starts, weeks = weekly_bars(bars, o, h, l, c)
+    lf = low_first(o, c)
     week_of = np.searchsorted(starts, np.arange(n), side='right') - 1
     contracts = np.zeros(len(o), int) if contracts is None else contracts
     trades, pieces = [], []
@@ -207,14 +220,14 @@ def simulate_weekly(bars, o, h, l, c, fac, mode='flat', fills='gap', rr=1.0, cut
         nonlocal trade, pend, leg
         trade = {'signal_week': pend['week'], 'submitted': pend['submitted'], 'requested': pend['requested'],
                  'sl': pend['sl'], 'entry_time': stamp(day[i], minute[i], k), 'fill': price,
-                 'risk_dollars': (price - pend['sl']) / fac[i] * POINT_VALUE, 'flat_fill': flat_fill,
+                 'risk_dollars': (price - pend['sl']) / fac[i] * point_value, 'flat_fill': flat_fill,
                  'gross': 0.0, 'pieces': 0, 'rolls': 0}
         pend = None
         leg = (trade['entry_time'], price)
 
     def close_piece(i, k, price, why):
         nonlocal leg
-        gross = (price - leg[1]) / fac[i] * POINT_VALUE
+        gross = (price - leg[1]) / fac[i] * point_value
         trade['gross'] += gross
         trade['pieces'] += 1
         pieces.append({'trade': len(trades), 'entry_time': leg[0], 'entry_price': leg[1],
@@ -321,7 +334,7 @@ def simulate_weekly(bars, o, h, l, c, fac, mode='flat', fills='gap', rr=1.0, cut
                 close_piece(i, 3, c[i], 'session_end')
                 live = False
             continue
-        ticks = path(o[i], h[i], l[i], c[i])
+        ticks = path(o[i], h[i], l[i], c[i], lf[i])
         for k in range(k0, 4):
             p = ticks[k]
             gap = fills == 'gap' and k == 0      # only a bar's open can jump past a level

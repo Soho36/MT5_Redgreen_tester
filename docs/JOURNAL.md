@@ -805,6 +805,14 @@ study doc. Keep each step to one or two lines.*
 - GG weekly flattened: $3,544 / $15,996, +0.33 / +0.18 R per trade, 2020-26 DD $18,760. 2022 lost $12,903 (10 stops in 11 trades buying breakouts above green weeks in the bear market); weekly RTL made +$807 that year. Flattening barely matters again (held $3,798 / $16,208).
 - Controls: GG minus plain long -0.13 / -0.10 R; its long sessions beat only 11% / 27% of random placements and its 2020-26 DD is larger than 98% of them. Buy stop vs market entry on green weeks +0.10 / +0.13 R (intervals across zero). RTL + GG weekly together: $43.3k, DD $23.3k, worse than the plain long ($37.6k, DD $14.1k).
 - Simulator reproduces all 26,505 MT5 GG M30 trades and all 119 trades of a fresh MT5 GG W1 run; RTL ledger unchanged; 13 tests pass.
+- GG study committed and pushed (`455f6e9`).
+
+## 2026-10-27: RTL on weekly MES candles
+
+- User asked to test weekly RTL on MES: bigger weekly candles might give ES the resolution its M30 candles lack. [Protocol](baseline/mes-weekly-flatten/PROTOCOL.md) fixed before results; [results](baseline/mes-weekly-flatten/RESULTS.md).
+- Resolution is no longer the limit: median signal range 185 / 673 ticks on W1 (M30: 10 / 25). Weekly RTL on MES flattened: +$3,429 / +$12,614, +0.36 / +0.28 net R, where ES M30 RTL loses.
+- But not because of the buy stop: the ES plain weekly long earns $7,281 / $22,767; RTL minus plain -0.07 / +0.02 R; timing beats 21% / 57% of random placements. Same as NQ: on weekly bars RTL harvests drift; the M30 buy-stop gain does not appear on weekly bars, so this cannot settle the ES M30 question.
+- Found MT5's tick order for flat minutes (close = open): it follows the last minute that moved (rise: high first; fall: low first), 2,952 of 2,952 cases. With it all 78,680 MT5 M30 trades (NQ RTL, NQ GG, ES RTL) match exactly; NQ/GG weekly numbers unchanged. 15 tests pass.
 
 ## 2026-10-27: Evaluation of the VWAP study
 
