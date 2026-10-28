@@ -110,9 +110,14 @@ def stamp_array(day, minute, k=0):
 
 # ---------------------------------------------------------------- M30 EA emulation
 
-def simulate_m30_ea(bars, rr=1.0, cutoffs=None, last_date=None, signal='red'):
+def simulate_m30_ea(bars, rr=1.0, cutoffs=None, last_date=None, signal='red', intrabar_rr=None):
     """RR_r_MFE_buy-stop-entry_runband on M30, uncapped, all 01:00-23:30 windows, flatten fallback
-    and early-close calendar, MT5 tester fills (pending and stop orders fill at their level)."""
+    and early-close calendar, MT5 tester fills (pending and stop orders fill at their level).
+    Optional intrabar_rr adds a resting TP alongside the unchanged close-confirmed exit.
+    Its distance uses initial entry-to-stop risk; fills occur at the target, not the bar high.
+    """
+    if intrabar_rr is not None and (not np.isfinite(intrabar_rr) or intrabar_rr <= 0):
+        raise ValueError('intrabar_rr must be finite and positive, or None')
     cutoffs = cutoffs or {}
     date, day, minute = bars['date'], bars['day'], bars['minute']
     o, h, l, c = bars['o'], bars['h'], bars['l'], bars['c']
@@ -138,11 +143,21 @@ def simulate_m30_ea(bars, rr=1.0, cutoffs=None, last_date=None, signal='red'):
             cur_slot = slot[i]
         else:
             cur[1] = max(cur[1], h[i]); cur[2] = min(cur[2], l[i]); cur[3] = c[i]
-        if not new and (pend is None or h[i] < pend['requested']) and (pos is None or l[i] > pos['sl']):
-            continue
+        if not new and (pend is None or h[i] < pend['requested']):
+            if pos is None:
+                continue
+            tp_untouched = intrabar_rr is None or h[i] < pos['fill'] + intrabar_rr * (pos['fill'] - pos['sl'])
+            if l[i] > pos['sl'] and tp_untouched:
+                continue
         for k, p in enumerate(path(o[i], h[i], l[i], c[i], lf[i])):
             if pos is not None and p <= pos['sl']:
                 close(i, k, pos['sl'], 'sl')
+            # MT5 checks attached exits before triggering a pending entry. A newly
+            # filled buy stop's TP becomes executable on the next generated quote.
+            if pos is not None and intrabar_rr is not None:
+                target = pos['fill'] + intrabar_rr * (pos['fill'] - pos['sl'])
+                if p >= target:
+                    close(i, k, target, 'intrabar_tp')
             if pend is not None and p >= pend['requested']:
                 pos = {**pend, 'entry_time': stamp(day[i], minute[i], k), 'fill': pend['requested']}
                 pend = None
@@ -177,7 +192,7 @@ def simulate_m30_ea(bars, rr=1.0, cutoffs=None, last_date=None, signal='red'):
                 if bar1[1] <= p:
                     rejected += 1
                     continue
-                pend = {'submitted': stamp(day[i], bar_min, 0), 'requested': bar1[1], 'sl': bar1[2]}
+                pend = {'submitted': stamp(day[i], minute[i], 0), 'requested': bar1[1], 'sl': bar1[2]}
     if pos is not None:
         close(n - 1, 3, c[n - 1], 'end_of_data')
     return pd.DataFrame(trades), rejected
