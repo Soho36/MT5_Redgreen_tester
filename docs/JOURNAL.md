@@ -845,3 +845,21 @@ study doc. Keep each step to one or two lines.*
 - Same tests and placebos as the futures test, pooled over the ten stocks. It supports the rule only if the contrast interval is below zero, the drawdown beats 95% of both placebos, and the direction holds in each era and in at least 7 of 10 stocks. The last historical instrument test of this rule.
 - Data: NVDA downloaded (structure checked only); nine stocks to download. Not run yet.
 
+## 2026-10-27: RTL MNQ +2R intratrade take profit alongside the 1R close exit
+
+- User requested an intratrade R/R exit while retaining the original candle-close
+  check. Interpreted "1/2" as 1:2 (+2R). Froze [protocol](baseline/rtl-intrabar-tp/PROTOCOL.md)
+  and ran both arms in MT5 on the same M30 MNQ proxy history, no run cap/VWAP gate.
+- **[Result](baseline/rtl-intrabar-tp/RESULTS.md): lower net profit in both eras.**
+  2016-19 $4,416.65 -> $3,535.40, closed-trade DD $2,175.90 -> $1,793.40;
+  2020-Sep2026 $38,399.95 -> $32,429.00, DD $5,781.15 -> $5,798.65.
+  Same-entry recent improvements $23,626 are outweighed by $29,153.50 given up
+  on capped winners. Only 15/9 net new trades; no baseline change.
+- New tester-only `RTL_intrabar_tp` under CodexExitResearch, configurable TP,
+  compiles without warnings. Disabled TP reproduces all 25,833 original trades
+  exactly. Simulator/native match all 25,872 hybrid trades by execution minute,
+  level and dollars; final tables use native timestamps. 11 hybrid + 15 engine
+  tests pass. Corrected sparse-opening submission timestamps and TP activation
+  after the pending-fill quote in the minute simulator; preserved provenance.
+- Artifacts: `Reports/rtl_intrabar_tp_20261027/`, especially `summary_native.csv`,
+  `yearly_native.csv`, `attribution_native.csv`, both native HTMLs and verification.
