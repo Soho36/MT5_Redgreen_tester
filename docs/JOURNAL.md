@@ -32,7 +32,9 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   (2020-26 DD $18.8k, 2022 -$12.9k). Not adopted.
 - **VWAP gate (2026-10-27):** on NQ 2016-26, skipping new signals more than one A20 below session VWAP
   about halved drawdown (full MT5 replay). The frozen test on other instruments failed: 0 of 3 (ES, YM,
-  RTY) confirm, and NQ 2010-15 fails too. Treat it as specific to that history. Not adopted.
+  RTY) confirm, and NQ 2010-15 fails too. On ten Nasdaq-100 stocks (2026-10-28) far-below trades are
+  clearly weaker, but the drawdown benefit fails in 2018-19, so that frozen test does not support it
+  either. The VWAP line closes on history; a forward paper test remains possible. Not adopted.
 - **Q1–Q5 answered (no filter).** **Next:** execution realism (live/demo fills and slippage)
   and the live sizing decision; new ideas go into the Inbox.
 
@@ -863,3 +865,11 @@ study doc. Keep each step to one or two lines.*
   after the pending-fill quote in the minute simulator; preserved provenance.
 - Artifacts: `Reports/rtl_intrabar_tp_20261027/`, especially `summary_native.csv`,
   `yearly_native.csv`, `attribution_native.csv`, both native HTMLs and verification.
+
+## 2026-10-28: VWAP rule on Nasdaq-100 stocks: does not support
+
+- User downloaded the stocks and asked to run the frozen test. [Results](baseline/rtl-vwap/STOCK_RESULTS.md); [protocol](baseline/rtl-vwap/STOCK_PROTOCOL.md).
+- Before any outcome: Databento had no FB history, so Meta enters from 2022-06-09 (the earlier META bars are an ETF). 17 bars without a price were dropped. All splits, early closes and signal bars checked out, and the stock simulator reproduces all 25,833 MT5 NQ trades.
+- Answer: does not support. Tests 1 and 2 pass, test 3 fails. Matched on risk, far-below trades earn 0.058 R less (interval -0.089 to -0.028), in both eras and in 8 of 10 stocks, and also when NQ was not far below. Portfolio drawdown $37,345 to $19,270 (beats 100% / 99% of placebos). But in May 2018-2019 the rule's drawdown was no better than random skipping.
+- Meaning: the strongest evidence so far that far-below signals are weaker, but the drawdown benefit is not stable across periods. As fixed in the protocol, the VWAP line closes on history; a forward paper test on NQ remains possible. No live change.
+- Independently verified: a separately written simulator matches MT5 on NQ, then reproduces all 90,176 stock trades and 89,292 labels, every draw and the verdict. 6 new tests (39 VWAP tests) pass.

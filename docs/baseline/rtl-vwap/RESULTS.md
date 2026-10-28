@@ -3,6 +3,8 @@
 **Update 2026-10-27, later: the rule does not transfer.** Tested unchanged under a frozen
 protocol on ES, YM and RTY, it confirms on none of them (0 of 3), and it fails on NQ 2010-15 too.
 Treat the result below as possibly specific to NQ 2016-26. See [cross-instrument results](CROSS_RESULTS.md).
+On ten Nasdaq-100 stocks (2026-10-28) far-below trades were clearly weaker, but the drawdown
+benefit failed in 2018-19, so that frozen test does not support it either ([stock results](STOCK_RESULTS.md)).
 
 **Update 2026-10-27:** the [full engine replay](REPLAY_RESULTS.md) is complete.
 The historical risk benefit survives, with higher net dollars in both eras.

@@ -301,7 +301,15 @@ and read together with those failures. [Frozen protocol](../rtl-vwap/STOCK_PROTO
 test of this rule. Only NVDA's file structure was inspected before freezing.
 
 - [x] Freeze ten stocks, data, session with pre-market, gap-aware fills, tests and verdict.
-- [ ] Download the other nine stocks (XNAS.ITCH ohlcv-1m, 2018-05-01 to 2026-10-27; FB then META).
-- [ ] Source checks: hashes, splits, early closes; simulator reproduces the 25,833 NQ trades.
-- [ ] Simulate RTL per stock, label, run contrast, placebos and the fixed verdict.
-- [ ] Independently verify; results, chart, plan, journal and status.
+- [x] Download the other nine stocks (XNAS.ITCH ohlcv-1m, 2018-05-01 to 2026-10-27; FB then META).
+  No FB history was available, so Meta enters from 2022-06-09 (disclosed, before any outcome).
+- [x] Source checks: hashes, splits, early closes; simulator reproduces the 25,833 NQ trades.
+- [x] Simulate RTL per stock, label, run contrast, placebos and the fixed verdict.
+- [x] Independently verify; results, chart, plan, journal and status.
+
+Completed 2026-10-28: [results](../rtl-vwap/STOCK_RESULTS.md). **Does not support: tests 1 and 2
+pass, test 3 fails.** Matched on risk, far-below trades earn 0.058 R less (interval -0.089 to
+-0.028), in both eras and 8 of 10 stocks, and also away from NQ's sell-offs. The portfolio
+drawdown falls $37,345 to $19,270, beating 100% / 99% of placebos, but in 2018-19 the rule was no
+better than random skipping. Per protocol, the VWAP line for RTL closes on history; a forward
+paper test on NQ remains possible. No production RTL change.
