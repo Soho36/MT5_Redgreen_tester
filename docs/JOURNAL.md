@@ -873,3 +873,12 @@ study doc. Keep each step to one or two lines.*
 - Answer: does not support. Tests 1 and 2 pass, test 3 fails. Matched on risk, far-below trades earn 0.058 R less (interval -0.089 to -0.028), in both eras and in 8 of 10 stocks, and also when NQ was not far below. Portfolio drawdown $37,345 to $19,270 (beats 100% / 99% of placebos). But in May 2018-2019 the rule's drawdown was no better than random skipping.
 - Meaning: the strongest evidence so far that far-below signals are weaker, but the drawdown benefit is not stable across periods. As fixed in the protocol, the VWAP line closes on history; a forward paper test on NQ remains possible. No live change.
 - Independently verified: a separately written simulator matches MT5 on NQ, then reproduces all 90,176 stock trades and 89,292 labels, every draw and the verdict. 6 new tests (39 VWAP tests) pass.
+
+## 2026-10-28: VWAP gate in MT5: EA, indicator and stock data
+
+- User asked for the stock minutes in MT5 import format and an RTL EA that can use VWAP data or compute it. [Usage and checks](baseline/rtl-vwap/MT5_EA.md).
+- Stock CSVs: ten files in `F:\DATABENTO\STOCKS\MT5` in MT5's export layout, May 2018 to 2026-10-27 (NVDA to 2026-10-26). M30 features rebuilt from each equal the stock test's (0 label changes). VWAP label files for the EA sit next to them and in `Common\Files`.
+- EA `RR_r_MFE_buy-stop-entry_vwap`: the runband EA plus the gate (computed from 1-minute bars, or read from a label file), US-stock early closes and notional sizing. Indicator `RTL_Session_VWAP` draws VWAP, the gate line and the candles the gate skips.
+- Found on the way: in "1 minute OHLC" the Strategy Tester rebuilds the minutes with equal synthetic volume, so a VWAP computed there is a plain average of minute prices. On NQ that gives 19,974 trades and $54,939 instead of 20,721 and $65,645.50. History runs must read label files; live charts compute from the real volume.
+- Checked: with labels, the replay ON run trade for trade (byte-identical ledger). Computed on stored bars, the study's VWAP for all 1,003 NQ candles of September 2026. The indicator in both modes, and on a fresh chart that had to wait for its minutes. 3 new tests; 42 VWAP tests pass.
+- Open: the stock import settings are written but not yet tried in MT5. The rule's verdicts stand; nothing adopted.
