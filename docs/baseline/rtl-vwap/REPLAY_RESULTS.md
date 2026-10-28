@@ -1,5 +1,7 @@
 # RTL VWAP: full strategy replay
 
+For hands-on inspection, see [manual MT5 runs and the VWAP chart overlay](MANUAL_VISUAL.md).
+
 **Update 2026-10-27, later: the rule does not transfer.** Under a frozen protocol it confirms on
 none of ES, YM and RTY (0 of 3) and fails on NQ 2010-15. The replay below stands as NQ 2016-26
 history only. See [cross-instrument results](CROSS_RESULTS.md).
