@@ -292,3 +292,16 @@ confirm.** Risk-matched contrasts -0.013 / -0.026 / -0.028 R on ES / YM / RTY (N
 interval across zero; the rule's DD beats only 87% / 15% / 89% of same-month placebos (95%
 needed). NQ 2010-15 fails too. Per protocol: no rescue on these data; the rule stays a forward
 candidate only. No production RTL change.
+
+## VWAP rule on Nasdaq-100 stocks: frozen 2026-10-28
+
+User's proposal after the cross-instrument result: new data, not a rescue on the futures data,
+and read together with those failures. [Frozen protocol](../rtl-vwap/STOCK_PROTOCOL.md), SHA-256
+`a12a4172b7d326e4e86d2537ddd0101c93849ccbe22daee11120211c5bfb4e38`. The last historical instrument
+test of this rule. Only NVDA's file structure was inspected before freezing.
+
+- [x] Freeze ten stocks, data, session with pre-market, gap-aware fills, tests and verdict.
+- [ ] Download the other nine stocks (XNAS.ITCH ohlcv-1m, 2018-05-01 to 2026-10-27; FB then META).
+- [ ] Source checks: hashes, splits, early closes; simulator reproduces the 25,833 NQ trades.
+- [ ] Simulate RTL per stock, label, run contrast, placebos and the fixed verdict.
+- [ ] Independently verify; results, chart, plan, journal and status.

@@ -820,7 +820,7 @@ study doc. Keep each step to one or two lines.*
 - Not just skipping big trades: far-below trades carry ~1.7x the planned risk, but their mean R is below other trades' in 9 of 10 risk deciles in each era. Skipping the same number of largest-risk trades instead: net -$442 / $18.2k, DD $1,763 / $3,520 (VWAP rule: $3,939 / $43.4k, DD $932 / $3,084).
 - Placebos without VWAP barely move DD. Same number of skips per risk decile: median DD $2,017 / $5,927 (baseline $2,143 / $5,781); the VWAP rule beats all 2,000 draws. The actual skip pattern rolled within each month (keeps runs of skips on the same days): the rule's DD beats 99.4% / 99.6% of draws, its net only 68% early, 99% recent.
 - Neighbouring thresholds: skipping more (z < -0.75 or -0.5) cuts DD as much or more; skipping less (-1.25) leaves recent DD at $4,764. Recent profit is best at -1 ($34.7k at -0.75, $40.9k at -1.25). DD lower in all 11 years; the recent profit gain leans on 2022 (+$4.2k) and 2024 gives back $4.6k.
-- Verdict: the best drawdown lead so far. Read it as "drawdown about halves, profit about the same", not as a profit gain. It came after many failed filters on the same history, so expect a smaller effect live. Next: the unchanged rule on ES, YM and RTY (minute volume is on disk), then forward. Forward alone needs years: ~36 far-below signals a month.
+- Verdict: the best drawdown lead so far. Historically profit rose too (replay +$305 / +$7,325), but that part depends on 2022 and the exact threshold; the drawdown cut is the steadier part (wording corrected 2026-10-28). It came after many failed filters on the same history, so expect a smaller effect live. Next: the unchanged rule on ES, YM and RTY (minute volume is on disk), then forward. Forward alone needs years: ~36 far-below signals a month.
 
 ## 2026-10-27: VWAP rule on ES, YM and RTY: protocol frozen
 
@@ -836,3 +836,12 @@ study doc. Keep each step to one or two lines.*
 - Drawdown halves on ES and RTY as on NQ, but mostly through timing: the rule's own skips shifted within each month do almost as well (rule beats 87% / 15% / 89% of those draws; 95% needed). 65-82% of their far-below trades came while NQ was also far below; on the rest the effect is about zero.
 - Meaning: the NQ VWAP lead is most likely specific to its 2016-26 history. No rescue, no live change; forward testing only, low priority.
 - Checks: all four MT5 reports reconcile, published totals reproduced, 93,020 signal bars match, the new code reproduces the NQ study's features and labels exactly. Disclosed: 3 ES positions and 1 YM order cross a date in documented data holes; a 1e-9 rounding tolerance against the older NQ panel; dollar ties count against the rule. Independently verified; 11 new tests (33 VWAP tests) pass.
+
+## 2026-10-28: VWAP rule on Nasdaq-100 stocks: protocol frozen
+
+- User pushed back: the filter improved the full 2010-26 MT5 run a lot ($36,746 to $44,925 after $1 a trade), so dropping it could be costly. Checked against the replay: it matches; 87% of the gain is 2020-26, the years where the rule was found; in 2010-15 it did no better than random skipping. Earlier journal wording on profit corrected.
+- User proposed Nasdaq-100 stocks as new data and chose a session that includes the pre-market. [Protocol](baseline/rtl-vwap/STOCK_PROTOCOL.md) frozen (SHA-256 `a12a4172…4e38`) before any stock label.
+- Ten stocks (AAPL, MSFT, NVDA, AMZN, GOOGL, META, AVGO, TSLA, COST, NFLX), Databento XNAS.ITCH 1-minute bars from May 2018. Session 04:00-15:59 New York time, cutoff 15:30, gap-aware fills (stocks gap overnight), $10,000 per trade, $2 cost.
+- Same tests and placebos as the futures test, pooled over the ten stocks. It supports the rule only if the contrast interval is below zero, the drawdown beats 95% of both placebos, and the direction holds in each era and in at least 7 of 10 stocks. The last historical instrument test of this rule.
+- Data: NVDA downloaded (structure checked only); nine stocks to download. Not run yet.
+

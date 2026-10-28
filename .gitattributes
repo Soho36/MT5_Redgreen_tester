@@ -4,4 +4,5 @@ python/prepare_rtl_vwap_replay.py text eol=lf
 mt5/experts/vwap_replay_research.mqh text eol=lf
 # Same for the frozen cross-instrument VWAP protocol and the feature code it hashes.
 docs/baseline/rtl-vwap/CROSS_PROTOCOL.md text eol=lf
+docs/baseline/rtl-vwap/STOCK_PROTOCOL.md text eol=lf
 python/build_rtl_vwap_features.py text eol=lf
