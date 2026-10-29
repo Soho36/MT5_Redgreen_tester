@@ -882,3 +882,11 @@ study doc. Keep each step to one or two lines.*
 - Found on the way: in "1 minute OHLC" the Strategy Tester rebuilds the minutes with equal synthetic volume, so a VWAP computed there is a plain average of minute prices. On NQ that gives 19,974 trades and $54,939 instead of 20,721 and $65,645.50. History runs must read label files; live charts compute from the real volume.
 - Checked: with labels, the replay ON run trade for trade (byte-identical ledger). Computed on stored bars, the study's VWAP for all 1,003 NQ candles of September 2026. The indicator in both modes, and on a fresh chart that had to wait for its minutes. 3 new tests; 42 VWAP tests pass.
 - Open: the stock import settings are written but not yet tried in MT5. The rule's verdicts stand; nothing adopted.
+
+## 2026-10-29: Stock CSVs imported into research MT5
+
+- Imported the ten prepared stock CSVs at the user's request into the AMP research terminal as `<STOCK>_XNAS`, under `Custom\CodexInstruments`.
+- All 11,663,663 M1 bars read back: matching timestamps, six-decimal OHLC prices (tolerance 0.0000001), tick and real volumes, and spread. Per-year counts, date spans and micro-dollar price sums also match; source and label hashes match the export manifest.
+- Stock settings verified: Exchange Stocks, six digits, tick size/value 0.000001, contract size one share, volume min/step 0.01, USD profit/margin currencies, no copied fixed futures margin. The check caught tick size rounding to zero when set before Digits; corrected the property order and reverified AAPL before proceeding.
+- Companion VWAP files verified in `Common\Files`. MT5 reopened after the imports. No tester runs were made as part of this import.
+- Tool: `python/import_stock_symbols.py`, reusing the ownership-guarded custom-symbol importer. Evidence: `Reports/stock_import_20261029/completed.json` and per-symbol compile, import and settings logs.

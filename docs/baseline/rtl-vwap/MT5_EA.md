@@ -78,7 +78,19 @@ labels cover 2010-06-07 to 2026-09-30; after the last label the gate stays off (
 split-adjusted to today's shares (volumes scaled up to match), as in the stock test. Meta starts
 2022-06-09 (Databento has no FB history). Labels run to the same end.
 
-**Import** (not yet tried in MT5; tell me if a setting is refused):
+**Imported and verified 2026-10-29** in the research AMP MT5 terminal. All ten symbols
+are under `Custom\CodexInstruments`, named `AAPL_XNAS`, `MSFT_XNAS`, `NVDA_XNAS`,
+`AMZN_XNAS`, `GOOGL_XNAS`, `META_XNAS`, `AVGO_XNAS`, `TSLA_XNAS`, `COST_XNAS`,
+and `NFLX_XNAS`. All 11,663,663 M1 bars were read back and checked against the input
+timestamps, OHLC prices (within 0.0000001), tick/real volumes and spread. Settings
+and the source/label hashes passed. Evidence: `Reports/stock_import_20261029/`.
+The companion VWAP label files are verified in `Common\Files`.
+
+Automated import: [import_stock_symbols.py](../../../python/import_stock_symbols.py),
+with MT5 closed. Set Digits before Tick size: setting 0.000001 while the symbol
+still has the copied two-digit precision rounds the tick size to zero.
+
+**Manual import settings:**
 
 1. View > Symbols (Ctrl+U) > Create Custom Symbol. Copy it from `MNQcontDTBNT20102026_2`, so
    sessions and order settings are the ones the EA already works with. Name it, e.g., `NVDA_XNAS`.

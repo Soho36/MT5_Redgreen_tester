@@ -139,7 +139,7 @@ def load_csv(path):
                          "vol": d["<VOL>"]})
 
 
-def main(csv, new_symbol, source_symbol, tick_size, tick_value, run_dir):
+def main(csv, new_symbol, source_symbol, tick_size, tick_value, run_dir, price_scale=100):
     run = Path(run_dir)
     run.mkdir(parents=True, exist_ok=True)
     prefix = f"import_{new_symbol}"
@@ -150,7 +150,7 @@ def main(csv, new_symbol, source_symbol, tick_size, tick_value, run_dir):
         arr = g[["t", "open", "high", "low", "close", "vol"]].to_numpy(dtype=np.float64)
         arr.tofile(COMMON / f"{prefix}_{year}.bin")
         expected[int(year)] = dict(rows=len(g), first=g.stamp.iloc[0], last=g.stamp.iloc[-1],
-                                   **{f"sum_{c}": int((g[c] * 100).round().astype("int64").sum())
+                                   **{f"sum_{c}": int((g[c] * price_scale).round().astype("int64").sum())
                                       for c in ("open", "high", "low", "close")})
     src = (MQL.replace("__NEW__", new_symbol).replace("__SOURCE__", source_symbol).replace("__OWNER__", owner)
            .replace("__PREFIX__", prefix).replace("__TICK_SIZE__", repr(float(tick_size)))
