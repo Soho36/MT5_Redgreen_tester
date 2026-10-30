@@ -78,5 +78,6 @@
  "docs/trendlines/STANDALONE_PROTOCOL.md": "docs/setups/trendlines/downtrend-breakout-long/q17-standalone/PROTOCOL.md",
  "docs/trendlines/STANDALONE_RESULTS.md": "docs/setups/trendlines/downtrend-breakout-long/q17-standalone/RESULTS.md",
  "docs/levels/README.md": "docs/setups/horizontal/README.md",
- "docs/trendlines/README.md": "docs/setups/trendlines/README.md"
+ "docs/trendlines/README.md": "docs/setups/trendlines/README.md",
+ "mt5/experts/RR_r_MFE_buy-stop-entry_vwap.cs": "mt5/experts/RR_GG_r_MFE_buy-stop-entry_vwap.cs"
 }

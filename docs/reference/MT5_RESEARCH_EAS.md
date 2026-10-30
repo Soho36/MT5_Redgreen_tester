@@ -15,7 +15,7 @@ Updated 2026-10-11. Installed research EAs are grouped by their purpose. The fol
 | CodexBarResearch | RTL_runband_snapshot |
 | CodexLocationValidation | RTL_base and RTL_runband_location: location-filter comparisons |
 | ClaudeEarlyClose / ClaudeFlattenFix / ClaudeTrailingStop / ClaudeSessionDump | Existing calendar, flatten, trailing and session-export tools |
-| CodexResearch | RR_r_MFE_buy-stop-entry_vwap (2026-10-28): runband EA with the VWAP gate, any symbol; indicator `Indicators\CodexResearch\RTL_Session_VWAP`. Usage: [MT5_EA.md](../baseline/rtl-vwap/MT5_EA.md) |
+| CodexResearch | RR_GG_r_MFE_buy-stop-entry_vwap (2026-10-28; named RR_r_MFE_buy-stop-entry_vwap until 2026-10-30): runband EA with the VWAP gate, any symbol, red (RTL) or green (GG) signal candle; indicator `Indicators\CodexResearch\RTL_Session_VWAP`. Usage: [MT5_EA.md](../baseline/rtl-vwap/MT5_EA.md) |
 
 The RTL_width experiment EA is now under:
 

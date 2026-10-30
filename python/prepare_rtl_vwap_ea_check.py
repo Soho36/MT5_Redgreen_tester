@@ -1,6 +1,7 @@
 """Prepare the MT5 checks of the VWAP gate EA (2026-10-28).
 
-mt5/experts/RR_r_MFE_buy-stop-entry_vwap.cs either computes session VWAP and A20 from 1-minute
+mt5/experts/RR_r_MFE_buy-stop-entry_vwap.cs (renamed RR_GG_r_MFE_buy-stop-entry_vwap.cs on
+2026-10-30, when it gained the green signal candle; this recorded run keeps the old name) either computes session VWAP and A20 from 1-minute
 bars or reads precomputed labels from a file. The replay run (Reports/rtl_vwap_replay_20261026,
 gate ON) read the Python labels. Two tester jobs on NQ with the replay ON settings, decision log on:
   bars - VWAP computed in the tester. The tester rebuilds 1-minute bars with synthetic volume

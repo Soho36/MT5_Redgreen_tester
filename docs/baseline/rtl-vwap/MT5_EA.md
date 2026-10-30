@@ -9,7 +9,7 @@ verdict. The rule [did not transfer](CROSS_RESULTS.md) to ES, YM or RTY and is
 
 | Item | What it does |
 |---|---|
-| [RR_r_MFE_buy-stop-entry_vwap.cs](../../../mt5/experts/RR_r_MFE_buy-stop-entry_vwap.cs) with [rtl_session_vwap.mqh](../../../mt5/experts/rtl_session_vwap.mqh), [stock_early_closes.mqh](../../../mt5/experts/stock_early_closes.mqh), [early_closes.mqh](../../../mt5/experts/early_closes.mqh) | The RTL runband EA plus the VWAP gate, any symbol. Compiled in MT5 as `Experts\CodexResearch\RR_r_MFE_buy-stop-entry_vwap` |
+| [RR_GG_r_MFE_buy-stop-entry_vwap.cs](../../../mt5/experts/RR_GG_r_MFE_buy-stop-entry_vwap.cs) with [rtl_session_vwap.mqh](../../../mt5/experts/rtl_session_vwap.mqh), [stock_early_closes.mqh](../../../mt5/experts/stock_early_closes.mqh), [early_closes.mqh](../../../mt5/experts/early_closes.mqh) | The RTL runband EA plus the VWAP gate, any symbol. Compiled in MT5 as `Experts\CodexResearch\RR_GG_r_MFE_buy-stop-entry_vwap` |
 | [RTL_Session_VWAP.mq5](../../../mt5/indicators/RTL_Session_VWAP.mq5) | Draws session VWAP, the gate line and the candles the gate would skip, on any M30 chart. Compiled as `Indicators\CodexResearch\RTL_Session_VWAP` |
 | `F:\DATABENTO\STOCKS\MT5\MT5_<STOCK>_2018-2026_ohlcv-1m.csv` | The ten stocks' 1-minute bars for MT5 import (written by [export_stock_mt5.py](../../../python/export_stock_mt5.py); `manifest.json` lists rows, splits, early closes and checks) |
 | `rtl_vwap_features_<STOCK>.csv` | VWAP label files for tester runs, next to the CSVs and copied to MT5's `Common\Files`. NQ's is the replay's `rtl_vwap_replay_20261026_features.csv`, already in `Common\Files` |
@@ -53,6 +53,7 @@ unchanged. With `UseVwapGate=false` the EA trades exactly like the runband EA.
 
 | Input | Default | Meaning |
 |---|---|---|
+| SignalCandle | Red (RTL) | Red = RTL, Green = GG. `MinRedRun`/`MaxRedRun` then count runs of that colour (GG baseline: 1 and 0) |
 | UseVwapGate | true | Gate on or off |
 | VwapFarBelowZ | -1.0 | Gate line = VWAP + this × A20. The research value; do not tune it on history |
 | VwapLabelFile | "" | Empty: compute VWAP from minute bars (live/demo). Tester: the label file's name in `Common\Files` |
@@ -71,6 +72,18 @@ an INI leaves out, so set them all.
 The baseline settings (symbol `MNQcontDTBNT20102026_2`, M30, 1 minute OHLC, windows 01:00-23:30,
 flatten 23:30, CME early closes), plus `VwapLabelFile=rtl_vwap_replay_20261026_features.csv`. The
 labels cover 2010-06-07 to 2026-09-30; after the last label the gate stays off (unknown = allowed).
+
+**GG on NQ** (added 2026-10-30): the same settings and the same label file, plus `SignalCandle=Green
+(GG)`, `MinRedRun=1`, `MaxRedRun=0`. The label file has one row per M30 bar, so it serves green
+signals as well as red. With the gate off this reproduces the GG baseline run
+(`ymbase_20261023_gg_nq`) byte for byte. Prepared INIs: `Reports/gg_vwap_ea_20261030`
+([prepare_gg_vwap_ea.py](../../../python/prepare_gg_vwap_ea.py)); results in
+[GG_RESULTS.md](GG_RESULTS.md#mt5-replay).
+
+**After a GG run, set `SignalCandle=Red (RTL)` explicitly for RTL.** The tester reuses the last
+value of an input missing from an INI, and the INIs written before 2026-10-30 (including
+`Reports/rtl_vwap_ea_20261028`) have no `SignalCandle` line: run after a GG run, they would trade
+green candles. Check the tester's Inputs tab, or the `signal_candle` column of the stats file.
 
 ## The stocks
 

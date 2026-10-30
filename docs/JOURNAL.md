@@ -898,3 +898,12 @@ study doc. Keep each step to one or two lines.*
 - Why: lower DD in 9 of 11 years (2022 $4,882 to $3,249), but June-July 2026 the 42 skipped trades made +$3,762 while the 210 kept lost $5,336. Net rises $42,951 to $49,272 (not in the verdict).
 - Descriptive: RTL + GG in one account, DD $9,141 (no gate), $6,877 (RTL gated), $5,569 (both gated); no placebo control. 2010-15: no signal.
 - Independently verified (labels rebuilt from raw minutes, every draw recomputed). Results: [GG_RESULTS.md](baseline/rtl-vwap/GG_RESULTS.md). The rule stays a forward-test candidate only.
+
+## 2026-10-30: VWAP gate EA for GG and its MT5 replay
+
+- The user asked for the RTL VWAP EA in a GG version, with the label file, to run a replay. New input `SignalCandle` (Red = RTL, default; Green = GG) in the VWAP EA; the NQ label file has one row per M30 bar, so it serves GG unchanged.
+- Gate off with green candles reproduces the GG baseline ledger byte for byte. Gate on: all 41,961 candidates follow the label file (7,143 withheld, 0 mismatches); no trade from a far-below signal.
+- Replay 2016-Sep 2026: $42,951 / DD $4,882 (baseline) to $41,401 / $5,360. Worse than the ledger omission ($49,272 / $5,404): the 1,082 extra trades freed by withheld orders lose. On RTL, freeing added profit.
+- RTL + GG account (both replayed, descriptive, no control): $85,768 / $9,141 no gate, $93,397 / $6,955 RTL gated, $91,847 / $5,158 both gated.
+- Results: [GG_RESULTS.md](baseline/rtl-vwap/GG_RESULTS.md#mt5-replay); usage: [MT5_EA.md](baseline/rtl-vwap/MT5_EA.md). Tools: `prepare_gg_vwap_ea.py`, `verify_gg_vwap_ea.py`.
+- Renamed at the user's request to `RR_GG_r_MFE_buy-stop-entry_vwap`, since it now trades both colours (source, MT5 `Experts\CodexResearch`, and the tester's saved settings, reset to Red). Runs recorded before the rename keep the old name in their folders and INIs.

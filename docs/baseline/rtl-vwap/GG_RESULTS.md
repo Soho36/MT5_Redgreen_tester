@@ -80,6 +80,44 @@ stocks' test 3, and now on GG's 2020-26 era. The combined-account numbers look g
 the same NQ history and have no random-skip control. The rule stays where it was: no further
 historical tests; a forward paper test with rules written in advance is the only next step.
 
+## MT5 replay
+
+Added 2026-10-30 at the user's request: the VWAP gate EA with `SignalCandle=Green (GG)` and the NQ
+label file, run in MT5 with the GG baseline's settings ([usage](MT5_EA.md)). Unlike the ledger
+omission above, a replay lets each withheld order change what follows: GG is flat more often and
+takes later signals it would have missed while in a trade.
+
+| 2016-Sep 2026 | Trades | Net | Mean net R | Daily-close DD |
+|---|---|---|---|---|
+| GG baseline | 17,569 | $42,951 | +0.022 | $4,882 |
+| Ledger omission (tests above) | 14,856 | $49,272 | +0.031 | $5,404 |
+| **MT5 replay** | **15,938** | **$41,401** | **+0.021** | **$5,360** |
+
+- **The replay is worse than doing nothing on GG:** net -$1,550 and DD +$478 against the baseline.
+  2016-19: $3,636 / $1,561 to $4,741 / $1,773; 2020-26: $39,315 / $4,882 to $36,659 / $5,360.
+- **Why it differs from the omission:** the replay takes 1,082 more trades than the omission
+  (freed by withheld orders), and its net ends $7,871 below the omission's. On RTL the same freeing
+  added profit (2016-19 $3,939 omission vs $4,721 replay).
+- 2010-15: -$5,108 / $5,833 to -$4,513 / $5,567.
+
+**RTL + GG in one account, both replayed** (RTL replay = the EA's verified label-file run):
+
+| 2016-Sep 2026 | Net | Daily-close DD |
+|---|---|---|
+| No gate | $85,768 | $9,141 |
+| RTL replayed, GG ungated | $93,397 | $6,955 |
+| Both replayed | $91,847 | $5,158 |
+
+Gating GG as well lowers the combined drawdown by another $1,800 but costs $1,550. That comes from
+the same NQ history and has no random-skip control, so it is a description, not evidence.
+2016-19: $8,052 / $3,695, $8,357 / $2,235, $9,462 / $2,163.
+
+Checks ([verify_gg_vwap_ea.py](../../../python/verify_gg_vwap_ea.py), `Reports/gg_vwap_ea_20261030/verification.json`):
+gate off reproduces the GG baseline ledger byte for byte and its tester totals; gate on, all 41,961
+candidates' known and blocked flags match the label file (0 mismatches; 7,143 withheld), VWAP
+within 0.0000000001, A20 exact, and no replay trade comes from a far-below signal. The baseline and
+omission rows equal the tests above.
+
 ## Evidence
 
 `Reports/gg_vwap_20261030/` (gitignored): source audit, labelled trades, summaries, contrast and

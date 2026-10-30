@@ -1,5 +1,5 @@
 //+------------------------------------------------------------------+
-//| RTL Session VWAP: the VWAP gate of RR_r_MFE_buy-stop-entry_vwap,  |
+//| RTL Session VWAP: the VWAP gate of RR_GG_r_MFE_buy-stop-entry_vwap, |
 //| drawn on any symbol's M30 chart and computed from its 1-minute    |
 //| bars (no data files). Same definitions as rtl_session_vwap.mqh:   |
 //|  blue line   = session VWAP up to each bar's close                |

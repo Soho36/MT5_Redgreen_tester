@@ -1,5 +1,7 @@
 //+------------------------------------------------------------------+
-//| Red-Green Breakout EA: dynamic exit + time window + candle range filters |
+//| RTL and GG Breakout EA (SignalCandle: red or green): dynamic exit +   |
+//| time window + candle range filters. Named RR_r_MFE_buy-stop-entry_vwap |
+//| until 2026-10-30.                                                     |
 //| VWAP variant of the RUNBAND EA (RR_r_MFE_buy-stop-entry_runband):     |
 //|  + session-VWAP gate: skip a new buy stop when the signal close is    |
 //|    below session VWAP - A20 (z < -1), the rule of docs/baseline/      |
@@ -10,6 +12,8 @@
 //|    Unknown VWAP/A20 (session open, short history) allows it.          |
 //|  + early-close calendar choice: CME futures or US stocks              |
 //|  + optional notional sizing (stocks): volume = notional / entry       |
+//|  + signal candle choice: red (RTL) or green (GG); the run filter     |
+//|    counts consecutive candles of that colour                         |
 //| With UseVwapGate = false it trades exactly like the runband EA.       |
 //+------------------------------------------------------------------+
 #property strict
@@ -21,6 +25,15 @@
 input double Lots           = 1.0;
 input double RiskReward     = 1.0;
 input int    Slippage       = 5;
+
+// ======== SIGNAL CANDLE ========
+// Red = RTL (RR_r_MFE_buy-stop-entry_runband), green = GG (GG_runband); the
+// two runband EAs differ only in this colour test. The run inputs below count
+// consecutive candles of the chosen colour.
+enum SIGNAL_CANDLE { SIGNAL_RED = 0,   // Red (RTL)
+                     SIGNAL_GREEN = 1  // Green (GG)
+};
+input SIGNAL_CANDLE SignalCandle = SIGNAL_RED;
 
 // ======== RED-RUN BAND FILTER ========
 // Only arm the entry when the number of consecutive red candles ending at the
@@ -367,9 +380,15 @@ bool IsAtOrAfterFlattenTime(datetime barOpen)
    return (dt.hour * 60 + dt.min >= FlattenCutoffMinutes(barOpen));
 }
 
-// Count consecutive red candles ending at the last CLOSED candle (index 1),
-// walking back until a non-red candle is hit. Returns 0 if index 1 is not red.
-int ConsecutiveRedRun()
+// True when a candle with this open and close has the signal colour (green: close > open, red: close < open).
+bool IsSignalCandle(double open, double close)
+{
+   return SignalCandle == SIGNAL_GREEN ? close > open : close < open;
+}
+
+// Count consecutive signal-colour candles ending at the last CLOSED candle (index 1),
+// walking back until another candle is hit. Returns 0 if index 1 is not a signal candle.
+int ConsecutiveSignalRun()
 {
    int count = 0;
    int bars  = Bars(_Symbol, _Period);
@@ -377,7 +396,7 @@ int ConsecutiveRedRun()
 
    for(int i = 1; i < bars && i <= maxLook; i++)
    {
-      if(iClose(_Symbol, _Period, i) < iOpen(_Symbol, _Period, i))
+      if(IsSignalCandle(iOpen(_Symbol, _Period, i), iClose(_Symbol, _Period, i)))
          count++;
       else
          break;
@@ -763,6 +782,8 @@ void DisplaySettings()
    Print("╚════════════════════════════════════════════════════════════╝");
    Print("Lots: ", Lots, ", RiskReward: ", RiskReward);
 
+   Print("Signal candle: ", SignalCandle == SIGNAL_GREEN ? "green (GG)" : "red (RTL)");
+
    // Display red-run band filter
    Print("┌────────────────────────────────────────────────────────────┐");
    Print("│ RED-RUN BAND FILTER                                        │");
@@ -979,7 +1000,7 @@ double OnTester()
                 "flatten_fallback", "trail_start_r", "trail_distance_r",
                 "early_close_calendar", "early_close_set", "vwap_gate", "vwap_far_below_z",
                 "vwap_anchor_minute", "vwap_candidates", "vwap_known", "vwap_blocked", "notional_per_trade",
-                "vwap_source");
+                "vwap_source", "signal_candle");
    FileWrite(f, g_runTag,
                 RiskReward,
                 (int)TesterStatistics(STAT_TRADES),
@@ -996,7 +1017,7 @@ double OnTester()
                 (int)FlattenFallback, TrailStartR, TrailDistanceR,
                 (int)UseEarlyCloseCalendar, (int)EarlyCloseSet, (int)UseVwapGate, VwapFarBelowZ,
                 VwapAnchorMinute, g_vwapCandidates, g_vwapKnown, g_vwapBlocked, NotionalPerTrade,
-                VwapLabelFile != "" ? VwapLabelFile : "computed");
+                VwapLabelFile != "" ? VwapLabelFile : "computed", SignalCandle == SIGNAL_GREEN ? "green" : "red");
    FileClose(f);
    return(0.0);
 }
@@ -1164,13 +1185,13 @@ void OnTick()
    }
 
 
-   // BUY-STOP ORDER AT PREVIOUS RED CANDLE HIGH
-    if(c1 < o1)
+   // BUY-STOP ORDER AT PREVIOUS SIGNAL (RED OR GREEN) CANDLE HIGH
+    if(IsSignalCandle(o1, c1))
 	{
 	   // 🔹 Filters. A rejected red signal cancels the pending order, just as
 	   //     an accepted one would replace it; a green bar (no signal) leaves
 	   //     the pending order alone, as in the base EA.
-	   int    run    = ConsecutiveRedRun();
+	   int    run    = ConsecutiveSignalRun();
 	   int    minRun = (MinRedRun < 1) ? 1 : MinRedRun;
 	   double loc    = SignalLocation();
 
