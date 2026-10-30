@@ -1,7 +1,9 @@
 # Project status
 
-Updated 2026-10-29. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
+Updated 2026-10-30. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
 For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
+
+**[Far-below VWAP rule on GG, NQ](baseline/rtl-vwap/GG_RESULTS.md) (2026-10-30, exploratory): not consistent with RTL.** Matched on risk, far-below GG signals earn 0.076 R less (interval below zero; RTL -0.091) and skipping them raises net $43.0k to $49.3k, but the 2016-26 drawdown rises $4.9k to $5.4k (one June-July 2026 stretch) and beats only 42% / 33% of random skips. Agreed in advance, this counts against the rule's drawdown claim. RTL + GG account with both gated: DD $9.1k to $5.6k, no placebo control. No further historical tests; forward paper test only.
 
 **Stock data imported into research MT5 (2026-10-29).** Ten `<STOCK>_XNAS` custom symbols in `Custom\CodexInstruments`; all 11,663,663 M1 bars read back and verified, including six-decimal prices, volumes and spread. Exchange Stocks calculation, one-share contract size, 0.01 share volume step, USD currencies and 0.000001 tick size/value verified. VWAP labels verified in `Common\Files`. [Usage](baseline/rtl-vwap/MT5_EA.md); evidence `Reports/stock_import_20261029/`. This completes the previously untried stock-import step below.
 

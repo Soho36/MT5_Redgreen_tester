@@ -890,3 +890,11 @@ study doc. Keep each step to one or two lines.*
 - Stock settings verified: Exchange Stocks, six digits, tick size/value 0.000001, contract size one share, volume min/step 0.01, USD profit/margin currencies, no copied fixed futures margin. The check caught tick size rounding to zero when set before Digits; corrected the property order and reverified AAPL before proceeding.
 - Companion VWAP files verified in `Common\Files`. MT5 reopened after the imports. No tester runs were made as part of this import.
 - Tool: `python/import_stock_symbols.py`, reusing the ownership-guarded custom-symbol importer. Evidence: `Reports/stock_import_20261029/completed.json` and per-symbol compile, import and settings logs.
+
+## 2026-10-30: VWAP rule on GG, NQ: not consistent (exploratory)
+
+- The user asked whether the far-below VWAP rule also works for GG on MNQ. Agreed first: GG trades the same NQ days as RTL, so this is exploratory; a pass would not upgrade the rule, a fail counts against it. Protocol frozen before any GG label: [GG_PROTOCOL.md](baseline/rtl-vwap/GG_PROTOCOL.md).
+- Existing GG run, cross-test code and frozen NQ features, same three tests. Test 1 passes: matched on risk, far-below GG trades earn 0.076 R less (interval -0.130 to -0.021; RTL -0.091). Tests 2-3 fail: 2016-26 DD rises $4,882 to $5,404 and beats only 42% / 33% of random skips; 2020-26 DD above both placebo medians.
+- Why: lower DD in 9 of 11 years (2022 $4,882 to $3,249), but June-July 2026 the 42 skipped trades made +$3,762 while the 210 kept lost $5,336. Net rises $42,951 to $49,272 (not in the verdict).
+- Descriptive: RTL + GG in one account, DD $9,141 (no gate), $6,877 (RTL gated), $5,569 (both gated); no placebo control. 2010-15: no signal.
+- Independently verified (labels rebuilt from raw minutes, every draw recomputed). Results: [GG_RESULTS.md](baseline/rtl-vwap/GG_RESULTS.md). The rule stays a forward-test candidate only.
