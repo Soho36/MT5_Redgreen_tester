@@ -1,0 +1,14 @@
+[
+  {
+    "source": "I:\\PycharmProjects\\RT30_min_nt8_standalone\\RR_m_w_r_stoplimits_and_tplimit_InstanceID_WindowRR_Offsets_SafeExits_MaxRedRun.cs",
+    "source_sha256": "c04b4154a346d7cdc8f9ee996df5585185b4e8c3c5a42f034b3712df199efac9",
+    "output": "RR_m_w_r_stoplimits_and_tplimit_InstanceID_WindowRR_Offsets_SafeExits_MaxRedRun_VWAP.cs",
+    "strategy": "RRLongTimeWinStopLimitTPlimitGAPWindowRROffsetsSafeExitsMaxRedRunVWAP"
+  },
+  {
+    "source": "I:\\PycharmProjects\\Accounts_staggering\\nt8\\RR_m_w_r_stoplimits_and_tplimit_InstanceID_WindowRR_Offsets_SafeExits_Routed_MaxRedRun.cs",
+    "source_sha256": "cba1b306558333f118b9ec1916f3fde9330240697e7d4c27b75412c94b7d40a9",
+    "output": "RR_m_w_r_stoplimits_and_tplimit_InstanceID_WindowRR_Offsets_SafeExits_Routed_MaxRedRun_VWAP.cs",
+    "strategy": "RRLongTimeWinStopLimitTPlimitGAPWindowRROffsetsSafeExitsRoutedMaxRedRunVWAP"
+  }
+]

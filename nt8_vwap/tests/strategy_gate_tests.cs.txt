@@ -1,0 +1,157 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Text;
+using System.Threading;
+
+// The runner inserts the unmodified production methods. Platform state is
+// represented only by the small inputs those methods read; no order engine runs.
+public class VwapTestIndicator
+{
+    public bool IsKnown = true;
+    public double[] SessionVWAP = { 100.0 };
+    public double[] A20 = { 10.0 };
+    public double[] GateLine = { 90.0 };
+    public int Shift = 480;
+    public DateTime SessionDate(DateTime time) { return time.AddMinutes(Shift).Date; }
+}
+
+public class VwapInstrument { public string FullName = "MES 12-26"; }
+public class VwapHours { public string Name = "CME US Index Futures ETH"; }
+public class VwapBars { public VwapHours TradingHours = new VwapHours(); }
+public class VwapPeriod { public override string ToString() { return "30 Minute"; } }
+
+public abstract class VwapStrategyHost
+{
+    public bool UseVwapGate = true;
+    public bool LogVwapDecisions;
+    public bool ShowVwapIndicator = true;
+    public double VwapFarBelowZ = -1.0;
+    public int VwapAnchorMinute;
+    public string VwapSessionTimeZoneId = "Central Standard Time";
+    public int VwapSessionShiftMinutes = 480;
+    public VwapTestIndicator sessionVwap = new VwapTestIndicator();
+    public DateTime[] Time = { new DateTime(2026, 10, 29, 10, 30, 0) };
+    public double[] Close = { 89.0 };
+    public string EntrySignalName = "Long1_42";
+    public readonly List<string> Messages = new List<string>();
+    public void Print(string message) { Messages.Add(message); }
+    public abstract bool Rejected(DateTime windowTime);
+
+    public VwapInstrument Instrument = new VwapInstrument();
+    public VwapPeriod BarsPeriod = new VwapPeriod();
+    public VwapBars Bars = new VwapBars();
+    public string Calculate = "OnBarClose";
+    public string RoutingMode = "Routed";
+    public int EntryQuantity = 1;
+    public int ExitOffset;
+    public int MaxRedRun;
+    public int EntryExpiryBars;
+    public double SeatFrozenOffset = 100.0;
+    public bool UseUnrealizedEquity = true;
+    public bool RequireHeadroomCoversStop = true;
+    public double[] windowRiskRewards = { 0.0, 1.5, 2.0 };
+}
+
+public class StandaloneVwapHost : VwapStrategyHost
+{
+    /* STANDALONE GATE */
+    public override bool Rejected(DateTime windowTime) { return IsVwapEntryRejected(windowTime); }
+}
+
+public class RoutedVwapHost : VwapStrategyHost
+{
+    /* ROUTED GATE */
+    /* ROUTED CONFIG */
+    public override bool Rejected(DateTime windowTime) { return IsVwapEntryRejected(windowTime); }
+    public string Config() { return BuildRouterConfigKey(); }
+}
+
+public class LegacyRoutedHost : VwapStrategyHost
+{
+    /* LEGACY CONFIG */
+    public override bool Rejected(DateTime windowTime) { return false; }
+    public string Config() { return BuildRouterConfigKey(); }
+}
+
+public static class VwapStrategyTests
+{
+    private static int assertions;
+    private static void Check(bool condition, string message)
+    {
+        assertions++;
+        if (!condition) throw new Exception(message);
+    }
+
+    private static void Gate(Func<VwapStrategyHost> create, string name)
+    {
+        VwapStrategyHost h = create();
+        DateTime now = h.Time[0];
+        Check(h.Rejected(now), name + ": known below-line signal must reject");
+        Check(h.Messages.Count == 1 && h.Messages[0].Contains("decision=SKIP"), name + ": rejection is logged even with optional logging off");
+        h.Close[0] = 90.0;
+        Check(!h.Rejected(now), name + ": equality must pass");
+        h.Close[0] = 91.0;
+        Check(!h.Rejected(now), name + ": above-line signal must pass");
+        h.Close[0] = 89.0;
+        h.UseVwapGate = false;
+        Check(!h.Rejected(now), name + ": disabled gate must pass known below-line signal");
+        h.LogVwapDecisions = true;
+        Check(!h.Rejected(now), name + ": logging must not enable the gate");
+        Check(h.Messages[h.Messages.Count - 1].Contains("enabled=False"), name + ": logs distinguish disabled gate");
+        h.UseVwapGate = true;
+        h.sessionVwap.IsKnown = false;
+        Check(!h.Rejected(now), name + ": incomplete history must fail open like MT5");
+        Check(h.Messages[h.Messages.Count - 1].Contains("ALLOW (unknown)"), name + ": unknown decision is explicit in logs");
+        h.sessionVwap = null;
+        Check(!h.Rejected(now), name + ": unavailable indicator must not throw or reject");
+        h.sessionVwap = new VwapTestIndicator();
+        h.Time[0] = new DateTime(2026, 10, 29, 16, 0, 0);
+        Check(!h.Rejected(new DateTime(2026, 10, 29, 17, 0, 0)), name + ": previous-session final signal must be unknown at next session open");
+        h.Time[0] = new DateTime(2026, 10, 29, 17, 30, 0);
+        Check(h.Rejected(h.Time[0]), name + ": same-session signal after rollover must reject when known");
+        h.Time[0] = new DateTime(2026, 10, 29, 15, 30, 0);
+        Check(h.Rejected(h.Time[0]), name + ": ordinary signal before rollover remains known");
+        h.sessionVwap.GateLine[0] = double.NaN;
+        Check(!h.Rejected(h.Time[0]), name + ": a NaN threshold must not reject");
+    }
+
+    private static void Config()
+    {
+        RoutedVwapHost h = new RoutedVwapHost();
+        string enabled = h.Config();
+        Check(enabled.Contains("|vwap=mt5-m1-hlc3-a20-v1"), "router includes calculation version");
+        h.UseVwapGate = false;
+        Check(h.Config() == new LegacyRoutedHost().Config(), "disabled gate preserves original router manifest exactly");
+        h.VwapFarBelowZ = -2.0;
+        h.VwapAnchorMinute = 570;
+        h.VwapSessionTimeZoneId = "Eastern Standard Time";
+        h.VwapSessionShiftMinutes = 0;
+        Check(h.Config() == new LegacyRoutedHost().Config(), "disabled gate ignores all inactive VWAP settings");
+        h = new RoutedVwapHost(); h.VwapFarBelowZ = -2.0;
+        Check(h.Config() != enabled, "router separates different Z values");
+        h = new RoutedVwapHost(); h.VwapAnchorMinute = 570;
+        Check(h.Config() != enabled, "router separates different anchors");
+        h = new RoutedVwapHost(); h.VwapSessionTimeZoneId = "Eastern Standard Time";
+        Check(h.Config() != enabled, "router separates different session zones");
+        h = new RoutedVwapHost(); h.VwapSessionShiftMinutes = 0;
+        Check(h.Config() != enabled, "router separates different clock shifts");
+        h = new RoutedVwapHost(); h.ShowVwapIndicator = false; h.LogVwapDecisions = true;
+        Check(h.Config() == enabled, "display and logging settings do not fragment routing");
+        CultureInfo old = Thread.CurrentThread.CurrentCulture;
+        try
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-FR");
+            Check(new RoutedVwapHost().Config() == enabled, "router manifest is stable across decimal cultures");
+        }
+        finally { Thread.CurrentThread.CurrentCulture = old; }
+    }
+
+    public static int Run()
+    {
+        Gate(delegate { return new StandaloneVwapHost(); }, "standalone");
+        Gate(delegate { return new RoutedVwapHost(); }, "routed");
+        Config();
+        return assertions;
+    }
+}
