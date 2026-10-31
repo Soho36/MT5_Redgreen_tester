@@ -1,7 +1,9 @@
 # Project status
 
-Updated 2026-10-31. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
+Updated 2026-11-01. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
 For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
+
+**[RTL shorts above VWAP + A20](baseline/rtl-vwap/SHORT_UPPER_RESULTS.md) (2026-11-01, descriptive native MT5): no profitable overextension short edge.** Green signal closes strictly above the upper orange line; sell stop remains at its low. Net -$1,016 / -$4,414 (2016-19 / 2020-Sep 2026), mean gross R +0.006 / -0.025, daily DD $2,079 / $13,913. Combining with gated RTL long reduces net and increases DD. Lower control byte-identical; native decisions and independent arithmetic verified. Separate tester-only upper EA installed, old EA preserved. Same feature file serves every offset; [brief exporter manual](baseline/rtl-vwap/FEATURE_FILE_GUIDE.md) and tested CLI added. Both export routes reproduce all 191,781 historical label rows byte for byte. No adoption.
 
 **[RTL-short blue VWAP versus orange cutoff](baseline/rtl-vwap/SHORT_LINE_RESULTS.md) (2026-10-31, exploratory native MT5): blue is worse in both eras.** Added `VwapFilterLine` to the installed short EA (orange=0/default, blue=1). Blue eligibility uses close < VWAP, while actual entry stays the green candle's low. Blue net -$4,302 / -$1,122 versus orange +$243 / +$1,454; daily DD $4,643 / $7,667 versus $1,089 / $2,772. Long + blue short also loses profit and increases DD versus gated long alone. Orange reproduces the prior ledger byte for byte; both native runs and independent checks pass. Lines and other strategy settings unchanged; no adoption.
 

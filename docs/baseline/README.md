@@ -7,6 +7,7 @@ flatten. The current rules are in [STATUS.md](../STATUS.md).
 
 | Study | Answer |
 |---|---|
+| [RTL shorts above VWAP + A20](rtl-vwap/SHORT_UPPER_RESULTS.md) ([protocol](rtl-vwap/SHORT_UPPER_PROTOCOL.md)) | Native upper-band short loses $1,016 / $4,414; no stable pre-cost R edge, larger combined DD. Lower control and all native decisions verified. Same label file; [exporter manual](rtl-vwap/FEATURE_FILE_GUIDE.md) added |
 | [RTL short: blue versus orange VWAP](rtl-vwap/SHORT_LINE_RESULTS.md) ([protocol](rtl-vwap/SHORT_LINE_PROTOCOL.md)) | Blue cutoff loses $4,302 / $1,122 versus orange +$243 / +$1,454, with larger DD. Switch installed; orange default; both native runs independently verified |
 | [RTL short below unchanged orange VWAP](rtl-vwap/SHORT_RESULTS.md) ([protocol](rtl-vwap/SHORT_PROTOCOL.md)) | Native replay: +$243 / +$1,454, PF ~1.02; pooled profit disappears with +$1/trade. Adding the leg raises gated-long DD 90% / 36%. No adoption; exact baseline and every gate decision verified |
 | [RTL MNQ: 1R candle-close plus 2R intratrade TP](rtl-intrabar-tp/RESULTS.md) ([protocol](rtl-intrabar-tp/PROTOCOL.md)) | No improvement: net $4.4k -> $3.5k early, $38.4k -> $32.4k recently; earlier DD falls, recent DD unchanged. Caps on larger winners cost more than rescued reversals. Both native MT5 arms verified; baseline unchanged |

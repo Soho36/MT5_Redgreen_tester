@@ -231,3 +231,16 @@ its extension); it is copied to `.mq5` with its includes by
 `python/prepare_rtl_short_vwap_lines.py`. Matching orange/blue `.set` presets
 are in `Reports/rtl_short_vwap_lines_20261031/`. The short EA deliberately
 refuses ordinary chart attachment. [Native comparison results](SHORT_LINE_RESULTS.md); [protocol](SHORT_LINE_PROTOCOL.md).
+
+## Upper-band short experiment and label-file generation (2026-11-01)
+
+The separate tester-only `CodexShortVwapUpper\RTL_short_vwap_upper` adds
+`ShortVwapSide`: Below line or Above line. For the upper experiment use
+Orange, `VwapFarBelowZ=+1` and Above line; the entry remains at the green
+candle's low. The original lower/blue EA is preserved. Native upper shorts
+lose in both primary eras: [results](SHORT_UPPER_RESULTS.md).
+
+The same feature file supports all offsets and sides. See the
+[brief manual](FEATURE_FILE_GUIDE.md) for the tested M1/existing-feature
+export commands, session-clock requirements, Common Files location and
+matching EA/indicator settings.

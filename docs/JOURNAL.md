@@ -940,3 +940,21 @@ study doc. Keep each step to one or two lines.*
   independent arithmetic and source reproduction checks pass.
   [Results and chart](baseline/rtl-vwap/SHORT_LINE_RESULTS.md);
   [protocol](baseline/rtl-vwap/SHORT_LINE_PROTOCOL.md).
+
+## 2026-11-01: Shorts above the upper VWAP band, and feature-file manual
+
+- User requested a descriptive mirror: green signal closes ABOVE VWAP + A20,
+  then the usual sell stop below its low. Added separate tester-only
+  `RTL_short_vwap_upper`, with explicit side and offset; lower/blue EA unchanged.
+- Lower reproduction is byte-identical. Upper net -$1,016 / -$4,414 early /
+  recent, mean gross R +0.006 / -0.025, daily DD $2,079 / $13,913. Long +
+  upper short loses profit and increases DD versus gated long alone. No adoption.
+- All 85,543 upper candidate decisions and 25,548 original orders verified;
+  native report/ledger totals and independent arithmetic checks pass.
+- No threshold-specific feature file is required: VWAP/A20 are already stored
+  separately. Added `export_vwap_labels.py` (M1 or existing full-session panel),
+  seven regression tests and a [brief manual](baseline/rtl-vwap/FEATURE_FILE_GUIDE.md).
+  Both documented export routes reproduce all 191,781 historical rows byte for
+  byte, including the exclusive availability endpoint.
+- [Results and chart](baseline/rtl-vwap/SHORT_UPPER_RESULTS.md);
+  [protocol](baseline/rtl-vwap/SHORT_UPPER_PROTOCOL.md).
