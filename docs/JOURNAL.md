@@ -907,3 +907,19 @@ study doc. Keep each step to one or two lines.*
 - RTL + GG account (both replayed, descriptive, no control): $85,768 / $9,141 no gate, $93,397 / $6,955 RTL gated, $91,847 / $5,158 both gated.
 - Results: [GG_RESULTS.md](baseline/rtl-vwap/GG_RESULTS.md#mt5-replay); usage: [MT5_EA.md](baseline/rtl-vwap/MT5_EA.md). Tools: `prepare_gg_vwap_ea.py`, `verify_gg_vwap_ea.py`.
 - Renamed at the user's request to `RR_GG_r_MFE_buy-stop-entry_vwap`, since it now trades both colours (source, MT5 `Experts\CodexResearch`, and the tester's saved settings, reset to Red). Runs recorded before the rename keep the old name in their folders and INIs.
+
+## 2026-10-31: RTL short only where orange VWAP blocks longs
+
+- User requested shorts below the existing orange line, keeping blue/orange
+  unchanged. Used the established green-candle RTL mirror and frozen
+  close < session VWAP - A20, gating new orders only.
+- Both native MT5 arms complete. OFF matches all 27,179 baseline trades byte
+  for byte; ON's 92,585 decisions and every actual sell-stop order checked.
+- Gated short net +$243 / +$1,454 (2016-19 / 2020-Sep 2026), PF ~1.024;
+  pooled +$1,697 falls to -$160 with another $1/trade. Equal-risk mean gross
+  and net R negative. The native replay differs from deleting baseline trades.
+- Adding the short to gated RTL long increases daily DD $986 -> $1,868 /
+  $3,158 -> $4,290 for 5% / 3% extra net. Small, fragile gain, no adoption.
+  [Full results](baseline/rtl-vwap/SHORT_RESULTS.md),
+  [protocol](baseline/rtl-vwap/SHORT_PROTOCOL.md). Independent arithmetic
+  verification passes; chart and long EA untouched.

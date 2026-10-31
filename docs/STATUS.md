@@ -1,7 +1,9 @@
 # Project status
 
-Updated 2026-10-30. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
+Updated 2026-10-31. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
 For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
+
+**[RTL short only below orange VWAP](baseline/rtl-vwap/SHORT_RESULTS.md) (2026-10-31, exploratory native MT5): small, fragile profit; no short leg adopted.** Existing RTL mirror (green candle, sell stop at low) gated with unchanged close < VWAP - A20: net -$5,492 -> +$243 early / -$3,228 -> +$1,454 recently, PF ~1.024; pooled +$1,697 becomes -$160 with another $1/trade. Mean gross/net R remains negative. Adding it to gated RTL long raises daily DD $986 -> $1,868 / $3,158 -> $4,290 for only 5% / 3% extra profit. OFF reproduces all 27,179 native trades byte for byte; all 92,585 ON decisions checked, plus independent arithmetic verification. Chart lines and long EA unchanged.
 
 **[Far-below VWAP rule on GG, NQ](baseline/rtl-vwap/GG_RESULTS.md) (2026-10-30, exploratory): not consistent with RTL.** Matched on risk, far-below GG signals earn 0.076 R less (interval below zero; RTL -0.091) and skipping them raises net $43.0k to $49.3k, but the 2016-26 drawdown rises $4.9k to $5.4k (one June-July 2026 stretch) and beats only 42% / 33% of random skips. Agreed in advance, this counts against the rule's drawdown claim. RTL + GG account with both gated: DD $9.1k to $5.6k, no placebo control. No further historical tests; forward paper test only. **MT5 replay** (VWAP EA, `SignalCandle=Green`): GG net $43.0k to $41.4k and DD $4.9k to $5.4k, worse than the ledger omission because the trades freed by withheld orders lose; RTL + GG both replayed DD $9.1k to $5.2k (RTL alone gated: $7.0k), descriptive only.
 
