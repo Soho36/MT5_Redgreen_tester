@@ -130,3 +130,9 @@ input, `compile` builds the EA, and `run_rtl_short_vwap_native.py off` / `on`
 runs the arms. Completed outputs are preserved; the runner refuses to stop
 an existing terminal. The historical sample was reused for this new idea;
 no untouched out-of-sample or live claim is made.
+
+## Follow-up: blue VWAP cutoff (2026-10-31)
+
+The user then requested a blue/orange switch. Both options were replayed in
+native MT5; orange reproduces this study exactly, while blue loses in both
+primary eras with higher drawdowns. [Comparison and MT5 switch instructions](SHORT_LINE_RESULTS.md).

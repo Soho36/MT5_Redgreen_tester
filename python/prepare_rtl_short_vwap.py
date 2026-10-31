@@ -21,6 +21,12 @@ TAG = 'rtlshortvwap_20261031'
 GATE = r'''
 #include "rtl_session_vwap.mqh"
 input bool UseVwapGate = true;
+enum VWAP_FILTER_LINE
+{
+   VWAP_FILTER_ORANGE = 0,  // Orange cutoff: VWAP + VwapFarBelowZ x A20
+   VWAP_FILTER_BLUE = 1     // Blue line: session VWAP
+};
+input VWAP_FILTER_LINE VwapFilterLine = VWAP_FILTER_ORANGE;
 input double VwapFarBelowZ = -1.0;
 input string VwapLabelFile = "";
 input bool LogVwapDecisions = true;
@@ -47,14 +53,14 @@ bool ShortVwapAllows(datetime barOpen, double close1)
       known = (sig - sig % 86400 == date)
               && RtlSessionVwap(_Symbol, sig, 0, 0, VWAP_VOLUME_AUTO, vwap)
               && RtlA20(_Symbol, 1, a20);
-   double cutoff = vwap + VwapFarBelowZ * a20;
+   double cutoff = vwap + (VwapFilterLine == VWAP_FILTER_BLUE ? 0.0 : VwapFarBelowZ) * a20;
    bool eligible = known && close1 < cutoff;
    bool allowed = !UseVwapGate || eligible;
    if(g_shortVwapLog != INVALID_HANDLE)
       FileWrite(g_shortVwapLog, TimeToString(barOpen, TIME_DATE|TIME_SECONDS),
                 TimeToString(sig, TIME_DATE|TIME_SECONDS), DoubleToString(close1, _Digits),
                 (int)known, DoubleToString(vwap, 12), DoubleToString(a20, 12),
-                DoubleToString(cutoff, 12), (int)eligible, (int)allowed);
+                DoubleToString(cutoff, 12), (int)eligible, (int)allowed, (int)VwapFilterLine);
    return allowed;
 }
 '''
@@ -68,7 +74,8 @@ def build_source():
     assert source.count(hook) == 1
     source = source.replace(hook, hook + r'''
    if(!MQLInfoInteger(MQL_TESTER)) return INIT_FAILED; // Research tester only.
-   if(_Period != PERIOD_M30 || !MathIsValidNumber(VwapFarBelowZ)) return INIT_PARAMETERS_INCORRECT;
+   if(_Period != PERIOD_M30 || !MathIsValidNumber(VwapFarBelowZ)
+      || (VwapFilterLine != VWAP_FILTER_ORANGE && VwapFilterLine != VWAP_FILTER_BLUE)) return INIT_PARAMETERS_INCORRECT;
    if(VwapLabelFile != "" && (UseVwapGate || LogVwapDecisions))
       if(!RtlVwapFileLoad(VwapLabelFile)) return INIT_FAILED;
    // Historical tests require real-volume labels, never synthetic tester volume.
@@ -77,7 +84,7 @@ def build_source():
    {
       g_shortVwapLog = FileOpen("short_vwap_" + RunTag + ".csv", FILE_WRITE|FILE_CSV|FILE_ANSI|FILE_COMMON, '\t');
       if(g_shortVwapLog == INVALID_HANDLE) return INIT_FAILED;
-      FileWrite(g_shortVwapLog, "time", "signal_bar", "signal_close", "known", "vwap", "a20", "cutoff", "eligible", "allowed");
+      FileWrite(g_shortVwapLog, "time", "signal_bar", "signal_close", "known", "vwap", "a20", "cutoff", "eligible", "allowed", "filter_line");
    }
 ''', 1)
     hook = '\t   double entry = l1;'
@@ -104,7 +111,7 @@ def prepare():
         tag = TAG + '_' + variant
         changes = {'Expert': f'CodexShortVwap\\{EXPERT}.ex5', 'Report': tag + '.htm', 'RunTag': tag}
         lines = [k+'='+changes[k] if (k := x.split('=', 1)[0]) in changes else x for x in template]
-        extras = dict(UseVwapGate=str(enabled).lower(), VwapFarBelowZ='-1.0',
+        extras = dict(UseVwapGate=str(enabled).lower(), VwapFilterLine='0', VwapFarBelowZ='-1.0',
                       VwapLabelFile=FEATURES, LogVwapDecisions='true', OutsideLookback='3',
                       MinOutsideRangeRatio='1.25', MinOutsideOverhangFraction='0.0')
         at = lines.index('[TesterInputs]') + 1

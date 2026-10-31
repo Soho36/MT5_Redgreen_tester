@@ -205,3 +205,29 @@ protocol before it starts.
 
 A first EA run that computed VWAP in the tester is kept in `Reports/rtl_vwap_ea_20261028_firstrun`
 with the volume probe that found the synthetic tester volume.
+
+## RTL-short cutoff switch (2026-10-31)
+
+The separate **tester-only** `CodexShortVwap\RTL_short_vwap` EA is the
+project's RTL mirror: green M30 candle, sell stop at its low, stop at its high.
+With `UseOutsideFilter=false`, no outside-candle pattern is required.
+
+With `UseVwapGate=true`, select `VwapFilterLine` in the tester's **Inputs**:
+
+| Input choice | New short qualifies when the signal closes... |
+|---|---|
+| Orange cutoff (0, default) | Below VWAP + `VwapFarBelowZ` × A20 (default: VWAP − A20) |
+| Blue line (1) | Below session VWAP |
+
+This chooses the eligibility cutoff; the actual sell-stop entry remains the
+signal candle's low. Both chart lines keep their original definitions;
+`VwapFarBelowZ` remains -1 even when blue is selected. Equality and unknown
+labels do not qualify. Pending orders and existing positions keep their
+original management; the condition is checked at submission.
+
+Use `rtl_vwap_replay_20261026_features.csv` as `VwapLabelFile` for this NQ
+history. The source is `mt5/experts/shorts/RTL_short_vwap.cs` (MQL5 despite
+its extension); it is copied to `.mq5` with its includes by
+`python/prepare_rtl_short_vwap_lines.py`. Matching orange/blue `.set` presets
+are in `Reports/rtl_short_vwap_lines_20261031/`. The short EA deliberately
+refuses ordinary chart attachment. [Native comparison results](SHORT_LINE_RESULTS.md); [protocol](SHORT_LINE_PROTOCOL.md).

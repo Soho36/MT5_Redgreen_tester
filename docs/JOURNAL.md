@@ -923,3 +923,20 @@ study doc. Keep each step to one or two lines.*
   [Full results](baseline/rtl-vwap/SHORT_RESULTS.md),
   [protocol](baseline/rtl-vwap/SHORT_PROTOCOL.md). Independent arithmetic
   verification passes; chart and long EA untouched.
+
+## 2026-10-31: Blue VWAP cutoff for RTL shorts
+
+- Committed the completed orange-short study as `d9923e6`, at the user's
+  request. Added `VwapFilterLine` (orange=0/default, blue=1) to the short EA
+  and generator, then compiled and installed it with the prior binary saved.
+- The switch changes eligibility only: green-candle sell stop remains at the
+  candle low. Both plotted lines retain their definitions.
+- Native orange reproduces the original ON ledger byte for byte. Blue loses
+  $4,302 / $1,122 in 2016-19 / 2020-Sep 2026, versus orange +$243 / +$1,454;
+  daily DD rises $1,089 -> $4,643 / $2,772 -> $7,667. It reduces profit and
+  increases DD when summed with gated RTL long. No adoption.
+- All 179,818 candidate decisions across both native runs checked; all
+  original sell-stop levels match eligible signal bars. Native reports,
+  independent arithmetic and source reproduction checks pass.
+  [Results and chart](baseline/rtl-vwap/SHORT_LINE_RESULTS.md);
+  [protocol](baseline/rtl-vwap/SHORT_LINE_PROTOCOL.md).

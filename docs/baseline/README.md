@@ -7,6 +7,7 @@ flatten. The current rules are in [STATUS.md](../STATUS.md).
 
 | Study | Answer |
 |---|---|
+| [RTL short: blue versus orange VWAP](rtl-vwap/SHORT_LINE_RESULTS.md) ([protocol](rtl-vwap/SHORT_LINE_PROTOCOL.md)) | Blue cutoff loses $4,302 / $1,122 versus orange +$243 / +$1,454, with larger DD. Switch installed; orange default; both native runs independently verified |
 | [RTL short below unchanged orange VWAP](rtl-vwap/SHORT_RESULTS.md) ([protocol](rtl-vwap/SHORT_PROTOCOL.md)) | Native replay: +$243 / +$1,454, PF ~1.02; pooled profit disappears with +$1/trade. Adding the leg raises gated-long DD 90% / 36%. No adoption; exact baseline and every gate decision verified |
 | [RTL MNQ: 1R candle-close plus 2R intratrade TP](rtl-intrabar-tp/RESULTS.md) ([protocol](rtl-intrabar-tp/PROTOCOL.md)) | No improvement: net $4.4k -> $3.5k early, $38.4k -> $32.4k recently; earlier DD falls, recent DD unchanged. Caps on larger winners cost more than rescued reversals. Both native MT5 arms verified; baseline unchanged |
 | [RTL on weekly MES candles, flattened every session](mes-weekly-flatten/RESULTS.md) ([protocol](mes-weekly-flatten/PROTOCOL.md)) | Weekly ES candles span 185-673 ticks (M30: 10-25), and weekly RTL on MES earns +$3.4k / +$12.6k where M30 loses. But a plain weekly long does as well (RTL minus plain -0.07 / +0.02 R) and earns more; timing ≈ random. Same as NQ: weekly RTL harvests drift, the M30 buy-stop edge does not appear on weekly bars. MT5-exact; flat-minute tick rule found |
