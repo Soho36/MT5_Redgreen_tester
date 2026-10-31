@@ -69,6 +69,24 @@ an INI leaves out, so set them all.
 
 ## NQ in the tester
 
+**Visual chart, version 1.01 (2026-10-31):** enable Visualization on an M30 test of
+`RR_GG_r_MFE_buy-stop-entry_vwap`. The EA automatically adds
+`Indicators\CodexResearch\RTL_Session_VWAP` using its own VWAP inputs, including
+`VwapLabelFile`. Compile/install both the EA and indicator version 1.01 together.
+Blue is session VWAP; dashed orange is `VWAP + VwapFarBelowZ * A20` (normally
+VWAP minus A20). The lines also appear with the gate OFF for comparison.
+The EA suppresses the indicator's standalone red-candle marks so they cannot be
+mistaken for actual RTL or GG trades; MT5's native trade markers remain.
+Label-file values appear on their signal candle only once that candle has closed;
+the forming candle stays blank. Computed VWAP can move while the candle forms.
+This display does not change entry/exit rules or run during nonvisual tests or
+optimization. The EA prints its version in the Journal at startup.
+
+Use the correct label file for historical tests: the displayed lines use the same
+source as the gate, including synthetic tester volume if the filename is empty.
+If the indicator is missing or cannot be attached, the visual test reports the
+error and stops initialization.
+
 The baseline settings (symbol `MNQcontDTBNT20102026_2`, M30, 1 minute OHLC, windows 01:00-23:30,
 flatten 23:30, CME early closes), plus `VwapLabelFile=rtl_vwap_replay_20261026_features.csv`. The
 labels cover 2010-06-07 to 2026-09-30; after the last label the gate stays off (unknown = allowed).

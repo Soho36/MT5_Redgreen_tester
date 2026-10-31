@@ -13,6 +13,8 @@
 //| labels in Common\Files to draw the real VWAP, as the EA does.     |
 //+------------------------------------------------------------------+
 #property strict
+#property version "1.01"
+// v1.01 (2026-10-31): optional markers; tester labels appear only after bar close.
 #property indicator_chart_window
 #property indicator_buffers 7
 #property indicator_plots 3
@@ -49,6 +51,7 @@ input VWAP_VOLUME  VolumeSource = VWAP_VOLUME_AUTO;
 input SERVER_CLOCK ServerClock  = CLOCK_AUTO;
 input int          MaxBars      = 3000;  // M30 bars to compute (0 = all; 3000 needs ~90k 1-minute bars, under MT5's default 100k "Max bars in chart")
 input string       LabelFile    = "";    // "" = compute from 1-minute bars; tester: e.g. rtl_vwap_features_NVDA.csv (EA: VwapLabelFile)
+input bool         ShowRedMarkers = true; // false when loaded by the RTL/GG EA: lines only, native trade markers remain
 
 double VwapLine[], GateLine[], Mark[];
 double PvReal[], VolReal[], PvTick[], VolTick[];   // running session sums at each bar's close
@@ -257,7 +260,7 @@ bool Fill(const int total, int start, const datetime &time[], const double &open
       if(a20 <= 0.0) continue;
       GateLine[i] = vwap + FarBelowZ * a20;
 
-      if(i < total - 1 && close[i] < open[i] && close[i] < GateLine[i] && SessionDay(time[i + 1]) == day)
+      if(ShowRedMarkers && i < total - 1 && close[i] < open[i] && close[i] < GateLine[i] && SessionDay(time[i + 1]) == day)
          Mark[i] = high[i];
    }
    // A series not built yet still reports itself synchronized, and requests fail (4401) until it is.
@@ -309,11 +312,13 @@ int OnCalculate(const int rates_total, const int prev_calculated, const datetime
       for(int i = from; i < rates_total; i++)
       {
          ClearBar(i);
+         // Files contain the entire test period: never reveal a forming bar's final VWAP.
+         if(MQLInfoInteger(MQL_TESTER) && time[i] + PeriodSeconds(PERIOD_M30) > TimeCurrent()) continue;
          int j = FileRow(time[i]);
          if(j < 0) continue;
          VwapLine[i] = g_fileVwap[j];
          GateLine[i] = g_fileVwap[j] + FarBelowZ * g_fileA20[j];
-         if(i < rates_total - 1 && close[i] < open[i] && close[i] < GateLine[i]
+         if(ShowRedMarkers && i < rates_total - 1 && close[i] < open[i] && close[i] < GateLine[i]
             && SessionDay(time[i + 1]) == SessionDay(time[i]))
             Mark[i] = high[i];
       }
