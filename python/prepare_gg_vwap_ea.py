@@ -43,11 +43,11 @@ def tester_ini(tag, gate, label_file):
         assert sum(x.startswith(key + '=') for x in lines) == 1, key
         lines = [f'{key}={value}' if x.startswith(key + '=') else x for x in lines]
     at = lines.index('[TesterInputs]') + 1
-    lines[at:at] = ['SignalCandle=1']
+    lines[at:at] = ['SignalCandle=1', 'VwapFilterLine=0']  # preserve the original orange-cutoff study
     end = next(i for i in range(at, len(lines)) if lines[i].startswith('['))
     given = [x.split('=', 1)[0] for x in lines[at:end] if '=' in x]
     inputs = re.findall(r'^input\s+\w+\s+(\w+)\s*=', (EXPERTS / f'{SOURCE}.cs').read_text(encoding='utf-8'), re.MULTILINE)
-    assert sorted(given) == sorted(inputs) and len(inputs) == 56, set(inputs) ^ set(given)
+    assert sorted(given) == sorted(inputs) and len(inputs) == 57, set(inputs) ^ set(given)
     # Everything but the EA, report, tag, run-band names and the new inputs equals the GG baseline run.
     mine = dict(x.split('=', 1) for x in lines if '=' in x)
     renamed = {'MinGreenRun': 'MinRedRun', 'MaxGreenRun': 'MaxRedRun'}

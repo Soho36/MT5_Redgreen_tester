@@ -55,6 +55,7 @@ unchanged. With `UseVwapGate=false` the EA trades exactly like the runband EA.
 |---|---|---|
 | SignalCandle | Red (RTL) | Red = RTL, Green = GG. `MinRedRun`/`MaxRedRun` then count runs of that colour (GG baseline: 1 and 0) |
 | UseVwapGate | true | Gate on or off |
+| VwapFilterLine | Orange cutoff (0) | Orange = compare signal close with VWAP + VwapFarBelowZ × A20; Blue (1) = compare with VWAP itself. Works for RTL and GG |
 | VwapFarBelowZ | -1.0 | Gate line = VWAP + this × A20. The research value; do not tune it on history |
 | VwapLabelFile | "" | Empty: compute VWAP from minute bars (live/demo). Tester: the label file's name in `Common\Files` |
 | VwapAnchorMinute | 0 | VWAP start in minutes after the session date's midnight. 0 = whole session; 570 = 09:30 for stocks (regular hours only) |
@@ -69,10 +70,22 @@ an INI leaves out, so set them all.
 
 ## NQ in the tester
 
+**Filter selection, EA version 1.02 (2026-10-31):** set `UseVwapGate=true`, then choose
+`VwapFilterLine`: **Orange cutoff** preserves the original rule; **Blue line** requires
+the signal candle to close at or above VWAP. Equality is allowed in both modes.
+`VwapFarBelowZ` still positions the orange chart line when Blue is selected, but does
+not affect the blue filter. Both lines remain visible. The normal entry rules,
+pending-order handling, and unknown-data behavior are unchanged: both modes use the
+existing known-VWAP/A20 checks, including the A20 warmup. Gate OFF bypasses either
+selection. Journal messages, decision CSVs and tester stats identify the selected line.
+The blue mode is an experimental option; previous study results describe Orange only.
+Set `VwapFilterLine=0` explicitly in old INIs/presets to preserve the original rule;
+MT5 may retain a previously selected input when it is omitted.
+
 **Visual chart, version 1.01 (2026-10-31):** enable Visualization on an M30 test of
 `RR_GG_r_MFE_buy-stop-entry_vwap`. The EA automatically adds
 `Indicators\CodexResearch\RTL_Session_VWAP` using its own VWAP inputs, including
-`VwapLabelFile`. Compile/install both the EA and indicator version 1.01 together.
+`VwapLabelFile`. Compile/install the current EA and indicator (version 1.01 or later) together.
 Blue is session VWAP; dashed orange is `VWAP + VwapFarBelowZ * A20` (normally
 VWAP minus A20). The lines also appear with the gate OFF for comparison.
 The EA suppresses the indicator's standalone red-candle marks so they cannot be
