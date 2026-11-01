@@ -958,3 +958,20 @@ study doc. Keep each step to one or two lines.*
   byte, including the exclusive availability endpoint.
 - [Results and chart](baseline/rtl-vwap/SHORT_UPPER_RESULTS.md);
   [protocol](baseline/rtl-vwap/SHORT_UPPER_PROTOCOL.md).
+
+## 2026-11-01 — GG signal open versus close at the orange VWAP cutoff
+
+- At the user's request, saved a descriptive plan before new outcomes. Used the
+  existing GG baseline and frozen VWAP/A20, changing only the compared price from
+  signal close to signal open; the cutoff remains measured at signal-bar close.
+- Baseline-trade omission over 2016-Sep 2026: baseline net/DD $42,951/$4,882;
+  close filter $49,272/$5,404; open filter $37,356/$4,456. Open skips 1,870 extra
+  trades earning $11,916.50 net and +0.0485 mean net R. Pooled net/DD deteriorates;
+  open annual DD exceeds close in 7 of 11 years. Secondary 2010-15 remains negative.
+- Inputs hashed, previous close labels and results reproduced, green-signal nesting
+  and profit decomposition verified. Separate feature lookup and arithmetic checks
+  cover 26,504 eligible trades, 189 metric rows and all plotted daily series.
+- [Results and chart](baseline/rtl-vwap/GG_OPEN_RESULTS.md),
+  [plan](baseline/rtl-vwap/GG_OPEN_PROTOCOL.md); outputs in
+  `Reports/gg_vwap_open_20261101/`. No EA change or native replay: newly available
+  trades after skipped orders remain unmodelled.
