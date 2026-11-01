@@ -975,3 +975,24 @@ study doc. Keep each step to one or two lines.*
   [plan](baseline/rtl-vwap/GG_OPEN_PROTOCOL.md); outputs in
   `Reports/gg_vwap_open_20261101/`. No EA change or native replay: newly available
   trades after skipped orders remain unmodelled.
+
+## 2026-11-01 — RTL blue session-VWAP slope only
+
+- Committed the prior GG open/close study as `c52a51d` at the user's request.
+- Saved the initial slope plan before outcomes; user first narrowed scope to RTL
+  and later to blue slope alone. The final [scope amendment](baseline/rtl-vwap/SLOPE_BLUE_PROTOCOL.md)
+  records that timing; original expanded outputs remain preserved.
+- Rule: completed signal-close VWAP minus preceding M30-close VWAP, same session
+  and exact 30-minute spacing. Positive permits entry; negative/zero/unknown blocks.
+  No price-versus-blue or orange-cutoff condition in published comparison.
+- NQ 2016-Sep 2026: baseline net/DD $42,816.60/$5,781.15; rising-only
+  $24,620.20/$3,295.75. Mean net R +0.0247 to +0.0475, net/DD 7.41 to 7.47.
+  Retains 6,346/16,668 trades; 9,369 falling-slope trades earned $17,688.55.
+  Unknown slopes: 953, net +$507.85, shown separately.
+- Three synthetic edge-case tests pass. Separate verifier checked 25,832 eligible
+  trades, 224 original metric rows, 16 daily paths and 8 slope-distribution rows.
+  Cumulative-VWAP identity residual <=7.05e-12; no sign disagreements. Published
+  rows are checked exact subsets and rising-only membership is checked directly.
+- [Results and chart](baseline/rtl-vwap/SLOPE_RESULTS.md). Publication tables:
+  `Reports/rtl_vwap_slope_blue_20261101/`; original verification:
+  `Reports/rtl_vwap_slope_20261101/`. No native replay or EA change.
