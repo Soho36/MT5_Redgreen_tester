@@ -996,3 +996,25 @@ study doc. Keep each step to one or two lines.*
 - [Results and chart](baseline/rtl-vwap/SLOPE_RESULTS.md). Publication tables:
   `Reports/rtl_vwap_slope_blue_20261101/`; original verification:
   `Reports/rtl_vwap_slope_20261101/`. No native replay or EA change.
+
+## 2026-11-01 — Full native RTL blue-slope replay
+
+- Committed the descriptive study as `fba1b84`; interpreted the user's subsequent
+  request for a full "reply" as a full MT5 replay, stated before starting.
+- Created a separate tester-only `RTL_blue_slope_replay` from the current RTL/GG
+  source, with an independent real-volume slope-label file and no orange condition.
+  OFF exactly reproduces all 25,833 baseline ledger rows. ON checks 77,182 candidates,
+  blocks 48,996, and every filled trade maps to an allowed rising-slope signal.
+- 2016-Sep 2026 baseline/omission/replay net: $42,816.60/$24,620.20/$29,261.70;
+  daily DD: $5,781.15/$3,295.75/$3,823.00. Replay adds 2,060 trades overall versus
+  omission and $4,641.50 net. Net/DD 7.41 baseline to 7.65 replay; early 2.06 to
+  4.65, recent 6.64 to 6.89. Secondary 2010-15 remains negative.
+- Independently checked every candidate label against frozen features, report vs
+  ledger trade economics/timestamps, native profit from fill/exit prices, and daily
+  DD accumulation; baseline and omission summaries reproduce the prior study.
+- First OFF attempt stopped at the October edge of feature coverage. Preserved it;
+  corrected beyond-window unknown handling and saved successful frozen jobs under
+  `Reports/rtl_vwap_slope_replay_20261101_v2/`. Both corrected native runs verified.
+- [Full results and chart](baseline/rtl-vwap/SLOPE_REPLAY_RESULTS.md),
+  [plan](baseline/rtl-vwap/SLOPE_REPLAY_PROTOCOL.md). No live chart attachment or
+  strategy-default change; historical exploratory result, no adoption decision.

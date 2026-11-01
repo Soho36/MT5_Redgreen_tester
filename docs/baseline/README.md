@@ -7,6 +7,7 @@ flatten. The current rules are in [STATUS.md](../STATUS.md).
 
 | Study | Answer |
 |---|---|
+| [RTL blue slope: full MT5 replay](rtl-vwap/SLOPE_REPLAY_RESULTS.md) ([plan](rtl-vwap/SLOPE_REPLAY_PROTOCOL.md)) | Net $42.8k to $29.3k, DD $5.8k to $3.8k; net/DD 7.41 to 7.65. More profit than omission, modest pooled ratio improvement. OFF byte-identical, all native decisions/economics verified |
 | [RTL blue VWAP slope only](rtl-vwap/SLOPE_RESULTS.md) ([scope](rtl-vwap/SLOPE_BLUE_PROTOCOL.md)) | Rising-only: net $42.8k to $24.6k, DD $5.8k to $3.3k; net/DD almost unchanged, higher mean R but profitable down-slope trades excluded. Descriptive omission, independently verified; no price-location condition |
 | [GG signal open versus close below VWAP - A20](rtl-vwap/GG_OPEN_RESULTS.md) ([plan](rtl-vwap/GG_OPEN_PROTOCOL.md)) | Descriptive omission: open removes 1,870 extra profitable trades; net $49.3k to $37.4k, DD $5.4k to $4.5k versus close. Lower pooled net/DD; independently verified; no native replay or adoption |
 | [RTL shorts above VWAP + A20](rtl-vwap/SHORT_UPPER_RESULTS.md) ([protocol](rtl-vwap/SHORT_UPPER_PROTOCOL.md)) | Native upper-band short loses $1,016 / $4,414; no stable pre-cost R edge, larger combined DD. Lower control and all native decisions verified. Same label file; [exporter manual](rtl-vwap/FEATURE_FILE_GUIDE.md) added |
