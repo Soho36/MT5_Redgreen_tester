@@ -1,7 +1,9 @@
 [CmdletBinding()]
-param([switch]$CheckOnly)
+param([switch]$CheckOnly, [switch]$GG)
 $ErrorActionPreference = 'Stop'
-$manifest = Get-Content -LiteralPath (Join-Path $PSScriptRoot 'sources.json') -Raw | ConvertFrom-Json
+$manifestName = if ($GG) { 'sources_gg.json' } else { 'sources.json' }
+$guideName = if ($GG) { 'README_GG_VWAP.md' } else { 'README_VWAP.md' }
+$manifest = Get-Content -LiteralPath (Join-Path $PSScriptRoot $manifestName) -Raw | ConvertFrom-Json
 $allowed = @(
     'I:\PycharmProjects\RT30_min_nt8_standalone',
     'I:\PycharmProjects\Accounts_staggering\nt8'
@@ -12,11 +14,18 @@ foreach ($entry in $manifest) {
     if ($actualHash -ne $entry.source_sha256) { throw "Original changed since preparation: $($entry.source)" }
     $destinationDirectory = [IO.Path]::GetFullPath((Split-Path -Parent $entry.source))
     if ($allowed -notcontains $destinationDirectory) { throw "Unexpected destination: $destinationDirectory" }
-    foreach ($name in @($entry.output, 'RTLSessionVWAP.cs', 'README_VWAP.md')) {
+    foreach ($name in @($entry.output, 'RTLSessionVWAP.cs', $guideName)) {
         $source = Join-Path $PSScriptRoot $name
         $destination = Join-Path $destinationDirectory $name
         if (-not (Test-Path -LiteralPath $source -PathType Leaf)) { throw "Missing prepared file: $source" }
-        if (Test-Path -LiteralPath $destination) { throw "Refusing to overwrite existing file: $destination" }
+        if (Test-Path -LiteralPath $destination) {
+            if ($GG -and $name -eq 'RTLSessionVWAP.cs' -and
+                (Get-FileHash -LiteralPath $source).Hash -eq (Get-FileHash -LiteralPath $destination).Hash) {
+                Write-Host ('Shared indicator already matches: ' + $destination)
+                continue
+            }
+            throw "Refusing to overwrite existing file: $destination"
+        }
         $copies += [pscustomobject]@{ Source = $source; Destination = $destination }
     }
 }
