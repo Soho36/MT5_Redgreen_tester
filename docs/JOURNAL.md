@@ -1045,3 +1045,10 @@ study doc. Keep each step to one or two lines.*
   generated1-minute-OHLC ticks, not real tick order. [Full report and chart](baseline/rtl-vwap/EXCLUDE_16_RESULTS.md).
   Evidence in `Reports/rtl_gg_exclude16_20261101/` and
   `Reports/rtl_gg_exclude16_flatten1630_20261101/`.
+
+## 2026-11-03: VWAP lines indicator for the live contract
+
+- The user asked for an indicator showing both VWAP lines on the live contract. `RTL_Session_VWAP` could not do it as installed: M30 only (the log shows it refusing MNQZ26 H1), and that installed copy presets a label file, which it rejects on a live symbol. `RTL_Study_VWAP` accepts only the research symbol.
+- New `Session_VWAP_Lines`: both lines on the chart's own symbol, M1 to H4, computed from its bars, no file. Installed under `Indicators\CodexResearch`; the two older indicators were left as they are.
+- Checked on MNQZ26 (`python/check_session_vwap_lines.py`): M1, M5, M30, H1 fill from a cold start; both lines rebuilt by separate code within 0.0000000002, across the 2026-11-01 clock change.
+- Finding: micro volume is not the research's full-size volume. 2026-09-15 to 09-30, 530 M30 bars: median VWAP gap 4.4 points, largest 48.6; 8 far-below labels differ (103 live, 97 research). A forward test would run on these live labels.

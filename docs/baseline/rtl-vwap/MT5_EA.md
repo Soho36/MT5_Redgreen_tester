@@ -11,6 +11,7 @@ verdict. The rule [did not transfer](CROSS_RESULTS.md) to ES, YM or RTY and is
 |---|---|
 | [RR_GG_r_MFE_buy-stop-entry_vwap.cs](../../../mt5/experts/RR_GG_r_MFE_buy-stop-entry_vwap.cs) with [rtl_session_vwap.mqh](../../../mt5/experts/rtl_session_vwap.mqh), [stock_early_closes.mqh](../../../mt5/experts/stock_early_closes.mqh), [early_closes.mqh](../../../mt5/experts/early_closes.mqh) | The RTL runband EA plus the VWAP gate, any symbol. Compiled in MT5 as `Experts\CodexResearch\RR_GG_r_MFE_buy-stop-entry_vwap` |
 | [RTL_Session_VWAP.mq5](../../../mt5/indicators/RTL_Session_VWAP.mq5) | Draws session VWAP, the gate line and the candles the gate would skip, on any M30 chart. Compiled as `Indicators\CodexResearch\RTL_Session_VWAP` |
+| [Session_VWAP_Lines.mq5](../../../mt5/indicators/Session_VWAP_Lines.mq5) | Only the two lines, on the chart's own symbol (e.g. `MNQZ26`), M1 to H4, no file. Compiled as `Indicators\CodexResearch\Session_VWAP_Lines` |
 | `F:\DATABENTO\STOCKS\MT5\MT5_<STOCK>_2018-2026_ohlcv-1m.csv` | The ten stocks' 1-minute bars for MT5 import (written by [export_stock_mt5.py](../../../python/export_stock_mt5.py); `manifest.json` lists rows, splits, early closes and checks) |
 | `rtl_vwap_features_<STOCK>.csv` | VWAP label files for tester runs, next to the CSVs and copied to MT5's `Common\Files`. NQ's is the replay's `rtl_vwap_replay_20261026_features.csv`, already in `Common\Files` |
 
@@ -172,6 +173,22 @@ candles. That needs about 90,000 minutes, under MT5's default limit of 100,000 b
 (Tools > Options > Charts > Max bars in chart); older candles stay empty. On a chart whose minutes
 are not loaded yet, the Experts log shows "waiting for the 1-minute history" and the lines appear
 a moment later.
+
+## Only the two lines, on a live contract
+
+`Session_VWAP_Lines` (added 2026-11-03) draws the blue VWAP and the dashed orange VWAP - A20 on the chart's own
+symbol, from its 1-minute and M30 bars. No file, no red x's, any timeframe up to H4. At each M30 close the
+lines equal the EA's values; between closes VWAP is current to that bar and A20 is from the last completed
+M30 bar. It draws the last `MaxDays` = 60 calendar days. Not for the tester (synthetic minute volume).
+
+**The live lines are not the research numbers.** `MNQZ26` weights VWAP by micro volume; the research used
+full-size NQ volume. On the 530 M30 bars of 2026-09-15 to 09-30, when both trade the December contract, VWAP
+differs by a median of 4.4 points (largest 48.6, on 09-21), and 8 far-below labels differ (103 live, 97 research).
+
+Checked by [check_session_vwap_lines.py](../../../python/check_session_vwap_lines.py) on `MNQZ26` M1, M5, M30
+and H1, attached from a template with the 1-minute cache removed: it waited for its history and filled in under
+2 s. Separate code rebuilds both lines from the bars, across the 2026-11-01 clock change, within 0.0000000002;
+the only exception was the bar forming during the check. Evidence: `Reports/session_vwap_lines_20261103` (local).
 
 ## Live or demo (forward test)
 

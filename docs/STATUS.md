@@ -1,7 +1,9 @@
 # Project status
 
-Updated 2026-11-01. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
+Updated 2026-11-03. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
 For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
+
+**[Session VWAP lines on the live contract](baseline/rtl-vwap/MT5_EA.md#only-the-two-lines-on-a-live-contract) (2026-11-03, tooling).** New indicator `Session_VWAP_Lines`: blue VWAP and orange VWAP - A20 on the chart's own symbol (`MNQZ26`), M1 to H4, no file. Rebuilt independently within 0.0000000002. Live micro volume is not the research's full-size volume: median VWAP gap 4.4 points, 8 of 530 far-below labels differ.
 
 **[Exclude16:00-17:00, optional flatten16:30: RTL/GG native replays](baseline/rtl-vwap/EXCLUDE_16_RESULTS.md) (2026-11-01): entry exclusion helps the VWAP-filtered paths; extra flatten does not improve pooled equity DD.** Twelve full native jobs. Pooled2016-Sep2026 RTL+VWAP net/equity-DD $50,446/$3,454 to $52,739/$2,848 with entry exclusion; adding flat16:30 gives $51,843/$2,959. GG+VWAP $41,401/$5,798 to $41,959/$4,616; extra flatten $39,180/$4,617. GG recent exclusion profit slips slightly while DD improves. Unfiltered baselines gain extra DD reduction from flattening. All four controls byte-identical; native decisions, forced closes and equity paths verified, gross equity DD matches MT5 for all12. Generic generated-tick intraday DD; no firm simulation or live-default change.
 
