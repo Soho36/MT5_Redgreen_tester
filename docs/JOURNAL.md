@@ -1018,3 +1018,30 @@ study doc. Keep each step to one or two lines.*
 - [Full results and chart](baseline/rtl-vwap/SLOPE_REPLAY_RESULTS.md),
   [plan](baseline/rtl-vwap/SLOPE_REPLAY_PROTOCOL.md). No live chart attachment or
   strategy-default change; historical exploratory result, no adoption decision.
+
+## 2026-11-01 — Opening-hour exclusion and flatten16:30, RTL/GG
+
+- User requested native baselines/VWAP with only16:00-17:00 excluded, then added
+  flatten at16:30 exactly, while entry exclusion remains16:00-17:00. Initial16:00
+  flatten copy was compiled but never run; corrected source and amendment preserved.
+- Twelve full replays: RTL/GG x VWAP OFF/ON x original/exclude/exclude+flat16:30.
+  Orange filter uses signal close, no slope/open-price modification. Four original
+  controls reproduce saved ledgers byte for byte. No live configuration changed.
+- Pooled2016-Sep2026 net/sampled-equity-DD: RTL+VWAP $50,445.95/$3,454.05 ->
+  exclusion $52,739.10/$2,847.65 -> flat $51,843.40/$2,959.15. GG+VWAP
+  $41,400.60/$5,797.80 -> $41,958.65/$4,615.80 -> $39,179.70/$4,616.65.
+  Extra flatten reduces DD for unfiltered baselines, but not pooled filtered paths.
+  Early/recent, annual and secondary tables saved; recent GG exclusion profit falls
+  slightly despite lower DD. Worst-session GG DD remains about$2,424.
+- All VWAP decisions, filled signals, native report/ledger/profit/timestamps and
+  no16-hour submissions checked. Forced events close all positions/orders; no
+  position survives its recorded event. Intraday equity observer's full-run gross
+  DD exactly matches MT5's independent native statistic for all12 jobs.
+- Passive callback close counter under-counted; raw balance/equity is independent.
+  Reconstructed $1.05 costs from authoritative native exit timestamps, verified
+  native ending balances, and measured timestamp sensitivity (pooled zero, max
+  $1.05 across era/annual rows). [Accounting note](baseline/rtl-vwap/EXCLUDE_16_EQUITY_NOTE.md).
+- User requested generic DD, not firm-specific rules. Sampled equity paths use
+  generated1-minute-OHLC ticks, not real tick order. [Full report and chart](baseline/rtl-vwap/EXCLUDE_16_RESULTS.md).
+  Evidence in `Reports/rtl_gg_exclude16_20261101/` and
+  `Reports/rtl_gg_exclude16_flatten1630_20261101/`.
