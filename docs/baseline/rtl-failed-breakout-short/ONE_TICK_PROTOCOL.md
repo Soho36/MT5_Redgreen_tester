@@ -1,0 +1,7 @@
+# One-tick entry and stop placement
+
+2026-11-06. This amendment was recorded after the original RTL-convention run and before observing the one-tick results. The original run placed both orders on the candle extremes. The user's wording specifies a sell stop **below** the red low and a protective stop **above** the original red high. This run uses the smallest NQ price increment for each buffer, 0.25 index points. The NQ price grid in the source data determines this increment, even though the MT5 custom symbol displays finer decimals.
+
+The high-break trigger stays strictly above the unadjusted red high during the immediately following M30 candle. The first qualifying quote submits the sell stop at `red_low - 0.25` with SL at `red_high + 0.25`. Initial risk therefore spans the candle range plus 0.50 points. The 1R close exit uses the actual entry and protective stop. A low touch before submission cannot fill the order. An armed order may fill on a later candle under the existing replacement and session rules.
+
+Test the failed-breakout rule and an otherwise identical red short that places its buffered sell stop immediately. Use the same continuous NQ history, one MNQ, $1.05 per round trip, session rules, native tester model, dates, reporting windows and metrics as the [first protocol](PROTOCOL.md). Report this pair as the literal implementation and the completed zero-buffer pair as the RTL-convention comparison. No buffer search. Assess both historical periods and the $1 additional cost per trade.

@@ -1,7 +1,9 @@
 # Project status
 
-Updated 2026-11-03. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
+Updated 2026-11-06. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
 For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
+
+**Failed-breakout red short (2026-11-06, exploratory).** Waiting for the next M30 candle to break the red high before selling one tick below its low improved pooled net from −$31,423 to +$995. It lost $450 in 2016–19 and earned $1,445 in 2020–September 2026. Another $1 per trade turns the pooled result into a $3,956 loss. [Results and execution rules](baseline/rtl-failed-breakout-short/RESULTS.md)
 
 **[Session VWAP lines on the live contract](baseline/rtl-vwap/MT5_EA.md#only-the-two-lines-on-a-live-contract) (2026-11-03, tooling).** New indicator `Session_VWAP_Lines`: blue VWAP and orange VWAP - A20 on the chart's own symbol (`MNQZ26`), M1 to H4, no file. Rebuilt independently within 0.0000000002. Live micro volume is not the research's full-size volume: median VWAP gap 4.4 points, 8 of 530 far-below labels differ.
 
