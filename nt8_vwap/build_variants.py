@@ -102,7 +102,7 @@ def build(source):
     new_class = old_class + 'VWAP'
     assert text.count('public class ' + old_class + ' : Strategy') == 1
     text = text.replace(old_class, new_class)
-    version = '2026.11.02-vwap.1' if green else '2026.10.29-vwap.1'
+    version = '2026.11.06-vwap.1'  # rejected protective stop -> stop-market -> market exit
     old_version = re.search(r'private const string ScriptVersion = "[^"]+";', text).group(0)
     text = replace_once(text, old_version,
                         f'private const string ScriptVersion = "{version}";')
