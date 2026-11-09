@@ -1,7 +1,17 @@
 # Project status
 
-Updated 2026-11-06. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
+Updated 2026-11-09. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
 For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
+
+**[Daily flatten/reopen hold benchmark](baseline/buy-hold/COMPARISON.md) (2026-11-09).** One long per session, normal 23:30/early-close cutoff: 4,203 native MT5 trades, $47,094.85 net and $13,266.05 equity DD over the full dataset. Since 2020: $35,965.20 / $13,266.05. Lower profit and slightly higher DD than rolled holding; removing overnight exposure alone does not reproduce RTL/GG risk reduction. Every fill and native gross DD verified; all comparison tables/chart extended.
+
+**[VWAP variants added to the hold comparison](baseline/buy-hold/COMPARISON.md) (2026-11-08).** Full-history net/equity-DD: RTL + VWAP $43,888/$7,607; adding exclude16-17 $46,899/$6,827. GG + VWAP $37,016/$6,080; adding exclusion $38,833/$4,616. Since 2020 RTL with both filters earns $47,393 with $2,848 DD, beating raw and rolled holding; GG with both earns $36,465 with $4,616 DD, less profit than its baseline. Six native runs verified, earlier comparison unchanged; no extra 16:30 flatten.
+
+**[Buy-and-hold versus RTL/GG](baseline/buy-hold/COMPARISON.md) (2026-11-08).** Matched full dataset, one contract, net/equity-DD: hold with rolls $50,319/$12,808, RTL $35,454/$8,815, GG $37,971/$6,355. Since 2020 both baselines beat rolled hold in profit ($38,534 / $39,444 versus $36,621), with 54–56% lower DD. Early 2010–15 loses and has worse DD than holding. Original unfiltered baselines; all costs included, no settings change.
+
+**[One-contract buy-and-hold benchmark](baseline/buy-hold/RESULTS.md) (2026-11-08).** Full June 2010–October 2026 dataset, no stop: raw continuous hold $57,973 net, or $50,319 when closing/reopening across 66 contract rolls. Native equity DD $12,566 / $12,804. Both exact-start MT5 replays and all fills independently verified; $1.05 per contract position charged afterward. Boundary-roll model excludes old-close/new-open gaps; no strategy change.
+
+**Two MNQ short tests (2026-11-07).** Waiting until the breakout candle closed earned $6,411 net across 2,901 trades. Placing the sell stop immediately on the high break earned $995, and a plain delay lost $3,988. The delayed high-break rule earned $3,510 with an additional $1 per trade, of which just $31 came from 2016–19. Separately, shorting the final half hour of a weak day lost $1,804. A 3:31 p.m. entry made $239 pooled and lost $927 after the published sample ended. [Delayed failed-breakout results](baseline/rtl-delayed-failed-breakout/RESULTS.md) · [Weak-day closing results](baseline/mnq-weak-close/RESULTS.md)
 
 **Failed-breakout red short (2026-11-06, exploratory).** Waiting for the next M30 candle to break the red high before selling one tick below its low improved pooled net from −$31,423 to +$995. It lost $450 in 2016–19 and earned $1,445 in 2020–September 2026. Another $1 per trade turns the pooled result into a $3,956 loss. [Results and execution rules](baseline/rtl-failed-breakout-short/RESULTS.md)
 

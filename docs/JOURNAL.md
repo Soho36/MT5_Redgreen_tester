@@ -1057,3 +1057,52 @@ study doc. Keep each step to one or two lines.*
 
 - Tested a sell stop armed as soon as the next M30 candle breaks the original red candle's high. The one-tick placement earned $995 across 4,951 trades after costs, compared with −$31,423 for immediate submission. Fills during the breakout candle lost $5,240, while fills on later candles earned $6,235.
 - Both the one-tick placement and the original RTL placement at the candle extremes lost in 2016–19. An additional $1 per trade erased the recent gains in both runs. [Full results](baseline/rtl-failed-breakout-short/RESULTS.md)
+
+## 2026-11-07 — Two MNQ short follow-ups
+
+- The delayed failed-breakout replay earned $1,050 in 2016–19 and $5,361 in 2020–September 2026. Of the earlier later-fill subset, 2,797 trades reproduced with identical entries and exits. The delayed rule retained $31 early and $3,479 recently at an additional $1 round-trip cost. [Native results and verification](baseline/rtl-delayed-failed-breakout/RESULTS.md)
+- Shorting NQ from 3:30 to 4:00 p.m. New York on weak days earned $465 early and lost $2,269 recently. Both modeled entry timings lost after the published sample, with all 2,637 eligible days independently checked. [Closing-short results](baseline/mnq-weak-close/RESULTS.md)
+
+
+## 2026-11-08: One contract held for the whole dataset
+
+- Ran the requested no-stop long benchmark, plus close/reopen at every saved rollover.
+- Exact first/last data timestamps, MNQ sizing: raw hold $57,972.95 net; 67 contract
+  positions across 66 rolls $50,319.15 net. MT5 gross equity DD $12,565.50 / $12,804.00.
+- Added a separate warm-up-only symbol clone to avoid MT5 skipping the first day;
+  all original bars and all native fills checked. Costs $1.05 per completed position.
+- [Results and roll-timing limitation](baseline/buy-hold/RESULTS.md). No baseline change.
+
+
+## 2026-11-08: Matched buy-and-hold versus RTL/GG comparison
+
+- Compared exact full dataset and separate eras using native intraday equity, all
+  with $1.05 per completed position. Full-history RTL/GG earn less than rolled
+  hold but DD is 31%/50% smaller; since 2020 both earn more with 54%/56% lower DD.
+- Early 2010–15 is loss-making with worse DD than passive hold. Two-strategy
+  portfolio is separately sized against two held contracts.
+- Saved [tables and methodology](baseline/buy-hold/COMPARISON.md), source checks
+  and equity chart. Original baseline settings unchanged.
+
+
+## 2026-11-08: VWAP and 16–17 exclusion added to hold comparison
+
+- Added existing native RTL/GG VWAP-only and VWAP-plus-entry-exclusion runs,
+  including matched combined portfolios. No additional 16:30 flatten.
+- Full-history RTL with both filters: $46,898.75 net / $6,826.80 equity DD; GG:
+  $38,832.95 / $4,615.80. Since 2020 RTL: $47,393.10 / $2,847.65, beating both
+  passive benchmarks; GG: $36,465.35 / $4,615.80, less profit than unfiltered GG.
+- All six native balances/profits/gross DD checked; prior comparison rows unchanged.
+  Updated [tables](baseline/buy-hold/COMPARISON.md), CSVs and equity chart.
+
+
+## 2026-11-09: Passive session flatten/reopen benchmark
+
+- Added a no-stop, one-contract long opened each session and closed at the existing
+  23:30/early-close cutoff. Final partial session closes at its last quote.
+- Native MT5: 4,203 positions, $51,508 gross, $47,094.85 after $4,413.15 fees;
+  net equity DD $13,266.05. Since 2020: $35,965.20 net, same maximum DD.
+- Every fill checked against raw bars and calendar; gross DD matches native
+  $13,023.50. Added to all period tables and the equity chart without changing
+  existing figures. [Comparison](baseline/buy-hold/COMPARISON.md).
+- Saved portable comparison CSV, chart and session audit alongside the docs.

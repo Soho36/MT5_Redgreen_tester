@@ -7,6 +7,9 @@ flatten. The current rules are in [STATUS.md](../STATUS.md).
 
 | Study | Answer |
 |---|---|
+| [One-contract buy and hold](buy-hold/RESULTS.md), [RTL/GG + VWAP comparison](buy-hold/COMPARISON.md) | Raw hold $57,973 net; rolled hold $50,319. Matched baseline, VWAP and VWAP + exclude16-17 variants added. Since 2020 RTL with both filters earns $47,393 with $2,848 equity DD. |
+| [Delay the failed-breakout short](rtl-delayed-failed-breakout/RESULTS.md) | A full MT5 replay earned $6,411 net after waiting for the breakout candle to close, versus $995 for immediate submission and −$3,988 for plain delay. The early period barely covered another $1 per trade. |
+| [Short weak days into the cash close](mnq-weak-close/RESULTS.md) | Net −$1,804 on 1,170 trades, with $7,386 daily-close drawdown. Waiting until 3:31 p.m. earned $239 pooled. Both entry timings lost from May 4, 2020 onward. |
 | [Failed-breakout red short](rtl-failed-breakout-short/RESULTS.md) | Immediate high break, sell stop one tick below the red low, protection one tick above the red high. 2016–19 −$450, 2020–September 2026 +$1,445. The pooled profit of $0.20 per trade disappears with higher costs. |
 | [RTL/GG: exclude16-17, optionally flatten16:30](rtl-vwap/EXCLUDE_16_RESULTS.md) ([plan](rtl-vwap/EXCLUDE_16_PROTOCOL.md), [timing correction](rtl-vwap/EXCLUDE_1630_FLATTEN_AMENDMENT.md)) | Twelve native replays: VWAP-filtered entry exclusion improves pooled profit and sampled equity DD; extra flatten sacrifices profit without extra pooled DD benefit. Unfiltered paths gain extra DD reduction from flattening. Four controls exact; all equity paths match native gross DD |
 | [RTL blue slope: full MT5 replay](rtl-vwap/SLOPE_REPLAY_RESULTS.md) ([plan](rtl-vwap/SLOPE_REPLAY_PROTOCOL.md)) | Net $42.8k to $29.3k, DD $5.8k to $3.8k; net/DD 7.41 to 7.65. More profit than omission, modest pooled ratio improvement. OFF byte-identical, all native decisions/economics verified |

@@ -1,0 +1,71 @@
+{
+  "all_passed": true,
+  "sessions": 4203,
+  "all_native_fills_verified": true,
+  "gross_equity_dd_matches_mt5": true,
+  "source_sha256": "df3390928189f0d12c2140c3994671998151d8cb7289189b6f8a8ad83ff74e6a",
+  "calendar_sha256": "5dcf4d99402ed987da4eae6ca9a8acfd0cdca329a0a8654eb6e207098d87b22b",
+  "summaries_sha256": "b45287e6d61db633f6b96069b00fd3ae00e074757c813156748b26b7abc5e14c",
+  "results": [
+    {
+      "period": "Full 2010-26",
+      "strategy": "Hold, flatten/reopen each session",
+      "positions": 4203,
+      "max_contracts": 1,
+      "net": 47094.85000000005,
+      "equity_dd": 13266.049999999832,
+      "gross": 51508.0,
+      "fees": 4413.150000000001,
+      "net_dd": 3.5500280791946848,
+      "drawdown_method": "verified native fills, raw minute extrema only while held; commission on exit"
+    },
+    {
+      "period": "2010-15",
+      "strategy": "Hold, flatten/reopen each session",
+      "positions": 1426,
+      "max_contracts": 1,
+      "net": 3614.199999999958,
+      "equity_dd": 1465.2500000000045,
+      "gross": 5111.5,
+      "fees": 1497.3,
+      "net_dd": 2.4666097935505524,
+      "drawdown_method": "verified native fills, raw minute extrema only while held; commission on exit"
+    },
+    {
+      "period": "2016-19",
+      "strategy": "Hold, flatten/reopen each session",
+      "positions": 1031,
+      "max_contracts": 1,
+      "net": 7515.449999999897,
+      "equity_dd": 3426.500000000014,
+      "gross": 8598.0,
+      "fees": 1082.55,
+      "net_dd": 2.1933313877133713,
+      "drawdown_method": "verified native fills, raw minute extrema only while held; commission on exit"
+    },
+    {
+      "period": "2016-26",
+      "strategy": "Hold, flatten/reopen each session",
+      "positions": 2777,
+      "max_contracts": 1,
+      "net": 43480.65000000058,
+      "equity_dd": 13266.049999999832,
+      "gross": 46396.5,
+      "fees": 2915.85,
+      "net_dd": 3.2775882798573153,
+      "drawdown_method": "verified native fills, raw minute extrema only while held; commission on exit"
+    },
+    {
+      "period": "2020-26",
+      "strategy": "Hold, flatten/reopen each session",
+      "positions": 1746,
+      "max_contracts": 1,
+      "net": 35965.200000000455,
+      "equity_dd": 13266.049999999948,
+      "gross": 37798.5,
+      "fees": 1833.3000000000002,
+      "net_dd": 2.71107074072543,
+      "drawdown_method": "verified native fills, raw minute extrema only while held; commission on exit"
+    }
+  ]
+}
