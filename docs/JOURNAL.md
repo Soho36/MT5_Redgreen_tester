@@ -1106,3 +1106,25 @@ study doc. Keep each step to one or two lines.*
   $13,023.50. Added to all period tables and the equity chart without changing
   existing figures. [Comparison](baseline/buy-hold/COMPARISON.md).
 - Saved portable comparison CSV, chart and session audit alongside the docs.
+
+## 2026-11-10: RTL scheduled major-news day exclusions
+
+- User uses Investing.com's three-star macro news and chose RTL only initially.
+  Frozen core: CPI, Employment Situation and scheduled FOMC announcement days;
+  individual exclusions and their union, unchanged uncapped M30/RR1 baseline.
+- Official calendar: 533 events on 523 dates, January 2010–September 2026.
+  BLS dated archive URLs via web reader (direct HTTP 403); Fed HTML. Hashed
+  source ZIP and reusable CSV saved in data/calendars/. No emergency Fed actions.
+- Five native runs. Combined filter recent net $38,399.95 → $42,138.55,
+  equity DD $5,941.70 → $4,037.05. Early net $4,416.65 → $3,713.20,
+  DD $2,348.40 → $2,475.75. Recent skips 210 sessions / 1,292 trades.
+- Recent net/DD exceeds 99.67% of 10,000 year/weekday-matched random exclusions;
+  paired-week profit-change interval includes zero. Excluding 2025–26 leaves
+  lower profit and only modest DD benefit; no stable all-era adoption case.
+- Control byte-identical; all filtered native trades exactly match the retained
+  sessions, full equity paths reconcile, gross DD matches MT5 for all five runs.
+  Six focused tests pass. Added exact-time fees for two unrecorded zero-P&L closes.
+- Release-date history is not a complete vintage schedule; schedule-disruption
+  sensitivity omits 2013/2025/2026. Entire historical study remains exploratory.
+  No production settings changed. [Report/chart](baseline/rtl-news-days/RESULTS.md),
+  [protocol](baseline/rtl-news-days/PROTOCOL.md). Evidence: Reports/rtl_news_days_20261110/.

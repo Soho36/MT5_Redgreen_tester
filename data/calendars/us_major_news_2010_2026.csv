@@ -1,0 +1,534 @@
+date,event,source_url,source_file,release_time_et,basis,schedule_caveat,research_session
+2010-01-08,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_01082010.htm,bls_empsit_web_582.txt,08:30,official archived release URL,archive_not_vintage_schedule,2010-01-08
+2010-01-15,CPI,https://www.bls.gov/news.release/archives/cpi_01152010.htm,bls_cpi_web_581.txt,08:30,official archived release URL,archive_not_vintage_schedule,2010-01-15
+2010-01-27,FOMC,https://www.federalreserve.gov/newsevents/press/monetary/20100127a.htm,fed_2010.html,,January 26-27 Meeting - 2010,scheduled_meeting_archive,2010-01-27
+2010-02-05,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_02052010.htm,bls_empsit_web_582.txt,08:30,official archived release URL,archive_not_vintage_schedule,2010-02-05
+2010-02-19,CPI,https://www.bls.gov/news.release/archives/cpi_02192010.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2010-02-19
+2010-03-05,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_03052010.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2010-03-05
+2010-03-16,FOMC,https://www.federalreserve.gov/newsevents/press/monetary/20100316a.htm,fed_2010.html,,March 16 Meeting - 2010,scheduled_meeting_archive,2010-03-16
+2010-03-18,CPI,https://www.bls.gov/news.release/archives/cpi_03182010.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2010-03-18
+2010-04-02,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_04022010.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2010-04-02
+2010-04-14,CPI,https://www.bls.gov/news.release/archives/cpi_04142010.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2010-04-14
+2010-04-28,FOMC,https://www.federalreserve.gov/newsevents/press/monetary/20100428a.htm,fed_2010.html,,April 27-28 Meeting - 2010,scheduled_meeting_archive,2010-04-28
+2010-05-07,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_05072010.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2010-05-07
+2010-05-19,CPI,https://www.bls.gov/news.release/archives/cpi_05192010.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2010-05-19
+2010-06-04,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_06042010.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2010-06-04
+2010-06-17,CPI,https://www.bls.gov/news.release/archives/cpi_06172010.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2010-06-17
+2010-06-23,FOMC,https://www.federalreserve.gov/newsevents/press/monetary/20100623a.htm,fed_2010.html,,June 22-23 Meeting - 2010,scheduled_meeting_archive,2010-06-23
+2010-07-02,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_07022010.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2010-07-02
+2010-07-16,CPI,https://www.bls.gov/news.release/archives/cpi_07162010.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2010-07-16
+2010-08-06,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_08062010.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2010-08-06
+2010-08-10,FOMC,https://www.federalreserve.gov/newsevents/press/monetary/20100810a.htm,fed_2010.html,,August 10 Meeting - 2010,scheduled_meeting_archive,2010-08-10
+2010-08-13,CPI,https://www.bls.gov/news.release/archives/cpi_08132010.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2010-08-13
+2010-09-03,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_09032010.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2010-09-03
+2010-09-17,CPI,https://www.bls.gov/news.release/archives/cpi_09172010.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2010-09-17
+2010-09-21,FOMC,https://www.federalreserve.gov/newsevents/press/monetary/20100921a.htm,fed_2010.html,,September 21 Meeting - 2010,scheduled_meeting_archive,2010-09-21
+2010-10-08,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_10082010.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2010-10-08
+2010-10-15,CPI,https://www.bls.gov/news.release/archives/cpi_10152010.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2010-10-15
+2010-11-03,FOMC,https://www.federalreserve.gov/newsevents/press/monetary/20101103a.htm,fed_2010.html,,November 2-3 Meeting - 2010,scheduled_meeting_archive,2010-11-03
+2010-11-05,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_11052010.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2010-11-05
+2010-11-17,CPI,https://www.bls.gov/news.release/archives/cpi_11172010.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2010-11-17
+2010-12-03,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_12032010.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2010-12-03
+2010-12-14,FOMC,https://www.federalreserve.gov/newsevents/press/monetary/20101214a.htm,fed_2010.html,,December 14 Meeting - 2010,scheduled_meeting_archive,2010-12-14
+2010-12-15,CPI,https://www.bls.gov/news.release/archives/cpi_12152010.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2010-12-15
+2011-01-07,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_01072011.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2011-01-07
+2011-01-14,CPI,https://www.bls.gov/news.release/archives/cpi_01142011.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2011-01-14
+2011-01-26,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20110126a.htm,fed_2011.html,,January 25-26 Meeting - 2011,scheduled_meeting_archive,2011-01-26
+2011-02-04,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_02042011.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2011-02-04
+2011-02-17,CPI,https://www.bls.gov/news.release/archives/cpi_02172011.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2011-02-17
+2011-03-04,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_03042011.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2011-03-04
+2011-03-15,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20110315a.htm,fed_2011.html,,March 15 Meeting - 2011,scheduled_meeting_archive,2011-03-15
+2011-03-17,CPI,https://www.bls.gov/news.release/archives/cpi_03172011.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2011-03-17
+2011-04-01,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_04012011.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2011-04-01
+2011-04-15,CPI,https://www.bls.gov/news.release/archives/cpi_04152011.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2011-04-15
+2011-04-27,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20110427a.htm,fed_2011.html,,April 26-27 Meeting - 2011,scheduled_meeting_archive,2011-04-27
+2011-05-06,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_05062011.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2011-05-06
+2011-05-13,CPI,https://www.bls.gov/news.release/archives/cpi_05132011.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2011-05-13
+2011-06-03,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_06032011.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2011-06-03
+2011-06-15,CPI,https://www.bls.gov/news.release/archives/cpi_06152011.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2011-06-15
+2011-06-22,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20110622a.htm,fed_2011.html,,June 21-22 Meeting - 2011,scheduled_meeting_archive,2011-06-22
+2011-07-08,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_07082011.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2011-07-08
+2011-07-15,CPI,https://www.bls.gov/news.release/archives/cpi_07152011.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2011-07-15
+2011-08-05,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_08052011.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2011-08-05
+2011-08-09,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20110809a.htm,fed_2011.html,,August 9 Meeting - 2011,scheduled_meeting_archive,2011-08-09
+2011-08-18,CPI,https://www.bls.gov/news.release/archives/cpi_08182011.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2011-08-18
+2011-09-02,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_09022011.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2011-09-02
+2011-09-15,CPI,https://www.bls.gov/news.release/archives/cpi_09152011.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2011-09-15
+2011-09-21,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20110921a.htm,fed_2011.html,,September 20-21 Meeting - 2011,scheduled_meeting_archive,2011-09-21
+2011-10-07,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_10072011.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2011-10-07
+2011-10-19,CPI,https://www.bls.gov/news.release/archives/cpi_10192011.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2011-10-19
+2011-11-02,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20111102a.htm,fed_2011.html,,November 1-2 Meeting - 2011,scheduled_meeting_archive,2011-11-02
+2011-11-04,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_11042011.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2011-11-04
+2011-11-16,CPI,https://www.bls.gov/news.release/archives/cpi_11162011.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2011-11-16
+2011-12-02,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_12022011.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2011-12-02
+2011-12-13,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20111213a.htm,fed_2011.html,,December 13 Meeting - 2011,scheduled_meeting_archive,2011-12-13
+2011-12-16,CPI,https://www.bls.gov/news.release/archives/cpi_12162011.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2011-12-16
+2012-01-06,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_01062012.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2012-01-06
+2012-01-19,CPI,https://www.bls.gov/news.release/archives/cpi_01192012.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2012-01-19
+2012-01-25,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20120125a.htm,fed_2012.html,,January 24-25 Meeting - 2012,scheduled_meeting_archive,2012-01-25
+2012-02-03,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_02032012.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2012-02-03
+2012-02-17,CPI,https://www.bls.gov/news.release/archives/cpi_02172012.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2012-02-17
+2012-03-09,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_03092012.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2012-03-09
+2012-03-13,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20120313a.htm,fed_2012.html,,March 13 Meeting - 2012,scheduled_meeting_archive,2012-03-13
+2012-03-16,CPI,https://www.bls.gov/news.release/archives/cpi_03162012.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2012-03-16
+2012-04-06,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_04062012.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2012-04-06
+2012-04-13,CPI,https://www.bls.gov/news.release/archives/cpi_04132012.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2012-04-13
+2012-04-25,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20120425a.htm,fed_2012.html,,April 24-25 Meeting - 2012,scheduled_meeting_archive,2012-04-25
+2012-05-04,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_05042012.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2012-05-04
+2012-05-15,CPI,https://www.bls.gov/news.release/archives/cpi_05152012.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2012-05-15
+2012-06-01,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_06012012.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2012-06-01
+2012-06-14,CPI,https://www.bls.gov/news.release/archives/cpi_06142012.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2012-06-14
+2012-06-20,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20120620a.htm,fed_2012.html,,June 19-20 Meeting - 2012,scheduled_meeting_archive,2012-06-20
+2012-07-06,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_07062012.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2012-07-06
+2012-07-17,CPI,https://www.bls.gov/news.release/archives/cpi_07172012.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2012-07-17
+2012-08-01,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20120801a.htm,fed_2012.html,,July 31-August 1 Meeting - 2012,scheduled_meeting_archive,2012-08-01
+2012-08-03,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_08032012.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2012-08-03
+2012-08-15,CPI,https://www.bls.gov/news.release/archives/cpi_08152012.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2012-08-15
+2012-09-07,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_09072012.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2012-09-07
+2012-09-13,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20120913a.htm,fed_2012.html,,September 12-13 Meeting - 2012,scheduled_meeting_archive,2012-09-13
+2012-09-14,CPI,https://www.bls.gov/news.release/archives/cpi_09142012.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2012-09-14
+2012-10-05,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_10052012.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2012-10-05
+2012-10-16,CPI,https://www.bls.gov/news.release/archives/cpi_10162012.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2012-10-16
+2012-10-24,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20121024a.htm,fed_2012.html,,October 23-24 Meeting - 2012,scheduled_meeting_archive,2012-10-24
+2012-11-02,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_11022012.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2012-11-02
+2012-11-15,CPI,https://www.bls.gov/news.release/archives/cpi_11152012.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2012-11-15
+2012-12-07,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_12072012.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2012-12-07
+2012-12-12,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20121212a.htm,fed_2012.html,,December 11-12 Meeting - 2012,scheduled_meeting_archive,2012-12-12
+2012-12-14,CPI,https://www.bls.gov/news.release/archives/cpi_12142012.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2012-12-14
+2013-01-04,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_01042013.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2013-01-04
+2013-01-16,CPI,https://www.bls.gov/news.release/archives/cpi_01162013.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2013-01-16
+2013-01-30,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20130130a.htm,fed_2013.html,,January 29-30 Meeting - 2013,scheduled_meeting_archive,2013-01-30
+2013-02-01,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_02012013.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2013-02-01
+2013-02-21,CPI,https://www.bls.gov/news.release/archives/cpi_02212013.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2013-02-21
+2013-03-08,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_03082013.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2013-03-08
+2013-03-15,CPI,https://www.bls.gov/news.release/archives/cpi_03152013.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2013-03-15
+2013-03-20,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20130320a.htm,fed_2013.html,,March 19-20 Meeting - 2013,scheduled_meeting_archive,2013-03-20
+2013-04-05,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_04052013.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2013-04-05
+2013-04-16,CPI,https://www.bls.gov/news.release/archives/cpi_04162013.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2013-04-16
+2013-05-01,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20130501a.htm,fed_2013.html,,April/May 30-1 Meeting - 2013,scheduled_meeting_archive,2013-05-01
+2013-05-03,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_05032013.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2013-05-03
+2013-05-16,CPI,https://www.bls.gov/news.release/archives/cpi_05162013.htm,bls_cpi_web_501.txt,08:30,official archived release URL,archive_not_vintage_schedule,2013-05-16
+2013-06-07,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_06072013.htm,bls_empsit_web_502.txt,08:30,official archived release URL,archive_not_vintage_schedule,2013-06-07
+2013-06-18,CPI,https://www.bls.gov/news.release/archives/cpi_06182013.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2013-06-18
+2013-06-19,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20130619a.htm,fed_2013.html,,June 18-19 Meeting - 2013,scheduled_meeting_archive,2013-06-19
+2013-07-05,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_07052013.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2013-07-05
+2013-07-16,CPI,https://www.bls.gov/news.release/archives/cpi_07162013.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2013-07-16
+2013-07-31,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20130731a.htm,fed_2013.html,,July 30-31 Meeting - 2013,scheduled_meeting_archive,2013-07-31
+2013-08-02,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_08022013.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2013-08-02
+2013-08-15,CPI,https://www.bls.gov/news.release/archives/cpi_08152013.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2013-08-15
+2013-09-06,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_09062013.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2013-09-06
+2013-09-17,CPI,https://www.bls.gov/news.release/archives/cpi_09172013.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2013-09-17
+2013-09-18,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20130918a.htm,fed_2013.html,,September 17-18 Meeting - 2013,scheduled_meeting_archive,2013-09-18
+2013-10-22,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_10222013.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2013-10-22
+2013-10-30,CPI,https://www.bls.gov/news.release/archives/cpi_10302013.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2013-10-30
+2013-10-30,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20131030a.htm,fed_2013.html,,October 29-30 Meeting - 2013,scheduled_meeting_archive,2013-10-30
+2013-11-08,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_11082013.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2013-11-08
+2013-11-20,CPI,https://www.bls.gov/news.release/archives/cpi_11202013.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2013-11-20
+2013-12-06,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_12062013.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2013-12-06
+2013-12-17,CPI,https://www.bls.gov/news.release/archives/cpi_12172013.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2013-12-17
+2013-12-18,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20131218a.htm,fed_2013.html,,December 17-18 Meeting - 2013,scheduled_meeting_archive,2013-12-18
+2014-01-10,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_01102014.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2014-01-10
+2014-01-16,CPI,https://www.bls.gov/news.release/archives/cpi_01162014.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2014-01-16
+2014-01-29,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20140129a.htm,fed_2014.html,,January 28-29 Meeting - 2014,scheduled_meeting_archive,2014-01-29
+2014-02-07,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_02072014.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2014-02-07
+2014-02-20,CPI,https://www.bls.gov/news.release/archives/cpi_02202014.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2014-02-20
+2014-03-07,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_03072014.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2014-03-07
+2014-03-18,CPI,https://www.bls.gov/news.release/archives/cpi_03182014.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2014-03-18
+2014-03-19,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20140319a.htm,fed_2014.html,,March 18-19 Meeting - 2014,scheduled_meeting_archive,2014-03-19
+2014-04-04,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_04042014.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2014-04-04
+2014-04-15,CPI,https://www.bls.gov/news.release/archives/cpi_04152014.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2014-04-15
+2014-04-30,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20140430a.htm,fed_2014.html,,April 29-30 Meeting - 2014,scheduled_meeting_archive,2014-04-30
+2014-05-02,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_05022014.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2014-05-02
+2014-05-15,CPI,https://www.bls.gov/news.release/archives/cpi_05152014.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2014-05-15
+2014-06-06,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_06062014.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2014-06-06
+2014-06-17,CPI,https://www.bls.gov/news.release/archives/cpi_06172014.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2014-06-17
+2014-06-18,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20140618a.htm,fed_2014.html,,June 17-18 Meeting - 2014,scheduled_meeting_archive,2014-06-18
+2014-07-03,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_07032014.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2014-07-03
+2014-07-22,CPI,https://www.bls.gov/news.release/archives/cpi_07222014.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2014-07-22
+2014-07-30,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20140730a.htm,fed_2014.html,,July 29-30 Meeting - 2014,scheduled_meeting_archive,2014-07-30
+2014-08-01,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_08012014.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2014-08-01
+2014-08-19,CPI,https://www.bls.gov/news.release/archives/cpi_08192014.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2014-08-19
+2014-09-05,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_09052014.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2014-09-05
+2014-09-17,CPI,https://www.bls.gov/news.release/archives/cpi_09172014.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2014-09-17
+2014-09-17,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20140917a.htm,fed_2014.html,,September 16-17 Meeting - 2014,scheduled_meeting_archive,2014-09-17
+2014-10-03,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_10032014.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2014-10-03
+2014-10-22,CPI,https://www.bls.gov/news.release/archives/cpi_10222014.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2014-10-22
+2014-10-29,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20141029a.htm,fed_2014.html,,October 28-29 Meeting - 2014,scheduled_meeting_archive,2014-10-29
+2014-11-07,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_11072014.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2014-11-07
+2014-11-20,CPI,https://www.bls.gov/news.release/archives/cpi_11202014.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2014-11-20
+2014-12-05,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_12052014.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2014-12-05
+2014-12-17,CPI,https://www.bls.gov/news.release/archives/cpi_12172014.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2014-12-17
+2014-12-17,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20141217a.htm,fed_2014.html,,December 16-17 Meeting - 2014,scheduled_meeting_archive,2014-12-17
+2015-01-09,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_01092015.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2015-01-09
+2015-01-16,CPI,https://www.bls.gov/news.release/archives/cpi_01162015.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2015-01-16
+2015-01-28,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20150128a.htm,fed_2015.html,,January 27-28 Meeting - 2015,scheduled_meeting_archive,2015-01-28
+2015-02-06,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_02062015.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2015-02-06
+2015-02-26,CPI,https://www.bls.gov/news.release/archives/cpi_02262015.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2015-02-26
+2015-03-06,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_03062015.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2015-03-06
+2015-03-18,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20150318a.htm,fed_2015.html,,March 17-18 Meeting - 2015,scheduled_meeting_archive,2015-03-18
+2015-03-24,CPI,https://www.bls.gov/news.release/archives/cpi_03242015.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2015-03-24
+2015-04-03,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_04032015.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2015-04-03
+2015-04-17,CPI,https://www.bls.gov/news.release/archives/cpi_04172015.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2015-04-17
+2015-04-29,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20150429a.htm,fed_2015.html,,April 28-29 Meeting - 2015,scheduled_meeting_archive,2015-04-29
+2015-05-08,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_05082015.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2015-05-08
+2015-05-22,CPI,https://www.bls.gov/news.release/archives/cpi_05222015.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2015-05-22
+2015-06-05,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_06052015.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2015-06-05
+2015-06-17,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20150617a.htm,fed_2015.html,,June 16-17 Meeting - 2015,scheduled_meeting_archive,2015-06-17
+2015-06-18,CPI,https://www.bls.gov/news.release/archives/cpi_06182015.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2015-06-18
+2015-07-02,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_07022015.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2015-07-02
+2015-07-17,CPI,https://www.bls.gov/news.release/archives/cpi_07172015.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2015-07-17
+2015-07-29,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20150729a.htm,fed_2015.html,,July 28-29 Meeting - 2015,scheduled_meeting_archive,2015-07-29
+2015-08-07,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_08072015.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2015-08-07
+2015-08-19,CPI,https://www.bls.gov/news.release/archives/cpi_08192015.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2015-08-19
+2015-09-04,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_09042015.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2015-09-04
+2015-09-16,CPI,https://www.bls.gov/news.release/archives/cpi_09162015.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2015-09-16
+2015-09-17,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20150917a.htm,fed_2015.html,,September 16-17 Meeting - 2015,scheduled_meeting_archive,2015-09-17
+2015-10-02,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_10022015.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2015-10-02
+2015-10-15,CPI,https://www.bls.gov/news.release/archives/cpi_10152015.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2015-10-15
+2015-10-28,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20151028a.htm,fed_2015.html,,October 27-28 Meeting - 2015,scheduled_meeting_archive,2015-10-28
+2015-11-06,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_11062015.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2015-11-06
+2015-11-17,CPI,https://www.bls.gov/news.release/archives/cpi_11172015.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2015-11-17
+2015-12-04,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_12042015.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2015-12-04
+2015-12-15,CPI,https://www.bls.gov/news.release/archives/cpi_12152015.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2015-12-15
+2015-12-16,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20151216a.htm,fed_2015.html,,December 15-16 Meeting - 2015,scheduled_meeting_archive,2015-12-16
+2016-01-08,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_01082016.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2016-01-08
+2016-01-20,CPI,https://www.bls.gov/news.release/archives/cpi_01202016.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2016-01-20
+2016-01-27,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20160127a.htm,fed_2016.html,,January 26-27 Meeting - 2016,scheduled_meeting_archive,2016-01-27
+2016-02-05,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_02052016.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2016-02-05
+2016-02-19,CPI,https://www.bls.gov/news.release/archives/cpi_02192016.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2016-02-19
+2016-03-04,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_03042016.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2016-03-04
+2016-03-16,CPI,https://www.bls.gov/news.release/archives/cpi_03162016.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2016-03-16
+2016-03-16,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20160316a.htm,fed_2016.html,,March 15-16 Meeting - 2016,scheduled_meeting_archive,2016-03-16
+2016-04-01,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_04012016.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2016-04-01
+2016-04-14,CPI,https://www.bls.gov/news.release/archives/cpi_04142016.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2016-04-14
+2016-04-27,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20160427a.htm,fed_2016.html,,April 26-27 Meeting - 2016,scheduled_meeting_archive,2016-04-27
+2016-05-06,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_05062016.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2016-05-06
+2016-05-17,CPI,https://www.bls.gov/news.release/archives/cpi_05172016.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2016-05-17
+2016-06-03,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_06032016.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2016-06-03
+2016-06-15,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20160615a.htm,fed_2016.html,,June 14-15 Meeting - 2016,scheduled_meeting_archive,2016-06-15
+2016-06-16,CPI,https://www.bls.gov/news.release/archives/cpi_06162016.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2016-06-16
+2016-07-08,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_07082016.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2016-07-08
+2016-07-15,CPI,https://www.bls.gov/news.release/archives/cpi_07152016.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2016-07-15
+2016-07-27,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20160727a.htm,fed_2016.html,,July 26-27 Meeting - 2016,scheduled_meeting_archive,2016-07-27
+2016-08-05,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_08052016.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2016-08-05
+2016-08-16,CPI,https://www.bls.gov/news.release/archives/cpi_08162016.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2016-08-16
+2016-09-02,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_09022016.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2016-09-02
+2016-09-16,CPI,https://www.bls.gov/news.release/archives/cpi_09162016.htm,bls_cpi_web_421.txt,08:30,official archived release URL,archive_not_vintage_schedule,2016-09-16
+2016-09-21,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20160921a.htm,fed_2016.html,,September 20-21 Meeting - 2016,scheduled_meeting_archive,2016-09-21
+2016-10-07,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_10072016.htm,bls_empsit_web_422.txt,08:30,official archived release URL,archive_not_vintage_schedule,2016-10-07
+2016-10-18,CPI,https://www.bls.gov/news.release/archives/cpi_10182016.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2016-10-18
+2016-11-02,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20161102a.htm,fed_2016.html,,November 1-2 Meeting - 2016,scheduled_meeting_archive,2016-11-02
+2016-11-04,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_11042016.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2016-11-04
+2016-11-17,CPI,https://www.bls.gov/news.release/archives/cpi_11172016.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2016-11-17
+2016-12-02,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_12022016.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2016-12-02
+2016-12-14,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20161214a.htm,fed_2016.html,,December 13-14 Meeting - 2016,scheduled_meeting_archive,2016-12-14
+2016-12-15,CPI,https://www.bls.gov/news.release/archives/cpi_12152016.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2016-12-15
+2017-01-06,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_01062017.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2017-01-06
+2017-01-18,CPI,https://www.bls.gov/news.release/archives/cpi_01182017.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2017-01-18
+2017-02-01,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20170201a.htm,fed_2017.html,,Jan/Feb 31-1 Meeting - 2017,scheduled_meeting_archive,2017-02-01
+2017-02-03,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_02032017.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2017-02-03
+2017-02-15,CPI,https://www.bls.gov/news.release/archives/cpi_02152017.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2017-02-15
+2017-03-10,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_03102017.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2017-03-10
+2017-03-15,CPI,https://www.bls.gov/news.release/archives/cpi_03152017.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2017-03-15
+2017-03-15,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20170315a.htm,fed_2017.html,,March 14-15 Meeting - 2017,scheduled_meeting_archive,2017-03-15
+2017-04-07,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_04072017.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2017-04-07
+2017-04-14,CPI,https://www.bls.gov/news.release/archives/cpi_04142017.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2017-04-14
+2017-05-03,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20170503a.htm,fed_2017.html,,May 2-3 Meeting - 2017,scheduled_meeting_archive,2017-05-03
+2017-05-05,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_05052017.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2017-05-05
+2017-05-12,CPI,https://www.bls.gov/news.release/archives/cpi_05122017.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2017-05-12
+2017-06-02,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_06022017.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2017-06-02
+2017-06-14,CPI,https://www.bls.gov/news.release/archives/cpi_06142017.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2017-06-14
+2017-06-14,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20170614a.htm,fed_2017.html,,June 13-14 Meeting - 2017,scheduled_meeting_archive,2017-06-14
+2017-07-07,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_07072017.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2017-07-07
+2017-07-14,CPI,https://www.bls.gov/news.release/archives/cpi_07142017.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2017-07-14
+2017-07-26,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20170726a.htm,fed_2017.html,,July 25-26 Meeting - 2017,scheduled_meeting_archive,2017-07-26
+2017-08-04,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_08042017.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2017-08-04
+2017-08-11,CPI,https://www.bls.gov/news.release/archives/cpi_08112017.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2017-08-11
+2017-09-01,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_09012017.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2017-09-01
+2017-09-14,CPI,https://www.bls.gov/news.release/archives/cpi_09142017.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2017-09-14
+2017-09-20,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20170920a.htm,fed_2017.html,,September 19-20 Meeting - 2017,scheduled_meeting_archive,2017-09-20
+2017-10-06,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_10062017.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2017-10-06
+2017-10-13,CPI,https://www.bls.gov/news.release/archives/cpi_10132017.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2017-10-13
+2017-11-01,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20171101a.htm,fed_2017.html,,Oct/Nov 31-1 Meeting - 2017,scheduled_meeting_archive,2017-11-01
+2017-11-03,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_11032017.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2017-11-03
+2017-11-15,CPI,https://www.bls.gov/news.release/archives/cpi_11152017.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2017-11-15
+2017-12-08,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_12082017.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2017-12-08
+2017-12-13,CPI,https://www.bls.gov/news.release/archives/cpi_12132017.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2017-12-13
+2017-12-13,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20171213a.htm,fed_2017.html,,December 12-13 Meeting - 2017,scheduled_meeting_archive,2017-12-13
+2018-01-05,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_01052018.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2018-01-05
+2018-01-12,CPI,https://www.bls.gov/news.release/archives/cpi_01122018.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2018-01-12
+2018-01-31,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20180131a.htm,fed_2018.html,,January 30-31 Meeting - 2018,scheduled_meeting_archive,2018-01-31
+2018-02-02,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_02022018.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2018-02-02
+2018-02-14,CPI,https://www.bls.gov/news.release/archives/cpi_02142018.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2018-02-14
+2018-03-09,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_03092018.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2018-03-09
+2018-03-13,CPI,https://www.bls.gov/news.release/archives/cpi_03132018.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2018-03-13
+2018-03-21,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20180321a.htm,fed_2018.html,,March 20-21 Meeting - 2018,scheduled_meeting_archive,2018-03-21
+2018-04-06,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_04062018.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2018-04-06
+2018-04-11,CPI,https://www.bls.gov/news.release/archives/cpi_04112018.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2018-04-11
+2018-05-02,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20180502a.htm,fed_2018.html,,May 1-2 Meeting - 2018,scheduled_meeting_archive,2018-05-02
+2018-05-04,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_05042018.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2018-05-04
+2018-05-10,CPI,https://www.bls.gov/news.release/archives/cpi_05102018.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2018-05-10
+2018-06-01,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_06012018.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2018-06-01
+2018-06-12,CPI,https://www.bls.gov/news.release/archives/cpi_06122018.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2018-06-12
+2018-06-13,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20180613a.htm,fed_2018.html,,June 12-13 Meeting - 2018,scheduled_meeting_archive,2018-06-13
+2018-07-06,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_07062018.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2018-07-06
+2018-07-12,CPI,https://www.bls.gov/news.release/archives/cpi_07122018.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2018-07-12
+2018-08-01,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20180801a.htm,fed_2018.html,,Jul/Aug 31-1 Meeting - 2018,scheduled_meeting_archive,2018-08-01
+2018-08-03,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_08032018.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2018-08-03
+2018-08-10,CPI,https://www.bls.gov/news.release/archives/cpi_08102018.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2018-08-10
+2018-09-07,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_09072018.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2018-09-07
+2018-09-13,CPI,https://www.bls.gov/news.release/archives/cpi_09132018.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2018-09-13
+2018-09-26,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20180926a.htm,fed_2018.html,,September 25-26 Meeting - 2018,scheduled_meeting_archive,2018-09-26
+2018-10-05,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_10052018.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2018-10-05
+2018-10-11,CPI,https://www.bls.gov/news.release/archives/cpi_10112018.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2018-10-11
+2018-11-02,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_11022018.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2018-11-02
+2018-11-08,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20181108a.htm,fed_2018.html,,November 7-8 Meeting - 2018,scheduled_meeting_archive,2018-11-08
+2018-11-14,CPI,https://www.bls.gov/news.release/archives/cpi_11142018.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2018-11-14
+2018-12-07,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_12072018.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2018-12-07
+2018-12-12,CPI,https://www.bls.gov/news.release/archives/cpi_12122018.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2018-12-12
+2018-12-19,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20181219a.htm,fed_2018.html,,December 18-19 Meeting - 2018,scheduled_meeting_archive,2018-12-19
+2019-01-04,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_01042019.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2019-01-04
+2019-01-11,CPI,https://www.bls.gov/news.release/archives/cpi_01112019.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2019-01-11
+2019-01-30,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20190130a.htm,fed_2019.html,,January 29-30 Meeting - 2019,scheduled_meeting_archive,2019-01-30
+2019-02-01,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_02012019.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2019-02-01
+2019-02-13,CPI,https://www.bls.gov/news.release/archives/cpi_02132019.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2019-02-13
+2019-03-08,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_03082019.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2019-03-08
+2019-03-12,CPI,https://www.bls.gov/news.release/archives/cpi_03122019.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2019-03-12
+2019-03-20,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20190320a.htm,fed_2019.html,,March 19-20 Meeting - 2019,scheduled_meeting_archive,2019-03-20
+2019-04-05,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_04052019.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2019-04-05
+2019-04-10,CPI,https://www.bls.gov/news.release/archives/cpi_04102019.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2019-04-10
+2019-05-01,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20190501a.htm,fed_2019.html,,April/May 30-1 Meeting - 2019,scheduled_meeting_archive,2019-05-01
+2019-05-03,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_05032019.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2019-05-03
+2019-05-10,CPI,https://www.bls.gov/news.release/archives/cpi_05102019.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2019-05-10
+2019-06-07,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_06072019.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2019-06-07
+2019-06-12,CPI,https://www.bls.gov/news.release/archives/cpi_06122019.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2019-06-12
+2019-06-19,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20190619a.htm,fed_2019.html,,June 18-19 Meeting - 2019,scheduled_meeting_archive,2019-06-19
+2019-07-05,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_07052019.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2019-07-05
+2019-07-11,CPI,https://www.bls.gov/news.release/archives/cpi_07112019.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2019-07-11
+2019-07-31,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20190731a.htm,fed_2019.html,,July 30-31 Meeting - 2019,scheduled_meeting_archive,2019-07-31
+2019-08-02,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_08022019.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2019-08-02
+2019-08-13,CPI,https://www.bls.gov/news.release/archives/cpi_08132019.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2019-08-13
+2019-09-06,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_09062019.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2019-09-06
+2019-09-12,CPI,https://www.bls.gov/news.release/archives/cpi_09122019.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2019-09-12
+2019-09-18,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20190918a.htm,fed_2019.html,,September 17-18 Meeting - 2019,scheduled_meeting_archive,2019-09-18
+2019-10-04,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_10042019.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2019-10-04
+2019-10-10,CPI,https://www.bls.gov/news.release/archives/cpi_10102019.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2019-10-10
+2019-10-30,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20191030a.htm,fed_2019.html,,October 29-30 Meeting - 2019,scheduled_meeting_archive,2019-10-30
+2019-11-01,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_11012019.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2019-11-01
+2019-11-13,CPI,https://www.bls.gov/news.release/archives/cpi_11132019.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2019-11-13
+2019-12-06,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_12062019.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2019-12-06
+2019-12-11,CPI,https://www.bls.gov/news.release/archives/cpi_12112019.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2019-12-11
+2019-12-11,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20191211a.htm,fed_2019.html,,December 10-11 Meeting - 2019,scheduled_meeting_archive,2019-12-11
+2020-01-10,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_01102020.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2020-01-10
+2020-01-14,CPI,https://www.bls.gov/news.release/archives/cpi_01142020.htm,bls_cpi_web_341.txt,08:30,official archived release URL,archive_not_vintage_schedule,2020-01-14
+2020-01-29,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20200129a.htm,fed_2020.html,,January 28-29 Meeting - 2020,scheduled_meeting_archive,2020-01-29
+2020-02-07,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_02072020.htm,bls_empsit_web_342.txt,08:30,official archived release URL,archive_not_vintage_schedule,2020-02-07
+2020-02-13,CPI,https://www.bls.gov/news.release/archives/cpi_02132020.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2020-02-13
+2020-03-06,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_03062020.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2020-03-06
+2020-03-11,CPI,https://www.bls.gov/news.release/archives/cpi_03112020.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2020-03-11
+2020-04-03,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_04032020.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2020-04-03
+2020-04-10,CPI,https://www.bls.gov/news.release/archives/cpi_04102020.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2020-04-10
+2020-04-29,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20200429a.htm,fed_2020.html,,April 28-29 Meeting - 2020,scheduled_meeting_archive,2020-04-29
+2020-05-08,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_05082020.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2020-05-08
+2020-05-12,CPI,https://www.bls.gov/news.release/archives/cpi_05122020.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2020-05-12
+2020-06-05,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_06052020.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2020-06-05
+2020-06-10,CPI,https://www.bls.gov/news.release/archives/cpi_06102020.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2020-06-10
+2020-06-10,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20200610a.htm,fed_2020.html,,June 9-10 Meeting - 2020,scheduled_meeting_archive,2020-06-10
+2020-07-02,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_07022020.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2020-07-02
+2020-07-14,CPI,https://www.bls.gov/news.release/archives/cpi_07142020.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2020-07-14
+2020-07-29,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20200729a.htm,fed_2020.html,,July 28-29 Meeting - 2020,scheduled_meeting_archive,2020-07-29
+2020-08-07,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_08072020.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2020-08-07
+2020-08-12,CPI,https://www.bls.gov/news.release/archives/cpi_08122020.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2020-08-12
+2020-09-04,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_09042020.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2020-09-04
+2020-09-11,CPI,https://www.bls.gov/news.release/archives/cpi_09112020.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2020-09-11
+2020-09-16,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20200916a.htm,fed_2020.html,,September 15-16 Meeting - 2020,scheduled_meeting_archive,2020-09-16
+2020-10-02,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_10022020.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2020-10-02
+2020-10-13,CPI,https://www.bls.gov/news.release/archives/cpi_10132020.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2020-10-13
+2020-11-05,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20201105a.htm,fed_2020.html,,November 4-5 Meeting - 2020,scheduled_meeting_archive,2020-11-05
+2020-11-06,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_11062020.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2020-11-06
+2020-11-12,CPI,https://www.bls.gov/news.release/archives/cpi_11122020.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2020-11-12
+2020-12-04,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_12042020.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2020-12-04
+2020-12-10,CPI,https://www.bls.gov/news.release/archives/cpi_12102020.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2020-12-10
+2020-12-16,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20201216a.htm,fed_2020.html,,December 15-16 Meeting - 2020,scheduled_meeting_archive,2020-12-16
+2021-01-08,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_01082021.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2021-01-08
+2021-01-13,CPI,https://www.bls.gov/news.release/archives/cpi_01132021.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2021-01-13
+2021-01-27,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20210127a.htm,fed_recent.html,,scheduled January 26-27,scheduled_meeting_archive,2021-01-27
+2021-02-05,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_02052021.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2021-02-05
+2021-02-10,CPI,https://www.bls.gov/news.release/archives/cpi_02102021.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2021-02-10
+2021-03-05,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_03052021.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2021-03-05
+2021-03-10,CPI,https://www.bls.gov/news.release/archives/cpi_03102021.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2021-03-10
+2021-03-17,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20210317a.htm,fed_recent.html,,scheduled March 16-17*,scheduled_meeting_archive,2021-03-17
+2021-04-02,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_04022021.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2021-04-02
+2021-04-13,CPI,https://www.bls.gov/news.release/archives/cpi_04132021.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2021-04-13
+2021-04-28,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20210428a.htm,fed_recent.html,,scheduled April 27-28,scheduled_meeting_archive,2021-04-28
+2021-05-07,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_05072021.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2021-05-07
+2021-05-12,CPI,https://www.bls.gov/news.release/archives/cpi_05122021.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2021-05-12
+2021-06-04,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_06042021.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2021-06-04
+2021-06-10,CPI,https://www.bls.gov/news.release/archives/cpi_06102021.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2021-06-10
+2021-06-16,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20210616a.htm,fed_recent.html,,scheduled June 15-16*,scheduled_meeting_archive,2021-06-16
+2021-07-02,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_07022021.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2021-07-02
+2021-07-13,CPI,https://www.bls.gov/news.release/archives/cpi_07132021.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2021-07-13
+2021-07-28,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20210728a.htm,fed_recent.html,,scheduled July 27-28,scheduled_meeting_archive,2021-07-28
+2021-08-06,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_08062021.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2021-08-06
+2021-08-11,CPI,https://www.bls.gov/news.release/archives/cpi_08112021.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2021-08-11
+2021-09-03,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_09032021.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2021-09-03
+2021-09-14,CPI,https://www.bls.gov/news.release/archives/cpi_09142021.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2021-09-14
+2021-09-22,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20210922a.htm,fed_recent.html,,scheduled September 21-22*,scheduled_meeting_archive,2021-09-22
+2021-10-08,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_10082021.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2021-10-08
+2021-10-13,CPI,https://www.bls.gov/news.release/archives/cpi_10132021.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2021-10-13
+2021-11-03,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20211103a.htm,fed_recent.html,,scheduled November 2-3,scheduled_meeting_archive,2021-11-03
+2021-11-05,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_11052021.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2021-11-05
+2021-11-10,CPI,https://www.bls.gov/news.release/archives/cpi_11102021.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2021-11-10
+2021-12-03,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_12032021.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2021-12-03
+2021-12-10,CPI,https://www.bls.gov/news.release/archives/cpi_12102021.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2021-12-10
+2021-12-15,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20211215a.htm,fed_recent.html,,scheduled December 14-15*,scheduled_meeting_archive,2021-12-15
+2022-01-07,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_01072022.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2022-01-07
+2022-01-12,CPI,https://www.bls.gov/news.release/archives/cpi_01122022.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2022-01-12
+2022-01-26,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20220126a.htm,fed_recent.html,,scheduled January 25-26,scheduled_meeting_archive,2022-01-26
+2022-02-04,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_02042022.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2022-02-04
+2022-02-10,CPI,https://www.bls.gov/news.release/archives/cpi_02102022.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2022-02-10
+2022-03-04,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_03042022.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2022-03-04
+2022-03-10,CPI,https://www.bls.gov/news.release/archives/cpi_03102022.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2022-03-10
+2022-03-16,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20220316a.htm,fed_recent.html,,scheduled March 15-16*,scheduled_meeting_archive,2022-03-16
+2022-04-01,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_04012022.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2022-04-01
+2022-04-12,CPI,https://www.bls.gov/news.release/archives/cpi_04122022.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2022-04-12
+2022-05-04,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20220504a.htm,fed_recent.html,,scheduled May 3-4,scheduled_meeting_archive,2022-05-04
+2022-05-06,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_05062022.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2022-05-06
+2022-05-11,CPI,https://www.bls.gov/news.release/archives/cpi_05112022.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2022-05-11
+2022-06-03,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_06032022.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2022-06-03
+2022-06-10,CPI,https://www.bls.gov/news.release/archives/cpi_06102022.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2022-06-10
+2022-06-15,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20220615a.htm,fed_recent.html,,scheduled June 14-15*,scheduled_meeting_archive,2022-06-15
+2022-07-08,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_07082022.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2022-07-08
+2022-07-13,CPI,https://www.bls.gov/news.release/archives/cpi_07132022.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2022-07-13
+2022-07-27,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20220727a.htm,fed_recent.html,,scheduled July 26-27,scheduled_meeting_archive,2022-07-27
+2022-08-05,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_08052022.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2022-08-05
+2022-08-10,CPI,https://www.bls.gov/news.release/archives/cpi_08102022.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2022-08-10
+2022-09-02,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_09022022.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2022-09-02
+2022-09-13,CPI,https://www.bls.gov/news.release/archives/cpi_09132022.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2022-09-13
+2022-09-21,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20220921a.htm,fed_recent.html,,scheduled September 20-21*,scheduled_meeting_archive,2022-09-21
+2022-10-07,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_10072022.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2022-10-07
+2022-10-13,CPI,https://www.bls.gov/news.release/archives/cpi_10132022.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2022-10-13
+2022-11-02,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20221102a.htm,fed_recent.html,,scheduled November 1-2,scheduled_meeting_archive,2022-11-02
+2022-11-04,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_11042022.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2022-11-04
+2022-11-10,CPI,https://www.bls.gov/news.release/archives/cpi_11102022.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2022-11-10
+2022-12-02,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_12022022.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2022-12-02
+2022-12-13,CPI,https://www.bls.gov/news.release/archives/cpi_12132022.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2022-12-13
+2022-12-14,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20221214a.htm,fed_recent.html,,scheduled December 13-14*,scheduled_meeting_archive,2022-12-14
+2023-01-06,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_01062023.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2023-01-06
+2023-01-12,CPI,https://www.bls.gov/news.release/archives/cpi_01122023.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2023-01-12
+2023-02-01,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20230201a.htm,fed_recent.html,,scheduled Jan/Feb 31-1,scheduled_meeting_archive,2023-02-01
+2023-02-03,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_02032023.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2023-02-03
+2023-02-14,CPI,https://www.bls.gov/news.release/archives/cpi_02142023.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2023-02-14
+2023-03-10,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_03102023.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2023-03-10
+2023-03-14,CPI,https://www.bls.gov/news.release/archives/cpi_03142023.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2023-03-14
+2023-03-22,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20230322a.htm,fed_recent.html,,scheduled March 21-22*,scheduled_meeting_archive,2023-03-22
+2023-04-07,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_04072023.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2023-04-07
+2023-04-12,CPI,https://www.bls.gov/news.release/archives/cpi_04122023.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2023-04-12
+2023-05-03,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20230503a.htm,fed_recent.html,,scheduled May 2-3,scheduled_meeting_archive,2023-05-03
+2023-05-05,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_05052023.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2023-05-05
+2023-05-10,CPI,https://www.bls.gov/news.release/archives/cpi_05102023.htm,bls_cpi_web_261.txt,08:30,official archived release URL,archive_not_vintage_schedule,2023-05-10
+2023-06-02,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_06022023.htm,bls_empsit_web_262.txt,08:30,official archived release URL,archive_not_vintage_schedule,2023-06-02
+2023-06-13,CPI,https://www.bls.gov/news.release/archives/cpi_06132023.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2023-06-13
+2023-06-14,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20230614a.htm,fed_recent.html,,scheduled June 13-14*,scheduled_meeting_archive,2023-06-14
+2023-07-07,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_07072023.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2023-07-07
+2023-07-12,CPI,https://www.bls.gov/news.release/archives/cpi_07122023.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2023-07-12
+2023-07-26,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20230726a.htm,fed_recent.html,,scheduled July 25-26,scheduled_meeting_archive,2023-07-26
+2023-08-04,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_08042023.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2023-08-04
+2023-08-10,CPI,https://www.bls.gov/news.release/archives/cpi_08102023.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2023-08-10
+2023-09-01,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_09012023.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2023-09-01
+2023-09-13,CPI,https://www.bls.gov/news.release/archives/cpi_09132023.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2023-09-13
+2023-09-20,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20230920a.htm,fed_recent.html,,scheduled September 19-20*,scheduled_meeting_archive,2023-09-20
+2023-10-06,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_10062023.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2023-10-06
+2023-10-12,CPI,https://www.bls.gov/news.release/archives/cpi_10122023.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2023-10-12
+2023-11-01,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20231101a.htm,fed_recent.html,,scheduled Oct/Nov 31-1,scheduled_meeting_archive,2023-11-01
+2023-11-03,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_11032023.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2023-11-03
+2023-11-14,CPI,https://www.bls.gov/news.release/archives/cpi_11142023.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2023-11-14
+2023-12-08,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_12082023.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2023-12-08
+2023-12-12,CPI,https://www.bls.gov/news.release/archives/cpi_12122023.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2023-12-12
+2023-12-13,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20231213a.htm,fed_recent.html,,scheduled December 12-13*,scheduled_meeting_archive,2023-12-13
+2024-01-05,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_01052024.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2024-01-05
+2024-01-11,CPI,https://www.bls.gov/news.release/archives/cpi_01112024.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2024-01-11
+2024-01-31,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20240131a.htm,fed_recent.html,,scheduled January 30-31,scheduled_meeting_archive,2024-01-31
+2024-02-02,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_02022024.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2024-02-02
+2024-02-13,CPI,https://www.bls.gov/news.release/archives/cpi_02132024.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2024-02-13
+2024-03-08,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_03082024.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2024-03-08
+2024-03-12,CPI,https://www.bls.gov/news.release/archives/cpi_03122024.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2024-03-12
+2024-03-20,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20240320a.htm,fed_recent.html,,scheduled March 19-20*,scheduled_meeting_archive,2024-03-20
+2024-04-05,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_04052024.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2024-04-05
+2024-04-10,CPI,https://www.bls.gov/news.release/archives/cpi_04102024.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2024-04-10
+2024-05-01,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20240501a.htm,fed_recent.html,,scheduled Apr/May 30-1,scheduled_meeting_archive,2024-05-01
+2024-05-03,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_05032024.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2024-05-03
+2024-05-15,CPI,https://www.bls.gov/news.release/archives/cpi_05152024.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2024-05-15
+2024-06-07,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_06072024.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2024-06-07
+2024-06-12,CPI,https://www.bls.gov/news.release/archives/cpi_06122024.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2024-06-12
+2024-06-12,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20240612a.htm,fed_recent.html,,scheduled June 11-12*,scheduled_meeting_archive,2024-06-12
+2024-07-05,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_07052024.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2024-07-05
+2024-07-11,CPI,https://www.bls.gov/news.release/archives/cpi_07112024.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2024-07-11
+2024-07-31,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20240731a.htm,fed_recent.html,,scheduled July 30-31,scheduled_meeting_archive,2024-07-31
+2024-08-02,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_08022024.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2024-08-02
+2024-08-14,CPI,https://www.bls.gov/news.release/archives/cpi_08142024.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2024-08-14
+2024-09-06,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_09062024.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2024-09-06
+2024-09-11,CPI,https://www.bls.gov/news.release/archives/cpi_09112024.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2024-09-11
+2024-09-18,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20240918a.htm,fed_recent.html,,scheduled September 17-18*,scheduled_meeting_archive,2024-09-18
+2024-10-04,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_10042024.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2024-10-04
+2024-10-10,CPI,https://www.bls.gov/news.release/archives/cpi_10102024.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2024-10-10
+2024-11-01,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_11012024.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2024-11-01
+2024-11-07,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20241107a.htm,fed_recent.html,,scheduled November 6-7,scheduled_meeting_archive,2024-11-07
+2024-11-13,CPI,https://www.bls.gov/news.release/archives/cpi_11132024.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2024-11-13
+2024-12-06,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_12062024.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2024-12-06
+2024-12-11,CPI,https://www.bls.gov/news.release/archives/cpi_12112024.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2024-12-11
+2024-12-18,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20241218a.htm,fed_recent.html,,scheduled December 17-18*,scheduled_meeting_archive,2024-12-18
+2025-01-10,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_01102025.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2025-01-10
+2025-01-15,CPI,https://www.bls.gov/news.release/archives/cpi_01152025.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2025-01-15
+2025-01-29,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20250129a.htm,fed_recent.html,,scheduled January 28-29,scheduled_meeting_archive,2025-01-29
+2025-02-07,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_02072025.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2025-02-07
+2025-02-12,CPI,https://www.bls.gov/news.release/archives/cpi_02122025.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2025-02-12
+2025-03-07,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_03072025.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2025-03-07
+2025-03-12,CPI,https://www.bls.gov/news.release/archives/cpi_03122025.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2025-03-12
+2025-03-19,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20250319a.htm,fed_recent.html,,scheduled March 18-19*,scheduled_meeting_archive,2025-03-19
+2025-04-04,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_04042025.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2025-04-04
+2025-04-10,CPI,https://www.bls.gov/news.release/archives/cpi_04102025.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2025-04-10
+2025-05-02,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_05022025.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2025-05-02
+2025-05-07,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20250507a.htm,fed_recent.html,,scheduled May 6-7,scheduled_meeting_archive,2025-05-07
+2025-05-13,CPI,https://www.bls.gov/news.release/archives/cpi_05132025.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2025-05-13
+2025-06-06,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_06062025.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2025-06-06
+2025-06-11,CPI,https://www.bls.gov/news.release/archives/cpi_06112025.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2025-06-11
+2025-06-18,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20250618a.htm,fed_recent.html,,scheduled June 17-18*,scheduled_meeting_archive,2025-06-18
+2025-07-03,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_07032025.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2025-07-03
+2025-07-15,CPI,https://www.bls.gov/news.release/archives/cpi_07152025.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2025-07-15
+2025-07-30,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20250730a.htm,fed_recent.html,,scheduled July 29-30,scheduled_meeting_archive,2025-07-30
+2025-08-01,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_08012025.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2025-08-01
+2025-08-12,CPI,https://www.bls.gov/news.release/archives/cpi_08122025.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2025-08-12
+2025-09-05,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_09052025.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2025-09-05
+2025-09-11,CPI,https://www.bls.gov/news.release/archives/cpi_09112025.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2025-09-11
+2025-09-17,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20250917a.htm,fed_recent.html,,scheduled September 16-17*,scheduled_meeting_archive,2025-09-17
+2025-10-24,CPI,https://www.bls.gov/news.release/archives/cpi_10242025.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2025-10-24
+2025-10-29,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20251029a.htm,fed_recent.html,,scheduled October 28-29,scheduled_meeting_archive,2025-10-29
+2025-11-20,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_11202025.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2025-11-20
+2025-12-10,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20251210a.htm,fed_recent.html,,scheduled December 9-10*,scheduled_meeting_archive,2025-12-10
+2025-12-16,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_12162025.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2025-12-16
+2025-12-18,CPI,https://www.bls.gov/news.release/archives/cpi_12182025.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2025-12-18
+2026-01-09,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_01092026.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2026-01-09
+2026-01-13,CPI,https://www.bls.gov/news.release/archives/cpi_01132026.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2026-01-13
+2026-01-28,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20260128a.htm,fed_recent.html,,scheduled January 27-28,scheduled_meeting_archive,2026-01-28
+2026-02-11,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_02112026.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2026-02-11
+2026-02-13,CPI,https://www.bls.gov/news.release/archives/cpi_02132026.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2026-02-13
+2026-03-06,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_03062026.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2026-03-06
+2026-03-11,CPI,https://www.bls.gov/news.release/archives/cpi_03112026.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2026-03-11
+2026-03-18,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20260318a.htm,fed_recent.html,,scheduled March 17-18*,scheduled_meeting_archive,2026-03-18
+2026-04-03,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_04032026.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2026-04-03
+2026-04-10,CPI,https://www.bls.gov/news.release/archives/cpi_04102026.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2026-04-10
+2026-04-29,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20260429a.htm,fed_recent.html,,scheduled April 28-29,scheduled_meeting_archive,2026-04-29
+2026-05-08,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_05082026.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2026-05-08
+2026-05-12,CPI,https://www.bls.gov/news.release/archives/cpi_05122026.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2026-05-12
+2026-06-05,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_06052026.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2026-06-05
+2026-06-10,CPI,https://www.bls.gov/news.release/archives/cpi_06102026.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2026-06-10
+2026-06-17,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20260617a.htm,fed_recent.html,,scheduled June 16-17*,scheduled_meeting_archive,2026-06-17
+2026-07-02,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_07022026.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2026-07-02
+2026-07-14,CPI,https://www.bls.gov/news.release/archives/cpi_07142026.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2026-07-14
+2026-07-29,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20260729a.htm,fed_recent.html,,scheduled July 28-29,scheduled_meeting_archive,2026-07-29
+2026-08-07,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_08072026.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2026-08-07
+2026-08-12,CPI,https://www.bls.gov/news.release/archives/cpi_08122026.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2026-08-12
+2026-09-04,PAYROLLS,https://www.bls.gov/news.release/archives/empsit_09042026.htm,bls_empsit_web_182.txt,08:30,official archived release URL,archive_not_vintage_schedule,2026-09-04
+2026-09-11,CPI,https://www.bls.gov/news.release/archives/cpi_09112026.htm,bls_cpi_web_181.txt,08:30,official archived release URL,archive_not_vintage_schedule,2026-09-11
+2026-09-16,FOMC,https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916a.htm,fed_recent.html,,scheduled September 15-16*,scheduled_meeting_archive,2026-09-16

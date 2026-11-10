@@ -7,6 +7,7 @@ flatten. The current rules are in [STATUS.md](../STATUS.md).
 
 | Study | Answer |
 |---|---|
+| [RTL scheduled major-news days](rtl-news-days/RESULTS.md) ([protocol](rtl-news-days/PROTOCOL.md)) | Skip CPI/payroll/scheduled-FOMC sessions: recent net +9.7%, equity DD −32.1%; early net −15.9%, DD +5.4%. Recent matched-random rank strong, but profit gain depends on 2025–26. Five native runs verified; no baseline change. |
 | [One-contract buy and hold](buy-hold/RESULTS.md), [RTL/GG + VWAP comparison](buy-hold/COMPARISON.md) | Raw hold $57,973 net; rolled hold $50,319. Matched baseline, VWAP and VWAP + exclude16-17 variants added. Since 2020 RTL with both filters earns $47,393 with $2,848 equity DD. |
 | [Delay the failed-breakout short](rtl-delayed-failed-breakout/RESULTS.md) | A full MT5 replay earned $6,411 net after waiting for the breakout candle to close, versus $995 for immediate submission and −$3,988 for plain delay. The early period barely covered another $1 per trade. |
 | [Short weak days into the cash close](mnq-weak-close/RESULTS.md) | Net −$1,804 on 1,170 trades, with $7,386 daily-close drawdown. Waiting until 3:31 p.m. earned $239 pooled. Both entry timings lost from May 4, 2020 onward. |

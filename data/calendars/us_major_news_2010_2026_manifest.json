@@ -1,0 +1,197 @@
+{
+  "built": "2026-11-10",
+  "coverage": [
+    "2010-01-01",
+    "2026-09-30"
+  ],
+  "events": 533,
+  "unique_dates": 523,
+  "calendar_sha256": "63a8c0eb3771c6f44422b65056862836394a507a22ce17fcff6003fd97288ca9",
+  "sources": {
+    "bls_cpi_web_181.txt": "6955e43d051973b24ce1558ae56709e41dcb5b7b706c37d1df9cd5f14a06d110",
+    "bls_cpi_web_261.txt": "b45f33e6652fc7aef5c219179783559a36c51c187497ca904dca6e854237dc3e",
+    "bls_cpi_web_341.txt": "3395e58e6d8b921627d024536a5ca303631f96cd6e402af9326f240ec4ec6f47",
+    "bls_cpi_web_421.txt": "f2af8b71956b133a0a4fc85334e0d0a8ac291cb6ecd622d86f217fd87f285280",
+    "bls_cpi_web_501.txt": "f97519795406f9619b8361d1749ddc53c2a82c913904660e2531b8a628f659b9",
+    "bls_cpi_web_581.txt": "02981a85e9cd82022b1e9c3f73704e5f2c42be2ec1c96061724423d39e8852d6",
+    "bls_empsit_web_182.txt": "e325379ff4d531f920c4578ae3ce5a3b13432abcf9b8d0f725fb205ab585b761",
+    "bls_empsit_web_262.txt": "b85865b9bcd5090c9f04a81437f6d269363a06c8227e2d3420a2c93d72020121",
+    "bls_empsit_web_342.txt": "7e228fa70d793f7f440e2f0df36e36708feb654482fa7820ebfcdb74516984e5",
+    "bls_empsit_web_422.txt": "92514e53dabe6f1684e9264580473c9ed59e320d587780818ee3d7c5640a3923",
+    "bls_empsit_web_502.txt": "860bc6a174f574b1b3912f550a05af85052fb3184878bd0fdbc5ba51f9980b06",
+    "bls_empsit_web_582.txt": "ce324b2b03aef98e45afe4dc4a3652fd5f7d67742a921e3040e1d86d67bf7471",
+    "fed_2010.html": "75ed7be426ec72ce9a1cf888e94a053589f12dce8fdf7241a7cf0da5d9cf27c1",
+    "fed_2011.html": "180b1afd38cf4081923bedd6a53d0472293a68232178303306d03eafa45d55cf",
+    "fed_2012.html": "5c289a002e78be9995b53eb41610894414a2b7cd0e652e4a653017becb35d1c2",
+    "fed_2013.html": "3d534ccbdb4818fef023904cb5a98438c22594e876ce7e253606b0b53143b944",
+    "fed_2014.html": "dc296300a7cc9bb771b17e61b9ec3b34aa0ba30fe558108cde22a348f7b1f3c1",
+    "fed_2015.html": "09fd7af4de74e9adae63c2447ce2559130fb4239301e82af2d13e4a81af2478a",
+    "fed_2016.html": "117f0f17823412aae9375deb78d1b567076eaea44c481a3b8a665b07ae31cd0d",
+    "fed_2017.html": "d4bf46d9a1ca26a5906ceca7704932bec48864e3587b9088c943877e7a820310",
+    "fed_2018.html": "46ece35e4e7b31442367f5e06cdb561470ac3f6b327ffcfe1fe3939866f8c875",
+    "fed_2019.html": "b8392257fcd040e603b1831b8a49cc2fe10201b0c382d2752408e6b225e250aa",
+    "fed_2020.html": "87d79cd4696858dd6e703b53356824ca6e025010b7d10437af9b6431813c5077",
+    "fed_recent.html": "3ad2ac4ad5db6fa7f297214fde438092f7a248624da23f297b82c9fdc5484246"
+  },
+  "excluded_fed_items": [
+    {
+      "source_file": "fed_2010.html",
+      "label": "May 9 Conference Call - 2010",
+      "reason": "not scheduled announcement",
+      "links": [
+        "/newsevents/press/monetary/20100509a.htm"
+      ]
+    },
+    {
+      "source_file": "fed_2010.html",
+      "label": "October 15 Conference Call - 2010",
+      "reason": "not scheduled announcement",
+      "links": []
+    },
+    {
+      "source_file": "fed_2011.html",
+      "label": "August 1 Conference Call - 2011",
+      "reason": "not scheduled announcement",
+      "links": []
+    },
+    {
+      "source_file": "fed_2011.html",
+      "label": "November 28 Conference Call - 2011",
+      "reason": "not scheduled announcement",
+      "links": []
+    },
+    {
+      "source_file": "fed_2013.html",
+      "label": "October 16 (unscheduled) - 2013",
+      "reason": "not scheduled announcement",
+      "links": []
+    },
+    {
+      "source_file": "fed_2014.html",
+      "label": "March 4 (unscheduled) - 2014",
+      "reason": "not scheduled announcement",
+      "links": []
+    },
+    {
+      "source_file": "fed_2019.html",
+      "label": "October 4 (unscheduled) - 2019",
+      "reason": "not scheduled announcement",
+      "links": [
+        "/newsevents/pressreleases/monetary20191011a.htm"
+      ]
+    },
+    {
+      "source_file": "fed_2020.html",
+      "label": "March 2 (unscheduled) Meeting - 2020",
+      "reason": "not scheduled announcement",
+      "links": [
+        "/newsevents/pressreleases/monetary20200303a.htm"
+      ]
+    },
+    {
+      "source_file": "fed_2020.html",
+      "label": "March 15 (unscheduled) Meeting - 2020",
+      "reason": "not scheduled announcement",
+      "links": [
+        "/newsevents/pressreleases/monetary20200315a.htm"
+      ]
+    },
+    {
+      "source_file": "fed_2020.html",
+      "label": "March 17-18 (cancelled) Meeting - 2020",
+      "reason": "not scheduled announcement",
+      "links": []
+    },
+    {
+      "source_file": "fed_2020.html",
+      "label": "March 19 (notation vote) - 2020",
+      "reason": "not scheduled announcement",
+      "links": []
+    },
+    {
+      "source_file": "fed_2020.html",
+      "label": "March 23 (notation vote) - 2020",
+      "reason": "not scheduled announcement",
+      "links": [
+        "/newsevents/pressreleases/monetary20200323a.htm"
+      ]
+    },
+    {
+      "source_file": "fed_2020.html",
+      "label": "March 31 (notation vote) - 2020",
+      "reason": "not scheduled announcement",
+      "links": []
+    },
+    {
+      "source_file": "fed_2020.html",
+      "label": "August 27 (notation vote) - 2020",
+      "reason": "not scheduled announcement",
+      "links": []
+    }
+  ],
+  "bls_archive_pages": [
+    "https://www.bls.gov/bls/news-release/cpi.htm",
+    "https://www.bls.gov/bls/news-release/empsit.htm"
+  ],
+  "access": "BLS resolved official archive links via web reader (HTTP download 403); Fed direct HTML",
+  "counts": {
+    "CPI": {
+      "2010": 12,
+      "2011": 12,
+      "2012": 12,
+      "2013": 12,
+      "2014": 12,
+      "2015": 12,
+      "2016": 12,
+      "2017": 12,
+      "2018": 12,
+      "2019": 12,
+      "2020": 12,
+      "2021": 12,
+      "2022": 12,
+      "2023": 12,
+      "2024": 12,
+      "2025": 11,
+      "2026": 9
+    },
+    "FOMC": {
+      "2010": 8,
+      "2011": 8,
+      "2012": 8,
+      "2013": 8,
+      "2014": 8,
+      "2015": 8,
+      "2016": 8,
+      "2017": 8,
+      "2018": 8,
+      "2019": 8,
+      "2020": 7,
+      "2021": 8,
+      "2022": 8,
+      "2023": 8,
+      "2024": 8,
+      "2025": 8,
+      "2026": 6
+    },
+    "PAYROLLS": {
+      "2010": 12,
+      "2011": 12,
+      "2012": 12,
+      "2013": 12,
+      "2014": 12,
+      "2015": 12,
+      "2016": 12,
+      "2017": 12,
+      "2018": 12,
+      "2019": 12,
+      "2020": 12,
+      "2021": 12,
+      "2022": 12,
+      "2023": 12,
+      "2024": 12,
+      "2025": 11,
+      "2026": 9
+    }
+  },
+  "schedule_caveat": "Release archives are not full point-in-time schedules; sensitivity omits 2013/2025/2026."
+}
