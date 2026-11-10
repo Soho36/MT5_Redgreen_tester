@@ -1,0 +1,9 @@
+{
+  "all_passed": true,
+  "source_zip_hashes": true,
+  "independent_interval_union": true,
+  "all_event_clock_conversions": true,
+  "summary_rows_checked": 84,
+  "comparison_rows_checked": 12,
+  "code_sha256": "3730330df6d9a8495003e621442d3f3030da247a06d8985e72f8a9b697d96300"
+}

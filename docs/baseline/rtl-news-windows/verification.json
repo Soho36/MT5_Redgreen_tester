@@ -1,0 +1,119 @@
+{
+  "all_passed": true,
+  "jobs": [
+    {
+      "policy": "control",
+      "trades": 25833,
+      "gross_equity_dd": 5696.0,
+      "native_gross_equity_dd": 5696.0,
+      "native_ledger_and_stats": true,
+      "simulation": {
+        "trades": 25833,
+        "rejected_orders": 330,
+        "news_exits": 0,
+        "all_prices_and_submission_bars_match": true,
+        "all_fill_exit_minutes_match": true
+      },
+      "actions": {
+        "disabled": true
+      },
+      "flat_daily_boundaries": true,
+      "direct_and_compressed_dd_match": true,
+      "zero_profit_fee_events_added": 2
+    },
+    {
+      "policy": "entry",
+      "trades": 25601,
+      "gross_equity_dd": 5335.0,
+      "native_gross_equity_dd": 5335.0,
+      "native_ledger_and_stats": true,
+      "simulation": {
+        "trades": 25601,
+        "rejected_orders": 330,
+        "news_exits": 0,
+        "all_prices_and_submission_bars_match": true,
+        "all_fill_exit_minutes_match": true
+      },
+      "actions": {
+        "windows": 525,
+        "cancelled_orders": 131,
+        "boundary_fills": 0,
+        "forced_closes": 0,
+        "post_callback_flat": false,
+        "positions_with_window_exposure": 250,
+        "exposure_minutes": 10434.333333333334,
+        "delayed_first_quotes": 4,
+        "max_delay_seconds": 61.0,
+        "all_submissions_outside_windows": true,
+        "first_quotes_match_raw_data": true
+      },
+      "flat_daily_boundaries": true,
+      "direct_and_compressed_dd_match": true,
+      "zero_profit_fee_events_added": 2
+    },
+    {
+      "policy": "flat",
+      "trades": 25618,
+      "gross_equity_dd": 5643.5,
+      "native_gross_equity_dd": 5643.5,
+      "native_ledger_and_stats": true,
+      "simulation": {
+        "trades": 25618,
+        "rejected_orders": 330,
+        "news_exits": 277,
+        "all_prices_and_submission_bars_match": true,
+        "all_fill_exit_minutes_match": true
+      },
+      "actions": {
+        "windows": 525,
+        "cancelled_orders": 131,
+        "boundary_fills": 0,
+        "forced_closes": 277,
+        "post_callback_flat": true,
+        "positions_with_window_exposure": 3,
+        "exposure_minutes": 1.05,
+        "delayed_first_quotes": 4,
+        "max_delay_seconds": 61.0,
+        "all_submissions_outside_windows": true,
+        "first_quotes_match_raw_data": true
+      },
+      "flat_daily_boundaries": true,
+      "direct_and_compressed_dd_match": true,
+      "zero_profit_fee_events_added": 2
+    }
+  ],
+  "raw_minutes": 5511965,
+  "old_day_benchmark_reconciled": true,
+  "bootstrap_draws": 10000,
+  "seed": 20261110,
+  "code_sha256": {
+    "analyze_rtl_news_windows.py": "93013214cf8860e95bb2f182057ac629b4cd2d2ae1f77acdda14d1ac88f9195a",
+    "rtl_news_window_engine.py": "95e5a0b962a6705b84b88e448a772c2d007ad711b7aa91bd3f1da04f90be840f",
+    "analyze_rtl_news_days.py": "83fab00c9788afc1cc90e080f009d44850d3fe3001096e808de70684392e3604"
+  },
+  "output_sha256": {
+    "comparisons.csv": "c11ce6771cbed49d340b63ecbff4c4de955883d5524c8ef993e5db89a884202f",
+    "independent_mode_0_trades.csv": "66b7ebec4d739487d25a4fbbcbf2971a1e97c5cf5cc4e63812bb6ba3d2bb5d16",
+    "independent_mode_1_trades.csv": "fa5a3e881bb8f6b8d1dc3653339e41979fe13b03f298c28b325fbdfe22cd0034",
+    "independent_mode_2_trades.csv": "f98746e375aec7e7fce2925ce22c769b13355f10c2d37d422de7469cc36b6de4",
+    "newswin_20261110_control_envelopes.csv": "f1c4d9f13a4bd9dd1f8d27ad1aa161e6e65ce1f1cd17cff3f77c1cc63e71063a",
+    "newswin_20261110_control_trades.csv": "6df50878a9681f9ef7f74b99847312a08dd1a7a562ac22ee4bdccc64f72bc965",
+    "newswin_20261110_entry_envelopes.csv": "5120e759a86373bb923a04d7e8dd7004e2665cf5da44b3bbba93c901222f9baa",
+    "newswin_20261110_entry_exposure.csv": "558e31478850dbaa103e09421e0c265bd78dd7f7e3de46e45754b7ba4ffc3452",
+    "newswin_20261110_entry_trades.csv": "ce4eb6c277fa75222d0968030f01b7d47cc02e2ea148aff5245ac5d2b047326e",
+    "newswin_20261110_flat_envelopes.csv": "cf2a0fab16b98384f07fd4ffc26b575ae4abd1c56dd95dc5aa6145862e1d704d",
+    "newswin_20261110_flat_exposure.csv": "b2b7a1785918a674d76b2acb739198856c3a46231d43bce8bb3474288a180824",
+    "newswin_20261110_flat_trades.csv": "879e368af3e2cead17cace33f5cc000eef0f1a79ca96ca407418c2a60a8b58b3",
+    "news_actions_newswin_20261110_control.csv": "05b3c3aa6d5f13479cbe9a2cca888e4849be7980982483f259f034874d2643c8",
+    "news_actions_newswin_20261110_entry.csv": "60c10c7bdec8987abfdd6ab2512046b46082bef6e462d8f438fc9269f14d8868",
+    "news_actions_newswin_20261110_flat.csv": "14c4054d22b1b2e0a4ee3b4dd251239ff6c287804814a29478ee38bec233932c",
+    "rtlvwap_newswin_20261110_control_1.00.csv": "88c0d6144b1ce8ecc937a8f5333188240bc41b6cf241cef2e3778dde7bd752e5",
+    "rtlvwap_newswin_20261110_control_1.00_stats.csv": "24d86849ccbdb05d5bbb743d904cdf51206fea1e6d2bfcb594dc8c14ddb40048",
+    "rtlvwap_newswin_20261110_entry_1.00.csv": "5a14793f2ebd8a621ddf56e2d413bb3e5c5cd0abf1f897c27aef87e0979a130e",
+    "rtlvwap_newswin_20261110_entry_1.00_stats.csv": "bc98d91be1537a5e1fcab5a366405ec373271b52f7ee11faec499ff21367c8fd",
+    "rtlvwap_newswin_20261110_flat_1.00.csv": "fbaa839d9c00c76dc9b7bf00fd604ad470a4cd055547b81caa5b30a9a8d53544",
+    "rtlvwap_newswin_20261110_flat_1.00_stats.csv": "309cceeb6d2d23ec82eb128617b99c244cf7c8b3781b00b1144a59f6773dbf0c",
+    "schedule_sensitivity.csv": "39fb4e6f4d1236dabf3f5cfeb468bad560e1b84d14e122f69ca8e1e671500623",
+    "summary.csv": "213e74adc0373887df9825f22d50afd993ed01e9ddb52c6dbf8405bd63882238"
+  }
+}

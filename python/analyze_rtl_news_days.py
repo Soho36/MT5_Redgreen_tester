@@ -19,7 +19,7 @@ def event_masks(calendar,events):
             for name,types in {'skip_cpi':['CPI'],'skip_payrolls':['PAYROLLS'],
                                'skip_fomc':['FOMC'],'skip_all':['CPI','PAYROLLS','FOMC']}.items()}
 
-def session_envelopes(path,trades,calendar):
+def session_envelopes(path,trades,calendar,cost=COST):
     """Sufficient statistics for exact DD under whole-session omission.
 
     Store each day's net change, min/max relative equity, and internal DD. With
@@ -45,7 +45,7 @@ def session_envelopes(path,trades,calendar):
         data=data[np.argsort(data['time'],kind='stable')]
         times=data['time']
     count=np.searchsorted(exits,times,side='right')
-    equity=data['equity']-COST*count
+    equity=data['equity']-cost*count
     days=times//86400
     bounds=np.r_[0,np.flatnonzero(np.diff(days))+1,len(data)]
     rows=[]

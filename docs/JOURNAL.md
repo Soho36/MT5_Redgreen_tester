@@ -1134,3 +1134,31 @@ study doc. Keep each step to one or two lines.*
 **[RTL cash-open half-hours](baseline/rtl-open-halves/RESULTS.md) (2026-11-11, exploratory).** Four verified native replays: pooled 2016-Sep2026 net/equity-DD baseline $42,817/$5,942; skip16:00-16:30 $43,281/$5,799; skip16:30-17:00 $44,330/$5,990; full hour $44,729/$5,734. Full hour remains best of these four. 555/1,186 positions open at16:30 stop within30 minutes, but whole cohort net is positive; 61% of 17-hour gross profits came from pre-open fills. Stops execute intrabar; profit exits wait for bar close, so exit-hour bars are not entry expectancy. Full-hour net improves in6/11 years and annual equity DD in10/11. Control/full-hour ledgers byte-identical to prior runs; no baseline change.
 
 Evidence: Reports/rtl_open_halves_20261111; preparation, analysis, report and three focused tests in python/*rtl_open_halves.py. Native source copied from the frozen November1 study; separate tester-only EA. Original controls reproduced, every deal and decision reconciled, sampled gross equity DD matched native. No live/default changes.
+
+## 2026-11-11: RTL thirty-minute news windows
+
+- Completed the November 10 frozen follow-up: cancel/block entries from thirty
+  minutes before through thirty minutes after each scheduled release; second
+  variant also flattens at the first available quote. Existing RTL state replays
+  fully. CPI/payroll/FOMC core plus associated press-conference starts, no width sweep.
+- Timestamp calendar: 626 events, 541 merged windows; 525 in the native sample.
+  All 400 BLS times checked. Four conflicting 2012 Fed archive labels resolved
+  using the scheduled 12:30 time explicitly approved in contemporaneous minutes.
+  Sources and UTC/research-clock conversions preserved in data/calendars/.
+- Recent original net/DD $38,399.95/$5,941.70; entry blocking
+  $38,196.15/$5,577.55; flattening $36,707.50/$5,886.05. Early 2016–19 both
+  lower profit and worsen DD. Recent profit-change intervals include zero.
+  Removing 2025–26 leaves only a small risk/profit tradeoff. No adoption.
+- Entry blocking leaves 250 positions exposed during windows over full history;
+  flat mode makes 277 forced closes. No boundary fills. Three flat-mode positions
+  have 63 seconds total exposure while waiting for the first quote; none remains
+  after the callback. Four windows have delayed quotes, maximum 61 seconds.
+- All three native runs verified against independent full minute replay:
+  25,833/25,601/25,618 trades; disabled ledger byte-identical; gross DD matches
+  MT5. Source ZIP, all clocks, independent interval union, 84 summary rows and
+  12 comparisons verified. Twelve focused tests pass. Higher-cost equity paths
+  use the same native closure times, including zero-profit exits.
+- [Report/chart](baseline/rtl-news-windows/RESULTS.md),
+  [protocol](baseline/rtl-news-windows/PROTOCOL.md). Evidence:
+  Reports/rtl_news_windows_20261110/. Production settings unchanged.
+  Earlier whole-day study commit: 8735708.
