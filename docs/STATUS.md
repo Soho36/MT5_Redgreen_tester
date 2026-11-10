@@ -1,6 +1,8 @@
 # Project status
 
-Updated 2026-11-09. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
+Updated 2026-11-11. **Start here.** All study docs are mapped by setup type in [README.md](README.md). Each study below links to the full evidence.
+
+**[RTL cash-open half-hours](baseline/rtl-open-halves/RESULTS.md) (2026-11-11, exploratory).** Four verified native replays: pooled 2016-Sep2026 net/equity-DD baseline $42,817/$5,942; skip16:00-16:30 $43,281/$5,799; skip16:30-17:00 $44,330/$5,990; full hour $44,729/$5,734. Full hour remains best of these four. 555/1,186 positions open at16:30 stop within30 minutes, but whole cohort net is positive; 61% of 17-hour gross profits came from pre-open fills. Stops execute intrabar; profit exits wait for bar close, so exit-hour bars are not entry expectancy. Full-hour net improves in6/11 years and annual equity DD in10/11. Control/full-hour ledgers byte-identical to prior runs; no baseline change.
 For the day-by-day history, see [JOURNAL.md](JOURNAL.md).
 
 **[RTL scheduled major-news days](baseline/rtl-news-days/RESULTS.md) (2026-11-10, exploratory): promising recently, inconsistent across eras.** Skip whole CPI/payroll/scheduled-FOMC sessions: 2020-Sep2026 net $38,400 → $42,139, equity DD $5,942 → $4,037; 2016-19 net $4,417 → $3,713, DD $2,348 → $2,476. Recent net/DD beats 99.67% of 10,000 year/weekday-matched random exclusions, but profit uncertainty includes zero. Removing 2025-26 reverses the profit gain; DD improvement shrinks. Five native runs verified, disabled control byte-identical, six tests pass. Official calendar: 533 events/523 dates, core subset of Investing.com's three-star scope. No baseline change.

@@ -1,0 +1,14 @@
+{
+  "skip_pre": {
+    "years_profit_improved": 7,
+    "years_equity_dd_improved": 9
+  },
+  "skip_post": {
+    "years_profit_improved": 5,
+    "years_equity_dd_improved": 5
+  },
+  "skip_both": {
+    "years_profit_improved": 6,
+    "years_equity_dd_improved": 10
+  }
+}

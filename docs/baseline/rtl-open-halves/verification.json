@@ -1,0 +1,42 @@
+{
+  "all_passed": true,
+  "checks": [
+    {
+      "arm": "control",
+      "trades": 25833,
+      "control_byte_identical": true,
+      "native_gross_equity_dd": 5696.0,
+      "observed_gross_equity_dd": 5696.0,
+      "decisions": 60194,
+      "equity_rows": 6935742
+    },
+    {
+      "arm": "skip_pre",
+      "trades": 25037,
+      "control_byte_identical": false,
+      "native_gross_equity_dd": 5419.0,
+      "observed_gross_equity_dd": 5419.0,
+      "decisions": 58953,
+      "equity_rows": 6823282
+    },
+    {
+      "arm": "skip_post",
+      "trades": 24553,
+      "control_byte_identical": false,
+      "native_gross_equity_dd": 5757.0,
+      "observed_gross_equity_dd": 5757.0,
+      "decisions": 59034,
+      "equity_rows": 6787248
+    },
+    {
+      "arm": "skip_both",
+      "trades": 24043,
+      "control_byte_identical": true,
+      "native_gross_equity_dd": 5503.0,
+      "observed_gross_equity_dd": 5503.0,
+      "decisions": 57594,
+      "equity_rows": 6731652
+    }
+  ],
+  "code_sha256": "915b09991d059d4fe9f6d1bf97b2e4edeec9133f8d852d210ff64007ee60672d"
+}

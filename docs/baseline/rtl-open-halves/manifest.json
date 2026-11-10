@@ -1,0 +1,80 @@
+{
+  "expert": "RTL_open_halves_20261111",
+  "source": "I:\\PycharmProjects\\MT5_Redgreen_tester\\Reports\\rtl_gg_exclude16_20261101\\RTL_GG_exclude16_replay.mq5",
+  "source_sha256": "e594cabb3eb311b4de5fade09c99e9a7c3685b7fe086b3be2acff840178357c7",
+  "protocol_sha256": "9dd1c0c6150aff152432189d33c8f7eed63bc8ec27ca4ed1acb4622b4dabbe15",
+  "jobs": [
+    {
+      "tag": "openhalf_20261111_control",
+      "arm": "control",
+      "pre": false,
+      "post": false,
+      "outputs": [
+        "rtlvwap_openhalf_20261111_control_1.00.csv",
+        "rtlvwap_openhalf_20261111_control_1.00_stats.csv",
+        "vwap_decisions_openhalf_20261111_control.csv",
+        "window_equity_openhalf_20261111_control.bin"
+      ],
+      "inputs_files": [
+        "rtl_vwap_replay_20261026_features.csv"
+      ]
+    },
+    {
+      "tag": "openhalf_20261111_skip_pre",
+      "arm": "skip_pre",
+      "pre": true,
+      "post": false,
+      "outputs": [
+        "rtlvwap_openhalf_20261111_skip_pre_1.00.csv",
+        "rtlvwap_openhalf_20261111_skip_pre_1.00_stats.csv",
+        "vwap_decisions_openhalf_20261111_skip_pre.csv",
+        "window_equity_openhalf_20261111_skip_pre.bin"
+      ],
+      "inputs_files": [
+        "rtl_vwap_replay_20261026_features.csv"
+      ]
+    },
+    {
+      "tag": "openhalf_20261111_skip_post",
+      "arm": "skip_post",
+      "pre": false,
+      "post": true,
+      "outputs": [
+        "rtlvwap_openhalf_20261111_skip_post_1.00.csv",
+        "rtlvwap_openhalf_20261111_skip_post_1.00_stats.csv",
+        "vwap_decisions_openhalf_20261111_skip_post.csv",
+        "window_equity_openhalf_20261111_skip_post.bin"
+      ],
+      "inputs_files": [
+        "rtl_vwap_replay_20261026_features.csv"
+      ]
+    },
+    {
+      "tag": "openhalf_20261111_skip_both",
+      "arm": "skip_both",
+      "pre": true,
+      "post": true,
+      "outputs": [
+        "rtlvwap_openhalf_20261111_skip_both_1.00.csv",
+        "rtlvwap_openhalf_20261111_skip_both_1.00_stats.csv",
+        "vwap_decisions_openhalf_20261111_skip_both.csv",
+        "window_equity_openhalf_20261111_skip_both.bin"
+      ],
+      "inputs_files": [
+        "rtl_vwap_replay_20261026_features.csv"
+      ]
+    }
+  ],
+  "prepared_sha256": {
+    "early_closes.mqh": "5dcf4d99402ed987da4eae6ca9a8acfd0cdca329a0a8654eb6e207098d87b22b",
+    "openhalf_20261111_control.ini": "9f4487a7f24fb802b91e9a82a176ef487bbd87fbd09254c7868e051241c9a9b2",
+    "openhalf_20261111_skip_both.ini": "b0144d2ed1d51a01e519efad5de8e68b832dded56fe87ae158a93f6174164266",
+    "openhalf_20261111_skip_post.ini": "dd4af0ffcfca52e198e8a9754809164276a0971e49fa7b9cb1261fe9ee72d7d9",
+    "openhalf_20261111_skip_pre.ini": "56ec53f39dfb640ac997b35fcea664cd7859bc4a4bd0cb03c72964dda2d9c406",
+    "RTL_open_halves_20261111.mq5": "15209421bfc2fbcccdf010783f3fa24c875315377fe0af53a2295c229bbf5e2b",
+    "rtl_session_vwap.mqh": "585c706e4cd891e0f1856ce4f1afd536c20e062a750e4e14115c117b046684b9",
+    "rtl_vwap_replay_20261026_features.csv": "ccec54cb4ca00e7923537f191333929ff9ce868cee8ba79e51fb7226487bd557",
+    "stock_early_closes.mqh": "9ae2280f47125ad5ff3edb3d0279dc6f0235cf2577c9ba0da602d5ad6072fbca",
+    "window_equity_research.mqh": "5224cfe4767d31d31e03bfeab898bbf445f0a56977e5c2ab9f98b7deb3273270"
+  }
+}

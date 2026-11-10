@@ -1128,3 +1128,9 @@ study doc. Keep each step to one or two lines.*
   sensitivity omits 2013/2025/2026. Entire historical study remains exploratory.
   No production settings changed. [Report/chart](baseline/rtl-news-days/RESULTS.md),
   [protocol](baseline/rtl-news-days/PROTOCOL.md). Evidence: Reports/rtl_news_days_20261110/.
+
+## 2026-11-11: RTL cash-open half-hour attribution
+
+**[RTL cash-open half-hours](baseline/rtl-open-halves/RESULTS.md) (2026-11-11, exploratory).** Four verified native replays: pooled 2016-Sep2026 net/equity-DD baseline $42,817/$5,942; skip16:00-16:30 $43,281/$5,799; skip16:30-17:00 $44,330/$5,990; full hour $44,729/$5,734. Full hour remains best of these four. 555/1,186 positions open at16:30 stop within30 minutes, but whole cohort net is positive; 61% of 17-hour gross profits came from pre-open fills. Stops execute intrabar; profit exits wait for bar close, so exit-hour bars are not entry expectancy. Full-hour net improves in6/11 years and annual equity DD in10/11. Control/full-hour ledgers byte-identical to prior runs; no baseline change.
+
+Evidence: Reports/rtl_open_halves_20261111; preparation, analysis, report and three focused tests in python/*rtl_open_halves.py. Native source copied from the frozen November1 study; separate tester-only EA. Original controls reproduced, every deal and decision reconciled, sampled gross equity DD matched native. No live/default changes.
