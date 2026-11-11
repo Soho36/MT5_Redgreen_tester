@@ -1107,6 +1107,28 @@ study doc. Keep each step to one or two lines.*
   existing figures. [Comparison](baseline/buy-hold/COMPARISON.md).
 - Saved portable comparison CSV, chart and session audit alongside the docs.
 
+
+## 2026-11-10: Conditional GG midpoint stops on large session candles
+
+- User's screenshot motivated a session-relative stop test. Per the user's answer,
+  the 1R candle-close profit threshold shrinks with the stop. Frozen 2026-11-09:
+  signal high-low >=3x median of earlier same-session M30 candles, minimum five;
+  predeclared 2.5x and 3.5x neighbours. One MNQ contract, unchanged entry/session rules.
+- Four full MT5 runs. Primary early/recent net $3,635.60/$39,315.45 ->
+  $2,044.20/$28,733.80; equity DD $1,765.35/$5,621.75 -> $2,067.60/$5,617.35.
+  All three thresholds lower net and net/DD in both main eras. Mean net R also falls.
+- Primary tightens 2,052 fills (10.9%) in 2016-Sep2026. Among matched affected
+  entries, 255 old winners are now stopped; matched P&L falls $6,392.50. Changed
+  subsequent entries account for further differences. No adoption or baseline edit.
+- Control reproduces all 26,505 saved GG trades byte for byte. All candidate labels
+  independently rebuilt from raw minute data; every native trade matches separate
+  minute replay; sampled gross equity DD equals MT5. 36 focused tests passed.
+- Portable startup required an account; retained failure evidence. User closed
+  MT5 and authorized reopening; successful runs use the established native tester.
+- [Results/chart](baseline/gg-large-candle-stop/RESULTS.md),
+  [frozen protocol](baseline/gg-large-candle-stop/PROTOCOL.md).
+  Raw evidence: Reports/gg_large_candle_20261109/.
+
 ## 2026-11-10: RTL scheduled major-news day exclusions
 
 - User uses Investing.com's three-star macro news and chose RTL only initially.

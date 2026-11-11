@@ -110,11 +110,14 @@ def stamp_array(day, minute, k=0):
 
 # ---------------------------------------------------------------- M30 EA emulation
 
-def simulate_m30_ea(bars, rr=1.0, cutoffs=None, last_date=None, signal='red', intrabar_rr=None):
+def simulate_m30_ea(bars, rr=1.0, cutoffs=None, last_date=None, signal='red', intrabar_rr=None, signal_stops=None):
     """RR_r_MFE_buy-stop-entry_runband on M30, uncapped, all 01:00-23:30 windows, flatten fallback
     and early-close calendar, MT5 tester fills (pending and stop orders fill at their level).
     Optional intrabar_rr adds a resting TP alongside the unchanged close-confirmed exit.
     Its distance uses initial entry-to-stop risk; fills occur at the target, not the bar high.
+    signal_stops optionally maps a completed signal's day*48+half-hour slot to
+    its stop price. The close target scales with that stop; callers must use
+    only information available at signal close when constructing the mapping.
     """
     if intrabar_rr is not None and (not np.isfinite(intrabar_rr) or intrabar_rr <= 0):
         raise ValueError('intrabar_rr must be finite and positive, or None')
@@ -128,7 +131,7 @@ def simulate_m30_ea(bars, rr=1.0, cutoffs=None, last_date=None, signal='red', in
     pend = pos = None
     last_flat = prev_date = 0
     bar1 = cur = None
-    cur_slot = -1
+    cur_slot = signal_slot = -1
 
     def close(i, k, price, why):
         nonlocal pos
@@ -138,6 +141,7 @@ def simulate_m30_ea(bars, rr=1.0, cutoffs=None, last_date=None, signal='red', in
     for i in range(n):
         new = slot[i] != cur_slot
         if new:
+            signal_slot = cur_slot
             bar1 = cur
             cur = [o[i], h[i], l[i], c[i]]
             cur_slot = slot[i]
@@ -192,7 +196,10 @@ def simulate_m30_ea(bars, rr=1.0, cutoffs=None, last_date=None, signal='red', in
                 if bar1[1] <= p:
                     rejected += 1
                     continue
-                pend = {'submitted': stamp(day[i], minute[i], 0), 'requested': bar1[1], 'sl': bar1[2]}
+                stop = bar1[2] if signal_stops is None else signal_stops.get(signal_slot, bar1[2])
+                if not np.isfinite(stop) or not bar1[2] <= stop < bar1[1]:
+                    raise ValueError('Signal stop must be finite, at/above low and below high')
+                pend = {'submitted': stamp(day[i], minute[i], 0), 'requested': bar1[1], 'sl': stop}
     if pos is not None:
         close(n - 1, 3, c[n - 1], 'end_of_data')
     return pd.DataFrame(trades), rejected
