@@ -1,0 +1,52 @@
+{
+  "study": "Whipsaw sessions before a large move (NQ M30 event study)",
+  "frozen_at_utc": "2026-11-11T19:34:23+00:00",
+  "outcomes_computed_before_freeze": false,
+  "protocol_sha256": "b0a9efa24afa25a850c81e0dff874c9f51ccbd2c0ef164b0faa3d05e9cee4d5b",
+  "event_code_sha256": "2398a8fcf3311dd2342ac41d1db2a4384530ad162e24742872842409cc0481bb",
+  "digest_note": "protocol and event code: SHA-256 of the text with CRLF normalized to LF; inputs: raw bytes",
+  "first_session": "2010-07-06",
+  "last_session": "2026-09-30",
+  "counts": {
+    "sessions": 4180,
+    "whipsaw": 243,
+    "looser": 549,
+    "stricter": 63,
+    "outside_inside": 233
+  },
+  "counts_by_era": {
+    "2010-15": {
+      "whipsaw": 69,
+      "looser": 182,
+      "stricter": 17,
+      "outside_inside": 89
+    },
+    "2016-19": {
+      "whipsaw": 60,
+      "looser": 129,
+      "stricter": 12,
+      "outside_inside": 62
+    },
+    "2020-26": {
+      "whipsaw": 114,
+      "looser": 238,
+      "stricter": 34,
+      "outside_inside": 82
+    },
+    "2016-26": {
+      "whipsaw": 174,
+      "looser": 367,
+      "stricter": 46,
+      "outside_inside": 144
+    }
+  },
+  "inputs_sha256": {
+    "Reports\\gg_large_candle_20261109\\signal_features.csv": "27d726524fc2c5f78c640e2bb173022f8a6a4995dabfc9aba706603c2c0a8978",
+    "Reports\\rtl_weekly_flatten_20261027\\minutes.npz": "dc9712878600799be97dc137c5d0d2b6a0b7972eebe6c3611723e48a57c41a72",
+    "F:\\DATABENTO\\MNQ_16_YEARS\\MT5_NQ_continuous_2010-2026_ohlcv-1m.csv": "df3390928189f0d12c2140c3994671998151d8cb7289189b6f8a8ad83ff74e6a",
+    "F:\\DATABENTO\\MNQ_16_YEARS\\MT5_NQ_continuous_2010-2026_rolls.csv": "7421df167e9bcdcdd21a310395f388e041d50de4ed42d987095c5596109be49d",
+    "Reports\\gg_size_cap_20261111\\ggcap_20261111_base_control_trades.csv": "b64bcf2629e226ac9afd41c0c18345b15af60896bfbc2bc6dea24b02f6d65c8b",
+    "Reports\\rtl_gg_exclude16_20261101\\ex16_20261101_rtl_base_all_trades.csv": "6df50878a9681f9ef7f74b99847312a08dd1a7a562ac22ee4bdccc64f72bc965",
+    "data\\calendars\\us_major_news_times_2010_2026.csv": "e17f844e2463e063f075f4ec88cfaefb821360c2c678d77b3cbdadc4dd01a202"
+  }
+}

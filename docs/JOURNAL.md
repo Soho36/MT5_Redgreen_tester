@@ -12,7 +12,7 @@
 What we did, day by day, and what each step answered. Newest day last.
 For the current state of the strategy, see [STATUS.md](STATUS.md).
 
-## Where we are now (strategy line updated 2026-10-13, weekly and VWAP lines 2026-10-27, news-day line 2026-11-10, GG bad-day, 16-17 and size-cap lines 2026-11-11, the rest 2026-10-01)
+## Where we are now (strategy line updated 2026-10-13, weekly and VWAP lines 2026-10-27, news-day line 2026-11-10, GG bad-day, 16-17, size-cap and whipsaw lines 2026-11-11, the rest 2026-10-01)
 
 - **Strategy:** buy stop over the last red M30 candle, stop at its low, bar-close exit at ≥ 1R,
   no red-run cap (`MaxRedRun = 0` since 2026-10-13; it was 3), flatten at 23:30 with the fallback fix.
@@ -47,6 +47,10 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - **GG size cap (2026-11-11, native replay):** skipping signals >= 5x the session's typical bar fails
   the pre-set screen: acceptable at 5x only, about -$5k at 4x and at 6x since 2020, and the largest
   risk and worst trade stay the same. Not adopted.
+- **Whipsaw sessions (2026-11-11, frozen event study):** after a session with three or more large
+  swings the next session moved more than after equally large days (0.93 against 0.57 normal-day
+  ranges; both eras; ES, YM and RTY agree). No direction, and GG / RTL results on the next session
+  do not differ measurably. A market fact worth logging forward, not a rule. Nothing adopted.
 - **Q1–Q5 answered (no filter).** **Next:** execution realism (live/demo fills and slippage)
   and the live sizing decision; new ideas go into the Inbox.
 
@@ -1278,3 +1282,32 @@ Evidence: Reports/rtl_open_halves_20261111; preparation, analysis, report and th
   and `blocked_minutes`.
 - [Results/chart](baseline/gg-size-cap/RESULTS.md), [protocol](baseline/gg-size-cap/PROTOCOL.md).
   Evidence: Reports/gg_size_cap_20261111/. No settings changed.
+
+## 2026-11-11: Whipsaw sessions and the move after them
+
+- User's idea: a session of failed breakouts in both directions is often followed by a major
+  move. Event study on NQ M30 bars, no MT5 run. The rule (3 or more zigzag swings of
+  0.75 x ATR20 inside one session, with a looser and a stricter neighbour) and its counts
+  (243 of 4,180 sessions since July 2010) were fixed without looking at any later session;
+  protocol hashed before the outcome code existed.
+- The trap: large days are followed by larger moves whatever their shape. So each whipsaw day
+  is compared with equally large days of the same year (same tenth by range / ATR20), and
+  again after correcting for the exact size.
+- Supported: all four pre-set conditions met. Next session's open-to-close move, 2016-Sep 2026,
+  in normal-day ranges: 0.93 after a whipsaw day, 0.57 after equally large days, 0.50 after all
+  other days. Difference +0.36 (95% interval +0.21 to +0.50); +0.43 / +0.32 by era; the same
+  without CPI/payroll/FOMC sessions. A full-range move followed 36% of whipsaw days against 15%.
+- No direction (signed difference -0.01). Range and share of trend days are higher too. An
+  outside day that closes back inside shows nothing (-0.02). 2010-15: +0.16, interval includes zero.
+- ES, YM and RTY, the protocol's step after a pass: +0.22 / +0.20 / +0.15, intervals above zero.
+  55-63% of their whipsaw days are NQ's too, so they are not independent evidence.
+- GG and RTL on the session after: $49 and $47 a session against $16 and $22 after equally
+  large days; the differences are inside the noise (-$86 to +$106, -$75 to +$96). No rule follows.
+- Checked after the result: above zero in 10 of 11 years, +0.29 without 2020 and without the
+  five largest cases, but close to nothing in the calm years 2023-25. Correcting for the
+  movement inside the session and for a stale 20-session yardstick leaves +0.20 (+0.05 to +0.34).
+- Independent re-computation with separate code matches every session, all 352 summary rows
+  and 1,920 resampling draws; 33 tests pass.
+- [Results/chart](baseline/whipsaw-days/RESULTS.md), [protocol](baseline/whipsaw-days/PROTOCOL.md).
+  Evidence: Reports/whipsaw_days_20261111/. Next: log the unchanged rule on sessions after
+  September 2026. No settings changed.

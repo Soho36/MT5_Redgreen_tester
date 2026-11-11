@@ -1,0 +1,10 @@
+{
+  "all_passed": true,
+  "sessions": 4180,
+  "roll_dates": 66,
+  "summary_rows": 352,
+  "explicit_resampling_draws": 1920,
+  "headline_intervals": 32,
+  "summary_sha256": "4c4f8151acb66b78f8e23d9aa3e2f2f99d58bbc5842717af85807e1345a7c8b7",
+  "code_sha256": "4b57fada39be0a4f89cd11063680d099ce5425b0fe2a8315ce857fe534133cb9"
+}

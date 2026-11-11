@@ -1,0 +1,79 @@
+{
+  "instruments": {
+    "ES": {
+      "supported": true,
+      "conditions": {
+        "1_matched_above_zero_in_both_eras": true,
+        "2_pooled_matched_interval_above_zero": true,
+        "3_pooled_size_corrected_interval_above_zero": true
+      },
+      "news_free_pooled_matched_above_zero": true,
+      "verdict": "supported",
+      "sessions": 4180,
+      "counts": {
+        "sessions": 4180,
+        "whipsaw": 265,
+        "looser": 630,
+        "stricter": 75,
+        "outside_inside": 215
+      },
+      "roll_dates": 66,
+      "minutes": 5685512,
+      "whipsaw_days_shared_with_nq": 0.6339622641509434,
+      "short_sessions_dropped": 2
+    },
+    "YM": {
+      "supported": true,
+      "conditions": {
+        "1_matched_above_zero_in_both_eras": true,
+        "2_pooled_matched_interval_above_zero": true,
+        "3_pooled_size_corrected_interval_above_zero": true
+      },
+      "news_free_pooled_matched_above_zero": true,
+      "verdict": "supported",
+      "sessions": 4184,
+      "counts": {
+        "sessions": 4184,
+        "whipsaw": 230,
+        "looser": 561,
+        "stricter": 60,
+        "outside_inside": 207
+      },
+      "roll_dates": 66,
+      "minutes": 5502688,
+      "whipsaw_days_shared_with_nq": 0.5695652173913044,
+      "short_sessions_dropped": 3
+    },
+    "RTY": {
+      "supported": true,
+      "conditions": {
+        "1_matched_above_zero_in_both_eras": true,
+        "2_pooled_matched_interval_above_zero": true,
+        "3_pooled_size_corrected_interval_above_zero": true
+      },
+      "news_free_pooled_matched_above_zero": true,
+      "verdict": "supported",
+      "sessions": 2363,
+      "counts": {
+        "sessions": 2363,
+        "whipsaw": 146,
+        "looser": 280,
+        "stricter": 36,
+        "outside_inside": 119
+      },
+      "roll_dates": 37,
+      "minutes": 3077561,
+      "whipsaw_days_shared_with_nq": 0.5547945205479452,
+      "short_sessions_dropped": 2
+    }
+  },
+  "passed": [
+    "ES",
+    "YM",
+    "RTY"
+  ],
+  "protocol_sha256": "b0a9efa24afa25a850c81e0dff874c9f51ccbd2c0ef164b0faa3d05e9cee4d5b",
+  "event_code_sha256": "2398a8fcf3311dd2342ac41d1db2a4384530ad162e24742872842409cc0481bb",
+  "code_sha256": "9ceddef0e46ebfd216119cea8c0701e7f43bc1a8cfeb4ac18acfededccf7f369",
+  "analysis_code_sha256": "90786309f1cb18871af4013dd7874538bf0f7a96c544a4febab8934b87ed7c23"
+}

@@ -1,0 +1,24 @@
+{
+  "supported": true,
+  "conditions": {
+    "1_matched_above_zero_in_both_eras": true,
+    "2_pooled_matched_interval_above_zero": true,
+    "3_pooled_size_corrected_interval_above_zero": true,
+    "4_both_neighbours_above_zero_pooled": true
+  },
+  "news_free_pooled_matched_above_zero": true,
+  "verdict": "supported",
+  "protocol_sha256": "b0a9efa24afa25a850c81e0dff874c9f51ccbd2c0ef164b0faa3d05e9cee4d5b",
+  "event_code_sha256": "2398a8fcf3311dd2342ac41d1db2a4384530ad162e24742872842409cc0481bb",
+  "frozen_at_utc": "2026-11-11T19:34:23+00:00",
+  "analysis_code_sha256": "90786309f1cb18871af4013dd7874538bf0f7a96c544a4febab8934b87ed7c23",
+  "raw_minutes_checked": 5511965,
+  "m30_bars": 191786,
+  "sessions": 4180,
+  "roll_dates": 66,
+  "independent_rows_checked": 32,
+  "draws": 5000,
+  "seed": 20261111,
+  "news_sessions": 504,
+  "news_free_sessions": 3189
+}
