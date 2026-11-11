@@ -1,0 +1,313 @@
+check,period,row,measure,value
+concentration,2016-19,news sessions,news sessions,122.0000
+concentration,2016-19,news sessions,news total,703.4500
+concentration,2016-19,news sessions,news median,3.8000
+concentration,2016-19,news sessions,other median,2.7000
+concentration,2016-19,news sessions,news sessions up,65.0000
+concentration,2016-19,news sessions,news sessions down,57.0000
+concentration,2016-19,Original RTL,net,4416.6500
+concentration,2016-19,Original RTL,equity_dd,2348.4000
+concentration,2016-19,Original RTL,net_over_dd,1.8807
+concentration,2016-19,Skip every news day,net,3713.2000
+concentration,2016-19,Skip every news day,equity_dd,2475.7500
+concentration,2016-19,Skip every news day,net_over_dd,1.4998
+concentration,2016-19,Skip only the worst news day,net,4660.0000
+concentration,2016-19,Skip only the worst news day,equity_dd,2348.4000
+concentration,2016-19,Skip only the worst news day,net_over_dd,1.9843
+concentration,2016-19,Skip every news day except the worst news day,net,3469.8500
+concentration,2016-19,Skip every news day except the worst news day,equity_dd,2475.7500
+concentration,2016-19,Skip every news day except the worst news day,net_over_dd,1.4015
+concentration,2016-19,Skip only the 2 worst news days,net,4885.3000
+concentration,2016-19,Skip only the 2 worst news days,equity_dd,2348.4000
+concentration,2016-19,Skip only the 2 worst news days,net_over_dd,2.0803
+concentration,2016-19,Skip every news day except the 2 worst news days,net,3244.5500
+concentration,2016-19,Skip every news day except the 2 worst news days,equity_dd,2475.7500
+concentration,2016-19,Skip every news day except the 2 worst news days,net_over_dd,1.3105
+concentration,2016-19,Skip only the 3 worst news days,net,5105.3500
+concentration,2016-19,Skip only the 3 worst news days,equity_dd,2348.4000
+concentration,2016-19,Skip only the 3 worst news days,net_over_dd,2.1740
+concentration,2016-19,Skip every news day except the 3 worst news days,net,3024.5000
+concentration,2016-19,Skip every news day except the 3 worst news days,equity_dd,2475.7500
+concentration,2016-19,Skip every news day except the 3 worst news days,net_over_dd,1.2217
+concentration,2016-19,Skip only the 5 worst news days,net,5402.5500
+concentration,2016-19,Skip only the 5 worst news days,equity_dd,2348.4000
+concentration,2016-19,Skip only the 5 worst news days,net_over_dd,2.3005
+concentration,2016-19,Skip every news day except the 5 worst news days,net,2727.3000
+concentration,2016-19,Skip every news day except the 5 worst news days,equity_dd,2475.7500
+concentration,2016-19,Skip every news day except the 5 worst news days,net_over_dd,1.1016
+concentration,2016-19,Skip only the 10 worst news days,net,5940.4500
+concentration,2016-19,Skip only the 10 worst news days,equity_dd,2348.4000
+concentration,2016-19,Skip only the 10 worst news days,net_over_dd,2.5296
+concentration,2016-19,Skip every news day except the 10 worst news days,net,2189.4000
+concentration,2016-19,Skip every news day except the 10 worst news days,equity_dd,2475.7500
+concentration,2016-19,Skip every news day except the 10 worst news days,net_over_dd,0.8843
+worst news sessions,2016-19,2019-08-02,rtl_net,-243.3500
+worst news sessions,2016-19,2018-02-02,rtl_net,-225.3000
+worst news sessions,2016-19,2016-02-19,rtl_net,-220.0500
+worst news sessions,2016-19,2019-07-31,rtl_net,-150.8500
+worst news sessions,2016-19,2016-01-27,rtl_net,-146.3500
+concentration,2020-26,news sessions,news sessions,210.0000
+concentration,2020-26,news sessions,news total,-3738.6000
+concentration,2020-26,news sessions,news median,23.7750
+concentration,2020-26,news sessions,other median,24.1500
+concentration,2020-26,news sessions,news sessions up,114.0000
+concentration,2020-26,news sessions,news sessions down,96.0000
+concentration,2020-26,Original RTL,net,38399.9500
+concentration,2020-26,Original RTL,equity_dd,5941.7000
+concentration,2020-26,Original RTL,net_over_dd,6.4628
+concentration,2020-26,Skip every news day,net,42138.5500
+concentration,2020-26,Skip every news day,equity_dd,4037.0500
+concentration,2020-26,Skip every news day,net_over_dd,10.4380
+concentration,2020-26,Skip only the worst news day,net,40617.9500
+concentration,2020-26,Skip only the worst news day,equity_dd,5941.7000
+concentration,2020-26,Skip only the worst news day,net_over_dd,6.8361
+concentration,2020-26,Skip every news day except the worst news day,net,39920.5500
+concentration,2020-26,Skip every news day except the worst news day,equity_dd,5003.2500
+concentration,2020-26,Skip every news day except the worst news day,net_over_dd,7.9789
+concentration,2020-26,Skip only the 2 worst news days,net,41922.4500
+concentration,2020-26,Skip only the 2 worst news days,equity_dd,5941.7000
+concentration,2020-26,Skip only the 2 worst news days,net_over_dd,7.0556
+concentration,2020-26,Skip every news day except the 2 worst news days,net,38616.0500
+concentration,2020-26,Skip every news day except the 2 worst news days,equity_dd,5003.2500
+concentration,2020-26,Skip every news day except the 2 worst news days,net_over_dd,7.7182
+concentration,2020-26,Skip only the 3 worst news days,net,43143.8000
+concentration,2020-26,Skip only the 3 worst news days,equity_dd,4720.3500
+concentration,2020-26,Skip only the 3 worst news days,net_over_dd,9.1400
+concentration,2020-26,Skip every news day except the 3 worst news days,net,37394.7000
+concentration,2020-26,Skip every news day except the 3 worst news days,equity_dd,5185.4000
+concentration,2020-26,Skip every news day except the 3 worst news days,net_over_dd,7.2115
+concentration,2020-26,Skip only the 5 worst news days,net,44781.4500
+concentration,2020-26,Skip only the 5 worst news days,equity_dd,4462.8000
+concentration,2020-26,Skip only the 5 worst news days,net_over_dd,10.0344
+concentration,2020-26,Skip every news day except the 5 worst news days,net,35757.0500
+concentration,2020-26,Skip every news day except the 5 worst news days,equity_dd,5927.2000
+concentration,2020-26,Skip every news day except the 5 worst news days,net_over_dd,6.0327
+concentration,2020-26,Skip only the 10 worst news days,net,47919.1000
+concentration,2020-26,Skip only the 10 worst news days,equity_dd,4462.8000
+concentration,2020-26,Skip only the 10 worst news days,net_over_dd,10.7375
+concentration,2020-26,Skip every news day except the 10 worst news days,net,32619.4000
+concentration,2020-26,Skip every news day except the 10 worst news days,equity_dd,5927.2000
+concentration,2020-26,Skip every news day except the 10 worst news days,net_over_dd,5.5033
+worst news sessions,2020-26,2025-04-04,rtl_net,-2218.0000
+worst news sessions,2020-26,2026-06-17,rtl_net,-1304.5000
+worst news sessions,2020-26,2026-02-13,rtl_net,-1221.3500
+worst news sessions,2020-26,2022-05-11,rtl_net,-895.8500
+worst news sessions,2020-26,2026-03-06,rtl_net,-741.8000
+drawdown episodes,2020-26,2026-01-29 to 2026-03-23,depth,5941.7000
+drawdown episodes,2020-26,2026-01-29 to 2026-03-23,sessions,37.0000
+drawdown episodes,2020-26,2026-01-29 to 2026-03-23,news sessions,5.0000
+drawdown episodes,2020-26,2026-01-29 to 2026-03-23,news net,-1977.6500
+drawdown episodes,2020-26,2026-01-29 to 2026-03-23: 2026-02-13,rtl_net,-1221.3500
+drawdown episodes,2020-26,2026-01-29 to 2026-03-23: 2026-03-06,rtl_net,-741.8000
+drawdown episodes,2020-26,2026-01-29 to 2026-03-23: 2026-03-11,rtl_net,-206.8500
+drawdown episodes,2020-26,2025-02-24 to 2025-04-07,depth,5006.7000
+drawdown episodes,2020-26,2025-02-24 to 2025-04-07,sessions,30.0000
+drawdown episodes,2020-26,2025-02-24 to 2025-04-07,news sessions,4.0000
+drawdown episodes,2020-26,2025-02-24 to 2025-04-07,news net,-2221.4500
+drawdown episodes,2020-26,2025-02-24 to 2025-04-07: 2025-04-04,rtl_net,-2218.0000
+drawdown episodes,2020-26,2025-02-24 to 2025-04-07: 2025-03-07,rtl_net,-224.3500
+drawdown episodes,2020-26,2025-02-24 to 2025-04-07: 2025-03-19,rtl_net,57.2500
+drawdown episodes,2020-26,2020-02-20 to 2020-03-17,depth,4462.8000
+drawdown episodes,2020-26,2020-02-20 to 2020-03-17,sessions,18.0000
+drawdown episodes,2020-26,2020-02-20 to 2020-03-17,news sessions,2.0000
+drawdown episodes,2020-26,2020-02-20 to 2020-03-17,news net,-425.7500
+drawdown episodes,2020-26,2020-02-20 to 2020-03-17: 2020-03-11,rtl_net,-558.9500
+drawdown episodes,2020-26,2020-02-20 to 2020-03-17: 2020-03-06,rtl_net,133.2000
+drawdown episodes,2020-26,2026-06-15 to 2026-07-30,depth,4462.1500
+drawdown episodes,2020-26,2026-06-15 to 2026-07-30,sessions,33.0000
+drawdown episodes,2020-26,2026-06-15 to 2026-07-30,news sessions,4.0000
+drawdown episodes,2020-26,2026-06-15 to 2026-07-30,news net,-1457.9000
+drawdown episodes,2020-26,2026-06-15 to 2026-07-30: 2026-06-17,rtl_net,-1304.5000
+drawdown episodes,2020-26,2026-06-15 to 2026-07-30: 2026-07-14,rtl_net,-218.8500
+drawdown episodes,2020-26,2026-06-15 to 2026-07-30: 2026-07-29,rtl_net,11.7000
+drawdown episodes,2020-26,Skip only the 15 news days inside these drawdowns,net,44482.7000
+drawdown episodes,2020-26,Skip only the 15 news days inside these drawdowns,equity_dd,4037.0500
+drawdown episodes,2020-26,Skip only the other 195 news days,net,36055.8000
+drawdown episodes,2020-26,Skip only the other 195 news days,equity_dd,5941.7000
+per unit of risk,2010-15,news minus other,mean_net_r_gap,-0.0554
+per unit of risk,2010-15,news minus other,gap_95_low,-0.1305
+per unit of risk,2010-15,news minus other,gap_95_high,0.0183
+per unit of risk,2016-19,news minus other,mean_net_r_gap,0.0470
+per unit of risk,2016-19,news minus other,gap_95_low,-0.0657
+per unit of risk,2016-19,news minus other,gap_95_high,0.1594
+per unit of risk,2020-26,news minus other,mean_net_r_gap,0.0098
+per unit of risk,2020-26,news minus other,gap_95_low,-0.0705
+per unit of risk,2020-26,news minus other,gap_95_high,0.0932
+per unit of risk,2010-15,news days,trades,1154.0000
+per unit of risk,2010-15,news days,net,-1227.2000
+per unit of risk,2010-15,news days,avg_net,-1.0634
+per unit of risk,2010-15,news days,mean_net_r,-0.2294
+per unit of risk,2010-15,news days,mean_risk,10.3107
+per unit of risk,2010-15,other days,trades,8010.0000
+per unit of risk,2010-15,other days,net,-6269.0000
+per unit of risk,2010-15,other days,avg_net,-0.7826
+per unit of risk,2010-15,other days,mean_net_r,-0.1740
+per unit of risk,2010-15,other days,mean_risk,10.4934
+per unit of risk,2016-19,news days,trades,751.0000
+per unit of risk,2016-19,news days,net,703.4500
+per unit of risk,2016-19,news days,avg_net,0.9367
+per unit of risk,2016-19,news days,mean_net_r,0.0269
+per unit of risk,2016-19,news days,mean_risk,22.4288
+per unit of risk,2016-19,other days,trades,5416.0000
+per unit of risk,2016-19,other days,net,3713.2000
+per unit of risk,2016-19,other days,avg_net,0.6856
+per unit of risk,2016-19,other days,mean_net_r,-0.0201
+per unit of risk,2016-19,other days,mean_risk,21.6184
+per unit of risk,2020-26,news days,trades,1292.0000
+per unit of risk,2020-26,news days,net,-3738.6000
+per unit of risk,2020-26,news days,avg_net,-2.8937
+per unit of risk,2020-26,news days,mean_net_r,0.0562
+per unit of risk,2020-26,news days,mean_risk,85.6676
+per unit of risk,2020-26,other days,trades,9209.0000
+per unit of risk,2020-26,other days,net,42138.5500
+per unit of risk,2020-26,other days,avg_net,4.5758
+per unit of risk,2020-26,other days,mean_net_r,0.0464
+per unit of risk,2020-26,other days,mean_risk,78.0100
+largest 1% by risk,2020-26,news days,trades,27.0000
+largest 1% by risk,2020-26,news days,net,-3714.8500
+largest 1% by risk,2020-26,news days,mean_net_r,-0.2417
+largest 1% by risk,2020-26,other days,trades,78.0000
+largest 1% by risk,2020-26,other days,net,12386.6000
+largest 1% by risk,2020-26,other days,mean_net_r,0.3386
+release split,2016-19,closed before the release,trades,465.0000
+release split,2016-19,closed before the release,net,-977.7500
+release split,2016-19,closed before the release,mean_net_r,-0.1166
+release split,2016-19,closed before the release,mean_risk,14.8258
+release split,2016-19,entered after the release,trades,228.0000
+release split,2016-19,entered after the release,net,1048.6000
+release split,2016-19,entered after the release,mean_net_r,0.1833
+release split,2016-19,entered after the release,mean_risk,36.3531
+release split,2016-19,open across the release,trades,58.0000
+release split,2016-19,open across the release,net,632.6000
+release split,2016-19,open across the release,mean_net_r,0.5632
+release split,2016-19,open across the release,mean_risk,28.6466
+release split,2020-26,closed before the release,trades,809.0000
+release split,2020-26,closed before the release,net,-2911.9500
+release split,2020-26,closed before the release,mean_net_r,0.0210
+release split,2020-26,closed before the release,mean_risk,52.5179
+release split,2020-26,entered after the release,trades,368.0000
+release split,2020-26,entered after the release,net,-1804.9000
+release split,2020-26,entered after the release,mean_net_r,0.0726
+release split,2020-26,entered after the release,mean_risk,154.5774
+release split,2020-26,open across the release,trades,115.0000
+release split,2020-26,open across the release,net,978.2500
+release split,2020-26,open across the release,mean_net_r,0.2511
+release split,2020-26,open across the release,mean_risk,98.3565
+market control,2016,news days,news_sessions,31.0000
+market control,2016,news days,rtl_on_news_days,-546.4000
+market control,2016,news days,plain_long_on_news_days,-24.0500
+market control,2017,news days,news_sessions,28.0000
+market control,2017,news days,rtl_on_news_days,58.7000
+market control,2017,news days,plain_long_on_news_days,823.6000
+market control,2018,news days,news_sessions,32.0000
+market control,2018,news days,rtl_on_news_days,312.1500
+market control,2018,news days,plain_long_on_news_days,-301.1000
+market control,2019,news days,news_sessions,31.0000
+market control,2019,news days,rtl_on_news_days,879.0000
+market control,2019,news days,plain_long_on_news_days,2050.4500
+market control,2020,news days,news_sessions,29.0000
+market control,2020,news days,rtl_on_news_days,288.8500
+market control,2020,news days,plain_long_on_news_days,-855.9500
+market control,2021,news days,news_sessions,32.0000
+market control,2021,news days,rtl_on_news_days,-394.9500
+market control,2021,news days,plain_long_on_news_days,1404.4000
+market control,2022,news days,news_sessions,32.0000
+market control,2022,news days,rtl_on_news_days,-3487.8500
+market control,2022,news days,plain_long_on_news_days,-2789.6000
+market control,2023,news days,news_sessions,32.0000
+market control,2023,news days,rtl_on_news_days,1220.9000
+market control,2023,news days,plain_long_on_news_days,4786.9000
+market control,2024,news days,news_sessions,31.0000
+market control,2024,news days,rtl_on_news_days,3576.6500
+market control,2024,news days,plain_long_on_news_days,2122.4500
+market control,2025,news days,news_sessions,30.0000
+market control,2025,news days,rtl_on_news_days,-2305.5500
+market control,2025,news days,plain_long_on_news_days,-708.5000
+market control,2026,news days,news_sessions,24.0000
+market control,2026,news days,rtl_on_news_days,-2636.6500
+market control,2026,news days,plain_long_on_news_days,-5266.2000
+market control,2016-19,mean per session,rtl_news,5.7660
+market control,2016-19,mean per session,plain_long_news,20.8926
+market control,2016-19,mean per session,rtl_other,4.0849
+market control,2016-19,mean per session,plain_long_other,5.4638
+market control,2020-26,mean per session,rtl_news,-17.8029
+market control,2020-26,mean per session,plain_long_news,-6.2214
+market control,2020-26,mean per session,rtl_other,27.4518
+market control,2020-26,mean per session,plain_long_other,24.1363
+worst news sessions,2020-26,2025-04-04,plain_long_net,-2481.5500
+worst news sessions,2020-26,2026-06-17,plain_long_net,-366.5500
+worst news sessions,2020-26,2026-02-13,plain_long_net,-121.0500
+worst news sessions,2020-26,2022-05-11,plain_long_net,-641.0500
+worst news sessions,2020-26,2026-03-06,plain_long_net,-775.5500
+filtered variants,2016-19,Original RTL,news_days_net,703.4500
+filtered variants,2016-19,Original RTL,net,4416.6500
+filtered variants,2016-19,Original RTL,net_if_skipped,3713.2000
+filtered variants,2016-19,Original RTL,close_dd,2143.1500
+filtered variants,2016-19,Original RTL,close_dd_if_skipped,2295.7500
+filtered variants,2016-19,RTL + exclude16-17,news_days_net,282.8500
+filtered variants,2016-19,RTL + exclude16-17,net,4877.0500
+filtered variants,2016-19,RTL + exclude16-17,net_if_skipped,4594.2000
+filtered variants,2016-19,RTL + exclude16-17,close_dd,1495.2500
+filtered variants,2016-19,RTL + exclude16-17,close_dd_if_skipped,1523.0000
+filtered variants,2016-19,RTL + VWAP,news_days_net,620.4500
+filtered variants,2016-19,RTL + VWAP,net,4721.3000
+filtered variants,2016-19,RTL + VWAP,net_if_skipped,4100.8500
+filtered variants,2016-19,RTL + VWAP,close_dd,985.5500
+filtered variants,2016-19,RTL + VWAP,close_dd_if_skipped,954.4000
+filtered variants,2016-19,RTL + VWAP + exclude16-17,news_days_net,470.4000
+filtered variants,2016-19,RTL + VWAP + exclude16-17,net,5479.9500
+filtered variants,2016-19,RTL + VWAP + exclude16-17,net_if_skipped,5009.5500
+filtered variants,2016-19,RTL + VWAP + exclude16-17,close_dd,824.9000
+filtered variants,2016-19,RTL + VWAP + exclude16-17,close_dd_if_skipped,687.5000
+filtered variants,2020-26,Original RTL,news_days_net,-3738.6000
+filtered variants,2020-26,Original RTL,net,38399.9500
+filtered variants,2020-26,Original RTL,net_if_skipped,42138.5500
+filtered variants,2020-26,Original RTL,close_dd,5781.1500
+filtered variants,2020-26,Original RTL,close_dd_if_skipped,3803.5000
+filtered variants,2020-26,RTL + exclude16-17,news_days_net,-1226.6500
+filtered variants,2020-26,RTL + exclude16-17,net,39851.4500
+filtered variants,2020-26,RTL + exclude16-17,net_if_skipped,41078.1000
+filtered variants,2020-26,RTL + exclude16-17,close_dd,5094.8500
+filtered variants,2020-26,RTL + exclude16-17,close_dd_if_skipped,3708.3500
+filtered variants,2020-26,RTL + VWAP,news_days_net,850.1000
+filtered variants,2020-26,RTL + VWAP,net,45724.6500
+filtered variants,2020-26,RTL + VWAP,net_if_skipped,44874.5500
+filtered variants,2020-26,RTL + VWAP,close_dd,3158.3500
+filtered variants,2020-26,RTL + VWAP,close_dd_if_skipped,3454.3500
+filtered variants,2020-26,RTL + VWAP + exclude16-17,news_days_net,2379.2000
+filtered variants,2020-26,RTL + VWAP + exclude16-17,net,47259.1500
+filtered variants,2020-26,RTL + VWAP + exclude16-17,net_if_skipped,44879.9500
+filtered variants,2020-26,RTL + VWAP + exclude16-17,close_dd,2698.1000
+filtered variants,2020-26,RTL + VWAP + exclude16-17,close_dd_if_skipped,2960.8500
+worst sessions,2016-19,10 sessions,news among worst,1.0000
+worst sessions,2016-19,10 sessions,news among best,1.0000
+worst sessions,2016-19,10 sessions,expected by chance,1.1833
+worst sessions,2016-19,50 sessions,news among worst,6.0000
+worst sessions,2016-19,50 sessions,news among best,6.0000
+worst sessions,2016-19,50 sessions,expected by chance,5.9166
+worst sessions,2020-26,10 sessions,news among worst,4.0000
+worst sessions,2020-26,10 sessions,news among best,1.0000
+worst sessions,2020-26,10 sessions,expected by chance,1.2034
+worst sessions,2020-26,50 sessions,news among worst,13.0000
+worst sessions,2020-26,50 sessions,news among best,6.0000
+worst sessions,2020-26,50 sessions,expected by chance,6.0172
+random days,2016-19,same year and weekday (the study),net beats %,47.0100
+random days,2016-19,same year and weekday (the study),dd no worse than %,14.5600
+random days,2016-19,same year and weekday (the study),net/dd beats %,32.3700
+random days,2016-19,same year and weekday (the study),random median net,3770.3500
+random days,2016-19,same year and weekday (the study),random median dd,2229.0000
+random days,2016-19,"same year, weekday and day size",net beats %,52.7400
+random days,2016-19,"same year, weekday and day size",dd no worse than %,22.7400
+random days,2016-19,"same year, weekday and day size",net/dd beats %,41.5800
+random days,2016-19,"same year, weekday and day size",random median net,3652.1000
+random days,2016-19,"same year, weekday and day size",random median dd,2308.2500
+random days,2020-26,same year and weekday (the study),net beats %,95.7900
+random days,2020-26,same year and weekday (the study),dd no worse than %,99.6400
+random days,2020-26,same year and weekday (the study),net/dd beats %,99.6700
+random days,2020-26,same year and weekday (the study),random median net,35355.8750
+random days,2020-26,same year and weekday (the study),random median dd,5378.7500
+random days,2020-26,"same year, weekday and day size",net beats %,94.5800
+random days,2020-26,"same year, weekday and day size",dd no worse than %,99.7900
+random days,2020-26,"same year, weekday and day size",net/dd beats %,99.7800
+random days,2020-26,"same year, weekday and day size",random median net,35768.4750
+random days,2020-26,"same year, weekday and day size",random median dd,5560.8250

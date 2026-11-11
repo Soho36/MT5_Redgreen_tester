@@ -12,7 +12,7 @@
 What we did, day by day, and what each step answered. Newest day last.
 For the current state of the strategy, see [STATUS.md](STATUS.md).
 
-## Where we are now (strategy line updated 2026-10-13, weekly and VWAP lines 2026-10-27, the rest 2026-10-01)
+## Where we are now (strategy line updated 2026-10-13, weekly and VWAP lines 2026-10-27, news-day line 2026-11-10, the rest 2026-10-01)
 
 - **Strategy:** buy stop over the last red M30 candle, stop at its low, bar-close exit at ≥ 1R,
   no red-run cap (`MaxRedRun = 0` since 2026-10-13; it was 3), flatten at 23:30 with the fallback fix.
@@ -35,6 +35,9 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   RTY) confirm, and NQ 2010-15 fails too. On ten Nasdaq-100 stocks (2026-10-28) far-below trades are
   clearly weaker, but the drawdown benefit fails in 2018-19, so that frozen test does not support it
   either. The VWAP line closes on history; a forward paper test remains possible. Not adopted.
+- **News days (2026-11-10):** skipping CPI/payroll/FOMC sessions looked better since 2020, but the
+  [review](baseline/rtl-news-days/REVIEW.md) found the gain sits in 15 of 210 news days and reverses with
+  the VWAP filter on. Not shown; only forward data can settle it. Not adopted.
 - **Q1–Q5 answered (no filter).** **Next:** execution realism (live/demo fills and slippage)
   and the live sizing decision; new ideas go into the Inbox.
 
@@ -1150,6 +1153,26 @@ study doc. Keep each step to one or two lines.*
   sensitivity omits 2013/2025/2026. Entire historical study remains exploratory.
   No production settings changed. [Report/chart](baseline/rtl-news-days/RESULTS.md),
   [protocol](baseline/rtl-news-days/PROTOCOL.md). Evidence: Reports/rtl_news_days_20261110/.
+
+## 2026-11-10: Review of the news-day study
+
+- User asked what is weak in commit 8735708, then for the checks to be written up.
+  The study's own figures hold: 29 hand-typed figures match the CSVs, six tests
+  pass, random-day ranks reproduce. Its "no baseline change" stands; "promising" is too strong.
+- Where the 2020-26 gain sits: the five worst news days lost $6,382, the other 205
+  made $2,643. Skipping only the 15 news days inside the four deepest drawdowns gives
+  the whole result ($44,483 net, $4,037 DD); skipping the other 195 costs $2,344 and
+  leaves DD at $5,942.
+- News-day trades are not worse in R (+0.056 vs +0.046). $2,912 of the $3,739 was lost
+  by trades closed before the release. Year by year the effect follows a plain long
+  on the same days.
+- With VWAP on, news days earned money since 2020 (+$850; +$2,379 with exclude16-17
+  too), so skipping them would cost profit and raise daily-close DD. Ledger
+  subtraction, not native runs.
+- ES/YM/RTY are not fresh data for a calendar rule (same dates, same moves): forward
+  only. Process notes for later studies are at the end of the review.
+- [Review](baseline/rtl-news-days/REVIEW.md); checks: python/review_rtl_news_days.py,
+  saved in baseline/rtl-news-days/review_checks.csv. No settings changed, nothing committed.
 
 ## 2026-11-11: RTL cash-open half-hour attribution
 
