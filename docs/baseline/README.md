@@ -7,6 +7,7 @@ flatten. The current rules are in [STATUS.md](../STATUS.md).
 
 | Study | Answer |
 |---|---|
+| [GG size cap on outsized signals](gg-size-cap/RESULTS.md) ([protocol](gg-size-cap/PROTOCOL.md)) | Reject green signals >= 5x the session's median earlier bar, 4x and 6x as neighbours: fails the pre-set screen. Acceptable at 5x only (2020-26 net −4%, equity DD −9%); 4x and 6x cost about $5k; largest risk and worst trade unchanged. Eight native runs independently replayed; no adoption. |
 | [RTL ±30-minute news windows](rtl-news-windows/RESULTS.md) ([protocol](rtl-news-windows/PROTOCOL.md)) | Entry blocking: recent net −0.5%, equity DD −6.1%; extra flattening: net −4.4%, DD −0.9%. Both worse in 2016–19. Three native runs independently replayed; no consistent improvement or baseline change. |
 | [RTL cash-open half-hours](rtl-open-halves/RESULTS.md) | Four native runs: full16-17 exclusion retains best pooled net/DD ($44,729/$5,734). 47% of pre-open positions stop in first30min; 61% of 17-hour gross profit comes from pre-open fills. Bar-close profit exits distort hourly interpretation; no baseline change. |
 | [RTL scheduled major-news days](rtl-news-days/RESULTS.md) ([protocol](rtl-news-days/PROTOCOL.md), [review](rtl-news-days/REVIEW.md)) | Skip CPI/payroll/scheduled-FOMC sessions: recent net +9.7%, equity DD −32.1%; early net −15.9%, DD +5.4%. Review: the recent gain sits in 15 of 210 news days and reverses with the VWAP filter on, so it is not shown. Five native runs verified; no baseline change. |

@@ -12,7 +12,7 @@
 What we did, day by day, and what each step answered. Newest day last.
 For the current state of the strategy, see [STATUS.md](STATUS.md).
 
-## Where we are now (strategy line updated 2026-10-13, weekly and VWAP lines 2026-10-27, news-day line 2026-11-10, the rest 2026-10-01)
+## Where we are now (strategy line updated 2026-10-13, weekly and VWAP lines 2026-10-27, news-day line 2026-11-10, GG bad-day, 16-17 and size-cap lines 2026-11-11, the rest 2026-10-01)
 
 - **Strategy:** buy stop over the last red M30 candle, stop at its low, bar-close exit at ≥ 1R,
   no red-run cap (`MaxRedRun = 0` since 2026-10-13; it was 3), flatten at 23:30 with the fallback fix.
@@ -38,6 +38,15 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - **News days (2026-11-10):** skipping CPI/payroll/FOMC sessions looked better since 2020, but the
   [review](baseline/rtl-news-days/REVIEW.md) found the gain sits in 15 of 210 news days and reverses with
   the VWAP filter on. Not shown; only forward data can settle it. Not adopted.
+- **GG bad-day filters (2026-11-11, first look):** large green signals, the first cash bar, news days and
+  "stop after N losses" do not pick out the bad trades on the saved GG ledger; each helps in one era
+  only. Big candles carry a thinner edge per unit of risk, not a negative one. Nothing adopted.
+- **16-17 entry exclusion (reviewed 2026-11-11):** on RTL it is the best of the 22 hours to close and
+  costs nothing; on GG it has cost profit since 2020 (-$3.9k) for a lower drawdown. A risk reducer,
+  not an edge; do not extend it to 17-18 on GG. Forward data only.
+- **GG size cap (2026-11-11, native replay):** skipping signals >= 5x the session's typical bar fails
+  the pre-set screen: acceptable at 5x only, about -$5k at 4x and at 6x since 2020, and the largest
+  risk and worst trade stay the same. Not adopted.
 - **Q1–Q5 answered (no filter).** **Next:** execution realism (live/demo fills and slippage)
   and the live sizing decision; new ideas go into the Inbox.
 
@@ -1174,6 +1183,26 @@ study doc. Keep each step to one or two lines.*
 - [Review](baseline/rtl-news-days/REVIEW.md); checks: python/review_rtl_news_days.py,
   saved in baseline/rtl-news-days/review_checks.csv. No settings changed, nothing committed.
 
+## 2026-11-11: Can GG's bad days be filtered? First look
+
+- User's screenshot of a losing GG session (a very large green first-cash-bar signal after
+  an 08:30 release) prompted the question. Cuts of the saved normal-GG ledger, 2016-Sep 2026,
+  one MNQ, $1.05; no new MT5 run. Skips are ledger omissions, not replays (the RTL cash-open
+  replays in the next entry show the two can differ in sign).
+- Large signals still earn: >=3x the session median made +$1,267 / +$3,754 (2016-19 / 2020-26).
+  Their edge per unit of risk is thinner (gross R +0.03 vs +0.07 in both eras; intervals
+  include zero). >=5x is about break-even (+$420 / -$276); 53% of them run to the session end.
+- First cash bar as signal (16:30 research bar): -$566 / -$911, but 2023-26 are all positive and
+  skipping it raises the recent daily DD $4,882 -> $5,935. On CPI/payroll days: +$387 / -$2,436
+  on 20 / 32 trades.
+- News sessions earned +$896 / +$3,245 and are not worse in R. Losses so far in a session
+  predict nothing; stopping after 4 losses costs $1,133 / $3,250 for 12% / 20% less daily DD.
+- No idea beats random skips of equally large trades in both eras. A >=5x cap is the only
+  profit-neutral one: a risk rule chosen after looking, needing a native replay before use.
+- At 2026 volatility 24 of 194 sessions lost $500+ and 27 gained $500+.
+- All cuts: python/explore_gg_session_filters.py. No settings changed.
+
+
 ## 2026-11-11: RTL cash-open half-hour attribution
 
 **[RTL cash-open half-hours](baseline/rtl-open-halves/RESULTS.md) (2026-11-11, exploratory).** Four verified native replays: pooled 2016-Sep2026 net/equity-DD baseline $42,817/$5,942; skip16:00-16:30 $43,281/$5,799; skip16:30-17:00 $44,330/$5,990; full hour $44,729/$5,734. Full hour remains best of these four. 555/1,186 positions open at16:30 stop within30 minutes, but whole cohort net is positive; 61% of 17-hour gross profits came from pre-open fills. Stops execute intrabar; profit exits wait for bar close, so exit-hour bars are not entry expectancy. Full-hour net improves in6/11 years and annual equity DD in10/11. Control/full-hour ledgers byte-identical to prior runs; no baseline change.
@@ -1207,3 +1236,45 @@ Evidence: Reports/rtl_open_halves_20261111; preparation, analysis, report and th
   [protocol](baseline/rtl-news-windows/PROTOCOL.md). Evidence:
   Reports/rtl_news_windows_20261110/. Production settings unchanged.
   Earlier whole-day study commit: 8735708.
+
+## 2026-11-11: What to make of the 16:00-17:00 exclusion (review)
+
+- User asked for an opinion on the exclusion (studies of 2026-11-01 and c3c05f8). New check:
+  the minute simulator, which reproduces the native trades exactly (original, 16-17 exclusion
+  and both RTL half-hours), replayed RTL and GG with each of the 22 one-hour entry windows closed.
+- RTL: closing an hour usually costs money (19 of 22 hours lower pooled net, median -$1,969).
+  16-17 is the best of the 22 (+$1,912); alone in 2016-19 it is 4th for net and 1st for daily DD.
+  So "costs nothing and lowers DD" holds on RTL. The dollar gain itself is inside the noise
+  (weekly bootstrap -$6,185 to +$9,639).
+- GG: +$1,061 in 2016-19 (2nd of 22), -$3,865 in 2020-26 (19th), daily DD -$532 (2nd):
+  profit traded for drawdown, interval -$10,867 to +$5,259. Native with the VWAP gate:
+  net +$558, equity DD -20%.
+- GG single half-hour bars, 2020-26: closing 16:00 alone -$6,384, 16:30 alone -$1,738,
+  17:00 alone (first cash bar as signal) -$2,734 with daily DD +$2,678. The ledger omission
+  of 17:00 had said +$911, so omission and replay disagree in sign again. Closing 17-18 is the
+  worst hour of all for GG (-$8,961, DD +$1,908).
+- Chosen on this history: only forward data can confirm. All replays:
+  python/review_exclude16_hours.py; tables baseline/rtl-open-halves/hour_exclusion_replays.csv
+  and half_hour_exclusion_replays.csv. No settings changed.
+
+## 2026-11-11: GG size cap on outsized signals (native replay)
+
+- User asked for the 5x cap from the first look, with 4x and 6x. Protocol frozen before the
+  runs: reject a green signal whose range is >= k x the median earlier-session M30 range (the
+  2026-11-09 reference), k = 5 primary, 4 and 6 fixed neighbours; second arm with no entries
+  16:00-17:00.
+- Does not meet the pre-set screen. 5x alone: net $3,636 -> $3,656 (2016-19) and $39,315 ->
+  $37,656 (2020-Sep 2026), equity DD -7% / -9%. But 4x and 6x cost $5,022 / $5,313 since 2020,
+  and 6x net/DD is below normal GG (6.11 vs 6.99). Same picture with the 16-17 exclusion on.
+- The cap does not limit the largest bets. Since 2020 the largest risk ($1,245.50), worst trade
+  (-$782.55) and worst-session DD ($2,423.50) are unchanged at every threshold. Of 38 trades
+  risking $500+, 5x removes 15; 19 came in sessions whose bars were all large.
+- The first look's "profit-neutral" was ledger omission. In the replay the 280 trades that
+  replace the capped ones lost $1,952 since 2020. By size band normal GG earned +$2,584 (4-5x),
+  -$4,433 (5-6x), +$4,156 (6x and more): no pattern, so 5x was a selected cell.
+- Eight native runs. Both cap-off controls byte-identical to saved ledgers; every decision
+  rebuilt from raw minutes; all trades match the independent minute replay; gross equity DD
+  equals MT5's. 8 new tests pass (33 with the engine's). The simulator gained `signal_skips`
+  and `blocked_minutes`.
+- [Results/chart](baseline/gg-size-cap/RESULTS.md), [protocol](baseline/gg-size-cap/PROTOCOL.md).
+  Evidence: Reports/gg_size_cap_20261111/. No settings changed.

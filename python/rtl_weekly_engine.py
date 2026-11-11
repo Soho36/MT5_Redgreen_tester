@@ -110,7 +110,8 @@ def stamp_array(day, minute, k=0):
 
 # ---------------------------------------------------------------- M30 EA emulation
 
-def simulate_m30_ea(bars, rr=1.0, cutoffs=None, last_date=None, signal='red', intrabar_rr=None, signal_stops=None):
+def simulate_m30_ea(bars, rr=1.0, cutoffs=None, last_date=None, signal='red', intrabar_rr=None, signal_stops=None,
+                    signal_skips=None, blocked_minutes=()):
     """RR_r_MFE_buy-stop-entry_runband on M30, uncapped, all 01:00-23:30 windows, flatten fallback
     and early-close calendar, MT5 tester fills (pending and stop orders fill at their level).
     Optional intrabar_rr adds a resting TP alongside the unchanged close-confirmed exit.
@@ -118,6 +119,10 @@ def simulate_m30_ea(bars, rr=1.0, cutoffs=None, last_date=None, signal='red', in
     signal_stops optionally maps a completed signal's day*48+half-hour slot to
     its stop price. The close target scales with that stop; callers must use
     only information available at signal close when constructing the mapping.
+    signal_skips optionally holds signal slots (same key) that the EA rejects: the
+    pending order is cancelled and none is placed, as for its other filters.
+    blocked_minutes holds bar-open minutes of the day outside the entry windows
+    (960 and 990 for W1600W1700=false): pending orders are cancelled, none placed.
     """
     if intrabar_rr is not None and (not np.isfinite(intrabar_rr) or intrabar_rr <= 0):
         raise ValueError('intrabar_rr must be finite and positive, or None')
@@ -186,11 +191,13 @@ def simulate_m30_ea(bars, rr=1.0, cutoffs=None, last_date=None, signal='red', in
                 if bar1[3] >= pos['fill'] + rr * (pos['fill'] - pos['sl']):
                     close(i, k, p, 'target')
                 continue
-            if bar_min < 60:
+            if bar_min < 60 or bar_min in blocked_minutes:
                 pend = None
                 continue
             if bar1 is not None and is_signal(bar1[0], bar1[3], signal):
                 pend = None
+                if signal_skips is not None and signal_slot in signal_skips:
+                    continue
                 if bar1[1] - bar1[2] <= 0:
                     continue
                 if bar1[1] <= p:
