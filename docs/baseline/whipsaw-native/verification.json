@@ -1,0 +1,63 @@
+{
+  "checks": [
+    {
+      "strategy": "rtl",
+      "policy": "control",
+      "primary_trades": 16668,
+      "control_or_subset_match": true,
+      "all_orders_in_allowed_sessions": true
+    },
+    {
+      "strategy": "rtl",
+      "policy": "day1",
+      "primary_trades": 1037,
+      "control_or_subset_match": true,
+      "all_orders_in_allowed_sessions": true
+    },
+    {
+      "strategy": "rtl",
+      "policy": "days123",
+      "primary_trades": 2444,
+      "control_or_subset_match": true,
+      "all_orders_in_allowed_sessions": true
+    },
+    {
+      "strategy": "rtl",
+      "policy": "day1_rr2",
+      "primary_trades": 859,
+      "control_or_subset_match": false,
+      "all_orders_in_allowed_sessions": true
+    },
+    {
+      "strategy": "gg",
+      "policy": "control",
+      "primary_trades": 17569,
+      "control_or_subset_match": true,
+      "all_orders_in_allowed_sessions": true
+    },
+    {
+      "strategy": "gg",
+      "policy": "day1",
+      "primary_trades": 1043,
+      "control_or_subset_match": true,
+      "all_orders_in_allowed_sessions": true
+    },
+    {
+      "strategy": "gg",
+      "policy": "days123",
+      "primary_trades": 2519,
+      "control_or_subset_match": true,
+      "all_orders_in_allowed_sessions": true
+    },
+    {
+      "strategy": "gg",
+      "policy": "day1_rr2",
+      "primary_trades": 838,
+      "control_or_subset_match": false,
+      "all_orders_in_allowed_sessions": true
+    }
+  ],
+  "all_passed": true,
+  "flat_boundaries_verified": true,
+  "full_native_equity_dd_reconciled": true
+}

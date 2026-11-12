@@ -1344,3 +1344,31 @@ Evidence: Reports/rtl_open_halves_20261111; preparation, analysis, report and th
 - [Results](baseline/whipsaw-followup/RESULTS.md), [specification](baseline/whipsaw-followup/PROTOCOL.md).
   Full evidence: Reports/whipsaw_followup_20261112/. Next: visually validate the event-only
   examples before selecting any revised geometry or intraday reference-level definition.
+
+## 2026-11-12: Whipsaw MT5 runs and overlays on normal trading
+
+- Committed the previous follow-up as `5d2062f`. User accepted bounded and expanding
+  examples as the same visual family and requested native replays using all 174 main events.
+  Intended use: retain other trades, add size or change exits after completed whipsaw sessions.
+- Fixed eight runs before new outcomes: RTL/GG each with control, next session at 1R,
+  union of next three sessions at 1R, next session at 2R. Same session flattening and
+  bar-close exits. No target optimization or stacking overlapping event windows.
+- Reconstructed extra-contract overlays from verified native session equity, assuming
+  identical fills and linear costs. Next-session extra size adds $8,195 / $8,450 RTL/GG;
+  equity DD rises $5,942 -> $7,721 / $5,622 -> $6,483. Three-session extra size adds
+  $14,173 / $8,517, with DD $8,831 / $9,094: only $67 extra for GG beyond day 1.
+- Actual 2R native trades replace day-1 baseline trades: RTL +$2,322, GG -$572 overall.
+  RTL is positive in both eras but its month-bootstrap incremental-profit interval
+  includes zero. Same-history exploration; equal-risk volatility-matched allocation
+  and prospective confirmation remain outstanding.
+- Separate days 1/2/3 mean absolute movement: 0.93/0.87/0.81 event ATR. Fifty day-2
+  observations and 38 day-3 observations also follow a newer whipsaw. Without these,
+  later movement averages 0.75/0.70 ATR. All three sessions share a direction in 22%
+  of sequences; these descriptive figures have no matched persistence control.
+- Eight runs complete, compile clean; controls reproduce existing primary ledgers,
+  selected 1R arms exactly match control subsets, full native DD reconciles, all
+  orders/positions stay within sessions. Independent minute replay matches both
+  2R arms (859 RTL / 838 GG trades). Five focused tests pass.
+- [Results/chart](baseline/whipsaw-native/RESULTS.md),
+  [fixed specification](baseline/whipsaw-native/PROTOCOL.md).
+  Full evidence: Reports/whipsaw_native_20261112/. No live settings changed.

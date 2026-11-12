@@ -1,0 +1,12 @@
+[
+  {
+    "strategy": "rtl",
+    "primary_trades": 859,
+    "all_matched": true
+  },
+  {
+    "strategy": "gg",
+    "primary_trades": 838,
+    "all_matched": true
+  }
+]

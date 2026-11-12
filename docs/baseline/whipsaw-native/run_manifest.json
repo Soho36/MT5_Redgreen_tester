@@ -1,0 +1,202 @@
+{
+  "preparation": {
+    "expert": "Whipsaw_session_research",
+    "jobs": [
+      {
+        "tag": "whipnative_20261112_rtl_control",
+        "strategy": "rtl",
+        "policy": "control",
+        "mask": 0,
+        "rr": 1,
+        "outputs": [
+          "rtlvwap_whipnative_20261112_rtl_control_1.00.csv",
+          "rtlvwap_whipnative_20261112_rtl_control_1.00_stats.csv",
+          "window_equity_whipnative_20261112_rtl_control.bin"
+        ]
+      },
+      {
+        "tag": "whipnative_20261112_rtl_day1",
+        "strategy": "rtl",
+        "policy": "day1",
+        "mask": 1,
+        "rr": 1,
+        "outputs": [
+          "rtlvwap_whipnative_20261112_rtl_day1_1.00.csv",
+          "rtlvwap_whipnative_20261112_rtl_day1_1.00_stats.csv",
+          "window_equity_whipnative_20261112_rtl_day1.bin"
+        ]
+      },
+      {
+        "tag": "whipnative_20261112_rtl_days123",
+        "strategy": "rtl",
+        "policy": "days123",
+        "mask": 7,
+        "rr": 1,
+        "outputs": [
+          "rtlvwap_whipnative_20261112_rtl_days123_1.00.csv",
+          "rtlvwap_whipnative_20261112_rtl_days123_1.00_stats.csv",
+          "window_equity_whipnative_20261112_rtl_days123.bin"
+        ]
+      },
+      {
+        "tag": "whipnative_20261112_rtl_day1_rr2",
+        "strategy": "rtl",
+        "policy": "day1_rr2",
+        "mask": 1,
+        "rr": 2,
+        "outputs": [
+          "rtlvwap_whipnative_20261112_rtl_day1_rr2_2.00.csv",
+          "rtlvwap_whipnative_20261112_rtl_day1_rr2_2.00_stats.csv",
+          "window_equity_whipnative_20261112_rtl_day1_rr2.bin"
+        ]
+      },
+      {
+        "tag": "whipnative_20261112_gg_control",
+        "strategy": "gg",
+        "policy": "control",
+        "mask": 0,
+        "rr": 1,
+        "outputs": [
+          "rtlvwap_whipnative_20261112_gg_control_1.00.csv",
+          "rtlvwap_whipnative_20261112_gg_control_1.00_stats.csv",
+          "window_equity_whipnative_20261112_gg_control.bin"
+        ]
+      },
+      {
+        "tag": "whipnative_20261112_gg_day1",
+        "strategy": "gg",
+        "policy": "day1",
+        "mask": 1,
+        "rr": 1,
+        "outputs": [
+          "rtlvwap_whipnative_20261112_gg_day1_1.00.csv",
+          "rtlvwap_whipnative_20261112_gg_day1_1.00_stats.csv",
+          "window_equity_whipnative_20261112_gg_day1.bin"
+        ]
+      },
+      {
+        "tag": "whipnative_20261112_gg_days123",
+        "strategy": "gg",
+        "policy": "days123",
+        "mask": 7,
+        "rr": 1,
+        "outputs": [
+          "rtlvwap_whipnative_20261112_gg_days123_1.00.csv",
+          "rtlvwap_whipnative_20261112_gg_days123_1.00_stats.csv",
+          "window_equity_whipnative_20261112_gg_days123.bin"
+        ]
+      },
+      {
+        "tag": "whipnative_20261112_gg_day1_rr2",
+        "strategy": "gg",
+        "policy": "day1_rr2",
+        "mask": 1,
+        "rr": 2,
+        "outputs": [
+          "rtlvwap_whipnative_20261112_gg_day1_rr2_2.00.csv",
+          "rtlvwap_whipnative_20261112_gg_day1_rr2_2.00_stats.csv",
+          "window_equity_whipnative_20261112_gg_day1_rr2.bin"
+        ]
+      }
+    ],
+    "counts": {
+      "sessions": 4180,
+      "whipsaw": 243,
+      "looser": 549,
+      "stricter": 63,
+      "outside_inside": 233
+    },
+    "protocol_sha256": "a7b0a189d0eab405e571f866ecac4bee1c72df2602dac7427a215a54d277321d",
+    "prepared_sha256": {
+      "early_closes.mqh": "5dcf4d99402ed987da4eae6ca9a8acfd0cdca329a0a8654eb6e207098d87b22b",
+      "event_sessions.csv": "97c07e6da41b783c67b1609566115143309afec1791209547f8c1f8390723c3f",
+      "rtl_session_vwap.mqh": "585c706e4cd891e0f1856ce4f1afd536c20e062a750e4e14115c117b046684b9",
+      "stock_early_closes.mqh": "9ae2280f47125ad5ff3edb3d0279dc6f0235cf2577c9ba0da602d5ad6072fbca",
+      "whipnative_20261112_gg_control.ini": "2e2e05dbc3887b37d6f500473b872ed9c1934258d680a4366090d776b8948abf",
+      "whipnative_20261112_gg_day1.ini": "f0dee609365a41ac2f6775efc817d3db31f0d849a73be28c2a82afa18c9f442e",
+      "whipnative_20261112_gg_day1_rr2.ini": "8631de9193ee9993e838e8bc98d0d670ad3372f84c511b99a6e4c454c941e5b0",
+      "whipnative_20261112_gg_days123.ini": "b29bf7938e606d45e9b1f4c710287fba2c7b6892b78d5ee1fa7da13e2d26cfe0",
+      "whipnative_20261112_rtl_control.ini": "8f7a85ecd6fa1bd88356a97897771a8001411452a296bc0c5836c8e7afb6287e",
+      "whipnative_20261112_rtl_day1.ini": "a085d53e432e48b720781460480dc55468bf389a779d7aa17de8fbffbd5dbed6",
+      "whipnative_20261112_rtl_day1_rr2.ini": "3bdf1252995ebe675a34898b7dd159edd513648300bd443af4846a55c6e3528c",
+      "whipnative_20261112_rtl_days123.ini": "93ab47d2afa68767c58f1c888534563cefd07a219389df779979ed46b849dfc9",
+      "whipsaw_session.mqh": "0ef167a1610c1e39c8331f1514e720d6c0461f80ab0a5b743c32b297c438c7ee",
+      "Whipsaw_session_research.mq5": "bd3c286ffb1790034dc413b47dc02e3932375822081834afdb3204e4914edcb8",
+      "window_equity_research.mqh": "5224cfe4767d31d31e03bfeab898bbf445f0a56977e5c2ab9f98b7deb3273270"
+    }
+  },
+  "completed_runs": [
+    {
+      "tag": "whipnative_20261112_rtl_control",
+      "seconds": 49.8,
+      "outputs": {
+        "rtlvwap_whipnative_20261112_rtl_control_1.00.csv": "88c0d6144b1ce8ecc937a8f5333188240bc41b6cf241cef2e3778dde7bd752e5",
+        "rtlvwap_whipnative_20261112_rtl_control_1.00_stats.csv": "ca3675c985942dbd89e02049d89167eb95c98a02f87e0333920570b93cde26b4",
+        "window_equity_whipnative_20261112_rtl_control.bin": "0bf42df27c6be75009bbd6e6cc8aec6ce45131b3c95217d5e2a83133d81e9d94"
+      }
+    },
+    {
+      "tag": "whipnative_20261112_rtl_day1",
+      "seconds": 17.8,
+      "outputs": {
+        "rtlvwap_whipnative_20261112_rtl_day1_1.00.csv": "8d845d37da690fab9fed7496efa361dec8e57242300e4d99ea5cc1ddd585a2b0",
+        "rtlvwap_whipnative_20261112_rtl_day1_1.00_stats.csv": "fe7ad46c3a35ba65500b0d8a4d9481c2f57e19025b648ec8e7ebadd7aa647c9c",
+        "window_equity_whipnative_20261112_rtl_day1.bin": "3e3a85d6380c12f6510cf969b944de3c8fda55a9757fc5c227dbc44bd8bce6fb"
+      }
+    },
+    {
+      "tag": "whipnative_20261112_rtl_days123",
+      "seconds": 21.9,
+      "outputs": {
+        "rtlvwap_whipnative_20261112_rtl_days123_1.00.csv": "02bd3b146328306a89361cd0a791a02f66664ff38a779e2c806fe9a019da1e12",
+        "rtlvwap_whipnative_20261112_rtl_days123_1.00_stats.csv": "cf370e65afeab422d952c0eec33a8c9b54f42687624537762c2d10f2301bca6f",
+        "window_equity_whipnative_20261112_rtl_days123.bin": "b0948cc664eaf15c0c3d4d1b390cdb8685561d348bafbdc9123a33c143908180"
+      }
+    },
+    {
+      "tag": "whipnative_20261112_rtl_day1_rr2",
+      "seconds": 16.8,
+      "outputs": {
+        "rtlvwap_whipnative_20261112_rtl_day1_rr2_2.00.csv": "885b3b7568b3a3fec80689a2d39e477e7c54a37b7dd21988cd1671749577e799",
+        "rtlvwap_whipnative_20261112_rtl_day1_rr2_2.00_stats.csv": "4a9cb917af263b99ac993dc73f7439a5e9a2128cdc70f90040deb7d7a22284de",
+        "window_equity_whipnative_20261112_rtl_day1_rr2.bin": "a8df77b27e8221ee68bb5d07c6b89806fb4ac8725c35e040146656aa7bc8b6dc"
+      }
+    },
+    {
+      "tag": "whipnative_20261112_gg_control",
+      "seconds": 42.9,
+      "outputs": {
+        "rtlvwap_whipnative_20261112_gg_control_1.00.csv": "091a3eeb2dae54698df78fb6860939593564c123681646efe822fd0e9333b459",
+        "rtlvwap_whipnative_20261112_gg_control_1.00_stats.csv": "175531437ff48017ac60e4589676e1239415d03887465a44f06269f6f8e0c9f4",
+        "window_equity_whipnative_20261112_gg_control.bin": "1e19ce3b3130bb734737498fb116f53952fbad4020c2027837b011df30a9e0cc"
+      }
+    },
+    {
+      "tag": "whipnative_20261112_gg_day1",
+      "seconds": 20.0,
+      "outputs": {
+        "rtlvwap_whipnative_20261112_gg_day1_1.00.csv": "dcf04d3b33c319fbb6e0cdd3c035996440ce6252d25d25c9aac4da0fa4b2c23d",
+        "rtlvwap_whipnative_20261112_gg_day1_1.00_stats.csv": "425ed2bda482bcebbe0580e007b641076ca4bd40c2ff17fa21d22c143cc8737b",
+        "window_equity_whipnative_20261112_gg_day1.bin": "a82217486d01f62080466f396005a43ef4e365111d9d28f3a5baab2696ee6a26"
+      }
+    },
+    {
+      "tag": "whipnative_20261112_gg_days123",
+      "seconds": 20.8,
+      "outputs": {
+        "rtlvwap_whipnative_20261112_gg_days123_1.00.csv": "5c932870b55c28f2246a1ddc9d1b64c735d26485cd3bf9abcd025480b68401fc",
+        "rtlvwap_whipnative_20261112_gg_days123_1.00_stats.csv": "c0b2bc9d0aeae91b1f7798f4dea96047483b740f131e2494223a7e8be0a3bfbd",
+        "window_equity_whipnative_20261112_gg_days123.bin": "23e6387e2d6f82c8e9fe902e4486f727e6d0b6c7def21d5921a801379d6c644c"
+      }
+    },
+    {
+      "tag": "whipnative_20261112_gg_day1_rr2",
+      "seconds": 20.0,
+      "outputs": {
+        "rtlvwap_whipnative_20261112_gg_day1_rr2_2.00.csv": "bd0af67c9527dd377dbfce72920b1688730269a9a612d3bd0533d74743de3d15",
+        "rtlvwap_whipnative_20261112_gg_day1_rr2_2.00_stats.csv": "68eccf39886899a5f53548c40fa314bc57629182bb164490995af728dfe6a21f",
+        "window_equity_whipnative_20261112_gg_day1_rr2.bin": "cd2c0c61a04171c38c53d651f1363a9b05016fe482c3b2447ecc869682b43257"
+      }
+    }
+  ]
+}
