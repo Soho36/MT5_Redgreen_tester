@@ -1,0 +1,33 @@
+{
+  "exploratory": true,
+  "conditions": {
+    "pooled_interval_above_zero": false,
+    "improvement_in_both_eras": false
+  },
+  "forecast_improvement_demonstrated": false,
+  "primary_relative_mse_gain": 0.0005079066778945564,
+  "primary_mse_gain": 0.00010812172628619414,
+  "primary_interval": [
+    -0.0007677100865528082,
+    0.0010122838180148537
+  ],
+  "evaluation_sessions": 2774,
+  "evaluation_events": 174,
+  "year_boundary_checks": true,
+  "original_counts": {
+    "sessions": 4180,
+    "whipsaw": 243,
+    "looser": 549,
+    "stricter": 63,
+    "outside_inside": 233
+  },
+  "m1_main_events": 178,
+  "m1_main_disagreements": 4,
+  "hashes": {
+    "docs/baseline/whipsaw-followup/PROTOCOL.md": "87b5ddfaedd8a5e861f375edb1ad657e88085614da2df3f40f8c8aca860a37ea",
+    "python/whipsaw_followup_features.py": "e7b97a3caae873a431c995b0040c160eacd75852ec66da5cd4952fced4a2a0ff",
+    "python/analyze_whipsaw_followup.py": "38dfb288c74e900bdc304e304a25a5f0badff70ff83ca9581fda7d53510436c1"
+  },
+  "features_sha256": "742d023d012f92c39faddd28a0a6f5bd368bb1787722c93c9a86e12d8868eef9",
+  "predictions_sha256": "653cbbd68b1292ac27e4841ed928983cd1507311470ea8a646e60d8cd80c2ef7"
+}

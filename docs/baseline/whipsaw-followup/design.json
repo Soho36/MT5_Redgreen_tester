@@ -1,0 +1,28 @@
+{
+  "recorded_at_utc": "2026-11-11T23:26:24+00:00",
+  "exploratory_reused_history": true,
+  "prior_m1_results_seen": true,
+  "original_protocol_sha256": "b0a9efa24afa25a850c81e0dff874c9f51ccbd2c0ef164b0faa3d05e9cee4d5b",
+  "hashes": {
+    "docs/baseline/whipsaw-followup/PROTOCOL.md": "87b5ddfaedd8a5e861f375edb1ad657e88085614da2df3f40f8c8aca860a37ea",
+    "python/whipsaw_followup_features.py": "e7b97a3caae873a431c995b0040c160eacd75852ec66da5cd4952fced4a2a0ff",
+    "python/analyze_whipsaw_followup.py": "38dfb288c74e900bdc304e304a25a5f0badff70ff83ca9581fda7d53510436c1"
+  },
+  "features_sha256": "742d023d012f92c39faddd28a0a6f5bd368bb1787722c93c9a86e12d8868eef9",
+  "counts": {
+    "sessions": 4180,
+    "whipsaw": 243,
+    "looser": 549,
+    "stricter": 63,
+    "outside_inside": 233
+  },
+  "main_events": 174,
+  "initial_geometry_counts": {
+    "other": 208,
+    "expanding": 21,
+    "bounded": 14
+  },
+  "alpha": 10.0,
+  "draws": 5000,
+  "seed": 20261112
+}

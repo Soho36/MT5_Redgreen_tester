@@ -12,7 +12,7 @@
 What we did, day by day, and what each step answered. Newest day last.
 For the current state of the strategy, see [STATUS.md](STATUS.md).
 
-## Where we are now (strategy line updated 2026-10-13, weekly and VWAP lines 2026-10-27, news-day line 2026-11-10, GG bad-day, 16-17, size-cap and whipsaw lines 2026-11-11, the rest 2026-10-01)
+## Where we are now (strategy line updated 2026-10-13, weekly and VWAP lines 2026-10-27, news-day line 2026-11-10, GG bad-day, 16-17, size-cap and original whipsaw lines 2026-11-11, whipsaw follow-up 2026-11-12, the rest 2026-10-01)
 
 - **Strategy:** buy stop over the last red M30 candle, stop at its low, bar-close exit at ≥ 1R,
   no red-run cap (`MaxRedRun = 0` since 2026-10-13; it was 3), flatten at 23:30 with the fallback fix.
@@ -51,6 +51,9 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   swings the next session moved more than after equally large days (0.93 against 0.57 normal-day
   ranges; both eras; ES, YM and RTY agree). No direction, and GG / RTL results on the next session
   do not differ measurably. A market fact worth logging forward, not a rule. Nothing adopted.
+- **Whipsaw follow-up (2026-11-12):** adding the unchanged flag to minute-volatility forecasts
+  gives no demonstrated improvement: pooled squared error +0.05%, eras disagree.
+  Strict shape groups are small; inspect event-only examples before refining labels.
 - **Q1–Q5 answered (no filter).** **Next:** execution realism (live/demo fills and slippage)
   and the live sizing decision; new ideas go into the Inbox.
 
@@ -1311,3 +1314,33 @@ Evidence: Reports/rtl_open_halves_20261111; preparation, analysis, report and th
 - [Results/chart](baseline/whipsaw-days/RESULTS.md), [protocol](baseline/whipsaw-days/PROTOCOL.md).
   Evidence: Reports/whipsaw_days_20261111/. Next: log the unchanged rule on sessions after
   September 2026. No settings changed.
+
+## 2026-11-12: Whipsaw follow-up with minute volatility and structure
+
+- User agreed to retain the session-level whipsaw definition and test incremental information
+  after controlling for minute-level volatility. Mechanism clarified: stop-triggered order
+  flow is the hypothesis; trader frustration is a consequence, not the cause.
+- Wrote and hashed a separate exploratory specification before this follow-up's outcome run.
+  Disclosed the already-seen original and M1 review results; this is reused history, not
+  independent prospective evidence. Original frozen event code and protocol unchanged.
+- Annual ridge forecasts train on earlier years only, purging training events with outcomes
+  in the test year. Baseline: current range and M1 movement, prior 5/20-session movement,
+  recent true range, signed body, scheduled news, weekday and roll. Added frozen whipsaw flag.
+- Incremental forecasting not demonstrated: pooled MSE improvement 0.05%, paired gain
+  +0.000108 (-0.000768 to +0.001012); early -0.30%, recent +0.30%. Five-minute sensitivity
+  +0.11%, interval crosses zero. Structure added after the flag worsens MSE by 0.20%.
+- Original association persists: adding volatility histories to the descriptive regression
+  leaves +0.157 ATR (+0.020 to +0.297). This is a different test from chronological prediction.
+- Initial three-leg labels: 9 bounded, 13 expanding, 152 other among 174 main events.
+  First buffered breach/return of both previous-day boundaries: 8, with 2 roll dates
+  unavailable. Sparse, definition-specific proxies cannot settle the broader visual patterns.
+  Example charts are chosen by date without subsequent outcomes.
+- Third swing's detection bar recorded causally; median 7 M30 bars remain. From the next
+  bar's open, 172 events have mean remaining displacement 0.541 ATR and range 0.935 ATR.
+  Descriptive only, no comparator or fill assumptions.
+- All seven original data hashes checked; 53 focused tests pass. Independent calculations
+  match all 4,180 volatility records, 243 recognition times, 8,230 boundary labels,
+  13,870 forecasts and 18 score rows. No EA or strategy settings changed.
+- [Results](baseline/whipsaw-followup/RESULTS.md), [specification](baseline/whipsaw-followup/PROTOCOL.md).
+  Full evidence: Reports/whipsaw_followup_20261112/. Next: visually validate the event-only
+  examples before selecting any revised geometry or intraday reference-level definition.

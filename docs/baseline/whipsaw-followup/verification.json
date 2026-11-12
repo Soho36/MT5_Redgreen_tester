@@ -1,0 +1,19 @@
+{
+  "all_passed": true,
+  "sessions": 4180,
+  "forecasts_checked": 13870,
+  "recognition_times_checked": 243,
+  "boundary_labels_checked": 8230,
+  "score_rows_checked": 18,
+  "dependency_hashes": {
+    "python/whipsaw_followup_features.py": "e7b97a3caae873a431c995b0040c160eacd75852ec66da5cd4952fced4a2a0ff",
+    "python/analyze_whipsaw_followup.py": "38dfb288c74e900bdc304e304a25a5f0badff70ff83ca9581fda7d53510436c1",
+    "python/analyze_whipsaw_days.py": "90786309f1cb18871af4013dd7874538bf0f7a96c544a4febab8934b87ed7c23",
+    "python/review_whipsaw_days.py": "4f7172ebaaf566537e20e1ab8ad9d564b44c49b5fee39837b6213355c59eaa31",
+    "python/whipsaw_days.py": "2398a8fcf3311dd2342ac41d1db2a4384530ad162e24742872842409cc0481bb",
+    "python/prepare_whipsaw_days.py": "20e83726e9551b01a265ae2a8b38cdf82ca4bd331bad70a137d79765625d13d7"
+  },
+  "verification_code_sha256": "3c09c1e30e529edd1879e489eaee008b7f616ea53e23bd0c920cb3fa8f81b21c",
+  "numpy_version": "2.5.3",
+  "pandas_version": "3.0.6"
+}
