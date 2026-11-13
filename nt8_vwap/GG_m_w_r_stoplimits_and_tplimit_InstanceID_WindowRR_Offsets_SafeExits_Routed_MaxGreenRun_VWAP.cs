@@ -48,7 +48,7 @@ namespace NinjaTrader.NinjaScript.Strategies
     {
         // Bump on every behaviour change; printed at startup and shown as the
         // strategy description, so the Output window shows which build is running.
-        private const string ScriptVersion = "2026.11.12-vwap.1";
+        private const string ScriptVersion = "2026.11.13-vwap.1";
 
         private RTLSessionVWAP sessionVwap;
 
@@ -1483,7 +1483,11 @@ namespace NinjaTrader.NinjaScript.Strategies
             lock (exitOrdersSync)
             {
                 Order order = entryTimeoutOrder;
+                // Only an order the broker has acknowledged can trigger. A price at the
+                // level while the order is still in flight usually means the broker will
+                // reject it (2026-11-13), not that it triggered.
                 if (order == null || Order.IsTerminalState(order.OrderState)
+                    || order.OrderState == OrderState.Initialized || order.OrderState == OrderState.Submitted
                     || order.OrderType != OrderType.StopLimit || order.OrderAction != OrderAction.Buy
                     || order.StopPrice <= 0 || lastPrice < order.StopPrice
                     || entryTriggeredAt != Core.Globals.MinDate)
@@ -2750,6 +2754,27 @@ namespace NinjaTrader.NinjaScript.Strategies
         // once.
         private readonly HashSet<Order> handledProtectiveRejections = new HashSet<Order>();
 
+        // A buy stop must sit above the last trade. When the market reaches the entry
+        // level in the instant between the bar-close check and the order's arrival, the
+        // broker rejects it ("buy order stop price must be above trade price"; observed
+        // 2026-11-13). The signal is skipped, with no retry: a buy limit placed after the
+        // market has passed the level tested worse than skipping (MT5_Redgreen_tester
+        // docs/baseline/entry-rescue). Seat status was already released by
+        // ApplyEntryOrderStatus.
+        private void HandleEntryRejection(Order order, string nativeError)
+        {
+            lock (exitOrdersSync)
+                if (entryTimeoutOrder == order)
+                    ResetEntryTimeoutTracking();
+            if (ReferenceEquals(longOrder, order))
+                longOrder = null;
+            bool pastLevel = nativeError != null
+                && nativeError.IndexOf("trade price", StringComparison.OrdinalIgnoreCase) >= 0;
+            Report($"[{Core.Globals.Now}] [{EntrySignalName}] ⚠️ Entry @ {order.StopPrice} rejected by the broker"
+                + (pastLevel ? ": the market traded at or above the entry level before the order arrived" : "")
+                + $" (broker: '{nativeError}'). Signal skipped, no retry.", LogLevel.Warning);
+        }
+
         private void HandleProtectiveRejection(Order order)
         {
             if (order == null || IsStopFallbackActive())
@@ -2825,6 +2850,8 @@ namespace NinjaTrader.NinjaScript.Strategies
                 BindEntryOrderSetup(order, null);
                 longOrder = order;
                 ApplyEntryOrderStatus(orderState);
+                if (orderState == OrderState.Rejected)
+                    HandleEntryRejection(order, nativeError);
             }
             else if (order.Name == StopLossSignalName || order.Name == StopMarketName)
             {

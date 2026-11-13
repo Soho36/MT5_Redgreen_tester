@@ -1,13 +1,13 @@
 [
   {
     "source": "I:\\PycharmProjects\\RT30_min_nt8_standalone\\GG_m_w_r_stoplimits_and_tplimit_InstanceID_WindowRR_Offsets_SafeExits_MaxGreenRun.cs",
-    "source_sha256": "09c1c3c7d6d84f783749247467f6399588fdffa285c09843932e68f7e54326f6",
+    "source_sha256": "80e2c309742a75f2c76ea6dc7e51c9d8515500f849c83e2c1486cb216989f9f8",
     "output": "GG_m_w_r_stoplimits_and_tplimit_InstanceID_WindowRR_Offsets_SafeExits_MaxGreenRun_VWAP.cs",
     "strategy": "GGLongTimeWinStopLimitTPlimitGAPWindowRROffsetsSafeExitsGreenRunVWAP"
   },
   {
     "source": "I:\\PycharmProjects\\Accounts_staggering\\nt8\\GG_m_w_r_stoplimits_and_tplimit_InstanceID_WindowRR_Offsets_SafeExits_Routed_MaxGreenRun.cs",
-    "source_sha256": "d558747bda835a6e7710916febed645df3084b89e60cae85357829c748571939",
+    "source_sha256": "09a61111797294e1f958d900c14f23ae231a6b637142678fd6e579e78036edd6",
     "output": "GG_m_w_r_stoplimits_and_tplimit_InstanceID_WindowRR_Offsets_SafeExits_Routed_MaxGreenRun_VWAP.cs",
     "strategy": "GGLongTimeWinStopLimitTPlimitGAPWindowRROffsetsSafeExitsRoutedGreenRunVWAP"
   }

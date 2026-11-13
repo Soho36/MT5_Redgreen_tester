@@ -102,7 +102,7 @@ def build(source):
     new_class = old_class + 'VWAP'
     assert text.count('public class ' + old_class + ' : Strategy') == 1
     text = text.replace(old_class, new_class)
-    version = '2026.11.12-vwap.1'  # stop-timeout account check: two-source proof, checked before cancelling
+    version = '2026.11.13-vwap.1'  # broker-rejected entry: clear warning, no retry; trigger arms only once acknowledged
     old_version = re.search(r'private const string ScriptVersion = "[^"]+";', text).group(0)
     text = replace_once(text, old_version,
                         f'private const string ScriptVersion = "{version}";')

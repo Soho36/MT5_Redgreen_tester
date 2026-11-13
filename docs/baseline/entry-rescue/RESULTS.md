@@ -63,3 +63,25 @@ from the near misses, which lose heavily. Longer windows (2, 5, 25 minutes) fill
 a few more and are no better (GG net -$3,131 to -$3,394 vs -$2,845 at 1 minute).
 
 No strategy change.
+
+## Addendum: what the live rejection actually was, and live stop-limit fills
+
+**The 2026-11-13 rejection was not this study's case.** The strategy's bar-close
+check found both the ask and the new bar's first trade below 28495 and sent the
+order; a trade printed at 28495 about 100 ms later, before the order arrived
+(submitted 01:29:59.796, rejected .892). MT5 would have accepted the order and
+filled it at the level. This study measures the other case, a bar that opens at or
+past the level, which MT5 also skips. Live, the race occurred once in 301 entry
+orders (trading PC logs 2026-10-24 to 2026-11-13). NinjaTrader now reports a
+broker-rejected entry as a warning in the Output window and the log, clears the
+entry state and does not retry (version 2026.11.13).
+
+**Live stop-limit entries (limit = stop) almost never diverge from MT5's
+fill-at-level.** Of 245 entries that triggered in the same logs, all 245 filled
+and none expired at the 25-minute timeout; 227 (93%) filled within 0.5 s of the
+trigger; 183 at the level and 41 one or two ticks better, never worse. Four filled
+late (2-13 min after price jumped over the level and came back), where MT5 would
+have filled at once: one session-close exit at -13 points, one target at +151,
+one stop at -66 (after a manual add); too few to judge. A minute-bar simulation
+cannot resolve these sub-second fills, so it was not run; the live record answers
+the question directly.
