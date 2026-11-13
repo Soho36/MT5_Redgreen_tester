@@ -20,7 +20,7 @@ namespace NinjaTrader.NinjaScript.Strategies
     {
         // Bump on every behaviour change; printed at startup and shown as the
         // strategy description, so the Output window shows which build is running.
-        private const string ScriptVersion = "2026.11.06-vwap.1";
+        private const string ScriptVersion = "2026.11.12-vwap.1";
 
         private RTLSessionVWAP sessionVwap;
 
@@ -659,8 +659,8 @@ namespace NinjaTrader.NinjaScript.Strategies
                         && order.StopPrice > 0 && lastPrice <= order.StopPrice)
                     {
                         stopTriggeredAt = Core.Globals.Now;
-                        Print($"[{stopTriggeredAt}] [{EntrySignalName}] Stop price reached at {lastPrice}; "
-                            + "unfilled stop quantity will exit at market after 60 seconds");
+                        Report($"[{stopTriggeredAt}] [{EntrySignalName}] Stop price reached at {lastPrice}; "
+                            + "unfilled stop quantity will exit at market after 60 seconds", LogLevel.Warning);
                         return;
                     }
                 }
@@ -758,8 +758,8 @@ namespace NinjaTrader.NinjaScript.Strategies
                     if ((now - stopTriggeredAt).TotalSeconds < 60)
                         return;
                     stopFallbackRequested = true;
-                    Print($"[{now}] [{EntrySignalName}] Stop timeout: cancelling entry/stop/target orders "
-                        + "before selling the remaining position at market");
+                    Report($"[{now}] [{EntrySignalName}] Stop timeout: cancelling entry/stop/target orders "
+                        + "before selling the remaining position at market", LogLevel.Warning);
                 }
                 stops = stopOrders.ToArray();
                 targets = takeProfitOrders.ToArray();
@@ -810,12 +810,14 @@ namespace NinjaTrader.NinjaScript.Strategies
                     if (submitted != null && !Order.IsTerminalState(submitted.OrderState))
                         stopFallbackOrder = submitted;
                 }
-                Print($"[{now}] [{EntrySignalName}] Stop timeout market exit quantity={remaining}: "
-                    + (submitted == null ? "API returned no order; will retry" : submitted.OrderState.ToString()));
+                Report($"[{now}] [{EntrySignalName}] Stop timeout market exit quantity={remaining}: "
+                    + (submitted == null ? "API returned no order; will retry" : submitted.OrderState.ToString()),
+                    LogLevel.Warning);
             }
             catch (Exception ex)
             {
-                Print($"[{now}] [{EntrySignalName}] Stop timeout market exit failed: {ex.Message}; will retry");
+                Report($"[{now}] [{EntrySignalName}] Stop timeout market exit failed: {ex.Message}; will retry",
+                    LogLevel.Warning);
             }
             finally
             {
@@ -1181,6 +1183,15 @@ namespace NinjaTrader.NinjaScript.Strategies
         // Latched until restart once this strategy's exits are unsafe to send.
         private bool exitsHalted;
 
+        // Output window AND NinjaTrader's log (Log tab and the log files), so exit-safety
+        // events can be reconstructed from the log folder afterwards.
+        private void Report(string message, LogLevel level)
+        {
+            Print(message);
+            try { Log(message, level); }
+            catch { }
+        }
+
         private void HaltExits(string reason)
         {
             lock (exitOrdersSync)
@@ -1189,8 +1200,9 @@ namespace NinjaTrader.NinjaScript.Strategies
                     return;
                 exitsHalted = true;
             }
-            Print($"[{Core.Globals.Now}] [{EntrySignalName}] ⛔ EXITS HALTED: {reason}. Check the account at "
-                + "the broker now and protect or flatten the position there.");
+            // LogLevel.Alert also raises NinjaTrader's alert pop-up.
+            Report($"[{Core.Globals.Now}] [{EntrySignalName}] ⛔ EXITS HALTED: {reason}. Check the account at "
+                + "the broker now and protect or flatten the position there.", LogLevel.Alert);
         }
 
         // Exchange price limits reject a protective sell stop-limit whose limit price
@@ -1224,13 +1236,13 @@ namespace NinjaTrader.NinjaScript.Strategies
                         + "may have no stop");
                     return;
                 }
-                Print($"[{now}] [{EntrySignalName}] ⚠️ Protective stop-market @ {order.StopPrice} rejected too; "
-                    + "exiting at market");
+                Report($"[{now}] [{EntrySignalName}] ⚠️ Protective stop-market @ {order.StopPrice} rejected too; "
+                    + "exiting at market", LogLevel.Warning);
             }
             else if (order.Name == StopLossSignalName && order.StopPrice > 0)
             {
-                Print($"[{now}] [{EntrySignalName}] ⚠️ Protective stop-limit @ {order.StopPrice} rejected; "
-                    + "re-sending it as a stop-market at the same price");
+                Report($"[{now}] [{EntrySignalName}] ⚠️ Protective stop-limit @ {order.StopPrice} rejected; "
+                    + "re-sending it as a stop-market at the same price", LogLevel.Warning);
                 Order replacement = ExitLongStopMarket(0, true, quantity, order.StopPrice,
                     StopMarketName, EntrySignalName);
                 if (replacement != null)
@@ -1238,7 +1250,8 @@ namespace NinjaTrader.NinjaScript.Strategies
                     TrackOrder(stopOrders, replacement);
                     return;
                 }
-                Print($"[{now}] [{EntrySignalName}] ⚠️ Stop-market API returned no order; exiting at market");
+                Report($"[{now}] [{EntrySignalName}] ⚠️ Stop-market API returned no order; exiting at market",
+                    LogLevel.Warning);
             }
             else
                 return;

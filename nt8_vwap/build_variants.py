@@ -1,4 +1,4 @@
-"""Build additive NT8 VWAP variants from the user's existing strategies."""
+﻿"""Build additive NT8 VWAP variants from the user's existing strategies."""
 from pathlib import Path
 import hashlib
 import json
@@ -102,7 +102,7 @@ def build(source):
     new_class = old_class + 'VWAP'
     assert text.count('public class ' + old_class + ' : Strategy') == 1
     text = text.replace(old_class, new_class)
-    version = '2026.11.06-vwap.1'  # rejected protective stop -> stop-market -> market exit
+    version = '2026.11.12-vwap.1'  # stop-timeout account check: two-source proof, checked before cancelling
     old_version = re.search(r'private const string ScriptVersion = "[^"]+";', text).group(0)
     text = replace_once(text, old_version,
                         f'private const string ScriptVersion = "{version}";')
