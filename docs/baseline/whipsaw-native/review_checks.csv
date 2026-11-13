@@ -1,0 +1,548 @@
+check,item,measure,value,low,high
+A1 ledgers,rtl control 2016-19,trades,6167.0,,
+A1 ledgers,rtl control 2016-19,net dollars,4416.6500000000015,,
+A1 ledgers,rtl control 2020-26,trades,10501.0,,
+A1 ledgers,rtl control 2020-26,net dollars,38399.94999999998,,
+A1 ledgers,rtl control 2016-26,trades,16668.0,,
+A1 ledgers,rtl control 2016-26,net dollars,42816.599999999984,,
+A1 ledgers,rtl day1 2016-19,trades,339.0,,
+A1 ledgers,rtl day1 2016-19,net dollars,1117.5499999999995,,
+A1 ledgers,rtl day1 2020-26,trades,698.0,,
+A1 ledgers,rtl day1 2020-26,net dollars,7077.599999999999,,
+A1 ledgers,rtl day1 2016-26,trades,1037.0,,
+A1 ledgers,rtl day1 2016-26,net dollars,8195.150000000001,,
+A1 ledgers,rtl days123 2016-19,trades,818.0,,
+A1 ledgers,rtl days123 2016-19,net dollars,1494.5999999999992,,
+A1 ledgers,rtl days123 2020-26,trades,1626.0,,
+A1 ledgers,rtl days123 2020-26,net dollars,12678.199999999997,,
+A1 ledgers,rtl days123 2016-26,trades,2444.0,,
+A1 ledgers,rtl days123 2016-26,net dollars,14172.799999999997,,
+A1 ledgers,rtl day1_rr2 2016-19,trades,280.0,,
+A1 ledgers,rtl day1_rr2 2016-19,net dollars,1851.5,,
+A1 ledgers,rtl day1_rr2 2020-26,trades,579.0,,
+A1 ledgers,rtl day1_rr2 2020-26,net dollars,8666.050000000001,,
+A1 ledgers,rtl day1_rr2 2016-26,trades,859.0,,
+A1 ledgers,rtl day1_rr2 2016-26,net dollars,10517.550000000003,,
+A1 ledgers,gg control 2016-19,trades,6388.0,,
+A1 ledgers,gg control 2016-19,net dollars,3635.6000000000004,,
+A1 ledgers,gg control 2020-26,trades,11181.0,,
+A1 ledgers,gg control 2020-26,net dollars,39315.44999999999,,
+A1 ledgers,gg control 2016-26,trades,17569.0,,
+A1 ledgers,gg control 2016-26,net dollars,42951.04999999998,,
+A1 ledgers,gg day1 2016-19,trades,341.0,,
+A1 ledgers,gg day1 2016-19,net dollars,-46.55000000000052,,
+A1 ledgers,gg day1 2020-26,trades,702.0,,
+A1 ledgers,gg day1 2020-26,net dollars,8496.400000000001,,
+A1 ledgers,gg day1 2016-26,trades,1043.0,,
+A1 ledgers,gg day1 2016-26,net dollars,8449.850000000002,,
+A1 ledgers,gg days123 2016-19,trades,848.0,,
+A1 ledgers,gg days123 2016-19,net dollars,-326.9000000000006,,
+A1 ledgers,gg days123 2020-26,trades,1671.0,,
+A1 ledgers,gg days123 2020-26,net dollars,8843.949999999997,,
+A1 ledgers,gg days123 2016-26,trades,2519.0,,
+A1 ledgers,gg days123 2016-26,net dollars,8517.049999999997,,
+A1 ledgers,gg day1_rr2 2016-19,trades,277.0,,
+A1 ledgers,gg day1_rr2 2016-19,net dollars,-255.85000000000025,,
+A1 ledgers,gg day1_rr2 2020-26,trades,561.0,,
+A1 ledgers,gg day1_rr2 2020-26,net dollars,8133.449999999999,,
+A1 ledgers,gg day1_rr2 2016-26,trades,838.0,,
+A1 ledgers,gg day1_rr2 2016-26,net dollars,7877.600000000001,,
+A2 sessions,rtl day1,sessions allowed,174.0,,
+A2 sessions,rtl day1,trades equal to the control subset,1037.0,,
+A2 sessions,rtl days123,sessions allowed,403.0,,
+A2 sessions,rtl days123,trades equal to the control subset,2444.0,,
+A2 sessions,gg day1,sessions allowed,174.0,,
+A2 sessions,gg day1,trades equal to the control subset,1043.0,,
+A2 sessions,gg days123,sessions allowed,403.0,,
+A2 sessions,gg days123,trades equal to the control subset,2519.0,,
+A3 drawdown,rtl control 2016-19,equity drawdown,2348.399999999965,,
+A3 drawdown,rtl day1 2016-19,equity drawdown,2505.899999999965,,
+A3 drawdown,rtl day1 2016-19,net dollars,5534.200000000012,,
+A4 intervals,rtl day1 2016-19,extra dollars per calendar session,1.0839476236663321,-0.9095721286571089,3.380437131361768
+A3 drawdown,rtl days123 2016-19,equity drawdown,2505.899999999965,,
+A3 drawdown,rtl days123 2016-19,net dollars,5911.250000000291,,
+A4 intervals,rtl days123 2016-19,extra dollars per calendar session,1.4496605237635962,-0.2977624844255486,3.2857957184766002
+A3 drawdown,rtl day1_rr2 2016-19,equity drawdown,2348.399999999965,,
+A3 drawdown,rtl day1_rr2 2016-19,net dollars,5150.600000000035,,
+A4 intervals,rtl day1_rr2 2016-19,extra dollars per calendar session,0.7118816682832315,-0.24122477795530908,1.9753904285126886
+A3 drawdown,rtl control 2020-26,equity drawdown,5941.699999999953,,
+A3 drawdown,rtl day1 2020-26,equity drawdown,7721.199999999895,,
+A3 drawdown,rtl day1 2020-26,net dollars,45477.55000000028,,
+A4 intervals,rtl day1 2020-26,extra dollars per calendar session,4.055931232091844,-0.6426254258884391,8.80392404734121
+A3 drawdown,rtl days123 2020-26,equity drawdown,8830.5,,
+A3 drawdown,rtl days123 2020-26,net dollars,51078.15000000008,,
+A4 intervals,rtl days123 2020-26,extra dollars per calendar session,7.265444126074539,0.855009134689947,13.77306768869461
+A3 drawdown,rtl day1_rr2 2020-26,equity drawdown,5941.699999999953,,
+A3 drawdown,rtl day1_rr2 2020-26,net dollars,39988.39999999979,,
+A4 intervals,rtl day1_rr2 2020-26,extra dollars per calendar session,0.9102865329511627,-2.2701774804531967,4.103040322622935
+A3 drawdown,rtl control 2016-26,equity drawdown,5941.699999999953,,
+A3 drawdown,rtl day1 2016-26,equity drawdown,7721.199999999895,,
+A3 drawdown,rtl day1 2016-26,net dollars,51011.75000000029,,
+A4 intervals,rtl day1 2016-26,extra dollars per calendar session,2.952143371758017,-0.0475283003297506,6.1342281002164265
+A3 drawdown,rtl days123 2016-26,equity drawdown,8830.5,,
+A3 drawdown,rtl days123 2016-26,net dollars,56989.40000000037,,
+A4 intervals,rtl days123 2016-26,extra dollars per calendar session,5.1054755043228885,1.1709217272667372,9.319475179241904
+A3 drawdown,rtl day1_rr2 2016-26,equity drawdown,5941.699999999953,,
+A3 drawdown,rtl day1_rr2 2016-26,net dollars,45138.999999999825,,
+A4 intervals,rtl day1_rr2 2016-26,extra dollars per calendar session,0.8365994236310484,-1.221770075882607,2.9828822620646123
+A3 drawdown,gg control 2016-19,equity drawdown,1765.3499999999767,,
+A3 drawdown,gg day1 2016-19,equity drawdown,2567.7000000000116,,
+A3 drawdown,gg day1 2016-19,net dollars,3589.0499999997555,,
+A4 intervals,gg day1 2016-19,extra dollars per calendar session,-0.0451503394764512,-2.261633410558496,2.022030569656648
+A3 drawdown,gg days123 2016-19,equity drawdown,2180.399999999907,,
+A3 drawdown,gg days123 2016-19,net dollars,3308.699999999837,,
+A4 intervals,gg days123 2016-19,extra dollars per calendar session,-0.31707080504378243,-2.559636516986108,2.098988920983935
+A3 drawdown,gg day1_rr2 2016-19,equity drawdown,1952.2499999999418,,
+A3 drawdown,gg day1_rr2 2016-19,net dollars,3426.300000000221,,
+A4 intervals,gg day1_rr2 2016-19,extra dollars per calendar session,-0.20300678952449613,-1.0137951871214255,0.5954866570248842
+A3 drawdown,gg control 2020-26,equity drawdown,5621.75,,
+A3 drawdown,gg day1 2020-26,equity drawdown,6483.350000000093,,
+A3 drawdown,gg day1 2020-26,net dollars,47811.850000000326,,
+A4 intervals,gg day1 2020-26,extra dollars per calendar session,4.868997134670634,-0.13429817936566588,10.394693134637444
+A3 drawdown,gg days123 2020-26,equity drawdown,9093.65000000014,,
+A3 drawdown,gg days123 2020-26,net dollars,48159.39999999979,,
+A4 intervals,gg days123 2020-26,extra dollars per calendar session,5.0681661891115874,-0.6065914822712818,10.499060939841195
+A3 drawdown,gg day1_rr2 2020-26,equity drawdown,5540.199999999895,,
+A3 drawdown,gg day1_rr2 2020-26,net dollars,38952.49999999977,,
+A4 intervals,gg day1_rr2 2020-26,extra dollars per calendar session,-0.20799426934114768,-2.504241882673282,2.2888855826183425
+A3 drawdown,gg control 2016-26,equity drawdown,5621.75,,
+A3 drawdown,gg day1 2016-26,equity drawdown,6483.350000000093,,
+A3 drawdown,gg day1 2016-26,net dollars,51400.90000000008,,
+A4 intervals,gg day1 2016-26,extra dollars per calendar session,3.0438940922190327,-0.07664397805038903,6.650572576059686
+A3 drawdown,gg days123 2016-26,equity drawdown,9093.65000000014,,
+A3 drawdown,gg days123 2016-26,net dollars,51468.09999999963,,
+A4 intervals,gg days123 2016-26,extra dollars per calendar session,3.0681015850142583,-0.4509263512315639,6.535864377309176
+A3 drawdown,gg day1_rr2 2016-26,equity drawdown,5540.199999999895,,
+A3 drawdown,gg day1_rr2 2016-26,net dollars,42378.79999999999,,
+A4 intervals,gg day1_rr2 2016-26,extra dollars per calendar session,-0.20614193083575583,-1.7040833183291766,1.380239157708174
+B1 per trade,rtl 2016-19 next sessions,trades,339.0,,
+B1 per trade,rtl 2016-19 next sessions,mean planned risk $,36.259587020648965,,
+B1 per trade,rtl 2016-19 next sessions,gross R,0.14688868969903618,,
+B1 per trade,rtl 2016-19 next sessions,commission R,0.055844857985221694,,
+B1 per trade,rtl 2016-19 next sessions,net R,0.09104383171381443,,
+B1 per trade,rtl 2016-19 next sessions,win %,46.017699115044245,,
+B1 per trade,rtl 2016-19 next sessions,net $ per trade,3.2966076696165176,,
+B1 per trade,rtl 2016-19 other sessions,trades,5828.0,,
+B1 per trade,rtl 2016-19 other sessions,mean planned risk $,20.871225120109816,,
+B1 per trade,rtl 2016-19 other sessions,gross R,0.07686650654103223,,
+B1 per trade,rtl 2016-19 other sessions,commission R,0.09733903702542833,,
+B1 per trade,rtl 2016-19 other sessions,net R,-0.020472530484396127,,
+B1 per trade,rtl 2016-19 other sessions,win %,42.999313658201785,,
+B1 per trade,rtl 2016-19 other sessions,net $ per trade,0.5660775566231986,,
+B2 equal risk,rtl 2016-19,gross_r: next minus equal-risk trades,0.074722140911927,-0.07238487295881815,0.22491307512523556
+B2 equal risk,rtl 2016-19,"gross_r: same, corrected for exact risk",0.07961918158050488,-0.0637087905331523,0.23067813647167715
+B2 equal risk,rtl 2016-19,net_r: next minus equal-risk trades,0.0756276620545149,-0.07126995131533731,0.22613637745430873
+B2 equal risk,rtl 2016-19,"net_r: same, corrected for exact risk",0.07619933219043501,-0.06710593734156853,0.22652835007066896
+B2 equal risk,rtl 2016-19,next-session trades used,339.0,,
+B4e dollar split,rtl 2016-19,next-session net dollars,1117.5499999999995,,
+B4e dollar split,rtl 2016-19,expected at the net R of equal-risk other trades,179.20672563851784,-1042.7848819322833,1216.7852358932444
+B4e dollar split,rtl 2016-19,rest: better trades,938.3432743614821,-1770.5438042882204,3721.979248202903
+B1 per trade,rtl 2020-26 next sessions,trades,698.0,,
+B1 per trade,rtl 2020-26 next sessions,mean planned risk $,118.02077363896848,,
+B1 per trade,rtl 2020-26 next sessions,gross R,0.10949884782294081,,
+B1 per trade,rtl 2020-26 next sessions,commission R,0.015611261332169722,,
+B1 per trade,rtl 2020-26 next sessions,net R,0.09388758649077103,,
+B1 per trade,rtl 2020-26 next sessions,win %,44.69914040114613,,
+B1 per trade,rtl 2020-26 next sessions,net $ per trade,10.139828080229226,,
+B1 per trade,rtl 2020-26 other sessions,trades,9803.0,,
+B1 per trade,rtl 2020-26 other sessions,mean planned risk $,76.17040701825972,,
+B1 per trade,rtl 2020-26 other sessions,gross R,0.06882027351039609,,
+B1 per trade,rtl 2020-26 other sessions,commission R,0.0245227734906298,,
+B1 per trade,rtl 2020-26 other sessions,net R,0.044297500019766255,,
+B1 per trade,rtl 2020-26 other sessions,win %,42.568601448536164,,
+B1 per trade,rtl 2020-26 other sessions,net $ per trade,3.1951800469244094,,
+B2 equal risk,rtl 2020-26,gross_r: next minus equal-risk trades,0.06524152300475547,-0.02843102346762141,0.155422463499521
+B2 equal risk,rtl 2020-26,"gross_r: same, corrected for exact risk",0.0720469597742087,-0.01510867556419467,0.15855129226369202
+B2 equal risk,rtl 2020-26,net_r: next minus equal-risk trades,0.06554389842295724,-0.028026225516481745,0.15565963398421787
+B2 equal risk,rtl 2020-26,"net_r: same, corrected for exact risk",0.07165312741195769,-0.015299461661082635,0.15831045783545333
+B2 equal risk,rtl 2020-26,next-session trades used,698.0,,
+B4e dollar split,rtl 2020-26,next-session net dollars,7077.599999999999,,
+B4e dollar split,rtl 2020-26,expected at the net R of equal-risk other trades,2992.023922937001,-476.2534663640819,8647.470401808798
+B4e dollar split,rtl 2020-26,rest: better trades,4085.576077062997,-6238.256412399867,13201.70937385771
+B1 per trade,rtl 2016-26 next sessions,trades,1037.0,,
+B1 per trade,rtl 2016-26 next sessions,mean planned risk $,91.29267116682739,,
+B1 per trade,rtl 2016-26 next sessions,gross R,0.12172175659439341,,
+B1 per trade,rtl 2016-26 next sessions,commission R,0.028763806428972635,,
+B1 per trade,rtl 2016-26 next sessions,net R,0.09295795016542072,,
+B1 per trade,rtl 2016-26 next sessions,win %,45.130183220829316,,
+B1 per trade,rtl 2016-26 next sessions,net $ per trade,7.902748312439732,,
+B1 per trade,rtl 2016-26 other sessions,trades,15631.0,,
+B1 per trade,rtl 2016-26 other sessions,mean planned risk $,55.55217196596507,,
+B1 per trade,rtl 2016-26 other sessions,gross R,0.07182030204999992,,
+B1 per trade,rtl 2016-26 other sessions,commission R,0.051672231866984844,,
+B1 per trade,rtl 2016-26 other sessions,net R,0.02014807018301503,,
+B1 per trade,rtl 2016-26 other sessions,win %,42.72919199027573,,
+B1 per trade,rtl 2016-26 other sessions,net $ per trade,2.2149222698483775,,
+B2 equal risk,rtl 2016-26,gross_r: next minus equal-risk trades,0.06834077996765915,-0.007743610592901747,0.1460271030641204
+B2 equal risk,rtl 2016-26,"gross_r: same, corrected for exact risk",0.07462368276588743,0.0022392509368586015,0.15219697893577996
+B2 equal risk,rtl 2016-26,net_r: next minus equal-risk trades,0.068840326456803,-0.007234287732363465,0.14656876626794155
+B2 equal risk,rtl 2016-26,"net_r: same, corrected for exact risk",0.0731930535226891,0.0005921794230698951,0.15069035579303255
+B2 equal risk,rtl 2016-26,next-session trades used,1037.0,,
+B4e dollar split,rtl 2016-26,next-session net dollars,8195.150000000001,,
+B4e dollar split,rtl 2016-26,expected at the net R of equal-risk other trades,3171.2306485755184,-603.8642267368604,8991.7500106408
+B4e dollar split,rtl 2016-26,rest: better trades,5023.919351424482,-5540.694019053414,14846.411245839894
+B3 concentration,rtl next sessions,net dollars 2016,161.75000000000003,,
+B3 concentration,rtl next sessions,net dollars 2017,-11.100000000000016,,
+B3 concentration,rtl next sessions,net dollars 2018,650.2,,
+B3 concentration,rtl next sessions,net dollars 2019,316.70000000000005,,
+B3 concentration,rtl next sessions,net dollars 2020,-1660.9500000000005,,
+B3 concentration,rtl next sessions,net dollars 2021,148.19999999999968,,
+B3 concentration,rtl next sessions,net dollars 2022,1232.8,,
+B3 concentration,rtl next sessions,net dollars 2023,-146.4,,
+B3 concentration,rtl next sessions,net dollars 2024,833.0999999999999,,
+B3 concentration,rtl next sessions,net dollars 2025,2028.7999999999995,,
+B3 concentration,rtl next sessions,net dollars 2026,4642.05,,
+B3 concentration,rtl next sessions,years above zero,8.0,,11.0
+B3 concentration,rtl next sessions,net dollars,8195.149999999998,,
+B3 concentration,rtl next sessions,net without the five best sessions,1712.5499999999975,,
+B3 concentration,rtl next sessions,sessions above zero %,58.04597701149425,,
+B3 concentration,rtl control,next sessions among its ten best sessions,4.0,,
+B3 concentration,rtl control,next sessions among its ten worst sessions,2.0,,
+B3 concentration,rtl control,sessions above zero %,53.602305475504316,,
+B3+ extremes,rtl control,worst session is a next session (low = its result),0.0,-2218.0,
+B3+ extremes,rtl control,worst drawdown inside a session is on a next session (high = its size),1.0,,2397.0
+B3+ extremes,rtl control,largest single-trade risk is on a next session (high = its size),1.0,,832.5
+B3+ extremes,rtl next sessions,session result: mean $,47.09856321839228,,
+B3+ extremes,rtl next sessions,session result: standard deviation $,373.8291665504708,,
+B3+ extremes,rtl next sessions,session result: median $,33.0,,
+B3+ extremes,rtl next sessions,session result: the worst 5% of sessions lose more than $,563.097499999986,,
+B3+ extremes,rtl next sessions,drawdown inside a session: mean $,331.69396551724475,,
+B3+ extremes,rtl other sessions,session result: mean $,13.30570714834734,,
+B3+ extremes,rtl other sessions,session result: standard deviation $,229.65380583710584,,
+B3+ extremes,rtl other sessions,session result: median $,8.700000000011642,,
+B3+ extremes,rtl other sessions,session result: the worst 5% of sessions lose more than $,328.8474999999773,,
+B3+ extremes,rtl other sessions,drawdown inside a session: mean $,207.05230591852407,,
+B4 alternatives,rtl even scaling,drawdown at the overlay's profit,7078.948701554984,,
+B4 alternatives,rtl even scaling,profit at the overlay's drawdown,55639.88958042284,,
+B4 alternatives,rtl whipsaw overlay,profit,51011.75000000029,,
+B4 alternatives,rtl whipsaw overlay,drawdown,7721.199999999895,,
+B4 alternatives,rtl after equally large days,sessions per draw,172.0,,
+B4 alternatives,"rtl random other sessions, same years",extra profit: median of draws,2193.900000000227,-3545.638750000001,7908.822500000133
+B4 alternatives,"rtl random other sessions, same years",drawdown: median of draws,6398.900000000023,5310.3250000000335,7987.620000000097
+B4 alternatives,"rtl random other sessions, same years",profit per drawdown dollar: median of draws,7.009306122771898,5.1643551575800695,8.961084023225498
+B4 alternatives,"rtl random other sessions, same years",whipsaw overlay earns more than % of draws,98.0,,
+B4 alternatives,"rtl random other sessions, same years",whipsaw overlay has a smaller drawdown than % of draws,5.779999999999999,,
+B4 alternatives,"rtl random other sessions, same years",whipsaw overlay has more profit per drawdown dollar than % of draws,34.44,,
+B4 alternatives,rtl after equally large days,extra profit: median of draws,3553.6249999998254,-1553.4612500002477,8318.755000000187
+B4 alternatives,rtl after equally large days,drawdown: median of draws,6828.399999999965,5081.699999999837,8818.113749999951
+B4 alternatives,rtl after equally large days,profit per drawdown dollar: median of draws,6.7834086942566785,4.886091038732123,9.603237421428908
+B4 alternatives,rtl after equally large days,whipsaw overlay earns more than % of draws,97.06,,
+B4 alternatives,rtl after equally large days,whipsaw overlay has a smaller drawdown than % of draws,18.54,,
+B4 alternatives,rtl after equally large days,whipsaw overlay has more profit per drawdown dollar than % of draws,44.800000000000004,,
+B4 alternatives,rtl label shuffled within year and size group,extra profit: median of draws,3999.324999999808,-3032.9337499998496,11183.354999999901
+B4 alternatives,rtl label shuffled within year and size group,drawdown: median of draws,7026.074999999866,5834.067499999908,8687.616249999997
+B4 alternatives,rtl label shuffled within year and size group,profit per drawdown dollar: median of draws,6.656259124205182,4.870631311235443,8.819635295913871
+B4 alternatives,rtl label shuffled within year and size group,whipsaw overlay earns more than % of draws,87.1,,
+B4 alternatives,rtl label shuffled within year and size group,whipsaw overlay has a smaller drawdown than % of draws,18.8,,
+B4 alternatives,rtl label shuffled within year and size group,whipsaw overlay has more profit per drawdown dollar than % of draws,48.06,,
+B1 per trade,gg 2016-19 next sessions,trades,341.0,,
+B1 per trade,gg 2016-19 next sessions,mean planned risk $,41.171554252199414,,
+B1 per trade,gg 2016-19 next sessions,gross R,0.07956005143326698,,
+B1 per trade,gg 2016-19 next sessions,commission R,0.05358993592245502,,
+B1 per trade,gg 2016-19 next sessions,net R,0.025970115510811936,,
+B1 per trade,gg 2016-19 next sessions,win %,42.81524926686217,,
+B1 per trade,gg 2016-19 next sessions,net $ per trade,-0.1365102639296203,,
+B1 per trade,gg 2016-19 other sessions,trades,6047.0,,
+B1 per trade,gg 2016-19 other sessions,mean planned risk $,22.300727633537292,,
+B1 per trade,gg 2016-19 other sessions,gross R,0.07103371841648487,,
+B1 per trade,gg 2016-19 other sessions,commission R,0.08968448520708797,,
+B1 per trade,gg 2016-19 other sessions,net R,-0.018650766790603124,,
+B1 per trade,gg 2016-19 other sessions,win %,43.47610385315032,,
+B1 per trade,gg 2016-19 other sessions,net $ per trade,0.6089217793947413,,
+B2 equal risk,gg 2016-19,gross_r: next minus equal-risk trades,0.009770530449511344,-0.13190331677621495,0.14962815997706644
+B2 equal risk,gg 2016-19,"gross_r: same, corrected for exact risk",0.013950477204838645,-0.12367261064730464,0.15397501465537825
+B2 equal risk,gg 2016-19,net_r: next minus equal-risk trades,0.010510500808747051,-0.13121782273521984,0.15002286430639367
+B2 equal risk,gg 2016-19,"net_r: same, corrected for exact risk",0.012178179716132385,-0.1269353082109402,0.1534479445379576
+B2 equal risk,gg 2016-19,next-session trades used,341.0,,
+B4e dollar split,gg 2016-19,next-session net dollars,-46.55000000000052,,
+B4e dollar split,gg 2016-19,expected at the net R of equal-risk other trades,226.99642362739343,-631.3741020262594,1156.0854354593516
+B4e dollar split,gg 2016-19,rest: better trades,-273.5464236273936,-3158.0192057845934,2198.012307105164
+B1 per trade,gg 2020-26 next sessions,trades,702.0,,
+B1 per trade,gg 2020-26 next sessions,mean planned risk $,128.31552706552708,,
+B1 per trade,gg 2020-26 next sessions,gross R,0.12552490413222425,,
+B1 per trade,gg 2020-26 next sessions,commission R,0.014504792339297013,,
+B1 per trade,gg 2020-26 next sessions,net R,0.11102011179292719,,
+B1 per trade,gg 2020-26 next sessions,win %,47.008547008547005,,
+B1 per trade,gg 2020-26 next sessions,net $ per trade,12.103133903133905,,
+B1 per trade,gg 2020-26 other sessions,trades,10479.0,,
+B1 per trade,gg 2020-26 other sessions,mean planned risk $,80.63884912682508,,
+B1 per trade,gg 2020-26 other sessions,gross R,0.06361684744084334,,
+B1 per trade,gg 2020-26 other sessions,commission R,0.023675973258473093,,
+B1 per trade,gg 2020-26 other sessions,net R,0.039940874182370203,,
+B1 per trade,gg 2020-26 other sessions,win %,42.97165760091612,,
+B1 per trade,gg 2020-26 other sessions,net $ per trade,2.9410296784044268,,
+B2 equal risk,gg 2020-26,gross_r: next minus equal-risk trades,0.0721700205042494,-0.012905309265680572,0.15905732846607046
+B2 equal risk,gg 2020-26,"gross_r: same, corrected for exact risk",0.06823135197553758,-0.015046700840070659,0.15572588779063615
+B2 equal risk,gg 2020-26,net_r: next minus equal-risk trades,0.0725298841139331,-0.012571260432857098,0.15939337419663765
+B2 equal risk,gg 2020-26,"net_r: same, corrected for exact risk",0.06758320959247537,-0.015668980833082078,0.15503970325225194
+B2 equal risk,gg 2020-26,next-session trades used,702.0,,
+B4e dollar split,gg 2020-26,next-session net dollars,8496.400000000001,,
+B4e dollar split,gg 2020-26,expected at the net R of equal-risk other trades,2674.4019270575322,-241.2630392238702,5667.921421226003
+B4e dollar split,gg 2020-26,rest: better trades,5821.998072942466,-3648.0046014292716,15719.488245010241
+B1 per trade,gg 2016-26 next sessions,trades,1043.0,,
+B1 per trade,gg 2016-26 next sessions,mean planned risk $,99.82454458293384,,
+B1 per trade,gg 2016-26 next sessions,gross R,0.11049708556046543,,
+B1 per trade,gg 2016-26 next sessions,commission R,0.027283348390933528,,
+B1 per trade,gg 2016-26 next sessions,net R,0.08321373716953188,,
+B1 per trade,gg 2016-26 next sessions,win %,45.63758389261745,,
+B1 per trade,gg 2016-26 next sessions,net $ per trade,8.101486097794824,,
+B1 per trade,gg 2016-26 other sessions,trades,16526.0,,
+B1 per trade,gg 2016-26 other sessions,mean planned risk $,59.292448263342614,,
+B1 per trade,gg 2016-26 other sessions,gross R,0.06633074183692855,,
+B1 per trade,gg 2016-26 other sessions,commission R,0.04782903339118967,,
+B1 per trade,gg 2016-26 other sessions,net R,0.018501708445738847,,
+B1 per trade,gg 2016-26 other sessions,win %,43.156238654241804,,
+B1 per trade,gg 2016-26 other sessions,net $ per trade,2.0876921215055058,,
+B2 equal risk,gg 2016-26,gross_r: next minus equal-risk trades,0.05176903669920082,-0.02171451879784114,0.1233401478199591
+B2 equal risk,gg 2016-26,"gross_r: same, corrected for exact risk",0.05076627803033026,-0.02035241837173299,0.12287557809243706
+B2 equal risk,gg 2016-26,net_r: next minus equal-risk trades,0.05225317298539193,-0.021255674252154303,0.1240787793064806
+B2 equal risk,gg 2016-26,"net_r: same, corrected for exact risk",0.04951295892544551,-0.021945138423760488,0.12198984507442308
+B2 equal risk,gg 2016-26,next-session trades used,1043.0,,
+B4e dollar split,gg 2016-26,next-session net dollars,8449.850000000002,,
+B4e dollar split,gg 2016-26,expected at the net R of equal-risk other trades,2901.398350684926,-163.3184276112,6024.237003334999
+B4e dollar split,gg 2016-26,rest: better trades,5548.451649315073,-4389.881644405143,16229.429794858888
+B3 concentration,gg next sessions,net dollars 2016,-130.04999999999995,,
+B3 concentration,gg next sessions,net dollars 2017,-96.9,,
+B3 concentration,gg next sessions,net dollars 2018,303.30000000000007,,
+B3 concentration,gg next sessions,net dollars 2019,-122.89999999999985,,
+B3 concentration,gg next sessions,net dollars 2020,2405.1,,
+B3 concentration,gg next sessions,net dollars 2021,2767.2999999999997,,
+B3 concentration,gg next sessions,net dollars 2022,-957.3500000000003,,
+B3 concentration,gg next sessions,net dollars 2023,-371.84999999999997,,
+B3 concentration,gg next sessions,net dollars 2024,2152.2999999999997,,
+B3 concentration,gg next sessions,net dollars 2025,480.84999999999957,,
+B3 concentration,gg next sessions,net dollars 2026,2020.0499999999995,,
+B3 concentration,gg next sessions,years above zero,6.0,,11.0
+B3 concentration,gg next sessions,net dollars,8449.849999999999,,
+B3 concentration,gg next sessions,net without the five best sessions,3156.199999999998,,
+B3 concentration,gg next sessions,sessions above zero %,55.74712643678161,,
+B3 concentration,gg control,next sessions among its ten best sessions,5.0,,
+B3 concentration,gg control,next sessions among its ten worst sessions,3.0,,
+B3 concentration,gg control,sessions above zero %,52.08933717579251,,
+B3+ extremes,gg control,worst session is a next session (low = its result),1.0,-2123.9000000000233,
+B3+ extremes,gg control,worst drawdown inside a session is on a next session (high = its size),1.0,,2423.5
+B3+ extremes,gg control,largest single-trade risk is on a next session (high = its size),1.0,,1245.5
+B3+ extremes,gg next sessions,session result: mean $,48.56235632183928,,
+B3+ extremes,gg next sessions,session result: standard deviation $,395.45377053415234,,
+B3+ extremes,gg next sessions,session result: median $,19.425000000017462,,
+B3+ extremes,gg next sessions,session result: the worst 5% of sessions lose more than $,618.5574999999808,,
+B3+ extremes,gg next sessions,drawdown inside a session: mean $,361.39137931034503,,
+B3+ extremes,gg other sessions,session result: mean $,13.259492697924678,,
+B3+ extremes,gg other sessions,session result: standard deviation $,236.76034646701507,,
+B3+ extremes,gg other sessions,session result: median $,4.774999999994179,,
+B3+ extremes,gg other sessions,session result: the worst 5% of sessions lose more than $,363.2949999999633,,
+B3+ extremes,gg other sessions,drawdown inside a session: mean $,228.07795926210503,,
+B4 alternatives,gg even scaling,drawdown at the overlay's profit,6727.728648659349,,
+B4 alternatives,gg even scaling,profit at the overlay's drawdown,49533.808870459245,,
+B4 alternatives,gg whipsaw overlay,profit,51400.90000000008,,
+B4 alternatives,gg whipsaw overlay,drawdown,6483.350000000093,,
+B4 alternatives,gg after equally large days,sessions per draw,172.0,,
+B4 alternatives,"gg random other sessions, same years",extra profit: median of draws,2266.5750000002445,-3723.2799999997965,8313.699999999164
+B4 alternatives,"gg random other sessions, same years",drawdown: median of draws,5991.399999999965,5310.6062500000235,7981.617499999931
+B4 alternatives,"gg random other sessions, same years",profit per drawdown dollar: median of draws,7.537494771423466,5.282907821657282,9.179691572600708
+B4 alternatives,"gg random other sessions, same years",whipsaw overlay earns more than % of draws,97.74000000000001,,
+B4 alternatives,"gg random other sessions, same years",whipsaw overlay has a smaller drawdown than % of draws,17.34,,
+B4 alternatives,"gg random other sessions, same years",whipsaw overlay has more profit per drawdown dollar than % of draws,67.86,,
+B4 alternatives,gg after equally large days,extra profit: median of draws,2609.6499999995867,-2491.8825000009524,7693.007499999774
+B4 alternatives,gg after equally large days,drawdown: median of draws,6187.099999999977,5480.741250000079,7785.349999999977
+B4 alternatives,gg after equally large days,profit per drawdown dollar: median of draws,7.433069138245267,5.537463312503548,8.824933392124548
+B4 alternatives,gg after equally large days,whipsaw overlay earns more than % of draws,98.74000000000001,,
+B4 alternatives,gg after equally large days,whipsaw overlay has a smaller drawdown than % of draws,20.9,,
+B4 alternatives,gg after equally large days,whipsaw overlay has more profit per drawdown dollar than % of draws,74.92,,
+B4 alternatives,gg label shuffled within year and size group,extra profit: median of draws,5355.449999999459,-1700.6612500002084,12440.641249999742
+B4 alternatives,gg label shuffled within year and size group,drawdown: median of draws,6627.399999999965,5413.900000000023,8345.223750000068
+B4 alternatives,gg label shuffled within year and size group,profit per drawdown dollar: median of draws,7.288288246684673,5.381979765562294,9.654034147858974
+B4 alternatives,gg label shuffled within year and size group,whipsaw overlay earns more than % of draws,80.82000000000001,,
+B4 alternatives,gg label shuffled within year and size group,whipsaw overlay has a smaller drawdown than % of draws,56.620000000000005,,
+B4 alternatives,gg label shuffled within year and size group,whipsaw overlay has more profit per drawdown dollar than % of draws,71.6,,
+B5 other instruments,ES rtl,next sessions,198.0,,
+B5 other instruments,ES rtl next sessions,trades,1195.0,,
+B5 other instruments,ES rtl next sessions,mean planned risk $,54.94456066945607,,
+B5 other instruments,ES rtl next sessions,gross R,0.024562691099084908,,
+B5 other instruments,ES rtl next sessions,commission R,0.04188407966624074,,
+B5 other instruments,ES rtl next sessions,net R,-0.017321388567155833,,
+B5 other instruments,ES rtl next sessions,win %,42.42677824267783,,
+B5 other instruments,ES rtl next sessions,net $ per trade,0.44267782426778224,,
+B5 other instruments,ES rtl other sessions,trades,15894.0,,
+B5 other instruments,ES rtl other sessions,mean planned risk $,32.54876053856801,,
+B5 other instruments,ES rtl other sessions,gross R,-0.021804251314025476,,
+B5 other instruments,ES rtl other sessions,commission R,0.06592810477577044,,
+B5 other instruments,ES rtl other sessions,net R,-0.08773235608979592,,
+B5 other instruments,ES rtl other sessions,win %,40.27305901598087,,
+B5 other instruments,ES rtl other sessions,net $ per trade,-0.8976626399899338,,
+B5 other instruments,ES rtl,gross_r: next minus equal-risk trades,0.03209111004689291,-0.04454336974950508,0.10495221660493244
+B5 other instruments,ES rtl,"gross_r: same, corrected for exact risk",0.027569217898048923,-0.0476858540367007,0.10263465413092736
+B5 other instruments,ES rtl,net_r: next minus equal-risk trades,0.03314617765019269,-0.0433536299767015,0.10614344178268521
+B5 other instruments,ES rtl,"net_r: same, corrected for exact risk",0.026013849682951656,-0.04929324060234616,0.10144814992224852
+B5 other instruments,ES rtl,next-session trades used,1195.0,,
+B5 other instruments,ES gg,next sessions,198.0,,
+B5 other instruments,ES gg next sessions,trades,1212.0,,
+B5 other instruments,ES gg next sessions,mean planned risk $,60.90037128712871,,
+B5 other instruments,ES gg next sessions,gross R,0.006784169372267311,,
+B5 other instruments,ES gg next sessions,commission R,0.03768358794581135,,
+B5 other instruments,ES gg next sessions,net R,-0.030899418573544023,,
+B5 other instruments,ES gg next sessions,win %,41.74917491749175,,
+B5 other instruments,ES gg next sessions,net $ per trade,-1.673968646864686,,
+B5 other instruments,ES gg other sessions,trades,16329.0,,
+B5 other instruments,ES gg other sessions,mean planned risk $,35.055193214526305,,
+B5 other instruments,ES gg other sessions,gross R,-0.026682172275853955,,
+B5 other instruments,ES gg other sessions,commission R,0.060805764660583246,,
+B5 other instruments,ES gg other sessions,net R,-0.08748793693643721,,
+B5 other instruments,ES gg other sessions,win %,40.44950701206442,,
+B5 other instruments,ES gg other sessions,net $ per trade,-0.901797415640885,,
+B5 other instruments,ES gg,gross_r: next minus equal-risk trades,0.013818414581653268,-0.05835841622545717,0.0834644206852389
+B5 other instruments,ES gg,"gross_r: same, corrected for exact risk",0.013856254623617954,-0.05823717473344295,0.08530134673654233
+B5 other instruments,ES gg,net_r: next minus equal-risk trades,0.014508483912492837,-0.05787192324250763,0.08422495871424009
+B5 other instruments,ES gg,"net_r: same, corrected for exact risk",0.01283212092557033,-0.05908906888567251,0.08465209302769526
+B5 other instruments,ES gg,next-session trades used,1212.0,,
+B5 other instruments,YM rtl,next sessions,167.0,,
+B5 other instruments,YM rtl next sessions,trades,992.0,,
+B5 other instruments,YM rtl next sessions,mean planned risk $,41.11441532258065,,
+B5 other instruments,YM rtl next sessions,gross R,0.008442226878391407,,
+B5 other instruments,YM rtl next sessions,commission R,0.05995067893207263,,
+B5 other instruments,YM rtl next sessions,net R,-0.05150845205368122,,
+B5 other instruments,YM rtl next sessions,win %,41.431451612903224,,
+B5 other instruments,YM rtl next sessions,net $ per trade,-0.23850806451613102,,
+B5 other instruments,YM rtl other sessions,trades,16106.0,,
+B5 other instruments,YM rtl other sessions,mean planned risk $,24.346020116726685,,
+B5 other instruments,YM rtl other sessions,gross R,0.030402821900841478,,
+B5 other instruments,YM rtl other sessions,commission R,0.08561329694393838,,
+B5 other instruments,YM rtl other sessions,net R,-0.0552104750430969,,
+B5 other instruments,YM rtl other sessions,win %,41.13373897926238,,
+B5 other instruments,YM rtl other sessions,net $ per trade,-0.09560412268719747,,
+B5 other instruments,YM rtl,gross_r: next minus equal-risk trades,-0.029606778245613467,-0.0997482457108042,0.0320414211685086
+B5 other instruments,YM rtl,"gross_r: same, corrected for exact risk",-0.03415460776192183,-0.10447154928594325,0.028749621198216183
+B5 other instruments,YM rtl,net_r: next minus equal-risk trades,-0.028420422683297118,-0.09874139623077628,0.033403180088641925
+B5 other instruments,YM rtl,"net_r: same, corrected for exact risk",-0.035887686958331444,-0.10639339691471839,0.0272790359567151
+B5 other instruments,YM rtl,next-session trades used,992.0,,
+B5 other instruments,YM gg,next sessions,167.0,,
+B5 other instruments,YM gg next sessions,trades,1030.0,,
+B5 other instruments,YM gg next sessions,mean planned risk $,44.34271844660194,,
+B5 other instruments,YM gg next sessions,gross R,0.04031467093965695,,
+B5 other instruments,YM gg next sessions,commission R,0.056758571021666634,,
+B5 other instruments,YM gg next sessions,net R,-0.016443900082009695,,
+B5 other instruments,YM gg next sessions,win %,42.33009708737864,,
+B5 other instruments,YM gg next sessions,net $ per trade,0.459223300970873,,
+B5 other instruments,YM gg other sessions,trades,16541.0,,
+B5 other instruments,YM gg other sessions,mean planned risk $,26.373193881869295,,
+B5 other instruments,YM gg other sessions,gross R,0.018474606810821706,,
+B5 other instruments,YM gg other sessions,commission R,0.08049473104476094,,
+B5 other instruments,YM gg other sessions,net R,-0.06202012423393925,,
+B5 other instruments,YM gg other sessions,win %,41.03742216310985,,
+B5 other instruments,YM gg other sessions,net $ per trade,-0.44329544767547324,,
+B5 other instruments,YM gg,gross_r: next minus equal-risk trades,0.010236352298614096,-0.06419416026742346,0.08888798533914734
+B5 other instruments,YM gg,"gross_r: same, corrected for exact risk",0.010960908376288407,-0.06435787213936782,0.08974854502753245
+B5 other instruments,YM gg,net_r: next minus equal-risk trades,0.01127835535658937,-0.06288811036602764,0.0898066328220793
+B5 other instruments,YM gg,"net_r: same, corrected for exact risk",0.009587687582945047,-0.0657527356606226,0.08830986380279277
+B5 other instruments,YM gg,next-session trades used,1030.0,,
+B5 other instruments,RTY rtl,next sessions,142.0,,
+B5 other instruments,RTY rtl next sessions,trades,862.0,,
+B5 other instruments,RTY rtl next sessions,mean planned risk $,35.767401392111395,,
+B5 other instruments,RTY rtl next sessions,gross R,0.0890055619070221,,
+B5 other instruments,RTY rtl next sessions,commission R,0.05744533759077634,,
+B5 other instruments,RTY rtl next sessions,net R,0.03156022431624577,,
+B5 other instruments,RTY rtl next sessions,win %,43.38747099767982,,
+B5 other instruments,RTY rtl next sessions,net $ per trade,0.6257540603248261,,
+B5 other instruments,RTY rtl other sessions,trades,13123.0,,
+B5 other instruments,RTY rtl other sessions,mean planned risk $,22.96993827630877,,
+B5 other instruments,RTY rtl other sessions,gross R,0.01932116741013383,,
+B5 other instruments,RTY rtl other sessions,commission R,0.08436323762461936,,
+B5 other instruments,RTY rtl other sessions,net R,-0.06504207021448552,,
+B5 other instruments,RTY rtl other sessions,win %,40.166120551703116,,
+B5 other instruments,RTY rtl other sessions,net $ per trade,-0.4728453859635752,,
+B5 other instruments,RTY rtl,gross_r: next minus equal-risk trades,0.06859785189729464,-0.026862064498347715,0.1633202742450209
+B5 other instruments,RTY rtl,"gross_r: same, corrected for exact risk",0.06590760549442659,-0.030026987163625337,0.16244021413433501
+B5 other instruments,RTY rtl,net_r: next minus equal-risk trades,0.06973853950828787,-0.026001056314189624,0.1649969689613319
+B5 other instruments,RTY rtl,"net_r: same, corrected for exact risk",0.06430325109788451,-0.03152159786744203,0.1617125488639922
+B5 other instruments,RTY rtl,next-session trades used,862.0,,
+B5 other instruments,RTY gg,next sessions,142.0,,
+B5 other instruments,RTY gg next sessions,trades,858.0,,
+B5 other instruments,RTY gg next sessions,mean planned risk $,40.20804195804198,,
+B5 other instruments,RTY gg next sessions,gross R,0.044729547807372705,,
+B5 other instruments,RTY gg next sessions,commission R,0.05108788696975575,,
+B5 other instruments,RTY gg next sessions,net R,-0.006358339162383052,,
+B5 other instruments,RTY gg next sessions,win %,42.773892773892776,,
+B5 other instruments,RTY gg next sessions,net $ per trade,-2.3157342657342666,,
+B5 other instruments,RTY gg other sessions,trades,13228.0,,
+B5 other instruments,RTY gg other sessions,mean planned risk $,25.543997580889037,,
+B5 other instruments,RTY gg other sessions,gross R,0.008973456825046695,,
+B5 other instruments,RTY gg other sessions,commission R,0.07781227542218522,,
+B5 other instruments,RTY gg other sessions,net R,-0.06883881859713853,,
+B5 other instruments,RTY gg other sessions,win %,40.648624130631994,,
+B5 other instruments,RTY gg other sessions,net $ per trade,-0.8573782884789838,,
+B5 other instruments,RTY gg,gross_r: next minus equal-risk trades,0.03321521606180765,-0.06128110769735569,0.1275483116293297
+B5 other instruments,RTY gg,"gross_r: same, corrected for exact risk",0.039619380750660925,-0.05495311440991907,0.1340178623939041
+B5 other instruments,RTY gg,net_r: next minus equal-risk trades,0.034258955986925035,-0.06003698710557973,0.12853978276931316
+B5 other instruments,RTY gg,"net_r: same, corrected for exact risk",0.038345387603926855,-0.05640092648441577,0.13292272495778762
+B5 other instruments,RTY gg,next-session trades used,858.0,,
+B6 2R,rtl next sessions,"2R minus 1R, dollars",2322.4000000000005,,
+B6 2R,rtl next sessions,2R minus 1R per session,13.347126436781613,-19.056631097560974,45.14482499999998
+B6 2R,rtl all other sessions,"2R minus 1R, dollars",-2415.5500000000056,,
+B6 2R,rtl all other sessions,2R minus 1R per session,-0.9283435818601098,-5.2823889367816115,3.3149224386032197
+B6 2R,rtl,"2R minus 1R after equally large days, per session",-14.338621919636907,,
+B6 2R,rtl,2R gain: next sessions minus sessions after equally large days,27.685748356418515,-8.461734388928393,75.87312977263169
+B6 2R,gg next sessions,"2R minus 1R, dollars",-572.2499999999997,,
+B6 2R,gg next sessions,2R minus 1R per session,-3.288793103448274,-26.168336635944698,21.828212320757597
+B6 2R,gg all other sessions,"2R minus 1R, dollars",-3581.100000000003,,
+B6 2R,gg all other sessions,2R minus 1R per session,-1.3762874711760196,-6.398903683944443,3.787585563561501
+B6 2R,gg,"2R minus 1R after equally large days, per session",-10.123551980059073,,
+B6 2R,gg,2R gain: next sessions minus sessions after equally large days,6.834758876610795,-28.5369294196396,41.73263614218205
+B7 forecast,whipsaw days,days,174.0,,
+B7 forecast,whipsaw days,"next move, normal-day ranges",0.9309486078053394,,
+B7 forecast,whipsaw days,next move at least one normal range %,36.206896551724135,,
+B7 forecast,whipsaw days,of them whipsaw days %,100.0,,
+B7 forecast,whipsaw days,rtl net dollars on the sessions after,8195.149999999998,,
+B7 forecast,whipsaw days,rtl net dollars per session after,47.098563218390794,-1.0600223214285809,99.40170125633028
+B7 forecast,whipsaw days,gg net dollars on the sessions after,8449.849999999999,,
+B7 forecast,whipsaw days,gg net dollars per session after,48.56235632183907,-3.844583941872355,104.28439266542502
+B7 forecast,highest volatility forecast,days,174.0,,
+B7 forecast,highest volatility forecast,"next move, normal-day ranges",0.8901489559320346,,
+B7 forecast,highest volatility forecast,next move at least one normal range %,35.05747126436782,,
+B7 forecast,highest volatility forecast,of them whipsaw days %,50.57471264367817,,
+B7 forecast,highest volatility forecast,rtl net dollars on the sessions after,11871.949999999995,,
+B7 forecast,highest volatility forecast,rtl net dollars per session after,68.2295977011494,4.640715699683268,144.6747768467849
+B7 forecast,highest volatility forecast,gg net dollars on the sessions after,8074.3499999999985,,
+B7 forecast,highest volatility forecast,gg net dollars per session after,46.40431034482758,-17.26616724941726,116.16661508282462
+B7 forecast,overlap,days in both lists,88.0,,
+B8 shorts,rtl short next sessions,net dollars,3443.899999999998,,
+B8 shorts,rtl short other sessions,net dollars,-12164.05000000001,,
+B8 shorts,rtl short next sessions,trades,1082.0,,
+B8 shorts,rtl short next sessions,mean planned risk $,81.58086876155268,,
+B8 shorts,rtl short next sessions,gross R,0.00034978629914175053,,
+B8 shorts,rtl short next sessions,commission R,0.03369818786956662,,
+B8 shorts,rtl short next sessions,net R,-0.03334840157042487,,
+B8 shorts,rtl short next sessions,win %,39.55637707948244,,
+B8 shorts,rtl short next sessions,net $ per trade,3.182902033271717,,
+B8 shorts,rtl short other sessions,trades,16551.0,,
+B8 shorts,rtl short other sessions,mean planned risk $,51.57951181197511,,
+B8 shorts,rtl short other sessions,gross R,-0.00860416251686745,,
+B8 shorts,rtl short other sessions,commission R,0.05289423928816238,,
+B8 shorts,rtl short other sessions,net R,-0.06149840180502982,,
+B8 shorts,rtl short other sessions,win %,37.69560751616217,,
+B8 shorts,rtl short other sessions,net $ per trade,-0.7349435079451399,,
+B8 shorts,rtl short,gross_r: next minus equal-risk trades,-0.006476300992701186,-0.08542654337265662,0.0631372800326738
+B8 shorts,rtl short,"gross_r: same, corrected for exact risk",-0.007940986884345747,-0.08709937686916652,0.06119833359982955
+B8 shorts,rtl short,net_r: next minus equal-risk trades,-0.005846997364873527,-0.08496775091407807,0.06367387578437601
+B8 shorts,rtl short,"net_r: same, corrected for exact risk",-0.009093255308759403,-0.08784939191955031,0.06009681929042875
+B8 shorts,rtl short,next-session trades used,1082.0,,
+B8 shorts,gg short next sessions,net dollars,-422.1500000000025,,
+B8 shorts,gg short other sessions,net dollars,-31282.850000000013,,
+B8 shorts,gg short next sessions,trades,1173.0,,
+B8 shorts,gg short next sessions,mean planned risk $,86.10656436487639,,
+B8 shorts,gg short next sessions,gross R,-0.07188485382520764,,
+B8 shorts,gg short next sessions,commission R,0.03308877535270477,,
+B8 shorts,gg short next sessions,net R,-0.10497362917791238,,
+B8 shorts,gg short next sessions,win %,36.828644501278774,,
+B8 shorts,gg short next sessions,net $ per trade,-0.3598891730605307,,
+B8 shorts,gg short other sessions,trades,16867.0,,
+B8 shorts,gg short other sessions,mean planned risk $,57.13971067765459,,
+B8 shorts,gg short other sessions,gross R,-0.020186444621386447,,
+B8 shorts,gg short other sessions,commission R,0.05109004041555922,,
+B8 shorts,gg short other sessions,net R,-0.07127648503694568,,
+B8 shorts,gg short other sessions,win %,37.70083595185866,,
+B8 shorts,gg short other sessions,net $ per trade,-1.854677773166539,,
+B8 shorts,gg short,gross_r: next minus equal-risk trades,-0.04892539307257246,-0.12211885529852308,0.018138670743835218
+B8 shorts,gg short,"gross_r: same, corrected for exact risk",-0.05200427905121811,-0.12681686770190234,0.01387576557581935
+B8 shorts,gg short,net_r: next minus equal-risk trades,-0.04810390185882138,-0.12129992091241354,0.019200353908484635
+B8 shorts,gg short,"net_r: same, corrected for exact risk",-0.05256920578446349,-0.12728931204572255,0.013249621727315718
+B8 shorts,gg short,next-session trades used,1173.0,,

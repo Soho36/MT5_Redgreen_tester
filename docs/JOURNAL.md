@@ -12,7 +12,7 @@
 What we did, day by day, and what each step answered. Newest day last.
 For the current state of the strategy, see [STATUS.md](STATUS.md).
 
-## Where we are now (strategy line updated 2026-10-13, weekly and VWAP lines 2026-10-27, news-day line 2026-11-10, GG bad-day, 16-17, size-cap and original whipsaw lines 2026-11-11, whipsaw follow-up 2026-11-12, the rest 2026-10-01)
+## Where we are now (strategy line updated 2026-10-13, weekly and VWAP lines 2026-10-27, news-day line 2026-11-10, GG bad-day, 16-17, size-cap and original whipsaw lines 2026-11-11, whipsaw follow-up, overlays and review 2026-11-12, the rest 2026-10-01)
 
 - **Strategy:** buy stop over the last red M30 candle, stop at its low, bar-close exit at ≥ 1R,
   no red-run cap (`MaxRedRun = 0` since 2026-10-13; it was 3), flatten at 23:30 with the fallback fix.
@@ -54,6 +54,11 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
 - **Whipsaw follow-up (2026-11-12):** adding the unchanged flag to minute-volatility forecasts
   gives no demonstrated improvement: pooled squared error +0.05%, eras disagree.
   Strict shape groups are small; inspect event-only examples before refining labels.
+- **Whipsaw overlays and their review (2026-11-12):** an extra contract on the session after a
+  whipsaw day adds about $8k per strategy with more drawdown; 2R, days 2-3 and shorts show
+  nothing. Reviewed: next-session trades already risk 1.65x the usual dollars and look +0.05 to
+  +0.07 R better at equal risk, but that rests on five sessions and is not shown; days picked by
+  a plain volatility forecast do as well. Trade the next session as normal, add no size.
 - **Q1–Q5 answered (no filter).** **Next:** execution realism (live/demo fills and slippage)
   and the live sizing decision; new ideas go into the Inbox.
 
@@ -1372,3 +1377,38 @@ Evidence: Reports/rtl_open_halves_20261111; preparation, analysis, report and th
 - [Results/chart](baseline/whipsaw-native/RESULTS.md),
   [fixed specification](baseline/whipsaw-native/PROTOCOL.md).
   Full evidence: Reports/whipsaw_native_20261112/. No live settings changed.
+
+## 2026-11-12: Review of the whipsaw follow-ups (forecast test and MT5 overlays)
+
+- User asked for a check of the two follow-ups and an opinion: next-session trades seem to
+  show an edge, but how could it be used? New script `python/review_whipsaw_native.py`; every
+  check written down before its result was looked at. Same reused history: descriptive.
+- The work holds up. Rebuilt with separate code: trades and net dollars of all eight native
+  runs, the 174 / 403 sessions, every equity drawdown sample by sample from the raw equity
+  files (equal to the cent), all 18 intervals. A full 2R simulation of every session gives
+  the native 2R arm's next-session dollars exactly.
+- What the next-session "edge" is. One contract already risks 1.65x the usual dollars per
+  trade there ($91 / $100 against $56 / $59). At equal risk in the same year the trades are
+  +0.07 R (RTL, -0.01 to +0.15) and +0.05 R (GG, -0.02 to +0.12) better. In dollars: RTL
+  $8,195 = $3,171 normal for that risk + $5,024 "better trades" (-$5.5k to +$14.8k); GG
+  $8,450 = $2,901 + $5,548 (-$4.4k to +$16.2k).
+- Not established: the five best of 174 sessions hold 79% / 63% of that profit, RTL made 57%
+  of it in 2026, positive years 8 / 6 of 11. With the whipsaw label shuffled among equally
+  large days of the same year, 13% / 19% of shuffles earn as much. ES, YM, RTY (saved RTL and
+  GG runs, own whipsaw days): +0.03 / +0.01, -0.03 / +0.01, +0.07 / +0.03 R, all intervals
+  across zero.
+- Not specific to whipsaw: as many days per year chosen by the follow-up's volatility-only
+  forecast are followed by a move of 0.89 (flag 0.93) and by $11,872 RTL / $8,074 GG (flag
+  $8,195 / $8,450); 88 of the 174 days are the same.
+- Use. Extra contract: RTL's profit would have cost $7,079 of drawdown by trading larger
+  every day, the overlay cost $7,721; GG $6,728 against $6,483. The largest single-trade risk
+  and the worst swing inside one session are on next sessions for both strategies, so a second
+  contract doubles them ($2.4k to $4.8k). 2R minus 1R per next session: RTL +$13 (-$19 to
+  +$45), GG -$3; about -$1 on other sessions. Days 2-3: movement fades and direction does not
+  carry (43% / 22% against 48% / 25% for all days). Shorts on next sessions: gross R 0.00 / -0.07.
+- Opinion given: trade the session after a whipsaw day as normal (do not skip or cut it),
+  treat the flag as a warning that dollar swings are about 1.6x, add no size and no 2R on this
+  evidence. If more research is wanted, ask once whether trade quality rises with expected
+  volatility, on all sessions, with ES/YM/RTY as replication.
+- [Review](baseline/whipsaw-native/REVIEW.md), checks in baseline/whipsaw-native/review_checks.csv;
+  4 new tests (62 whipsaw tests pass). Nothing in the two studies changed. No settings changed.
