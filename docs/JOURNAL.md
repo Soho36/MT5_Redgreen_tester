@@ -12,7 +12,7 @@
 What we did, day by day, and what each step answered. Newest day last.
 For the current state of the strategy, see [STATUS.md](STATUS.md).
 
-## Where we are now (strategy line updated 2026-10-13, weekly and VWAP lines 2026-10-27, news-day line 2026-11-10, GG bad-day, 16-17, size-cap and original whipsaw lines 2026-11-11, whipsaw follow-up, overlays and review 2026-11-12, the rest 2026-10-01)
+## Where we are now (strategy line updated 2026-10-13, weekly and VWAP lines 2026-10-27, news-day line 2026-11-10, GG bad-day, 16-17, size-cap and original whipsaw lines 2026-11-11, whipsaw follow-up, overlays and review 2026-11-12, mirrored sell limit 2026-11-16, the rest 2026-10-01)
 
 - **Strategy:** buy stop over the last red M30 candle, stop at its low, bar-close exit at ≥ 1R,
   no red-run cap (`MaxRedRun = 0` since 2026-10-13; it was 3), flatten at 23:30 with the fallback fix.
@@ -59,6 +59,9 @@ For the current state of the strategy, see [STATUS.md](STATUS.md).
   nothing. Reviewed: next-session trades already risk 1.65x the usual dollars and look +0.05 to
   +0.07 R better at equal risk, but that rests on five sessions and is not shown; days picked by
   a plain volatility forecast do as well. Trade the next session as normal, add no size.
+- **RTL mirrored (2026-11-16):** a sell limit at the red high with the stop one range above
+  is the other side of RTL's entry and loses in every period, before costs too (2020-26:
+  -$33k with RTL's exit mirrored, -$48k with a take profit at the low). Closed.
 - **Q1–Q5 answered (no filter).** **Next:** execution realism (live/demo fills and slippage)
   and the live sizing decision; new ideas go into the Inbox.
 
@@ -1412,3 +1415,27 @@ Evidence: Reports/rtl_open_halves_20261111; preparation, analysis, report and th
   volatility, on all sessions, with ES/YM/RTY as replication.
 - [Review](baseline/whipsaw-native/REVIEW.md), checks in baseline/whipsaw-native/review_checks.csv;
   4 new tests (62 whipsaw tests pass). Nothing in the two studies changed. No settings changed.
+
+## 2026-11-16: RTL mirrored, a sell limit at the red candle's high
+
+- User's idea: turn RTL around. Sell limit at the red M30 high, stop one candle range above,
+  take profit at least the low. Asked for an MT5 EA and a replay. Rules and the expected
+  result (a loss of about 0.05R per trade before costs) written down first:
+  [protocol](baseline/rtl-sell-limit-fade/PROTOCOL.md).
+- New tester-only EA `RTL_red_high_sell_limit` (`mt5/experts/shorts/`): RTL's candles, order
+  lifetime, windows and flatten; `ExitMode` 0 = RTL's bar-close exit mirrored, 1 = a resting
+  take profit at the low. Unlike the other EAs its trade windows default to 01:00-23:30.
+- Answer: it loses in every period, before costs as well. One MNQ, $1.05, 2010-15 / 2016-19 /
+  2020-Sep 2026: bar close -$12,812 / -$13,456 / -$33,082 (1 positive year of 17), take profit
+  -$12,142 / -$15,619 / -$47,666 (none). RTL: -$7,496 / +$4,417 / +$38,400. Since 2016, 49
+  stops for every 45 take-profits of the same size; with the bar-close exit 58% stops against
+  33% targets averaging 1.62R. It is the other side of RTL's entry, plus costs.
+- Checks: all 24,141 and 28,249 trades match a separate minute replay
+  (`python/rtl_sell_limit_fade.py`, 8 tests). Filled only when price trades one tick through
+  the limit, 2016-26 gets worse: -$54,676 / -$71,099 against -$46,537 / -$63,285.
+- Found on the way: MT5 rejects a buy stop at or below the market but accepts a sell limit
+  there and fills it at the market. 79 of those 324 trades were filled above their own stop
+  and "stopped" below the fill, +$5,859 that no market pays. The EA skips such orders by
+  default (`AllowOrderAtMarket = false`); two extra runs with MT5's handling also lose.
+- [Results](baseline/rtl-sell-limit-fade/RESULTS.md). Evidence: Reports/rtl_sell_limit_fade_20261116/.
+  No settings changed.

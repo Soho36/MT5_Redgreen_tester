@@ -1,0 +1,165 @@
+{
+  "close": {
+    "seconds": 48.6,
+    "native_trades": 24148,
+    "native_order_states": {
+      "canceled": 30266,
+      "filled": 24148
+    },
+    "native_orders_placed": 54414,
+    "native_orders_rejected": 0,
+    "native_orders_skipped_at_market": 325,
+    "replay_orders_not_placed": 326,
+    "trades_missing_from_ea_ledger": 0,
+    "report_ledger_and_totals_reconciled": true,
+    "replay": {
+      "compared_from": "2010-06-11",
+      "native_trades": 24141,
+      "replay_trades": 24141,
+      "same_count": true,
+      "mismatches": {
+        "submitted_minute": 0,
+        "entry_price": 0,
+        "stop": 0,
+        "entry_minute": 0,
+        "exit_minute": 0,
+        "exit_price": 0,
+        "reason": 0
+      },
+      "all_trades_identical": true
+    }
+  },
+  "tp": {
+    "seconds": 57.1,
+    "native_trades": 28258,
+    "native_order_states": {
+      "canceled": 36849,
+      "filled": 28258
+    },
+    "native_orders_placed": 65107,
+    "native_orders_rejected": 0,
+    "native_orders_skipped_at_market": 338,
+    "replay_orders_not_placed": 339,
+    "trades_missing_from_ea_ledger": 0,
+    "report_ledger_and_totals_reconciled": true,
+    "replay": {
+      "compared_from": "2010-06-11",
+      "native_trades": 28249,
+      "replay_trades": 28249,
+      "same_count": true,
+      "mismatches": {
+        "submitted_minute": 0,
+        "entry_price": 0,
+        "stop": 0,
+        "entry_minute": 0,
+        "exit_minute": 0,
+        "exit_price": 0,
+        "reason": 0
+      },
+      "all_trades_identical": true
+    }
+  },
+  "close_atmarket": {
+    "seconds": 51.3,
+    "native_trades": 24424,
+    "native_order_states": {
+      "canceled": 30195,
+      "filled": 24424
+    },
+    "native_orders_placed": 54619,
+    "native_orders_rejected": 0,
+    "native_orders_skipped_at_market": 0,
+    "replay_orders_not_placed": 0,
+    "trades_missing_from_ea_ledger": 87,
+    "report_ledger_and_totals_reconciled": true,
+    "replay": {
+      "compared_from": "2010-06-11",
+      "native_trades": 24417,
+      "replay_trades": 24417,
+      "same_count": true,
+      "mismatches": {
+        "submitted_minute": 0,
+        "entry_price": 0,
+        "stop": 0,
+        "entry_minute": 0,
+        "exit_minute": 1,
+        "exit_price": 0,
+        "reason": 0
+      },
+      "all_trades_identical": false,
+      "mismatching_trades": [
+        {
+          "submitted": "2011-06-15 07:01:00",
+          "native_exit": "2011-06-15 07:08:00",
+          "replay_exit": "2011-06-15 07:01:20",
+          "native_exit_price": 2240.0,
+          "replay_exit_price": 2240.0
+        }
+      ]
+    },
+    "filled_at_submission": {
+      "trades": 324,
+      "gross_dollars": 4839.0,
+      "at_the_session_open": 246,
+      "filled_at_or_above_own_stop": 79,
+      "their_gross_dollars": 5859.0,
+      "filled_below_own_stop": 245,
+      "their_gross_dollars_below_stop": -1020.0
+    },
+    "ledger_identical_to_first_build": true
+  },
+  "tp_atmarket": {
+    "seconds": 59.5,
+    "native_trades": 28546,
+    "native_order_states": {
+      "canceled": 36784,
+      "filled": 28546
+    },
+    "native_orders_placed": 65330,
+    "native_orders_rejected": 0,
+    "native_orders_skipped_at_market": 0,
+    "replay_orders_not_placed": 0,
+    "trades_missing_from_ea_ledger": 86,
+    "report_ledger_and_totals_reconciled": true,
+    "replay": {
+      "compared_from": "2010-06-11",
+      "native_trades": 28537,
+      "replay_trades": 28537,
+      "same_count": true,
+      "mismatches": {
+        "submitted_minute": 0,
+        "entry_price": 0,
+        "stop": 0,
+        "entry_minute": 0,
+        "exit_minute": 1,
+        "exit_price": 0,
+        "reason": 0
+      },
+      "all_trades_identical": false,
+      "mismatching_trades": [
+        {
+          "submitted": "2011-06-15 07:01:00",
+          "native_exit": "2011-06-15 07:08:00",
+          "replay_exit": "2011-06-15 07:01:20",
+          "native_exit_price": 2240.0,
+          "replay_exit_price": 2240.0
+        }
+      ]
+    },
+    "filled_at_submission": {
+      "trades": 336,
+      "gross_dollars": 4979.5,
+      "at_the_session_open": 246,
+      "filled_at_or_above_own_stop": 78,
+      "their_gross_dollars": 5859.0,
+      "filled_below_own_stop": 258,
+      "their_gross_dollars_below_stop": -879.5
+    },
+    "ledger_identical_to_first_build": true
+  },
+  "rtl_baseline_replay": {
+    "first_day": "2010-06-10",
+    "trades": 25833,
+    "buy_stops_rejected_at_market": 330
+  }
+}
