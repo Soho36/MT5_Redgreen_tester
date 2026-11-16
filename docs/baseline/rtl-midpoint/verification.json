@@ -1,0 +1,46 @@
+{
+  "protocol_after_clarification_sha256": "8951dffcdac132f9442805cea74d90dba7cc95fe18c587e1e83303b7ec4daad5",
+  "minute_cache_sha256": "dc9712878600799be97dc137c5d0d2b6a0b7972eebe6c3611723e48a57c41a72",
+  "script_sha256": "8eb6b904f58752d58ec9b29b0fad8b79c7d6e22964f9c46826501a89527b5845",
+  "baseline": {
+    "replay": {
+      "compared_from": "2010-06-11",
+      "native_trades": 25824,
+      "replay_trades": 25824,
+      "same_count": true,
+      "mismatches": {
+        "submitted_minute": 0,
+        "entry_price": 0,
+        "stop": 0,
+        "entry_minute": 0,
+        "exit_minute": 0,
+        "exit_price": 0,
+        "reason": 0
+      },
+      "all_trades_identical": true
+    },
+    "replay_rejections": 330,
+    "report_ledger_totals_match": true
+  },
+  "baseline_ledger_byte_identical": true,
+  "stop_only": {
+    "replay": {
+      "compared_from": "2010-06-11",
+      "native_trades": 39266,
+      "replay_trades": 39266,
+      "same_count": true,
+      "mismatches": {
+        "submitted_minute": 0,
+        "entry_price": 0,
+        "stop": 0,
+        "entry_minute": 0,
+        "exit_minute": 0,
+        "exit_price": 0,
+        "reason": 0
+      },
+      "all_trades_identical": true
+    },
+    "replay_rejections": 18621,
+    "report_ledger_totals_match": true
+  }
+}

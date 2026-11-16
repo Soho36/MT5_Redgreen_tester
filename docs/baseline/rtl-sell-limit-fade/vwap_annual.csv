@@ -1,0 +1,103 @@
+exit,gate,year,trades,net,gross_mean_r
+close,far below VWAP only,2010,234,-716.2,-0.135256
+close,far below VWAP only,2011,398,-648.4,-0.0982403
+close,far below VWAP only,2012,407,-603.85,0.00929019
+close,far below VWAP only,2013,378,-1147.4,-0.229414
+close,far below VWAP only,2014,358,-517.4,-0.031675
+close,far below VWAP only,2015,397,-519.85,-0.0847998
+close,far below VWAP only,2016,414,-470.7,-0.0238281
+close,far below VWAP only,2017,328,-1043.9,-0.142271
+close,far below VWAP only,2018,385,-1127.75,0.0364762
+close,far below VWAP only,2019,364,-2021.7,-0.0944944
+close,far below VWAP only,2020,341,-2756.05,-0.125652
+close,far below VWAP only,2021,361,1655.45,0.0629912
+close,far below VWAP only,2022,443,2870.35,0.0195815
+close,far below VWAP only,2023,409,-2949.95,-0.0720702
+close,far below VWAP only,2024,376,-3705.3,-0.0606009
+close,far below VWAP only,2025,382,1010.9,0.0274536
+close,far below VWAP only,2026,299,-1424.45,0.0144417
+close,all other signals,2010,696,-1226.3,-0.126477
+close,all other signals,2011,1233,-2303.65,-0.0603421
+close,all other signals,2012,1200,-1420,-0.0253019
+close,all other signals,2013,1183,-2006.65,-0.0981539
+close,all other signals,2014,1218,-1620.9,-0.11888
+close,all other signals,2015,1181,-1332.05,-0.00337228
+close,all other signals,2016,1186,-1406.8,-0.0348765
+close,all other signals,2017,1219,-2288.95,-0.0778626
+close,all other signals,2018,1128,-2313.4,-0.0450699
+close,all other signals,2019,1206,-3517.3,-0.0410321
+close,all other signals,2020,1146,-4944.3,-0.06095
+close,all other signals,2021,1146,26.7,0.0303228
+close,all other signals,2022,1179,-3956.95,0.0171135
+close,all other signals,2023,1179,-7906.95,-0.083354
+close,all other signals,2024,1149,-4861.45,-0.059343
+close,all other signals,2025,1115,-2983.25,0.00183087
+close,all other signals,2026,824,-1893.2,-0.049075
+close,no gate,2010,884,-1746.2,-0.112071
+close,no gate,2011,1541,-2357.55,-0.0503638
+close,no gate,2012,1497,-1808.85,-0.02042
+close,no gate,2013,1468,-2636.4,-0.104041
+close,no gate,2014,1452,-2093.1,-0.0876616
+close,no gate,2015,1482,-2170.1,-0.0405672
+close,no gate,2016,1493,-1904.65,-0.0412821
+close,no gate,2017,1463,-3286.15,-0.0957333
+close,no gate,2018,1434,-3142.7,-0.0252423
+close,no gate,2019,1503,-5122.15,-0.0540981
+close,no gate,2020,1437,-6044.35,-0.077196
+close,no gate,2021,1442,2379.4,0.0348727
+close,no gate,2022,1561,-3290.55,0.00245347
+close,no gate,2023,1513,-11675.2,-0.0949552
+close,no gate,2024,1455,-5143.75,-0.033863
+close,no gate,2025,1436,-3861.3,0.00298667
+close,no gate,2026,1086,-5445.8,-0.0421888
+tp,far below VWAP only,2010,274,-651.2,-0.108432
+tp,far below VWAP only,2011,454,-244.7,-0.00297375
+tp,far below VWAP only,2012,465,-707.25,-0.0016604
+tp,far below VWAP only,2013,431,-864.05,-0.0994263
+tp,far below VWAP only,2014,404,-471.7,-0.00540899
+tp,far below VWAP only,2015,439,-394.45,-0.00829909
+tp,far below VWAP only,2016,475,-364.75,0.0381188
+tp,far below VWAP only,2017,363,-1212.15,-0.0998916
+tp,far below VWAP only,2018,437,-880.85,-0.0166934
+tp,far below VWAP only,2019,416,-1762.8,-0.0732844
+tp,far below VWAP only,2020,397,-3872.85,-0.0839904
+tp,far below VWAP only,2021,417,494.65,0.0164996
+tp,far below VWAP only,2022,496,2236.7,0.0207898
+tp,far below VWAP only,2023,462,-1846.1,-0.0400371
+tp,far below VWAP only,2024,426,-4374.3,-0.0729412
+tp,far below VWAP only,2025,444,1631.3,0.00864659
+tp,far below VWAP only,2026,348,2561.1,0.0611462
+tp,all other signals,2010,820,-1147,-0.0349107
+tp,all other signals,2011,1439,-2113.95,0.000911864
+tp,all other signals,2012,1443,-1278.65,0.0228088
+tp,all other signals,2013,1399,-1881.45,-0.0111491
+tp,all other signals,2014,1415,-1341.75,-0.00912679
+tp,all other signals,2015,1415,-1624.25,0.00686904
+tp,all other signals,2016,1360,-1950,-0.0223304
+tp,all other signals,2017,1399,-3080.45,-0.077332
+tp,all other signals,2018,1298,-3499.9,-0.0668133
+tp,all other signals,2019,1367,-4251.85,-0.0583155
+tp,all other signals,2020,1295,-6158.25,-0.068982
+tp,all other signals,2021,1317,-2605.85,-0.0190527
+tp,all other signals,2022,1323,-9758.15,-0.0623851
+tp,all other signals,2023,1350,-6805,-0.0446383
+tp,all other signals,2024,1305,-5022.25,-0.0571477
+tp,all other signals,2025,1304,-8739.7,-0.0509382
+tp,all other signals,2026,960,-4739,-0.0519933
+tp,no gate,2010,1056,-1687.3,-0.0451415
+tp,no gate,2011,1831,-2093.55,0.00261711
+tp,no gate,2012,1823,-2025.15,0.0152497
+tp,no gate,2013,1752,-2476.6,-0.0237916
+tp,no gate,2014,1713,-1855.15,-0.00831068
+tp,no gate,2015,1773,-2004.15,0.00543118
+tp,no gate,2016,1740,-2061,-0.00626044
+tp,no gate,2017,1665,-4180.75,-0.091724
+tp,no gate,2018,1668,-3484.4,-0.0492271
+tp,no gate,2019,1715,-5893.25,-0.0643994
+tp,no gate,2020,1658,-7810.9,-0.0636867
+tp,no gate,2021,1676,-2139.8,-0.0129209
+tp,no gate,2022,1774,-7924.7,-0.0457306
+tp,no gate,2023,1759,-9323.95,-0.0498732
+tp,no gate,2024,1671,-8641.05,-0.0553153
+tp,no gate,2025,1698,-7597.4,-0.0357025
+tp,no gate,2026,1285,-4227.75,-0.0342783

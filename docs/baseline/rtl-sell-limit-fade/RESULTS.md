@@ -98,6 +98,31 @@ This is history studied many times before and MT5's assumed price order inside e
 For a losing result that matters less than for a winning one: the idea would need the test to
 be wrong by more than its whole size to work.
 
+## Follow-up: only signals below the VWAP gate (2026-11-16, exploratory)
+
+User question: take the sell limit only when the signal candle closed below session
+VWAP - A20, the "far below" signals where RTL's long is weaker. Minute replay with the frozen
+VWAP label file (the replay reproduces the ungated MT5 runs to the cent); a blocked red
+signal cancels the resting order, as in the VWAP EA. No native run.
+
+| Period | Exit | Far below VWAP only: trades / net / gross R | All other signals: trades / net / gross R |
+|---|---|---:|---:|
+| 2010-15 | Bar close | 2,172 / -$4,153 / -0.091 | 6,711 / -$9,910 / -0.068 |
+| 2016-19 | Bar close | 1,491 / -$4,664 / -0.052 | 4,739 / -$9,526 / -0.050 |
+| 2020-Sep 2026 | Bar close | 2,611 / -$5,299 / -0.019 | 7,738 / -$26,519 / -0.028 |
+| 2010-15 | Take profit | 2,467 / -$3,333 / -0.033 | 7,931 / -$9,387 / -0.002 |
+| 2016-19 | Take profit | 1,691 / -$4,221 / -0.033 | 5,424 / -$12,782 / -0.056 |
+| 2020-Sep 2026 | Take profit | 2,990 / -$3,170 / -0.014 | 8,854 / -$43,828 / -0.051 |
+
+Still a loss in every period and before costs. The gate keeps about a quarter of the trades,
+so the dollar loss is smaller, and since 2016 the gated trades are somewhat less bad per trade
+(with the take profit -0.021R against -0.053R). They do not turn positive: 3 (bar close) and
+4 (take profit) positive years of 17, and since 2020 another $1 per trade makes it -$7,910 /
+-$6,160. In 2010-15 the gated trades are worse than the rest. RTL's long is weaker far below
+VWAP, but not weak enough for its other side to pay.
+[Period table](vwap_summary.csv) · [annual table](vwap_annual.csv) ·
+[script](../../../python/rtl_sell_limit_fade_vwap.py)
+
 ## Files
 
 - EA: [RTL_red_high_sell_limit.cs](../../../mt5/experts/shorts/RTL_red_high_sell_limit.cs),

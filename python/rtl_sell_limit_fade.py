@@ -60,7 +60,7 @@ def tag(arm):
 # ---------------------------------------------------------------- simulator
 
 def simulate_fade(bars, cutoffs=None, last_date=None, rr=1.0, resting_tp=False, tp_spread=0.0, at_market=False,
-                  through=0.0):
+                  through=0.0, allowed=None):
     """The EA on M30 from 1-minute bars: sell limit at the last red candle's high while flat,
     stop one candle range above, RTL's order lifetime, windows and flatten.
     resting_tp False: buy back at the next bar's first quote after a bar closes at or below
@@ -70,6 +70,9 @@ def simulate_fade(bars, cutoffs=None, last_date=None, rr=1.0, resting_tp=False, 
     rejected there). True: MT5's own handling, an immediate fill at that opening quote.
     through: the resting order fills (still at its price) only once a quote is this far above
     it. 0 is MT5's rule, a touch fills; one tick is the cautious case for a real limit order.
+    allowed: optional set of signal-bar slots (day * 48 + half hour). A red signal outside it,
+    or one from an earlier session, cancels the resting order and places none (the VWAP EA's
+    handling of a blocked signal).
     Returns (trades, orders not placed)."""
     cutoffs = cutoffs or {}
     date, day, minute = bars['date'], bars['day'], bars['minute']
@@ -81,7 +84,7 @@ def simulate_fade(bars, cutoffs=None, last_date=None, rr=1.0, resting_tp=False, 
     pend = pos = None
     last_flat = prev_date = 0
     bar1 = cur = None
-    cur_slot = -1
+    cur_slot = signal_slot = -1
 
     def close(i, k, price, why):
         nonlocal pos
@@ -91,6 +94,7 @@ def simulate_fade(bars, cutoffs=None, last_date=None, rr=1.0, resting_tp=False, 
     for i in range(n):
         new = slot[i] != cur_slot
         if new:
+            signal_slot = cur_slot
             bar1 = cur
             cur = [o[i], h[i], l[i], c[i]]
             cur_slot = slot[i]
@@ -137,6 +141,8 @@ def simulate_fade(bars, cutoffs=None, last_date=None, rr=1.0, resting_tp=False, 
                 continue
             if bar1 is not None and bar1[3] < bar1[0]:
                 pend = None
+                if allowed is not None and (signal_slot not in allowed or signal_slot // 48 != day[i]):
+                    continue
                 rng = bar1[1] - bar1[2]
                 if rng <= 0:
                     continue

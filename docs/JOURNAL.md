@@ -1439,3 +1439,16 @@ Evidence: Reports/rtl_open_halves_20261111; preparation, analysis, report and th
   default (`AllowOrderAtMarket = false`); two extra runs with MT5's handling also lose.
 - [Results](baseline/rtl-sell-limit-fade/RESULTS.md). Evidence: Reports/rtl_sell_limit_fade_20261116/.
   No settings changed.
+- Follow-up, same day: user asked for the sell limit only after signals that closed below
+  VWAP - A20. Minute replay with the frozen labels (`python/rtl_sell_limit_fade_vwap.py`): still
+  a loss in every period, -$4,153 / -$4,664 / -$5,299 (bar close) and -$3,333 / -$4,221 /
+  -$3,170 (take profit) on about a quarter of the trades; 3 and 4 positive years of 17. Less bad
+  per trade than the other signals since 2016, worse in 2010-15. Not pursued.
+
+
+## 2026-11-16: RTL midpoint buy-stop experiment
+
+- User confirmed high-low midpoint including wicks and buy stops only. Stop remains at the red low; original bar-close exit uses 1R from the new entry.
+- Native comparison: 2016-19 / 2020-Sep 2026 midpoint -$4,433 / -$879, ordinary RTL +$4,417 / +$38,400. Pooled daily balance DD doubles, gross R weakens and costs consume the smaller risk.
+- Original control ledger reproduced byte for byte; independent replay matches all 39,266 midpoint trades after startup. 10 midpoint tests plus 11 exit regression tests pass. Preliminary build preserved and excluded.
+- [Results](baseline/rtl-midpoint/RESULTS.md), [protocol](baseline/rtl-midpoint/PROTOCOL.md), tester-only `RTL_midpoint`. No baseline or live changes.

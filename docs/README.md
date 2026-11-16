@@ -8,6 +8,8 @@ Every study has its own folder: `PROTOCOL.md` (frozen before any outcome),
 ledgers and MT5 reports stay in `Reports/`. Studies are numbered Q1, Q2, ...
 in the order they were run.
 
+Latest entry experiment: [RTL midpoint buy stop](baseline/rtl-midpoint/RESULTS.md) (2026-11-16): loses after costs in both main periods; original high-breakout entry retained.
+
 ## Setups (price patterns at levels and trendlines)
 
 Grouped as in the user's sketch ([photo](reference/setup_map_sketch.jpg)).
