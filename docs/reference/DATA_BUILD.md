@@ -153,3 +153,44 @@ The NQ part comes first; the ES build (same rules, unseen-instrument data) is [b
 .\venv\Scripts\python.exe python\build_continuous.py RTY "F:\DATABENTO\RTY_16_YEARS" "F:\DATABENTO\RTY_16_YEARS\source\glbx-mdp3-20100606-20261021.ohlcv-1m.dbn"
 ```
 
+## NQ extension imported (2026-11-17)
+
+- **New custom symbol:** `MNQcontDTBNT20261114`, in MT5's `CodexInstruments` group.
+  Settings copied from `MNQcontDTBNT20102026_2`: tick size 0.25, tick value $0.50
+  ($2 per NQ point), USD. Earlier symbols and saved studies remain intact.
+- **Source top-up:** `F:\DATABENTO\MNQ_16_YEARS\2026-10-01_2026-11-14.csv`,
+  UTC 2026-10-01 00:00 through 2026-11-13 21:59. 60,201 rows: 55,689 outright
+  rows and 4,512 calendar-spread rows excluded. Rebuilt with the original DBN,
+  using the same Chicago + 8-hour clock and previous-session-volume roll rule.
+- **Extended dataset:**
+  `F:\DATABENTO\MNQ_16_YEARS\NQ_extended_20261114\MT5_NQ_continuous_2010-2026_ohlcv-1m.csv`.
+  **5,556,005 bars**, **4,234 session dates**, 2010-06-07 01:00 through
+  **2026-11-13 23:59** on the research clock. Added **44,040 bars**; every byte
+  of the previous 5,511,965-bar file is an identical prefix, and the 67-period
+  roll file is byte-identical. The old top-level dataset was preserved.
+  October 1's partial session is now complete; every session October 1 through
+  November 13 has 1,380 bars (01:00-23:59), including across US DST end.
+- **Checks:** unique sorted minutes, valid OHLC, positive integral volumes,
+  0.25 price grid, weekdays only, tick/real volume equality and spread 1.
+  MT5 read back all 17 years, comparing every timestamp, OHLC price, tick volume,
+  real volume and spread exactly; annual counts, spans and price sums also match.
+  Evidence: `Reports/nq_extension_20261117/build.completed.json`, `session_audit.csv`,
+  and `mt5_import/import.completed.json`, `import_experts.log`, source and compiler log.
+- **Builder fix:** mixing unsigned DBN and signed CSV volume types had formatted
+  counts as `117.00`; the builder now validates and restores integer counts.
+  Regression: `python/test_build_continuous.py`.
+
+Reproduce into a new, empty output directory:
+
+```powershell
+.\venv\Scripts\python.exe python\build_continuous.py NQ "<new_output_directory>" "F:\DATABENTO\MNQ_16_YEARS\NQ_20100606-20261001\glbx-mdp3-20100606-20260930.ohlcv-1m.dbn" "F:\DATABENTO\MNQ_16_YEARS\2026-10-01_2026-11-14.csv"
+```
+
+
+### Matching VWAP labels (2026-11-17)
+
+Generated and installed `rtl_vwap_features_MNQcontDTBNT20261114.csv` and the
+compatibility name `rtl_vwap_replay_20261026_features.csv` in MT5 Common Files.
+193,254 M30 rows through the final November 13 bar; all 191,781 historical
+labels match exactly. Independent reconstruction and native MT5 loader/value
+checks passed. [Usage and evidence](../baseline/rtl-vwap/FEATURE_FILE_GUIDE.md#extended-nq-history-installed-2026-11-17).

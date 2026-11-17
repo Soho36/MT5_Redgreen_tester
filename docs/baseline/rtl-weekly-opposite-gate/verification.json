@@ -1,0 +1,67 @@
+{
+  "input_hashes_verified": true,
+  "raw_minutes": 5556005,
+  "jobs": {
+    "baseline": {
+      "weekly_decisions": 857,
+      "all_weekly_ohlc_and_references_match": true,
+      "state_changes": 149,
+      "pending_at_halt": 0,
+      "positions_at_halt": 0,
+      "trades": 26036,
+      "report_sha256": "d9f0fc7774367006b268813bd5dc489f2293ba33a10be66811c42774cafca6ae",
+      "native_gross_equity_dd": 5895.5,
+      "rebuilt_gross_equity_dd": 5895.5,
+      "ledger_and_native_totals_match": true,
+      "flat_daily_boundaries": true,
+      "replay": {
+        "from_date": "2010-06-11",
+        "trades": 26028,
+        "all_trade_fields_and_exit_reasons_match": true
+      },
+      "replay_rejections": 332
+    },
+    "weekly_gate": {
+      "weekly_decisions": 857,
+      "all_weekly_ohlc_and_references_match": true,
+      "state_changes": 149,
+      "pending_at_halt": 0,
+      "positions_at_halt": 0,
+      "trades": 16661,
+      "report_sha256": "8aaae063dd8f251d3a3b1733b346c8226ab9b32e16b88f5c1f666d05957d7475",
+      "native_gross_equity_dd": 3456.0,
+      "rebuilt_gross_equity_dd": 3456.0,
+      "ledger_and_native_totals_match": true,
+      "flat_daily_boundaries": true,
+      "replay": {
+        "from_date": "2010-06-11",
+        "trades": 16653,
+        "all_trade_fields_and_exit_reasons_match": true
+      },
+      "replay_rejections": 218,
+      "boundary_fills": 0
+    }
+  },
+  "historical_baseline": {
+    "trades": 25832,
+    "all_times_pnl_and_signal_ranges_match": true,
+    "source_sha256": "88c0d6144b1ce8ecc937a8f5333188240bc41b6cf241cef2e3778dde7bd752e5"
+  },
+  "gated_is_exact_retained_subset": true,
+  "replacement_trades": 0,
+  "all_passed": true,
+  "protocol_sha256": "437f4bdd4ab93cabaae86cc762cb616aed8fcedaa077ebf047e4f77c420a9dfe",
+  "code_sha256": {
+    "rtl_weekly_opposite_gate.py": "2de0b603a4b1ba98869b54eaffdac2b98957b68455a95f700ee421d742427549",
+    "rtl_news_window_engine.py": "95e5a0b962a6705b84b88e448a772c2d007ad711b7aa91bd3f1da04f90be840f",
+    "rtl_weekly_engine.py": "7ada22e19d0df78480015cefc5c3807732984ddf96735e5ca63f4143950e6be9",
+    "analyze_rtl_news_days.py": "83fab00c9788afc1cc90e080f009d44850d3fe3001096e808de70684392e3604"
+  },
+  "output_sha256": {
+    "comparisons.csv": "cd2e010a6fabbabe5bffbad6f5e703ec02c3f5f589bb1a947db47071a9eea329",
+    "halt_periods.csv": "5d25e919f37ce28a3434c3a9d6bb21eeaab41901cb1589a2f8319bd2ca884512",
+    "summary.csv": "fd5f7ad96c58056709f14774b0fa1fec8242bd0c368241f2e7f77b5cb8836216",
+    "weekly_decisions.csv": "46a60bced80642a45584f258d8e4d21454231b53b4d7bd7fc93daa0c640c0ed6",
+    "weeks.csv": "8546ab1fe79d43bab4c62de6e31444216a0e7bef551fd7a7bbcf663c7e96e3ff"
+  }
+}

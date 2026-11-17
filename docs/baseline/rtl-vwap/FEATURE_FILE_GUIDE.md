@@ -81,3 +81,39 @@ fresh `RunTag` for manual runs.
 The default volume column is `<VOL>`. `--volume-column '<TICKVOL>'` is an
 explicit tick-volume alternative, producing a different study when tick and
 real volume differ. The tested NQ example uses real volume.
+
+
+## Extended NQ history installed (2026-11-17)
+
+For `MNQcontDTBNT20261114`, use:
+
+```text
+VwapLabelFile=rtl_vwap_features_MNQcontDTBNT20261114.csv
+```
+
+This file is installed in `%APPDATA%\MetaQuotes\Terminal\Common\Files`.
+The existing name `rtl_vwap_replay_20261026_features.csv` is also installed there
+with the same extended contents, so existing tester presets continue to work.
+Enter the filename only, without a trailing backslash.
+
+The 193,254 M30 labels use the extended real-volume M1 dataset and cover bars
+through 2026-11-13 23:30 (last label available at 2026-11-14 00:00).
+All 191,781 original study labels match exactly, including VWAP and A20.
+The frozen study copy in `Reports/rtl_vwap_replay_20261026` is preserved.
+All new labels passed an independent M1 reconstruction; MT5's actual file loader
+loaded both names, resolved a November 13 label, and matched the last session's
+VWAP computed from the imported custom symbol's real-volume M1 bars.
+
+Files, export metadata and verification evidence:
+`Reports/nq_extension_20261117/vwap/`.
+
+To regenerate to a fresh output filename:
+
+```powershell
+.\venv\Scripts\python.exe python\export_vwap_labels.py `
+  --minutes "F:\DATABENTO\MNQ_16_YEARS\NQ_extended_20261114\MT5_NQ_continuous_2010-2026_ohlcv-1m.csv" `
+  --output "Reports\vwap_labels\NQ_extended_20261114.csv"
+```
+
+No cutoff is needed here: the final M30 slot is complete. The exporter retains
+that final label at midnight on November 14.

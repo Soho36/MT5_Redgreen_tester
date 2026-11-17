@@ -41,6 +41,12 @@ def read_one(path):
 def load(root, files):
     parts = [read_one(Path(f)) for f in files]
     df = pd.concat(parts, ignore_index=True)
+    # DBN unsigned volumes and CSV signed volumes can concatenate as float64.
+    # Keep counts integral so a mixed-source top-up preserves MT5 CSV formatting.
+    volume = df["volume"]
+    if not (volume.notna().all() and volume.ge(0).all() and volume.mod(1).eq(0).all()):
+        raise ValueError("volume must contain nonnegative integer counts")
+    df["volume"] = volume.astype("uint64")
     assert not df.duplicated(["ts_utc", "instrument_id"]).any(), "input files overlap"
     df = df[df["symbol"].str.fullmatch(rf"{root}[FGHJKMNQUVXZ]\d{{1,2}}")]
     ts = df["ts_utc"].dt.tz_convert("America/Chicago").dt.tz_localize(None) + pd.Timedelta(hours=8)

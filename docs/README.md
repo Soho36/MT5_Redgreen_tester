@@ -10,6 +10,10 @@ in the order they were run.
 
 Latest entry experiment: [RTL midpoint buy stop](baseline/rtl-midpoint/RESULTS.md) (2026-11-16): loses after costs in both main periods; original high-breakout entry retained.
 
+Latest timeframe experiment: [Daily RTL with monthly VWAP](baseline/rtl-daily-monthly-vwap/RESULTS.md) (2026-11-18): monthly VWAP minus daily A20 improves daily RTL net profit in both main eras, with mixed drawdown. Positions held across months; raw continuous-contract screen, native replay verified.
+
+Latest weekly filter experiment: [RTL completed-week opposite-colour gate](baseline/rtl-weekly-opposite-gate/RESULTS.md) (2026-11-17): exact red-below-green-low / green-above-red-high rule with references several weeks back. Lower profit in both main eras; lower recent drawdown, worse early drawdown. Native replay verified through November 13; no adoption.
+
 ## Setups (price patterns at levels and trendlines)
 
 Grouped as in the user's sketch ([photo](reference/setup_map_sketch.jpg)).

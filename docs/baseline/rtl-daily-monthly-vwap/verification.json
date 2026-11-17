@@ -1,0 +1,52 @@
+{
+  "features": {
+    "days": 4234,
+    "all_daily_ohlc_monthly_vwap_a20_match": true
+  },
+  "jobs": {
+    "baseline": {
+      "trades": 524,
+      "all_native_ledger_totals_match": true,
+      "all_replayed_trades_match": true,
+      "all_candidates_match": true,
+      "candidates": 1090,
+      "known_candidates": 1036,
+      "blocked_candidates": 0,
+      "candidate_intraminute_timestamp_differences": 6,
+      "month_reset_unknown": 54,
+      "replay_rejected_orders": 9,
+      "start": "2010-10-26 01:00:00",
+      "gross_equity_dd": 10651.0,
+      "native_gross_equity_dd": 10651.0,
+      "trades_crossing_rolls": 28,
+      "report_sha256": "fcb4df3ae07b7986d142679a974782504a0ea408badc16c0d56788a86880aeb0"
+    },
+    "gated": {
+      "trades": 454,
+      "all_native_ledger_totals_match": true,
+      "all_replayed_trades_match": true,
+      "all_candidates_match": true,
+      "candidates": 1266,
+      "known_candidates": 1202,
+      "blocked_candidates": 362,
+      "candidate_intraminute_timestamp_differences": 8,
+      "month_reset_unknown": 64,
+      "replay_rejected_orders": 10,
+      "start": "2010-10-26 01:00:00",
+      "gross_equity_dd": 10356.0,
+      "native_gross_equity_dd": 10356.0,
+      "trades_crossing_rolls": 20,
+      "report_sha256": "c81fe0c53b73e7651cb5e82dc8761087e50b2ae724b31f29aaba9a9770c19f03"
+    }
+  },
+  "trade_attribution": {
+    "identical": 380,
+    "baseline_only": 144,
+    "gated_only": 74
+  },
+  "all_passed": true,
+  "protocol_sha256": "115c4eb3eca2c6d739432b095ab91964fa17709ce130e5e8bbd8dc19b67f9dfb",
+  "code_sha256": "1f994f851477b66058d2e0f363f1b8ba42f25f0d44ab5e4ae88ab0e5bc86804f",
+  "source_minutes_cache_sha256": "f6f4664def359659b1b53173cd671cd4647532355fc2f50716f4da1aeb71c744",
+  "summary_sha256": "80a5a6aed2e76b90f0128636e535fb5414655fb975f2d7765fa0ab47cba1416a"
+}

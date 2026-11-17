@@ -1452,3 +1452,54 @@ Evidence: Reports/rtl_open_halves_20261111; preparation, analysis, report and th
 - Native comparison: 2016-19 / 2020-Sep 2026 midpoint -$4,433 / -$879, ordinary RTL +$4,417 / +$38,400. Pooled daily balance DD doubles, gross R weakens and costs consume the smaller risk.
 - Original control ledger reproduced byte for byte; independent replay matches all 39,266 midpoint trades after startup. 10 midpoint tests plus 11 exit regression tests pass. Preliminary build preserved and excluded.
 - [Results](baseline/rtl-midpoint/RESULTS.md), [protocol](baseline/rtl-midpoint/PROTOCOL.md), tester-only `RTL_midpoint`. No baseline or live changes.
+
+
+## 2026-11-17: Extend NQ history and import a separate MT5 symbol
+
+- Appended the October-November Databento download using the existing clock and
+  roll rules: +44,040 bars, 5,556,005 total, through 2026-11-13 23:59.
+- Imported as **`MNQcontDTBNT20261114`**, preserving the earlier symbols and dataset.
+  Every historical byte and all roll dates are unchanged; every imported bar's
+  timestamp, OHLC, volumes and spread passed exact MT5 read-back verification.
+- Fixed mixed DBN/CSV integer-volume formatting and added its regression check.
+  [Dataset location and evidence](reference/DATA_BUILD.md#nq-extension-imported-2026-11-17).
+
+- Follow-up: rebuilt the matching VWAP/A20 file (193,254 M30 rows), installed both
+  the new dated filename and the existing preset filename in MT5 Common Files.
+  Historical labels match exactly; all rows independently reconstructed and
+  both filenames loaded successfully through the native EA helper.
+
+## 2026-11-17: RTL completed-week opposite-colour gate
+
+- Tested the user-confirmed rule with a separate native MT5 EA: completed red
+  week closes below the latest earlier green low -> halt; completed green
+  closes above the latest earlier red high -> resume. Search beyond adjacent
+  weeks; persistent state, cancel pending entries, retain normal position exits.
+- Two runs on the newly extended MNQ history through November 13. One contract,
+  $1.05: 2016-19 net $4,417 -> -$1,199; 2020-Sep2026 $38,400 -> $19,542.
+  Pooled 2016-Nov13 net $40,011 -> $16,855; equity DD $6,584 -> $3,638.
+  Skipped trades earned $23,156 net. Since 2020 through September, a baseline
+  scaled to the same holding exposure earns about $4,007 more at virtually the
+  same drawdown. Small October-November sample avoids $1,318 of losses.
+- All 857 weekly decisions independently rebuilt; 25,832 historical baseline
+  trades match; full minute replay matches 26,028 / 16,653 trades after startup.
+  18 tests pass. Separate from the old adjacent-week experiment; no live changes.
+- [Results](baseline/rtl-weekly-opposite-gate/RESULTS.md),
+  [protocol](baseline/rtl-weekly-opposite-gate/PROTOCOL.md). No adoption case.
+
+## 2026-11-18: Daily RTL with monthly VWAP screening
+
+- User proposes daily candles as RTL signals, calendar month as VWAP session;
+  explicitly holds positions across month-end and resets only VWAP.
+- Native D1 control versus monthly VWAP minus daily A20 candidate gate, source
+  exchange volume, normal buy-stop/low-stop/1R-close exits. Month-start stale
+  labels pass as unknown, preserving the existing VWAP EA convention.
+- 2016-19 net $861 -> $2,211; 2020-Sep2026 $11,213 -> $15,791, while recent
+  equity DD increases $8,822 -> $9,948. Pooled 2016-Nov13 net $8,236 -> $17,235,
+  DD $10,667 -> $10,389. Positive profit screen; does not avoid every selloff.
+- Verified all 4,234 daily features, 524/454 trades and every candidate against
+  original minutes; native equity reconciled, 7 tests pass. Raw roll jumps
+  affect 28/20 held trades, so this is preliminary continuous-symbol evidence.
+  No baseline/live changes and no conclusion yet about a daily gate on M30 RTL.
+- [Results](baseline/rtl-daily-monthly-vwap/RESULTS.md),
+  [protocol](baseline/rtl-daily-monthly-vwap/PROTOCOL.md).
