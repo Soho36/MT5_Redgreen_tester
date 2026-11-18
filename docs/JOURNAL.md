@@ -1503,3 +1503,16 @@ Evidence: Reports/rtl_open_halves_20261111; preparation, analysis, report and th
   No baseline/live changes and no conclusion yet about a daily gate on M30 RTL.
 - [Results](baseline/rtl-daily-monthly-vwap/RESULTS.md),
   [protocol](baseline/rtl-daily-monthly-vwap/PROTOCOL.md).
+
+## 2026-11-18: Apply the persistent daily VWAP gate to M30 RTL
+
+- User requests D1 close below monthly VWAP - daily A20 -> halt M30 entries;
+  any D1 close above -> resume, no candle-colour or previous-red breakout rule.
+  State survives month-end; existing M30 exits and session flatten stay intact.
+- Two native runs: 2016-Nov13 net $40,011 -> $22,838; equity DD $6,584 -> $7,185.
+  Halted 348/2,808 sessions; skipped 2,087 trades worth +$17,173. Lower net in
+  every year since 2016. The prior daily-trading gain did not transfer.
+- Independently checked 4,234 features, 4,233 daily decisions and every trade
+  after startup; baseline byte-identical, 11 tests pass. No live changes.
+- [Results](baseline/rtl-m30-daily-vwap-gate/RESULTS.md),
+  [protocol](baseline/rtl-m30-daily-vwap-gate/PROTOCOL.md).

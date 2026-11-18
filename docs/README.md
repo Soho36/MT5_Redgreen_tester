@@ -12,6 +12,8 @@ Latest entry experiment: [RTL midpoint buy stop](baseline/rtl-midpoint/RESULTS.m
 
 Latest timeframe experiment: [Daily RTL with monthly VWAP](baseline/rtl-daily-monthly-vwap/RESULTS.md) (2026-11-18): monthly VWAP minus daily A20 improves daily RTL net profit in both main eras, with mixed drawdown. Positions held across months; raw continuous-contract screen, native replay verified.
 
+Follow-up: [Persistent D1 VWAP gate on M30 RTL](baseline/rtl-m30-daily-vwap-gate/RESULTS.md) (2026-11-18): lower net and greater drawdown in both main eras; daily strategy improvement did not transfer to the M30 regime overlay. Verified native runs; no adoption.
+
 Latest weekly filter experiment: [RTL completed-week opposite-colour gate](baseline/rtl-weekly-opposite-gate/RESULTS.md) (2026-11-17): exact red-below-green-low / green-above-red-high rule with references several weeks back. Lower profit in both main eras; lower recent drawdown, worse early drawdown. Native replay verified through November 13; no adoption.
 
 ## Setups (price patterns at levels and trendlines)

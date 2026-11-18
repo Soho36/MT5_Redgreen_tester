@@ -1,0 +1,54 @@
+{
+  "features": {
+    "days": 4234,
+    "all_daily_ohlc_monthly_vwap_a20_match": true
+  },
+  "jobs": {
+    "baseline": {
+      "trades": 26036,
+      "report_sha256": "08f397989157e28a776a172a31d61fa6d06bc20f05d93ca6c486eef9a3b176aa",
+      "native_gross_equity_dd": 5895.5,
+      "rebuilt_gross_equity_dd": 5895.5,
+      "ledger_and_native_totals_match": true,
+      "flat_daily_boundaries": true,
+      "replay": {
+        "from_date": "2010-06-11",
+        "trades": 26028,
+        "all_trade_fields_and_exit_reasons_match": true
+      },
+      "daily_decisions": 4233,
+      "all_daily_decisions_match": true
+    },
+    "gated": {
+      "trades": 22719,
+      "report_sha256": "107e78631b004afb89ba2bcb7a534228f4deb86210699c4c06fe3c77dc8896ff",
+      "native_gross_equity_dd": 6897.5,
+      "rebuilt_gross_equity_dd": 6897.5,
+      "ledger_and_native_totals_match": true,
+      "flat_daily_boundaries": true,
+      "replay": {
+        "from_date": "2010-06-11",
+        "trades": 22711,
+        "all_trade_fields_and_exit_reasons_match": true
+      },
+      "daily_decisions": 4233,
+      "all_daily_decisions_match": true,
+      "fills_during_halt": 0
+    }
+  },
+  "historical_baseline": {
+    "trades": 25832,
+    "all_times_pnl_and_signal_ranges_match": true,
+    "source_sha256": "88c0d6144b1ce8ecc937a8f5333188240bc41b6cf241cef2e3778dde7bd752e5"
+  },
+  "extended_control_byte_identical": true,
+  "gated_is_exact_retained_subset": true,
+  "all_passed": true,
+  "protocol_sha256": "1036a551f68693253468546605e1ebd4b80e82ed89a49f65f240e41c3ad6717c",
+  "output_sha256": {
+    "comparisons.csv": "c2a610394b8ebbbc9ef7eaaaec4bfa69fed3a86bb97fc8d5958d907408470d7f",
+    "daily_decisions.csv": "9cc1d69dd6faf6ac641ae2e59631587e8f9f28b8a5f47e0bf852f711075b23cb",
+    "halt_periods.csv": "5bf03c07b103b2a028135ed4517ac9085d0f7659c86d6bdbad65862038b11870",
+    "summary.csv": "1b3ec99076e16ba959b22b3e7c5ac5ede6675c2315f25afd842035025e49493e"
+  }
+}
