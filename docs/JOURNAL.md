@@ -1516,3 +1516,19 @@ Evidence: Reports/rtl_open_halves_20261111; preparation, analysis, report and th
   after startup; baseline byte-identical, 11 tests pass. No live changes.
 - [Results](baseline/rtl-m30-daily-vwap-gate/RESULTS.md),
   [protocol](baseline/rtl-m30-daily-vwap-gate/PROTOCOL.md).
+
+## 2026-11-19: NQ volatility history, costs and a volatility-ramp halt
+
+- User asked for a plot of NQ M30 candle ranges since 2010 with monthly OHLC
+  (`python/plot_m30_range_history.py`): median range 3-4 pts in 2010-14, ~54 pts in
+  2026, but 0.1-0.4% of price throughout; spikes 2011, 2015-16, 2018, 2020, 2022, 2025.
+- Follow-ups on the RTL ledger ([results](baseline/volatility-regimes/RESULTS.md)):
+  $1.05 is 0.19 R per trade in 2010-15 vs 0.02 R since 2020. At 2020s costs 2010-15
+  is still flat (gross +0.006 R): costs make the loss, not the missing edge. 2016-19
+  gross +0.08 R would have been profitable at recent costs.
+- Adaptive size filter: smallest signal candles (<~0.5x typical) lose only through
+  costs; largest are fine. No case for an adaptive cap; a minimum = a cost filter.
+- Halting after a volatility ramp (prior 5 / prior 60 sessions) costs more profit than
+  random skips; since 2020 ramp>1.2 cuts DD $5.8k -> $3.8k but net $38.5k -> $24.0k,
+  worse net/DD than trading smaller. Rising vol does not reliably precede declines.
+  Ledger omission only; no settings changed.
