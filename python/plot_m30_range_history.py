@@ -9,6 +9,7 @@ import pandas as pd
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 
 from project_paths import PROJECT_ROOT as ROOT
 
@@ -58,6 +59,8 @@ def main():
     a2.plot(monthly.index, monthly.pct_median, color="#E45756", lw=1.4)
     a2.set_ylabel("median range, % of price")
     a2.grid(alpha=0.3)
+    a2.xaxis.set_major_locator(mdates.YearLocator())
+    a2.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
     fig.tight_layout()
     fig.savefig(OUT / "m30_range_history.png", dpi=130)
 
