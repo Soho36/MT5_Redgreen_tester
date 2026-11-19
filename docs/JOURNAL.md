@@ -1543,3 +1543,7 @@ Evidence: Reports/rtl_open_halves_20261111; preparation, analysis, report and th
   risk (range < 2.625/5.25/10.5 pts). floor10: 2010-15 -$7,496 -> -$950, DD $8,254 -> $1,992;
   2016-19 $4,417 -> $5,646, DD +$32; 2020-26 -$219, same DD. Pooled $35.5k -> $43.0k,
   DD $8.8k -> $5.8k. Control byte-identical. Exploratory; no baseline change.
+- MES follow-up (ledger): MES since 2020 pays 0.03-0.06 R per trade (18-36 tick candles),
+  like NQ 2018-19, not NQ 2010-15. Its problem is no gross edge (-0.005 R). A tick-equal
+  floor (>= 21 ticks) makes MES about break-even (2020-26 -$2,325), consistent with the
+  2026-10-11 native ES width test. Small candles lose before costs on both instruments.

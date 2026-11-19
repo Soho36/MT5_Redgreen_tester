@@ -45,3 +45,21 @@ floor10: 2010-15 -$2,456 -> +$632 (DD $3,620 -> $991); 2016-19 $7,809 -> $7,840 
   an edge there.
 - As a live rule it is cheap insurance for a return to very low volatility, not a profit source today.
   Chosen after seeing the ledger split; exploratory. No baseline change.
+
+## Follow-up: is MES today where NQ was in 2010-15? (2026-11-19, ledger only)
+
+User question. Cap-0 RTL ledgers from the cross study (`Reports/rtl_vwap_cross_20261027/trades_ES.csv`, MES $5/pt,
+$1.05); script `python/analyze_mes_cost_vs_ticks.py`. Skips are ledger omissions.
+
+- **Costs: no.** MES since 2020 has median signal candles of 18-36 ticks and pays 0.03-0.06 R per trade, like NQ in
+  2018-19, not NQ 2010-15 (12-16 ticks, 0.13-0.23 R). MES 2010-17 (6-10 ticks, 0.11-0.15 R) did look like early NQ.
+- **The real MES problem is no gross edge:** -0.005 R per trade in 2020-26 before costs, against NQ +0.04 to +0.12
+  at the same tick counts in 2018-19.
+- **Ticks matter on both:** gross R by signal size, all years: NQ -0.02 under 8 ticks, +0.01-0.02 at 8-16, +0.04-0.08
+  above 16; MES -0.19 / -0.06 / -0.02 under 16 ticks, but only +0.01-0.04 above. Small candles lose before costs on both
+  (the [granularity finding](../nq-vs-es/RESULTS.md)); above that NQ has an edge and MES barely does.
+- **Floors on MES:** a 10% cost floor (>= 2.25 pts) leaves 2020-26 at -$7,642. The tick-equal floor (>= 21 ticks,
+  5.25 pts) gives +$418 / +$1,710 / -$2,325 (2010-15 / 2016-19 / 2020-26), net R +0.001 / +0.021 / -0.005: break-even,
+  not an edge. Matches the native 50-tick ES test of 2026-10-11 ([results](../es-minimum-width/RESULTS.md)).
+- Reading: the floor rescued early NQ because NQ's gross edge was there once candles were big enough. MES lacks it.
+  No MES change.
