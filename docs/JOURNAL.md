@@ -1532,3 +1532,14 @@ Evidence: Reports/rtl_open_halves_20261111; preparation, analysis, report and th
   random skips; since 2020 ramp>1.2 cuts DD $5.8k -> $3.8k but net $38.5k -> $24.0k,
   worse net/DD than trading smaller. Rising vol does not reliably precede declines.
   Ledger omission only; no settings changed.
+
+## 2026-11-19: RTL cost floor, native MT5
+
+- User: historical costs are unknown; adjust for NQ-era costs; cannot trade smaller
+  than one MNQ; test a cost-based minimum-risk filter natively.
+- Cost sensitivity on the baseline ledger: at $0.50 per MNQ-equivalent 2010-15 is
+  -$2,456 (vs -$7,496 at $1.05), 2016-19 +$7,809 (vs +$4,417); at $0 2010-15 is only +$2,126.
+- [Cost floor](baseline/rtl-cost-floor/RESULTS.md): skip signals where $1.05 > 20/10/5% of
+  risk (range < 2.625/5.25/10.5 pts). floor10: 2010-15 -$7,496 -> -$950, DD $8,254 -> $1,992;
+  2016-19 $4,417 -> $5,646, DD +$32; 2020-26 -$219, same DD. Pooled $35.5k -> $43.0k,
+  DD $8.8k -> $5.8k. Control byte-identical. Exploratory; no baseline change.
