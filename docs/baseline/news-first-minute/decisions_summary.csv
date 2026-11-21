@@ -1,0 +1,15 @@
+policy,status,count
+both,entered,333
+both,zero_target_wick,23
+both,invalid_entry_levels,19
+both,doji,11
+both,missing_entry_minute,1
+cpi,entered,152
+cpi,zero_target_wick,17
+cpi,invalid_entry_levels,13
+cpi,doji,10
+cpi,missing_entry_minute,1
+payrolls,entered,181
+payrolls,invalid_entry_levels,6
+payrolls,zero_target_wick,6
+payrolls,doji,1

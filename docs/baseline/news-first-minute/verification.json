@@ -1,0 +1,85 @@
+{
+  "all_passed": true,
+  "jobs": [
+    {
+      "policy": "both",
+      "events_observed": 387,
+      "trades": 333,
+      "decisions_match": true,
+      "all_entries_and_exits_match": true,
+      "gross_equity_dd": 750.0,
+      "ambiguous_trades": 2,
+      "forced_closes": 1,
+      "missing_calendar_dates": [
+        20100108,
+        20100115,
+        20100205,
+        20100219,
+        20100305,
+        20100318,
+        20100402,
+        20100414,
+        20100507,
+        20100519,
+        20100604,
+        20170414,
+        20200410
+      ]
+    },
+    {
+      "policy": "cpi",
+      "events_observed": 193,
+      "trades": 152,
+      "decisions_match": true,
+      "all_entries_and_exits_match": true,
+      "gross_equity_dd": 955.0,
+      "ambiguous_trades": 2,
+      "forced_closes": 0,
+      "missing_calendar_dates": [
+        20100115,
+        20100219,
+        20100318,
+        20100414,
+        20100519,
+        20170414,
+        20200410
+      ]
+    },
+    {
+      "policy": "payrolls",
+      "events_observed": 194,
+      "trades": 181,
+      "decisions_match": true,
+      "all_entries_and_exits_match": true,
+      "gross_equity_dd": 487.0,
+      "ambiguous_trades": 0,
+      "forced_closes": 1,
+      "missing_calendar_dates": [
+        20100108,
+        20100205,
+        20100305,
+        20100402,
+        20100507,
+        20100604
+      ]
+    }
+  ],
+  "subset_union_exact": true,
+  "code_sha256": "560ca5af5e91f3469e482df32b2376219dade3d59ab2f2a3acf82f6ebcead1c6",
+  "files": {
+    "both_trades.csv": "0424ef71fef75baca60e23d4fd96fc8060bb84a5ba4cd7417291abb297181d2b",
+    "cpi_trades.csv": "29760678b37f301aa7284f78418f28b6322061eee2e6f743acdc59ff67e2a2cd",
+    "deals_news1m_20261122_both.csv": "ade0437aeb3d312e4d9fcdfa98b1b93690850d235a8b4b20c7f89723ebb35b9c",
+    "deals_news1m_20261122_cpi.csv": "5ad882ba8517dbd522ff015e2515dbd11e96f775634f73ebba2af8b33e5e88eb",
+    "deals_news1m_20261122_payrolls.csv": "3863c570524827c1c92a18936a0d32a76341808fb4363f5c86d9957a0ae80f38",
+    "decisions_news1m_20261122_both.csv": "af01ae6219a31145ee803b1f3060775fae3be771f2664a1aa42711f9917d4ad3",
+    "decisions_news1m_20261122_cpi.csv": "5739635ebfff39d6b1e5142b465e0acb4ff3a5b0be07e4a9a8fbc8b709dcd1b1",
+    "decisions_news1m_20261122_payrolls.csv": "760d10df5654530b849d9c72d452de8d8b2cacd6823aaba9d4b4476f7d6d350c",
+    "decisions_summary.csv": "8ad9023b1458dbe48cfef980576ab21fa61d378b80ba1620fbe24267de9fe146",
+    "payrolls_trades.csv": "234d36803672dcacd2edba96b773f794edec96034ca40551661cc27567a64a92",
+    "stats_news1m_20261122_both.csv": "a1f1b902987a7ec99f01ad1d935c05f4c941510efd3fa292d7dcb1ff10432b33",
+    "stats_news1m_20261122_cpi.csv": "26e5ab197d7f6fc960d8dca48cfe28eb76601d36c943bf8aed8f013cbb90ad68",
+    "stats_news1m_20261122_payrolls.csv": "91d592c211c23367ee7ded13f423761f2664f6ead09c2296919dccdd3e049281",
+    "summary.csv": "7c085aad4e2a33966e5aa55bf6f585ed8809660bdfcddc1e945bd2a768eecfa3"
+  }
+}
