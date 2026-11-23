@@ -8,7 +8,9 @@ Every study has its own folder: `PROTOCOL.md` (frozen before any outcome),
 ledgers and MT5 reports stay in `Reports/`. Studies are numbered Q1, Q2, ...
 in the order they were run.
 
-Latest entry experiment: [RTL midpoint buy stop](baseline/rtl-midpoint/RESULTS.md) (2026-11-16): loses after costs in both main periods; original high-breakout entry retained.
+Latest entry experiment: [Candle-low buy limit](baseline/candle-low-buy-limit/RESULTS.md) (2026-11-23): any-colour M30 low, SL one range below, fixed 1:1; loses after costs in all periods. Verified native run, 10 tests.
+
+Previous entry experiment: [RTL midpoint buy stop](baseline/rtl-midpoint/RESULTS.md) (2026-11-16): loses after costs in both main periods; original high-breakout entry retained.
 
 Latest timeframe experiment: [Daily RTL with monthly VWAP](baseline/rtl-daily-monthly-vwap/RESULTS.md) (2026-11-18): monthly VWAP minus daily A20 improves daily RTL net profit in both main eras, with mixed drawdown. Positions held across months; raw continuous-contract screen, native replay verified.
 

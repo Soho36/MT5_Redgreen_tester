@@ -1547,3 +1547,10 @@ Evidence: Reports/rtl_open_halves_20261111; preparation, analysis, report and th
   like NQ 2018-19, not NQ 2010-15. Its problem is no gross edge (-0.005 R). A tick-equal
   floor (>= 21 ticks) makes MES about break-even (2020-26 -$2,325), consistent with the
   2026-10-11 native ES width test. Small candles lose before costs on both instruments.
+
+
+## 2026-11-23: Buy limit at every candle low
+
+- Tested any-colour M30 limit at low, stop low minus range, resting TP high. User confirmed replacing unfilled orders every candle. Native MNQ, one contract/$1.05, usual session flatten.
+- [Results](baseline/candle-low-buy-limit/RESULTS.md): 40,631 trades; full-history net -$47,366.55. Net -$17,374.65 / -$12,079.95 / -$17,911.95 by era; recent gross +$10.50, PF 0.972. Extra tick through entry and TP worsens results.
+- All 40,619 trades after native startup match independent replay; ten tests pass. Fixed sparse one-tick-minute replay handling. New tester-only EA and reproducible analysis; no baseline changes.
