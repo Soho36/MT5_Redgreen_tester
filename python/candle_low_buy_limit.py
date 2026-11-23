@@ -115,7 +115,7 @@ def prepare():
                 OptimizationCriterion=0,Visual=0,UseLocal=1,UseRemote=0,UseCloud=0,
                 ShutdownTerminal=1,Report=TAG+'.htm',ReplaceReport=1)
     lines=['[Tester]']+[f'{k}={v}' for k,v in tester.items()]+[
-        '[TesterInputs]','Lots=1.0','RunTag='+TAG,'[Experts]','Enabled=0','AllowLiveTrading=0','AllowDllImport=0']
+        '[TesterInputs]','Lots=1.0','RiskReward=1.0','RunTag='+TAG,'[Experts]','Enabled=0','AllowLiveTrading=0','AllowDllImport=0']
     (RUN/(TAG+'.ini')).write_text('\n'.join(lines)+'\n',encoding='utf-16')
     manifest=dict(expert=EXPERT,symbol=SYMBOL,jobs=[dict(tag=TAG,outputs=[TAG+'_stats.csv'])],
                   hashes={str(p):sha(p) for p in (SOURCE,e.CALENDAR,CACHE,DOC/'PROTOCOL.md')})
@@ -123,7 +123,7 @@ def prepare():
     print('Prepared',RUN)
 
 
-def native():
+def native(expected_rr=1.0):
     from analyze_rtl_vwap_cross import CELL,TAG as HTML_TAG,STAMP,number
     section=None; orders={}; rows=[]; active=None
     with (RUN/(TAG+'.htm')).open(encoding='utf-16') as stream:
@@ -157,7 +157,7 @@ def native():
     assert np.isclose(frame.trade_profit.sum(),stats.gross,rtol=0,atol=1e-7)
     assert np.allclose(frame.trade_profit,(frame.exit_price-frame.fill)*2,rtol=0,atol=1e-8)
     assert frame.fill.eq(frame.requested).all()
-    assert np.allclose(frame.tp-frame.fill,frame.fill-frame.sl)
+    assert np.allclose(frame.tp-frame.fill, np.maximum(1, np.floor(expected_rr*(frame.fill-frame.sl)/.25+.5))*.25)
     assert (frame.entry_time>=frame.submitted).all()
     assert (frame.entry_time.iloc[1:].reset_index(drop=True)>=frame.exit_time.iloc[:-1].reset_index(drop=True)).all()
     return frame,stats
@@ -166,7 +166,10 @@ def native():
 def analyze():
     manifest=json.loads((RUN/'manifest.json').read_text())
     from pathlib import Path
-    for p,digest in manifest['hashes'].items(): assert sha(Path(p))==digest,p
+    for p,digest in manifest['hashes'].items():
+        # The study used this archived build; the working EA can gain manual inputs.
+        recorded=RUN/SOURCE.name if Path(p)==SOURCE else Path(p)
+        assert sha(recorded)==digest,recorded
     bars=e.load_minutes(CACHE)
     volume=pd.read_csv(e.MINUTES,sep='\t',usecols=[0,1,6])
     assert len(volume)==len(bars['o'])

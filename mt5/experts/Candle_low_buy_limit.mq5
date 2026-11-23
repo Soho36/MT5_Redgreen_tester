@@ -1,9 +1,10 @@
-// Candle-low buy limit, fixed 1:1, any colour. Strategy Tester only.
+// Candle-low buy limit, adjustable reward/risk, any colour. Strategy Tester only.
 #property strict
 #include <Trade/Trade.mqh>
 #include "early_closes.mqh"
 input double Lots = 1.0;
-input string RunTag = "candlelow_20261123";
+input double RiskReward = 1.0; // TP distance / SL distance: 1 = 1:1, 2 = 2:1 reward/risk
+input string RunTag = "candlelow_manual"; // CSV prefix; change to retain separate manual runs
 CTrade trade;
 datetime lastBar=0, previousDate=0, lastFlat=0;
 int placed=0, skipped=0, rejected=0;
@@ -33,7 +34,7 @@ void Flatten()
 int OnInit()
 {
    if(!MQLInfoInteger(MQL_TESTER) || !SymbolInfoInteger(_Symbol,SYMBOL_CUSTOM)) return INIT_FAILED;
-   if(Lots<=0 || _Period!=PERIOD_M30) return INIT_PARAMETERS_INCORRECT;
+   if(Lots<=0 || !MathIsValidNumber(RiskReward) || RiskReward<=0 || _Period!=PERIOD_M30) return INIT_PARAMETERS_INCORRECT;
    trade.SetDeviationInPoints(5);
    trade.SetTypeFilling(ORDER_FILLING_RETURN);
    return INIT_SUCCEEDED;
@@ -64,7 +65,12 @@ void OnTick()
    if(range<=0) return;
    if(low>=SymbolInfoDouble(_Symbol,SYMBOL_ASK)) { skipped++; return; }
    double stop=NormalizeDouble(low-range,_Digits);
-   if(!trade.BuyLimit(Lots,low,_Symbol,stop,high,ORDER_TIME_GTC,0,"candle low 1R")
+   double tick=SymbolInfoDouble(_Symbol,SYMBOL_TRADE_TICK_SIZE);
+   if(tick<=0) tick=_Point;
+   // Nearest valid tick; positive targets always stay at least one tick above entry.
+   double targetTicks=MathMax(1.0,MathRound(RiskReward*range/tick));
+   double target=NormalizeDouble(low+targetTicks*tick,_Digits);
+   if(!trade.BuyLimit(Lots,low,_Symbol,stop,target,ORDER_TIME_GTC,0,"candle low")
       || (trade.ResultRetcode()!=TRADE_RETCODE_DONE && trade.ResultRetcode()!=TRADE_RETCODE_PLACED)) rejected++;
    else placed++;
 }
@@ -72,9 +78,9 @@ double OnTester()
 {
    int f=FileOpen(RunTag+"_stats.csv",FILE_WRITE|FILE_CSV|FILE_COMMON);
    if(f==INVALID_HANDLE) return 0;
-   FileWrite(f,"trades","gross","equity_dd_gross","balance_dd_gross","placed","skipped","rejected");
+   FileWrite(f,"trades","gross","equity_dd_gross","balance_dd_gross","placed","skipped","rejected","risk_reward");
    FileWrite(f,(int)TesterStatistics(STAT_TRADES),TesterStatistics(STAT_PROFIT),
-      TesterStatistics(STAT_EQUITY_DD),TesterStatistics(STAT_BALANCE_DD),placed,skipped,rejected);
+      TesterStatistics(STAT_EQUITY_DD),TesterStatistics(STAT_BALANCE_DD),placed,skipped,rejected,RiskReward);
    FileClose(f);
    return 0;
 }

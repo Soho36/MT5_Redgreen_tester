@@ -58,3 +58,19 @@ The sensitivity begins June 11, 2010, after native startup; the native table inc
 Run folder: `Reports/candle_low_buy_limit_20261123/`: HTML, INI, compiler/tester logs, manifest, verification.json, trades.csv, summary.csv, annual.csv and trades_through.csv. Prepare refuses to overwrite an existing run. EA: `mt5/experts/Candle_low_buy_limit.mq5`. Replay: `python/candle_low_buy_limit.py`.
 
 **Interpretation:** this unfiltered candle-low entry does not show a profitable edge in this test. Recent gross performance is approximately break-even; costs make it negative. One-minute OHLC assumes intraminute ordering and does not establish executable tick-level or live results.
+
+## Manual risk/reward runs (2026-11-23)
+
+The installed `CodexResearch\Candle_low_buy_limit` now has `RiskReward` (default 1.0).
+In Strategy Tester Inputs, use 1 for 1:1, 2 for a target twice the stop distance,
+or e.g. 2.5. TP = entry + RiskReward x signal range; SL remains low minus range.
+TP rounds to the nearest instrument tick, with a minimum one-tick distance.
+Select M30 and a custom research symbol, e.g. `MNQcontDTBNT20102026_2`.
+All original session and order-replacement rules still apply.
+`RunTag` defaults to `candlelow_manual`; change it for each run to retain separate
+Common/Files stats CSVs. The stats CSV includes the requested risk/reward input.
+
+The published results above remain the original 1:1 study. Its EA snapshot and
+reports in the original run folder are preserved; analysis verifies that snapshot.
+
+Validation of the input change: zero compiler errors/warnings; ten regression tests pass. September 2026 native checks at 1R (219 trades) and 2.5R (150 trades) verify every filled order's target geometry, with zero rejected orders. All 208 1R trades from September 2 match the original study exactly. Checks saved under `Reports/candle_low_buy_limit_rr_manual_20261123/`.
