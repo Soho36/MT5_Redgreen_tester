@@ -3,6 +3,12 @@
 #include "news_first_minute_dates.mqh"
 #include "early_closes.mqh"
 input int NewsMask=3;
+enum ENUM_NEWS_DIRECTION {
+   NEWS_BOTH=0,        // Both longs and shorts
+   NEWS_LONGS_ONLY=1,  // Longs only
+   NEWS_SHORTS_ONLY=2  // Shorts only
+};
+input ENUM_NEWS_DIRECTION TradeDirection=NEWS_BOTH;
 input string RunTag="news_first_minute";
 string g_runTag;
 #include "window_equity_research.mqh"
@@ -17,7 +23,7 @@ int Mask(int date) {
 }
 int Cutoff(int date) {for(int i=0;i<EC_COUNT;i++)if(EC_DATE[i]==date)return EC_FLAT_MIN[i];return 1410;}
 int OnInit() {
-   if(!MQLInfoInteger(MQL_TESTER) || _Symbol!="MNQcontDTBNT20102026_2" || _Period!=PERIOD_M1 || NewsMask<1 || NewsMask>3)return INIT_PARAMETERS_INCORRECT;
+   if(!MQLInfoInteger(MQL_TESTER) || _Symbol!="MNQcontDTBNT20102026_2" || _Period!=PERIOD_M1 || NewsMask<1 || NewsMask>3 || TradeDirection<NEWS_BOTH || TradeDirection>NEWS_SHORTS_ONLY)return INIT_PARAMETERS_INCORRECT;
    g_runTag=RunTag;trade.SetExpertMagicNumber(20261122);trade.SetTypeFillingBySymbol(_Symbol);trade.SetDeviationInPoints(0);
    decisions=FileOpen("decisions_"+RunTag+".csv",FILE_WRITE|FILE_CSV|FILE_ANSI|FILE_COMMON,',');
    if(decisions==INVALID_HANDLE || !WindowEquityInit())return INIT_FAILED;
@@ -47,7 +53,8 @@ void StrategyTick() {
       direction=c>o?1:-1;sl=direction==1?l:h;tp=direction==1?h:l;
       double entry=direction==1?tick.ask:tick.bid;
       double closing=direction==1?tick.bid:tick.ask;
-      if(direction*(tp-c)<=0)status="zero_target_wick";
+      if((TradeDirection==NEWS_LONGS_ONLY && direction<0) || (TradeDirection==NEWS_SHORTS_ONLY && direction>0))status="direction_disabled";
+      else if(direction*(tp-c)<=0)status="zero_target_wick";
       else if(direction*(tp-entry)<=0 || direction*(entry-sl)<=0)status="invalid_entry_levels";
       else if(direction*(tp-closing)<distance || direction*(closing-sl)<distance)status="broker_stop_distance";
       else if(PositionsTotal()>0)status="existing_position";
