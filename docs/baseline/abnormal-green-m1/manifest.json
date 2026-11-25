@@ -1,0 +1,29 @@
+{
+  "source": "F:\\DATABENTO\\MNQ_16_YEARS\\NQ_extended_20261114\\MT5_NQ_continuous_2010-2026_ohlcv-1m.csv",
+  "source_sha256": "919f67fe8ffb574fb13c1d6a15fe6d007539d9d4dc8dbf328accd65a2a4d74ab",
+  "bars": 5556005,
+  "first": "2010-06-07 01:00:00",
+  "last": "2026-11-13 23:59:00",
+  "protocol_sha256": "37d020926bd09484ccc6f38ad109e9bdd9c1eab317e74a54fc022aeeba6628a8",
+  "code_sha256": "be2d7a05a4516b43df0a9093a993a6b8c973833a828eebe27248de645500fd2f",
+  "cutoff_sha256": "5dcf4d99402ed987da4eae6ca9a8acfd0cdca329a0a8654eb6e207098d87b22b",
+  "point_value": 2.0,
+  "cost": 1.05,
+  "model": "Python OHLC, no separate spread",
+  "runs": [
+    {
+      "multiplier": 10.0,
+      "eligible_since_2016": 348
+    }
+  ],
+  "output_sha256": {
+    "10x_directional_signals.csv": "3f104fd5b3a73c537c0c6452589eedd07ad1b347cd657b3d1da5c0479b95d579",
+    "10x_directional_trades.csv": "62938db3d3afb14af0f161e4bf2495ee5712966af3805c86f6313729d212a6e3",
+    "10x_high_first_signals.csv": "3f104fd5b3a73c537c0c6452589eedd07ad1b347cd657b3d1da5c0479b95d579",
+    "10x_high_first_trades.csv": "4ff4144b8490ccbdd8768277609c616cb98041e0021270102eb39c3ecc889f41",
+    "10x_low_first_signals.csv": "3f104fd5b3a73c537c0c6452589eedd07ad1b347cd657b3d1da5c0479b95d579",
+    "10x_low_first_trades.csv": "cb10c441ec10ae6d84e2d50e9070d6aa5de42d38619cdc4fbb3705d6890a2be5",
+    "decisions_summary.csv": "e4d22a47ceb986094e03f1117526b405a97b4ef4fdf7b5d453e078fbb01c5893",
+    "summary.csv": "5a1ed1ede64fdc9aab9058efbe574571cf68166009cf1a871db36d583bf919bf"
+  }
+}

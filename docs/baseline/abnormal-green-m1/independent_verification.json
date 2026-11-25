@@ -1,0 +1,33 @@
+{
+  "all_passed": true,
+  "checks": [
+    {
+      "label": "10x_directional",
+      "signals": 2395,
+      "trades": 446,
+      "all_signals_match_cumulative_sums": true,
+      "all_first_entries_and_exits_match": true,
+      "marks_and_equity_dd_match": true,
+      "path_equity_dd": 2424.9
+    },
+    {
+      "label": "10x_low_first",
+      "signals": 2395,
+      "trades": 446,
+      "all_signals_match_cumulative_sums": true,
+      "all_first_entries_and_exits_match": true,
+      "marks_and_equity_dd_match": true,
+      "path_equity_dd": 2424.9
+    },
+    {
+      "label": "10x_high_first",
+      "signals": 2395,
+      "trades": 446,
+      "all_signals_match_cumulative_sums": true,
+      "all_first_entries_and_exits_match": true,
+      "marks_and_equity_dd_match": true,
+      "path_equity_dd": 2885.4
+    }
+  ],
+  "code_sha256": "0554aa97e82589c0e98bf1bf5bf3da48dd3ef12c74fb4e13122dd4e2cf88bdf0"
+}

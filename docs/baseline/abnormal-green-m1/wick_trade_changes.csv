@@ -1,0 +1,13 @@
+filter,mode,shared,new,removed,changed_shared
+control,directional,446,0,0,0
+control,low_first,446,0,0,0
+control,high_first,446,0,0,0
+body70,directional,243,3,203,0
+body70,low_first,243,3,203,0
+body70,high_first,243,3,203,0
+body80,directional,170,1,276,0
+body80,low_first,170,1,276,0
+body80,high_first,170,1,276,0
+body90,directional,92,1,354,0
+body90,low_first,92,1,354,0
+body90,high_first,92,1,354,0

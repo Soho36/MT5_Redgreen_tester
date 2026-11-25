@@ -1,0 +1,30 @@
+{
+  "all_passed": true,
+  "checks": [
+    {
+      "filter": "control",
+      "raw_shape_check": true,
+      "control_exact": true,
+      "independent_audit": true
+    },
+    {
+      "filter": "body70",
+      "raw_shape_check": true,
+      "control_exact": false,
+      "independent_audit": true
+    },
+    {
+      "filter": "body80",
+      "raw_shape_check": true,
+      "control_exact": false,
+      "independent_audit": true
+    },
+    {
+      "filter": "body90",
+      "raw_shape_check": true,
+      "control_exact": false,
+      "independent_audit": true
+    }
+  ],
+  "code_sha256": "a8e1beea08aed4bc5a59ab316a3840625401d670687e3ad419387ff38e3c5858"
+}

@@ -1556,6 +1556,35 @@ Evidence: Reports/rtl_open_halves_20261111; preparation, analysis, report and th
 - All 40,619 trades after native startup match independent replay; ten tests pass. Fixed sparse one-tick-minute replay handling. New tester-only EA and reproducible analysis; no baseline changes.
 - Follow-up: added `RiskReward` (default 1.0) for manual tester runs; nearest-tick target, unchanged stop. Compiled/installed; native 1R and 2.5R checks pass, 1R matches original after startup. Original study snapshot preserved.
 
+
+## 2026-11-24: Abnormal green one-minute breakout
+
+- Scanned all 5,556,005 extended NQ minutes for green range >=10x the mean of
+  the previous 20 ranges. User confirmed immediate 1R TP; entry at completed
+  signal high, stop one tick below low, one MNQ, $1.05 round trip.
+- 2,395 raw detections; 492 continuous same-session eligible signals, 446 fills.
+  348 eligible since 2016 meets the predeclared minimum: did not lower 10x.
+- Python OHLC result +$972 / $2,425 marked DD, PF 1.054. Since 2016 +$1,223;
+  2026 -$1,644. Largest winner +$1,202: removing it makes full-history net negative.
+  Extra $2/trade leaves +$80. High-first path DD rises to $2,885.
+- Independent raw-bar audit matches every signal, first entry, exit and equity DD
+  in all three paths; 13 focused tests. This is a Python screen, not native MT5;
+  spread not separately modeled. No defaults/live changes. Saved
+  [results](baseline/abnormal-green-m1/RESULTS.md), protocol, chart and all ledgers.
+
+## 2026-11-24: Excluding long wicks from abnormal M1 signals
+
+- Defined full body as >=80% of high-low range before shape/results inspection;
+  70% and 90% neighbours, exact wickless count. Of 446 original trades:
+  243 / 170 / 92 pass 70 / 80 / 90%; 21 have no wicks at all.
+- Full-history replays, same 10x signal and immediate 1R: 80% produces 171
+  trades, +$56.95 net and $2,314.45 path DD. 70%: 246 trades, +$1,890.20;
+  90%: 93 trades, -$876.65. Counts include newly available opportunities.
+  No consistent benefit from stricter body thresholds; no best-threshold adoption.
+- All three original controls exactly match; independent signal/first-entry/exit
+  and path-DD checks pass for all 12 runs; 17 tests pass. Original files preserved. Python OHLC only,
+  spread not separately simulated. [Results](baseline/abnormal-green-m1/WICK_RESULTS.md).
+
 ## 2026-11-25 GG close entry
 
 [GG entry at the green close](baseline/gg-close-entry/RESULTS.md) earned $32,026.80 less than the high breakout over 2016–September 2026. Pooled maximum daily-close drawdown also rose by $2,021.40. The native high-entry control reproduced the archived GG ledger.

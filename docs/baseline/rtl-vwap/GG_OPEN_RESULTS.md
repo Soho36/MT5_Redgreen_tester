@@ -5,6 +5,8 @@ but does not improve the profit/drawdown trade-off in the pooled sample.** It re
 1,870 additional trades that earned $11,916.50 net. These green candles opened below
 the cutoff and closed at or above it: this group contributed profit rather than loss.
 
+The subsequent [full MT5 replay of the open rule](GG_OPEN_REPLAY_RESULTS.md) found a larger daily-close drawdown than either ungated GG or the close rule over 2016–September 2026.
+
 This is descriptive baseline-trade omission, not a new MT5 strategy replay. All
 results include $1.05 per trade and use the original one-contract sizing.
 

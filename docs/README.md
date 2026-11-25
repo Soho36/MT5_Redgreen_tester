@@ -10,7 +10,11 @@ Every study has its own folder: `PROTOCOL.md` (frozen before any outcome),
 ledgers and MT5 reports stay in `Reports/`. Studies are numbered Q1, Q2, ...
 in the order they were run.
 
-Latest entry experiment: [Candle-low buy limit](baseline/candle-low-buy-limit/RESULTS.md) (2026-11-23): any-colour M30 low, SL one range below, fixed 1:1; loses after costs in all periods. Verified native run, 10 tests.
+Latest entry experiment: [Abnormal green M1 breakout](baseline/abnormal-green-m1/RESULTS.md) (2026-11-24): >=10x prior-20 mean range, high entry, one-tick-below-low stop, immediate 1R. Full-history Python screen: 446 trades, +$972 net versus $2,425 marked path DD; profit depends on one large winner. Independently checked, 13 tests.
+
+[Full-body follow-up](baseline/abnormal-green-m1/WICK_RESULTS.md): 170/446 original signals have bodies >=80% of range. Filtering and replaying gives 171 trades and only +$57 net, with $2,314 marked path DD. 70% yields +$1,890; 90% loses $877. All 12 runs independently checked; 17 tests pass. No consistent benefit from stricter wick exclusion.
+
+Previous entry experiment: [Candle-low buy limit](baseline/candle-low-buy-limit/RESULTS.md) (2026-11-23): any-colour M30 low, SL one range below, fixed 1:1; loses after costs in all periods. Verified native run, 10 tests.
 
 Previous entry experiment: [RTL midpoint buy stop](baseline/rtl-midpoint/RESULTS.md) (2026-11-16): loses after costs in both main periods; original high-breakout entry retained.
 
