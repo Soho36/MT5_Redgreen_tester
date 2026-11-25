@@ -106,8 +106,8 @@ def run_paths(spec):
 
 # ---------------------------------------------------------------- prepare (no outcomes)
 
-def parse_report(path, symbol):
-    """Buy-stop orders and buy-in/sell-out deal pairs from an MT5 tester report."""
+def parse_report(path, symbol, entry_type='buy stop'):
+    """Expected entry orders and buy-in/sell-out deal pairs from an MT5 tester report."""
     orders, trades, active, section = {}, [], None, None
     with Path(path).open(encoding='utf-16') as stream:
         for line in stream:
@@ -121,7 +121,7 @@ def parse_report(path, symbol):
             if not cells or not STAMP.match(cells[0]):
                 continue
             if section == 'orders' and len(cells) == 11 and cells[3] in ('buy stop', 'buy'):
-                assert cells[2] == symbol and cells[3] == 'buy stop', cells
+                assert cells[2] == symbol and cells[3] == entry_type, cells
                 ticket = int(cells[1])
                 assert ticket not in orders
                 orders[ticket] = {'submitted': cells[0], 'requested_price': number(cells[5]),

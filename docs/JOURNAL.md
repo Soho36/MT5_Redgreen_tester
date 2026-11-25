@@ -1555,3 +1555,7 @@ Evidence: Reports/rtl_open_halves_20261111; preparation, analysis, report and th
 - [Results](baseline/candle-low-buy-limit/RESULTS.md): 40,631 trades; full-history net -$47,366.55. Net -$17,374.65 / -$12,079.95 / -$17,911.95 by era; recent gross +$10.50, PF 0.972. Extra tick through entry and TP worsens results.
 - All 40,619 trades after native startup match independent replay; ten tests pass. Fixed sparse one-tick-minute replay handling. New tester-only EA and reproducible analysis; no baseline changes.
 - Follow-up: added `RiskReward` (default 1.0) for manual tester runs; nearest-tick target, unchanged stop. Compiled/installed; native 1R and 2.5R checks pass, 1R matches original after startup. Original study snapshot preserved.
+
+## 2026-11-25 GG close entry
+
+[GG entry at the green close](baseline/gg-close-entry/RESULTS.md) earned $32,026.80 less than the high breakout over 2016–September 2026. Pooled maximum daily-close drawdown also rose by $2,021.40. The native high-entry control reproduced the archived GG ledger.

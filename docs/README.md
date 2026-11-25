@@ -3,6 +3,8 @@
 **Start with [STATUS.md](STATUS.md)** (where the project stands) and
 [JOURNAL.md](JOURNAL.md) (what was done, day by day). This page is the map.
 
+[GG entry at the green close](baseline/gg-close-entry/RESULTS.md) compares immediate market entry with the ungated GG high breakout on the same NQ M30 history.
+
 Every study has its own folder: `PROTOCOL.md` (frozen before any outcome),
 `RESULTS.md` (the answer) and `img/` when it has charts. Generated tables,
 ledgers and MT5 reports stay in `Reports/`. Studies are numbered Q1, Q2, ...
